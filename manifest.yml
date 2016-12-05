@@ -7,4 +7,4 @@ applications:
 services:
 - crime-data-api-creds
 env:
-  NODE_MODULES_CACHE: "false"
+  NODE_ENV: 'prod'
