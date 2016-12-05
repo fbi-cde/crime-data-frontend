@@ -28,5 +28,9 @@
     "eslint-plugin-react": "^6.8.0",
     "webpack": "1.13.2",
     "webpack-dev-server": "1.16.2"
+  },
+  "engines": {
+    "node": "6.2.x",
+    "npm": "3.8.x"
   }
 }
