@@ -8,7 +8,7 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      incidents: []
+      incidents: [],
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -19,7 +19,7 @@ class App extends React.Component {
       .then(response => { this.setState({ incidents: response.data.slice(0, 10) }) })
   }
 
-  handleChange (e) {
+  handleChange(e) {
     const { name, value } = e.target
     this.setState({ [name]: value })
   }
