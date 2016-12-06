@@ -1,0 +1,19 @@
+$body-color: $black !default;
+$body-background-color: $white !default;
+$link-color: $blue !default;
+$link-text-decoration: none !default;
+$link-hover-text-decoration: underline !default;
+
+body {
+  color: $body-color;
+  background-color: $body-background-color;
+}
+
+a {
+  color: $link-color;
+  text-decoration: $link-text-decoration;
+}
+
+a:hover {
+  text-decoration: $link-hover-text-decoration;
+}

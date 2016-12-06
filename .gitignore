@@ -1,6 +1,7 @@
 node_modules
 
 bundle.js
+app.css
 
 .DS_Store
 .env
