@@ -10,6 +10,7 @@
     "import/no-extraneous-dependencies": 0,
     "max-len": [1, 100],
     "react/jsx-filename-extension": 0,
+    "react/prop-types": 0,
     "semi": 0,
     "jsx-quotes": [2, "prefer-single"],
   }

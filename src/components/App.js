@@ -3,16 +3,21 @@ import axios from 'axios'
 
 import Glossary from './Glossary'
 import Header from './Header'
+import TimeSeriesChart from './TimeSeriesChart'
+
+const data = [
+  ['2016-01-01', 5],
+  ['2016-01-02', 7],
+  ['2016-01-03', 3],
+  ['2016-01-04', 5],
+  ['2016-01-05', 10],
+];
 
 class App extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      incidents: [],
-    }
-
-    this.handleChange = this.handleChange.bind(this)
+    this.state = { incidents: [] }
   }
 
   componentDidMount() {
@@ -20,19 +25,14 @@ class App extends React.Component {
       .then(response => { this.setState({ incidents: response.data.slice(0, 10) }) })
   }
 
-  handleChange(e) {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
-  }
-
   render() {
-    const { incidents } = this.state
-
     return (
       <div>
         <Header />
         <div className='p2 container'>
-          {incidents.map((d, i) => <p key={i}>{JSON.stringify(d)}</p>)}
+          <div className='inline-block border'>
+            <TimeSeriesChart data={data} />
+          </div>
         </div>
         <Glossary />
       </div>

@@ -16,6 +16,10 @@
     "basic-auth-connect": "^1.0.0",
     "cfenv": "^1.0.3",
     "express": "^4.14.0",
+    "d3-array": "^1.0.2",
+    "d3-scale": "^1.0.4",
+    "d3-shape": "^1.0.4",
+    "d3-time-format": "^2.0.3",
     "glossary-panel": "^0.2.0"
   },
   "devDependencies": {
