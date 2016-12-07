@@ -1,18 +1,12 @@
-$font-family: 'Helvetica Neue', Helvetica, sans-serif !default;
-$line-height: 1.5 !default;
-$body-font-size: 100% !default;
-$heading-font-family: $font-family !default;
-$heading-font-weight: bold !default;
-$heading-line-height: 1.25 !default;
-$heading-margin-top: 1em !default;
-$heading-margin-bottom: .5em !default;
-$paragraph-margin-top: 0 !default;
-$paragraph-margin-bottom: $space-2 !default;
+html {
+  font-size: $base-font-size;
+}
 
 body {
   font-family: $font-family;
   line-height: $line-height;
   font-size: $body-font-size;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -27,3 +21,7 @@ p {
   margin-top: $paragraph-margin-top;
   margin-bottom: $paragraph-margin-bottom;
 }
+
+.monospace { font-family: $font-monospace; }
+.sans-serif { font-family: $font-sans-serif; }
+.serif { font-family: $font-serif; }
