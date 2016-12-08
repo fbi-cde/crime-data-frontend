@@ -1,0 +1,13 @@
+engines:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+  scss-lint:
+    enabled: true
+ratings:
+  paths:
+  - '**.js'
+exclude_paths:
+- build/**/*
+- test/**/*
