@@ -16,6 +16,8 @@ test:
   override:
     - npm run lint
     - npm run test
+  post:
+    - npm run coverage
 
 deployment:
   production:
