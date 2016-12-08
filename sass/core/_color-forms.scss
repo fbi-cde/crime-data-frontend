@@ -1,15 +1,17 @@
+// scss-lint:disable MergeableSelector
+
 .field {
-  border-style: solid;
-  border-width: $border-width;
   border-color: $border-color;
   border-radius: $border-radius;
+  border-style: solid;
+  border-width: $border-width;
 }
 
 .field:focus,
 .field.is-focused {
-  outline: none;
   border-color: $field-focus-color;
   box-shadow: 0 0 0 2px rgba($field-focus-color, .5);
+  outline: none;
 }
 
 .field:disabled,

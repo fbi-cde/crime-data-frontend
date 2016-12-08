@@ -1,0 +1,10 @@
+exclude:
+  - 'node_modules/**'
+  - 'build/**'
+linters:
+  ColorVariable:
+    enabled: false
+  QualifyingElement:
+    enabled: false
+  SelectorFormat:
+    enabled: false

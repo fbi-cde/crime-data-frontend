@@ -6,18 +6,15 @@ table {
 }
 
 th {
-  text-align: left;
   font-weight: $table-header-font-weight;
+  text-align: left;
+  vertical-align: bottom;
 }
 
 th,
 td {
-  padding: $table-cell-padding-y $table-cell-padding-x;
   line-height: inherit;
-}
-
-th {
-  vertical-align: bottom;
+  padding: $table-cell-padding-y $table-cell-padding-x;
 }
 
 td {
