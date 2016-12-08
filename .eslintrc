@@ -7,6 +7,7 @@
   },
   "rules": {
     "arrow-parens": [2, "as-needed"],
+    "import/no-extraneous-dependencies": 0,
     "max-len": [1, 100],
     "react/jsx-filename-extension": 0,
     "semi": 0,

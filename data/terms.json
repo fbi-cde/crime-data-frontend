@@ -1,0 +1,82 @@
+[
+  {
+    "term": "Status",
+    "definition": "Refers to whether the candidate is an incumbent, challenger or running unopposed."
+  },
+  {
+    "term": "Candidate ID",
+    "definition": "A unique identifier assigned to each candidate registered with the FEC. The initial character indicates the office sought. (H)ouse, (S)enate, (P)resident. If a person runs for several offices, they will have separate Candidate IDs for each office."
+  },
+  {
+    "term": "Party",
+    "definition": "Party affiliation as stated on a candidate’s \"Statement of Candidacy.\""
+  },
+  {
+    "term": "District",
+    "definition": "A U.S. House of Representatives District. Because Senators represent an entire state, Senate races do not have districts associated with them."
+  },
+  {
+    "term": "Organization type",
+    "definition": "Certain filers, like Separate Segregated Funds, certain types of PACs, and Communication Cost filers identify the types of organizations they are associated with.  These entities can be associated with corporations, trade associations, labor organizations, cooperatives, membership organizations, or corporations without capital stock, or have no association."
+  },
+  {
+    "term": "Committee type",
+    "definition": "A definition that categorizes groups organized to raise and spend money in federal elections. The basic committee types are principal campaign committee, political party committee, and political action committee (PAC)."
+  },
+  {
+    "term": "Total receipts",
+    "definition": "The sum of all money received by a committee as reported to the FEC, including contributions, during a filing period."
+  },
+  {
+    "term": "Total disbursements",
+    "definition": "The sum of all money spent by a committee as reported to the FEC during a filing period."
+  },
+  {
+    "term": "Ending cash on hand",
+    "definition": "The ending cash balance on a report for a particular time period. Cash on hand includes funds held in checking and savings accounts, certificates of deposit, petty cash funds, traveler’s checks, treasury bills and other investments valued at cost."
+  },
+  {
+    "term": "Debt",
+    "definition": "The amount of money a committee owes to other entities at the end of the filing period."
+  },
+  {
+    "term": "Joint fundraising",
+    "definition": "Fundraising conducted jointly by a political committee and one or more other political committees or unregistered organizations.  Joint fundraising is often conducted between a principal campaign committee and a political party committee."
+  },
+  {
+    "term": "Joint fundraising committee",
+    "definition": "A committee that has been set up for the purposes of fundraising for multiple committees at the same time, or an existing committee that has been authorized to serve that purpose."
+  },
+  {
+    "term": "Reports and statements",
+    "definition": "All committees registered with the FEC are required to file reports and statements regularly that disclose their financial activity.  The contents of those reports and statements, as well as the filing schedule, depend on the type of committee or organization."
+  },
+  {
+    "term": "Filing",
+    "definition": "A report or statement submitted to the FEC by a candidate, committee, or other filing entity. Entities are required to file to declare their status as a candidate or committee and to report the money they raise and spend."
+  },
+  {
+    "term": "Authorized committee",
+    "definition": "A committee that has been authorized by a candidate to raise or spend money on his or her behalf."
+  },
+  {
+    "term": "Committee",
+    "definition": "An entity that meets one of the following conditions:<ul class='list--bulleted'><li>An authorized committee of a candidate (see definition of candidate)</li><li>A state party committee or nonparty committee, club, association or other group of persons that receives contributions or makes  expenditures, either of which aggregate over $1,000 during a calendar year</li><li>A local unit of a political party (except a state party committee) that: (1) receives contributions aggregating over $5,000 during  a calendar year; (2) makes contributions or  expenditures either of which aggregate over  $1,000 during a calendar year; or (3) makes payments aggregating over $5,000 during a  calendar year for certain activities which are exempt from the definitions of contribution and expenditure (11 CFR 100.80, 100.87 and 100.89;  11 CFR 100.140, 100.147 and 100.149)</li><li>Any separate segregated fund upon its establishment. 11 CFR 100.5.</li><ul>"
+  },
+  {
+    "term": "Principal campaign committee",
+    "definition": "An authorized committee designated by a candidate as the principal committee to raise contributions and make expenditures for his or her campaign for a federal office."
+  },
+  {
+    "term": "Candidate",
+    "definition": "An individual seeking nomination for election, or election, to a federal office becomes a candidate when he or she (or agents working on his or her behalf) raises contributions or makes expenditures that exceed $5,000."
+  },
+  {
+    "term": "None",
+    "definition": "If data appears as \"None\", it is best to check the source document. Common reasons that the data appears as \"None\" are:<ul class='list--bulleted'><li>Data is not processed yet; often, paper filings cause delays and inconsistent upload times.</li><li>Data is from an amendment that did not properly identify the form it was amending.</li><li>The filer did not fill out the information on the form.</li></ul>If you think there is an error, you can report that via <a href='mailto:betafeedback@fec.gov'>email</a>."
+  },
+  {
+    "term": "Independent expenditure",
+    "definition": "An expenditure for a communication that expressly advocates the election or defeat of a clearly identified candidate and that is not made in cooperation, consultation or concert with, or at the request or suggestion of, any candidate, or his or her authorized committees or agents, or a political party committee or its agents. 11 CFR 100.16."
+  }
+]

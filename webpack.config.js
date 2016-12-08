@@ -15,6 +15,10 @@ module.exports = {
         loader: 'babel'
       },
       {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
+      {
         test: /\.scss$/i,
         loader: ExtractTextPlugin.extract(['css', 'sass'])
       },

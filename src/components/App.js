@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
+import Glossary from './Glossary'
 import Header from './Header'
 
 class App extends React.Component {
@@ -33,6 +34,7 @@ class App extends React.Component {
         <div className='p2 container'>
           {incidents.map((d, i) => <p key={i}>{JSON.stringify(d)}</p>)}
         </div>
+        <Glossary />
       </div>
     )
   }

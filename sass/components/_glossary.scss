@@ -1,0 +1,33 @@
+// temporary stylez to start with
+
+.glossary {
+  background: #e1f3f8;
+  width: 30rem;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transition: right .2s;
+}
+
+.glossary[aria-hidden=true] {
+  right: -30rem;
+}
+
+.glossary div[aria-hidden=true] {
+  display: none !important;
+}
+
+.glossary__content {
+  ul { padding: 0; }
+  li { list-style-type: none; }
+  button {
+    appearance: none;
+    background-color: #0071bc;
+    border: 1px solid #205493;
+    color: #fff;
+    padding: .5rem;
+    text-align: left;
+    width: 100%;
+  }
+}

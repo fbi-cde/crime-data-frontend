@@ -1,0 +1,6 @@
+exclude:
+  - 'node_modules/**'
+
+linters:
+  ColorVariable:
+    enabled: false
