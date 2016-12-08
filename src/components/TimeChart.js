@@ -38,9 +38,18 @@ const TimeChart = ({
         <path
           d={l(dataClean)}
           fill='none'
-          stroke='steelblue'
-          strokeWidth={1.5}
+          stroke='tomato'
+          strokeWidth={3}
         />
+        {dataClean.map((d, i) => (
+          <circle
+            key={i}
+            cx={x(d.date)}
+            cy={y(d.value)}
+            fill='tomato'
+            r={5}
+          />
+        ))}
       </g>
     </svg>
   )
