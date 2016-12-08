@@ -25,9 +25,8 @@ We track work and progress through [ZenHub](https://www.zenhub.io/), which adds 
 3. "To Do (Current Sprint)" - culled from the "Backlog" for the current spring
 4. "In Progress" - all issues are assigned and are actively being worked on
 5. "Review/QA" - for development issues this lane is used for code review and testing
-6. "Done" - once pull requests are merged, the issues can be 
+6. "Done" - once pull requests are merged, the issues can be
 7. "Closed" - at the end of each sprint, issues are moved from "Done" to "Closed"
-
 
 ## Code standards
 
@@ -65,6 +64,7 @@ We track work and progress through [ZenHub](https://www.zenhub.io/), which adds 
 
 ### Branches
 - Open branches off main repo due to Circle CI env var problem. For now, remember to branch off of the `master` branch.
+- Begin the branch name with your first initials. This is helpful for keeping track of branch ownership.
 - Include a short description of the feature that's being developed after your initial.
 
 ### Commit message
@@ -116,4 +116,3 @@ Adding performance tracking and metrics is currently a TODO. Here are some items
 - What should performance budgets for decided metrics be? ie: faster then 1000 for speed index, faster then 1s for certain custom event, total request size below 2mb.
 - How should performance metrics and budgets be incorporated into workflow? Going over a budget requires re-implementation, or issue.
 - Any library added that's total file size is above 25kb should be evaluated for performance affect.
-
