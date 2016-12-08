@@ -7,4 +7,4 @@ applications:
 services:
 - crime-data-api-creds
 env:
-  NODE_ENV: 'prod'
+  NODE_ENV: 'production'
