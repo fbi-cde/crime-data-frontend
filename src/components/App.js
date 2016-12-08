@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import Glossary from './Glossary'
 import Header from './Header'
-import TimeSeriesChart from './TimeSeriesChart'
+import TimeChart from './TimeChart'
 
 const data = [
   ['2016-01-01', 5],
@@ -31,7 +31,7 @@ class App extends React.Component {
         <Header />
         <div className='p2 container'>
           <div className='inline-block border'>
-            <TimeSeriesChart data={data} />
+            <TimeChart data={data} />
           </div>
         </div>
         <Glossary />
