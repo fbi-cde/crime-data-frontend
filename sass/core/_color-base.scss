@@ -1,13 +1,10 @@
 body {
-  color: $body-color;
   background-color: $body-background-color;
+  color: $body-color;
 }
 
 a {
   color: $link-color;
   text-decoration: $link-text-decoration;
-}
-
-a:hover {
-  text-decoration: $link-hover-text-decoration;
+  &:hover { text-decoration: $link-hover-text-decoration; }
 }
