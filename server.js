@@ -9,7 +9,7 @@ const credService = env.getService('crime-data-api-creds') || { credentials: {} 
 const username = credService.credentials["HTTP_BASIC_USERNAME"]
 const password = credService.credentials["HTTP_BASIC_PASSWORD"]
 
-if (process.env.NODE_ENV === 'prod') {
+if (process.env.NODE_ENV === 'production') {
   app.use(basicAuth(username, password))
 }
 
