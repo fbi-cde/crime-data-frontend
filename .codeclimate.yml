@@ -1,8 +1,6 @@
 engines:
   eslint:
     enabled: true
-    config:
-      config: .eslintrc
   csslint:
     enabled: true
   scss-lint:
