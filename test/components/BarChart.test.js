@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import BarChart from '../../src/components/BarChart';
 
 describe('BarChart', () => {
-  const data = [['2016-01-01', 5], ['2016-01-02', 7]]
+  const data = [['red', 5], ['green', 7], ['yellow', 2]]
   let chart
 
   beforeEach(() => {

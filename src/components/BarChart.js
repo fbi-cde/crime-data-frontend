@@ -1,6 +1,5 @@
-import { extent, max } from 'd3-array'
-import { scaleBand, scaleLinear, scaleTime } from 'd3-scale'
-import { timeParse } from 'd3-time-format'
+import { max } from 'd3-array'
+import { scaleBand, scaleLinear } from 'd3-scale'
 import React from 'react'
 
 import XAxis from './XAxis'
@@ -14,12 +13,11 @@ const BarChart = ({
   data,
 }) => {
   const height = size.height - margin.top - margin.bottom
-  const parse = timeParse('%Y-%m-%d')
-  const dataClean = data.map(d => ({ date: parse(d[0]), value: +d[1] }))
+  const dataClean = data.map(d => ({ key: d[0], value: +d[1] }))
   const width = size.width - margin.left - margin.right
 
   const x = scaleBand()
-      .domain(dataClean.map(d => d.date))
+      .domain(dataClean.map(d => d.key))
       .rangeRound([0, width])
       .padding(0.1)
 
@@ -33,9 +31,9 @@ const BarChart = ({
         <XAxis scale={x} height={height} tickCt={dataClean.length} />
         <YAxis scale={y} />
         {dataClean.map(d => (
-          <g key={d.date} className='bar'>
+          <g key={d.key} className='bar'>
             <rect
-              x={x(d.date) - 5}
+              x={x(d.key) - 5}
               y={y(d.value)}
               height={height - y(d.value)}
               width={x.bandwidth()}
@@ -43,7 +41,7 @@ const BarChart = ({
             />
             {(!labels) ? '' : (
               <text
-                x={x(d.date) + (x.bandwidth() / 2)}
+                x={x(d.key) + (x.bandwidth() / 2)}
                 y={y(d.value) - 5}
               >
                 {d.value}
