@@ -2,7 +2,7 @@
 
 [![build status](https://circleci.com/gh/18F/crime-data-explorer/tree/master.svg?style=svg)](https://circleci.com/gh/18F/crime-data-explorer/tree/master)
 
-This project is the front end for the Crime Data Explorer, using data from [18f/crime-data-api](/18f/crime-data-api).
+This project is the front end for the Crime Data Explorer, using data from [18f/crime-data-api](https://github.com/18f/crime-data-api).
 
 ## Installation
 
