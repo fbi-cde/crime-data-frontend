@@ -7,12 +7,11 @@
   },
   "rules": {
     "arrow-parens": [2, "as-needed"],
-    "import/no-extraneous-dependencies": 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "max-len": [1, 100],
     "react/jsx-filename-extension": 0,
     "react/prop-types": 0,
     "semi": 0,
-    "jsx-quotes": [2, "prefer-single"],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+    "jsx-quotes": [2, "prefer-single"]
   }
 }
