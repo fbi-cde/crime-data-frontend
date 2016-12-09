@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
+import BarChart from './BarChart'
 import Glossary from './Glossary'
 import Header from './Header'
 import TimeChart from './TimeChart'
@@ -30,8 +31,11 @@ class App extends React.Component {
       <div>
         <Header />
         <div className='p2 container'>
-          <div className='inline-block border'>
+          <div className='border'>
             <TimeChart data={data} />
+          </div>
+          <div className='border'>
+            <BarChart data={data} labels={false} />
           </div>
         </div>
         <Glossary />
