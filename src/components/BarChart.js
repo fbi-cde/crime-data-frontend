@@ -16,7 +16,6 @@ const BarChart = ({
   const parse = timeParse('%Y-%m-%d')
   const dataClean = data.map(d => ({ date: parse(d[0]), value: +d[1] }))
   const width = size.width - margin.left - margin.right
-  const rectWidth = width / dataClean.length
 
   const x = scaleTime()
       .domain(extent(dataClean, d => d.date))
@@ -27,7 +26,7 @@ const BarChart = ({
       .range([height, 0])
 
   const text = (!labels) ? '' : dataClean.map(d => (
-    <text x={x(d.date) - 5} y={y(d.value) - 5} >
+    <text key={`${d.date}-text`} x={x(d.date) - 5} y={y(d.value) - 5} >
       {d.value}
     </text>
   ))
