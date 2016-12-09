@@ -10,7 +10,8 @@
     "dev": "webpack-dev-server",
     "build": "webpack -p",
     "lint": "eslint src || exit 0",
-    "test": "jest --env=jsdom"
+    "test": "jest --env=jsdom",
+    "coverage": "npm test -- --coverage"
   },
   "dependencies": {
     "basic-auth-connect": "^1.0.0",
