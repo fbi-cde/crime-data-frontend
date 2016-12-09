@@ -15,7 +15,11 @@
   "dependencies": {
     "basic-auth-connect": "^1.0.0",
     "cfenv": "^1.0.3",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "d3-array": "^1.0.2",
+    "d3-scale": "^1.0.4",
+    "d3-shape": "^1.0.4",
+    "d3-time-format": "^2.0.3"
   },
   "devDependencies": {
     "axios": "^0.15.3",
@@ -28,6 +32,7 @@
     "babel-preset-react": "^6.16.0",
     "basscss-sass": "^4.0.0",
     "css-loader": "^0.26.1",
+    "enzyme": "^2.6.0",
     "eslint": "^3.11.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-babel": "^4.0.0",
@@ -41,6 +46,7 @@
     "nodemon": "^1.11.0",
     "normalize.css": "^5.0.0",
     "react-dom": "^15.4.1",
+    "react-addons-test-utils": "^15.4.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "1.13.2",

@@ -1,25 +1,28 @@
-html {
-  font-size: $base-font-size;
-}
+html { font-size: $base-font-size; }
 
 body {
   font-family: $font-family;
-  line-height: $line-height;
   font-size: $body-font-size;
   -webkit-font-smoothing: antialiased;
+  line-height: $line-height;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: $heading-font-family;
   font-weight: $heading-font-weight;
   line-height: $heading-line-height;
-  margin-top: $heading-margin-top;
   margin-bottom: $heading-margin-bottom;
+  margin-top: $heading-margin-top;
 }
 
 p {
-  margin-top: $paragraph-margin-top;
   margin-bottom: $paragraph-margin-bottom;
+  margin-top: $paragraph-margin-top;
 }
 
 .monospace { font-family: $font-monospace; }

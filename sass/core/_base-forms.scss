@@ -2,11 +2,11 @@ input,
 select,
 textarea,
 fieldset {
+  box-sizing: border-box;
   font-family: $form-field-font-family;
   font-size: $form-field-font-size;
-  box-sizing: border-box;
-  margin-top: 0;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 label {
@@ -26,10 +26,10 @@ input[type=tel],
 input[type=time],
 input[type=url],
 input[type=week] {
+  -webkit-appearance: none;
   height: $form-field-height;
   padding: $form-field-padding-y $form-field-padding-x;
   vertical-align: middle;
-  -webkit-appearance: none;
 }
 
 select {
