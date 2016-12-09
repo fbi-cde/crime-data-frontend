@@ -1,5 +1,5 @@
 import { extent, max } from 'd3-array'
-import { scaleLinear, scaleTime } from 'd3-scale'
+import { scaleBand, scaleLinear, scaleTime } from 'd3-scale'
 import { timeParse } from 'd3-time-format'
 import React from 'react'
 
@@ -17,19 +17,14 @@ const BarChart = ({
   const dataClean = data.map(d => ({ date: parse(d[0]), value: +d[1] }))
   const width = size.width - margin.left - margin.right
 
-  const x = scaleTime()
-      .domain(extent(dataClean, d => d.date))
-      .range([0, width])
+  const x = scaleBand()
+      .domain(dataClean.map(d => d.date))
+      .rangeRound([0, width])
+      .padding(0.1)
 
   const y = scaleLinear()
       .domain([0, max(dataClean, d => d.value)])
       .range([height, 0])
-
-  const text = (!labels) ? '' : dataClean.map(d => (
-    <text key={`${d.date}-text`} x={x(d.date) - 5} y={y(d.value) - 5} >
-      {d.value}
-    </text>
-  ))
 
   return (
     <svg width={size.width} height={size.height}>
@@ -37,15 +32,22 @@ const BarChart = ({
         <XAxis scale={x} height={height} tickCt={dataClean.length} />
         <YAxis scale={y} />
         {dataClean.map(d => (
-          <g key={d.date}>
+          <g key={d.date} className='bar'>
             <rect
               x={x(d.date) - 5}
               y={y(d.value)}
               height={height - y(d.value)}
-              width='10'
+              width={x.bandwidth()}
               fill='rebeccapurple'
             />
-            {text}
+            {(!labels) ? '' : (
+              <text
+                x={x(d.date) + (x.bandwidth()/2)}
+                y={y(d.value) - 5}
+              >
+                {d.value}
+              </text>
+            )}
           </g>
         ))}
       </g>

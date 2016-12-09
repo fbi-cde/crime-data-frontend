@@ -18,4 +18,13 @@ describe('BarChart', () => {
   it('BarChart has a rect element for each data point', () => {
     expect(chart.find('rect').length).toEqual(data.length)
   })
+
+  it('BarChart has a label for each data point by default', () => {
+    expect(chart.find('.bar text').length).toEqual(data.length)
+  })
+
+  it('BarChart can be configured with no labels', () => {
+    chart = shallow(<BarChart data={data} labels={false} />)
+    expect(chart.find('.bar text').length).toEqual(0)
+  })
 })
