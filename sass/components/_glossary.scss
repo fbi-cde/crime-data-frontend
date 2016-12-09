@@ -1,0 +1,28 @@
+// scss-lint:disable ImportantRule
+
+.glossary {
+  background: #e1f3f8;
+  bottom: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: right .2s;
+  width: 30rem;
+
+  &[aria-hidden=true] { right: -30rem; }
+  [aria-hidden=true] { display: none !important; }
+}
+
+.glossary__content {
+  ul { padding: 0; }
+  li { list-style-type: none; }
+  button {
+    appearance: none;
+    background-color: #0071bc;
+    border: 1px solid #205493;
+    color: #fff;
+    padding: .5rem;
+    text-align: left;
+    width: 100%;
+  }
+}

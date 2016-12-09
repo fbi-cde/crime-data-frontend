@@ -19,7 +19,8 @@
     "d3-array": "^1.0.2",
     "d3-scale": "^1.0.4",
     "d3-shape": "^1.0.4",
-    "d3-time-format": "^2.0.3"
+    "d3-time-format": "^2.0.3",
+    "glossary-panel": "^0.2.0"
   },
   "devDependencies": {
     "axios": "^0.15.3",
@@ -41,10 +42,12 @@
     "eslint-plugin-react": "^6.8.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "jest": "^17.0.3",
-    "react": "^15.4.1",
+    "js-yaml": "^3.7.0",
+    "json-loader": "^0.5.4",
     "node-sass": "^3.13.0",
     "nodemon": "^1.11.0",
     "normalize.css": "^5.0.0",
+    "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-addons-test-utils": "^15.4.1",
     "sass-loader": "^4.0.2",

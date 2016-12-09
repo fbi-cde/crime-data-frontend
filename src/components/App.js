@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
+import Glossary from './Glossary'
 import Header from './Header'
 import TimeChart from './TimeChart'
 
@@ -33,6 +34,7 @@ class App extends React.Component {
             <TimeChart data={data} />
           </div>
         </div>
+        <Glossary />
       </div>
     )
   }
