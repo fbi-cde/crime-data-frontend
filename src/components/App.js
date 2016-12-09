@@ -1,11 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 
-<<<<<<< HEAD
-import Glossary from './Glossary'
-=======
 import BarChart from './BarChart'
->>>>>>> Add basic <BarChart />
+import Glossary from './Glossary'
 import Header from './Header'
 import TimeChart from './TimeChart'
 
