@@ -37,6 +37,7 @@
     "eslint-plugin-react": "^6.8.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "jest": "^17.0.3",
+    "js-yaml": "^3.7.0",
     "json-loader": "^0.5.4",
     "node-sass": "^3.13.0",
     "nodemon": "^1.11.0",
