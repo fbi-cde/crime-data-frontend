@@ -10,6 +10,7 @@ const BarChart = ({
   size = { width: 600, height: 400 },
   margin = { top: 20, right: 20, bottom: 30, left: 50 },
   labels = true,
+  fill = 'firebrick',
   data,
 }) => {
   const height = size.height - margin.top - margin.bottom
@@ -38,11 +39,11 @@ const BarChart = ({
               y={y(d.value)}
               height={height - y(d.value)}
               width={x.bandwidth()}
-              fill='rebeccapurple'
+              fill={fill}
             />
             {(!labels) ? '' : (
               <text
-                x={x(d.date) + (x.bandwidth()/2)}
+                x={x(d.date) + (x.bandwidth() / 2)}
                 y={y(d.value) - 5}
               >
                 {d.value}
