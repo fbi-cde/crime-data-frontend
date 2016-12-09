@@ -12,5 +12,6 @@
     "react/prop-types": 0,
     "semi": 0,
     "jsx-quotes": [2, "prefer-single"],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
   }
 }
