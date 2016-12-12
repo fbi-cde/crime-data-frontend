@@ -16,15 +16,16 @@ const XAxis = ({
   const ticks = values.map((v, i) => {
     let pos = scale(v)
 
-    if (typeof scale.bandwidth === 'function') {
-      pos = scale(v) + (scale.bandwidth() / 2)
-      pos -= scale.padding()
+    if (scale.bandwidth) {
+      let offset = scale.bandwidth() / 2
+      if (scale.round()) offset = Math.round(offset)
+      pos += offset
     }
 
     return (
       <g key={i} transform={`translate(${pos}, 0)`} className='tick'>
-        <line stroke='#000' x1='0.5' x2='0.5' y2='6' />
-        <text fill='#000' x='0.5' y='9' dy='.71em'>{format(v)}</text>
+        <line stroke='#000' x2='0' y2='6' />
+        <text fill='#000' x='0' y='9' dy='.71em'>{format(v)}</text>
       </g>
     )
   })

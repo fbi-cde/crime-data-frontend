@@ -33,7 +33,7 @@ const BarChart = ({
         {dataClean.map(d => (
           <g key={d.key} className='bar'>
             <rect
-              x={x(d.key) - 5}
+              x={x(d.key)}
               y={y(d.value)}
               height={height - y(d.value)}
               width={x.bandwidth()}
