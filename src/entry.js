@@ -1,9 +1,6 @@
-import React from 'react'
 import ReactDOM from 'react-dom'
-
-import App from './components/App'
-
+import routes from './routes'
 import '../sass/app.scss'
 
 const div = document.getElementById('app')
-ReactDOM.render(<App />, div)
+ReactDOM.render(routes, div)
