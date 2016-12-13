@@ -17,7 +17,7 @@ const data = [
 
 const data2 = { CA: 1, FL: 1 }
 
-class App extends React.Component {
+class Sandbox extends React.Component {
   constructor(props) {
     super(props)
 
@@ -50,4 +50,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default Sandbox
