@@ -4,11 +4,13 @@ import Footer from './Footer'
 import Navigation from './Navigation'
 
 const App = props => (
-  <div>
-    <Navigation />
-    <main className='container'>
-      { props.children }
-    </main>
+  <div className='site'>
+    <div className='site-wrap'>
+      <Navigation />
+      <main className='container'>
+        { props.children }
+      </main>
+    </div>
     <Footer />
   </div>
 )
