@@ -12,7 +12,9 @@ const Footer = () => (
       <div className='sm-col-right'>
         <div>
           <Link to='/'className='btn py2'>Explorer</Link>
-          <Link to='/downloads-and-documentation' className='btn py2'>Downloads & Documentation</Link>
+          <Link to='/downloads-and-documentation' className='btn py2'>
+            Downloads & Documentation
+          </Link>
           <Link to='/about' className='btn py2'>About</Link>
         </div>
         <div>
