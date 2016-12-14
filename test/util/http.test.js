@@ -39,11 +39,12 @@ describe('http utility', () => {
     })
   })
 
-  it('get() should log the error if unsuccessful', done => {
-    const spy = sinon.stub(console, 'error', () => {})
+  it('get() should throw the error if unsuccessful', done => {
+    const spy = sandbox.spy(http, 'get')
 
     sandbox.stub(axios, 'get', () => createPromise(undefined, true))
-    http.get('API').then(() => {
+    http.get('API').catch(e => {
+      expect(e).toEqual(new Error(true))
       expect(spy.callCount).toEqual(1)
       done()
     })
@@ -53,7 +54,7 @@ describe('http utility', () => {
     const expected = success.data.pagination.pages
     const spy = sandbox.stub(axios, 'get', () => createPromise(success))
 
-    http.getAll('API').then(results => {
+    http.getAll('API').then(() => {
       expect(spy.callCount).toEqual(expected)
       done()
     })
