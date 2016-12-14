@@ -2,11 +2,11 @@ import http from 'axios'
 import flatten from 'lodash.flatten'
 import range from 'lodash.range'
 
-const get = (url, params = {}) => {
-  return http.get(url, { params })
+const get = (url, params = {}) => (
+  http.get(url, { params })
     .then(f => f.data)
-    .catch(err => console.error(err))
-}
+    .catch(err => { throw new Error(err) })
+)
 
 const getAll = (url, params = {}) => {
   const all = get(url, params).then(first => {
