@@ -1,6 +1,6 @@
 import React from 'react'
 
-import stateGrid from '../../data/usa-states.json'
+import stateGrid from '../../data/state-grid.json'
 
 const [ROWS, COLS] = [8, 12]
 
