@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Footer from './Footer'
 import Navigation from './Navigation'
 
 const App = props => (
@@ -8,6 +9,7 @@ const App = props => (
     <main className='container'>
       { props.children }
     </main>
+    <Footer />
   </div>
 )
 
