@@ -2,28 +2,27 @@ import React from 'react'
 import { Link } from 'react-router'
 
 const Footer = () => (
-  <footer className='clearfix py2 bg-blue white'>
-    <div className='container'>
+  <footer className='footer clearfix py3 bg-navy white'>
+    <div className='container px2'>
       <div className='sm-col'>
-        <h2 className='h5'>Crime Data Explorer</h2>
-        <img alt='FBI Logo' />
-        <img alt='CJIS logo' />
+        <h3 className='mt0'>Crime Data Explorer</h3>
+        <div className='mb2'>
+          {['FBI', 'CJIS'].map((l, i) => (
+            <div key={i} className='p2 mr1 inline-block border border-white'>{l}</div>
+          ))}
+        </div>
       </div>
-      <div className='sm-col-right'>
-        <div>
-          <Link to='/'className='btn py2'>Explorer</Link>
-          <Link to='/downloads-and-documentation' className='btn py2'>
-            Downloads & Documentation
-          </Link>
-          <Link to='/about' className='btn py2'>About</Link>
+      <div className='sm-col-right h6'>
+        <div className='mxn1 pt1 pb3 bold caps'>
+          <Link to='/'className='px1 white'>Explorer</Link>
+          <Link to='/downloads-and-documentation' className='px1 white'>Downloads</Link>
+          <Link to='/about' className='px1 white'>About</Link>
         </div>
         <div>
-          <p className='strong'>Contact us</p>
-          <p>Criminal Justice Information Services (CJIS) Division</p>
-          <a className='btn' href='mailto:cjis_comm@leo.gov'>
-            cjis_comm@leo.gov
-          </a>
-          <a className='btn' href='tel:3046254995'>(304) 625-4995</a>
+          <div className='bold'>Contact us</div>
+          <div>Criminal Justice Information Services (CJIS) Division</div>
+          <a className='white mr1' href='mailto:cjis_comm@leo.gov'>cjis_comm@leo.gov</a>
+          <a className='white' href='tel:3046254995'>(304) 625-4995</a>
         </div>
       </div>
     </div>
