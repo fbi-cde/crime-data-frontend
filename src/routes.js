@@ -11,6 +11,7 @@ const routes = (
     <Route path='/' component={App}>
       <IndexRoute component={Sandbox} />
       <Route path='/sample' component={Sample} />
+      <Route path='/sandbox' component={Sandbox} />
       <Route path='/*' component={NotFound} />
     </Route>
   </Router>
