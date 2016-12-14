@@ -3,14 +3,12 @@ import React from 'react'
 import BarChart from './BarChart'
 import Cartogram from './Cartogram'
 import Glossary from './Glossary'
-import Header from './Header'
 import TimeChart from './TimeChart'
 
 import { timeData, mapData } from '../util/data'
 
 const Sandbox = () => (
   <div>
-    <Header />
     <div className='p2 container'>
       <div className='mb3'>
         <Cartogram data={mapData} />
