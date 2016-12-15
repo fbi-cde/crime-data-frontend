@@ -1,7 +1,23 @@
 import React from 'react'
 
 import Breadcrumbs from './Breadcrumbs'
+import Census from './Census'
 import Term from './Term'
+
+const censusData = [
+  {
+    statistic: '11,613,423',
+    label: 'residents',
+  },
+  {
+    statistic: '74%',
+    label: 'covered in UCR program',
+  },
+  {
+    statistic: 831,
+    label: 'law enforcement agencies',
+  },
+]
 
 const Explorer = props => {
   const state = props.params.state
@@ -31,7 +47,7 @@ const Explorer = props => {
           </p>
         </div>
         <div className='sm-col-right sm-col-4'>
-          <p>Census block will go here</p>
+          <Census data={censusData} />
         </div>
       </div>
     </div>
