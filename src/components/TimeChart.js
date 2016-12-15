@@ -55,4 +55,8 @@ const TimeChart = ({
   )
 }
 
+TimeChart.propTypes = {
+  data: React.PropTypes.arrayOf(React.PropTypes.array).isRequired,
+}
+
 export default TimeChart
