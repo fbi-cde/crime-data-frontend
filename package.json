@@ -11,6 +11,7 @@
     "build": "webpack -p",
     "lint": "eslint src scripts || exit 0",
     "test": "jest --env=jsdom",
+    "test:debug": "node --debug-brk jest -i --env=jsdom",
     "coverage": "npm test -- --coverage"
   },
   "dependencies": {
@@ -46,6 +47,8 @@
     "jest": "^17.0.3",
     "js-yaml": "^3.7.0",
     "json-loader": "^0.5.4",
+    "lodash.flatten": "^4.4.0",
+    "lodash.range": "^3.2.0",
     "node-sass": "^3.13.0",
     "nodemon": "^1.11.0",
     "normalize.css": "^5.0.0",
@@ -54,6 +57,7 @@
     "react-dom": "^15.4.1",
     "react-router": "^3.0.0",
     "sass-loader": "^4.0.2",
+    "sinon": "^1.17.6",
     "style-loader": "^0.13.1",
     "topojson": "^2.2.0",
     "webpack": "1.13.2",
