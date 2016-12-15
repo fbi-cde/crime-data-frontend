@@ -11,4 +11,19 @@ const mapData = {
   FL: 1,
 }
 
-export { timeData, mapData }
+const censusData = [
+  {
+    statistic: '11,613,423',
+    label: 'residents',
+  },
+  {
+    statistic: '74%',
+    label: 'covered in UCR program',
+  },
+  {
+    statistic: 831,
+    label: 'law enforcement agencies',
+  },
+]
+
+export { timeData, mapData, censusData }

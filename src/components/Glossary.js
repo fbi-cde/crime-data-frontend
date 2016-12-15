@@ -5,7 +5,7 @@ import terms from '../../data/terms.json'
 
 class Glossary extends React.Component {
   componentDidMount() {
-    new GlossaryPanel(terms) // eslint-disable-line no-new
+    window.Glossary = new GlossaryPanel(terms) // eslint-disable-line no-new
   }
 
   shouldComponentUpdate() { return false }

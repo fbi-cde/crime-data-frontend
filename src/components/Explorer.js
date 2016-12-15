@@ -1,10 +1,16 @@
 import React from 'react'
+import startCase from 'lodash.startcase'
 
 import Breadcrumbs from './Breadcrumbs'
+import Census from './Census'
 import Term from './Term'
+import TimeChart from './TimeChart'
+
+import { censusData, timeData } from '../util/data'
 
 const Explorer = props => {
-  const state = props.params.state
+  const { crime } = props.params
+  const state = startCase(props.params.state)
 
   return (
     <div className='container'>
@@ -21,18 +27,22 @@ const Explorer = props => {
       <div className='clearfix'>
         <div className='sm-col sm-col-8'>
           <p className='bold'>
-            Incidents of <Term>rape</Term> are on the
-            rise in { state }, but lower than 5 or 10 years ago.
+            Incidents of <Term>{crime}</Term> are on the
+            rise in {state}, but lower than 5 or 10 years ago.
           </p>
           <p>
-            Ohio's rape rate surpassed that of the U.S. in 1985, and peaked
+            {state}&#39;s {crime} rate surpassed that of the U.S. in 1985, and peaked
             in 1991, with a rate of over 52 incidents per 100,000
             people.<sup>1</sup>
           </p>
         </div>
         <div className='sm-col-right sm-col-4'>
-          <p>Census block will go here</p>
+          <Census data={censusData} />
         </div>
+      </div>
+      <div>
+        <h3>Reported {crime}s in {state}, 2005 - 2014</h3>
+        <TimeChart data={timeData} />
       </div>
     </div>
   )

@@ -5,19 +5,22 @@ import React from 'react'
 const showTerm = term => {
   const id = term.target.getAttribute('data-term')
   console.log(`fire off action to show ${id} in the glossary`)
+  window.Glossary.show()
+  window.Glossary.findTerm(id)
 }
 
 const Term = props => {
   const id = props.id || props.children
 
   return (
-    <span
-      className='btn border-none border-bottom p0'
+    <button
+      className='align-baseline btn border-bottom p0 underline'
       data-term={id}
       onClick={showTerm}
+      role='button'
     >
       { props.children }
-    </span>
+    </button>
   )
 }
 
