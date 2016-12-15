@@ -4,13 +4,11 @@ import Footer from './Footer'
 import Glossary from './Glossary'
 import Navigation from './Navigation'
 
-const App = props => (
+const App = ({ children }) => (
   <div className='site'>
     <div className='site-wrap'>
       <Navigation />
-      <main className='container'>
-        { props.children }
-      </main>
+      <main>{ children }</main>
     </div>
     <Glossary />
     <Footer />
