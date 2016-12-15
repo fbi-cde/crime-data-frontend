@@ -11,13 +11,14 @@ const Term = props => {
   const id = props.id || props.children
 
   return (
-    <span
-      className='btn border-none border-bottom p0'
+    <button
+      className='align-baseline btn border-bottom p0 underline'
       data-term={id}
       onClick={showTerm}
+      role='button'
     >
       { props.children }
-    </span>
+    </button>
   )
 }
 
