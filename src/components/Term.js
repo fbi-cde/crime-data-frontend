@@ -5,6 +5,8 @@ import React from 'react'
 const showTerm = term => {
   const id = term.target.getAttribute('data-term')
   console.log(`fire off action to show ${id} in the glossary`)
+  window.Glossary.show()
+  window.Glossary.findTerm(id)
 }
 
 const Term = props => {
