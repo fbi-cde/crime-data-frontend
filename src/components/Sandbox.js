@@ -1,8 +1,8 @@
+import { Link } from 'react-router'
 import React from 'react'
 
 import BarChart from './BarChart'
 import Cartogram from './Cartogram'
-import Glossary from './Glossary'
 import TimeChart from './TimeChart'
 
 import StateSvg from './StateSvg'
@@ -12,6 +12,9 @@ import { timeData, mapData } from '../util/data'
 const Sandbox = () => (
   <div>
     <div className='p2 container'>
+      <div className='mb3'>
+        <Link to='/explorer/ohio/murder'>Murder in Ohio</Link>
+      </div>
       <div className='mb3'>
         <StateSvg state='dc' color='steelblue' />
         <StateSvg state='ca' color='tomato' />
@@ -27,7 +30,6 @@ const Sandbox = () => (
         <BarChart data={timeData} labels={false} />
       </div>
     </div>
-    <Glossary />
   </div>
 )
 
