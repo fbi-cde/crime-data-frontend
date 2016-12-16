@@ -21,6 +21,7 @@
     "express": "^4.14.0"
   },
   "devDependencies": {
+    "autoprefixer": "^6.5.4",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
@@ -53,6 +54,7 @@
     "node-sass": "^3.13.0",
     "nodemon": "^1.11.0",
     "normalize.css": "^5.0.0",
+    "postcss-loader": "^1.2.1",
     "react": "^15.4.1",
     "react-addons-test-utils": "^15.4.1",
     "react-dom": "^15.4.1",
