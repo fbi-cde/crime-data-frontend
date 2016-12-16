@@ -7,26 +7,21 @@ import Footer from './Footer'
 import Glossary from './Glossary'
 import Navigation from './Navigation'
 
-const App = props => {
-  const appState = props.appState
-  const dispatch = props.dispatch
-
-  return (
-    <div className='site'>
-      <div className='site-wrap'>
-        <Navigation />
-        <main className='container'>
-          {props.children}
-        </main>
-      </div>
-      <Glossary
-        dispatch={dispatch}
-        {...appState.glossary}
-      />
-      <Footer />
+const App = ({ appState, children, dispatch }) => (
+  <div className='site'>
+    <div className='site-wrap'>
+      <Navigation />
+      <main className='container'>
+        {children}
+      </main>
     </div>
-  )
-}
+    <Glossary
+      dispatch={dispatch}
+      {...appState.glossary}
+    />
+    <Footer />
+  </div>
+)
 
 App.propTypes = {
   appState: React.PropTypes.object,

@@ -16,5 +16,5 @@ const render = () => {
   ), rootEl)
 }
 
-store.subscribe(() => render())
 render()
+store.subscribe(() => render())

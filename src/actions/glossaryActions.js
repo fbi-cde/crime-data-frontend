@@ -4,24 +4,18 @@ import {
   GLOSSARY_SHOW_TERM,
 } from '../constants'
 
-const hide = () => (
-  {
-    type: GLOSSARY_HIDE,
-  }
-)
+const hide = () => ({
+  type: GLOSSARY_HIDE,
+})
 
-const show = () => (
-  {
-    type: GLOSSARY_SHOW,
-  }
-)
+const show = () => ({
+  type: GLOSSARY_SHOW,
+})
 
-const showTerm = term => (
-  {
-    type: GLOSSARY_SHOW_TERM,
-    term,
-  }
-)
+const showTerm = term => ({
+  type: GLOSSARY_SHOW_TERM,
+  term,
+})
 
 export {
   hide,
