@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import GlossaryPanel from 'glossary-panel'
 import React from 'react'
 
@@ -70,7 +72,9 @@ class Glossary extends React.Component {
 }
 
 Glossary.defaultProps = {
-  dispatch: () => {},
+  dispatch: a => {
+    console.error('dispatch() was not provided to <Glossary /> as a prop', a)
+  },
   isVisible: false,
 }
 
