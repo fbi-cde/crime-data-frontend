@@ -6,7 +6,7 @@ import Census from './Census'
 import Term from './Term'
 import TimeChart from './TimeChart'
 
-import { censusData, timeData } from '../util/data'
+import { censusData, timeData2 } from '../util/data'
 
 const Explorer = props => {
   const { crime } = props.params
@@ -42,7 +42,7 @@ const Explorer = props => {
       </div>
       <div>
         <h3>Reported {crime}s in {state}, 2005 - 2014</h3>
-        <TimeChart data={timeData} />
+        <TimeChart data={timeData2} keys={['foo', 'bar']} />
       </div>
     </div>
   )
