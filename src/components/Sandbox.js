@@ -7,7 +7,7 @@ import TimeChart from './TimeChart'
 
 import StateSvg from './StateSvg'
 
-import { timeData, mapData } from '../util/data'
+import { timeData, timeData2, mapData } from '../util/data'
 
 const Sandbox = () => (
   <div>
@@ -24,7 +24,7 @@ const Sandbox = () => (
         <Cartogram data={mapData} />
       </div>
       <div className='mb3'>
-        <TimeChart data={timeData} />
+        <TimeChart data={timeData2} keys={['foo', 'bar']} />
       </div>
       <div className='mb3'>
         <BarChart data={timeData} labels={false} />

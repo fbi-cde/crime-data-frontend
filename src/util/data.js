@@ -6,6 +6,14 @@ const timeData = [
   ['2016-01-05', 10],
 ]
 
+const timeData2 = [
+  { date: '2016-01-01', foo: 5, bar: 7 },
+  { date: '2016-01-02', foo: 7, bar: 2 },
+  { date: '2016-01-03', foo: 4, bar: 4 },
+  { date: '2016-01-04', foo: 5, bar: 6 },
+  { date: '2016-01-05', foo: 10, bar: 4 },
+]
+
 const mapData = {
   CA: 1,
   FL: 1,
@@ -26,4 +34,4 @@ const censusData = [
   },
 ]
 
-export { timeData, mapData, censusData }
+export { timeData, timeData2, mapData, censusData }
