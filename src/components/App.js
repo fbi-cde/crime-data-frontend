@@ -19,7 +19,10 @@ const App = props => {
           {props.children}
         </main>
       </div>
-      <Glossary />
+      <Glossary
+        dispatch={dispatch}
+        {...appState.glossary}
+      />
       <Footer />
     </div>
   )
