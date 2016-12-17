@@ -1,6 +1,6 @@
-/* name constants as NOUN_ACTION so that actions related
-   by nouns will show up near each other in an alphabetized
-   list
+/*
+  name constants as NOUN_ACTION so that actions related
+  by nouns will show up near each other in an alphabetized list
 */
 
 export const GLOSSARY_HIDE = 'GLOSSARY_HIDE'

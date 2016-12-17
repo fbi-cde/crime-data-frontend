@@ -3,7 +3,7 @@
 import {
   GLOSSARY_HIDE,
   GLOSSARY_SHOW,
-} from '../../src/constants';
+} from '../../src/actions/actionTypes';
 
 import { hide, show } from '../../src/actions/glossaryActions';
 

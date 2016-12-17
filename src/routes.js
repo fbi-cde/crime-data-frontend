@@ -1,5 +1,5 @@
 import React from 'react'
-import { hashHistory, IndexRoute, Router, Route } from 'react-router'
+import { hashHistory, IndexRoute, Route, Router } from 'react-router'
 
 import App from './components/App'
 import Explorer from './components/Explorer'

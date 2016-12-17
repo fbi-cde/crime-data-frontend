@@ -1,7 +1,7 @@
 import {
   GLOSSARY_HIDE,
   GLOSSARY_SHOW,
-} from '../constants'
+} from '../actions/actionTypes'
 
 const initialState = {
   isVisible: false,

@@ -7,14 +7,12 @@ import store from './store'
 
 import '../sass/app.scss'
 
-const rootEl = document.getElementById('app')
 const render = () => {
-  ReactDOM.render((
-    <Provider store={store} >
-      { routes }
-    </Provider>
-  ), rootEl)
+  ReactDOM.render(
+    <Provider store={store}>{routes}</Provider>,
+    document.getElementById('app'),
+  )
 }
 
 render()
-store.subscribe(() => render())
+store.subscribe(render)
