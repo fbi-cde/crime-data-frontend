@@ -13,7 +13,7 @@ const Explorer = props => {
   const state = startCase(props.params.state)
 
   return (
-    <div className='container'>
+    <div className='p2 container'>
       <div className='border-bottom clearfix pb2 mb2'>
         <Breadcrumbs {...props} />
         <span className='sm-col flex flex-center'>

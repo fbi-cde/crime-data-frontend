@@ -9,19 +9,15 @@ const showTerm = term => {
   window.Glossary.findTerm(id)
 }
 
-const Term = props => {
-  const id = props.id || props.children
-
-  return (
-    <button
-      className='align-baseline btn border-bottom p0 underline'
-      data-term={id}
-      onClick={showTerm}
-      role='button'
-    >
-      { props.children }
-    </button>
-  )
-}
+const Term = ({ children, id }) => (
+  <button
+    className='align-baseline btn border-bottom p0 underline'
+    data-term={id || children}
+    onClick={showTerm}
+    role='button'
+  >
+    {children}
+  </button>
+)
 
 export default Term

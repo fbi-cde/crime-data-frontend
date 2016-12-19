@@ -1,9 +1,14 @@
-const path = require('path')
+/* eslint-disable comma-dangle, no-var, quote-props  */
 
-const autoprefixer = require('autoprefixer')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+var path = require('path')
 
-module.exports = {
+var autoprefixer = require('autoprefixer')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var webpack = require('webpack')
+
+var env = process.env.NODE_ENV || 'development'
+
+var config = {
   entry: './src/entry.js',
   output: {
     path: path.join(__dirname, 'build'),
@@ -34,6 +39,17 @@ module.exports = {
     autoprefixer({ browsers: ['last 2 versions', '> 2%'] })
   ],
   plugins: [
-    new ExtractTextPlugin('app.css')
+    new ExtractTextPlugin('app.css'),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(env)
+      }
+    })
   ]
 }
+
+if (env === 'production') {
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin())
+}
+
+module.exports = config

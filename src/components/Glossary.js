@@ -9,7 +9,7 @@ import terms from '../../data/terms.json'
 class Glossary extends React.Component {
   constructor() {
     super()
-    this.toggleGlossary = this.toggleGlossary.bind(this)
+    this.toggleGlossary = ::this.toggleGlossary
   }
 
   componentDidMount() {
@@ -51,10 +51,7 @@ class Glossary extends React.Component {
           aria-describedby='glossary-result'
           aria-hidden='true'
         >
-          <button className='js-glossary-close btn btn-primary toggle' title='Close glossary'>
-            <span className='u-visually-hidden'>Hide glossary</span>
-          </button>
-          <h2>Glossary</h2>
+          <h2 className='mt0'>Glossary</h2>
           <label className='label' htmlFor='glossary-search'>Filter glossary terms</label>
           <input
             className='field js-glossary-search'
@@ -65,6 +62,12 @@ class Glossary extends React.Component {
           <div className='glossary__content' id='glossary-result'>
             <ul className='js-glossary-list' />
           </div>
+        </div>
+        <div className='display-none'>
+          <button className='js-glossary-toggle' />
+          <button className='js-glossary-close btn btn-primary toggle'>
+            <span className='u-visually-hidden'>Hide glossary</span>
+          </button>
         </div>
       </div>
     )
