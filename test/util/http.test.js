@@ -3,7 +3,7 @@
 import axios from 'axios'
 import sinon from 'sinon'
 
-import http from '../../src/util/http'
+import * as http from '../../src/util/http'
 
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)
