@@ -34,4 +34,35 @@ const censusData = [
   },
 ]
 
-export { timeData, timeData2, mapData, censusData }
+const detailData = [
+  {
+    key: 'Acquaintance',
+    count: 10083,
+    percent: 0.32,
+  },
+  {
+    key: 'Unknown',
+    count: 6358,
+    percent: 0.2,
+  },
+  {
+    key: 'Stranger',
+    count: 3403,
+    percent: 0.11,
+  },
+  {
+    key: 'Boyfriend',
+    count: 3313,
+    percent: 0.11,
+  },
+  {
+    key: 'Girlfriend',
+    count: 2794,
+    percent: 0.09,
+  },
+]
+
+export {
+  timeData, timeData2, mapData,
+  censusData, detailData,
+}
