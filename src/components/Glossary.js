@@ -39,7 +39,7 @@ class Glossary extends React.Component {
       <div>
         <div className='fixed left-0 bottom-0 p1'>
           <button
-            className='btn btn-outline'
+            className='btn btn-outline bg-white'
             onClick={this.toggleGlossary}
           >
             Glossary
