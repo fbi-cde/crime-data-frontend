@@ -1,4 +1,4 @@
-// bottom sticky footer
+// 'holy grail' layout (https://en.wikipedia.org/wiki/Holy_Grail_(web_design))
 //
 // a few things to note:
 // 1. Avoid the IE 10-11 `min-height` bug.
@@ -8,6 +8,8 @@
 // 3. Use `%` instead of `vh` since `vh` is buggy in older mobile Safari.
 //
 // scss-lint:disable IdSelector
+
+$sidebar-width: 20rem;
 
 html,
 body,
@@ -21,18 +23,23 @@ body,
   height: 100%; // 1, 3
 }
 
+header,
 footer {
   flex: none; // 2
 }
 
-.site-wrap {
+.site-body {
+  display: flex;
   flex: 1 0 auto; // 2
-  width: 100%;
+  flex-direction: column;
 }
 
-.site-wrap::after {
-  content: '\00a0'; // &nbsp;
-  display: block;
-  height: 0;
-  visibility: hidden;
+.site-sidebar {
+  order: -1;
+}
+
+@media #{$breakpoint-md} {
+  .site-body { flex-direction: row; }
+  .site-content { flex: 1; }
+  .site-sidebar { flex: 0 0 $sidebar-width; }
 }

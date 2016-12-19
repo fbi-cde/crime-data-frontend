@@ -6,19 +6,19 @@ import { connect } from 'react-redux'
 import Footer from './Footer'
 import Glossary from './Glossary'
 import Navigation from './Navigation'
+import Sidebar from './Sidebar'
 
 const App = ({ appState, children, dispatch }) => (
   <div className='site'>
-    <div className='site-wrap'>
-      <Navigation />
-      <main className='container'>
-        {children}
-      </main>
+    <Navigation />
+    <div className='site-body'>
+      <main className='site-content'>{children}</main>
+      <Sidebar />
+      <Glossary
+        dispatch={dispatch}
+        {...appState.glossary}
+      />
     </div>
-    <Glossary
-      dispatch={dispatch}
-      {...appState.glossary}
-    />
     <Footer />
   </div>
 )
