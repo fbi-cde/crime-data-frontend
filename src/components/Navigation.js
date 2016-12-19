@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router'
 
 const Navigation = () => (
-  <nav className='clearfix py2 bg-navy white'>
-    <div className='container px2'>
+  <header className='py2 bg-navy white'>
+    <div className='clearfix px2'>
       <div className='sm-col'>
         <h2 className='m0 lh-32p'>Crime Data Explorer</h2>
       </div>
@@ -13,7 +13,7 @@ const Navigation = () => (
         <Link to='/about' className='px1 white'>About</Link>
       </div>
     </div>
-  </nav>
+  </header>
 )
 
 export default Navigation
