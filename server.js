@@ -1,3 +1,8 @@
+/* eslint global-require: 0 */
+
+const production = (process.env.NODE_ENV === 'production')
+if (production) require('newrelic')
+
 const basicAuth = require('basic-auth-connect')
 const cfenv = require('cfenv')
 const express = require('express')
@@ -11,9 +16,7 @@ const apiKey = credService.credentials.API_KEY || process.env.API_KEY || false
 const username = credService.credentials.HTTP_BASIC_USERNAME
 const password = credService.credentials.HTTP_BASIC_PASSWORD
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(basicAuth(username, password))
-}
+if (production) app.use(basicAuth(username, password))
 
 app.use(express.static(__dirname))
 
