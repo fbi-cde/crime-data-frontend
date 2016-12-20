@@ -5,7 +5,7 @@ const Navigation = () => (
   <header className='py2 bg-navy white'>
     <div className='clearfix px2'>
       <div className='sm-col'>
-        <h2 className='m0 lh-32p'>Crime Data Explorer</h2>
+        <h2 className='m0 serif lh-32p'>Crime Data Explorer</h2>
       </div>
       <div className='sm-col-right mxn1 lh-32p'>
         <Link to='/'className='px1 white'>Explorer</Link>

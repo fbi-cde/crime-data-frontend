@@ -10,7 +10,7 @@ import StateSvg from './StateSvg'
 import { timeData, timeData2, mapData } from '../util/data'
 
 const Sandbox = () => (
-  <div className='p2 container'>
+  <div className='p3 bg-white border-left'>
     <div className='mb3'>
       <Link to='/explorer/ohio/murder'>Murder in Ohio</Link>
     </div>

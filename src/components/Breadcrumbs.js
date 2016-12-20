@@ -1,23 +1,21 @@
 import { Link } from 'react-router'
 import React from 'react'
 
-const Breadcrumbs = props => {
-  const { crime, state } = props.params
+const Breadcrumbs = ({ params }) => {
+  const { crime, state } = params
+  const links = [
+    ['/explorer', 'Explorer'],
+    [`/explorer/${state}`, state],
+    [`/explorer/${state}/${crime}`, crime],
+  ]
+
   return (
-    <ul className='breadcrumbs clearfix list-style-none px0'>
-      <li className='left mr2'>
-        <Link to='/explorer'>Explorer</Link>
-      </li>
-      <li className='left mr2'>
-        <Link to={`/explorer/${state}`} className='titlecase'>
-          { state }
-        </Link>
-      </li>
-      <li className='left'>
-        <Link to={`/explorer/${state}/${crime}`} className='titlecase'>
-          { crime }
-        </Link>
-      </li>
+    <ul className='breadcrumbs list-reset mt0 h5'>
+      {links.map((link, i) => (
+        <li key={i}>
+          <Link to={link[0]} className='titlecase black'>{link[1]}</Link>
+        </li>
+      ))}
     </ul>
   )
 }
