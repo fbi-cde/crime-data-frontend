@@ -28,7 +28,19 @@ const Sandbox = () => (
     <div className='mb3'>
       <BarChart data={timeData} labels={false} />
     </div>
-  </div>
-)
+  )
+}
+
+// Sandbox.defaultProps = {
+//   appState: { filters: {} },
+// }
+//
+// const applyStates = s => {
+//   const states = s.reduce((a, n) => {
+//     const name = n.toUpperCase()
+//     return { ...a, [name]: 1 }
+//   }, {})
+//   return Object.assign({}, mapData, states)
+// }
 
 export default Sandbox
