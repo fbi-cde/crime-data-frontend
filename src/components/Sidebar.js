@@ -1,9 +1,9 @@
 import React from 'react'
 
 import Filter from './Filter'
-import { update } from '../actions/filterActions'
+import { updateFilter } from '../actions/filterActions'
 
-const eventAction = e => update(e)
+const eventAction = e => updateFilter(e)
 
 const filters = [
   {

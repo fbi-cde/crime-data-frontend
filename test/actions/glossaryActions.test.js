@@ -5,19 +5,19 @@ import {
   GLOSSARY_SHOW,
 } from '../../src/actions/actionTypes';
 
-import { hide, show } from '../../src/actions/glossaryActions';
+import { hideGlossary, showGlossary } from '../../src/actions/glossaryActions';
 
 describe('glossaryActions', () => {
-  describe('hide()', () => {
+  describe('hideGlossary()', () => {
     it('should return a GLOSSARY_HIDE action', () => {
-      const actual = hide()
+      const actual = hideGlossary()
       expect(actual.type).toEqual(GLOSSARY_HIDE)
     })
   })
 
-  describe('show()', () => {
+  describe('showGlossary()', () => {
     it('should return a GLOSSARY_SHOW action', () => {
-      const actual = show()
+      const actual = showGlossary()
       expect(actual.type).toEqual(GLOSSARY_SHOW)
     })
   })

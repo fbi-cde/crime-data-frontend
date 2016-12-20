@@ -3,12 +3,12 @@ import {
   FILTER_UPDATE,
 } from './actionTypes'
 
-export const reset = ({ id }) => ({
+export const resetFilter = ({ id }) => ({
   type: FILTER_RESET,
   id,
 })
 
-export const update = ({ id, value }) => ({
+export const updateFilter = ({ id, value }) => ({
   type: FILTER_UPDATE,
   id,
   value,

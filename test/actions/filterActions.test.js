@@ -5,23 +5,23 @@ import {
   FILTER_UPDATE,
 } from '../../src/actions/actionTypes';
 
-import { reset, update } from '../../src/actions/filterActions';
+import { resetFilter, updateFilter } from '../../src/actions/filterActions';
 
 describe('filterActions', () => {
-  describe('reset()', () => {
+  describe('resetFilter()', () => {
     it('should return a FILTER_RESET action', () => {
       const id = 'fake-id'
-      const actual = reset({ id })
+      const actual = resetFilter({ id })
       expect(actual.type).toEqual(FILTER_RESET)
       expect(actual.id).toEqual(id)
     })
   })
 
-  describe('update()', () => {
+  describe('updateFilter()', () => {
     it('should return a FILTER_UPDATE action', () => {
       const id = 'fake-id'
       const value = 'fake-value'
-      const actual = update({ id, value })
+      const actual = updateFilter({ id, value })
       expect(actual.type).toEqual(FILTER_UPDATE)
       expect(actual.id).toEqual(id)
       expect(actual.value).toEqual(value)
