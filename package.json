@@ -12,6 +12,7 @@
     "lint": "eslint src scripts || exit 0",
     "test": "jest --env=jsdom",
     "test:debug": "node --debug-brk jest -i --env=jsdom",
+    "test:watch": "jest --env=jsdom --watch",
     "coverage": "npm test -- --coverage"
   },
   "dependencies": {
@@ -63,6 +64,7 @@
     "react-redux": "^5.0.1",
     "react-router": "^3.0.0",
     "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0",
     "sass-loader": "^4.0.2",
     "sinon": "^1.17.6",
     "style-loader": "^0.13.1",

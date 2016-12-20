@@ -1,7 +1,10 @@
 /* eslint no-console: 0 */
 
 import { applyMiddleware, combineReducers, createStore } from 'redux'
+import thunk from 'redux-thunk'
+
 import glossary from './reducers/glossaryReducer'
+import incidents from './reducers/incidentsReducer'
 
 const logger = store => next => action => {
   const result = next(action)
@@ -10,7 +13,7 @@ const logger = store => next => action => {
   return result
 }
 
-const reducer = combineReducers({ glossary })
-const store = createStore(reducer, applyMiddleware(logger))
+const reducer = combineReducers({ glossary, incidents })
+const store = createStore(reducer, applyMiddleware(logger, thunk))
 
 export default store

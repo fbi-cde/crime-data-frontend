@@ -24,4 +24,4 @@ const getAll = (url, params = {}) => {
   return all
 }
 
-export default { get, getAll }
+export { get, getAll }
