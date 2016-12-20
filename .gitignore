@@ -4,4 +4,5 @@ node_modules
 
 .DS_Store
 .env
+newrelic_agent.log
 npm-debug.log
