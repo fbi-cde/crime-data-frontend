@@ -1,21 +1,41 @@
 import React from 'react'
 
-import StateSvg from './StateSvg'
+import Filter from './Filter'
+import { update } from '../actions/filterActions'
 
-const Sidebar = () => (
-  <nav className='site-sidebar bg-white'>
+const eventAction = e => update(e)
+
+const filters = [
+  {
+    label: 'Crime type',
+    type: 'select',
+    options: ['Yo', 'Dude', 'Hey'],
+  },
+  {
+    label: 'States',
+    type: 'checkbox',
+    options: ['AK', 'CA', 'IL', 'NY'],
+  },
+]
+
+const Sidebar = ({ dispatch }) => (
+  <nav className='site-sidebar bg-silver'>
     <div className='p2 sm-p3'>
-      <h3 className='mt0 pb1 border-bottom'>Location</h3>
-      <div className='py2 center'>
-        <StateSvg state='oh' color='tomato' size={150} />
-      </div>
-      <p>
-        Bacon ipsum dolor sit amet chuck prosciutto landjaeger ham hock filet mignon
-        shoulder hamburger pig venison. Ham bacon corned beef, sausage kielbasa flank
-        tongue pig drumstick capicola swine short loin ham hock kevin.
-      </p>
+      <h2 className='mt0'>Sidebar</h2>
     </div>
+    { filters.map((f, i) => (
+      <Filter
+        key={i}
+        onChange={e => { dispatch(eventAction(e)) }}
+        {...f}
+      />
+    ))}
+
   </nav>
 )
+
+Sidebar.propTypes = {
+  dispatch: React.PropTypes.func,
+}
 
 export default Sidebar

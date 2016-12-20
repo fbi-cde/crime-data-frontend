@@ -1,0 +1,29 @@
+.filter {
+  position: relative;
+}
+
+.filter::before {
+  border: 1px solid black;
+  border-left: 0;
+  border-bottom: 0;
+  content: '';
+  display: inline-block;
+  height: $space-1;
+  position: absolute;
+  right: $space-3;
+  top: $space-1;
+  transform: rotate(135deg);
+  width: $space-1;
+}
+
+.filter[aria-expanded="true"] label + * {
+  display: block;
+}
+
+.filter[aria-expanded="false"] label + * {
+  display: none;
+}
+
+.filter[aria-expanded="false"]::before {
+  transform: rotate(45deg);
+}
