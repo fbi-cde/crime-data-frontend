@@ -14,19 +14,17 @@ const Explorer = props => {
   const state = startCase(props.params.state)
 
   return (
-    <div className='p2 container'>
-      <div className='border-bottom clearfix pb2 mb2'>
-        <Breadcrumbs {...props} />
-        <span className='sm-col flex flex-center'>
-          <h1 className='py0 my0 titlecase'>{ state }</h1>
-        </span>
-        <span className='sm-col-right flex flex-center'>
-          <a className='btn'>Download this data</a>
-          <a className='btn'>Share this page</a>
-        </span>
+    <div className='p2 sm-p3 container'>
+      <Breadcrumbs {...props} />
+      <div className='md-flex items-baseline mb4 border-bottom'>
+        <h1 className='flex-auto my0 md-mb1 serif'>{state}</h1>
+        <div className='mxn1'>
+          <a href='#!' className='btn px1 h5'>Download this data</a>
+          <a href='#!' className='btn px1 h5'>Share this page</a>
+        </div>
       </div>
-      <div className='clearfix'>
-        <div className='sm-col sm-col-8'>
+      <div className='clearfix mb3 mxn1'>
+        <div className='sm-col sm-col-8 px1'>
           <p className='bold'>
             Incidents of <Term>{crime}</Term> are on the
             rise in {state}, but lower than 5 or 10 years ago.
@@ -37,16 +35,16 @@ const Explorer = props => {
             people.<sup>1</sup>
           </p>
         </div>
-        <div className='sm-col-right sm-col-4'>
+        <div className='sm-col-right sm-col-4 px1'>
           <Census data={censusData} />
         </div>
       </div>
-      <div>
-        <h3>Reported {crime}s in {state}, 2005 - 2014</h3>
+      <div className='mb3 p2 sm-p3 bg-white rounded'>
+        <h3 className='mt0 mb3'>Reported {crime}s in {state}, 2005 - 2014</h3>
         <TimeChart data={timeData2} keys={['foo', 'bar']} />
       </div>
       <div>
-        <h3>Details</h3>
+        <h2 className='pb1 serif border-bottom border-silver'>Details</h2>
         <div className='clearfix mxn1'>
           <div className='sm-col sm-col-6 p1'>
             <DetailsCard data={detailData} title='Title!' />

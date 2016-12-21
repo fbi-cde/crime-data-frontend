@@ -12,12 +12,14 @@ const DetailsCard = ({
   const withPercent = data.map(d => ({ ...d, percent: (d.count / sum) }))
 
   return (
-    <div className='p2 border rounded'>
+    <div className='p2 sm-p3 bg-white rounded'>
       <h2 className='mt0'>{title}</h2>
       <div className='mb1 h6 blue caps bold right-align'>Incidents</div>
       <table>
         <thead>
-          {colWidths.map((c, i) => <th key={i} className={`col-${c}`} />)}
+          <tr>
+            {colWidths.map((c, i) => <th key={i} className={`col-${c}`} />)}
+          </tr>
         </thead>
         <tbody>
           {withPercent.map((d, i) => (

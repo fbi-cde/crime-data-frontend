@@ -1,6 +1,7 @@
+// main colors
 $aqua: #7fdbff !default;
 $blue: #0074d9 !default;
-$navy: #122f50 !default;
+$navy: #274152 !default;
 $teal: #39cccc !default;
 $green: #2ecc40 !default;
 $olive: #3d9970 !default;
@@ -16,6 +17,9 @@ $silver: #e3e4e6 !default;
 $gray: #aaa !default;
 $black: #000 !default;
 
+// additional colors
+$light-blue: #eff4f9 !default;
+
 $font-serif: georgia, times, serif !default;
 $font-sans-serif: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica, helvetica neue, ubuntu, roboto, noto, segoe ui, arial, sans-serif !default;
 $font-monospace: 'Source Code Pro', Consolas, monospace !default;
@@ -30,7 +34,7 @@ $h6: .75rem !default;
 $space-1: .5rem !default;
 $space-2: 1rem !default;
 $space-3: 2rem !default;
-$space-4: 4rem !default;
+$space-4: 3rem !default;
 
 $line-height-1: 1 !default;
 $line-height-2: 1.125 !default;
@@ -54,7 +58,7 @@ $paragraph-margin-top: 0 !default;
 $paragraph-margin-bottom: $space-2 !default;
 
 $body-color: $black !default;
-$body-background-color: $white !default;
+$body-background-color: $light-blue !default;
 $link-color: $blue !default;
 $link-text-decoration: none !default;
 $link-hover-text-decoration: underline !default;

@@ -11,7 +11,7 @@ const showTerm = term => {
 
 const Term = ({ children, id }) => (
   <button
-    className='align-baseline btn border-bottom p0 underline'
+    className='btn p0 bg-navy white align-baseline'
     data-term={id || children}
     onClick={showTerm}
     role='button'
