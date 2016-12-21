@@ -12,8 +12,10 @@ const App = ({ appState, children, dispatch }) => (
   <div className='site'>
     <Navigation />
     <div className='site-body'>
-      <main className='site-content'>{children}</main>
-      <Sidebar />
+      <main className='site-content'>
+        {children && React.cloneElement(children, { appState, dispatch })}
+      </main>
+      <Sidebar dispatch={dispatch} />
       <Glossary
         dispatch={dispatch}
         {...appState.glossary}

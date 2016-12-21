@@ -3,7 +3,7 @@
 import GlossaryPanel from 'glossary-panel'
 import React from 'react'
 
-import { hide, show } from '../actions/glossaryActions'
+import { hideGlossary, showGlossary } from '../actions/glossaryActions'
 import terms from '../../data/terms.json'
 
 class Glossary extends React.Component {
@@ -30,8 +30,8 @@ class Glossary extends React.Component {
 
   toggleGlossary() {
     const { dispatch, isVisible } = this.props
-    if (isVisible) dispatch(hide())
-    else dispatch(show())
+    if (isVisible) dispatch(hideGlossary())
+    else dispatch(showGlossary())
   }
 
   render() {

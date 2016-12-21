@@ -4,11 +4,11 @@ import {
   GLOSSARY_SHOW_TERM,
 } from './actionTypes'
 
-export const hide = () => ({
+export const hideGlossary = () => ({
   type: GLOSSARY_HIDE,
 })
 
-export const show = () => ({
+export const showGlossary = () => ({
   type: GLOSSARY_SHOW,
 })
 
