@@ -3,7 +3,7 @@
 }
 
 .filter-field::before {
-  border-width: $border-width * 3;
+  border: $border-width * 3;
   border-bottom: 0;
   border-color: $black;
   border-left: 0;
