@@ -1,13 +1,10 @@
 import React from 'react'
 
 const Filter = ({ children, id, legend }) => (
-  <fieldset
-    id={id}
-    className='mt2 pl0 border-none'
-  >
-    <legend className='col-12 h3 border-bottom'>{legend}</legend>
+  <div id={id} className='mb3'>
+    <div className='mb2 h5 caps bold border-bottom'>{legend}</div>
     {children}
-  </fieldset>
+  </div>
 )
 
 Filter.propTypes = {

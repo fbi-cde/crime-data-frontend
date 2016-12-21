@@ -25,9 +25,8 @@ const Sidebar = ({ dispatch }) => {
   const handleChange = change => dispatch(updateFilter(change))
   const debouncedHandleChange = debounce(handleChange, 800)
   return (
-    <nav className='site-sidebar bg-silver'>
+    <nav className='site-sidebar bg-white'>
       <div className='p2 sm-p3'>
-        <h2 className='mt0'>Sidebar</h2>
         <Filter legend='Location' id='location'>
           <FilterField
             label='State'
@@ -37,21 +36,23 @@ const Sidebar = ({ dispatch }) => {
           />
         </Filter>
         <Filter legend='Time period' id='time-period'>
-          <FilterField
-            className='col col-5'
-            label='Time from'
-            onChange={debouncedHandleChange}
-            showLabel={false}
-            type='number'
-          />
-          <span className='align-middle col col-2 center'>to</span>
-          <FilterField
-            className='col col-5'
-            label='Time to'
-            onChange={debouncedHandleChange}
-            showLabel={false}
-            type='number'
-          />
+          <div className='clearfix'>
+            <FilterField
+              className='col col-5'
+              label='Time from'
+              onChange={debouncedHandleChange}
+              showLabel={false}
+              type='number'
+            />
+            <span className='col col-2 lh-form-field center'>to</span>
+            <FilterField
+              className='col col-5'
+              label='Time to'
+              onChange={debouncedHandleChange}
+              showLabel={false}
+              type='number'
+            />
+          </div>
         </Filter>
         <Filter legend='Type of crime' id='type-of-crime'>
           <FilterField

@@ -1,8 +1,7 @@
 import { Link } from 'react-router'
 import React from 'react'
 
-const Breadcrumbs = ({ params }) => {
-  const { crime, state } = params
+const Breadcrumbs = ({ crime, state }) => {
   const links = [
     ['/explorer', 'Explorer'],
     [`/explorer/${state}`, state],

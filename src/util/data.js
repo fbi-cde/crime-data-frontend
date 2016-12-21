@@ -14,10 +14,7 @@ const timeData2 = [
   { date: '2016-01-05', foo: 10, bar: 4 },
 ]
 
-const mapData = {
-  CA: 1,
-  FL: 1,
-}
+const mapData = { ca: 1, fl: 1 }
 
 const censusData = [
   {

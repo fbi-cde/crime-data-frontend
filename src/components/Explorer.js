@@ -9,13 +9,13 @@ import TimeChart from './TimeChart'
 
 import { censusData, detailData, timeData2 } from '../util/data'
 
-const Explorer = props => {
-  const { crime } = props.params
-  const state = startCase(props.params.state)
+const Explorer = ({ params }) => {
+  const { crime } = params
+  const state = startCase(params.state)
 
   return (
     <div className='p2 sm-p3 container'>
-      <Breadcrumbs {...props} />
+      <Breadcrumbs {...params} />
       <div className='md-flex items-baseline mb4 border-bottom'>
         <h1 className='flex-auto my0 md-mb1 serif'>{state}</h1>
         <div className='mxn1'>

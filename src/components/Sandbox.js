@@ -10,17 +10,15 @@ import StateSvg from './StateSvg'
 import { timeData, timeData2, mapData } from '../util/data'
 
 const Sandbox = ({ appState }) => {
-  const { state } = appState.filters
-  const map = (state) ? { ...mapData, [state.toUpperCase()]: 1 } : mapData
+  const { state: usaState } = appState.filters
+  const map = (usaState) ? { [usaState]: 1 } : mapData
   return (
-    <div className='p3 bg-white border-left'>
+    <div className='p3 bg-white border-left border-silver'>
       <div className='mb3'>
         <Link to='/explorer/ohio/murder'>Murder in Ohio</Link>
       </div>
       <div className='mb3'>
-        <StateSvg state='dc' color='steelblue' />
-        <StateSvg state='ca' color='tomato' />
-        <StateSvg state='ny' color='springgreen' />
+        <StateSvg state={usaState || 'dc'} size={120} />
       </div>
       <div className='mb3'>
         <Cartogram data={map} />

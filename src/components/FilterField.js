@@ -41,40 +41,35 @@ export default class FilterField extends React.Component {
     switch (this.props.type.toLowerCase()) {
       case 'select':
         field = (
-          <select>
+          <select className='block col-12 field'>
             {options.map((o, i) => (<option key={i}>{o}</option>))}
           </select>
         )
         break
       case 'radio':
         field = (
-          <fieldset className='border-none p0'>
+          <div className='mb2'>
             {options.map((o, i) => (
               <label className='block' key={i} htmlFor={id}>
-                <input
-                  className='mr1'
-                  name={id}
-                  type='radio'
-                  value={slugify(o)}
-                />
+                <input className='mr1' type='radio' name={id} value={slugify(o)} />
                 {o}
               </label>
             ))}
-          </fieldset>
+          </div>
         )
         break
       default:
-        field = (<input type={this.props.type} />)
+        field = (<input className='block col-12 field' type={this.props.type} />)
     }
     const labelClass = (this.props.showLabel) ? '' : 'display-none'
 
     return (
       <div
-        className={`flex flex-column ${this.props.className}`}
+        className={`${this.props.className}`}
         aria-expanded={expanded}
       >
         <label
-          className={`block bold border-bottom my1 ${labelClass}`}
+          className={`block mb1 h5 bold ${labelClass}`}
           htmlFor={id}
         >
           {this.props.label}
