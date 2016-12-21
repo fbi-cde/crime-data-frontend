@@ -4,13 +4,14 @@ import React from 'react'
 import Filter from './Filter'
 import FilterField from './FilterField'
 import { updateFilter } from '../actions/filterActions'
+import { states } from '../util/usStates'
 
 const propertyCrime = [
   'All property crime',
   'Burglary',
 ]
 
-const usStates = ['AZ', 'CA', 'MT', 'NJ', 'PA', 'WV']
+const usStates = Object.keys(states).map(s => s.toUpperCase())
 
 const violentCrime = [
   'All violent crime',
