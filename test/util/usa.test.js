@@ -1,8 +1,8 @@
 /* eslint no-undef: 0 */
 
-import lookup, { states } from '../../src/util/usStates'
+import lookup, { states } from '../../src/util/usa'
 
-describe('usStates utility', () => {
+describe('usa utility', () => {
   it('should cover all 50 states and DC', () => {
     const stateCount = Object.keys(states).length
     expect(stateCount).toEqual(51)

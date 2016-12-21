@@ -4,14 +4,14 @@ import React from 'react'
 import Filter from './Filter'
 import FilterField from './FilterField'
 import { updateFilter } from '../actions/filterActions'
-import { states } from '../util/usStates'
+import { states } from '../util/usa'
 
 const propertyCrime = [
   'All property crime',
   'Burglary',
 ]
 
-const usStates = Object.keys(states).map(s => s.toUpperCase())
+const usaStates = Object.keys(states).map(s => s.toUpperCase())
 
 const violentCrime = [
   'All violent crime',
@@ -32,7 +32,7 @@ const Sidebar = ({ dispatch }) => {
           <FilterField
             label='State'
             onChange={handleChange}
-            options={usStates}
+            options={usaStates}
             type='select'
           />
         </Filter>

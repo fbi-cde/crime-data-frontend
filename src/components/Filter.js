@@ -3,12 +3,10 @@ import React from 'react'
 const Filter = ({ children, id, legend }) => (
   <fieldset
     id={id}
-    className='border-none mt2 pl0'
+    className='mt2 pl0 border-none'
   >
-    <legend className='border-bottom col-12 h3'>
-      {legend}
-    </legend>
-    { children }
+    <legend className='col-12 h3 border-bottom'>{legend}</legend>
+    {children}
   </fieldset>
 )
 

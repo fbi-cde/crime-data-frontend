@@ -1,4 +1,3 @@
-
 const states = {
   ak: 'alaska',
   al: 'alabama',
@@ -54,6 +53,7 @@ const states = {
 }
 
 const getStateNameFromAbbr = abbr => states[abbr.toLowerCase()]
+
 const getStateAbbrFromName = name => (
   Object.keys(states).filter(key => (
     states[key] === name.toLowerCase()

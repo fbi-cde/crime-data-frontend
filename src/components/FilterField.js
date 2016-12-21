@@ -50,10 +50,10 @@ export default class FilterField extends React.Component {
         field = (
           <fieldset className='border-none p0'>
             {options.map((o, i) => (
-              <label className='block' key={i}>
+              <label className='block' key={i} htmlFor={id}>
                 <input
                   className='mr1'
-                  name={`${id}`}
+                  name={id}
                   type='radio'
                   value={slugify(o)}
                 />
