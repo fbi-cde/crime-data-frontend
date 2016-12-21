@@ -1,4 +1,14 @@
-// additional, ad-hoc spacing utilities added as needed
-
-.lh-32p { line-height: 32px; }
-.lh-form-field { line-height: $form-field-height; }
+.m-tiny { margin: $space-tiny; }
+.mt-tiny { margin-top: $space-tiny; }
+.mr-tiny { margin-right: $space-tiny; }
+.mb-tiny { margin-bottom: $space-tiny; }
+.ml-tiny { margin-left: $space-tiny; }
+.mx-tiny { margin-left: $space-tiny; margin-right: $space-tiny; }
+.my-tiny { margin-bottom: $space-tiny; margin-top: $space-tiny; }
+.p-tiny { padding: $space-tiny; }
+.pt-tiny { padding-top: $space-tiny; }
+.pr-tiny { padding-right: $space-tiny; }
+.pb-tiny { padding-bottom: $space-tiny; }
+.pl-tiny { padding-left: $space-tiny; }
+.px-tiny { padding-left: $space-tiny; padding-right: $space-tiny; }
+.py-tiny { padding-bottom: $space-tiny; padding-top: $space-tiny; }

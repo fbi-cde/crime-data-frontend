@@ -2,7 +2,7 @@ import React from 'react'
 
 const Filter = ({ children, id, legend }) => (
   <div id={id} className='mb3'>
-    <div className='mb2 h5 caps bold border-bottom'>{legend}</div>
+    <div className='mb2 pb-tiny h5 caps bold border-bottom'>{legend}</div>
     {children}
   </div>
 )

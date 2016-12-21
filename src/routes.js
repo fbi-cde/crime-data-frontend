@@ -1,5 +1,5 @@
 import React from 'react'
-import { hashHistory, IndexRoute, Route, Router } from 'react-router'
+import { hashHistory, IndexRedirect, Route, Router } from 'react-router'
 
 import App from './components/App'
 import Explorer from './components/Explorer'
@@ -10,7 +10,7 @@ import Sandbox from './components/Sandbox'
 const routes = (
   <Router history={hashHistory}>
     <Route path='/' component={App}>
-      <IndexRoute component={Sandbox} />
+      <IndexRedirect to='/explorer/ohio/murder' />
       <Route path='/explorer/:state/:crime' component={Explorer} />
       <Route path='/sample' component={Sample} />
       <Route path='/sandbox' component={Sandbox} />

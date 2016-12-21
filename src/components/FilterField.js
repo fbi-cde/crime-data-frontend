@@ -69,7 +69,7 @@ export default class FilterField extends React.Component {
         aria-expanded={expanded}
       >
         <label
-          className={`block mb1 h5 bold ${labelClass}`}
+          className={`block pb-tiny h5 bold ${labelClass}`}
           htmlFor={id}
         >
           {this.props.label}

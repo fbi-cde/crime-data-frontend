@@ -19,8 +19,24 @@ const Explorer = ({ params }) => {
       <div className='md-flex items-baseline mb4 border-bottom'>
         <h1 className='flex-auto my0 md-mb1 serif'>{state}</h1>
         <div className='mxn1'>
-          <a href='#!' className='btn px1 h5'>Download this data</a>
-          <a href='#!' className='btn px1 h5'>Share this page</a>
+          <a href='#!' className='btn px1 h5'>
+            <img
+              className='mr-tiny align-tb'
+              width='16'
+              src='/img/download.svg'
+              alt='download'
+            />
+            Download data
+          </a>
+          <a href='#!' className='btn px1 h5'>
+            <img
+              className='mr-tiny align-tb'
+              width='16'
+              src='/img/share.svg'
+              alt='share'
+            />
+            Share page
+          </a>
         </div>
       </div>
       <div className='clearfix mb3 mxn1'>
@@ -40,6 +56,10 @@ const Explorer = ({ params }) => {
         </div>
       </div>
       <div className='mb3 p2 sm-p3 bg-white rounded'>
+        <div className='right mxn1'>
+          <img className='px1' width='24' src='/img/download.svg' alt='download' />
+          <img className='px1' width='24' src='/img/share.svg' alt='share' />
+        </div>
         <h3 className='mt0 mb3'>Reported {crime}s in {state}, 2005 - 2014</h3>
         <TimeChart data={timeData2} keys={['foo', 'bar']} />
       </div>
@@ -56,6 +76,10 @@ const Explorer = ({ params }) => {
       </div>
     </div>
   )
+}
+
+Explorer.defaultProps = {
+  params: { crime: 'murder', state: 'ohio' },
 }
 
 export default Explorer
