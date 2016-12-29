@@ -1,7 +1,7 @@
 applications:
 - name: crime-data-explorer
   buildpack: nodejs_buildpack
-  memory: 512M
+  memory: 1G
   host: crime-data-explorer
   domain: fr.cloud.gov
 services:
