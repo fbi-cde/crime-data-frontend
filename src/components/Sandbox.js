@@ -1,8 +1,8 @@
-import { Link } from 'react-router'
 import React from 'react'
 
 import BarChart from './BarChart'
 import Cartogram from './Cartogram'
+import Table from './Table'
 import TimeChart from './TimeChart'
 
 import StateSvg from './StateSvg'
@@ -15,9 +15,6 @@ const Sandbox = ({ appState }) => {
   return (
     <div className='p3 bg-white border-left border-silver'>
       <div className='mb3'>
-        <Link to='/explorer/ohio/murder'>Murder in Ohio</Link>
-      </div>
-      <div className='mb3'>
         <StateSvg state={usaState || 'dc'} size={120} />
       </div>
       <div className='mb3'>
@@ -28,6 +25,18 @@ const Sandbox = ({ appState }) => {
       </div>
       <div className='mb3'>
         <BarChart data={timeData} labels={false} />
+      </div>
+      <div className='mb3'>
+        <Table
+          data={[
+            ['Hamburger', 'Beef', 'Onion', 'Bun'],
+            ['Pizza', 'Pork', 'Tomato', 'Crust'],
+            ['Corndog', 'Pork', 'Corn', 'Cornbread'],
+            ['Hot Dog', 'Pork', 'Peppers', 'Bun'],
+          ]}
+          headings={['Name', 'Meat', 'Vegetable', 'Carb']}
+          cls='table-bordered table-striped'
+        />
       </div>
     </div>
   )
