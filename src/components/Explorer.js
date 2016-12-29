@@ -13,6 +13,7 @@ import { censusData, detailData, timeData2 } from '../util/data'
 const Explorer = ({ params, dispatch }) => {
   const { crime } = params
   const state = startCase(params.state)
+
   return (
     <div className='site-wrapper'>
       <Sidebar dispatch={dispatch} />

@@ -21,16 +21,16 @@ const Table = ({ cls, data, headings }) => (
   </table>
 )
 
-Table.propTypes = {
-  cls: React.PropTypes.string,
-  data: React.PropTypes.arrayOf(React.PropTypes.arrayOf(React.PropTypes.string)),
-  headings: React.PropTypes.arrayOf(React.PropTypes.string),
-}
-
 Table.defaultProps = {
   cls: '',
   data: [],
   headings: [],
+}
+
+Table.propTypes = {
+  cls: React.PropTypes.string,
+  data: React.PropTypes.arrayOf(React.PropTypes.arrayOf(React.PropTypes.string)),
+  headings: React.PropTypes.arrayOf(React.PropTypes.string),
 }
 
 export default Table

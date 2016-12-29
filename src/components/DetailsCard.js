@@ -8,8 +8,8 @@ const DetailsCard = ({
   const colWidths = ['3', '2', '4', '3']
   const formatPercent = format('.0%')
   const formatNumber = format(',')
-  const sum = data.reduce((total, next) => (total + next.count), 0)
-  const withPercent = data.map(d => ({ ...d, percent: (d.count / sum) }))
+  const total = data.reduce((a, b) => (a + b.count), 0)
+  const dataParsed = data.map(d => ({ ...d, percent: (d.count / total) }))
 
   return (
     <div className='p2 sm-p3 bg-white rounded'>
@@ -22,7 +22,7 @@ const DetailsCard = ({
           </tr>
         </thead>
         <tbody>
-          {withPercent.map((d, i) => (
+          {dataParsed.map((d, i) => (
             <tr key={i}>
               <td>
                 <div className='progress-bar my1'>
