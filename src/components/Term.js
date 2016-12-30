@@ -2,22 +2,28 @@
 
 import React from 'react'
 
-const showTerm = term => {
-  const id = term.target.getAttribute('data-term')
-  console.log(`fire off action to show ${id} in the glossary`)
-  window.Glossary.show()
-  window.Glossary.findTerm(id)
+import { showTerm } from '../actions/glossaryActions'
+
+const Term = ({ children, dispatch, id }) => {
+  const handler = e => {
+    e.preventDefault()
+    dispatch(showTerm(id))
+  }
+
+  return (
+    <button
+      className='btn mx1 p0 bg-navy white align-baseline'
+      onClick={handler}
+      role='button'
+    >
+      {children}
+    </button>
+  )
 }
 
-const Term = ({ children, id }) => (
-  <button
-    className='btn p0 bg-navy white align-baseline'
-    data-term={id || children}
-    onClick={showTerm}
-    role='button'
-  >
-    {children}
-  </button>
-)
+Term.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
+  id: React.PropTypes.string.isRequired,
+}
 
 export default Term

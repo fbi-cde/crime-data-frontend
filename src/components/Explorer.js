@@ -46,7 +46,14 @@ const Explorer = ({ params, dispatch }) => {
           <div className='clearfix mb3 mxn1'>
             <div className='sm-col sm-col-8 px1'>
               <p className='bold'>
-                Incidents of <Term>{crime}</Term> are on the
+                Incidents of
+                <Term
+                  dispatch={dispatch}
+                  id='murder and nonnegligent homicide'
+                >
+                  {crime}
+                </Term>
+                are on the
                 rise in {state}, but lower than 5 or 10 years ago.
               </p>
               <p>
