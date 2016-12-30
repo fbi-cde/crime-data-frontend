@@ -1,13 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const Navigation = () => (
-  <header className='py2 bg-navy white'>
-    <div className='clearfix px2'>
-      <div className='sm-col'>
-        <h2 className='m0 serif lh-32p'>Crime Data Explorer</h2>
-      </div>
-      <div className='sm-col-right mxn1 lh-32p'>
+const Header = () => (
+  <header className='py3 bg-navy white'>
+    <div className='md-flex items-baseline px2 md-px3'>
+      <h2 className='flex-auto m0 serif regular'>Crime Data Explorer</h2>
+      <div className='mxn1 mt1 md-m0'>
         <Link to='/'className='px1 white'>Explorer</Link>
         <Link to='/downloads-and-docs' className='px1 white'>
           Downloads & Documentation
@@ -18,4 +16,4 @@ const Navigation = () => (
   </header>
 )
 
-export default Navigation
+export default Header
