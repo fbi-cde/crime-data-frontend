@@ -15,12 +15,13 @@ const credService = env.getService('crime-data-api-creds') || { credentials: {} 
 const apiKey = credService.credentials.API_KEY || process.env.API_KEY || false
 const username = credService.credentials.HTTP_BASIC_USERNAME
 const password = credService.credentials.HTTP_BASIC_PASSWORD
+const API = 'https://crime-data-api.fr.cloud.gov'
+
+app.get('/status', (req, res) => res.send('OK'))
 
 if (production) app.use(basicAuth(username, password))
 
 app.use(express.static(__dirname))
-
-const API = 'https://crime-data-api.fr.cloud.gov'
 
 app.get('/api/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')
