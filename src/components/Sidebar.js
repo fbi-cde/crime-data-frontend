@@ -3,6 +3,7 @@ import React from 'react'
 
 import Filter from './Filter'
 import FilterField from './FilterField'
+import StateSvg from './StateSvg'
 import { updateFilter } from '../actions/filterActions'
 import { states } from '../util/usa'
 
@@ -34,6 +35,9 @@ const Sidebar = ({ dispatch }) => {
             options={usaStates}
             type='select'
           />
+          <div className='mt2 center'>
+            <StateSvg state='dc' color='#274152' size='160' />
+          </div>
         </Filter>
         <Filter legend='Time period' id='time-period'>
           <div className='clearfix'>
