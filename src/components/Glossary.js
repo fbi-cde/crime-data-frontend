@@ -9,16 +9,18 @@ import terms from '../../data/terms.json'
 class Glossary extends React.Component {
   constructor() {
     super()
+    this.applyProps = ::this.applyProps
+    this.showTerm = ::this.showTerm
     this.toggleGlossary = ::this.toggleGlossary
   }
 
   componentDidMount() {
     this.glossaryEl = new GlossaryPanel(terms) // eslint-disable-line no-new
-    if (this.props.isVisible) this.glossaryEl.show()
+    this.applyProps(this.props)
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setVisibility(nextProps.isVisible)
+    this.applyProps(nextProps)
   }
 
   shouldComponentUpdate() { return false }
@@ -26,6 +28,16 @@ class Glossary extends React.Component {
   setVisibility(isVisible) {
     if (isVisible) this.glossaryEl.show()
     else this.glossaryEl.hide()
+  }
+
+  showTerm(term) {
+    if (term) this.glossaryEl.findTerm(term)
+  }
+
+  applyProps(props) {
+    const { isVisible, term } = props
+    this.setVisibility(isVisible)
+    if (term) this.showTerm(term)
   }
 
   toggleGlossary() {
@@ -75,14 +87,11 @@ class Glossary extends React.Component {
 }
 
 Glossary.defaultProps = {
-  dispatch: a => {
-    console.error('dispatch() was not provided to <Glossary /> as a prop', a)
-  },
   isVisible: false,
 }
 
 Glossary.propTypes = {
-  dispatch: React.PropTypes.func,
+  dispatch: React.PropTypes.func.isRequired,
   isVisible: React.PropTypes.bool,
 }
 
