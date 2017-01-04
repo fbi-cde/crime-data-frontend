@@ -24,3 +24,7 @@ You can lint the code with `npm run lint` and run tests with `npm run test`.
 ## Deployment
 
 This project is [continuously deployed](circle.yml) to [cloud.gov](https://cloud.gov) with every commit to the `master` branch. Until we have an ATO for this project, the deployed app is behind HTTP basic auth.
+
+## Browser support
+
+For the MVP launch of this project (Spring 2017) we will explicitly support Chrome, Safari, IE 10+, Firefox and MS Edge.
