@@ -26,8 +26,16 @@ const censusData = [
     label: 'covered in UCR program',
   },
   {
-    statistic: 831,
+    statistic: '831',
     label: 'law enforcement agencies',
+  },
+  {
+    statistic: '25,992',
+    label: 'peace officers',
+  },
+  {
+    statistic: '447',
+    label: 'peace officers per resident',
   },
 ]
 
