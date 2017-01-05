@@ -6,7 +6,7 @@ const Breadcrumbs = ({ crime, place }) => {
   const links = [
     ['/explorer', 'Explorer'],
     [`/explorer/${place}`, startCase(place)],
-    [`/explorer/${place}/${crime}`, crime],
+    [`/explorer/${place}/${crime}`, startCase(crime)],
   ]
 
   return (

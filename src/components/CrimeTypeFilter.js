@@ -2,9 +2,19 @@ import React from 'react'
 
 import { slugify } from '../util/text'
 
+const otherCrime = [
+  'Hate Crime',
+  'Human Trafficking',
+  'Law Enforcement Officers Killed and Assaulted (LEOKA)',
+]
+
 const propertyCrime = [
   'All property crime',
+  'Arson',
   'Burglary',
+  'Cargo Theft',
+  'Larceny Theft',
+  'Motor Vehicle Theft',
 ]
 
 const violentCrime = [
@@ -54,6 +64,22 @@ const CrimeTypeFilter = ({ onChange, selected }) => {
           </label>
         ))}
       </div>
+      {otherCrime.map((o, i) => (
+        <div className='mb2'>
+          <label className='block' key={i} htmlFor={slugify(o)}>
+            <input
+              checked={slugify(o) === slugify(selected)}
+              className='mr1'
+              id={slugify(o)}
+              name='crime'
+              onChange={handleChange}
+              type='radio'
+              value={slugify(o)}
+            />
+            {o}
+          </label>
+        </div>
+      ))}
     </div>
   )
 }
