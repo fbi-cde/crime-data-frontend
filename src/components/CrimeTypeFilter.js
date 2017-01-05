@@ -17,7 +17,6 @@ const violentCrime = [
 
 const CrimeTypeFilter = ({ onChange, selected }) => {
   const handleChange = e => onChange({ crime: e.target.value })
-  const selectedSlug = slugify(selected)
   return (
     <div id='type-of-crime' className='mb3'>
       <div className='mb2 pb-tiny h5 caps bold border-bottom'>

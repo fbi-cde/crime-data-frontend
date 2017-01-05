@@ -22,8 +22,8 @@ export const updateFilterAndUrl = ({ change, location }) => (
     dispatch(updateFilters(change))
     history.push(createNewLocation({ change, location }))
 
-    // const { filters } = getState()
-    // dispatch(fetchIncidents(filters))
+    const { filters } = getState()
+    dispatch(fetchIncidents(filters))
 
     return Promise.resolve()
   }
