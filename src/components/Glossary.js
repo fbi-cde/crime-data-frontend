@@ -66,7 +66,7 @@ class Glossary extends React.Component {
           <h2 className='mt0'>Glossary</h2>
           <label className='label' htmlFor='glossary-search'>Filter glossary terms</label>
           <input
-            className='field js-glossary-search'
+            className='field col-12 js-glossary-search'
             id='glossary-search'
             type='search'
             placeholder='e.g. Committee'
