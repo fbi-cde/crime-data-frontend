@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 
-import { extent, max } from 'd3-array'
+import { bisector, extent, max } from 'd3-array'
 import {
   scaleLinear, scaleOrdinal,
   scaleTime, schemeCategory20c,
@@ -9,31 +9,33 @@ import { line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import React from 'react'
 
-import Hint from './Hint'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
 
 class TimeChart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { active: null }
+    this.state = { hover: null }
     this.rememberValue = ::this.rememberValue
     this.forgetValue = ::this.forgetValue
   }
 
-  rememberValue(d, e) {
-    this.setState({
-      active: { data: d, position: { x: e.pageX, y: e.pageY } },
-    })
+  rememberValue(e) {
+    // get mouse x position, relative to container
+    const node = e.target
+    const rect = node.getBoundingClientRect()
+    const xRel = e.clientX - rect.left - node.clientLeft
+
+    this.setState({ hover: { x: xRel / rect.width } })
   }
 
   forgetValue() {
-    this.setState({ active: null })
+    this.setState({ hover: null })
   }
 
   render() {
     const { keys, data, margin, size } = this.props
-    const { active } = this.state
+    const { hover } = this.state
 
     const width = size.width - margin.left - margin.right
     const height = size.height - margin.top - margin.bottom
@@ -68,9 +70,31 @@ class TimeChart extends React.Component {
         .x(d => x(d.date))
         .y(d => y(d.value))
 
+    let callout
+    if (hover) {
+      const bisectDate = bisector(d => d.date).left
+      const x0 = x.invert(hover.x * width)
+      const i = bisectDate(dataClean, x0, 1)
+      const [d0, d1] = [dataClean[i - 1], dataClean[i]]
+      const dActive = x0 - d0.date > d1.date - x0 ? d1 : d0
+
+      callout = (
+        <g transform={`translate(${x(dActive.date)}, 0)`}>
+          <line y2={height} stroke='#000' strokeWidth='1' />
+          <text x='4' dy='.71em' className='h6 monospace'>
+            {keys.map(k => `${k}: ${dActive[k]}`).join(', ')}
+          </text>
+        </g>
+      )
+    }
+
     return (
       <div>
-        <svg width={size.width} height={size.height}>
+        <svg
+          preserveAspectRatio='xMidYMid'
+          viewBox={`0 0 ${size.width} ${size.height}`}
+          style={{ width: '100%', height: '100%' }}
+        >
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             <XAxis scale={x} height={height} tickCt={4} />
             <YAxis scale={y} />
@@ -91,16 +115,21 @@ class TimeChart extends React.Component {
                     r='6'
                     stroke='#fff'
                     strokeWidth='3'
-                    onMouseOver={e => this.rememberValue(v, e)}
-                    onMouseMove={e => this.rememberValue(v, e)}
-                    onMouseOut={this.forgetValue}
                   />
                 ))}
               </g>
             ))}
+            {callout}
+            <rect
+              width={width}
+              height={height}
+              fill='none'
+              pointerEvents='all'
+              onMouseMove={this.rememberValue}
+              onMouseOut={this.forgetValue}
+            />
           </g>
         </svg>
-        {active ? <Hint {...active} /> : null}
       </div>
     )
   }
@@ -111,8 +140,8 @@ TimeChart.propTypes = {
 }
 
 TimeChart.defaultProps = {
-  margin: { top: 20, right: 20, bottom: 30, left: 50 },
-  size: { width: 600, height: 400 },
+  margin: { top: 20, right: 30, bottom: 30, left: 30 },
+  size: { width: 850, height: 300 },
 }
 
 export default TimeChart
