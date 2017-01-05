@@ -14,7 +14,7 @@ $purple: #b10dc9 !default;
 $maroon: #85144b !default;
 $white: #fff !default;
 $silver: #e3e4e6 !default;
-$gray: #aaa !default;
+$gray: #999 !default;
 $black: #000 !default;
 
 // additional colors
@@ -95,6 +95,11 @@ $table-cell-padding-condensed: .25rem !default;
 $border-width: 1px !default;
 $border-radius: 3px !default;
 $border-color: #e9e9e9 !default;
+
+$darken-1: rgba(0, 0, 0, .05) !default;
+$darken-2: rgba(0, 0, 0, .1) !default;
+$darken-3: rgba(0, 0, 0, .25) !default;
+$darken-4: rgba(0, 0, 0, .5) !default;
 
 $breakpoint-sm: '(min-width: 40em)' !default;
 $breakpoint-md: '(min-width: 52em)' !default;
