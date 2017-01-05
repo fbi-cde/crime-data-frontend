@@ -1,19 +1,26 @@
+/* eslint no-param-reassign: 0 */
 import {
   FILTER_RESET,
-  FILTER_UPDATE,
+  FILTERS_UPDATE,
 } from '../actions/actionTypes'
 
-export default (state = {}, action) => {
+const initialState = {
+  timeFrom: 2005,
+  timeTo: 2015,
+}
+
+export default (state = initialState, action) => {
   let temp
   switch (action.type) {
     case FILTER_RESET:
       temp = Object.assign({}, state)
       delete temp[action.id]
       return temp
-    case FILTER_UPDATE:
-      return Object.assign({}, state, {
-        [action.id]: action.value,
-      })
+    case FILTERS_UPDATE:
+      return {
+        ...state,
+        ...action.filters,
+      }
     default:
       return state
   }

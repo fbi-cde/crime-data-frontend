@@ -4,7 +4,7 @@
 */
 
 export const FILTER_RESET = 'FILTER_RESET'
-export const FILTER_UPDATE = 'FILTER_UPDATE'
+export const FILTERS_UPDATE = 'FILTERS_UPDATE'
 
 export const GLOSSARY_HIDE = 'GLOSSARY_HIDE'
 export const GLOSSARY_SHOW = 'GLOSSARY_SHOW'
