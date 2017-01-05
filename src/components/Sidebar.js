@@ -1,80 +1,40 @@
-import debounce from 'lodash.debounce'
 import React from 'react'
 
-import Filter from './Filter'
-import FilterField from './FilterField'
-import StateSvg from './StateSvg'
+import CrimeTypeFilter from './CrimeTypeFilter'
+import LocationFilter from './LocationFilter'
+import TimePeriodFilter from './TimePeriodFilter'
 import { updateFilter } from '../actions/filterActions'
-import { states } from '../util/usa'
 
-const propertyCrime = [
-  'All property crime',
-  'Burglary',
-]
+class Sidebar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleChange = ::this.handleChange
+  }
 
-const usaStates = Object.keys(states).map(s => s.toUpperCase())
+  handleChange(change) {
+    const action = updateFilter(change)
+    this.props.dispatch(action)
+  }
 
-const violentCrime = [
-  'All violent crime',
-  'Murder',
-  'Rape',
-  'Robbery',
-  'Aggravated assult',
-]
+  render() {
+    const { crime, state } = this.props.router.params
 
-const Sidebar = ({ dispatch }) => {
-  const handleChange = change => dispatch(updateFilter(change))
-  const debouncedHandleChange = debounce(handleChange, 800)
-  return (
-    <nav className='site-sidebar bg-white'>
-      <div className='p2 sm-p3'>
-        <Filter legend='Location' id='location'>
-          <FilterField
-            label='State'
-            onChange={handleChange}
-            options={usaStates}
-            type='select'
+    return (
+      <nav className='site-sidebar bg-white'>
+        <div className='p2 sm-p3'>
+          <LocationFilter
+            onChange={this.handleChange}
+            selected={state}
           />
-          <div className='mt2 center'>
-            <StateSvg state='dc' color='#274152' size='160' />
-          </div>
-        </Filter>
-        <Filter legend='Time period' id='time-period'>
-          <div className='clearfix'>
-            <FilterField
-              className='col col-5'
-              label='Time from'
-              onChange={debouncedHandleChange}
-              showLabel={false}
-              type='number'
-            />
-            <span className='col col-2 lh-form-field center'>to</span>
-            <FilterField
-              className='col col-5'
-              label='Time to'
-              onChange={debouncedHandleChange}
-              showLabel={false}
-              type='number'
-            />
-          </div>
-        </Filter>
-        <Filter legend='Type of crime' id='type-of-crime'>
-          <FilterField
-            label='Violent crime'
-            onChange={handleChange}
-            options={violentCrime}
-            type='radio'
+          <TimePeriodFilter onChange={this.handleChange} />
+          <CrimeTypeFilter
+            onChange={this.handleChange}
+            selected={crime}
           />
-          <FilterField
-            label='Property crime'
-            onChange={handleChange}
-            options={propertyCrime}
-            type='radio'
-          />
-        </Filter>
-      </div>
-    </nav>
-  )
+        </div>
+      </nav>
+    )
+  }
 }
 
 Sidebar.propTypes = {
