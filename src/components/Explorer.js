@@ -10,18 +10,29 @@ import TimeChart from './TimeChart'
 
 import { censusData, detailData, timeData2 } from '../util/data'
 
-const Explorer = ({ params, dispatch }) => {
+const crimeIds = {
+  murder: 'murder and nonnegligent homicide',
+  rape: 'rape (legacy definition)',
+  robbery: 'robbery',
+}
+
+const Explorer = ({ appState, dispatch, params, router }) => {
   const { crime } = params
-  const state = startCase(params.state)
+  const { filters } = appState
+  const place = startCase(params.place)
 
   return (
     <div className='site-wrapper'>
-      <Sidebar dispatch={dispatch} />
+      <Sidebar
+        dispatch={dispatch}
+        filters={filters}
+        router={router}
+      />
       <div className='site-content'>
         <div className='p2 sm-p3 container'>
           <Breadcrumbs {...params} />
           <div className='md-flex items-baseline mb4 border-bottom'>
-            <h1 className='flex-auto my0 md-mb1 serif'>{state}</h1>
+            <h1 className='flex-auto my0 md-mb1 serif'>{place}</h1>
             <div className='mxn1'>
               <a href='#!' className='btn px1 h5'>
                 <img
@@ -49,15 +60,15 @@ const Explorer = ({ params, dispatch }) => {
                 Incidents of
                 <Term
                   dispatch={dispatch}
-                  id='murder and nonnegligent homicide'
+                  id={crimeIds[crime] || 'undefinedTerm'}
                 >
                   {crime}
                 </Term>
                 are on the
-                rise in {state}, but lower than 5 or 10 years ago.
+                rise in {place}, but lower than 5 or 10 years ago.
               </p>
               <p>
-                {state}&#39;s {crime} rate surpassed that of the U.S. in 1985, and peaked
+                {place}&#39;s {crime} rate surpassed that of the U.S. in 1985, and peaked
                 in 1991, with a rate of over 52 incidents per 100,000
                 people.<sup>1</sup>
               </p>
@@ -71,14 +82,10 @@ const Explorer = ({ params, dispatch }) => {
               <img className='px1' width='24' src='/img/download.svg' alt='download' />
               <img className='px1' width='24' src='/img/share.svg' alt='share' />
             </div>
-            <h2 className='mt0 mb2'>Reported {crime}s, 2005—2014</h2>
-            <p className='mb2 md-col-10 lg-col-8'>
-              Ohio’s incident rate surpasses that of the United States, and in
-              2014 was 35.3 incidents per 100,000 people (legacy definition).
-            </p>
-            <div className='mb2'>
-              <TimeChart data={timeData2} keys={['foo', 'bar']} />
-            </div>
+            <h3 className='mt0 mb3'>
+              Reported {crime}s in {place}, {filters.timeFrom} - {filters.timeTo}
+            </h3>
+            <TimeChart data={timeData2} keys={['foo', 'bar']} />
           </div>
           <div>
             <h2 className='pb1 serif border-bottom border-silver'>Details</h2>
@@ -98,7 +105,7 @@ const Explorer = ({ params, dispatch }) => {
 }
 
 Explorer.defaultProps = {
-  params: { crime: 'murder', state: 'ohio' },
+  params: { crime: 'murder', place: 'ohio' },
 }
 
 export default Explorer

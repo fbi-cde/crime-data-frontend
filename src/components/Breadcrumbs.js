@@ -2,11 +2,11 @@ import { Link } from 'react-router'
 import React from 'react'
 import startcase from 'lodash.startcase'
 
-const Breadcrumbs = ({ crime, state }) => {
+const Breadcrumbs = ({ crime, place }) => {
   const links = [
     ['/explorer', 'Explorer'],
-    [`/explorer/${state}`, startcase(state)],
-    [`/explorer/${state}/${crime}`, crime],
+    [`/explorer/${place}`, startcase(place)],
+    [`/explorer/${place}/${crime}`, crime],
   ]
 
   return (

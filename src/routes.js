@@ -14,7 +14,7 @@ const routes = (
     <Route path='/' component={App}>
       <IndexRedirect to='/explorer/ohio/murder' />
       <Route path='/downloads-and-docs' component={DownloadsAndDocs} />
-      <Route path='/explorer/:state/:crime' component={Explorer} />
+      <Route path='/explorer/:place/:crime' component={Explorer} />
       <Route path='/sample' component={Sample} />
       <Route path='/sandbox' component={Sandbox} />
       <Route path='/*' component={NotFound} />
