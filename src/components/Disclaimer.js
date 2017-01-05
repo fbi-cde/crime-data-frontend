@@ -1,14 +1,19 @@
 import React from 'react'
 
 const Disclaimer = () => (
-  <div className='h6 mx3'>
-    <div className='usa-grid'>
-      <span className='left'>
-        <img className='mr1' alt='US flag signifying that this is a United States Federal Government website' src='/img/us_flag_small.png' />
-        An official website of the United States Government
-      </span>
-      <span className='right'>This site is currently in beta. <a href='https://18f.gsa.gov/dashboard/stages/#beta'>Learn more.</a></span>
+  <div className='clearfix p1 h6 bg-white line-height-1'>
+    <div className='right xs-hide'>
+      This site is currently in beta.&nbsp;
+      <a href='https://18f.gsa.gov/dashboard/stages/#beta'>Learn more.</a>
     </div>
+    <img
+      className='mr-tiny align-bottom'
+      alt='US flag'
+      width='18'
+      height='12'
+      src='/img/usa-flag.png'
+    />
+    An official website of the United States government
   </div>
 )
 
