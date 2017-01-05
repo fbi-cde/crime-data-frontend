@@ -1,5 +1,10 @@
 .axis {
   fill: none;
-  font-family: $font-sans-serif;
-  font-size: 10px;
+  font-family: $font-monospace;
+  font-size: $h6;
+
+  line,
+  path {
+    stroke: #979797;
+  }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const YAxis = ({
-  tickCt = 8,
+  tickCt = 4,
   tickSizeOuter = 6,
   scale,
 }) => {
@@ -23,7 +23,7 @@ const YAxis = ({
 
   return (
     <g className='axis' textAnchor='end'>
-      <path className='domain' stroke='#000' d={domain} />
+      <path className='domain display-none' d={domain} />
       {ticks}
     </g>
   )
