@@ -12,11 +12,12 @@ const Term = ({ children, dispatch, id }) => {
 
   return (
     <button
-      className='btn mx1 p0 bg-navy white align-baseline'
+      className='btn mx-tiny p0 align-baseline border-bottom-dotted'
       onClick={handler}
       role='button'
     >
       {children}
+      <img className='ml-tiny' width='12' src='/img/book.svg' alt='glossary lookup' />
     </button>
   )
 }
