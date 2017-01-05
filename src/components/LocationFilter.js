@@ -15,7 +15,9 @@ const LocationFilter = ({ onChange, selected }) => {
       <div className='mb2 pb-tiny h5 caps bold border-bottom'>
         Location
       </div>
-      <StateSvg size={80} state={abbr(selected)} />
+      <div className='mt2 center'>
+        <StateSvg size={80} state={abbr(selected)} />
+      </div>
       <select
         className='block col-12 field'
         onChange={handleChange}
