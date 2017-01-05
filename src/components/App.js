@@ -3,12 +3,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import Disclaimer from './Disclaimer'
 import Footer from './Footer'
 import Glossary from './Glossary'
 import Header from './Header'
 
 const App = ({ appState, children, dispatch }) => (
   <div className='site'>
+    <Disclaimer />
     <Header />
     <main className='site-main'>
       {children && React.cloneElement(children, { appState, dispatch })}
