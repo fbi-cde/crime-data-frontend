@@ -1,12 +1,12 @@
 import React from 'react'
-import startcase from 'lodash.startcase'
+import startCase from 'lodash.startcase'
 
 import abbr, { states } from '../util/usa'
 import { slugify } from '../util/text'
 import StateSvg from './StateSvg'
 
 
-const usaStates = Object.values(states).map(s => startcase(s))
+const usaStates = Object.values(states).map(s => startCase(s))
 
 const LocationFilter = ({ onChange, selected }) => {
   const handleChange = e => onChange({ place: slugify(e.target.value) })
@@ -21,7 +21,7 @@ const LocationFilter = ({ onChange, selected }) => {
       <select
         className='block col-12 field'
         onChange={handleChange}
-        value={startcase(selected)}
+        value={startCase(selected)}
       >
         {usaStates.map((s, i) => (
           <option key={i}>{s}</option>
