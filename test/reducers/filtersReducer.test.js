@@ -2,7 +2,6 @@
 
 import {
   FILTER_RESET,
-  FILTER_UPDATE,
   FILTERS_UPDATE,
 } from '../../src/actions/actionTypes';
 
@@ -25,14 +24,6 @@ describe('filtersReducer', () => {
       expect(actual.secondFilter).toBeUndefined()
     })
   })
-
-  // describe('FILTER_UPDATE action type', () => {
-  //   it('should set the filter\'s value', () => {
-  //     const action = { id: 'filter', value: 'fake', type: FILTER_UPDATE }
-  //     const actual = reducer({}, action)
-  //     expect(actual[action.id]).toEqual(action.value)
-  //   })
-  // })
 
   describe('FILTERS_UPDATE action type', () => {
     it('should set all of the filters\' values', () => {
