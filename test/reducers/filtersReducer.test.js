@@ -2,16 +2,16 @@
 
 import {
   FILTER_RESET,
-  FILTER_UPDATE,
+  FILTERS_UPDATE,
 } from '../../src/actions/actionTypes';
 
 import reducer from '../../src/reducers/filtersReducer';
 
 describe('filtersReducer', () => {
   describe('initial state', () => {
-    it('should return empty object', () => {
+    it('should return a small object with time values', () => {
       const initialState = reducer(undefined, { type: 'fake' })
-      expect(initialState).toEqual({})
+      expect(Object.keys(initialState).length).toEqual(2)
     })
   })
 
@@ -25,11 +25,19 @@ describe('filtersReducer', () => {
     })
   })
 
-  describe('FILTER_UPDATE action type', () => {
-    it('should set the filter\'s value', () => {
-      const action = { id: 'filter', value: 'fake', type: FILTER_UPDATE }
+  describe('FILTERS_UPDATE action type', () => {
+    it('should set all of the filters\' values', () => {
+      const action = {
+        type: FILTERS_UPDATE,
+        filters: {
+          fakeOne: 'yo',
+          fakeTwo: 'hey',
+        },
+      }
       const actual = reducer({}, action)
-      expect(actual[action.id]).toEqual(action.value)
+      expect(Object.keys(actual).length).toEqual(2)
+      expect(actual.fakeOne).toEqual('yo')
+      expect(actual.fakeTwo).toEqual('hey')
     })
   })
 })

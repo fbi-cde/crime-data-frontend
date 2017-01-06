@@ -2,10 +2,10 @@
 
 import {
   FILTER_RESET,
-  FILTER_UPDATE,
+  FILTERS_UPDATE,
 } from '../../src/actions/actionTypes';
 
-import { resetFilter, updateFilter } from '../../src/actions/filterActions';
+import { resetFilter, updateFilters } from '../../src/actions/filterActions';
 
 describe('filterActions', () => {
   describe('resetFilter()', () => {
@@ -17,14 +17,11 @@ describe('filterActions', () => {
     })
   })
 
-  describe('updateFilter()', () => {
-    it('should return a FILTER_UPDATE action', () => {
-      const id = 'fake-id'
-      const value = 'fake-value'
-      const actual = updateFilter({ id, value })
-      expect(actual.type).toEqual(FILTER_UPDATE)
-      expect(actual.id).toEqual(id)
-      expect(actual.value).toEqual(value)
+  describe('updateFilters()', () => {
+    it('should return a FILTERS_UPDATE action', () => {
+      const actual = updateFilters({ 'fake-id': 'fake-value' })
+      expect(actual.type).toEqual(FILTERS_UPDATE)
+      expect(Object.keys(actual.filters).length).toEqual(1)
     })
   })
 })
