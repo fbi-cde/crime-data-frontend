@@ -1,3 +1,5 @@
+import lowerCase from 'lodash.lowercase'
+import { plural } from 'pluralize'
 import React from 'react'
 import startCase from 'lodash.startcase'
 
@@ -17,7 +19,7 @@ const crimeIds = {
 }
 
 const Explorer = ({ appState, dispatch, params, router }) => {
-  const { crime } = params
+  const crime = lowerCase(params.crime)
   const { filters } = appState
   const place = startCase(params.place)
 
@@ -32,7 +34,9 @@ const Explorer = ({ appState, dispatch, params, router }) => {
         <div className='p2 sm-p3 container'>
           <Breadcrumbs {...params} />
           <div className='md-flex items-baseline mb4 border-bottom'>
-            <h1 className='flex-auto my0 md-mb1 serif'>{place}</h1>
+            <h1 className='flex-auto my0 md-mb1 serif'>
+              {place}, {filters.timeFrom}-{filters.timeTo}
+            </h1>
             <div className='mxn1'>
               <a href='#!' className='btn px1 h5'>
                 <img
@@ -60,7 +64,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
                 Incidents of
                 <Term
                   dispatch={dispatch}
-                  id={crimeIds[crime] || 'undefinedTerm'}
+                  id={crimeIds[params.crime] || 'undefinedTerm'}
                 >
                   {crime}
                 </Term>
@@ -83,7 +87,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               <img className='px1' width='24' src='/img/share.svg' alt='share' />
             </div>
             <h3 className='mt0 mb3'>
-              Reported {crime}s in {place}, {filters.timeFrom} - {filters.timeTo}
+              Reported {plural(crime)} in {place}, {filters.timeFrom} - {filters.timeTo}
             </h3>
             <TimeChart data={timeData2} keys={['foo', 'bar']} />
           </div>
