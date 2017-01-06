@@ -7,7 +7,7 @@ import stateIcons from '../../data/state-icons.json'
 const StateSvg = ({
   state = 'va',
   size = 64,
-  color = 'tomato',
+  color = '#95aabc',
 }) => {
   const path = geoPath().projection(null)
   const datum = stateIcons[state]

@@ -13,7 +13,7 @@ const DetailsCard = ({
 
   return (
     <div className='p2 sm-p3 bg-white rounded'>
-      <h2 className='mt0'>{title}</h2>
+      <h3 className='mt0 mb1'>{title}</h3>
       <div className='mb1 h6 blue caps bold right-align'>Incidents</div>
       <table>
         <thead>

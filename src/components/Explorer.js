@@ -31,7 +31,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
         router={router}
       />
       <div className='site-content'>
-        <div className='p2 sm-p3 container'>
+        <div className='p2 sm-p3 md-p4 container'>
           <Breadcrumbs {...params} />
           <div className='md-flex items-baseline mb4 border-bottom'>
             <h1 className='flex-auto my0 md-mb1 serif'>
@@ -58,8 +58,8 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               </a>
             </div>
           </div>
-          <div className='clearfix mb3 mxn1'>
-            <div className='sm-col sm-col-8 px1'>
+          <div className='clearfix mb4 mxn3'>
+            <div className='sm-col sm-col-7 px3 h3 serif'>
               <p className='bold'>
                 Incidents of
                 <Term
@@ -77,7 +77,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
                 people.<sup>1</sup>
               </p>
             </div>
-            <div className='sm-col-right sm-col-4 px1'>
+            <div className='sm-col-right sm-col-5 px3'>
               <Census data={censusData} />
             </div>
           </div>
@@ -95,10 +95,10 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             <h2 className='pb1 serif border-bottom border-silver'>Details</h2>
             <div className='clearfix mxn1'>
               <div className='sm-col sm-col-6 p1'>
-                <DetailsCard data={detailData} title='Title!' />
+                <DetailsCard data={detailData} title='Murder, 2005-2014' />
               </div>
               <div className='sm-col sm-col-6 p1'>
-                <DetailsCard data={detailData} title='Title!' />
+                <DetailsCard data={detailData} title='Rape, 2005-2014' />
               </div>
             </div>
           </div>
