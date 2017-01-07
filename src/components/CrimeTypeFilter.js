@@ -28,10 +28,8 @@ const violentCrime = [
 const CrimeTypeFilter = ({ onChange, selected }) => {
   const handleChange = e => onChange({ crime: e.target.value })
   return (
-    <div id='type-of-crime' className='mb3'>
-      <div className='mb2 pb-tiny h5 caps bold border-bottom'>
-        Type of crime
-      </div>
+    <div id='type-of-crime' className='mb4'>
+      <h3 className='mt0 mb2 pb-tiny border-bottom'>Type of crime</h3>
       <div className='mb2'>
         {violentCrime.map((o, i) => (
           <label className='block' key={i} htmlFor={slugify(o)}>
@@ -65,8 +63,8 @@ const CrimeTypeFilter = ({ onChange, selected }) => {
         ))}
       </div>
       {otherCrime.map((o, i) => (
-        <div className='mb2'>
-          <label className='block' key={i} htmlFor={slugify(o)}>
+        <div key={i} className='mb2'>
+          <label className='block' htmlFor={slugify(o)}>
             <input
               checked={slugify(o) === slugify(selected)}
               className='mr1'

@@ -33,7 +33,8 @@ class Sidebar extends React.Component {
 
     return (
       <nav className='site-sidebar bg-white'>
-        <div className='p2 sm-p3'>
+        <div className='p2 sm-p3 md-p4'>
+          <a className='mb3 block navy bold' href='#!'>⬅ National Trends</a>
           <LocationFilter
             onChange={this.handleChange}
             selected={place}
