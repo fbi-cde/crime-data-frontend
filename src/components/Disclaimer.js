@@ -3,8 +3,8 @@ import React from 'react'
 const Disclaimer = () => (
   <div className='clearfix p1 h6 bg-white line-height-1'>
     <div className='right xs-hide'>
-      This site is currently in beta.&nbsp;
-      <a href='https://18f.gsa.gov/dashboard/stages/#beta'>Learn more.</a>
+      This site is in beta.&nbsp;
+      <a href='https://github.com/18F/crime-data-explorer/issues'>Share your feedback.</a>
     </div>
     <img
       className='mr-tiny align-bottom'
