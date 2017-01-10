@@ -9,6 +9,7 @@ import { line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import React from 'react'
 
+import TimeChartDetails from './TimeChartDetails'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
 
@@ -70,26 +71,38 @@ class TimeChart extends React.Component {
         .x(d => x(d.date))
         .y(d => y(d.value))
 
+    let active
     let callout
     if (hover) {
       const bisectDate = bisector(d => d.date).left
       const x0 = x.invert(hover.x * width)
       const i = bisectDate(dataClean, x0, 1)
       const [d0, d1] = [dataClean[i - 1], dataClean[i]]
-      const dActive = x0 - d0.date > d1.date - x0 ? d1 : d0
 
-      callout = (
-        <g transform={`translate(${x(dActive.date)}, 0)`}>
-          <line y2={height} stroke='#000' strokeWidth='1' />
-          <text x='4' dy='.71em' className='h6 monospace'>
-            {keys.map(k => `${k}: ${dActive[k]}`).join(', ')}
-          </text>
-        </g>
-      )
+      if (d0 && d1) {
+        active = (x0 - d0.date > d1.date - x0) ? d1 : d0
+        callout = (
+          <g transform={`translate(${x(active.date)}, 0)`}>
+            <line y2={height} stroke='#000' strokeWidth='1' strokeDasharray='2,2' />
+            {keys.map((k, j) => (
+              <circle
+                key={j}
+                cx='0'
+                cy={y(active[k])}
+                fill={color(k)}
+                r='6'
+                stroke='#fff'
+                strokeWidth='2'
+              />
+            ))}
+          </g>
+        )
+      }
     }
 
     return (
       <div>
+        <TimeChartDetails data={active} />
         <svg
           preserveAspectRatio='xMidYMid'
           viewBox={`0 0 ${size.width} ${size.height}`}
@@ -97,7 +110,7 @@ class TimeChart extends React.Component {
         >
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             <XAxis scale={x} height={height} tickCt={4} />
-            <YAxis scale={y} />
+            <YAxis scale={y} width={width} />
             {dataByKey.map((d, i) => (
               <g key={i} className={`series series-${d.id}`}>
                 <path
@@ -106,17 +119,6 @@ class TimeChart extends React.Component {
                   stroke={color(d.id)}
                   strokeWidth='3'
                 />
-                {d.values.map((v, j) => (
-                  <circle
-                    key={j}
-                    cx={x(v.date)}
-                    cy={y(v.value)}
-                    fill={color(d.id)}
-                    r='6'
-                    stroke='#fff'
-                    strokeWidth='3'
-                  />
-                ))}
               </g>
             ))}
             {callout}

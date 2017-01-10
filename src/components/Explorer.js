@@ -78,7 +78,10 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               </p>
             </div>
             <div className='sm-col-right sm-col-5 px3'>
-              <Census data={censusData} />
+              <Census
+                data={censusData}
+                year={parseInt(filters.timeTo, 10)}
+              />
             </div>
           </div>
           <div className='mb3 p2 sm-p3 bg-white rounded'>
@@ -86,7 +89,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               <img className='px1' width='24' src='/img/download.svg' alt='download' />
               <img className='px1' width='24' src='/img/share.svg' alt='share' />
             </div>
-            <h3 className='mt0 mb3'>
+            <h3 className='mt0 mb2'>
               Reported {plural(crime)} in {place}, {filters.timeFrom} - {filters.timeTo}
             </h3>
             <TimeChart data={timeData2} keys={['foo', 'bar']} />

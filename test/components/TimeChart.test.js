@@ -23,8 +23,4 @@ describe('TimeChart', () => {
   it('TimeChart has a line (<path>) for each series', () => {
     expect(chart.find('.series path').length).toEqual(keys.length)
   })
-
-  it('TimeChart has a <circle> for each data point', () => {
-    expect(chart.find('.series-foo circle').length).toEqual(data.length)
-  })
 })

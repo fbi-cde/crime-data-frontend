@@ -31,7 +31,7 @@ const XAxis = ({
   })
 
   return (
-    <g className='axis' transform={`translate(0, ${height})`} textAnchor='middle'>
+    <g className='axis axis--x' transform={`translate(0, ${height})`} textAnchor='middle'>
       <path className='domain' stroke='#000' d={domain} />
       {ticks}
     </g>

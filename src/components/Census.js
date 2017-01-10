@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Census = ({ data, source }) => (
+const Census = ({ data, source, year }) => (
   <div className='px1 navy'>
-    <h3 className='m0 pb-tiny border-bottom border-navy'>Census Overview, 2014</h3>
+    <h3 className='m0 pb-tiny border-bottom border-navy'>Census Overview, {year}</h3>
     <ul className='list-style-none my2 p0'>
       { data.map((d, i) => (
         <li key={i}>
@@ -10,7 +10,7 @@ const Census = ({ data, source }) => (
         </li>
       ))}
     </ul>
-    <a href={source} className='block h5 italic navy'>Source: Census data, 2014</a>
+    <a href={source} className='block h5 italic navy'>Source: Census data, {year}</a>
   </div>
 )
 
@@ -21,6 +21,7 @@ Census.defaultProps = {
 Census.propTypes = {
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   source: React.PropTypes.string,
+  year: React.PropTypes.number,
 }
 
 export default Census
