@@ -6,6 +6,7 @@ import thunk from 'redux-thunk'
 import filters from './reducers/filtersReducer'
 import glossary from './reducers/glossaryReducer'
 import incidents from './reducers/incidentsReducer'
+import summaries from './reducers/summaryReducer'
 
 const logger = store => next => action => {
   const result = next(action)
@@ -14,7 +15,7 @@ const logger = store => next => action => {
   return result
 }
 
-const reducer = combineReducers({ filters, glossary, incidents })
+const reducer = combineReducers({ filters, glossary, incidents, summaries })
 const store = createStore(reducer, applyMiddleware(logger, thunk))
 
 export default store
