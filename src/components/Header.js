@@ -9,8 +9,11 @@ const Header = () => {
 
   return (
     <header className='py3 bg-navy white'>
-      <div className='md-flex items-baseline px2 md-px3'>
-        <h2 className='flex-auto m0 serif regular'>Crime Data Explorer</h2>
+      <div className='md-flex items-center px2 md-px3'>
+        <div className='flex-auto'>
+          <div className='h6 caps bold gray-blue'>Federal Bureau of Investigation</div>
+          <div className='h2 serif line-height-3'>Crime Data Explorer</div>
+        </div>
         <div className='mxn1 mt1 md-m0'>
           <Link
             to='/explorer/ohio/murder'
