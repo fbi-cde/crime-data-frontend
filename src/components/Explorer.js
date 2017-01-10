@@ -78,7 +78,10 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               </p>
             </div>
             <div className='sm-col-right sm-col-5 px3'>
-              <Census data={censusData} />
+              <Census
+                data={censusData}
+                year={parseInt(filters.timeTo, 10)}
+              />
             </div>
           </div>
           <div className='mb3 p2 sm-p3 bg-white rounded'>
