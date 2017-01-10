@@ -1,0 +1,68 @@
+[
+  {
+  "population": 11459011,
+  "year": 2004,
+  "count": 4646,
+  "rate": 40.5
+  },
+  {
+  "population": 11470685,
+  "year": 2005,
+  "count": 4671,
+  "rate": 40.7
+  },
+  {
+  "population": 11478006,
+  "year": 2006,
+  "count": 4770,
+  "rate": 41.6
+  },
+  {
+  "population": 11466917,
+  "year": 2007,
+  "count": 4661,
+  "rate": 40.6
+  },
+  {
+  "population": 11485910,
+  "year": 2008,
+  "count": 4531,
+  "rate": 39.4
+  },
+  {
+  "population": 11542645,
+  "year": 2009,
+  "count": 4119,
+  "rate": 35.7
+  },
+  {
+  "population": 11537968,
+  "year": 2010,
+  "count": 3730,
+  "rate": 32.3
+  },
+  {
+  "population": 11541007,
+  "year": 2011,
+  "count": 3679,
+  "rate": 31.9
+  },
+  {
+  "population": 11544225,
+  "year": 2012,
+  "count": 3658,
+  "rate": 31.7
+  },
+  {
+  "population": 11572005,
+  "year": 2013,
+  "count": 7985,
+  "rate": 31.1
+  },
+  {
+  "population": 11594163,
+  "year": 2014,
+  "count": 9139,
+  "rate": 35.3
+  }
+]
