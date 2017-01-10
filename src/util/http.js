@@ -2,11 +2,27 @@ import http from 'axios'
 import flatten from 'lodash.flatten'
 import range from 'lodash.range'
 
-const get = (url, params = {}) => (
-  http.get(url, { params })
-    .then(f => f.data)
-    .catch(err => { throw new Error(err) })
-)
+import storage from './localStorage'
+
+const createUrlQueryString = obj => {
+  const keys = Object.keys(obj).sort((a, b) => b < a)
+  return (keys.length > 0) ? keys.map(k => `${k}=${obj[k]}`).join('&') : ''
+}
+
+const createUrlKey = (url, p = {}) => `${url}?${createUrlQueryString(p)}`
+
+const get = (url, params = {}) => {
+  const key = createUrlKey(url, params)
+  return storage.getItem(key).then(item => {
+    if (item !== null) return item
+
+    return http.get(url, { params })
+      .then(f => f.data).then(data => {
+        storage.setItem(key, data)
+        return data
+      }).catch(err => { throw new Error(err) })
+  })
+}
 
 const getAll = (url, params = {}) => {
   const all = get(url, params).then(first => {
