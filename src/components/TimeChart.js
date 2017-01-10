@@ -1,10 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 
 import { bisector, extent, max } from 'd3-array'
-import {
-  scaleLinear, scaleOrdinal,
-  scaleTime, schemeCategory20c,
-} from 'd3-scale'
+import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
 import { line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import React from 'react'
@@ -35,13 +32,13 @@ class TimeChart extends React.Component {
   }
 
   render() {
-    const { keys, data, margin, size } = this.props
+    const { keys, colors, data, margin, size } = this.props
     const { hover } = this.state
 
     const width = size.width - margin.left - margin.right
     const height = size.height - margin.top - margin.bottom
 
-    const color = scaleOrdinal(schemeCategory20c);
+    const color = scaleOrdinal(colors);
     const parse = timeParse('%Y-%m-%d')
 
     // parse date, ensure all key cols are numbers
@@ -102,7 +99,11 @@ class TimeChart extends React.Component {
 
     return (
       <div>
-        <TimeChartDetails data={active} />
+        <TimeChartDetails
+          colors={colors}
+          data={active || dataClean[dataClean.length - 1]}
+          keys={keys}
+        />
         <svg
           preserveAspectRatio='xMidYMid'
           viewBox={`0 0 ${size.width} ${size.height}`}
@@ -144,6 +145,7 @@ TimeChart.propTypes = {
 TimeChart.defaultProps = {
   margin: { top: 20, right: 30, bottom: 30, left: 30 },
   size: { width: 850, height: 300 },
+  colors: ['#52687d', '#ff5e50', '#97a7b8'],
 }
 
 export default TimeChart
