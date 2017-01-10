@@ -86,7 +86,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               <img className='px1' width='24' src='/img/download.svg' alt='download' />
               <img className='px1' width='24' src='/img/share.svg' alt='share' />
             </div>
-            <h3 className='mt0 mb3'>
+            <h3 className='mt0 mb2'>
               Reported {plural(crime)} in {place}, {filters.timeFrom} - {filters.timeTo}
             </h3>
             <TimeChart data={timeData2} keys={['foo', 'bar']} />
