@@ -80,7 +80,7 @@ class TimeChart extends React.Component {
       const [d0, d1] = [dataClean[i - 1], dataClean[i]]
 
       if (d0 && d1) {
-        active = x0 - d0.date > d1.date - x0 ? d1 : d0
+        active = (x0 - d0.date > d1.date - x0) ? d1 : d0
         callout = (
           <g transform={`translate(${x(active.date)}, 0)`}>
             <line y2={height} stroke='#000' strokeWidth='1' strokeDasharray='2,2' />
