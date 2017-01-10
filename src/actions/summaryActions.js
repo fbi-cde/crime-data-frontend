@@ -27,7 +27,6 @@ export const fetchSummaries = params => dispatch => {
       national: data[0],
       [place]: data[1],
     }
-    console.log('summaries', summaries)
     dispatch(receivedSummary(summaries))
   })
 }

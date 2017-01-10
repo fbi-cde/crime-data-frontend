@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-import { get, getAll } from './http'
+import { getAll } from './http'
 
 import incidents from '../../data/incidents.json'
 import nationalSummary from '../../data/national-summary.json'
@@ -14,7 +14,7 @@ const getAllIncidents = params => (
   getAll(ENDPOINTS.incidents, params)
 )
 
-const getIncidents = params => (
+const getIncidents = () => (
   Promise.resolve({ results: incidents })
   // get(ENDPOINTS.incidents, params)
 )
