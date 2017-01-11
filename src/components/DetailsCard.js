@@ -1,7 +1,7 @@
 import { format } from 'd3-format'
 import React from 'react'
 
-const DetailsCard = ({
+const IncidentDetailCard = ({
   data,
   title,
 }) => {
@@ -40,9 +40,9 @@ const DetailsCard = ({
   )
 }
 
-DetailsCard.propTypes = {
+IncidentDetailCard.propTypes = {
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   title: React.PropTypes.string.isRequired,
 }
 
-export default DetailsCard
+export default IncidentDetailCard
