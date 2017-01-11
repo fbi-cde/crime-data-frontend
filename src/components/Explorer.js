@@ -32,9 +32,6 @@ const Explorer = ({ appState, dispatch, params, router }) => {
   const { filters, summaries } = appState
   const place = startCase(params.place)
   const trendData = mungeSummaryData(summaries, params.place)
-  const timeChart = (!trendData) ? '' : (
-    <TimeChart data={trendData} keys={['National', place]} />
-  )
 
   return (
     <div className='site-wrapper'>
@@ -105,7 +102,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             <h3 className='mt0 mb2'>
               Reported {plural(crime)} in {place}, {filters.timeFrom} - {filters.timeTo}
             </h3>
-            {timeChart}
+            {trendData && <TimeChart data={trendData} keys={['National', place]} />}
           </div>
           <div>
             <h2 className='pb1 serif border-bottom border-silver'>Details</h2>
