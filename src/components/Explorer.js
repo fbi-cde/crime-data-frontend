@@ -3,6 +3,7 @@ import { plural } from 'pluralize'
 import React from 'react'
 import startCase from 'lodash.startcase'
 
+import AboutTheData from './AboutTheData'
 import Breadcrumbs from './Breadcrumbs'
 import Census from './Census'
 import DetailsCard from './DetailsCard'
@@ -94,7 +95,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               />
             </div>
           </div>
-          <div className='mb3 p2 sm-p3 bg-white rounded'>
+          <div className='mb4 p2 sm-p3 bg-white rounded'>
             <div className='right mxn1'>
               <img className='px1' width='24' src='/img/download.svg' alt='download' />
               <img className='px1' width='24' src='/img/share.svg' alt='share' />
@@ -104,8 +105,8 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             </h3>
             {trendData && <TimeChart data={trendData} keys={['National', place]} />}
           </div>
-          <div>
-            <h2 className='pb1 serif border-bottom border-silver'>Details</h2>
+          <div className='mb4'>
+            <h2 className='mb1'>Details</h2>
             <div className='clearfix mxn1'>
               <div className='sm-col sm-col-6 p1'>
                 <DetailsCard data={detailData} title='Murder, 2005-2014' />
@@ -115,6 +116,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               </div>
             </div>
           </div>
+          <AboutTheData />
         </div>
       </div>
     </div>
