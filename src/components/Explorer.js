@@ -58,8 +58,8 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               </a>
             </div>
           </div>
-          <div className='clearfix mb4 mxn3'>
-            <div className='sm-col sm-col-7 px3 h3 serif'>
+          <div className='lg-flex mb4 mxn2'>
+            <div className='flex-auto px2 h3 serif'>
               <p className='bold'>
                 Incidents of
                 <Term
@@ -77,7 +77,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
                 people.<sup>1</sup>
               </p>
             </div>
-            <div className='sm-col-right sm-col-5 px3'>
+            <div className='flex-none px2'>
               <Census
                 data={censusData}
                 year={parseInt(filters.timeTo, 10)}
