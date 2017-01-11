@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { slugify } from '../util/text'
+import FilterGroup from './FilterGroup'
 
 const otherCrime = [
   'Hate Crime',
@@ -24,36 +24,6 @@ const violentCrime = [
   'Robbery',
   'Aggravated assualt',
 ]
-
-const FilterGroup = ({ options, onChange, selected }) => {
-  const handleChange = e => onChange({ crime: e.target.value })
-
-  return (
-    <div className='mb1 bg-light-blue rounded'>
-      {options.map((o, i) => {
-        const isActive = slugify(o) === slugify(selected)
-        return (
-          <label
-            key={i}
-            className={`py-tiny px2 block cursor-pointer ${isActive ? 'bg-darken-2' : ''}`}
-            htmlFor={slugify(o)}
-          >
-            <input
-              checked={isActive}
-              className='mr1'
-              id={slugify(o)}
-              name='crime'
-              onChange={handleChange}
-              type='radio'
-              value={slugify(o)}
-            />
-            {o}
-          </label>
-        )
-      })}
-    </div>
-  )
-}
 
 const CrimeTypeFilter = ({ onChange, selected }) => (
   <div id='type-of-crime' className='mb4'>
