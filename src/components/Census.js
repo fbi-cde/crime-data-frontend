@@ -1,8 +1,8 @@
 import React from 'react'
 
 const Census = ({ data, source, year }) => (
-  <div className='px1 navy'>
-    <h3 className='m0 pb-tiny border-bottom border-navy'>Census Overview, {year}</h3>
+  <div className='p2 navy border border-navy'>
+    <h3 className='m0'>Census Data</h3>
     <ul className='list-style-none my2 p0'>
       { data.map((d, i) => (
         <li key={i}>
