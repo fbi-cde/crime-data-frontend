@@ -1,7 +1,11 @@
 import React from 'react'
 
+import { slugify } from '../util/text'
+
 const TimeChartDetails = ({ colors, data, keys }) => {
   const year = data.date.getFullYear()
+  const placeId = slugify(keys[1])
+  const rate = data[placeId]
 
   return (
     <div className='mb1 p2 bg-light-blue md-flex'>
@@ -9,7 +13,7 @@ const TimeChartDetails = ({ colors, data, keys }) => {
         <div className='mb1 monospace bold underline inline-block active-year'>{year}</div>
         <p className='sm-m0 md-col-10 lg-col-8 h5'>
           Ohio’s incident rate surpasses that of the United States, and
-          in {year} was {data[keys[0]]} incidents per 100,000 people.
+          in {year} was {rate} incidents per 100,000 people.
         </p>
       </div>
       <div>
@@ -25,8 +29,10 @@ const TimeChartDetails = ({ colors, data, keys }) => {
                   />
                   <strong>{k}</strong>
                 </td>
-                <td className='monospace'>{data[k]}</td>
-                <td className='monospace'>{data[k] * 100}</td>
+                <td className='monospace'>{data[slugify(k)]}</td>
+                <td className='monospace'>
+                  {parseInt(data[slugify(k)]) * 98}
+                </td>
               </tr>
             ))}
           </tbody>
