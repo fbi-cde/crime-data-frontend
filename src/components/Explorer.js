@@ -10,7 +10,7 @@ import Sidebar from './Sidebar'
 import Term from './Term'
 import TimeChart from './TimeChart'
 
-import { censusData, detailData, timeData2 } from '../util/data'
+import { censusData, detailData } from '../util/data'
 
 const crimeIds = {
   murder: 'murder and nonnegligent homicide',
@@ -18,10 +18,20 @@ const crimeIds = {
   robbery: 'robbery',
 }
 
+const mungeSummaryData = (summaries, place) => {
+  if (Object.keys(summaries).length === 1) return false
+  return summaries[place].map((s, i) => ({
+    date: s.year,
+    national: summaries.national[i].rate,
+    [place]: s.rate,
+  }))
+}
+
 const Explorer = ({ appState, dispatch, params, router }) => {
   const crime = lowerCase(params.crime)
-  const { filters } = appState
+  const { filters, summaries } = appState
   const place = startCase(params.place)
+  const trendData = mungeSummaryData(summaries, params.place)
 
   return (
     <div className='site-wrapper'>
@@ -92,7 +102,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             <h3 className='mt0 mb2'>
               Reported {plural(crime)} in {place}, {filters.timeFrom} - {filters.timeTo}
             </h3>
-            <TimeChart data={timeData2} keys={['foo', 'bar']} />
+            {trendData && <TimeChart data={trendData} keys={['National', place]} />}
           </div>
           <div>
             <h2 className='pb1 serif border-bottom border-silver'>Details</h2>

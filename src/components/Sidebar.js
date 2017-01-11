@@ -3,7 +3,9 @@ import React from 'react'
 import CrimeTypeFilter from './CrimeTypeFilter'
 import LocationFilter from './LocationFilter'
 import TimePeriodFilter from './TimePeriodFilter'
-import { updateFilters, updateFilterAndUrl } from '../actions/filterActions'
+import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
+import { fetchIncidents } from '../actions/incidentsActions'
+import { fetchSummaries } from '../actions/summaryActions'
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -19,11 +21,13 @@ class Sidebar extends React.Component {
     }
 
     dispatch(updateFilters(filters))
+    dispatch(fetchIncidents(filters))
+    dispatch(fetchSummaries(filters))
   }
 
   handleChange(change) {
     const { location } = this.props.router
-    const action = updateFilterAndUrl({ change, location })
+    const action = updateFiltersAndUrl({ change, location })
     this.props.dispatch(action)
   }
 

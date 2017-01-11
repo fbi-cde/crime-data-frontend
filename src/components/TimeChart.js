@@ -6,6 +6,7 @@ import { line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import React from 'react'
 
+import { slugify } from '../util/text'
 import TimeChartDetails from './TimeChartDetails'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
@@ -39,22 +40,24 @@ class TimeChart extends React.Component {
     const height = size.height - margin.top - margin.bottom
 
     const color = scaleOrdinal(colors);
-    const parse = timeParse('%Y-%m-%d')
+    const parse = timeParse('%Y')
 
     // parse date, ensure all key cols are numbers
     const dataClean = data.map(d => (
-      Object.assign({},
-        { date: parse(d.date) },
-        ...keys.map(id => ({ [id]: +d[id] })),
+      Object.assign({ date: parse(d.date) },
+        ...keys.map(id => ({ [slugify(id)]: +d[slugify(id)] })),
       )
     ))
 
     // nest data by key, standardize naming
-    const dataByKey = keys.map(id => ({
-      id: id.toLowerCase().replace(/\s/g, '_'),
-      name: id,
-      values: dataClean.map(d => ({ date: d.date, value: d[id] })),
-    }))
+    const dataByKey = keys.map(name => {
+      const id = slugify(name)
+      const values = dataClean.map(d => ({
+        date: d.date,
+        value: d[id],
+      }))
+      return { id, name, values }
+    })
 
     const x = scaleTime()
         .domain(extent(dataClean, d => d.date))
@@ -85,7 +88,7 @@ class TimeChart extends React.Component {
               <circle
                 key={j}
                 cx='0'
-                cy={y(active[k])}
+                cy={y(active[slugify(k)])}
                 fill={color(k)}
                 r='6'
                 stroke='#fff'
