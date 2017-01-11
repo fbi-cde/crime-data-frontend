@@ -18,13 +18,12 @@ const crimeIds = {
   robbery: 'robbery',
 }
 
-const mungeSummaryData = summaries => {
-  const keys = Object.keys(summaries).filter(k => (k !== 'loading'))
-  if (keys.length === 0) return false
-  return summaries[keys[0]].map((s, i) => ({
+const mungeSummaryData = (summaries, place) => {
+  if (Object.keys(summaries).length === 1) return false
+  return summaries[place].map((s, i) => ({
     date: s.year,
-    [keys[0]]: s.rate,
-    [keys[1]]: summaries[keys[1]][i].rate,
+    national: summaries.national[i].rate,
+    [place]: s.rate,
   }))
 }
 
@@ -32,7 +31,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
   const crime = lowerCase(params.crime)
   const { filters, summaries } = appState
   const place = startCase(params.place)
-  const trendData = mungeSummaryData(summaries)
+  const trendData = mungeSummaryData(summaries, params.place)
   const timeChart = (!trendData) ? '' : (
     <TimeChart data={trendData} keys={['National', place]} />
   )
