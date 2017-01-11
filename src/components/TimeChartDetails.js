@@ -31,7 +31,7 @@ const TimeChartDetails = ({ colors, data, keys }) => {
                 </td>
                 <td className='monospace'>{data[slugify(k)]}</td>
                 <td className='monospace'>
-                  {parseInt(data[slugify(k)]) * 98}
+                  {parseInt(data[slugify(k)], 10) * 98}
                 </td>
               </tr>
             ))}
