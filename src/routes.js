@@ -7,7 +7,6 @@ import Explorer from './components/Explorer'
 import history from './util/history'
 import NotFound from './components/NotFound'
 import Sample from './components/Sample'
-import Sandbox from './components/Sandbox'
 
 const routes = (
   <Router history={history}>
@@ -16,7 +15,6 @@ const routes = (
       <Route path='/downloads-and-docs' component={DownloadsAndDocs} />
       <Route path='/explorer/:place/:crime' component={Explorer} />
       <Route path='/sample' component={Sample} />
-      <Route path='/sandbox' component={Sandbox} />
       <Route path='/*' component={NotFound} />
     </Route>
   </Router>
