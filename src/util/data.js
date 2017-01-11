@@ -7,11 +7,14 @@ const timeData = [
 ]
 
 const timeData2 = [
-  { date: '2016-01-01', foo: 5, bar: 7 },
-  { date: '2016-01-02', foo: 7, bar: 2 },
-  { date: '2016-01-03', foo: 4, bar: 4 },
-  { date: '2016-01-04', foo: 5, bar: 6 },
-  { date: '2016-01-05', foo: 10, bar: 4 },
+  { date: '2008-01-01', foo: 12, bar: 7 },
+  { date: '2009-01-01', foo: 6, bar: 5 },
+  { date: '2010-01-01', foo: 5, bar: 7 },
+  { date: '2011-01-01', foo: 7, bar: 2 },
+  { date: '2012-01-01', foo: 4, bar: 4 },
+  { date: '2013-01-01', foo: 5, bar: 6 },
+  { date: '2014-01-01', foo: 10, bar: 4 },
+  { date: '2015-01-01', foo: 12, bar: 3 },
 ]
 
 const mapData = { ca: 1, fl: 1 }
