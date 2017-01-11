@@ -5,7 +5,7 @@ import startCase from 'lodash.startcase'
 
 import Breadcrumbs from './Breadcrumbs'
 import Census from './Census'
-import DetailsCard from './DetailsCard'
+import IncidentDetailCard from './IncidentDetailCard'
 import Sidebar from './Sidebar'
 import Term from './Term'
 import TimeChart from './TimeChart'
@@ -107,11 +107,11 @@ const Explorer = ({ appState, dispatch, params, router }) => {
           <div>
             <h2 className='pb1 serif border-bottom border-silver'>Details</h2>
             <div className='clearfix mxn1'>
-              <div className='sm-col sm-col-6 p1'>
-                <DetailsCard data={detailData} title='Murder, 2005-2014' />
+              <div className='md-col md-col-6 p1'>
+                <IncidentDetailCard data={detailData} title='Victim demographics' />
               </div>
-              <div className='sm-col sm-col-6 p1'>
-                <DetailsCard data={detailData} title='Rape, 2005-2014' />
+              <div className='md-col md-col-6 p1'>
+                <IncidentDetailCard data={detailData} title='Offender demographics' />
               </div>
             </div>
           </div>
