@@ -19,14 +19,20 @@ export const updateFilters = filters => ({
 })
 
 /* eslint arrow-body-style: 0 */
-export const updateFilterAndUrl = ({ change, location }) => {
+
+const updateUrl = ({ change, location }) => {
+  history.push(createNewLocation({ change, location }))
+}
+
+export const updateFiltersAndUrl = ({ change, location }) => {
   return (dispatch, getState) => {
     dispatch(updateFilters(change))
-    history.push(createNewLocation({ change, location }))
 
     const { filters } = getState()
     dispatch(fetchIncidents(filters))
     dispatch(fetchSummaries(filters))
+
+    updateUrl({ change, location })
 
     return Promise.resolve()
   }
