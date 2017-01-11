@@ -1,6 +1,10 @@
+import { format } from 'd3-format'
 import React from 'react'
 
 import { slugify } from '../util/text'
+
+const formatRate = format('.1f')
+const formatTotal = format(',.0f')
 
 const TimeChartDetails = ({ colors, data, keys }) => {
   const year = data.date.getFullYear()
@@ -29,9 +33,11 @@ const TimeChartDetails = ({ colors, data, keys }) => {
                   />
                   <strong>{k}</strong>
                 </td>
-                <td className='monospace'>{data[slugify(k)]}</td>
                 <td className='monospace'>
-                  {parseInt(data[slugify(k)], 10) * 98}
+                  {formatRate(data[slugify(k)])}
+                </td>
+                <td className='monospace'>
+                  {formatTotal(data[slugify(k)] * 98)}
                 </td>
               </tr>
             ))}

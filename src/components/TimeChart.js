@@ -89,7 +89,7 @@ class TimeChart extends React.Component {
                 key={j}
                 cx='0'
                 cy={y(active[slugify(k)])}
-                fill={color(k)}
+                fill={color(slugify(k))}
                 r='6'
                 stroke='#fff'
                 strokeWidth='2'
