@@ -1,5 +1,6 @@
 import { format } from 'd3-format'
 import React from 'react'
+import startCase from 'lodash.startcase'
 
 import { slugify } from '../util/text'
 
@@ -16,7 +17,7 @@ const TimeChartDetails = ({ colors, data, keys }) => {
       <div className='flex-auto'>
         <div className='mb1 monospace bold underline inline-block active-year'>{year}</div>
         <p className='sm-m0 md-col-10 lg-col-8 h5'>
-          Ohio’s incident rate surpasses that of the United States, and
+          {startCase(keys[1])}’s incident rate surpasses that of the United States, and
           in {year} was {rate} incidents per 100,000 people.
         </p>
       </div>
