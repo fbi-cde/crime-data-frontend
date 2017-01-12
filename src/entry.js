@@ -16,5 +16,3 @@ const render = () => {
 
 render()
 store.subscribe(render)
-
-window.localStorage.clear()
