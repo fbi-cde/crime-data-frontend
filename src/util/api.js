@@ -1,13 +1,18 @@
 /* eslint no-console: 0 */
-import { getAll } from './http'
+import { get, getAll } from './http'
+
+import getStateAbbrFromName from './usa'
 
 import incidents from '../../data/incidents.json'
-import nationalSummary from '../../data/national-summary.json'
-import stateSummary from '../../data/state-summary.json'
 
 const API = '/api'
 const ENDPOINTS = {
   incidents: `${API}/incidents`,
+  summary: `${API}/incidents/count`,
+}
+
+const mapCrimeFilterToApiQuery = crimeFilter => {
+  return `Manslaughter by Negligence`
 }
 
 const getAllIncidents = params => (
@@ -20,8 +25,26 @@ const getIncidents = () => (
 )
 
 const getSummary = params => {
-  if (params.place) return Promise.resolve(stateSummary)
-  return Promise.resolve(nationalSummary)
+  const crime = mapCrimeFilterToApiQuery(params.crime)
+  const timeFrom = parseInt(params.timeFrom, 10)
+  const timeTo = parseInt(params.timeTo, 10)
+  const perPage = (timeTo - timeFrom) + 1
+  const qs = [
+    `offense=${crime}`,
+    `per_page=${perPage}`,
+    `year>${timeFrom - 1}`,
+    `year<${timeTo + 1}`,
+  ]
+
+  if (params.place) qs.push(`state=${getStateAbbrFromName(params.place)}`)
+  console.log('qs', qs)
+  return get(`${ENDPOINTS.summary}?${qs.join('&')}`).then(d => {
+    console.log('d', d)
+    return d.results.map(r => ({
+      year: r.year,
+      rate: r.actual,
+    }))
+  })
 }
 
 export default { getAllIncidents, getIncidents, getSummary }
