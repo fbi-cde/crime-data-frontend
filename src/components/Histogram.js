@@ -2,60 +2,88 @@ import { extent, histogram, max } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import React from 'react'
 
+import HistogramDetails from './HistogramDetails'
 import XAxis from './XAxis'
 
-const Histogram = ({
-  size = { width: 360, height: 160 },
-  margin = { top: 20, right: 20, bottom: 30, left: 20 },
-  fill = '#ff5e50',
-  data,
-}) => {
-  const height = size.height - margin.top - margin.bottom
-  const width = size.width - margin.left - margin.right
+class Histogram extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { hover: null }
+    this.rememberValue = ::this.rememberValue
+    this.forgetValue = ::this.forgetValue
+  }
 
-  const dataClean = data.map(d => ({ key: d[0], value: +d[1] }))
+  rememberValue(e) {
+    const id = parseInt(e.target.getAttribute('data-id'), 10)
+    this.setState({ hover: id })
+  }
 
-  const x = scaleLinear()
-      .domain(extent(dataClean, d => d.value))
-      .range([0, width])
+  forgetValue() {
+    this.setState({ hover: null })
+  }
 
-  const hist = histogram()
-      .domain(x.domain())
-      .value(d => d.value)
+  render() {
+    const { data, margin, size } = this.props
+    const { hover } = this.state
 
-  const bins = hist(dataClean)
+    const height = size.height - margin.top - margin.bottom
+    const width = size.width - margin.left - margin.right
+    const tickCt = 8
 
-  const y = scaleLinear()
-      .domain([0, max(bins, d => d.length)])
-      .range([height, 0])
+    const dataClean = data.map(d => ({ key: d[0], value: +d[1] }))
 
-  return (
-    <div>
-      <svg
-        preserveAspectRatio='xMidYMid'
-        viewBox={`0 0 ${size.width} ${size.height}`}
-        style={{ width: '100%', height: '100%' }}
-      >
-        <g transform={`translate(${margin.left}, ${margin.top})`}>
-          {bins.map((d, i) => (
-            <g key={i} transform={`translate(${x(d.x0)}, ${y(d.length)})`}>
-              <rect
-                x='1'
-                width={x(bins[0].x1) - x(bins[0].x0) - 1}
-                height={height - y(d.length)}
-                fill={fill}
-              />
-            </g>
-          ))}
-          <XAxis scale={x} height={height} />
-        </g>
-      </svg>
-      <div className='mt1'>
-        In 2014, there were <span className='bold red'>3,000</span> incidents
-        involving victims <span className='bold red'>ages 20-24</span>.
+    const x = scaleLinear()
+        .domain(extent(dataClean, d => d.value))
+        .range([0, width])
+
+    const hist = histogram()
+        .domain(x.domain())
+        .thresholds(x.ticks(tickCt))
+        .value(d => d.value)
+
+    const bins = hist(dataClean)
+
+    const y = scaleLinear()
+        .domain([0, max(bins, d => d.length)])
+        .range([height, 0])
+
+    // default to last bin if no interaction
+    const active = hover !== null ? hover : bins.length - 1
+
+    return (
+      <div>
+        <svg
+          preserveAspectRatio='xMidYMid'
+          viewBox={`0 0 ${size.width} ${size.height}`}
+          style={{ width: '100%', height: '100%' }}
+        >
+          <g transform={`translate(${margin.left}, ${margin.top})`}>
+            {bins.map((d, i) => (
+              <g key={i} transform={`translate(${x(d.x0)}, ${y(d.length)})`}>
+                <rect
+                  x='1'
+                  data-id={i}
+                  width={x(bins[0].x1) - x(bins[0].x0) - 1}
+                  height={height - y(d.length)}
+                  fill={(hover === null || i === active) ? '#ff5e50' : '#f4dfdd'}
+                  pointerEvents='all'
+                  onMouseOver={this.rememberValue}
+                  onMouseOut={this.forgetValue}
+                />
+              </g>
+            ))}
+            <XAxis scale={x} height={height} tickCt={tickCt} />
+          </g>
+        </svg>
+        <HistogramDetails data={bins[active]} />
       </div>
-    </div>
-  )
+    )
+  }
+}
+
+Histogram.defaultProps = {
+  margin: { top: 20, right: 20, bottom: 30, left: 20 },
+  size: { width: 360, height: 160 },
 }
 
 export default Histogram
