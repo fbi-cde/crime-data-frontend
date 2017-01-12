@@ -18,7 +18,7 @@ const IncidentDetailTable = ({ data, title }) => {
 
   return (
     <table className='mb2 pb2 border-bottom'>
-      <caption className='mb1 bold left-align'>{title}</caption>
+      <caption className='bold left-align'>{title}</caption>
       <thead>
         <tr>
           {cols.map((c, i) => (
