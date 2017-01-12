@@ -1,5 +1,6 @@
 import { format } from 'd3-format'
 import React from 'react'
+import startCase from 'lodash.startcase'
 
 const formatRate = format('.1f')
 const formatTotal = format(',.0f')
@@ -13,7 +14,7 @@ const TimeChartDetails = ({ colors, data, keys }) => {
       <div className='flex-auto'>
         <h3 className='mt0 mb-tiny monospace inline-block'>{year}</h3>
         <p className='sm-m0 md-col-10 lg-col-8 h5'>
-          Ohio’s incident rate surpasses that of the United States, and
+          {startCase(keys[1])}’s incident rate surpasses that of the United States, and
           in {year} was {rate} incidents per 100,000 people.
         </p>
       </div>

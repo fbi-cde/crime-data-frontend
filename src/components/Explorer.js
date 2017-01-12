@@ -20,7 +20,7 @@ const crimeIds = {
 }
 
 const mungeSummaryData = (summaries, place) => {
-  if (Object.keys(summaries).length === 1) return false
+  if (Object.keys(summaries).length === 1 || !summaries[place]) return false
   return summaries[place].map((s, i) => ({
     date: s.year,
     national: summaries.national[i].rate,
@@ -103,6 +103,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             <h3 className='mt0 mb2'>
               Reported {plural(crime)} in {place}, {filters.timeFrom} - {filters.timeTo}
             </h3>
+            {summaries.loading && <span>Loading</span>}
             {trendData && <TimeChart data={trendData} keys={['National', place]} />}
           </div>
           <div className='mb4'>
