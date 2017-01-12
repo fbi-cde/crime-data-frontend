@@ -30,25 +30,31 @@ const Histogram = ({
       .range([height, 0])
 
   return (
-    <svg
-      preserveAspectRatio='xMidYMid'
-      viewBox={`0 0 ${size.width} ${size.height}`}
-      style={{ width: '100%', height: '100%' }}
-    >
-      <g transform={`translate(${margin.left}, ${margin.top})`}>
-        {bins.map(d => (
-          <g transform={`translate(${x(d.x0)}, ${y(d.length)})`}>
-            <rect
-              x='1'
-              width={x(bins[0].x1) - x(bins[0].x0) - 1}
-              height={height - y(d.length)}
-              fill={fill}
-            />
-          </g>
-        ))}
-        <XAxis scale={x} height={height} />
-      </g>
-    </svg>
+    <div>
+      <svg
+        preserveAspectRatio='xMidYMid'
+        viewBox={`0 0 ${size.width} ${size.height}`}
+        style={{ width: '100%', height: '100%' }}
+      >
+        <g transform={`translate(${margin.left}, ${margin.top})`}>
+          {bins.map((d, i) => (
+            <g key={i} transform={`translate(${x(d.x0)}, ${y(d.length)})`}>
+              <rect
+                x='1'
+                width={x(bins[0].x1) - x(bins[0].x0) - 1}
+                height={height - y(d.length)}
+                fill={fill}
+              />
+            </g>
+          ))}
+          <XAxis scale={x} height={height} />
+        </g>
+      </svg>
+      <div className='mt1'>
+        In 2014, there were <span className='bold red'>3,000</span> incidents
+        involving victims <span className='bold red'>ages 20-24</span>.
+      </div>
+    </div>
   )
 }
 

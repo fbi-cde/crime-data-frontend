@@ -1,20 +1,17 @@
 import { format } from 'd3-format'
 import React from 'react'
 
-import { slugify } from '../util/text'
-
 const formatRate = format('.1f')
 const formatTotal = format(',.0f')
 
 const TimeChartDetails = ({ colors, data, keys }) => {
   const year = data.date.getFullYear()
-  const placeId = slugify(keys[1])
-  const rate = data[placeId]
+  const rate = data[keys[1].slug]
 
   return (
     <div className='mb1 p2 bg-light-blue md-flex'>
       <div className='flex-auto'>
-        <div className='mb1 monospace bold underline inline-block active-year'>{year}</div>
+        <h3 className='mt0 mb-tiny monospace inline-block'>{year}</h3>
         <p className='sm-m0 md-col-10 lg-col-8 h5'>
           Ohio’s incident rate surpasses that of the United States, and
           in {year} was {rate} incidents per 100,000 people.
@@ -31,13 +28,13 @@ const TimeChartDetails = ({ colors, data, keys }) => {
                     className='mr1 inline-block circle'
                     style={{ width: 10, height: 10, backgroundColor: colors[i] || '#000' }}
                   />
-                  <strong>{k}</strong>
+                  <strong>{k.name}</strong>
                 </td>
                 <td className='monospace'>
-                  {formatRate(data[slugify(k)])}
+                  {formatRate(data[k.slug])}
                 </td>
                 <td className='monospace'>
-                  {formatTotal(data[slugify(k)] * 98)}
+                  {formatTotal(data[k.slug] * 98)}
                 </td>
               </tr>
             ))}

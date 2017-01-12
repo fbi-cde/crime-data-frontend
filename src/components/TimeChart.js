@@ -42,21 +42,23 @@ class TimeChart extends React.Component {
     const color = scaleOrdinal(colors);
     const parse = timeParse('%Y')
 
+    const keysWithSlugs = keys.map(name => ({ name, slug: slugify(name) }))
+
     // parse date, ensure all key cols are numbers
     const dataClean = data.map(d => (
-      Object.assign({ date: parse(d.date) },
-        ...keys.map(id => ({ [slugify(id)]: +d[slugify(id)] })),
+      Object.assign(
+        { date: parse(d.date) },
+        ...keysWithSlugs.map(k => ({ [k.slug]: +d[k.slug] })),
       )
     ))
 
     // nest data by key, standardize naming
-    const dataByKey = keys.map(name => {
-      const id = slugify(name)
+    const dataByKey = keysWithSlugs.map(k => {
       const values = dataClean.map(d => ({
         date: d.date,
-        value: d[id],
+        value: d[k.slug],
       }))
-      return { id, name, values }
+      return { id: k.slug, name: k.name, values }
     })
 
     const x = scaleTime()
@@ -71,8 +73,7 @@ class TimeChart extends React.Component {
         .x(d => x(d.date))
         .y(d => y(d.value))
 
-    let active
-    let callout
+    let active = dataClean[dataClean.length - 1]
     if (hover) {
       const bisectDate = bisector(d => d.date).left
       const x0 = x.invert(hover.x * width)
@@ -81,32 +82,29 @@ class TimeChart extends React.Component {
 
       if (d0 && d1) {
         active = (x0 - d0.date > d1.date - x0) ? d1 : d0
-        callout = (
-          <g transform={`translate(${x(active.date)}, 0)`}>
-            <line y2={height} stroke='#000' strokeWidth='1' strokeDasharray='2,2' />
-            {keys.map((k, j) => (
-              <circle
-                key={j}
-                cx='0'
-                cy={y(active[slugify(k)])}
-                fill={color(slugify(k))}
-                r='6'
-                stroke='#fff'
-                strokeWidth='2'
-              />
-            ))}
-          </g>
-        )
       }
     }
 
+    const callout = (
+      <g transform={`translate(${x(active.date)}, 0)`}>
+        <line y2={height} stroke='#000' strokeWidth='1' strokeDasharray='2,2' />
+        {keysWithSlugs.map((k, j) => (
+          <circle
+            key={j}
+            cx='0'
+            cy={y(active[k.slug])}
+            fill={color(k.slug)}
+            r='6'
+            stroke='#fff'
+            strokeWidth='2'
+          />
+        ))}
+      </g>
+    )
+
     return (
       <div>
-        <TimeChartDetails
-          colors={colors}
-          data={active || dataClean[dataClean.length - 1]}
-          keys={keys}
-        />
+        <TimeChartDetails colors={colors} data={active} keys={keysWithSlugs} />
         <svg
           preserveAspectRatio='xMidYMid'
           viewBox={`0 0 ${size.width} ${size.height}`}
