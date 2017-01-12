@@ -16,11 +16,11 @@ export const receivedSummary = summaries => ({
 // TODO: rename this. fetchSummaries isn't very descriptive
 // but something like fetchPlaceAndNationalSummaries is too long
 export const fetchSummaries = params => dispatch => {
-  const { crime, place } = params
+  const { crime, place, timeFrom, timeTo } = params
   dispatch(fetchingSummary())
 
-  const nationalSummary = api.getSummary({ crime })
-  const placeSummary = api.getSummary({ crime, place })
+  const nationalSummary = api.getSummary({ crime, timeFrom, timeTo })
+  const placeSummary = api.getSummary({ crime, place, timeFrom, timeTo })
 
   return Promise.all([nationalSummary, placeSummary]).then(data => {
     const summaries = {
