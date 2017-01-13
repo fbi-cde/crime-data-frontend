@@ -39,9 +39,13 @@ const IncidentDetailTable = ({ data, title }) => {
                 <span className='rtl' style={{ width: `${d.percent * 100}%` }} />
               </div>
             </td>
-            <td className='bold right-align'>{formatPercent(d.percent)}</td>
+            <td className='bold monospace right-align'>
+              {formatPercent(d.percent)}
+            </td>
             <td className='truncate px2' title={d.key}>{d.key}</td>
-            <td className='right-align'>{formatNumber(d.count)}</td>
+            <td className='monospace right-align'>
+              {formatNumber(d.count)}
+            </td>
           </tr>
         ))}
       </tbody>
