@@ -29,7 +29,6 @@
     "express": "^4.14.0",
     "glossary-panel": "^0.2.0",
     "lodash.debounce": "^4.0.8",
-    "lodash.find": "^4.6.0",
     "lodash.flatten": "^4.4.0",
     "lodash.range": "^3.2.0",
     "lodash.startcase": "^4.4.0",

@@ -1,8 +1,11 @@
 import axios from 'axios'
 import { geoAlbersUsa, geoPath } from 'd3-geo'
-import find from 'lodash.find'
 import React from 'react'
 import { feature, mesh } from 'topojson'
+
+const Container = ({ children }) => (
+  <div className='aspect-ratio aspect-ratio--4x3'>{children}</div>
+)
 
 class StateThumbnail extends React.Component {
   constructor(props) {
@@ -16,58 +19,63 @@ class StateThumbnail extends React.Component {
   }
 
   render() {
+    const { selected } = this.props
     const { usa } = this.state
-    if (!usa) return null
 
-    const { size, place } = this.props
-    const { w, h } = size
+    if (!usa) return <Container />
 
+    const [w, h] = [400, 300]
     const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
     const geoStates = feature(usa, usa.objects.units).features
     const meshed = mesh(usa, usa.objects.units, (a, b) => (a !== b))
+    const active = geoStates.find(s => (s.properties.name === selected))
 
-    const active = find(geoStates, s => (s.properties.name === place))
-    const bounds = path.bounds(active)
-    const dx = bounds[1][0] - bounds[0][0]
-    const dy = bounds[1][1] - bounds[0][1]
-    const x = (bounds[0][0] + bounds[1][0]) / 2
-    const y = (bounds[0][1] + bounds[1][1]) / 2
-    const scale = 0.8 / Math.max(dx / w, dy / h)
-    const translate = [(w / 2) - (scale * x), (h / 2) - (scale * y)]
+    let strokeWidth
+    let transform
+    if (active) {
+      const bounds = path.bounds(active)
+      const dx = bounds[1][0] - bounds[0][0]
+      const dy = bounds[1][1] - bounds[0][1]
+      const x = (bounds[0][0] + bounds[1][0]) / 2
+      const y = (bounds[0][1] + bounds[1][1]) / 2
+      const scale = 0.8 / Math.max(dx / w, dy / h)
+      const translate = [(w / 2) - (scale * x), (h / 2) - (scale * y)]
+
+      strokeWidth = active ? `${2.5 / scale}px` : 1
+      transform = `translate(${translate})scale(${scale})`
+    }
 
     return (
-      <svg
-        preserveAspectRatio='xMidYMid'
-        viewBox={`0 0 ${w} ${h}`}
-        style={{ width: '250px', height: 'auto' }}
-      >
-        <g
-          strokeWidth={`${2 / scale}px`}
-          transform={`translate(${translate})scale(${scale})`}
+      <Container>
+        <svg
+          className='aspect-ratio--object'
+          preserveAspectRatio='xMidYMid'
+          viewBox={`0 0 ${w} ${h}`}
         >
-          {geoStates.map((d, i) => (
+          <g
+            strokeWidth={strokeWidth}
+            transform={transform}
+          >
+            {geoStates.map((d, i) => (
+              <path
+                key={i}
+                d={path(d)}
+                fill={d.properties.name === selected ? '#95aabc' : '#eff4f9'}
+              />
+            ))}
             <path
-              key={i}
-              d={path(d)}
-              fill={d.properties.name === place ? 'orange' : '#ccc'}
+              d={path(meshed)}
+              fill='none'
+              stroke='#fff'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
-          ))}
-          <path
-            d={path(meshed)}
-            fill='none'
-            stroke='#fff'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-          />
-        </g>
-      </svg>
+          </g>
+        </svg>
+      </Container>
     )
   }
-}
-
-StateThumbnail.defaultProps = {
-  size: { w: 400, h: 300 },
 }
 
 export default StateThumbnail
