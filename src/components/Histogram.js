@@ -5,7 +5,6 @@ import React from 'react'
 import HistogramDetails from './HistogramDetails'
 import XAxis from './XAxis'
 
-<<<<<<< HEAD
 class Histogram extends React.Component {
   constructor(props) {
     super(props)
@@ -78,7 +77,7 @@ class Histogram extends React.Component {
             <XAxis scale={x} height={height} tickCt={tickCt} />
           </g>
         </svg>
-        <HistogramDetails data={bins[active]} />
+        <HistogramDetails data={dataClean[active]} />
       </div>
     )
   }
