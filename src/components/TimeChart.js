@@ -111,7 +111,7 @@ class TimeChart extends React.Component {
           style={{ width: '100%', height: '100%' }}
         >
           <g transform={`translate(${margin.left}, ${margin.top})`}>
-            <XAxis scale={x} height={height} tickCt={4} />
+            <XAxis scale={x} height={height} tickCt={8} />
             <YAxis scale={y} width={width} />
             {dataByKey.map((d, i) => (
               <g key={i} className={`series series-${d.id}`}>
@@ -134,6 +134,10 @@ class TimeChart extends React.Component {
             />
           </g>
         </svg>
+        <div className='py2 h5 bold center'>Rate per 100,000 people / Year</div>
+        <div className='pt1 h5 italic blue-gray'>
+          Source: Ohio reported Summary (SRS) data from 2004–2014.
+        </div>
       </div>
     )
   }
@@ -144,7 +148,7 @@ TimeChart.propTypes = {
 }
 
 TimeChart.defaultProps = {
-  margin: { top: 20, right: 30, bottom: 30, left: 30 },
+  margin: { top: 20, right: 30, bottom: 25, left: 30 },
   size: { width: 850, height: 300 },
   colors: ['#52687d', '#ff5e50', '#97a7b8'],
 }

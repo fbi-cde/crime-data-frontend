@@ -100,10 +100,14 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               <img className='px1' width='24' src='/img/download.svg' alt='download' />
               <img className='px1' width='24' src='/img/share.svg' alt='share' />
             </div>
-            <h3 className='mt0 mb2'>
+            <h2 className='mt0 mb2'>
               Reported {plural(crime)} in {place}, {filters.timeFrom} - {filters.timeTo}
-            </h3>
-            {summaries.loading && <span>Loading</span>}
+            </h2>
+            <p className='h3 lg-col-10'>
+              {place}’s incident rate surpasses that of the United States, and in
+              2014 was 35.3 incidents per 100,000 people (legacy definition).
+            </p>
+            {summaries.loading && <span>Loading...</span>}
             {trendData && <TimeChart data={trendData} keys={['National', place]} />}
           </div>
           <div className='mb4'>
