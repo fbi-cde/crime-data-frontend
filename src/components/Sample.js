@@ -5,7 +5,7 @@ import StateThumbnail from './StateThumbnail'
 const Sample = () => (
   <section className='container px2 py3'>
     <h1 className='mt0'>Hello!</h1>
-    <StateThumbnail place='Ohio' />
+    <StateThumbnail place='Nevada' />
     <div className='clearfix mxn2'>
       <div className='sm-col sm-col-8 md-col-9 px2'>
         {[...Array(4)].map((_, i) => (

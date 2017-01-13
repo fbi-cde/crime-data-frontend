@@ -22,7 +22,7 @@ class StateThumbnail extends React.Component {
     const { size, place } = this.props
     const { w, h } = size
 
-    const projection = geoAlbersUsa().scale(1000).translate([w / 2, h / 2])
+    const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
     const geoStates = feature(usa, usa.objects.units).features
     const meshed = mesh(usa, usa.objects.units, (a, b) => (a !== b))
@@ -33,7 +33,7 @@ class StateThumbnail extends React.Component {
     const dy = bounds[1][1] - bounds[0][1]
     const x = (bounds[0][0] + bounds[1][0]) / 2
     const y = (bounds[0][1] + bounds[1][1]) / 2
-    const scale = 0.85 / Math.max(dx / w, dy / h)
+    const scale = 0.8 / Math.max(dx / w, dy / h)
     const translate = [(w / 2) - (scale * x), (h / 2) - (scale * y)]
 
     return (
@@ -43,7 +43,7 @@ class StateThumbnail extends React.Component {
         style={{ width: '250px', height: 'auto' }}
       >
         <g
-          strokeWidth={`${1.5 / scale}px`}
+          strokeWidth={`${2 / scale}px`}
           transform={`translate(${translate})scale(${scale})`}
         >
           {geoStates.map((d, i) => (
@@ -57,7 +57,6 @@ class StateThumbnail extends React.Component {
             d={path(meshed)}
             fill='none'
             stroke='#fff'
-            strokeWidth={0.5}
             strokeLinecap='round'
             strokeLinejoin='round'
           />
@@ -68,7 +67,7 @@ class StateThumbnail extends React.Component {
 }
 
 StateThumbnail.defaultProps = {
-  size: { w: 960, h: 500 },
+  size: { w: 400, h: 300 },
 }
 
 export default StateThumbnail
