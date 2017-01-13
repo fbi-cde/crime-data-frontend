@@ -11,7 +11,49 @@ import Sidebar from './Sidebar'
 import Term from './Term'
 import TimeChart from './TimeChart'
 
-import { censusData, detailData } from '../util/data'
+import {
+  censusData,
+  detailLocationData,
+  detailOffenderAge,
+  detailOffenderRace,
+  detailOffenderSex,
+  detailRelationshipData,
+ } from '../util/data'
+
+const demoData = who => ([
+  {
+    data: detailOffenderAge,
+    title: (who) ? `Age of ${who}` : undefined,
+    type: 'histogram',
+  },
+  {
+    data: detailOffenderRace,
+    title: (who) ? `Race of ${who}` : undefined,
+    type: 'table',
+  },
+  {
+    data: detailOffenderSex,
+    title: (who) ? `Sex of ${who}` : undefined,
+    type: 'table',
+  },
+])
+
+const locationData = [
+  {
+    data: detailLocationData,
+    type: 'table',
+  },
+]
+
+const relationshipData = [
+  {
+    data: detailRelationshipData,
+    type: 'table',
+  },
+]
+
+const detailOffenderDemographicsData = demoData('offender')
+const detailVictimDemographicsData = demoData('victim')
 
 const crimeIds = {
   murder: 'murder and nonnegligent homicide',
@@ -110,10 +152,28 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             <h2 className='mb1'>Details</h2>
             <div className='clearfix mxn1'>
               <div className='md-col md-col-6 p1'>
-                <IncidentDetailCard data={detailData} title='Victim demographics' />
+                <IncidentDetailCard
+                  data={detailOffenderDemographicsData}
+                  title='Offender demographics'
+                />
               </div>
               <div className='md-col md-col-6 p1'>
-                <IncidentDetailCard data={detailData} title='Offender demographics' />
+                <IncidentDetailCard
+                  data={detailVictimDemographicsData}
+                  title='Victim demographics'
+                />
+              </div>
+              <div className='md-col md-col-6 p1'>
+                <IncidentDetailCard
+                  data={relationshipData}
+                  title='Victims relationship to offender'
+                />
+              </div>
+              <div className='md-col md-col-6 p1'>
+                <IncidentDetailCard
+                  data={locationData}
+                  title='Location type'
+                />
               </div>
             </div>
           </div>
