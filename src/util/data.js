@@ -34,11 +34,11 @@ const censusData = [
   },
   {
     statistic: '25,992',
-    label: 'peace officers',
+    label: 'officers',
   },
   {
     statistic: '447',
-    label: 'peace officers per resident',
+    label: 'officers per resident',
   },
 ]
 
