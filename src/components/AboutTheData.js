@@ -21,7 +21,7 @@ const AboutTheData = () => (
         </p>
         <h4>How these crimes are counted</h4>
         <p>
-          The Uniform Crime Reporting (UCR) Program counts one offense for each
+          The Uniform Crime Reporting Program counts one offense for each
           victim of rape, attempted rape, or assault to commit rape, regardless
           of the victim’s age. Sexual relations involving a family member
           without consent are counted as rape, not incest. Statutory rape
