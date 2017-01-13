@@ -9,7 +9,7 @@ const otherCrime = [
 ]
 
 const propertyCrime = [
-  'All property crime',
+  'All Property Crime',
   'Arson',
   'Burglary',
   'Cargo Theft',
@@ -18,11 +18,11 @@ const propertyCrime = [
 ]
 
 const violentCrime = [
-  'All violent crime',
+  'All Violent Crime',
   'Murder',
   'Rape',
   'Robbery',
-  'Aggravated assualt',
+  'Aggravated Assault',
 ]
 
 const CrimeTypeFilter = ({ onChange, selected }) => (
