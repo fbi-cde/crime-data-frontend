@@ -2,11 +2,23 @@ import React from 'react'
 
 const minYear = 1960
 const maxYear = 2015
+const yearRange = 10
 
 const TimePeriodFilter = ({ onChange, timeFrom, timeTo }) => {
   const handleChange = e => {
     const { id, value } = e.target
-    onChange({ [id]: value })
+
+    const isFrom = id === 'timeFrom'
+    const otherId = isFrom ? 'timeTo' : 'timeFrom'
+    const otherVal = +value + (yearRange * (isFrom ? 1 : -1))
+
+    if (isFrom && otherVal > maxYear) return
+    else if (otherVal < minYear) return
+
+    onChange({
+      [id]: value,
+      [otherId]: String(otherVal),
+    })
   }
 
   return (
