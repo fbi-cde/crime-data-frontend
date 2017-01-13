@@ -8,16 +8,16 @@ const IncidentDetailTable = ({ data, title }) => {
   const total = data.reduce((a, b) => (a + b.count), 0)
   const dataParsed = data.map(d => ({ ...d, percent: (d.count / total) }))
   const cols = [
-    { name: '', width: 3 },
+    { name: '', width: 1 },
     { name: 'Percent', width: 2 },
-    { name: title, width: 4 },
+    { name: title, width: 6 },
     { name: 'Incidents', width: 3 },
   ]
 
   dataParsed.sort((a, b) => a.key > b.key)
 
   return (
-    <table className='mb2 pb2 border-bottom'>
+    <table className='mb2 pb2 border-bottom table-fixed'>
       <caption className='bold left-align'>{title}</caption>
       <thead>
         <tr>
@@ -34,14 +34,18 @@ const IncidentDetailTable = ({ data, title }) => {
       <tbody>
         {dataParsed.map((d, i) => (
           <tr key={i}>
-            <td>
+            <td className=''>
               <div className='progress-bar my1'>
                 <span className='rtl' style={{ width: `${d.percent * 100}%` }} />
               </div>
             </td>
-            <td className='bold right-align'>{formatPercent(d.percent)}</td>
-            <td className='px2'>{d.key}</td>
-            <td className='right-align'>{formatNumber(d.count)}</td>
+            <td className='bold monospace right-align'>
+              {formatPercent(d.percent)}
+            </td>
+            <td className='truncate px2' title={d.key}>{d.key}</td>
+            <td className='monospace right-align'>
+              {formatNumber(d.count)}
+            </td>
           </tr>
         ))}
       </tbody>

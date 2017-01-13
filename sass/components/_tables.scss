@@ -21,6 +21,10 @@
   th, td { border: 1px solid $table-border-color; }
 }
 
+.table-fixed {
+  table-layout: fixed;
+}
+
 .table-striped {
   tbody tr:nth-of-type(odd) { background-color: $table-bg-accent; }
 }

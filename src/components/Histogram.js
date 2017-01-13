@@ -30,21 +30,21 @@ class Histogram extends React.Component {
     const width = size.width - margin.left - margin.right
     const tickCt = 8
 
-    const dataClean = data.map(d => ({ key: d[0], value: +d[1] }))
+    const dataClean = data.map(d => ({ key: +d.key, value: +d.count }))
 
     const x = scaleLinear()
-        .domain(extent(dataClean, d => d.value))
+        .domain(extent(dataClean, d => d.key))
         .range([0, width])
 
     const hist = histogram()
         .domain(x.domain())
-        .thresholds(x.ticks(tickCt))
-        .value(d => d.value)
+        .thresholds(10)
+        .value(d => d.length)
 
     const bins = hist(dataClean)
 
     const y = scaleLinear()
-        .domain([0, max(bins, d => d.length)])
+        .domain([0, max(dataClean, d => d.value)])
         .range([height, 0])
 
     // default to last bin if no interaction
@@ -59,12 +59,14 @@ class Histogram extends React.Component {
         >
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {bins.map((d, i) => (
-              <g key={i} transform={`translate(${x(d.x0)}, ${y(d.length)})`}>
+              <g
+                key={i}
+                transform={`translate(${x(d.x0)}, ${y(dataClean[i].value)})`}
+              >
                 <rect
                   x='1'
-                  data-id={i}
                   width={x(bins[0].x1) - x(bins[0].x0) - 1}
-                  height={height - y(d.length)}
+                  height={height - y(dataClean[i].value)}
                   fill={(hover === null || i === active) ? '#ff5e50' : '#f4dfdd'}
                   pointerEvents='all'
                   onMouseOver={this.rememberValue}
@@ -75,7 +77,7 @@ class Histogram extends React.Component {
             <XAxis scale={x} height={height} tickCt={tickCt} />
           </g>
         </svg>
-        <HistogramDetails data={bins[active]} />
+        <HistogramDetails data={dataClean[active]} />
       </div>
     )
   }
