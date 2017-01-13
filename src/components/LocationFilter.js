@@ -1,10 +1,10 @@
 import React from 'react'
 import startCase from 'lodash.startcase'
 
-import abbr, { states } from '../util/usa'
-import { slugify } from '../util/text'
-import StateSvg from './StateSvg'
+import StateThumbnail from './StateThumbnail'
 
+import { states } from '../util/usa'
+import { slugify } from '../util/text'
 
 const usaStates = Object.values(states).map(s => startCase(s))
 
@@ -16,7 +16,7 @@ const LocationFilter = ({ onChange, selected }) => {
     <div id='location' className='mb4'>
       <h3 className='mt0 mb2 pb-tiny border-bottom'>{placeDisplay}</h3>
       <div className='pt1 pb2 center'>
-        <StateSvg size={160} state={abbr(selected)} />
+        <StateThumbnail selected={placeDisplay} />
       </div>
       <select
         className='block col-12 field'
