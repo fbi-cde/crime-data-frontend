@@ -11,7 +11,7 @@ const ENDPOINTS = {
   summary: `${API}/incidents/count`,
 }
 
-const mapCrimeFilterToApiQuery = () => `Manslaughter by Negligence`
+const mapCrimeFilterToApiQuery = () => 'Manslaughter by Negligence'
 
 const getAllIncidents = params => (
   getAll(ENDPOINTS.incidents, params)
