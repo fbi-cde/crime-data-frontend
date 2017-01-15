@@ -110,43 +110,53 @@ const detailLocationData = [
 
 const detailOffenderAge = [
   {
-    key: '10',
+    x0: 0,
+    x1: 10,
     count: 2408,
   },
   {
-    key: '20',
+    x0: 10,
+    x1: 20,
     count: 76198,
   },
   {
-    key: '30',
+    x0: 20,
+    x1: 30,
     count: 109999,
   },
   {
-    key: '40',
+    x0: 30,
+    x1: 40,
     count: 67089,
   },
   {
-    key: '50',
+    x0: 40,
+    x1: 50,
     count: 44943,
   },
   {
-    key: '60',
+    x0: 50,
+    x1: 60,
     count: 20510,
   },
   {
-    key: '70',
+    x0: 60,
+    x1: 70,
     count: 4457,
   },
   {
-    key: '80',
+    x0: 70,
+    x1: 80,
     count: 1010,
   },
   {
-    key: '90',
+    x0: 80,
+    x1: 90,
     count: 234,
   },
   {
-    key: '100',
+    x0: 90,
+    x1: 100,
     count: 29,
   },
 ]

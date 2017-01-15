@@ -4,21 +4,19 @@ import Histogram from './Histogram'
 import IncidentDetailTable from './IncidentDetailTable'
 
 const IncidentDetailCard = ({ data, title }) => {
-  const datasets = data.map(d => {
+  const datasets = data.map((d, i) => {
     switch (d.type) {
       case 'histogram':
         return (
-          <div className='mb2 pb2 border-bottom'>
+          <div key={i} className='mb2 pb2 border-bottom'>
             <div className='mb1 bold'>{d.title}</div>
             <Histogram data={d.data} />
           </div>
         )
       case 'table':
-        return (
-          <IncidentDetailTable data={d.data} title={d.title} />
-        )
+        return <IncidentDetailTable key={i} data={d.data} title={d.title} />
       default:
-        return (<p>{d.type} not handled</p>)
+        return <p key={i}>{d.type} not handled</p>
     }
   })
 

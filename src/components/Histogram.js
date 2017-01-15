@@ -1,4 +1,4 @@
-import { extent, histogram, max } from 'd3-array'
+import { max, min } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import React from 'react'
 
@@ -28,27 +28,20 @@ class Histogram extends React.Component {
 
     const height = size.height - margin.top - margin.bottom
     const width = size.width - margin.left - margin.right
-    const tickCt = 8
 
-    const dataClean = data.map(d => ({ key: +d.key, value: +d.count }))
+    const bins = data.map(d => ({ ...d, ct: +d.count }))
+    const binCt = bins.length
 
     const x = scaleLinear()
-        .domain(extent(dataClean, d => d.key))
+        .domain([min(bins, d => d.x0), max(bins, d => d.x1)])
         .range([0, width])
 
-    const hist = histogram()
-        .domain(x.domain())
-        .thresholds(10)
-        .value(d => d.length)
-
-    const bins = hist(dataClean)
-
     const y = scaleLinear()
-        .domain([0, max(dataClean, d => d.value)])
+        .domain([0, max(bins, d => d.ct)])
         .range([height, 0])
 
     // default to last bin if no interaction
-    const active = hover !== null ? hover : bins.length - 1
+    const active = hover !== null ? hover : binCt - 1
 
     return (
       <div>
@@ -61,12 +54,14 @@ class Histogram extends React.Component {
             {bins.map((d, i) => (
               <g
                 key={i}
-                transform={`translate(${x(d.x0)}, ${y(dataClean[i].value)})`}
+                className='cursor-pointer'
+                transform={`translate(${x(d.x0)}, ${y(d.ct)})`}
               >
                 <rect
+                  data-id={i}
                   x='1'
                   width={x(bins[0].x1) - x(bins[0].x0) - 1}
-                  height={height - y(dataClean[i].value)}
+                  height={height - y(d.ct)}
                   fill={(hover === null || i === active) ? '#ff5e50' : '#f4dfdd'}
                   pointerEvents='all'
                   onMouseOver={this.rememberValue}
@@ -74,10 +69,10 @@ class Histogram extends React.Component {
                 />
               </g>
             ))}
-            <XAxis scale={x} height={height} tickCt={tickCt} />
+            <XAxis scale={x} height={height} tickCt={binCt} />
           </g>
         </svg>
-        <HistogramDetails data={dataClean[active]} />
+        <HistogramDetails data={bins[active]} />
       </div>
     )
   }
