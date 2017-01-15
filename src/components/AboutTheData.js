@@ -1,12 +1,34 @@
 import React from 'react'
 
+const links = [
+  [
+    'https://ucr.fbi.gov/new-rape-fact-sheet',
+    'Rape Definition Fact Sheet',
+  ],
+  [
+    'https://ucr.fbi.gov/recent-program-updates/new-rape-definition-frequently-asked-questions',
+    'FAQ About the Change in the UCR Definition of Rape',
+  ],
+  [
+    'https://ucr.fbi.gov/nibrs/2013/resources/nibrs-rape-vs.-srs-rape',
+    'NIBRS Rape vs. Summary Rape',
+  ],
+  [
+    'https://www.bjs.gov/index.cfm?ty=tp&tid=317#pubs',
+    'Bureau of Justice Statistics: Rape and Sexual Assault',
+  ],
+]
+
 const AboutTheData = () => (
   <div>
     <h2 className='mb1'>About the data</h2>
     <div className='clearfix mxn2'>
       <div className='lg-col lg-col-7 px2'>
         <p>
-          The FBI collects crime data through the <a className='navy bold' href='https://ucr.fbi.gov/'>Uniform Crime Reporting (UCR) Program</a>.
+          The FBI collects crime data through the&nbsp;
+          <a className='navy bold' href='https://ucr.fbi.gov/'>
+            Uniform Crime Reporting (UCR) Program
+          </a>.
         </p>
         <h4>Change in rape definition</h4>
         <p>
@@ -40,10 +62,11 @@ const AboutTheData = () => (
         <div className='p2 sm-p3 bg-navy white'>
           <h3 className='mt0 mb2'>Further reading</h3>
           <ul className='list-style-none m0 p0'>
-            <li className='mb1'><a href='https://ucr.fbi.gov/new-rape-fact-sheet'>Rape Definition Fact Sheet</a></li>
-            <li className='mb1'><a href='https://ucr.fbi.gov/recent-program-updates/new-rape-definition-frequently-asked-questions'>FAQ About the Change in the UCR Definition of Rape</a></li>
-            <li className='mb1'><a href='https://ucr.fbi.gov/nibrs/2013/resources/nibrs-rape-vs.-srs-rape'>NIBRS Rape vs. Summary Rape</a></li>
-            <li className='mb1'><a href='https://www.bjs.gov/index.cfm?ty=tp&tid=317#pubs'>Bureau of Justice Statistics: Rape and Sexual Assault</a></li>
+            {links.map((l, i) => (
+              <li key={i} className='mb1'>
+                <a className='white' href={l[0]}>{l[1]}</a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
