@@ -14,15 +14,17 @@ class Sidebar extends React.Component {
   }
 
   componentDidMount() {
+    const { dispatch } = this.props
     const filters = {
       ...this.props.filters,
       ...this.props.router.params,
       ...this.props.router.location.query,
     }
 
-    this.props.dispatch(updateFilters(filters))
-    this.props.dispatch(fetchIncidents(filters))
-    this.props.dispatch(fetchSummaries(filters))
+    dispatch(updateFilters(filters))
+    dispatch(fetchIncidents(filters))
+
+    if (filters.crime) dispatch(fetchSummaries(filters))
   }
 
   handleChange(change) {
