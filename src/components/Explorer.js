@@ -91,7 +91,10 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               {place}, {filters.timeFrom}-{filters.timeTo}
             </h1>
             <div className='mxn1'>
-              <a href='#!' className='btn px1 h5'>
+              <a
+                href='https://gist.github.com/brendansudol/f16c8c9f3d391826de566a4722420dde'
+                className='btn px1 h5'
+              >
                 <img
                   className='mr-tiny align-tb'
                   width='16'
