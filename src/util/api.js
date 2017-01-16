@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-import startCase from 'lodash.startCase'
+import startCase from 'lodash.startcase'
 
 import { get, getAll } from './http'
 
