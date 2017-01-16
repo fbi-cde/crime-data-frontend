@@ -29,8 +29,8 @@ export const updateFiltersAndUrl = ({ change, location }) => {
     dispatch(updateFilters(change))
 
     const { filters } = getState()
+    if (filters.crime) dispatch(fetchSummaries(filters))
     dispatch(fetchIncidents(filters))
-    dispatch(fetchSummaries(filters))
 
     updateUrl({ change, location })
 
