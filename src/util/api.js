@@ -54,6 +54,7 @@ const getSummary = params => {
   if (params.place) qs.push(`state=${getStateAbbrFromName(params.place)}`)
   console.log(`${ENDPOINTS.summary}?${qs.join('&')}`)
   return get(`${ENDPOINTS.summary}?${qs.join('&')}`).then(d => {
+    console.log('d', d)
     return d.results.map(r => ({
       year: r.year,
       count: r.actual,

@@ -203,6 +203,8 @@ const detailOffenderSex = [
   },
 ]
 
+/* eslint quote-props: 0 */
+
 const population = {
   'National': 300000000,
   'California': 38802500,
@@ -264,5 +266,5 @@ export {
   detailOffenderRace,
   detailOffenderSex,
   detailRelationshipData,
-  population
+  population,
 }
