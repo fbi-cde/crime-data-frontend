@@ -150,7 +150,9 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               2014 was 35.3 incidents per 100,000 people (legacy definition).
             </p>
             {summaries.loading && <span>Loading...</span>}
-            {trendData && <TimeChart data={trendData} keys={['National', place]} />}
+            {trendData && !summaries.loading && (
+              <TimeChart data={trendData} keys={['National', place]} />
+            )}
           </div>
           <div className='mb4'>
             <h2 className='mb1'>Details</h2>
