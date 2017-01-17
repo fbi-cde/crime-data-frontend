@@ -158,7 +158,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             )}
           </div>
           <div className='mb4'>
-            <h2 className='mb1'>Details</h2>
+            <h2 className='mb1'>Details, {filters.timeTo}</h2>
             <div className='clearfix mxn1'>
               <div className='md-col md-col-6 p1'>
                 <IncidentDetailCard
