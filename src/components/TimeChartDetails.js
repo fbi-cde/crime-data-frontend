@@ -5,17 +5,20 @@ const formatRate = format('.1f')
 const formatTotal = format(',.0f')
 
 const TimeChartDetails = ({ colors, data, keys }) => {
+  const { name, slug } = keys[1]
   const year = data.date.getFullYear()
-  // const rate = data[keys[1].slug]
+  const rate = data[slug]
+
+  const highlight = v => <span className='bold navy'>{v}</span>
 
   return (
     <div className='mb1 p2 bg-light-blue-darker md-flex'>
       <div className='flex-auto'>
         <h3 className='mt0 mb-tiny monospace inline-block'>{year}</h3>
         <p className='sm-m0 md-col-10 lg-col-8 h5'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fermentum, est
-          luctus tempus vestibulum, nisi justo posuere ligula, lobortis consectetur
-          ante felis ac odio.
+          {name}’s incident rate surpasses that of the United States, and
+          in {highlight(year)} was {highlight(formatRate(rate))} incidents
+          per 100,000 people.
         </p>
       </div>
       <div>
