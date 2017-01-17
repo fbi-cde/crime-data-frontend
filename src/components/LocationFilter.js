@@ -1,3 +1,4 @@
+import { entries } from 'd3-collection'
 import React from 'react'
 import startCase from 'lodash.startcase'
 
@@ -6,7 +7,7 @@ import StateThumbnail from './StateThumbnail'
 import { states } from '../util/usa'
 import { slugify } from '../util/text'
 
-const usaStates = Object.values(states).map(s => startCase(s))
+const usaStates = entries(states).map(d => startCase(d.value))
 
 const LocationFilter = ({ onChange, selected }) => {
   const handleChange = e => onChange({ place: slugify(e.target.value) })

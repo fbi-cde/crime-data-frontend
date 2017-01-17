@@ -21,6 +21,7 @@
     "basscss-sass": "^4.0.0",
     "cfenv": "^1.0.3",
     "d3-array": "^1.0.2",
+    "d3-collection": "^1.0.2",
     "d3-format": "^1.0.2",
     "d3-geo": "^1.4.0",
     "d3-scale": "^1.0.4",
