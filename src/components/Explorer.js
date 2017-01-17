@@ -56,6 +56,8 @@ const detailOffenderDemographicsData = demoData('offender')
 const detailVictimDemographicsData = demoData('victim')
 
 const crimeIds = {
+  'aggravated-assault': 'aggravated assault',
+  burglary: 'burglary',
   murder: 'murder and nonnegligent homicide',
   rape: 'rape (legacy definition)',
   robbery: 'robbery',
