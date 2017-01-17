@@ -1,7 +1,7 @@
 import React from 'react'
 
 const MIN_YEAR = 1960
-const MAX_YEAR = 2015
+const MAX_YEAR = 2014
 const YEAR_WINDOW = 10
 
 class TimePeriodFilter extends React.Component {

@@ -47,8 +47,8 @@ const getSummary = params => {
   const qs = [
     `offense=${crime}`,
     `per_page=${perPage}`,
-    `year>${timeFrom - 1}`,
-    `year<${timeTo + 1}`,
+    `year>=${timeFrom}`,
+    `year<=${timeTo}`,
   ]
 
   if (params.place) qs.push(`state=${getStateAbbrFromName(params.place)}`)
