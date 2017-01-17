@@ -151,7 +151,8 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               Reported {plural(crime)} in {place}, {filters.timeFrom} - {filters.timeTo}
             </h2>
             <p className='h3 lg-col-10'>
-              {place}’s incident rate surpasses that of the United States, and in {filters.timeTo} was
+              {place}’s incident rate surpasses that of the United States,
+              and in {filters.timeTo} was
               35.3 incidents per 100,000 people.
             </p>
             {summaries.loading && <span>Loading...</span>}
