@@ -106,9 +106,11 @@ class TimeChart extends React.Component {
       <div>
         <TimeChartDetails colors={colors} data={active} keys={keysWithSlugs} />
         <svg
+          width={size.width}
+          height={size.height}
           preserveAspectRatio='xMidYMid'
           viewBox={`0 0 ${size.width} ${size.height}`}
-          style={{ width: '100%', height: '100%' }}
+          style={{ width: '100%' }}
         >
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             <XAxis scale={x} height={height} tickCt={8} />
