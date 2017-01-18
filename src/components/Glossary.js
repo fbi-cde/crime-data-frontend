@@ -50,21 +50,26 @@ class Glossary extends React.Component {
     return (
       <div>
         <div className='fixed left-0 bottom-0 p1'>
-          <button
-            className='btn btn-outline bg-white'
-            onClick={this.toggleGlossary}
-          >
+          <button className='btn btn-outline bg-white' onClick={this.toggleGlossary}>
             Glossary
           </button>
         </div>
         <div
-          className='p2 glossary'
+          className='p2 sm-p3 bg-black white glossary'
           id='glossary'
           aria-describedby='glossary-result'
           aria-hidden='true'
         >
-          <h2 className='mt0'>Glossary</h2>
-          <label className='label' htmlFor='glossary-search'>Filter glossary terms</label>
+          <button className='right btn p0' onClick={this.toggleGlossary}>
+            <img src='img/x.svg' alt='close' width='16' height='16' />
+          </button>
+          <h3 className='mt1 mb2 white'>Glossary</h3>
+          <label
+            className='block mb-tiny h5 white italic'
+            htmlFor='glossary-search'
+          >
+            Search glossary terms
+          </label>
           <input
             className='field col-12 js-glossary-search'
             id='glossary-search'

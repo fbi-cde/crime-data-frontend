@@ -1,7 +1,6 @@
 // scss-lint:disable ImportantRule
 
 .glossary {
-  background: #e1f3f8;
   bottom: 0;
   box-sizing: border-box;
   overflow-y: auto;
@@ -9,22 +8,43 @@
   right: 0;
   top: 0;
   transition: right .2s;
-  width: 30rem;
+  width: 20rem;
 
-  &[aria-hidden=true] { right: -30rem; }
+  &[aria-hidden=true] { right: -20rem; }
   [aria-hidden=true] { display: none !important; }
 }
 
 .glossary__content {
   ul { padding: 0; }
-  li { list-style-type: none; }
+  li {
+    border-bottom: 1px solid $white;
+    border-top: 1px solid $white;
+    list-style-type: none;
+    margin-bottom: -1px;
+  }
+
   button {
     appearance: none;
-    background-color: #0071bc;
-    border: 1px solid #205493;
-    color: #fff;
-    padding: .5rem;
+    background-color: transparent;
+    background-image: url('/img/chevron-right.svg');
+    background-position: center right .5rem;
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+    border: 0;
+    color: $white;
+    padding: 1rem 2rem 1rem 0;
+    position: relative;
     text-align: left;
     width: 100%;
+
+    &[aria-expanded=true] {
+      background-image: url('/img/chevron-down.svg');
+      font-weight: $bold-font-weight;
+    }
+  }
+
+  .glossary__definition {
+    margin-bottom: $space-2;
+    margin-top: $space-tiny;
   }
 }
