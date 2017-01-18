@@ -72,10 +72,21 @@ const mungeSummaryData = (summaries, place) => {
   }))
 }
 
+// TODO: Potential refactored components
+// * Download button
+// * Share button
+// * Crime/data headline
+// * TimeChart that encapsulates all aspects of the trend chart
+//   * Including to be created component to generate descriptive text
+// * Incident details container components
+//   * Would be responsible for determining which details to show
+
 const Explorer = ({ appState, dispatch, params, router }) => {
   const crime = lowerCase(params.crime)
   const { filters, summaries } = appState
   const place = startCase(params.place)
+  // TODO: no data manipulation should be required here, the
+  // data should be stored in an immediately usable state
   const trendData = mungeSummaryData(summaries, params.place)
 
   return (
@@ -196,6 +207,10 @@ const Explorer = ({ appState, dispatch, params, router }) => {
   )
 }
 
+
+// TODO: Why are these props but the other crucial element (time)
+// not included? Time is set as the initial reducer state, I wonder
+// if this should be handled the same way
 Explorer.defaultProps = {
   params: { crime: 'murder', place: 'ohio' },
 }
