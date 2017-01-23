@@ -11,7 +11,7 @@ const Header = () => {
     <header className='py3 bg-navy white'>
       <div className='md-flex items-center px2 md-px3'>
         <div className='flex-auto'>
-          <div className='h6 caps bold gray-blue'>Federal Bureau of Investigation</div>
+          <div className='h6 caps bold blue-gray'>Federal Bureau of Investigation</div>
           <div className='h2 serif line-height-3'>Crime Data Explorer</div>
         </div>
         <div className='mxn1 mt1 md-m0'>
