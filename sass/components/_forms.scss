@@ -37,13 +37,13 @@
 
 .checkbox input:checked ~ .indicator,
 .radio input:checked ~ .indicator, {
-  background-color: $gray-blue;
+  background-color: $blue-gray;
   color: $white;
 }
 
 .checkbox input:active ~ .indicator,
 .radio input:active ~ .indicator, {
-  background-color: $light-blue;
+  background-color: $blue-white;
   color: $white;
 }
 
@@ -59,7 +59,7 @@
 
 .radio .indicator {
   background-color: #f2f9ff;
-  border: $border-width solid $gray-blue;
+  border: $border-width solid $blue-gray;
   border-radius: 50%;
 }
 

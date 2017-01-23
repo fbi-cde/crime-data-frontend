@@ -6,7 +6,7 @@ const FilterGroup = ({ options, onChange, selected, title }) => {
   const handleChange = e => onChange({ crime: e.target.value })
 
   return (
-    <div className='mb2 bg-light-blue rounded overflow-hidden'>
+    <div className='mb2 bg-blue-light rounded overflow-hidden'>
       {title && <div className='py1 px2 bg-darken-2 bold'>{title}</div>}
       <div>
         {options.map((o, i) => {

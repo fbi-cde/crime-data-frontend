@@ -21,7 +21,7 @@ const DownloadsAndDocs = () => (
       <h1 className='mt0'>Downloads & Documentation</h1>
       <div className='clearfix mxn1 mb3'>
         <div className='sm-col sm-col-6 px1 mb2'>
-          <div className='p2 sm-p3 bg-light-blue'>
+          <div className='p2 sm-p3 bg-blue-lighter'>
             <h3 className='mt0 caps'>Crime Data API</h3>
             <p>
               Bacon ipsum dolor sit amet chuck prosciutto landjaeger ham hock filet mignon
@@ -32,7 +32,7 @@ const DownloadsAndDocs = () => (
           </div>
         </div>
         <div className='sm-col sm-col-6 px1 mb2'>
-          <div className='p2 sm-p3 bg-light-blue'>
+          <div className='p2 sm-p3 bg-blue-lighter'>
             <h3 className='mt0 caps'>Documentation</h3>
             <p>
               Bacon ipsum dolor sit amet chuck prosciutto landjaeger ham hock filet mignon

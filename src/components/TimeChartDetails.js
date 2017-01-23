@@ -12,7 +12,7 @@ const TimeChartDetails = ({ colors, data, keys }) => {
   const highlight = v => <span className='bold navy'>{v}</span>
 
   return (
-    <div className='mb1 p2 bg-light-blue-darker md-flex'>
+    <div className='mb1 p2 bg-blue-lighter md-flex'>
       <div className='flex-auto'>
         <h3 className='mt0 mb-tiny monospace inline-block'>{year}</h3>
         <p className='sm-m0 md-col-10 lg-col-8 h5'>
