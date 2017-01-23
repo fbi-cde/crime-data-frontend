@@ -3,7 +3,6 @@
 const production = (process.env.NODE_ENV === 'production')
 if (production) require('newrelic')
 
-const basicAuth = require('basic-auth-connect')
 const cfenv = require('cfenv')
 const express = require('express')
 const http = require('axios')
@@ -13,13 +12,9 @@ const app = express()
 const env = cfenv.getAppEnv()
 const credService = env.getService('crime-data-api-creds') || { credentials: {} }
 const apiKey = credService.credentials.API_KEY || process.env.API_KEY || false
-const username = credService.credentials.HTTP_BASIC_USERNAME
-const password = credService.credentials.HTTP_BASIC_PASSWORD
 const API = 'https://crime-data-api2.fr.cloud.gov'
 
 app.get('/status', (req, res) => res.send('OK'))
-
-if (production) app.use(basicAuth(username, password))
 
 app.use(express.static(__dirname))
 
