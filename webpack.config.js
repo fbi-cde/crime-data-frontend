@@ -26,10 +26,6 @@ var config = {
         loader: 'json-loader'
       },
       {
-        test: /\.svg$/,
-        loader: 'babel!svg-react'
-      },
-      {
         test: /\.scss$/i,
         loader: ExtractTextPlugin.extract(['css', 'postcss', 'sass'])
       },

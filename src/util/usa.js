@@ -1,3 +1,5 @@
+import lowerCase from 'lodash.lowercase'
+
 const states = {
   ak: 'alaska',
   al: 'alabama',
@@ -62,7 +64,7 @@ const getStateAbbrFromName = name => (
 
 const lookup = query => {
   if (query.length === 2) return getStateNameFromAbbr(query)
-  return getStateAbbrFromName(query)
+  return getStateAbbrFromName(lowerCase(query))
 }
 
 export { lookup as default, states }
