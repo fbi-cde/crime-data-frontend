@@ -36,7 +36,7 @@ const Home = ({ appState, dispatch, location }) => {
           <h1 className='mt0 pb1 border-bottom border-red-bright'>
             National, state, and local crime data
           </h1>
-          <p className='m0 col-10 fs-b1 serif'>
+          <p className='m0 col-10 fs1 serif'>
             The FBI collects and publishes Uniform Crime Reporting (UCR)
             data on an annual basis. This project is part of our ongoing
             efforts to improve the accuracy and timeliness of the nation’s
@@ -110,7 +110,7 @@ const Home = ({ appState, dispatch, location }) => {
           <h3 className='mt0 mb3 pb1 border-bottom border-red-bright'>
             Use our data in your project
           </h3>
-          <p className='mb6 col-10 fs-b1 serif'>
+          <p className='mb6 col-10 fs1 serif'>
             An application programming interface (API) is an easy way for
             computers, programs, and developers to share and translate large
             amounts of data in meaningful ways. We recently released the
