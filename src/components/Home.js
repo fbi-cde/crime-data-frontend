@@ -1,23 +1,24 @@
 /* eslint no-console: 0 */
 import React from 'react'
 
-import getStateName from '../util/usa'
+import stateLookup from '../util/usa'
 import LocationSelect from './LocationSelect'
 import { slugify } from '../util/text'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 
-import MapSvg from '../../img/usa-map.svg'
+import usaSvgData from '../../data/usa-state-svg.json'
 
 const scrollToBottom = () => window.scrollTo(0, window.outerHeight * 1.5)
 
 const Home = ({ appState, dispatch, location }) => {
   const { crime, place } = appState.filters
+  const placeId = place && stateLookup(place).toUpperCase()
   const isButtonDisabled = !!(crime && place) || false
 
   const handleMapClick = e => {
     const id = e.target.getAttribute('id')
     if (!id) return
-    dispatch(updateFilters({ place: slugify(getStateName(id)) }))
+    dispatch(updateFilters({ place: slugify(stateLookup(id)) }))
   }
   const handleSearchClick = () => {
     const change = { crime, place }
@@ -81,7 +82,25 @@ const Home = ({ appState, dispatch, location }) => {
             </div>
           </div>
           <div className='py7 sm-col-9 mx-auto'>
-            <MapSvg className='cursor-pointer' onClick={handleMapClick} />
+            <svg
+              className='cursor-pointer'
+              viewBox='0 0 959 593'
+              preserveAspectRatio='xMidYMid'
+            >
+              <title>USA</title>
+              <g onClick={handleMapClick}>
+                {usaSvgData.map(s => (
+                  <path
+                    d={s.d}
+                    className={
+                      s.id === placeId ? 'fill-red-bright' : 'fill-blue-light'
+                    }
+                    id={s.id}
+                    key={s.id}
+                  />
+                ))}
+              </g>
+            </svg>
           </div>
           <h2 className='mt0 mb4'>Other Data Sets</h2>
           <div className='clearfix mxn2'>
@@ -117,7 +136,12 @@ const Home = ({ appState, dispatch, location }) => {
             FBI’s first crime data API so you can use this data to tell
             your own story.
           </p>
-          <button className='btn btn-primary h4'>See API documentation</button>
+          <a
+            className='btn btn-primary h4'
+            href='https://crime-data-api.fr.cloud.gov/swagger-ui/'
+          >
+            See API documentation
+          </a>
         </div>
       </section>
     </div>
