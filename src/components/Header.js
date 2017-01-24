@@ -8,7 +8,7 @@ const Header = () => {
   }
 
   return (
-    <header className='py3 bg-navy white'>
+    <header className='py3 bg-blue white'>
       <div className='md-flex items-center px2 md-px3'>
         <div className='flex-auto'>
           <div className='h6 caps bold blue-gray'>Federal Bureau of Investigation</div>

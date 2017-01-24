@@ -26,7 +26,7 @@ const AboutTheData = () => (
       <div className='lg-col lg-col-7 px2'>
         <p>
           The FBI collects crime data through the&nbsp;
-          <a className='navy bold' href='https://ucr.fbi.gov/'>
+          <a className='blue bold' href='https://ucr.fbi.gov/'>
             Uniform Crime Reporting (UCR) Program
           </a>.
         </p>
@@ -59,7 +59,7 @@ const AboutTheData = () => (
         </p>
       </div>
       <div className='lg-col lg-col-5 px2'>
-        <div className='p2 sm-p3 bg-navy white'>
+        <div className='p2 sm-p3 bg-blue white'>
           <h3 className='mt0 mb2'>Further reading</h3>
           <ul className='list-style-none m0 p0'>
             {links.map((l, i) => (

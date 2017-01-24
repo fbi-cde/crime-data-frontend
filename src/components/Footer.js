@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 
 const Footer = () => (
-  <footer className='clearfix py3 bg-navy white'>
+  <footer className='clearfix py3 bg-blue white'>
     <div className='container px2'>
       <div className='sm-col'>
         <h3 className='mt0'>Crime Data Explorer</h3>
