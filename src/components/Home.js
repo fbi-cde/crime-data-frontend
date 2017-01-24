@@ -16,6 +16,7 @@ const Home = ({ appState, dispatch, location }) => {
 
   const handleMapClick = e => {
     const id = e.target.getAttribute('id')
+    if (!id) return
     dispatch(updateFilters({ place: slugify(getStateName(id)) }))
   }
   const handleSearchClick = () => {
