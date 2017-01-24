@@ -28,7 +28,7 @@ const DownloadsAndDocs = () => (
               shoulder hamburger pig venison. Ham bacon corned beef, sausage kielbasa flank
               tongue pig drumstick capicola swine short loin ham hock kevin.
             </p>
-            <a href='#!' className='btn btn-primary bg-navy'>See API documentation</a>
+            <a href='#!' className='btn btn-primary bg-blue'>See API documentation</a>
           </div>
         </div>
         <div className='sm-col sm-col-6 px1 mb2'>
@@ -39,7 +39,7 @@ const DownloadsAndDocs = () => (
               shoulder hamburger pig venison. Ham bacon corned beef, sausage kielbasa flank
               tongue pig drumstick capicola swine short loin ham hock kevin.
             </p>
-            <a href='#!' className='btn btn-primary bg-navy'>See UCR documentation</a>
+            <a href='#!' className='btn btn-primary bg-blue'>See UCR documentation</a>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@ const DownloadsAndDocs = () => (
               </p>
             </div>
             <div className='sm-col sm-col-4 px2 mb1 sm-m0'>
-              <div><span className='navy'>▶</span> Crime trends (SRS)</div>
+              <div><span className='blue'>▶</span> Crime trends (SRS)</div>
               <div><span className='red'>▶</span> Incidents (NIBRS)</div>
             </div>
           </div>
