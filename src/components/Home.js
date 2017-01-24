@@ -33,8 +33,10 @@ const Home = ({ appState, dispatch, location }) => {
     <div>
       <section className='px2 bg-blue-white'>
         <div className='py7 container relative'>
-          <h1 className='mt0 pb1 border-bottom'>National, state, and local crime data</h1>
-          <p className='m0 col-10 h3 serif'>
+          <h1 className='mt0 pb1 border-bottom border-red-bright'>
+            National, state, and local crime data
+          </h1>
+          <p className='m0 col-10 fs-b1 serif'>
             The FBI collects and publishes Uniform Crime Reporting (UCR)
             data on an annual basis. This project is part of our ongoing
             efforts to improve the accuracy and timeliness of the nation’s
@@ -43,6 +45,8 @@ const Home = ({ appState, dispatch, location }) => {
           <img
             className='absolute right-0 cursor-pointer'
             style={{ bottom: '-30px' }}
+            width='60px'
+            height='60px'
             src='/img/arrow-down-circle.svg'
             alt='more information below'
             onClick={scrollToBottom}
@@ -53,22 +57,22 @@ const Home = ({ appState, dispatch, location }) => {
         <div className='py7 container'>
           <h2 className='mt0 mb4'>Explore by type of crime and location</h2>
           <div className='clearfix mxn2'>
-            <div className='sm-col sm-col-5 px2 mb2 sm-m0'>
+            <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
               <LocationSelect
                 className='col-12 bold field'
                 onChange={selectLocation}
                 selected={place}
               />
             </div>
-            <div className='sm-col sm-col-5 px2 mb2 sm-m0'>
+            <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
               <select className='col-12 bold field' onChange={selectCrime}>
                 <option>Crime Type</option>
                 <option>Murder</option>
               </select>
             </div>
-            <div className='sm-col sm-col-2 px2 mb2 sm-m0'>
+            <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
               <button
-                className='col-12 btn btn-primary'
+                className='col-12 btn btn-primary h4'
                 disabled={!isButtonDisabled}
                 onClick={handleSearchClick}
               >
@@ -77,13 +81,43 @@ const Home = ({ appState, dispatch, location }) => {
             </div>
           </div>
           <div className='py7 sm-col-9 mx-auto'>
-            <MapSvg onClick={handleMapClick} />
+            <MapSvg className='cursor-pointer' onClick={handleMapClick} />
+          </div>
+          <h2 className='mt0 mb4'>Other Data Sets</h2>
+          <div className='clearfix mxn2'>
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className='sm-col sm-col-4 px2 mb2 sm-m0'>
+                <div className='px3 py2 bg-blue-white'>
+                  <div className='mb1 pb1 fs-ch2 bold border-bottom border-red-bright'>
+                    Arrests
+                  </div>
+                  <p className='mb2'>
+                    Lorem ipsum dolor sit amet, quis tellus nonummy id. Vitae
+                    amet vel phasellus, est cras lectus lacus.
+                  </p>
+                  <button className='mb1 btn btn-primary btn-sm'>
+                    View details
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
       <section className='px2 bg-blue-white'>
         <div className='py7 container'>
-          <p>TODO...</p>
+          <h2 className='h1 mt0 mb1'>Crime Data API</h2>
+          <h3 className='mt0 mb3 pb1 border-bottom border-red-bright'>
+            Use our data in your project
+          </h3>
+          <p className='mb6 col-10 fs-b1 serif'>
+            An application programming interface (API) is an easy way for
+            computers, programs, and developers to share and translate large
+            amounts of data in meaningful ways. We recently released the
+            FBI’s first crime data API so you can use this data to tell
+            your own story.
+          </p>
+          <button className='btn btn-primary h4'>See API documentation</button>
         </div>
       </section>
     </div>

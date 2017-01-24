@@ -1,30 +1,30 @@
-// imported from node_modules
+// imported from node_modules...
 
 @import 'normalize.css/normalize';
 
 // basscss
 
-// components (comment out if unneeded)
+// components
+//
 @import 'basscss-sass/scss/btn';
 @import 'basscss-sass/scss/btn-outline';
 @import 'basscss-sass/scss/btn-primary';
-@import 'basscss-sass/scss/forms';
-// @import 'basscss-sass/scss/highlight-dark';
-// @import 'basscss-sass/scss/highlight';
-// @import 'basscss-sass/scss/input-range';
-// @import 'basscss-sass/scss/media-object';
-// @import 'basscss-sass/scss/progress';
 
 // core utilities
-@import 'basscss-sass/scss/basscss';
+//
+@import 'basscss-sass/scss/type-scale';
+@import 'basscss-sass/scss/typography';
+@import 'basscss-sass/scss/layout';
+@import 'basscss-sass/scss/align';
+@import 'basscss-sass/scss/margin';
+@import 'basscss-sass/scss/padding';
+@import 'basscss-sass/scss/grid';
+@import 'basscss-sass/scss/flexbox';
+@import 'basscss-sass/scss/position';
+@import 'basscss-sass/scss/border';
+@import 'basscss-sass/scss/hide';
 
-// addon utilities (comment out if unneeded)
-@import 'basscss-sass/scss/all';
-@import 'basscss-sass/scss/background-colors';
-@import 'basscss-sass/scss/background-images';
-@import 'basscss-sass/scss/border-colors';
-@import 'basscss-sass/scss/colors';
-@import 'basscss-sass/scss/darken';
-@import 'basscss-sass/scss/lighten';
+// addon utilities
+//
 @import 'basscss-sass/scss/responsive-margin';
 @import 'basscss-sass/scss/responsive-padding';

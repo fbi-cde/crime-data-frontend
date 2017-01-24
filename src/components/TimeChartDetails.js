@@ -9,7 +9,7 @@ const TimeChartDetails = ({ colors, data, keys }) => {
   const year = data.date.getFullYear()
   const rate = data[slug]
 
-  const highlight = v => <span className='bold navy'>{v}</span>
+  const highlight = v => <span className='bold blue'>{v}</span>
 
   return (
     <div className='mb1 p2 bg-blue-lighter md-flex'>

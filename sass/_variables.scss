@@ -31,13 +31,24 @@ $font-serif: georgia, times, serif !default;
 $font-sans-serif: arial, -apple-system, BlinkMacSystemFont, helvetica, helvetica neue, ubuntu, roboto, noto, segoe ui, sans-serif !default;
 $font-monospace: Courier, Consolas, monospace !default;
 
-$h1: 2rem !default;
-$h2: 1.75rem !default;
-$h3: 1.5rem !default;
+$h1: 2.5rem !default;
+$h2: 2rem !default;
+$h3: 1.625rem !default;
 $h4: 1.125rem !default;
 $h5: .875rem !default;
 $h6: .75rem !default;
 
+$fs-ch1: 2rem !default;
+$fs-ch2: 1.375rem !default;
+$fs-ch3: 1.125rem !default;
+$fs-ch4: .75rem !default;
+
+$fs-b1: 1.5rem !default;
+$fs-b2: 1rem !default;
+$fs-b3: .875rem !default;
+$fs-b4: .75rem !default;
+
+$space-tiny: .25rem !default;
 $space-1: .5rem !default;
 $space-2: 1rem !default;
 $space-3: 1.5rem !default;
@@ -47,19 +58,17 @@ $space-6: 3rem !default;
 $space-7: 4rem !default;
 $space-8: 5rem !default;
 
-$space-tiny: .25rem !default;
-
 $line-height-1: 1 !default;
 $line-height-2: 1.125 !default;
 $line-height-3: 1.3 !default;
 $line-height-4: 1.5 !default;
-$caps-letter-spacing: .05em !default;
-$bold-font-weight: bold !default;
 
 $font-family: $font-sans-serif !default;
 $line-height: 1.5 !default;
 $base-font-size: 16px !default;
 $body-font-size: 100% !default;
+$caps-letter-spacing: .05em !default;
+$bold-font-weight: bold !default;
 
 $heading-font-family: $font-serif !default;
 $heading-font-weight: bold !default;
@@ -77,12 +86,12 @@ $link-text-decoration: none !default;
 $link-hover-text-decoration: none !default;
 
 $form-field-font-family: inherit !default;
-$form-field-font-size: 1rem !default;
-$form-field-height: 2.25rem !default;
+$form-field-font-size: 1.125rem !default;
+$form-field-height: 2.5rem !default;
 $form-field-padding-y: .5rem !default;
-$form-field-padding-x: .5rem !default;
+$form-field-padding-x: 1rem !default;
 
-$field-focus-color: $blue !default;
+$field-focus-color: $blue-light !default;
 $field-success-color: $green !default;
 $field-warning-color: $yellow !default;
 $field-error-color: $red !default;
@@ -90,9 +99,9 @@ $field-error-color: $red !default;
 $button-font-family: inherit !default;
 $button-font-size: inherit !default;
 $button-font-weight: $bold-font-weight !default;
-$button-line-height: 1.125rem !default;
+$button-line-height: 1.375rem !default;
 $button-padding-y: .5rem !default;
-$button-padding-x: 1rem !default;
+$button-padding-x: 1.5rem !default;
 $button-color: $white !default;
 $button-background-color: $blue !default;
 
@@ -112,9 +121,9 @@ $darken-2: rgba(0, 0, 0, .1) !default;
 $darken-3: rgba(0, 0, 0, .25) !default;
 $darken-4: rgba(0, 0, 0, .5) !default;
 
-$breakpoint-sm: '(min-width: 40em)' !default;
-$breakpoint-md: '(min-width: 52em)' !default;
-$breakpoint-lg: '(min-width: 64em)' !default;
-$breakpoint-sm-md: '(min-width: 40em) and (max-width: 52em)' !default;
-$breakpoint-md-lg: '(min-width: 52em) and (max-width: 64em)' !default;
+$breakpoint-sm: '(min-width: 40rem)' !default;
+$breakpoint-md: '(min-width: 52rem)' !default;
+$breakpoint-lg: '(min-width: 64rem)' !default;
+$breakpoint-sm-md: '(min-width: 40rem) and (max-width: 52rem)' !default;
+$breakpoint-md-lg: '(min-width: 52rem) and (max-width: 64rem)' !default;
 $container-width: 940px !default;

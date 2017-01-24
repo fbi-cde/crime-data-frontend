@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Census = ({ data, source, year }) => (
-  <div className='px2 navy border-left border-navy'>
+  <div className='px2 border-left'>
     <h3 className='m0 h4 caps'>Census Data, {year}</h3>
     <ul className='list-style-none my2 p0'>
       { data.map((d, i) => (
@@ -10,7 +10,7 @@ const Census = ({ data, source, year }) => (
         </li>
       ))}
     </ul>
-    <a href={source} className='block h5 italic navy'>Source: Census data, {year}</a>
+    <a href={source} className='block h5 italic blue'>Source: Census data, {year}</a>
   </div>
 )
 

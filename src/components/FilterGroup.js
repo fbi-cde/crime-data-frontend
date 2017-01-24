@@ -6,7 +6,7 @@ const FilterGroup = ({ options, onChange, selected, title }) => {
   const handleChange = e => onChange({ crime: e.target.value })
 
   return (
-    <div className='mb2 bg-blue-light rounded overflow-hidden'>
+    <div className='mb2 bg-blue-white rounded overflow-hidden'>
       {title && <div className='py1 px2 bg-darken-2 bold'>{title}</div>}
       <div>
         {options.map((o, i) => {
@@ -15,7 +15,7 @@ const FilterGroup = ({ options, onChange, selected, title }) => {
             <label
               key={i}
               className={
-                `py-tiny px2 block cursor-pointer ${isActive ? 'bg-navy white bold' : ''}`
+                `py-tiny px2 block cursor-pointer ${isActive ? 'bg-blue white bold' : ''}`
               }
               htmlFor={slugify(o)}
             >
