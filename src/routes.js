@@ -10,7 +10,7 @@ import NotFound from './components/NotFound'
 import Sample from './components/Sample'
 
 const routes = (
-  <Router history={history}>
+  <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
     <Route path='/' component={App}>
       <IndexRoute component={Home} />
       <Route path='/downloads-and-docs' component={DownloadsAndDocs} />
