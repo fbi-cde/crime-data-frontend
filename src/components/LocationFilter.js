@@ -1,16 +1,10 @@
-import { entries } from 'd3-collection'
 import React from 'react'
 import startCase from 'lodash.startcase'
 
+import LocationSelect from './LocationSelect'
 import StateThumbnail from './StateThumbnail'
 
-import { states } from '../util/usa'
-import { slugify } from '../util/text'
-
-const usaStates = entries(states).map(d => startCase(d.value))
-
 const LocationFilter = ({ onChange, selected }) => {
-  const handleChange = e => onChange({ place: slugify(e.target.value) })
   const placeDisplay = startCase(selected)
 
   return (
@@ -19,15 +13,10 @@ const LocationFilter = ({ onChange, selected }) => {
       <div className='pt1 pb2 center'>
         <StateThumbnail selected={placeDisplay} />
       </div>
-      <select
-        className='block col-12 field'
-        onChange={handleChange}
-        value={placeDisplay}
-      >
-        {usaStates.map((s, i) => (
-          <option key={i}>{s}</option>
-        ))}
-      </select>
+      <LocationSelect
+        onChange={onChange}
+        selected={placeDisplay}
+      />
     </div>
   )
 }
