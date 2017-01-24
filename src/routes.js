@@ -1,17 +1,18 @@
 import React from 'react'
-import { IndexRedirect, Route, Router } from 'react-router'
+import { IndexRoute, Route, Router } from 'react-router'
 
 import App from './components/App'
 import DownloadsAndDocs from './components/DownloadsAndDocs'
 import Explorer from './components/Explorer'
 import history from './util/history'
+import Home from './components/Home'
 import NotFound from './components/NotFound'
 import Sample from './components/Sample'
 
 const routes = (
   <Router history={history}>
     <Route path='/' component={App}>
-      <IndexRedirect to='/explorer/ohio/murder' />
+      <IndexRoute component={Home} />
       <Route path='/downloads-and-docs' component={DownloadsAndDocs} />
       <Route path='/explorer/:place/:crime' component={Explorer} />
       <Route path='/sample' component={Sample} />
