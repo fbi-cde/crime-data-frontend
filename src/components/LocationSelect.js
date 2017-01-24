@@ -28,7 +28,7 @@ const LocationSelect = ({ className, onChange, selected }) => {
       >
         <option key='0'>United States</option>
         {usaStates.map((s, i) => (
-          <option key={i+1}>{s}</option>
+          <option key={i + 1}>{s}</option>
         ))}
       </select>
     </div>
