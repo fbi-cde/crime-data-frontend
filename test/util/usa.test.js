@@ -28,11 +28,5 @@ describe('usa utility', () => {
       const actual = lookup('california')
       expect(actual).toEqual(expected)
     })
-
-    it('should work with any cased state name', () => {
-      const expected = 'ca'
-      const actual = lookup('CAliforNIA')
-      expect(actual).toEqual(expected)
-    })
   })
 })
