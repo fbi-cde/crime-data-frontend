@@ -7,16 +7,27 @@ machine:
     CF_ORGANIZATION: fbi-crime-explorer
     CF_SPACE: prototype
     CF_APP: crime-data-explorer
+    PORT: 6005
 
 dependencies:
   cache_directories:
     - ./node_modules
+  post:
+    - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
+    - tar -xzf sc-latest-linux.tar.gz
 
 test:
   override:
+    - cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY -i $CIRCLE_BUILD_NUM:
+        background: true
     - npm run lint
     - npm run test
     - npm run coverage
+    - npm run build && npm start:
+        background: true
+    - npm run test:browser
+  post:
+    - killall --wait node npm sc
 
 deployment:
   production:

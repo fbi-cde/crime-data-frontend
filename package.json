@@ -10,9 +10,10 @@
     "dev": "webpack-dev-server",
     "build": "NODE_ENV=production webpack -p",
     "lint": "eslint src scripts || exit 0",
-    "test": "jest --env=jsdom",
-    "test:debug": "node --debug-brk jest -i --env=jsdom",
-    "test:watch": "jest --env=jsdom --watch",
+    "test": "jest --config .jest.json --env=jsdom",
+    "test:browser": "wdio wdio.conf.js",
+    "test:debug": "node --debug-brk jest -i --config .jest.json --env=jsdom",
+    "test:watch": "jest --config .jest.json --env=jsdom --watch",
     "coverage": "npm test -- --coverage"
   },
   "dependencies": {
@@ -74,6 +75,7 @@
     "sass-loader": "^4.0.2",
     "sinon": "^1.17.6",
     "style-loader": "^0.13.1",
+    "webdriverio": "^4.6.1",
     "webpack": "1.13.2",
     "webpack-dev-server": "1.16.2"
   },
