@@ -9,7 +9,7 @@ const usaStates = entries(states).map(d => startCase(d.value))
 
 const defaultOnChange = change => {
   const message = '<LocationSelect /> needs an onChange prop to do anything'
-  console.error(message, change)
+  console.error(message, change) /* eslint no-console: 0 */
 }
 
 const LocationSelect = ({ className, onChange, selected }) => {
