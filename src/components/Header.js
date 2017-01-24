@@ -16,7 +16,7 @@ const Header = () => {
         </div>
         <div className='mxn1 mt1 md-m0'>
           <Link
-            to='/explorer/ohio/murder'
+            to='/'
             className='mx1 py-tiny white'
             activeStyle={active}
           >
