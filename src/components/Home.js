@@ -10,7 +10,7 @@ import MapSvg from '../../img/usa-map.svg'
 
 const scrollToBottom = () => window.scrollTo(0, window.outerHeight * 1.5)
 
-const Home = ({ appState, dispatch }) => {
+const Home = ({ appState, dispatch, location }) => {
   const { crime, place } = appState.filters
   const isButtonDisabled = !!(crime && place) || false
 
@@ -18,7 +18,10 @@ const Home = ({ appState, dispatch }) => {
     const id = e.target.getAttribute('id')
     dispatch(updateFilters({ place: slugify(getStateName(id)) }))
   }
-  const handleSearchClick = () => dispatch(updateFiltersAndUrl({}))
+  const handleSearchClick = () => {
+    const change = { crime, place }
+    dispatch(updateFiltersAndUrl({ change, location }))
+  }
   const selectCrime = e => {
     const action = updateFilters({ crime: slugify(e.target.value) })
     dispatch(action)
