@@ -23,6 +23,8 @@ test:
     - npm run test
     - npm run coverage
     - npm run test:browser
+  post:
+    - killall --wait sc
 
 deployment:
   production:
