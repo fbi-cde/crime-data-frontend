@@ -27,7 +27,7 @@ test:
         background: true
     - npm run test:browser
   post:
-    - killall --wait npm sc server.js
+    - killall --wait node npm sc
 
 deployment:
   production:

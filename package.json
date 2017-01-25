@@ -11,7 +11,7 @@
     "build": "NODE_ENV=production webpack -p",
     "lint": "eslint src scripts || exit 0",
     "test": "jest --config .jest.json --env=jsdom",
-    "test:browser": "node test/browser/loading.test.js",
+    "test:browser": "wdio wdio.conf.js",
     "test:debug": "node --debug-brk jest -i --config .jest.json --env=jsdom",
     "test:watch": "jest --config .jest.json --env=jsdom --watch",
     "coverage": "npm test -- --coverage"
