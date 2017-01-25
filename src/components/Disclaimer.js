@@ -1,10 +1,15 @@
 import React from 'react'
 
 const Disclaimer = () => (
-  <div className='clearfix p1 h6 bg-white line-height-1'>
-    <div className='right xs-hide'>
+  <div className='clearfix px2 sm-px6 py1 h6 bg-white line-height-1'>
+    <div className='right xs-hide red'>
       This site is in beta.&nbsp;
-      <a href='https://github.com/18F/crime-data-explorer/issues'>Share your feedback.</a>
+      <a
+        className='red bold'
+        href='https://github.com/18F/crime-data-explorer/issues'
+      >
+        Share your feedback.
+      </a>
     </div>
     <img
       className='mr-tiny align-bottom'
