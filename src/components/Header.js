@@ -1,7 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const Header = () => (
+const isExplorerActive = location => (
+  location.pathname === '/' || location.pathname.includes('explorer')
+)
+
+const active = {
+  borderBottom: '3px solid #ff5e50',
+  paddingBottom: '1px',
+}
+
+const Header = ({ location }) => (
   <header className='flex items-center bg-blue white' style={{ height: 128 }}>
     <div className='md-flex flex-auto items-baseline px2 sm-px6'>
       <div className='flex-auto'>
@@ -14,13 +23,25 @@ const Header = () => (
         </div>
       </div>
       <div className='mxn1 mt1 md-m0 truncate'>
-        <Link to='/' className='mx1 h4 white'>
+        <Link
+          to='/'
+          className='mx1 h4 white'
+          style={(isExplorerActive(location) && active) || {}}
+        >
           Explorer
         </Link>
-        <Link to='/downloads-and-docs' className='mx1 md-mx2 h4 white'>
+        <Link
+          to='/downloads-and-docs'
+          className='mx1 h4 white'
+          activeStyle={active}
+        >
           Downloads & Documentation
         </Link>
-        <Link to='/about' className='mx1 md-mx2 h4 white'>
+        <Link
+          to='/about'
+          className='mx1 h4 white'
+          activeStyle={active}
+        >
           About
         </Link>
       </div>
