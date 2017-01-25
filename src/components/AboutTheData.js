@@ -49,14 +49,6 @@ const AboutTheData = () => (
           without consent are counted as rape, not incest. Statutory rape
           and incest are excluded.
         </p>
-        <h4>Estimations</h4>
-        <p>
-          The national and state-level trends include estimates for agencies
-          that submitted less than 12 months of data. The estimation process
-          considers the population size covered by the agency; type of
-          jurisdiction, such as a police department or sheriff’s office; and
-          geographic location.
-        </p>
       </div>
       <div className='lg-col lg-col-5 px2'>
         <div className='p2 sm-p3 bg-blue white'>
