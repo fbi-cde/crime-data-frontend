@@ -17,11 +17,11 @@ dependencies:
 
 test:
   override:
-    - cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY --readyfile ~/sauce_is_ready
+    - cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY:
+        background: true
     - npm run lint
     - npm run test
     - npm run coverage
-    - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
     - npm run test:browser
 
 deployment:

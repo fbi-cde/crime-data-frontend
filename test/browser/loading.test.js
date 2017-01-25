@@ -10,7 +10,7 @@ const options = {
   host: 'ondemand.saucelabs.com',
   port: 80,
   user: process.env.SAUCE_USERNAME,
-  key: process.env.SAUCE_KEY,
+  key: process.env.SAUCE_ACCESS_KEY,
   sauceConnect: true,
 }
 
