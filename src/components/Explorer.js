@@ -78,6 +78,28 @@ const Explorer = ({ appState, dispatch, params, router }) => {
   const place = startCase(params.place)
   const trendData = mungeSummaryData(summaries, params.place)
 
+  // <a
+  //   href='https://gist.github.com/brendansudol/f16c8c9f3d391826de566a4722420dde'
+  //   className='btn px1 h5'
+  // >
+  //   <img
+  //     className='mr-tiny align-tb'
+  //     width='16'
+  //     src='/img/download.svg'
+  //     alt='download'
+  //   />
+  //   Download data
+  // </a>
+  // <a href='#!' className='btn px1 h5'>
+  //   <img
+  //     className='mr-tiny align-tb'
+  //     width='16'
+  //     src='/img/share.svg'
+  //     alt='share'
+  //   />
+  //   Share page
+  // </a>
+
   return (
     <div className='site-wrapper'>
       <Sidebar
@@ -92,29 +114,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             <h1 className='flex-auto my0 md-mb1 serif'>
               {place}, {filters.timeFrom}-{filters.timeTo}
             </h1>
-            <div className='mxn1'>
-              <a
-                href='https://gist.github.com/brendansudol/f16c8c9f3d391826de566a4722420dde'
-                className='btn px1 h5'
-              >
-                <img
-                  className='mr-tiny align-tb'
-                  width='16'
-                  src='/img/download.svg'
-                  alt='download'
-                />
-                Download data
-              </a>
-              <a href='#!' className='btn px1 h5'>
-                <img
-                  className='mr-tiny align-tb'
-                  width='16'
-                  src='/img/share.svg'
-                  alt='share'
-                />
-                Share page
-              </a>
-            </div>
+            <div className='mxn1' />
           </div>
           <div className='lg-flex mb4 mxn2'>
             <div className='flex-auto px2 h3 serif'>
@@ -143,10 +143,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             </div>
           </div>
           <div className='mb4 p2 sm-p3 bg-white rounded'>
-            <div className='right mxn1'>
-              <img className='px1' width='24' src='/img/download.svg' alt='download' />
-              <img className='px1' width='24' src='/img/share.svg' alt='share' />
-            </div>
+            <div className='right mxn1' />
             <h2 className='mt0 mb2'>
               Reported {plural(crime)} in {place}, {filters.timeFrom} - {filters.timeTo}
             </h2>
