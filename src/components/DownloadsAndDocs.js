@@ -28,7 +28,12 @@ const DownloadsAndDocs = () => (
               shoulder hamburger pig venison. Ham bacon corned beef, sausage kielbasa flank
               tongue pig drumstick capicola swine short loin ham hock kevin.
             </p>
-            <a href='#!' className='btn btn-primary bg-blue'>See API documentation</a>
+            <a
+              className='btn btn-primary bg-blue'
+              href='https://crime-data-api.fr.cloud.gov/swagger-ui/'
+            >
+              See API documentation
+            </a>
           </div>
         </div>
         <div className='sm-col sm-col-6 px1 mb2'>
