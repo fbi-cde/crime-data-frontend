@@ -49,11 +49,6 @@ class Glossary extends React.Component {
   render() {
     return (
       <div>
-        <div className='fixed left-0 bottom-0 p1'>
-          <button className='btn btn-outline bg-white' onClick={this.toggleGlossary}>
-            Glossary
-          </button>
-        </div>
         <div
           className='p2 sm-p3 bg-black white glossary'
           id='glossary'
