@@ -8,3 +8,10 @@ a {
   text-decoration: $link-text-decoration;
   &:hover { text-decoration: $link-hover-text-decoration; }
 }
+
+hr {
+  border: 0;
+  border-bottom-color: $blue-lighter;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}

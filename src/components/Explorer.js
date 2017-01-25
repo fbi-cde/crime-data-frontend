@@ -5,14 +5,12 @@ import startCase from 'lodash.startcase'
 
 import AboutTheData from './AboutTheData'
 import Breadcrumbs from './Breadcrumbs'
-import Census from './Census'
 import IncidentDetailCard from './IncidentDetailCard'
 import Sidebar from './Sidebar'
 import Term from './Term'
 import TimeChart from './TimeChart'
 
 import {
-  censusData,
   detailLocationData,
   detailOffenderAge,
   detailOffenderRace,
@@ -78,28 +76,6 @@ const Explorer = ({ appState, dispatch, params, router }) => {
   const place = startCase(params.place)
   const trendData = mungeSummaryData(summaries, params.place)
 
-  // <a
-  //   href='https://gist.github.com/brendansudol/f16c8c9f3d391826de566a4722420dde'
-  //   className='btn px1 h5'
-  // >
-  //   <img
-  //     className='mr-tiny align-tb'
-  //     width='16'
-  //     src='/img/download.svg'
-  //     alt='download'
-  //   />
-  //   Download data
-  // </a>
-  // <a href='#!' className='btn px1 h5'>
-  //   <img
-  //     className='mr-tiny align-tb'
-  //     width='16'
-  //     src='/img/share.svg'
-  //     alt='share'
-  //   />
-  //   Share page
-  // </a>
-
   return (
     <div className='site-wrapper'>
       <Sidebar
@@ -108,77 +84,69 @@ const Explorer = ({ appState, dispatch, params, router }) => {
         router={router}
       />
       <div className='site-content'>
-        <div className='p2 sm-p3 md-p4 container'>
+        <div className='p3 sm-px8 container'>
           <Breadcrumbs {...params} />
-          <div className='md-flex items-baseline mb4 border-bottom'>
-            <h1 className='flex-auto my0 md-mb1 serif'>
+          <div className='md-flex items-baseline mb4 border-bottom border-blue-lighter'>
+            <h1 className='flex-auto mt0 mb1'>
               {place}, {filters.timeFrom}-{filters.timeTo}
             </h1>
-            <div className='mxn1' />
           </div>
-          <div className='lg-flex mb4 mxn2'>
-            <div className='flex-auto px2 h3 serif'>
-              <p className='bold'>
-                Incidents of
-                <Term
-                  dispatch={dispatch}
-                  id={crimeIds[params.crime] || 'undefinedTerm'}
-                >
-                  {crime}
-                </Term>
-                are on the
-                rise in {place}, but lower than 5 or 10 years ago.
-              </p>
-              <p>
-                {place}&#39;s {crime} rate surpassed that of the U.S. in 1985, and peaked
-                in 1991, with a rate of over 52 incidents per 100,000
-                people.<sup>1</sup>
-              </p>
-            </div>
-            <div className='flex-none px2'>
-              <Census
-                data={censusData}
-                year={parseInt(filters.timeTo, 10)}
-              />
-            </div>
-          </div>
-          <div className='mb4 p2 sm-p3 bg-white rounded'>
-            <div className='right mxn1' />
-            <h2 className='mt0 mb2'>
-              Reported {plural(crime)} in {place}, {filters.timeFrom} - {filters.timeTo}
+          <p className='mb5 fs1 serif'>
+            Incidents of
+            <Term
+              dispatch={dispatch}
+              id={crimeIds[params.crime] || 'undefinedTerm'}
+            >
+              {crime}
+            </Term>
+            are on the
+            rise in {place}, but lower than 5 or 10 years ago.
+            {place}&#39;s {crime} rate surpassed that of the U.S. in 1985, and peaked
+            in 1991, with a rate of over 52 incidents per 100,000
+            people.<sup>1</sup>
+          </p>
+          <hr className='mt0 mb3' />
+          <div className='mb2 p2 sm-p4 bg-blue-lighter'>
+            <h2 className='m0 fs-ch1 sans-serif'>
+              Reported {plural(crime)} in {place},
+              <br />
+              {filters.timeFrom}–{filters.timeTo}
             </h2>
-            <p className='h3 lg-col-10'>
-              {place}’s incident rate surpasses that of the United States,
-              and in {filters.timeTo} was
-              35.3 incidents per 100,000 people.
-            </p>
-            {summaries.loading && <span>Loading...</span>}
+          </div>
+          <div className='mb8 p2 sm-p4 bg-white'>
+            {summaries.loading && <div className='h4'>Loading...</div>}
             {trendData && !summaries.loading && (
               <TimeChart data={trendData} keys={['National', place]} />
             )}
           </div>
-          <div className='mb4'>
-            <h2 className='mb1'>Incident details, {filters.timeTo}</h2>
+          <div className='mb2 p2 sm-p4 bg-blue-lighter'>
+            <h2 className='m0 fs-ch1 sans-serif'>
+              {startCase(crime)} Incident Details in {place},
+              <br />
+              {filters.timeFrom}–{filters.timeTo}
+            </h2>
+          </div>
+          <div className='mb8'>
             <div className='clearfix mxn1'>
-              <div className='md-col md-col-6 p1'>
+              <div className='md-col md-col-6 mb2 px1'>
                 <IncidentDetailCard
                   data={detailOffenderDemographicsData}
                   title='Offender demographics'
                 />
               </div>
-              <div className='md-col md-col-6 p1'>
+              <div className='md-col md-col-6 mb2 px1'>
                 <IncidentDetailCard
                   data={detailVictimDemographicsData}
                   title='Victim demographics'
                 />
               </div>
-              <div className='md-col md-col-6 p1'>
+              <div className='md-col md-col-6 mb2 px1'>
                 <IncidentDetailCard
                   data={relationshipData}
                   title='Victims relationship to offender'
                 />
               </div>
-              <div className='md-col md-col-6 p1'>
+              <div className='md-col md-col-6 mb2 px1'>
                 <IncidentDetailCard
                   data={locationData}
                   title='Location type'
@@ -186,6 +154,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               </div>
             </div>
           </div>
+          <hr className='mt0 mb3' />
           <AboutTheData />
         </div>
       </div>
