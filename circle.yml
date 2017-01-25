@@ -7,6 +7,7 @@ machine:
     CF_ORGANIZATION: fbi-crime-explorer
     CF_SPACE: prototype
     CF_APP: crime-data-explorer
+    PORT: 6005
 
 dependencies:
   cache_directories:
@@ -17,7 +18,7 @@ dependencies:
 
 test:
   override:
-    - cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY:
+    - cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY -i $CIRCLE_BUILD_NUM:
         background: true
     - npm run lint
     - npm run test

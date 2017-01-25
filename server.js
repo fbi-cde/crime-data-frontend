@@ -31,6 +31,6 @@ app.get('/api/*', (req, res) => {
   })
 })
 
-app.listen(env.port, () => {
+app.listen(env.port || 6005, () => {
   console.log(`Listening on ${env.port}`)
 })

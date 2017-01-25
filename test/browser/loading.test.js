@@ -17,7 +17,7 @@ const options = {
 webdriverio
   .remote(options)
   .init()
-  .url('https://crime-data-explorer.fr.cloud.gov')
+  .url(`http://127.0.0.1:${process.env.PORT}`)
   .waitForExist('#app', 2000)
   .getTitle()
   .then(title => console.log(`Title was: ${title}`))
