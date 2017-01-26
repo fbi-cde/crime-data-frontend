@@ -20,7 +20,9 @@ const Header = ({ location }) => (
           >
             Federal Bureau of Investigation
           </span>
-          <span className='h2 serif line-height-1'>Crime Data Explorer</span>
+          <a className='h2 serif line-height-1 white' href='/'>
+            Crime Data Explorer
+          </a>
         </div>
       </div>
       <div className='mxn1 mt1 md-m0 truncate'>

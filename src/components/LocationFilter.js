@@ -9,7 +9,9 @@ const LocationFilter = ({ onChange, selected }) => {
 
   return (
     <div id='location' className='mb4'>
-      <h3 className='mt0 mb2 pb-tiny border-bottom'>{placeDisplay}</h3>
+      <h3 className='fs1 sans-serif mt0 mb2 pb-tiny border-bottom'>
+        {placeDisplay}
+      </h3>
       <div className='pt1 pb2 center'>
         <StateThumbnail selected={placeDisplay} />
       </div>
