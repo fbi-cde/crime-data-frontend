@@ -9,3 +9,8 @@
     stroke-width: 1px;
   }
 }
+
+.usa-map path:hover {
+  stroke: $blue;
+  stroke-width: 2px;
+}
