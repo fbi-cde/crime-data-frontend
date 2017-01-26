@@ -1,4 +1,4 @@
-/* eslint no-console: 0 */
+/* eslint jsx-a11y/no-static-element-interactions: 0 */
 import React from 'react'
 
 import stateLookup from '../util/usa'

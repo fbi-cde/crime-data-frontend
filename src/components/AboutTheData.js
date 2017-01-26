@@ -21,16 +21,16 @@ const links = [
 
 const AboutTheData = () => (
   <div>
-    <h2 className='mb1'>About the data</h2>
+    <h3 className='mt0 mb4'>About the data</h3>
     <div className='clearfix mxn2'>
-      <div className='lg-col lg-col-7 px2'>
+      <div className='lg-col lg-col-7 px2 mb1 black'>
         <p>
           The FBI collects crime data through the&nbsp;
-          <a className='blue bold' href='https://ucr.fbi.gov/'>
+          <a className='blue underline' href='https://ucr.fbi.gov/'>
             Uniform Crime Reporting (UCR) Program
           </a>.
         </p>
-        <h4>Change in rape definition</h4>
+        <div className='bold'>Change in rape definition</div>
         <p>
           In 2013, the FBI started collecting rape data under a revised
           definition and removed “forcible” from the offense name. All
@@ -41,7 +41,7 @@ const AboutTheData = () => (
           legacy definition, because they haven’t been able to change their
           records management systems to accommodate the change.
         </p>
-        <h4>How these crimes are counted</h4>
+        <div className='bold'>How these crimes are counted</div>
         <p>
           The Uniform Crime Reporting Program counts one offense for each
           victim of rape, attempted rape, or assault to commit rape, regardless
@@ -49,18 +49,10 @@ const AboutTheData = () => (
           without consent are counted as rape, not incest. Statutory rape
           and incest are excluded.
         </p>
-        <h4>Estimations</h4>
-        <p>
-          The national and state-level trends include estimates for agencies
-          that submitted less than 12 months of data. The estimation process
-          considers the population size covered by the agency; type of
-          jurisdiction, such as a police department or sheriff’s office; and
-          geographic location.
-        </p>
       </div>
       <div className='lg-col lg-col-5 px2'>
-        <div className='p2 sm-p3 bg-blue white'>
-          <h3 className='mt0 mb2'>Further reading</h3>
+        <div className='p2 sm-px4 sm-py3 bg-blue white'>
+          <h4 className='mt0 mb1'>Further reading</h4>
           <ul className='list-style-none m0 p0'>
             {links.map((l, i) => (
               <li key={i} className='mb1'>
