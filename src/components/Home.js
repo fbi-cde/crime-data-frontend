@@ -117,7 +117,7 @@ const Home = ({ appState, dispatch, location }) => {
               </g>
             </svg>
           </div>
-          <h2 className='mt0 mb4'>Other Data Sets</h2>
+          <h2 className='mt0 mb3'>Other Data Sets</h2>
           <div className='clearfix mxn2'>
             {[...Array(3)].map((_, i) => (
               <div key={i} className='sm-col sm-col-4 px2 mb2 sm-m0'>

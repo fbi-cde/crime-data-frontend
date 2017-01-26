@@ -15,31 +15,32 @@ const Header = ({ location }) => (
     <div className='md-flex flex-auto items-baseline px2 sm-px6'>
       <div className='flex-auto'>
         <div className='inline-block'>
-          <span className='mb1 h6 caps bold line-height-1 blue-gray'>
+          <span
+            className='mb1 h6 caps bold line-height-1 blue-gray block'
+          >
             Federal Bureau of Investigation
           </span>
-          <br />
           <span className='h2 serif line-height-1'>Crime Data Explorer</span>
         </div>
       </div>
       <div className='mxn1 mt1 md-m0 truncate'>
         <Link
           to='/'
-          className='mx1 h4 white'
+          className='mx2 h4 white'
           style={(isExplorerActive(location) && active) || {}}
         >
           Explorer
         </Link>
         <Link
           to='/downloads-and-docs'
-          className='mx1 h4 white'
+          className='mx2 h4 white'
           activeStyle={active}
         >
           Downloads & Documentation
         </Link>
         <Link
           to='/about'
-          className='mx1 h4 white'
+          className='mx2 h4 white'
           activeStyle={active}
         >
           About
