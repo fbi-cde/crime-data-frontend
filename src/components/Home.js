@@ -1,9 +1,11 @@
 /* eslint jsx-a11y/no-static-element-interactions: 0 */
 import React from 'react'
 
-import stateLookup from '../util/usa'
+
 import LocationSelect from './LocationSelect'
 import { slugify } from '../util/text'
+import stateLookup from '../util/usa'
+import Term from './Term'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 
 import usaSvgData from '../../data/usa-state-svg.json'
@@ -38,7 +40,13 @@ const Home = ({ appState, dispatch, location }) => {
             National, state, and local crime data
           </h1>
           <p className='m0 col-10 fs1 serif'>
-            The FBI collects and publishes Uniform Crime Reporting (UCR)
+            The FBI collects and publishes
+            <Term
+              dispatch={dispatch}
+              id='uniform crime reporting (ucr)'
+            >
+              Uniform Crime Reporting (UCR)
+            </Term>
             data on an annual basis. This project is part of our ongoing
             efforts to improve the accuracy and timeliness of the nation’s
             crime statistics.
