@@ -83,7 +83,7 @@ const Home = ({ appState, dispatch, location }) => {
           </div>
           <div className='py7 sm-col-9 mx-auto'>
             <svg
-              className='cursor-pointer'
+              className='cursor-pointer usa-map'
               viewBox='0 0 959 593'
               preserveAspectRatio='xMidYMid'
             >
