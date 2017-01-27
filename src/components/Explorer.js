@@ -128,25 +128,25 @@ const Explorer = ({ appState, dispatch, params, router }) => {
           </div>
           <div className='mb8'>
             <div className='clearfix mxn1'>
-              <div className='md-col md-col-6 mb2 px1'>
+              <div className='lg-col lg-col-6 mb2 px1'>
                 <IncidentDetailCard
                   data={detailOffenderDemographicsData}
                   title='Offender demographics'
                 />
               </div>
-              <div className='md-col md-col-6 mb2 px1'>
+              <div className='lg-col lg-col-6 mb2 px1'>
                 <IncidentDetailCard
                   data={detailVictimDemographicsData}
                   title='Victim demographics'
                 />
               </div>
-              <div className='md-col md-col-6 mb2 px1'>
+              <div className='lg-col lg-col-6 mb2 px1'>
                 <IncidentDetailCard
                   data={relationshipData}
                   title='Victims relationship to offender'
                 />
               </div>
-              <div className='md-col md-col-6 mb2 px1'>
+              <div className='lg-col lg-col-6 mb2 px1'>
                 <IncidentDetailCard
                   data={locationData}
                   title='Location type'

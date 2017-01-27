@@ -22,8 +22,8 @@ const links = [
 const AboutTheData = () => (
   <div>
     <h3 className='mt0 mb4'>About the data</h3>
-    <div className='clearfix mxn2'>
-      <div className='lg-col lg-col-7 px2 mb1 black'>
+    <div className='lg-flex'>
+      <div className='flex-auto mb1 black'>
         <p>
           The FBI collects crime data through the&nbsp;
           <a className='blue underline' href='https://ucr.fbi.gov/'>
@@ -50,10 +50,13 @@ const AboutTheData = () => (
           and incest are excluded.
         </p>
       </div>
-      <div className='lg-col lg-col-5 px2'>
+      <div
+        className='flex-none ml3 xs-hide sm-hide md-hide'
+        style={{ width: 300 }}
+      >
         <div className='p2 sm-px4 sm-py3 bg-blue white'>
           <h4 className='mt0 mb1'>Further reading</h4>
-          <ul className='list-style-none m0 p0'>
+          <ul className='m0 p0 left-bars'>
             {links.map((l, i) => (
               <li key={i} className='mb1'>
                 <a className='white' href={l[0]}>{l[1]}</a>

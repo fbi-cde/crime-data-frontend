@@ -1,0 +1,16 @@
+.left-bars {
+  list-style: none;
+
+  li {
+    padding-left: $space-1;
+    text-indent: -$space-1;
+
+    &::before {
+      border-left: 2px solid $red-bright;
+      content: '';
+      display: inline-block;
+      height: 10px;
+      padding-right: $space-1;
+    }
+  }
+}
