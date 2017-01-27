@@ -5,8 +5,8 @@ import startCase from 'lodash.startcase'
 
 import AboutTheData from './AboutTheData'
 import Breadcrumbs from './Breadcrumbs'
-import IncidentDetailCard from './IncidentDetailCard'
 import NotFound from './NotFound'
+import NibrsDimensionsContainer from './NibrsDimensionsContainer'
 import Sidebar from './Sidebar'
 import Term from './Term'
 import TimeChart from './TimeChart'
@@ -77,12 +77,12 @@ const mungeSummaryData = (summaries, place) => {
 
 const Explorer = ({ appState, dispatch, params, router }) => {
   const crime = lowerCase(params.crime)
+  const { filters, incidents, summaries } = appState
   const place = startCase(params.place)
 
   // show not found page if crime or place unfamiliar
   if (!crimeSlugs.includes(crime) || !lookup(place)) return <NotFound />
 
-  const { filters, summaries } = appState
   const trendData = mungeSummaryData(summaries, params.place)
 
   return (
@@ -136,32 +136,10 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             </h2>
           </div>
           <div className='mb8'>
-            <div className='clearfix mxn1'>
-              <div className='lg-col lg-col-6 mb2 px1'>
-                <IncidentDetailCard
-                  data={detailOffenderDemographicsData}
-                  title='Offender demographics'
-                />
-              </div>
-              <div className='lg-col lg-col-6 mb2 px1'>
-                <IncidentDetailCard
-                  data={detailVictimDemographicsData}
-                  title='Victim demographics'
-                />
-              </div>
-              <div className='lg-col lg-col-6 mb2 px1'>
-                <IncidentDetailCard
-                  data={relationshipData}
-                  title='Victims relationship to offender'
-                />
-              </div>
-              <div className='lg-col lg-col-6 mb2 px1'>
-                <IncidentDetailCard
-                  data={locationData}
-                  title='Location type'
-                />
-              </div>
-            </div>
+            <NibrsDimensionsContainer
+              data={incidents.data}
+              loading={incidents.loading}
+            />
           </div>
           <hr className='mt0 mb3' />
           <AboutTheData />
