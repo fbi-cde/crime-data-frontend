@@ -1,4 +1,3 @@
-/* eslint no-console: 0 */
 import startCase from 'lodash.startcase'
 
 import { get, getAll } from './http'
@@ -52,18 +51,14 @@ const getSummary = params => {
   ]
 
   if (params.place) qs.push(`state=${getStateAbbrFromName(params.place)}`)
-  console.log(`${ENDPOINTS.summary}?${qs.join('&')}`)
-  return get(`${ENDPOINTS.summary}?${qs.join('&')}`).then(d => {
-    console.log('d', d)
-    return d.results.map(r => ({
+
+  return get(`${ENDPOINTS.summary}?${qs.join('&')}`).then(d => (
+    d.results.map(r => ({
       year: r.year,
       count: r.actual,
       rate: (r.actual * 100000) / population,
     }))
-  }).then(d => {
-    console.log('summary data', d)
-    return d
-  })
+  )).then(d => d)
 }
 
 export default { getAllIncidents, getIncidents, getSummary }

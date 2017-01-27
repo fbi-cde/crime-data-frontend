@@ -1,5 +1,3 @@
-/* eslint no-console: 0 */
-
 import React from 'react'
 
 import { showTerm } from '../actions/glossaryActions'
