@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import React from 'react'
 
 import FilterGroup from './FilterGroup'
@@ -31,12 +32,14 @@ const CrimeTypeFilter = ({ onChange, selected }) => (
       Type of crime
     </h3>
     <FilterGroup
+      name='crime'
       title='Violent Crime'
       options={violentCrime}
       onChange={onChange}
       selected={selected}
     />
     <FilterGroup
+      name='crime'
       title='Property Crime'
       options={propertyCrime}
       onChange={onChange}
@@ -45,11 +48,18 @@ const CrimeTypeFilter = ({ onChange, selected }) => (
     {otherCrime.map((o, i) => (
       <FilterGroup
         key={i}
+        name='crime'
         options={[o]}
         onChange={onChange}
         selected={selected}
       />
     ))}
+    <Link
+      className='px2 underline'
+      to='/downloads-and-docs'
+    >
+      Additional data sets
+    </Link>
   </div>
 )
 
