@@ -3,7 +3,14 @@ import React from 'react'
 import CrimeTypeFilter from './CrimeTypeFilter'
 import LocationFilter from './LocationFilter'
 import TimePeriodFilter from './TimePeriodFilter'
+
+// TODO: potential refactoring
+// not sure the distinction here makes sense
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
+
+// TODO: potential refactoring
+// perhaps fetchIncidents should be fetchIncidentsDetails
+
 import { fetchIncidents } from '../actions/incidentsActions'
 import { fetchSummaries } from '../actions/summaryActions'
 
