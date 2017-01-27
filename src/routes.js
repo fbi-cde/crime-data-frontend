@@ -7,7 +7,6 @@ import Explorer from './components/Explorer'
 import history from './util/history'
 import Home from './components/Home'
 import NotFound from './components/NotFound'
-import Sample from './components/Sample'
 
 const scrollToTop = () => window.scrollTo(0, 0)
 
@@ -17,7 +16,6 @@ const routes = (
       <IndexRoute component={Home} />
       <Route path='/downloads-and-docs' component={DownloadsAndDocs} />
       <Route path='/explorer/:place/:crime' component={Explorer} />
-      <Route path='/sample' component={Sample} />
       <Route path='/*' component={NotFound} />
     </Route>
   </Router>

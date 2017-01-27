@@ -12,7 +12,7 @@ const active = {
 
 const Header = ({ location }) => (
   <header className='flex items-center bg-blue white' style={{ height: 128 }}>
-    <div className='md-flex flex-auto items-baseline px2 sm-px6'>
+    <div className='md-flex flex-auto items-baseline container-big mx-auto px2'>
       <div className='flex-auto'>
         <div className='inline-block'>
           <span
@@ -20,33 +20,35 @@ const Header = ({ location }) => (
           >
             Federal Bureau of Investigation
           </span>
-          <a className='h2 serif line-height-1 white' href='/'>
+          <Link to='/' className='h2 serif line-height-1 white'>
             Crime Data Explorer
-          </a>
+          </Link>
         </div>
       </div>
-      <div className='mxn1 mt1 md-m0 truncate'>
-        <Link
-          to='/'
-          className='mx2 h4 white'
-          style={(isExplorerActive(location) && active) || {}}
-        >
-          Explorer
-        </Link>
-        <Link
-          to='/downloads-and-docs'
-          className='mx2 h4 white'
-          activeStyle={active}
-        >
-          Downloads & Documentation
-        </Link>
-        <Link
-          to='/about'
-          className='mx2 h4 white'
-          activeStyle={active}
-        >
-          About
-        </Link>
+      <div className='mt1 md-m0 truncate'>
+        <div className='mxn2 overflow-scroll'>
+          <Link
+            to='/'
+            className='mx2 h4 white'
+            style={(isExplorerActive(location) && active) || {}}
+          >
+            Explorer
+          </Link>
+          <Link
+            to='/downloads-and-docs'
+            className='mx2 h4 white'
+            activeStyle={active}
+          >
+            Downloads & Documentation
+          </Link>
+          <Link
+            to='/about'
+            className='mx2 h4 white'
+            activeStyle={active}
+          >
+            About
+          </Link>
+        </div>
       </div>
     </div>
   </header>

@@ -1,17 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const firstCls = 'border-white border-right pr1 white'
-const lastCls = 'pl1 white'
-const linkCls = 'border-white border-right px1 white'
+const linkClass = 'mr1 pr1 white border-right border-white'
+const linkClassLast = 'white'
 
 const Footer = () => (
   <footer className='py7 bg-blue white'>
-    <div className='container items-center px2 mt1 md-px3'>
+    <div className='items-center container-big mx-auto mt1 px2'>
       <div className='clearfix'>
         <div className='sm-col sm-col-6'>
-          <div className='h6 caps bold blue-gray mb1'>Federal Bureau of Investigation</div>
-          <div className='h2 serif line-height-3'>Crime Data Explorer</div>
+          <div className='mb1 h6 caps bold line-height-1 blue-gray'>
+            Federal Bureau of Investigation
+          </div>
+          <div className='h2 serif line-height-1'>Crime Data Explorer</div>
           <div className='my4'>
             {['FBI', 'CJIS'].map((l, i) => (
               <div
@@ -27,30 +28,32 @@ const Footer = () => (
           <div className='pb3 caps'>
             <ul className='list-style-none px0 m0 mb1'>
               <li className='inline-block'>
-                <Link className={firstCls} to='/'>Explorer</Link>
+                <Link className={linkClass} to='/'>Explorer</Link>
               </li>
               <li className='inline-block'>
-                <Link className={linkCls} to='/downloads-and-docs'>Downloads & Documentation</Link>
+                <Link className={linkClass} to='/downloads-and-docs'>
+                  Downloads & Documentation
+                </Link>
               </li>
               <li className='inline-block'>
-                <Link className={linkCls} to='/about'>About</Link>
+                <Link className={linkClass} to='/about'>About</Link>
               </li>
               <li className='inline-block'>
-                <Link className={lastCls} to='/'>Glossary</Link>
+                <Link className={linkClass} to='/'>Glossary</Link>
               </li>
             </ul>
             <ul className='list-style-none px0 my0'>
               <li className='inline-block'>
-                <Link className={firstCls} to='/'>Accessibility</Link>
+                <Link className={linkClass} to='/'>Accessibility</Link>
               </li>
               <li className='inline-block'>
-                <Link className={linkCls} to='/'>Privacy Policy</Link>
+                <Link className={linkClass} to='/'>Privacy Policy</Link>
               </li>
               <li className='inline-block'>
-                <Link className={linkCls} to='/'>License</Link>
+                <Link className={linkClass} to='/'>License</Link>
               </li>
               <li className='inline-block'>
-                <Link className={lastCls} to='/'>Feedback</Link>
+                <Link className={linkClassLast} to='/'>Feedback</Link>
               </li>
             </ul>
           </div>

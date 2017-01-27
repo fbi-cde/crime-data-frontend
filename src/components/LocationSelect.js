@@ -26,7 +26,7 @@ const LocationSelect = ({ className, onChange, selected }) => {
         onChange={handleChange}
         value={(selected) ? startCase(selected) : ''}
       >
-        <option key='0'>United States</option>
+        <option key='0' value='' disabled>United States</option>
         {usaStates.map((s, i) => (
           <option key={i + 1}>{s}</option>
         ))}

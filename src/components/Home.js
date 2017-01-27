@@ -1,7 +1,6 @@
 /* eslint jsx-a11y/no-static-element-interactions: 0 */
 import React from 'react'
 
-
 import LocationSelect from './LocationSelect'
 import { slugify } from '../util/text'
 import stateLookup from '../util/usa'
@@ -35,7 +34,7 @@ const Home = ({ appState, dispatch, location }) => {
   return (
     <div>
       <section className='px2 bg-blue-white'>
-        <div className='py7 container relative'>
+        <div className='py7 container mx-auto relative'>
           <h1 className='mt0 pb1 border-bottom border-red-bright'>
             National, state, and local crime data
           </h1>
@@ -63,7 +62,7 @@ const Home = ({ appState, dispatch, location }) => {
         </div>
       </section>
       <section className='px2 bg-white'>
-        <div className='py7 container'>
+        <div className='py7 container mx-auto'>
           <h2 className='mt0 mb4'>Explore by type of crime and location</h2>
           <div className='clearfix mxn2'>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
@@ -74,8 +73,12 @@ const Home = ({ appState, dispatch, location }) => {
               />
             </div>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
-              <select className='col-12 bold field' onChange={selectCrime}>
-                <option value='' disabled selected>Crime Type</option>
+              <select
+                className='col-12 bold field'
+                onChange={selectCrime}
+                defaultValue=''
+              >
+                <option value='' disabled>Crime Type</option>
                 <optgroup label='Violent Crime'>
                   <option value='murder'>Homicide</option>
                   <option value='rape'>Rape</option>
@@ -147,7 +150,7 @@ const Home = ({ appState, dispatch, location }) => {
         </div>
       </section>
       <section className='px2 bg-blue-white'>
-        <div className='py7 container'>
+        <div className='py7 container mx-auto'>
           <h2 className='h1 mt0 mb1'>Crime Data API</h2>
           <h3 className='mt0 mb3 pb1 border-bottom border-red-bright'>
             Use our data in your project

@@ -17,7 +17,7 @@ const data = [
 
 const DownloadsAndDocs = () => (
   <section className='bg-white'>
-    <div className='px2 py3 container'>
+    <div className='px2 py3 container mx-auto'>
       <h1 className='mt0'>Downloads & Documentation</h1>
       <div className='clearfix mxn1 mb3'>
         <div className='sm-col sm-col-6 px1 mb2'>
