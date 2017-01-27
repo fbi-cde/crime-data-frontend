@@ -84,7 +84,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
         router={router}
       />
       <div className='site-content'>
-        <div className='p3 sm-px8 container'>
+        <div className='container-main mx-auto p3'>
           <Breadcrumbs {...params} />
           <div className='md-flex items-baseline mb4 border-bottom border-blue-lighter'>
             <h1 className='flex-auto mt0 mb1'>
