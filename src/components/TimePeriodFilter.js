@@ -28,13 +28,15 @@ class TimePeriodFilter extends React.Component {
     const { error } = this.state
 
     return (
-      <div id='time-period' className='mb4'>
-        <h3 className='mt0 mb2 pb-tiny border-bottom'>Time period</h3>
+      <div id='time-period' className='mb5'>
+        <h3 className='fs1 sans-serif mt0 mb4 pb-tiny border-bottom'>
+          Time period
+        </h3>
         <div className='clearfix'>
           <div className='col col-5'>
             <label htmlFor='time-from' className='hide'>Time from</label>
             <input
-              className='block col-12 field'
+              className='block field right-align m0'
               type='number'
               id='timeFrom'
               min={MIN_YEAR}
@@ -47,7 +49,7 @@ class TimePeriodFilter extends React.Component {
           <div className='col col-5'>
             <label htmlFor='time-to' className='hide'>Time to</label>
             <input
-              className='block col-12 field'
+              className='block field center'
               type='number'
               id='timeTo'
               min={MIN_YEAR}
@@ -62,6 +64,8 @@ class TimePeriodFilter extends React.Component {
             Please select a 10 year period between {MIN_YEAR} and {MAX_YEAR}.
           </p>
         )}
+        <p className='italic fs4 m0 mt3 serif'>Summary data available from 1961–2015</p>
+        <p className='italic fs4 m0 serif'>Incident data available from 1996–2015</p>
       </div>
     )
   }

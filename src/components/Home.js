@@ -1,9 +1,10 @@
 /* eslint jsx-a11y/no-static-element-interactions: 0 */
 import React from 'react'
 
-import stateLookup from '../util/usa'
 import LocationSelect from './LocationSelect'
 import { slugify } from '../util/text'
+import stateLookup from '../util/usa'
+import Term from './Term'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 
 import usaSvgData from '../../data/usa-state-svg.json'
@@ -33,12 +34,18 @@ const Home = ({ appState, dispatch, location }) => {
   return (
     <div>
       <section className='px2 bg-blue-white'>
-        <div className='py7 container relative'>
+        <div className='py7 container mx-auto relative'>
           <h1 className='mt0 pb1 border-bottom border-red-bright'>
             National, state, and local crime data
           </h1>
           <p className='m0 col-10 fs1 serif'>
-            The FBI collects and publishes Uniform Crime Reporting (UCR)
+            The FBI collects and publishes
+            <Term
+              dispatch={dispatch}
+              id='uniform crime reporting (ucr)'
+            >
+              Uniform Crime Reporting (UCR)
+            </Term>
             data on an annual basis. This project is part of our ongoing
             efforts to improve the accuracy and timeliness of the nation’s
             crime statistics.
@@ -55,7 +62,7 @@ const Home = ({ appState, dispatch, location }) => {
         </div>
       </section>
       <section className='px2 bg-white'>
-        <div className='py7 container'>
+        <div className='py7 container mx-auto'>
           <h2 className='mt0 mb4'>Explore by type of crime and location</h2>
           <div className='clearfix mxn2'>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
@@ -66,9 +73,28 @@ const Home = ({ appState, dispatch, location }) => {
               />
             </div>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
-              <select className='col-12 bold field' onChange={selectCrime}>
-                <option>Crime Type</option>
-                <option>Murder</option>
+              <select
+                className='col-12 bold field'
+                onChange={selectCrime}
+                defaultValue=''
+              >
+                <option value='' disabled>Crime Type</option>
+                <optgroup label='Violent Crime'>
+                  <option value='murder'>Homicide</option>
+                  <option value='rape'>Rape</option>
+                  <option value='robbery'>Robbery</option>
+                  <option value='aggravated-assault'>Aggravated Assault</option>
+                </optgroup>
+                <optgroup label='Property Crime'>
+                  <option value='arson'>Arson</option>
+                  <option value='burglary'>Burglary</option>
+                  <option value='cargo-theft'>Cargo Theft</option>
+                  <option value='larceny-theft'>Larceny Theft</option>
+                  <option value='motor-vehicle-theft'>Motor Vehicle Theft</option>
+                </optgroup>
+                <option value='hate-crime'>Hate Crime</option>
+                <option value='Human trafficking'>Human trafficking</option>
+                <option value='leoka'>Law Enforcement Officers Killed and Assaulted</option>
               </select>
             </div>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
@@ -102,7 +128,7 @@ const Home = ({ appState, dispatch, location }) => {
               </g>
             </svg>
           </div>
-          <h2 className='mt0 mb4'>Other Data Sets</h2>
+          <h2 className='mt0 mb3'>Other Data Sets</h2>
           <div className='clearfix mxn2'>
             {[...Array(3)].map((_, i) => (
               <div key={i} className='sm-col sm-col-4 px2 mb2 sm-m0'>
@@ -124,7 +150,7 @@ const Home = ({ appState, dispatch, location }) => {
         </div>
       </section>
       <section className='px2 bg-blue-white'>
-        <div className='py7 container'>
+        <div className='py7 container mx-auto'>
           <h2 className='h1 mt0 mb1'>Crime Data API</h2>
           <h3 className='mt0 mb3 pb1 border-bottom border-red-bright'>
             Use our data in your project

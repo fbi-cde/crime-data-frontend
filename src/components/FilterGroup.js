@@ -2,20 +2,23 @@ import React from 'react'
 
 import { slugify } from '../util/text'
 
-const FilterGroup = ({ options, onChange, selected, title }) => {
+const FilterGroup = ({ name, options, onChange, selected, title }) => {
   const handleChange = e => onChange({ crime: e.target.value })
 
   return (
-    <div className='mb2 bg-blue-white rounded overflow-hidden'>
-      {title && <div className='py1 px2 bg-darken-2 bold'>{title}</div>}
+    <div className='mb2 rounded overflow-hidden'>
+      {title && <div className='py1 px2 bold'>{title}</div>}
       <div>
         {options.map((o, i) => {
           const isActive = slugify(o) === slugify(selected)
+          const single = options.length === 1
           return (
             <label
               key={i}
               className={
-                `py-tiny px2 block cursor-pointer ${isActive ? 'bg-blue white bold' : ''}`
+                `py-tiny block cursor-pointer hover-bg-blue-light
+                ${isActive ? 'bg-blue white bold hover-blue' : ''}
+                ${single ? 'bold px2' : 'px3'}`
               }
               htmlFor={slugify(o)}
             >
@@ -23,7 +26,7 @@ const FilterGroup = ({ options, onChange, selected, title }) => {
                 className='hide'
                 checked={isActive}
                 id={slugify(o)}
-                name='crime'
+                name={name}
                 onChange={handleChange}
                 type='radio'
                 value={slugify(o)}

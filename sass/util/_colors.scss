@@ -36,3 +36,7 @@
 
 .fill-blue-light { fill: $blue-light; }
 .fill-red-bright { fill: $red-bright; }
+
+.hover-blue:hover { color: $blue; }
+.hover-bg-blue:hover { background-color: $blue; }
+.hover-bg-blue-light:hover { background-color: $blue-white; }
