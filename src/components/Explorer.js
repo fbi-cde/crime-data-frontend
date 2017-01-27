@@ -6,17 +6,21 @@ import startCase from 'lodash.startcase'
 import AboutTheData from './AboutTheData'
 import Breadcrumbs from './Breadcrumbs'
 import IncidentDetailCard from './IncidentDetailCard'
+import NotFound from './NotFound'
 import Sidebar from './Sidebar'
 import Term from './Term'
 import TimeChart from './TimeChart'
 
 import {
+  crimeTypes,
   detailLocationData,
   detailOffenderAge,
   detailOffenderRace,
   detailOffenderSex,
   detailRelationshipData,
- } from '../util/data'
+} from '../util/data'
+import { slugify } from '../util/text'
+import lookup from '../util/usa'
 
 const demoData = who => ([
   {
@@ -53,6 +57,7 @@ const relationshipData = [
 const detailOffenderDemographicsData = demoData('offender')
 const detailVictimDemographicsData = demoData('victim')
 
+const crimeSlugs = [].concat(...Object.values(crimeTypes)).map(s => slugify(s))
 const crimeIds = {
   'aggravated-assault': 'aggravated assault',
   burglary: 'burglary',
@@ -72,8 +77,12 @@ const mungeSummaryData = (summaries, place) => {
 
 const Explorer = ({ appState, dispatch, params, router }) => {
   const crime = lowerCase(params.crime)
-  const { filters, summaries } = appState
   const place = startCase(params.place)
+
+  // show not found page if crime or place unfamiliar
+  if (!crimeSlugs.includes(crime) || !lookup(place)) return <NotFound />
+
+  const { filters, summaries } = appState
   const trendData = mungeSummaryData(summaries, params.place)
 
   return (

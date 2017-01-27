@@ -2,29 +2,9 @@ import { Link } from 'react-router'
 import React from 'react'
 
 import FilterGroup from './FilterGroup'
+import { crimeTypes } from '../util/data'
 
-const otherCrime = [
-  'Hate Crime',
-  'Human Trafficking',
-  'Law Enforcement Officers Killed and Assaulted (LEOKA)',
-]
-
-const propertyCrime = [
-  'All Property Crime',
-  'Arson',
-  'Burglary',
-  'Cargo Theft',
-  'Larceny Theft',
-  'Motor Vehicle Theft',
-]
-
-const violentCrime = [
-  'All Violent Crime',
-  'Murder',
-  'Rape',
-  'Robbery',
-  'Aggravated Assault',
-]
+const { violentCrime, propertyCrime, otherCrime } = crimeTypes
 
 const CrimeTypeFilter = ({ onChange, selected }) => (
   <div id='type-of-crime' className='mb4'>

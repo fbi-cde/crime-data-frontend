@@ -259,12 +259,41 @@ const population = {
   'Wyoming': 584153,
 }
 
+const violentCrime = [
+  'All Violent Crime',
+  'Murder',
+  'Rape',
+  'Robbery',
+  'Aggravated Assault',
+]
+
+const propertyCrime = [
+  'All Property Crime',
+  'Arson',
+  'Burglary',
+  'Cargo Theft',
+  'Larceny Theft',
+  'Motor Vehicle Theft',
+]
+
+const otherCrime = [
+  'Hate Crime',
+  'Human Trafficking',
+  'Law Enforcement Officers Killed and Assaulted (LEOKA)',
+]
+
+const crimeTypes = { violentCrime, propertyCrime, otherCrime }
+
 export {
-  timeData, timeData2, mapData, censusData,
+  censusData,
+  crimeTypes,
   detailLocationData,
   detailOffenderAge,
   detailOffenderRace,
   detailOffenderSex,
   detailRelationshipData,
+  mapData,
   population,
+  timeData,
+  timeData2,
 }
