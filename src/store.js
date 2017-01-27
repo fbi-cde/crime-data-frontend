@@ -15,7 +15,10 @@ const logger = store => next => action => {
   return result
 }
 
+const middlewares = [thunk]
+if (process.env.NODE_ENV !== 'production') middlewares.push(logger)
+
 const reducer = combineReducers({ filters, glossary, incidents, summaries })
-const store = createStore(reducer, applyMiddleware(logger, thunk))
+const store = createStore(reducer, applyMiddleware(...middlewares))
 
 export default store
