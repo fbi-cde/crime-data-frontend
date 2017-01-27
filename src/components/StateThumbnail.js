@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { geoAlbersUsa, geoPath } from 'd3-geo'
 import React from 'react'
+import { Motion, spring } from 'react-motion'
 import { feature, mesh } from 'topojson'
 
 const Container = ({ children }) => (
@@ -31,19 +32,20 @@ class StateThumbnail extends React.Component {
     const meshed = mesh(usa, usa.objects.units, (a, b) => (a !== b))
     const active = geoStates.find(s => (s.properties.name === selected))
 
-    let strokeWidth
-    let transform
+    let translate = [0, 0]
+    let scale = 1
+    let strokeWidth = 1
+
     if (active) {
       const bounds = path.bounds(active)
       const dx = bounds[1][0] - bounds[0][0]
       const dy = bounds[1][1] - bounds[0][1]
       const x = (bounds[0][0] + bounds[1][0]) / 2
       const y = (bounds[0][1] + bounds[1][1]) / 2
-      const scale = 0.8 / Math.max(dx / w, dy / h)
-      const translate = [(w / 2) - (scale * x), (h / 2) - (scale * y)]
 
-      strokeWidth = active ? `${2.5 / scale}px` : 1
-      transform = `translate(${translate})scale(${scale})`
+      scale = 0.8 / Math.max(dx / w, dy / h)
+      translate = [(w / 2) - (scale * x), (h / 2) - (scale * y)]
+      strokeWidth = 2.5 / scale
     }
 
     return (
@@ -53,25 +55,36 @@ class StateThumbnail extends React.Component {
           preserveAspectRatio='xMidYMid'
           viewBox={`0 0 ${w} ${h}`}
         >
-          <g
-            strokeWidth={strokeWidth}
-            transform={transform}
+          <Motion
+            style={{
+              scale: spring(scale),
+              strokeWidth: spring(strokeWidth),
+              tX: spring(translate[0]),
+              tY: spring(translate[1]),
+            }}
           >
-            {geoStates.map((d, i) => (
-              <path
-                key={i}
-                d={path(d)}
-                fill={d.properties.name === selected ? '#95aabc' : '#eff4f9'}
-              />
-            ))}
-            <path
-              d={path(meshed)}
-              fill='none'
-              stroke='#fff'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            />
-          </g>
+            {value => (
+              <g
+                strokeWidth={`${value.strokeWidth}px`}
+                transform={`translate(${[value.tX, value.tY]})scale(${value.scale})`}
+              >
+                {geoStates.map((d, i) => (
+                  <path
+                    key={i}
+                    d={path(d)}
+                    fill={d.properties.name === selected ? '#95aabc' : '#eff4f9'}
+                  />
+                ))}
+                <path
+                  d={path(meshed)}
+                  fill='none'
+                  stroke='#fff'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                />
+              </g>
+            )}
+          </Motion>
         </svg>
       </Container>
     )
