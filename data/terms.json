@@ -147,9 +147,13 @@
     "term": "Gambling equipment violations",
     "definition": "To unlawfully manufacture, sell, buy, possess, or transport equipment, devices, or goods used for gambling purposes."
   },
+    {
+    "term": "Hierarchy Rule",
+    "definition": "With Summary (SRS) data, when more than one crime was committed by the same person or group of people and the time and space between the crimes were insignificant, the crime highest in the hierarchy is the only one reported."
+  },
   {
     "term": "Homicide",
-    "definition": "The killing of one human being by another."
+    "definition": "The killing of one human being by another. The Uniform Crime Reporting program has three groups of homicide offenses: murder and nonnegligent manslaughter, negligent manslaughter, and justifiable homicide."
   },
   {
     "term": "Human trafficking",
@@ -229,11 +233,11 @@
   },
   {
     "term": "National Crime Statistics Exchange (NCS-X)",
-    "definition": "A program designed to generate nationally-representative incident-based data on crimes reported to law enforcement agencies"
+    "definition": "A program designed to generate nationally-representative incident-based data on crimes reported to law enforcement agencies."
   },
   {
     "term": "National Incident-Based Reporting System (NIBRS)",
-    "definition": "The FBI's incident-based reporting system used by law enforcement agencies in the U.S. for collecting and reporting detailed crime data"
+    "definition": "The FBI’s incident-based reporting system for crimes known to law enforcement. Local, state, and federal law enforcement agencies collect a variety of details about each incident, including the time and location of the crime; the circumstance of the incident; the characteristics of the victim and offender (age, sex, race, and ethnicity); the victim’s relationship to the offender; the involvement of weapons or drugs; property loss; and whether the crime was motivated by bias."
   },
   {
     "term": "National Sheriffs’ Association",
@@ -293,7 +297,7 @@
   },
   {
     "term": "Purse-snatching",
-    "definition": "The grabbing or snatching of a purse, handbag, etc., from the physical possession of another person."
+    "definition": "The grabbing or snatching of a purse or handbag from another person."
   },
   {
     "term": "Rape (legacy definition)",
@@ -358,6 +362,10 @@
   {
     "term": "Stolen property offenses",
     "definition": "Receiving, buying, selling, possessing, concealing, or transporting any property with the knowledge that it has been unlawfully taken, as by burglary, embezzlement, fraud, larceny, or robbery, etc."
+  },
+    {
+    "term": "Summary Reporting System (SRS)",
+    "definition": "The FBI’s reporting system for summarizing crime trends and arrests known to law enforcement. Data is collected at the aggregate level and lacks incident-level details for crimes other than homicide. Local, state, and federal law enforcement agencies tally the number of Part I offenses along with arrest data for Part I and Part II offenses, and submit the totals in a monthly summary report to the FBI or state Uniform Crime Reporting Program. The Hierarchy Rule governs multiple offenses within this system."
   },
   {
     "term": "Supplementary Homicide Report",
