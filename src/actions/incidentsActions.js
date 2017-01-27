@@ -8,14 +8,32 @@ export const fetchingIncidents = () => ({
   type: INCIDENTS_FETCHING,
 })
 
-export const receivedIncidents = response => ({
+export const receivedIncidents = data => ({
   type: INCIDENTS_RECEIVED,
-  incidents: response.results,
+  data,
 })
 
-export const fetchIncidents = () => dispatch => {
+export const fetchIncidentDimensions = params => dispatch => {
+  const { place } = params
+  const requests = [
+    api.getIncidentOffendersSex,
+    api.getIncidentOffendersRace,
+    api.getIncidentOffendersAge,
+    api.getIncidentVictimsAge,
+    api.getIncidentVictimsLocationName,
+    api.getIncidentVictimsRace,
+    api.getIncidentVictimsSex,
+    api.getIncidentVictimsRelationship,
+  ].map(f => f({ place }))
+
   dispatch(fetchingIncidents())
-  return api.getIncidents().then(res => {
-    dispatch(receivedIncidents(res))
+
+  const reduceData = (accum, next) => ({
+    ...accum,
+    [next.key]: next.data,
   })
+
+  return Promise.all(requests)
+    .then(data => data.reduce(reduceData, {}))
+    .then(data => dispatch(receivedIncidents(data)))
 }

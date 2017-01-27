@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
     case INCIDENTS_RECEIVED:
       return {
         ...state,
-        data: action.incidents,
+        data: action.data,
         loading: false,
       }
     default:

@@ -1,4 +1,5 @@
 import startCase from 'lodash.startcase'
+import upperFirst from 'lodash.upperfirst'
 
 import { get, getAll } from './http'
 
@@ -6,13 +7,7 @@ import getStateAbbrFromName from './usa'
 
 import { population as pop } from './data'
 
-import incidents from '../../data/incidents.json'
-
 const API = '/api'
-const ENDPOINTS = {
-  incidents: `${API}/incidents`,
-  summary: `${API}/incidents/count`,
-}
 
 const crimes = {
   'aggravated-assault': 'Assault',
@@ -28,13 +23,73 @@ const getPop = (place = 'National') => pop[startCase(place)]
 
 const mapCrimeFilterToApiQuery = filter => crimes[filter]
 
-const getAllIncidents = params => (
-  getAll(ENDPOINTS.incidents, params)
+const dimensionEndpoints = {
+  ageNum: 'age_num',
+  locationName: 'location_name',
+  raceCode: 'race_code',
+  relationship: 'offender_relationship',
+  sexCode: 'sex_code',
+}
+
+const stateCodes = {
+  california: 10,
+  arizona: 2,
+}
+
+const getOffendersDimension = ({ dimension, place }) => {
+  const endpoint = dimensionEndpoints[dimension]
+  const stateCode = stateCodes[place] || '40'
+  return get(`${API}/offenders/count/states/${stateCode}/${endpoint}`, {
+    per_page: 50,
+    aggregate_many: false,
+  }).then(res => ({
+    key: `offender${upperFirst(dimension)}`,
+    data: res.results,
+  }))
+}
+
+const getVictimsDimension = ({ dimension, place }) => {
+  const endpoint = dimensionEndpoints[dimension]
+  const stateCode = stateCodes[place] || '40'
+  return get(`${API}/victims/count/states/${stateCode}/${endpoint}`, {
+    per_page: 50,
+    aggregate_many: false,
+  }).then(res => ({
+    key: `victim${upperFirst(dimension)}`,
+    data: res.results,
+  }))
+}
+
+const getIncidentOffendersAge = params => (
+  getOffendersDimension({ dimension: 'ageNum', ...params })
 )
 
-const getIncidents = () => (
-  Promise.resolve({ results: incidents })
-  // get(ENDPOINTS.incidents, params)
+const getIncidentOffendersRace = params => (
+  getOffendersDimension({ dimension: 'raceCode', ...params })
+)
+
+const getIncidentOffendersSex = params => (
+  getOffendersDimension({ dimension: 'sexCode', ...params })
+)
+
+const getIncidentVictimsAge = params => (
+  getVictimsDimension({ dimension: 'ageNum', ...params })
+)
+
+const getIncidentVictimsLocationName = params => (
+  getVictimsDimension({ dimension: 'locationName', ...params })
+)
+
+const getIncidentVictimsRace = params => (
+  getVictimsDimension({ dimension: 'raceCode', ...params })
+)
+
+const getIncidentVictimsRelationship = params => (
+  getVictimsDimension({ dimension: 'relationship', ...params })
+)
+
+const getIncidentVictimsSex = params => (
+  getVictimsDimension({ dimension: 'sexCode', ...params })
 )
 
 const getSummary = params => {
@@ -58,7 +113,17 @@ const getSummary = params => {
       count: r.actual,
       rate: (r.actual * 100000) / population,
     }))
-  )).then(d => d)
+  ))
 }
 
-export default { getAllIncidents, getIncidents, getSummary }
+export default {
+  getSummary,
+  getIncidentVictimsLocationName,
+  getIncidentOffendersSex,
+  getIncidentOffendersRace,
+  getIncidentOffendersAge,
+  getIncidentVictimsSex,
+  getIncidentVictimsRace,
+  getIncidentVictimsAge,
+  getIncidentVictimsRelationship,
+}
