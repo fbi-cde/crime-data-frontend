@@ -24,7 +24,7 @@ export const fetchNibrsDimensions = params => dispatch => {
     api.getIncidentVictimsRace,
     api.getIncidentVictimsSex,
     api.getIncidentVictimsRelationship,
-  ].map(f => f({ place }))
+  ].map(fn => fn({ place }))
 
   dispatch(fetchingNibrsDimensions())
 

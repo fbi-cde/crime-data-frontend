@@ -122,12 +122,16 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               {filters.timeFrom}–{filters.timeTo}
             </h2>
           </div>
-          <div className='mb8 p2 sm-p4 bg-white'>
-            {summaries.loading && <div className='h4'>Loading...</div>}
-            {trendData && !summaries.loading && (
-              <TimeChart data={trendData} keys={['National', place]} />
-            )}
+          {summaries.loading && (
+          <div className='mb8'>
+            <Loading text='summary loading' />
           </div>
+          )}
+          {trendData && !summaries.loading && (
+          <div className='mb8 p2 sm-p4 bg-white'>
+            <TimeChart data={trendData} keys={['National', place]} />
+          </div>
+          )}
           <div className='mb2 p2 sm-p4 bg-blue-lighter'>
             <h2 className='m0 fs-ch1 sans-serif'>
               {startCase(crime)} Incident Details in {place},
@@ -136,10 +140,13 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             </h2>
           </div>
           <div className='mb8'>
-            <NibrsDimensionsContainer
-              data={nibrs.data}
-              loading={nibrs.loading}
-            />
+            {nibrs.loading && <Loading text='nibrs loading' />}
+            {nibrs.data && !nibrs.loading && (
+              <NibrsDimensionsContainer
+                data={nibrs.data}
+                loading={nibrs.loading}
+              />
+          )}
           </div>
           <hr className='mt0 mb3' />
           <AboutTheData />
