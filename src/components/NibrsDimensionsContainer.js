@@ -1,6 +1,7 @@
 import React from 'react'
 
 import IncidentDetailCard from './IncidentDetailCard'
+import Loading from './Loading'
 
 const raceCodes = {
   A: 'Asian',
@@ -49,7 +50,7 @@ const reduceSexData = data => (
 )
 
 const NibrsDimensionsContainer = ({ data, loading }) => {
-  if (loading) return (<h1>Loading</h1>)
+  if (loading) return (<Loading text='nibrs loading' />)
 
   const relationshipData = [
     {

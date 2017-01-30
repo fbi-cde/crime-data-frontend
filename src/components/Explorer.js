@@ -9,7 +9,7 @@ import NotFound from './NotFound'
 import NibrsDimensionsContainer from './NibrsDimensionsContainer'
 import Sidebar from './Sidebar'
 import Term from './Term'
-import TimeChart from './TimeChart'
+import TrendContainer from './TrendContainer'
 
 import {
   crimeTypes,
@@ -122,16 +122,13 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               {filters.timeFrom}–{filters.timeTo}
             </h2>
           </div>
-          {summaries.loading && (
           <div className='mb8'>
-            <Loading text='summary loading' />
+            <TrendContainer
+              data={trendData}
+              loading={summaries.loading}
+              keys={['National', place]}
+            />
           </div>
-          )}
-          {trendData && !summaries.loading && (
-          <div className='mb8 p2 sm-p4 bg-white'>
-            <TimeChart data={trendData} keys={['National', place]} />
-          </div>
-          )}
           <div className='mb2 p2 sm-p4 bg-blue-lighter'>
             <h2 className='m0 fs-ch1 sans-serif'>
               {startCase(crime)} Incident Details in {place},
@@ -140,13 +137,10 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             </h2>
           </div>
           <div className='mb8'>
-            {nibrs.loading && <Loading text='nibrs loading' />}
-            {nibrs.data && !nibrs.loading && (
-              <NibrsDimensionsContainer
-                data={nibrs.data}
-                loading={nibrs.loading}
-              />
-          )}
+            <NibrsDimensionsContainer
+              data={nibrs.data}
+              loading={nibrs.loading}
+            />
           </div>
           <hr className='mt0 mb3' />
           <AboutTheData />
