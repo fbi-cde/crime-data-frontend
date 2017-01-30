@@ -5,6 +5,7 @@ import startCase from 'lodash.startcase'
 
 import AboutTheData from './AboutTheData'
 import Breadcrumbs from './Breadcrumbs'
+import DownloadDataBtn from './DownloadDataBtn'
 import IncidentDetailCard from './IncidentDetailCard'
 import NotFound from './NotFound'
 import Sidebar from './Sidebar'
@@ -116,11 +117,24 @@ const Explorer = ({ appState, dispatch, params, router }) => {
           </p>
           <hr className='mt0 mb3' />
           <div className='mb2 p2 sm-p4 bg-blue-lighter'>
-            <h2 className='m0 fs-ch1 sans-serif'>
-              Reported {plural(crime)} in {place},
-              <br />
-              {filters.timeFrom}–{filters.timeTo}
-            </h2>
+            <div className='md-flex items-baseline'>
+              <div className='flex-auto'>
+                <div className='inline-block'>
+                  <h2 className='m0 fs-ch1 sans-serif'>
+                    Reported {plural(crime)} in {place},
+                    <br />
+                    {filters.timeFrom}–{filters.timeTo}
+                  </h2>
+                </div>
+              </div>
+              <div>
+                <DownloadDataBtn
+                  data={trendData}
+                  fname='summary data'
+                  text='Download data'
+                />
+              </div>
+            </div>
           </div>
           <div className='mb8 p2 sm-p4 bg-white'>
             {summaries.loading && <div className='h4'>Loading...</div>}
