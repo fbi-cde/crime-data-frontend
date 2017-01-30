@@ -5,7 +5,7 @@ import {
   FILTER_RESET,
   FILTERS_UPDATE,
 } from './actionTypes'
-import { fetchIncidents } from './incidentsActions'
+import { fetchNibrsDimensions } from './nibrsActions'
 import { fetchSummaries } from '../actions/summaryActions'
 
 export const resetFilter = ({ id }) => ({
@@ -30,7 +30,7 @@ export const updateFiltersAndUrl = ({ change, location }) => {
 
     const { filters } = getState()
     if (filters.crime) dispatch(fetchSummaries(filters))
-    dispatch(fetchIncidents(filters))
+    dispatch(fetchNibrsDimensions(filters))
 
     updateUrl({ change, location })
 

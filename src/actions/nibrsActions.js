@@ -4,16 +4,16 @@ import {
 } from './actionTypes'
 import api from '../util/api'
 
-export const fetchingIncidents = () => ({
+export const fetchingNibrsDimensions = () => ({
   type: INCIDENTS_FETCHING,
 })
 
-export const receivedIncidents = data => ({
+export const receivedNibrsDimensions = data => ({
   type: INCIDENTS_RECEIVED,
   data,
 })
 
-export const fetchIncidentDimensions = params => dispatch => {
+export const fetchNibrsDimensions = params => dispatch => {
   const { place } = params
   const requests = [
     api.getIncidentOffendersSex,
@@ -26,7 +26,7 @@ export const fetchIncidentDimensions = params => dispatch => {
     api.getIncidentVictimsRelationship,
   ].map(f => f({ place }))
 
-  dispatch(fetchingIncidents())
+  dispatch(fetchingNibrsDimensions())
 
   const reduceData = (accum, next) => ({
     ...accum,
@@ -35,5 +35,5 @@ export const fetchIncidentDimensions = params => dispatch => {
 
   return Promise.all(requests)
     .then(data => data.reduce(reduceData, {}))
-    .then(data => dispatch(receivedIncidents(data)))
+    .then(data => dispatch(receivedNibrsDimensions(data)))
 }

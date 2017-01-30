@@ -5,9 +5,9 @@ import {
   INCIDENTS_RECEIVED,
 } from '../../src/actions/actionTypes'
 
-import reducer from '../../src/reducers/incidentsReducer'
+import reducer from '../../src/reducers/nibrsReducer'
 
-describe('incidentsReducer', () => {
+describe('nibrsReducer', () => {
   describe('initial state', () => {
     it('should return loading: false and data: []', () => {
       const expected = { loading: false, data: [] }
@@ -24,7 +24,7 @@ describe('incidentsReducer', () => {
   })
 
   describe('INCIDENTS_RECEIVED action type', () => {
-    const action = { type: INCIDENTS_RECEIVED, incidents: [{ key: 'fake' }] }
+    const action = { type: INCIDENTS_RECEIVED, data: [{ key: 'fake' }] }
 
     it('should set loading to false', () => {
       const actual = reducer(undefined, action)
@@ -33,7 +33,7 @@ describe('incidentsReducer', () => {
 
     it('should set data equal to the array', () => {
       const actual = reducer(undefined, action)
-      expect(actual.data).toEqual(action.incidents)
+      expect(actual.data).toEqual(action.data)
     })
   })
 })

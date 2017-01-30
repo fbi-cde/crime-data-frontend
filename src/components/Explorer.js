@@ -77,7 +77,7 @@ const mungeSummaryData = (summaries, place) => {
 
 const Explorer = ({ appState, dispatch, params, router }) => {
   const crime = lowerCase(params.crime)
-  const { filters, incidents, summaries } = appState
+  const { filters, nibrs, summaries } = appState
   const place = startCase(params.place)
 
   // show not found page if crime or place unfamiliar
@@ -137,8 +137,8 @@ const Explorer = ({ appState, dispatch, params, router }) => {
           </div>
           <div className='mb8'>
             <NibrsDimensionsContainer
-              data={incidents.data}
-              loading={incidents.loading}
+              data={nibrs.data}
+              loading={nibrs.loading}
             />
           </div>
           <hr className='mt0 mb3' />
