@@ -2,41 +2,14 @@ import React from 'react'
 
 import IncidentDetailCard from './IncidentDetailCard'
 
-import {
-  detailLocationData,
-  detailOffenderAge,
-  detailOffenderRace,
-  detailOffenderSex,
-  detailRelationshipData,
- } from '../util/data'
-
-const demoData = who => ([
-  {
-    data: detailOffenderAge,
-    title: (who) ? `Age of ${who}` : undefined,
-    type: 'histogram',
-  },
-  {
-    data: detailOffenderRace,
-    title: (who) ? `Race of ${who}` : undefined,
-    type: 'table',
-  },
-  {
-    data: detailOffenderSex,
-    title: (who) ? `Sex of ${who}` : undefined,
-    type: 'table',
-  },
-])
-
-const locationData = [
-  {
-    data: detailLocationData,
-    type: 'table',
-  },
-]
-
-const detailOffenderDemographicsData = demoData('offender')
-const detailVictimDemographicsData = demoData('victim')
+const raceCodes = {
+  A: 'Asian',
+  AP: 'Pacific Islander',
+  B: 'Black',
+  I: 'Native American',
+  U: 'Unknown',
+  W: 'White',
+}
 
 const sexCodes = {
   F: 'Female',
@@ -44,25 +17,10 @@ const sexCodes = {
   U: 'Unknown',
 }
 
-const reduceSexCode = data => {
+const reduceData = (data, key) => {
   const reduced = data.reduce((a, next) => {
-    if (a[next.sex_code]) a[next.sex_code] += next.count
-    else a[next.sex_code] = next.count
-    console.log('a', a)
-    return a
-  }, {})
-
-  return Object.keys(reduced).map(d => ({
-    key: sexCodes[d] || d,
-    count: reduced[d],
-  }))
-}
-
-const reduceRelationshipData = data => {
-  console.log('data', data)
-  const reduced = data.reduce((a, next) => {
-    if (a[next.offender_relationship]) a[next.offender_relationship] += next.count
-    else a[next.offender_relationship] = next.count
+    if (a[next[key]]) a[next[key]] += next.count
+    else a[next[key]] = +next.count
     return a
   }, {})
 
@@ -71,6 +29,24 @@ const reduceRelationshipData = data => {
     count: reduced[d],
   }))
 }
+
+// const reduceAgeData = data => reduceData(data, 'age_num')
+const reduceLocationData = data => reduceData(data, 'location_name')
+const reduceRaceData = data => (
+  reduceData(data, 'race_code').map(x => ({
+    key: `${raceCodes[x.key]}`,
+    count: x.count,
+  }))
+)
+const reduceRelationshipData = data => (
+  reduceData(data, 'offender_relationship')
+)
+const reduceSexData = data => (
+  reduceData(data, 'sex_code').map(x => ({
+    key: `${sexCodes[x.key]}`,
+    count: x.count,
+  }))
+)
 
 const NibrsDimensionsContainer = ({ data, loading }) => {
   if (loading) return (<h1>Loading</h1>)
@@ -82,43 +58,77 @@ const NibrsDimensionsContainer = ({ data, loading }) => {
     },
   ]
 
+  const locationData = [
+    {
+      data: reduceLocationData(data.victimLocationName || []),
+      type: 'table',
+    },
+  ]
+
+  const offenderDemographicData = [
+    // {
+    //   data: reduceAgeData(data.offenderAgeNum || []),
+    //   title: 'Age of offender',
+    //   type: 'histogram',
+    // },
+    {
+      data: reduceRaceData(data.offenderRaceCode || []),
+      title: 'Race of offender',
+      type: 'table',
+    },
+    {
+      data: reduceSexData(data.offenderSexCode || []),
+      title: 'Sex of offender',
+      type: 'table',
+    },
+  ]
+
+  const victimDemographicData = [
+    // {
+    //   data: reduceAgeData(data.offenderAgeNum || []),
+    //   title: 'Age of offender',
+    //   type: 'histogram',
+    // },
+    {
+      data: reduceRaceData(data.victimRaceCode || []),
+      title: 'Race of victim',
+      type: 'table',
+    },
+    {
+      data: reduceSexData(data.victimSexCode || []),
+      title: 'Sex of victim',
+      type: 'table',
+    },
+  ]
+
   return (
-    <div className='lg-col lg-col-6 mb2 px1'>
-      <IncidentDetailCard
-        data={relationshipData}
-        title='Victims relationship to offender'
-      />
+    <div className='clearfix mxn1'>
+      <div className='lg-col lg-col-6 mb2 px1'>
+        <IncidentDetailCard
+          data={offenderDemographicData}
+          title='Offender demographics'
+        />
+      </div>
+      <div className='lg-col lg-col-6 mb2 px1'>
+        <IncidentDetailCard
+          data={victimDemographicData}
+          title='Victim demographics'
+        />
+      </div>
+      <div className='lg-col lg-col-6 mb2 px1'>
+        <IncidentDetailCard
+          data={relationshipData}
+          title='Relationship of the victim to the offender'
+        />
+      </div>
+      <div className='lg-col lg-col-6 mb2 px1'>
+        <IncidentDetailCard
+          data={locationData}
+          title='Location name'
+        />
+      </div>
     </div>
   )
-
-  // return (
-  //   <div className='clearfix mxn1'>
-  //     <div className='lg-col lg-col-6 mb2 px1'>
-  //       <IncidentDetailCard
-  //         data={detailOffenderDemographicsData}
-  //         title='Offender demographics'
-  //       />
-  //     </div>
-  //     <div className='lg-col lg-col-6 mb2 px1'>
-  //       <IncidentDetailCard
-  //         data={detailVictimDemographicsData}
-  //         title='Victim demographics'
-  //       />
-  //     </div>
-  //     <div className='lg-col lg-col-6 mb2 px1'>
-  //       <IncidentDetailCard
-  //         data={relationshipData}
-  //         title='Victims relationship to offender'
-  //       />
-  //     </div>
-  //     <div className='lg-col lg-col-6 mb2 px1'>
-  //       <IncidentDetailCard
-  //         data={locationData}
-  //         title='Location type'
-  //       />
-  //     </div>
-  //   </div>
-  // )
 }
 
 export default NibrsDimensionsContainer
