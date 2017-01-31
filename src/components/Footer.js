@@ -39,7 +39,7 @@ const Footer = () => (
                 <Link className={linkClass} to='/about'>About</Link>
               </li>
               <li className='inline-block'>
-                <Link className={linkClass} to='/'>Glossary</Link>
+                <Link className={linkClassLast} to='/'>Glossary</Link>
               </li>
             </ul>
             <ul className='list-style-none px0 my0'>
