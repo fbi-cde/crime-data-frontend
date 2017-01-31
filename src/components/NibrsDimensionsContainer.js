@@ -51,7 +51,7 @@ const reduceSexData = data => (
 )
 
 const NibrsDimensionsContainer = ({ data, loading }) => {
-  if (loading) return (<Loading text='nibrs loading' />)
+  if (loading) return <Loading />
 
   const relationshipData = [
     {
