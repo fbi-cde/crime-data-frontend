@@ -4,7 +4,7 @@ import CrimeTypeFilter from './CrimeTypeFilter'
 import LocationFilter from './LocationFilter'
 import TimePeriodFilter from './TimePeriodFilter'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
-import { fetchIncidents } from '../actions/incidentsActions'
+import { fetchNibrsDimensions } from '../actions/nibrsActions'
 import { fetchSummaries } from '../actions/summaryActions'
 
 class Sidebar extends React.Component {
@@ -22,7 +22,7 @@ class Sidebar extends React.Component {
     }
 
     dispatch(updateFilters(filters))
-    dispatch(fetchIncidents(filters))
+    dispatch(fetchNibrsDimensions(filters))
 
     if (filters.crime) dispatch(fetchSummaries(filters))
   }

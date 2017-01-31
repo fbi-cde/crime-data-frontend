@@ -5,65 +5,37 @@ import startCase from 'lodash.startcase'
 
 import AboutTheData from './AboutTheData'
 import Breadcrumbs from './Breadcrumbs'
-import IncidentDetailCard from './IncidentDetailCard'
 import NotFound from './NotFound'
+import NibrsDimensionsContainer from './NibrsDimensionsContainer'
 import Sidebar from './Sidebar'
 import Term from './Term'
-import TimeChart from './TimeChart'
+import TrendContainer from './TrendContainer'
 
-import {
-  crimeTypes,
-  detailLocationData,
-  detailOffenderAge,
-  detailOffenderRace,
-  detailOffenderSex,
-  detailRelationshipData,
-} from '../util/data'
+import { crimeTypes } from '../util/data'
 import { slugify } from '../util/text'
 import lookup from '../util/usa'
 
-const demoData = who => ([
-  {
-    data: detailOffenderAge,
-    title: (who) ? `Age of ${who}` : undefined,
-    type: 'histogram',
-  },
-  {
-    data: detailOffenderRace,
-    title: (who) ? `Race of ${who}` : undefined,
-    type: 'table',
-  },
-  {
-    data: detailOffenderSex,
-    title: (who) ? `Sex of ${who}` : undefined,
-    type: 'table',
-  },
-])
-
-const locationData = [
-  {
-    data: detailLocationData,
-    type: 'table',
-  },
-]
-
-const relationshipData = [
-  {
-    data: detailRelationshipData,
-    type: 'table',
-  },
-]
-
-const detailOffenderDemographicsData = demoData('offender')
-const detailVictimDemographicsData = demoData('victim')
-
 const crimeSlugs = [].concat(...Object.values(crimeTypes)).map(s => slugify(s))
+/* crimeIds is for linking the crime text to the <Glossary /> component */
 const crimeIds = {
   'aggravated-assault': 'aggravated assault',
   burglary: 'burglary',
   murder: 'murder and nonnegligent homicide',
   rape: 'rape (legacy definition)',
   robbery: 'robbery',
+}
+
+const filterNibrsData = (data, { timeFrom, timeTo }) => {
+  if (!data) return false
+  const filtered = {}
+  Object.keys(data).forEach(key => {
+    filtered[key] = data[key].filter(d => {
+      const year = parseInt(d.year, 10)
+      return year >= timeFrom && year <= timeTo
+    })
+  })
+
+  return filtered
 }
 
 const mungeSummaryData = (summaries, place) => {
@@ -77,12 +49,13 @@ const mungeSummaryData = (summaries, place) => {
 
 const Explorer = ({ appState, dispatch, params, router }) => {
   const crime = lowerCase(params.crime)
+  const { filters, nibrs, summaries } = appState
   const place = startCase(params.place)
 
   // show not found page if crime or place unfamiliar
   if (!crimeSlugs.includes(crime) || !lookup(place)) return <NotFound />
 
-  const { filters, summaries } = appState
+  const nibrsData = filterNibrsData(nibrs.data, filters)
   const trendData = mungeSummaryData(summaries, params.place)
 
   return (
@@ -122,11 +95,12 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               {filters.timeFrom}–{filters.timeTo}
             </h2>
           </div>
-          <div className='mb8 p2 sm-p4 bg-white'>
-            {summaries.loading && <div className='h4'>Loading...</div>}
-            {trendData && !summaries.loading && (
-              <TimeChart data={trendData} keys={['National', place]} />
-            )}
+          <div className='mb8'>
+            <TrendContainer
+              data={trendData}
+              loading={summaries.loading}
+              keys={['National', place]}
+            />
           </div>
           <div className='mb2 p2 sm-p4 bg-blue-lighter'>
             <h2 className='m0 fs-ch1 sans-serif'>
@@ -136,32 +110,10 @@ const Explorer = ({ appState, dispatch, params, router }) => {
             </h2>
           </div>
           <div className='mb8'>
-            <div className='clearfix mxn1'>
-              <div className='lg-col lg-col-6 mb2 px1'>
-                <IncidentDetailCard
-                  data={detailOffenderDemographicsData}
-                  title='Offender demographics'
-                />
-              </div>
-              <div className='lg-col lg-col-6 mb2 px1'>
-                <IncidentDetailCard
-                  data={detailVictimDemographicsData}
-                  title='Victim demographics'
-                />
-              </div>
-              <div className='lg-col lg-col-6 mb2 px1'>
-                <IncidentDetailCard
-                  data={relationshipData}
-                  title='Victims relationship to offender'
-                />
-              </div>
-              <div className='lg-col lg-col-6 mb2 px1'>
-                <IncidentDetailCard
-                  data={locationData}
-                  title='Location type'
-                />
-              </div>
-            </div>
+            <NibrsDimensionsContainer
+              data={nibrsData}
+              loading={nibrs.loading}
+            />
           </div>
           <hr className='mt0 mb3' />
           <AboutTheData />
