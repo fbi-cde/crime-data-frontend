@@ -8,10 +8,10 @@ import {
 } from '../../src/actions/actionTypes'
 
 import {
-  fetchIncidents,
-  fetchingIncidents,
-  receivedIncidents,
-} from '../../src/actions/incidentsActions'
+  fetchNibrsDimensions,
+  fetchingNibrsDimensions,
+  receivedNibrsDimensions,
+} from '../../src/actions/nibrsActions'
 import api from '../../src/util/api'
 
 const createPromise = (res, err) => {
@@ -23,7 +23,7 @@ const success = {
   results: [],
 }
 
-describe('incidentsAction', () => {
+describe('nibrsAction', () => {
   let sandbox
 
   beforeEach(() => {
@@ -34,18 +34,18 @@ describe('incidentsAction', () => {
     sandbox.restore()
   })
 
-  describe('fetchingIncidents()', () => {
+  describe('fetchingNibrsDimensions()', () => {
     it('should return INCIDENTS_FETCHING type', () => {
-      const actual = fetchingIncidents()
+      const actual = fetchingNibrsDimensions()
       expect(actual.type).toEqual(INCIDENTS_FETCHING)
     })
   })
 
-  describe('receivedIncidents()', () => {
+  describe('receivedNibrsDimensions()', () => {
     const action = { results: [1, 2, 3] }
 
     it('should return INCIDENTS_RECEIVED type', () => {
-      const actual = receivedIncidents(action)
+      const actual = receivedNibrsDimensions(action)
       expect(actual.type).toEqual(INCIDENTS_RECEIVED)
     })
 
@@ -55,16 +55,19 @@ describe('incidentsAction', () => {
     })
   })
 
-  describe.only('fetchIncidents()', () => {
+  describe.only('fetchNibrsDimensions()', () => {
     it('should be a function', () => {
-      expect(typeof fetchIncidents).toEqual('function')
+      expect(typeof fetchNibrsDimensions).toEqual('function')
     })
 
     it('should dispatch INCIDENTS_FETCHING and INCIDENTS_RECEIVED', done => {
-      const dispatch = sinon.spy()
-      sinon.stub(api, 'getIncidents', () => createPromise(success))
+      const dispatch = sandbox.spy()
+      /* stub out all the API functions required for this action */
+      Object.keys(api).map(fn => (
+        sandbox.stub(api, fn, () => createPromise(success))
+      ))
 
-      fetchIncidents()(dispatch).then(() => {
+      fetchNibrsDimensions({ place: 'montana' })(dispatch).then(() => {
         const first = dispatch.getCall(0)
         const second = dispatch.getCall(1)
         expect(first.args[0].type).toEqual(INCIDENTS_FETCHING)
