@@ -122,7 +122,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
               {filters.timeFrom}–{filters.timeTo}
             </h2>
           </div>
-          <div className='mb8 p2 sm-p4 bg-white'>
+          <div className='mb8 p4 bg-white'>
             {summaries.loading && <div className='h4'>Loading...</div>}
             {trendData && !summaries.loading && (
               <TimeChart data={trendData} keys={['National', place]} />
