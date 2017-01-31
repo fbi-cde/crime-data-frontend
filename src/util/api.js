@@ -19,10 +19,6 @@ const crimes = {
   robbery: 'Robbery',
 }
 
-const getPop = (place = 'National') => pop[startCase(place)]
-
-const mapCrimeFilterToApiQuery = filter => crimes[filter]
-
 const dimensionEndpoints = {
   ageNum: 'age_num',
   locationName: 'location_name',
@@ -30,6 +26,10 @@ const dimensionEndpoints = {
   relationship: 'offender_relationship',
   sexCode: 'sex_code',
 }
+
+const getPop = (place = 'National') => pop[startCase(place)]
+
+const mapCrimeFilterToApiQuery = filter => crimes[filter]
 
 const stateCodes = {
   alabama: 2,

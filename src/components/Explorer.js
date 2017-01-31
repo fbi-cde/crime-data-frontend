@@ -11,53 +11,12 @@ import Sidebar from './Sidebar'
 import Term from './Term'
 import TrendContainer from './TrendContainer'
 
-import {
-  crimeTypes,
-  detailLocationData,
-  detailOffenderAge,
-  detailOffenderRace,
-  detailOffenderSex,
-  detailRelationshipData,
-} from '../util/data'
+import { crimeTypes } from '../util/data'
 import { slugify } from '../util/text'
 import lookup from '../util/usa'
 
-const demoData = who => ([
-  {
-    data: detailOffenderAge,
-    title: (who) ? `Age of ${who}` : undefined,
-    type: 'histogram',
-  },
-  {
-    data: detailOffenderRace,
-    title: (who) ? `Race of ${who}` : undefined,
-    type: 'table',
-  },
-  {
-    data: detailOffenderSex,
-    title: (who) ? `Sex of ${who}` : undefined,
-    type: 'table',
-  },
-])
-
-const locationData = [
-  {
-    data: detailLocationData,
-    type: 'table',
-  },
-]
-
-const relationshipData = [
-  {
-    data: detailRelationshipData,
-    type: 'table',
-  },
-]
-
-const detailOffenderDemographicsData = demoData('offender')
-const detailVictimDemographicsData = demoData('victim')
-
 const crimeSlugs = [].concat(...Object.values(crimeTypes)).map(s => slugify(s))
+/* crimeIds is for linking the crime text to the <Glossary /> component */
 const crimeIds = {
   'aggravated-assault': 'aggravated assault',
   burglary: 'burglary',
