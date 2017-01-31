@@ -156,7 +156,7 @@ const getSummary = params => {
 
   if (params.place) qs.push(`state=${getStateAbbrFromName(params.place)}`)
 
-  return get(`${ENDPOINTS.summary}?${qs.join('&')}`).then(d => (
+  return get(`${API}/incidents/count?${qs.join('&')}`).then(d => (
     d.results.map(r => ({
       year: r.year,
       count: r.actual,
