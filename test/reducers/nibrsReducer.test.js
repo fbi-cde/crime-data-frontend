@@ -10,7 +10,7 @@ import reducer from '../../src/reducers/nibrsReducer'
 describe('nibrsReducer', () => {
   describe('initial state', () => {
     it('should return loading: false and data: []', () => {
-      const expected = { loading: false, data: [] }
+      const expected = { loading: false, data: null }
       const actual = reducer(undefined, { type: 'fake' })
       expect(actual).toEqual(expected)
     })

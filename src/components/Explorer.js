@@ -25,6 +25,19 @@ const crimeIds = {
   robbery: 'robbery',
 }
 
+const filterNibrsData = (data, { timeFrom, timeTo }) => {
+  if (!data) return false
+  const filtered = {}
+  Object.keys(data).forEach(key => {
+    filtered[key] = data[key].filter(d => {
+      const year = parseInt(d.year, 10)
+      return year >= timeFrom && year <= timeTo
+    })
+  })
+
+  return filtered
+}
+
 const mungeSummaryData = (summaries, place) => {
   if (Object.keys(summaries).length === 1 || !summaries[place]) return false
   return summaries[place].map((s, i) => ({
@@ -42,6 +55,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
   // show not found page if crime or place unfamiliar
   if (!crimeSlugs.includes(crime) || !lookup(place)) return <NotFound />
 
+  const nibrsData = filterNibrsData(nibrs.data, filters)
   const trendData = mungeSummaryData(summaries, params.place)
 
   return (
@@ -97,7 +111,7 @@ const Explorer = ({ appState, dispatch, params, router }) => {
           </div>
           <div className='mb8'>
             <NibrsDimensionsContainer
-              data={nibrs.data}
+              data={nibrsData}
               loading={nibrs.loading}
             />
           </div>

@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   loading: false,
-  data: [],
+  data: null,
 }
 
 export default (state = initialState, action) => {
