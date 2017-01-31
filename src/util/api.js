@@ -1,7 +1,7 @@
 import startCase from 'lodash.startcase'
 import upperFirst from 'lodash.upperfirst'
 
-import { get, getAll } from './http'
+import { get } from './http'
 
 import getStateAbbrFromName from './usa'
 
