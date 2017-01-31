@@ -87,14 +87,16 @@ class TimeChart extends React.Component {
 
     const callout = (
       <g transform={`translate(${x(active.date)}, 0)`}>
-        <line y2={height} stroke='#000' strokeWidth='1' strokeDasharray='3,3' />
+        <line y2={height} stroke='#000' strokeWidth='1' strokeDasharray='2,2' />
         {keysWithSlugs.map((k, j) => (
           <circle
             key={j}
             cx='0'
             cy={y(active[k.slug])}
             fill={color(k.slug)}
-            r='4'
+            r='6'
+            stroke='#fff'
+            strokeWidth='2'
           />
         ))}
       </g>
@@ -119,7 +121,7 @@ class TimeChart extends React.Component {
                   d={l(d.values)}
                   fill='none'
                   stroke={color(d.id)}
-                  strokeWidth='2'
+                  strokeWidth='3'
                 />
               </g>
             ))}
@@ -134,8 +136,9 @@ class TimeChart extends React.Component {
             />
           </g>
         </svg>
-        <div className='my2 h6 bold monospace line-height-1 center'>
-          Rate per 100,000 people / Year
+        <div className='py2 h5 bold center'>Rate per 100,000 people / Year</div>
+        <div className='pt1 h5 italic blue-gray'>
+          Source: Ohio reported Summary (SRS) data from 2004–2014.
         </div>
       </div>
     )
@@ -147,7 +150,7 @@ TimeChart.propTypes = {
 }
 
 TimeChart.defaultProps = {
-  margin: { top: 20, right: 20, bottom: 10, left: 30 },
+  margin: { top: 20, right: 30, bottom: 25, left: 30 },
   size: { width: 850, height: 300 },
   colors: ['#52687d', '#ff5e50', '#97a7b8'],
 }

@@ -12,45 +12,33 @@ const TimeChartDetails = ({ colors, data, keys }) => {
   const highlight = v => <span className='bold blue'>{v}</span>
 
   return (
-    <div className='mb2 md-flex'>
+    <div className='mb1 p2 bg-blue-lighter md-flex'>
       <div className='flex-auto'>
-        <h4 className='mt0 mb1 sans-serif'>{year}</h4>
-        <p className='sm-m0 md-pr4'>
+        <h3 className='mt0 mb-tiny monospace inline-block'>{year}</h3>
+        <p className='sm-m0 md-col-10 lg-col-8 h5'>
           {name}’s incident rate surpasses that of the United States, and
           in {highlight(year)} was {highlight(formatRate(rate))} incidents
           per 100,000 people.
         </p>
       </div>
       <div>
-        <table className='mt4 h5 bold'>
-          <thead className='h6 caps line-height-3'>
-            <tr><th /><th>Rate</th><th>Total</th></tr>
-          </thead>
+        <table className='h5 table-condensed'>
+          <thead className='h6 caps'><tr><th /><th>Rate</th><th>Total</th></tr></thead>
           <tbody>
             {keys.map((k, i) => (
               <tr key={i}>
-                <td className='pr3 nowrap align-bottom'>
+                <td className='nowrap'>
                   <span
                     className='mr1 inline-block circle'
-                    style={{ width: 8, height: 8, backgroundColor: colors[i] || '#000' }}
+                    style={{ width: 10, height: 10, backgroundColor: colors[i] || '#000' }}
                   />
-                  {k.name}
+                  <strong>{k.name}</strong>
                 </td>
-                <td className='pt1 pr3 h4 line-height-2 align-bottom'>
-                  <span
-                    className='inline-block border-bottom border-blue-light border-w2'
-                    style={{ width: 72 }}
-                  >
-                    {formatRate(data[k.slug])}
-                  </span>
+                <td className='monospace'>
+                  {formatRate(data[k.slug])}
                 </td>
-                <td className='pt1 h4 line-height-2 align-bottom'>
-                  <span
-                    className='inline-block border-bottom border-blue-light border-w2'
-                    style={{ width: 72 }}
-                  >
-                    {formatTotal(data[k.slug] * 98)}
-                  </span>
+                <td className='monospace'>
+                  {formatTotal(data[k.slug] * 98)}
                 </td>
               </tr>
             ))}
