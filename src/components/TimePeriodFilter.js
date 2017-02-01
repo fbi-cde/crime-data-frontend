@@ -2,7 +2,6 @@ import React from 'react'
 
 const MIN_YEAR = 1960
 const MAX_YEAR = 2014
-const YEAR_WINDOW = 10
 
 class TimePeriodFilter extends React.Component {
   constructor(props) {
@@ -16,18 +15,22 @@ class TimePeriodFilter extends React.Component {
     }
   }
 
+  setError(msg) {
+    this.setState({ error: msg })
+  }
+
   handleChange(e) {
     const { state } = this
     const { id, value } = e.target
     const isFrom = id === 'timeFrom'
     const other = (isFrom) ? state.timeTo : state.timeFrom
 
-    if (isFrom && value < 1960) {
-      return this.setError('Please select a beginning year since 1960')
+    if (isFrom && value < MIN_YEAR) {
+      return this.setError(`Please select a beginning year since ${MIN_YEAR}`)
     } else if (isFrom && value > other) {
       return this.setError('The beginning year must be earlier than the end year')
-    } else if (!isFrom && value > 2014) {
-      return this.setError('Please select an end year that is earlier than 2014')
+    } else if (!isFrom && value > MAX_YEAR) {
+      return this.setError(`Please select an end year that is earlier than ${MAX_YEAR}`)
     } else if (Math.abs(other - value) < 10) {
       return this.setError('You must select a range of at least 10 years')
     }
@@ -38,10 +41,6 @@ class TimePeriodFilter extends React.Component {
       timeFrom: (isFrom) ? value : state.timeFrom,
       timeTo: (isFrom) ? state.timeTo : value,
     })
-  }
-
-  setError(msg) {
-    this.setState({ error: msg })
   }
 
   render() {
