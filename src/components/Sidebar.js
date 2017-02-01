@@ -9,6 +9,21 @@ const Sidebar = ({ filters, onChange, router }) => {
 
   return (
     <nav className='site-sidebar bg-white'>
+      <div className='p2 bg-red-bright line-height-1 md-hide lg-hide'>
+        <button
+          type='button'
+          className='right btn p0 h5 caps line-height-3 black'
+        >
+          Close
+        </button>
+        <img
+          className='align-middle'
+          width='22'
+          height='20'
+          src='/img/filters.svg'
+          alt='filters'
+        />
+      </div>
       <div className='p6 sm-p3 md-p4'>
         <LocationFilter
           onChange={onChange}
