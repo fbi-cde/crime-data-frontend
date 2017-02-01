@@ -52,9 +52,6 @@ class TimePeriodFilter extends React.Component {
           Time period
         </h3>
         <div className='clearfix'>
-          {error && (
-            <p className='m0 mb1 h5 red'>{error}</p>
-          )}
           <div className='col col-5'>
             <label htmlFor='time-from' className='hide'>Time from</label>
             <input
@@ -81,7 +78,10 @@ class TimePeriodFilter extends React.Component {
             />
           </div>
         </div>
-        <p className='italic fs4 m0 mt2 serif'>Summary data available from 1961–2015</p>
+        {error && <p className='mt1 mb1 h5 red'>{error}</p>}
+        <p className={`italic fs4 m0 serif ${!error && 'mt2'}`}>
+          Summary data available from 1961–2015
+        </p>
         <p className='italic fs4 m0 serif'>Incident data available from 1996–2015</p>
       </div>
     )
