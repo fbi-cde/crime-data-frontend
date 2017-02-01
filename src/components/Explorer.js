@@ -71,8 +71,6 @@ class Explorer extends React.Component {
       return year >= 1960 && year <= 2014
     }
 
-    window.addEventListener('scroll', this.handleScroll)
-
     if (!check(filters.timeFrom)) filters.timeFrom = appState.filters.timeFrom
     if (!check(filters.timeTo)) filters.timeTo = appState.filters.timeTo
 
