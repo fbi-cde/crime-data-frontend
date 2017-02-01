@@ -4,15 +4,19 @@ import CrimeTypeFilter from './CrimeTypeFilter'
 import LocationFilter from './LocationFilter'
 import TimePeriodFilter from './TimePeriodFilter'
 
-const Sidebar = ({ filters, onChange, router }) => {
+import { hideSidebar } from '../actions/sidebarActions'
+
+const Sidebar = ({ dispatch, filters, isOpen, onChange, router }) => {
   const { crime, place } = router.params
+  const hide = () => dispatch(hideSidebar())
 
   return (
-    <nav className='site-sidebar bg-white'>
+    <nav className={`site-sidebar bg-white ${isOpen ? 'open' : ''}`}>
       <div className='p2 bg-red-bright line-height-1 md-hide lg-hide'>
         <button
           type='button'
           className='right btn p0 h5 caps line-height-3 black'
+          onClick={hide}
         >
           Close
         </button>

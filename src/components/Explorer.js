@@ -95,14 +95,16 @@ class Explorer extends React.Component {
     // show not found page if crime or place unfamiliar
     if (!crimeSlugs.includes(crime) || !lookup(place)) return <NotFound />
 
-    const { filters, nibrs, summaries } = appState
+    const { filters, nibrs, sidebar, summaries } = appState
     const nibrsData = filterNibrsData(nibrs.data, filters)
     const trendData = mungeSummaryData(summaries, params.place)
 
     return (
       <div className='site-wrapper'>
         <Sidebar
+          dispatch={dispatch}
           filters={filters}
+          isOpen={sidebar.isOpen}
           onChange={this.handleSidebarChange}
           router={router}
         />
