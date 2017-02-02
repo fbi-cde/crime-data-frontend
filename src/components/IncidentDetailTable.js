@@ -1,6 +1,8 @@
 import { format } from 'd3-format'
 import React from 'react'
 
+// TODO: refactor SORT_DETAILS and sortIdx
+
 const SORT_DETAILS = [
   { key: 'key', order: 'asc' },
   { key: 'count', order: 'desc' },
@@ -13,7 +15,7 @@ const formatNumber = format(',')
 class IncidentDetailTable extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { sortIdx: 0 }
+    this.state = { sortIdx: 1 }
     this.changeSort = ::this.changeSort
   }
 
@@ -57,7 +59,7 @@ class IncidentDetailTable extends React.Component {
                 </div>
               </td>
               <td className='bold monospace right-align'>
-                {formatPercent(d.percent)}
+                {(d.percent > 0.01) ? formatPercent(d.percent) : '<1%'}
               </td>
               <td className='px1 line-height-3' title={d.key}>{d.key}</td>
               <td className='monospace right-align'>
