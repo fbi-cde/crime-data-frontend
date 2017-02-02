@@ -103,37 +103,38 @@ class TrendChart extends React.Component {
     return (
       <div>
         <TrendChartDetails colors={colors} data={active} keys={keysWithSlugs} />
-        <svg
-          width={size.width}
-          height={size.height}
-          preserveAspectRatio='xMidYMid'
-          viewBox={`0 0 ${size.width} ${size.height}`}
-          style={{ width: '100%' }}
-        >
-          <g transform={`translate(${margin.left}, ${margin.top})`}>
-            <XAxis scale={x} height={height} tickCt={8} />
-            <YAxis scale={y} width={width} />
-            {dataByKey.map((d, i) => (
-              <g key={i} className={`series series-${d.id}`}>
-                <path
-                  d={l(d.values)}
-                  fill='none'
-                  stroke={color(d.id)}
-                  strokeWidth='2'
-                />
-              </g>
-            ))}
-            {callout}
-            <rect
-              width={width}
-              height={height}
-              fill='none'
-              pointerEvents='all'
-              onMouseMove={this.rememberValue}
-              onMouseOut={this.forgetValue}
-            />
-          </g>
-        </svg>
+        <div className='col-12 overflow-auto'>
+          <svg
+            width={size.width}
+            height={size.height}
+            preserveAspectRatio='xMidYMid'
+            viewBox={`0 0 ${size.width} ${size.height}`}
+          >
+            <g transform={`translate(${margin.left}, ${margin.top})`}>
+              <XAxis scale={x} height={height} tickCt={8} />
+              <YAxis scale={y} width={width} />
+              {dataByKey.map((d, i) => (
+                <g key={i} className={`series series-${d.id}`}>
+                  <path
+                    d={l(d.values)}
+                    fill='none'
+                    stroke={color(d.id)}
+                    strokeWidth='2'
+                  />
+                </g>
+              ))}
+              {callout}
+              <rect
+                width={width}
+                height={height}
+                fill='none'
+                pointerEvents='all'
+                onMouseMove={this.rememberValue}
+                onMouseOut={this.forgetValue}
+              />
+            </g>
+          </svg>
+        </div>
         <div className='my2 h6 bold monospace line-height-1 center'>
           Rate per 100,000 people / Year
         </div>
@@ -147,8 +148,8 @@ TrendChart.propTypes = {
 }
 
 TrendChart.defaultProps = {
-  margin: { top: 20, right: 20, bottom: 10, left: 30 },
-  size: { width: 850, height: 300 },
+  margin: { top: 20, right: 20, bottom: 30, left: 30 },
+  size: { width: 735, height: 300 },
   colors: ['#52687d', '#ff5e50', '#97a7b8'],
 }
 
