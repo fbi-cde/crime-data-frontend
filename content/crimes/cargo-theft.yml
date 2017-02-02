@@ -1,8 +1,6 @@
 caveats:
-  - heading:
-    text:
-  - heading:
-    text:
+  - heading: How these crimes are counted
+    text: When law enforcement agencies report cargo theft, they include at least one of 13 offenses to specifically describe the incident. For instance, if the cargo was taken by threat or force, it is a robbery. If an entire truck is stolen, it is reported as a motor vehicle theft. If the situation involves fraud, an offense such as impersonation or embezzlement would be noted. Some of the other details that agencies can report include the location of the cargo theft, the type of weapon used (if any), the monetary value and a description of the property stolen, whether the property is recovered, as well as victim and offender information.
 
 links:
   - url: https://ucr.fbi.gov/cargo-theft-update

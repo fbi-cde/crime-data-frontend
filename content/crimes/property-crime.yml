@@ -1,11 +1,9 @@
 caveats:
-  - heading:
-    text:
-  - heading:
-    text:
+  - heading: Related offenses
+    text: Property crime includes the offenses of burglary, larceny-theft, motor vehicle theft, and arson. The object of the theft-type offenses is the taking of money or property, but there is no force or threat of force against the victims. The property crime category includes arson because the offense involves the destruction of property; however, arson victims may be subjected to force.
 
 links:
-  - url:
-    text:
+  - url: https://www.bjs.gov/index.cfm?ty=tp&tid=32
+    text: Bureau of Justice Statistics: Property Crime
   - url: https://www.nij.gov/topics/crime/property/pages/welcome.aspx
     text: National Institute of Justice: Property Crimes

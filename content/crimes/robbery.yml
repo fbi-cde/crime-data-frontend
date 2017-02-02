@@ -1,11 +1,11 @@
 caveats:
-  - heading:
-    text:
-  - heading:
-    text:
+  - heading: How these crimes are counted
+    text: The Uniform Crime Reporting Program defines robbery as the taking or attempting to take anything of value from the care, custody, or control of a person or persons by force or threat of force or violence or by putting the victim in fear.
 
 links:
   - url: https://www.bjs.gov/index.cfm?ty=tp&tid=313
     text: Bureau of Justice Statistics: Robbery
   - url: https://bankrobbers.fbi.gov/
     text: FBI: Wanted Bank Robbers
+  - url: https://www.bjs.gov/index.cfm?ty=pbdetail&iid=3878
+    text: Patterns of Robbery and Burglary in 9 States 1984-88

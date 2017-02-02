@@ -1,9 +1,299 @@
-caveats:
-  - heading:
-    text:
-  - heading:
+state: Alabama
+  - url: http://www.acjic.alabama.gov/
+    text: Alabama Criminal Justice Information Center
+  - url:
     text:
 
-links:
+state: Alaska
+  - url: http://www.dps.alaska.gov/statewide/ucr.aspx
+    text: Alaska Department of Public Safety
   - url:
-    text: 
+    text:
+
+state: Arizona
+  - url: http://www.azdps.gov/
+    text: Arizona Department of Public Safety
+  - url:
+    text:
+
+state: Arkansas
+  - url: http://www.acic.org/
+    text: Arkansas Crime Information Center
+  - url:
+    text:
+
+state: California
+  - url: https://oag.ca.gov/crime
+    text: California Crime Data
+  - url:
+    text:
+
+state: Colorado
+  - url: https://www.colorado.gov/cbi
+    text: Colorado Department of Public Safety
+  - url:
+    text:
+
+state: Connecticut
+  - url: http://www.ct.gov/despp/site/default.asp
+    text: Connecticut Department of Emergency Services and Public Protection
+  - url:
+    text:
+
+state: Delaware
+  - url:
+    text:
+  - url:
+    text:
+
+state: Florida
+  - url: http://www.fdle.state.fl.us/cms/home.aspx
+    text: Florida Department of Law Enforcement
+  - url:
+    text:
+
+state: Georgia
+  - url: http://gbi.georgia.gov/georgia-crime-information-center
+    text: Georgia Bureau of Investigation
+  - url:
+    text:
+
+state: Hawaii
+  - url: http://ag.hawaii.gov/cpja/
+    text: Hawaii Crime Prevention and Justice Assistance Division
+  - url:
+    text:
+
+state: Idaho
+  - url: https://isp.idaho.gov/BCI/
+    text: Idaho State Police
+  - url:
+    text:
+
+state: Illinois
+  - url: http://www.isp.state.il.us/
+    text: Illinois State Police
+  - url:
+    text:
+
+state: Indiana
+  - url:
+    text:
+  - url:
+    text:
+
+state: Iowa
+  - url: http://www.dps.state.ia.us/
+    text: Iowa Department of Public Safety
+  - url:
+    text:
+
+state: Kansas
+  - url: http://www.accesskansas.org/kbi/
+    text: Kansas Bureau of Investigation
+  - url:
+    text:
+
+state: Kentucky
+  - url: http://www.kentuckystatepolice.org/
+    text: Kentucky State Police
+  - url:
+    text:
+
+state: Louisiana
+  - url: http://lcle.state.la.us/
+    text: Louisiana Commission on Law Enforcement
+  - url:
+    text:
+
+state: Maine
+  - url: http://www.maine.gov/dps/
+    text: Maine Department of Public Safety
+  - url:
+    text:
+
+state: Maryland
+  - url:
+    text:
+  - url:
+    text:
+
+state: Massachusettes
+  - url: http://www.mass.gov/portal/residents/health-safety/
+    text: Massachusettes Public Safety
+  - url:
+    text:
+
+state: Michigan
+  - url: http://www.michigan.gov/msp
+    text: Michigan State Police
+  - url:
+    text:
+
+state: Minnesota
+  - url:
+    text:
+  - url:
+    text:
+
+state: Mississippi
+  - url:
+    text:
+  - url:
+    text:
+
+state: Missouri
+  - url: https://ucr.mshp.dps.mo.gov/ucr/ucrhome.nsf/
+    text: Missouri Department of Public Safety
+  - url:
+    text:
+
+state: Montana
+  - url: http://mbcc.mt.gov/
+    text: Montana Board of Crime Control
+  - url:
+    text:
+
+state: Nebraska
+  - url: https://ncc.nebraska.gov/
+    text: Nebraska Crime Comission
+  - url:
+    text:
+
+state: Nevada
+  - url: http://gsd.nv.gov/
+    text: Nevada Department of Public Safety
+  - url:
+    text:
+
+state: New Hampshire
+  - url:
+    text:
+  - url:
+    text:
+
+state: New Jersey
+  - url: http://www.njsp.org/
+    text: New Jersey State Police
+  - url:
+    text:
+
+state: New Mexico
+  - url:
+    text:
+  - url:
+    text:
+
+state: New York
+  - url: http://www.criminaljustice.ny.gov/
+    text: New York State Division of Criminal Justice Services
+  - url:
+    text:
+
+state: North Carolina
+  - url: http://www.ncdoj.gov/
+    text: North Carolina Department of Justice
+  - url:
+    text:
+
+state: North Dakota
+  - url: https://attorneygeneral.nd.gov/
+    text: North Dakota Attorney General
+  - url:
+    text:
+
+state: Ohio
+  - url: http://www.ocjs.ohio.gov/
+    text: Ohio Office of Criminal Justice Services
+  - url:
+    text:
+
+state: Oklahoma
+  - url: https://www.ok.gov/osbi/
+    text: Oklahoma State Bureau of Investigation
+  - url:
+    text:
+
+state: Oregon
+  - url: http://www.oregon.gov/osp/cjis/Pages/index.aspx
+    text: Oregon State Police
+  - url:
+    text:
+
+state: Pennsylvania
+  - url: http://www.paucrs.pa.gov/
+    text: Pennsylvania State Police Reporting
+  - url:
+    text:
+
+state: Rhode Island
+  - url:
+    text:
+  - url:
+    text:
+
+state: South Carolina
+  - url: http://www.sled.sc.gov/
+    text: South Carolina Law Enforcement Division
+  - url:
+    text:
+
+state: South Dakota
+  - url: http://www.dci.sd.gov/
+    text: Attorney General of South Dakota
+  - url:
+    text:
+
+state: Tennessee
+  - url:
+    text:
+  - url:
+    text:
+
+state: Texas
+  - url: http://www.dps.texas.gov/
+    text: Texas Department of Public Safety
+  - url:
+    text:
+
+state: Utah
+  - url: https://publicsafety.utah.gov/
+    text: Utah Department of Public Safety
+  - url:
+    text:
+
+state: Vermont
+  - url: http://vcic.vermont.gov/
+    text: Vermont Department of Public Safety
+  - url:
+    text:
+
+state: Virginia
+  - url: http://www.vsp.state.va.us/Crime_in_Virginia.shtm
+    text: Virginia State Police
+  - url:
+    text:
+
+state: Washington
+  - url: http://www.waspc.org/
+    text: Washington Association of Sheriffs and Police Chiefs
+  - url:
+    text:
+
+state: West Virginia
+  - url:
+    text:
+  - url:
+    text:
+
+state: Wisconsin
+  - url: https://www.doj.state.wi.us/dles/bureau-justice-information-and-analysis
+    text: Wisconsin Department of Justice
+  - url:
+    text:
+
+state: Wyoming
+  - url: http://ag.wyo.gov/
+    text: Wyoming Attorney General
+  - url:
+    text:

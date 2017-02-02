@@ -1,9 +1,11 @@
 caveats:
-  - heading:
-    text:
-  - heading:
-    text:
+  - heading: How these crimes are counted
+    text: In the Uniform Crime Reporting (UCR) Program, motor vehicle theft is defined as the theft or attempted theft of a motor vehicle. A motor vehicle is defined in the UCR Program as a self-propelled vehicle that runs on land surfaces and not on rails. Examples of motor vehicles include sport utility vehicles, automobiles, trucks, buses, motorcycles, motor scooters, all-terrain vehicles, and snowmobiles. Motor vehicle theft does not include farm equipment, bulldozers, airplanes, construction equipment, or water craft such as motorboats, sailboats, houseboats, or jet skis. The taking of a motor vehicle for temporary use by persons having lawful access is excluded from this definition.
 
 links:
-  - url:
-    text: 
+  - url: https://www.bjs.gov/index.cfm?ty=tp&tid=323
+    text: Bureau of Justice Statistics: Motor Vehicle Theft
+  - url: https://www.bjs.gov/index.cfm?ty=pbdetail&iid=476
+    text: Bureau of Justice Statistics: Carjacking 1993–2002
+  - url: https://www.safercar.gov/Vehicle-Owners/Resources/Theft-Prevention
+    text: Vehicle Theft Prevention: What Consumers Should Know
