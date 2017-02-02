@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import TimeChart from '../../src/components/TimeChart';
+import TrendChart from '../../src/components/TrendChart';
 
-describe('TimeChart', () => {
+describe('TrendChart', () => {
   const data = [
     { date: '2016-01-01', foo: 5, bar: 7 },
     { date: '2016-01-02', foo: 7, bar: 2 },
@@ -13,14 +13,14 @@ describe('TimeChart', () => {
   let chart
 
   beforeEach(() => {
-    chart = shallow(<TimeChart data={data} keys={keys} />)
+    chart = shallow(<TrendChart data={data} keys={keys} />)
   });
 
-  it('TimeChart renders svg', () => {
+  it('TrendChart renders svg', () => {
     expect(chart.find('svg').length).toEqual(1)
   })
 
-  it('TimeChart has a line (<path>) for each series', () => {
+  it('TrendChart has a line (<path>) for each series', () => {
     expect(chart.find('.series path').length).toEqual(keys.length)
   })
 })

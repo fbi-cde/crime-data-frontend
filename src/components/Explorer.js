@@ -1,11 +1,9 @@
 import lowerCase from 'lodash.lowercase'
-import { plural } from 'pluralize'
 import React from 'react'
 import startCase from 'lodash.startcase'
 
 import AboutTheData from './AboutTheData'
 import Breadcrumbs from './Breadcrumbs'
-import DownloadDataBtn from './DownloadDataBtn'
 import NotFound from './NotFound'
 import NibrsDimensionsContainer from './NibrsDimensionsContainer'
 import Sidebar from './Sidebar'
@@ -129,33 +127,14 @@ class Explorer extends React.Component {
               people.<sup>1</sup>
             </p>
             <hr className='mt0 mb3' />
-            <div className='mb2 p2 sm-p4 bg-blue-lighter'>
-              <div className='md-flex items-baseline'>
-                <div className='flex-auto'>
-                  <div className='inline-block'>
-                    <h2 className='m0 fs-ch1 sans-serif'>
-                      Reported {plural(crime)} in {place},
-                      <br />
-                      {filters.timeFrom}–{filters.timeTo}
-                    </h2>
-                  </div>
-                </div>
-                <div>
-                  <DownloadDataBtn
-                    data={trendData}
-                    fname='summary data'
-                    text='Download data'
-                  />
-                </div>
-              </div>
-            </div>
-            <div className='mb8'>
-              <TrendContainer
-                data={trendData}
-                loading={summaries.loading}
-                keys={['National', place]}
-              />
-            </div>
+            <TrendContainer
+              crime={crime}
+              place={place}
+              filters={filters}
+              data={trendData}
+              loading={summaries.loading}
+              keys={['National', place]}
+            />
             <div className='mb2 p2 sm-p4 bg-blue-lighter'>
               <h2 className='m0 fs-ch1 sans-serif'>
                 {startCase(crime)} Incident Details in {place},
