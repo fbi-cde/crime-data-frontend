@@ -1,0 +1,20 @@
+caveats:
+  - heading: Change in rape definition
+    text: In 2013, the FBI started collecting rape data under a revised definition and removed “forcible” from the offense name. All reported rape incidents in Ohio—whether collected under the revised definition or the legacy definition—are presented here.
+
+    Since the rape definition changed, some state and local law enforcement agencies have continued to report incidents with the legacy definition, because they haven’t been able to change their records management systems to accommodate the change.
+
+  - heading: How these crimes are counted
+    text: The Uniform Crime Reporting Program counts one offense for each victim of rape, attempted rape, or assault to commit rape, regardless of the victim’s age. Sexual relations involving a family member without consent are counted as rape, not incest. Statutory rape and incest are excluded.
+
+links:
+  - url: https://ucr.fbi.gov/new-rape-fact-sheet
+    text: Rape Definition Fact Sheet
+  - url: https://ucr.fbi.gov/nibrs/2013/resources/nibrs-rape-vs.-srs-rape
+    text: NIBRS Rape vs. Summary Rape
+  - url: https://ucr.fbi.gov/recent-program-updates/new-rape-definition-frequently-asked-questions
+    text: FAQ About the Change in the UCR Definition of Rape
+  - url: https://www.bjs.gov/index.cfm?ty=tp&tid=317
+    text: Bureau of Justice Statistics: Rape and Sexual Assault
+  - url: https://www.nij.gov/topics/crime/rape-sexual-violence/Pages/welcome.aspx
+    text: National Institute of Justice: Rape and Sexual Violence
