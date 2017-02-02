@@ -76,7 +76,7 @@ const Home = ({ appState, dispatch, location }) => {
               <select
                 className='col-12 bold field'
                 onChange={selectCrime}
-                defaultValue=''
+                defaultValue={crime || ''}
               >
                 <option value='' disabled>Crime Type</option>
                 <optgroup label='Violent Crime'>
