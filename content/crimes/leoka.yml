@@ -1,9 +1,18 @@
 caveats:
-  - heading:
-    text:
-  - heading:
-    text:
+  - heading: General criteria
+    text: This data concerns duly sworn city, university and college, county, state, and tribal law enforcement officers who were assaulted in the line of duty.
+
+  - heading: How these crimes are counted
+    text: Law enforcement agencies report the number of assaults resulting in injuries to their officers or instances in which an offender used a weapon that could have caused injury or death. Law enforcement agencies report assaults not causing injury if they involved more than verbal abuse or minor resistance to arrest.
+
+  - heading: Detailed assault data
+    text: While the FBI’s Law Enforcement Officers Killed and Assaulted (LEOKA) Program has collected aggregate assault data for more than 50 years, the program began collecting data for assaults with injury in 2013.
 
 links:
-  - url:
-    text: 
+  - url: https://ucr.fbi.gov/leoka
+    text: Uniform Crime Reporting Program: Law Enforcement Officers Killed and
+  Assaulted (LEOKA)
+  - url: https://ucr.fbi.gov/leoka-resources
+    text: LEOKA Resources
+  - url: https://leoka.org/
+    text: Center for the Study of Law Enforcement Officers Killed and Assaulted
