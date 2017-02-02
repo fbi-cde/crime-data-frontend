@@ -4,7 +4,6 @@ import React from 'react'
 // TODO: refactor SORT_DETAILS and sortIdx
 
 const SORT_DETAILS = [
-  { key: 'key', order: 'asc' },
   { key: 'count', order: 'desc' },
   { key: 'count', order: 'asc' },
 ]
@@ -15,13 +14,13 @@ const formatNumber = format(',')
 class IncidentDetailTable extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { sortIdx: 1 }
+    this.state = { sortIdx: 0 }
     this.changeSort = ::this.changeSort
   }
 
   changeSort(e) {
     e.preventDefault()
-    this.setState({ sortIdx: ((this.state.sortIdx + 1) % 3) })
+    this.setState({ sortIdx: ((this.state.sortIdx + 1) % 2) })
   }
 
   render() {
@@ -32,7 +31,7 @@ class IncidentDetailTable extends React.Component {
     const dataParsed = data.map(d => ({ ...d, percent: (d.count / total) }))
     const sort = SORT_DETAILS[sortIdx]
 
-    dataParsed.sort((a, b) => a[sort.key] > b[sort.key])
+    dataParsed.sort((a, b) => a[sort.key] - b[sort.key])
     if (sort.order === 'desc') dataParsed.reverse()
 
     return (
