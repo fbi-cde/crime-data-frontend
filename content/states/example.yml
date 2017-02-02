@@ -41,8 +41,8 @@ state: Connecticut
     text:
 
 state: Delaware
-  - url:
-    text:
+  - url: http://dsp.delaware.gov/state_bureau_of_identification.shtml
+    text: Delaware State Bureau of Identification
   - url:
     text:
 
@@ -113,8 +113,8 @@ state: Maine
     text:
 
 state: Maryland
-  - url:
-    text:
+  - url: http://mdsp.maryland.gov/Organization/Pages/SupportServicesBureau/CentralRecordsDivision.aspx
+    text: Maryland Central Records Division
   - url:
     text:
 
@@ -131,14 +131,14 @@ state: Michigan
     text:
 
 state: Minnesota
-  - url:
-    text:
+  - url: https://dps.mn.gov/divisions/bca/bca-divisions/mnjis/Pages/default.aspx
+    text: Minnesota Justice Information Services
   - url:
     text:
 
 state: Mississippi
-  - url:
-    text:
+  - url: http://www.dps.state.ms.us/
+    text: Mississippi Department of Public Safety
   - url:
     text:
 
@@ -167,8 +167,8 @@ state: Nevada
     text:
 
 state: New Hampshire
-  - url:
-    text:
+  - url: https://www.nh.gov/safety/divisions/nhsp/ssb/crimrecords/#criminal
+    text: New Hampshire Criminal Records Unit
   - url:
     text:
 
@@ -179,8 +179,8 @@ state: New Jersey
     text:
 
 state: New Mexico
-  - url:
-    text:
+  - url: http://www.dps.state.nm.us/index.php/uniform-crime-reports/
+    text: New Mexico Department of Public Safety
   - url:
     text:
 
@@ -227,8 +227,8 @@ state: Pennsylvania
     text:
 
 state: Rhode Island
-  - url:
-    text:
+  - url: http://risp.ri.gov/ucr/
+    text: Rhode Island Uniform Crime Reporting Unit
   - url:
     text:
 
@@ -245,8 +245,8 @@ state: South Dakota
     text:
 
 state: Tennessee
-  - url:
-    text:
+  - url: https://www.tn.gov/tbi/topic/crime-statistics
+    text: Tennessee Bureau of Investigation
   - url:
     text:
 
@@ -281,8 +281,8 @@ state: Washington
     text:
 
 state: West Virginia
-  - url:
-    text:
+  - url: http://www.wvsp.gov/about/Pages/Publications.aspx
+    text: West Virginia State Police
   - url:
     text:
 
