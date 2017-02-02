@@ -8,11 +8,7 @@ class TimePeriodFilter extends React.Component {
     super(props)
     this.handleChange = ::this.handleChange
     this.setError = ::this.setError
-    this.state = {
-      error: null,
-      timeFrom: this.props.timeFrom,
-      timeTo: this.props.timeTo,
-    }
+    this.state = { error: null }
   }
 
   setError(msg) {
@@ -20,10 +16,10 @@ class TimePeriodFilter extends React.Component {
   }
 
   handleChange(e) {
-    const { state } = this
+    const { props } = this
     const { id, value } = e.target
     const isFrom = id === 'timeFrom'
-    const other = (isFrom) ? state.timeTo : state.timeFrom
+    const other = (isFrom) ? props.timeTo : props.timeFrom
 
     if (isFrom && value < MIN_YEAR) {
       return this.setError(`Please select a beginning year since ${MIN_YEAR}`)
@@ -35,16 +31,17 @@ class TimePeriodFilter extends React.Component {
       return this.setError('You must select a range of at least 10 years')
     }
 
-    this.setState({ [id]: value, error: null })
+    this.setState({ error: null })
 
-    return this.props.onChange({
-      timeFrom: (isFrom) ? value : state.timeFrom,
-      timeTo: (isFrom) ? state.timeTo : value,
+    return props.onChange({
+      timeFrom: (isFrom) ? value : props.timeFrom,
+      timeTo: (isFrom) ? props.timeTo : value,
     })
   }
 
   render() {
     const { error } = this.state
+    const { timeFrom, timeTo } = this.props
 
     return (
       <div id='time-period' className='mb5'>
@@ -61,7 +58,7 @@ class TimePeriodFilter extends React.Component {
               min={MIN_YEAR}
               max={MAX_YEAR}
               onChange={this.handleChange}
-              value={this.state.timeFrom}
+              value={timeFrom}
             />
           </div>
           <span className='col col-2 center lh-form-field'>to</span>
@@ -74,7 +71,7 @@ class TimePeriodFilter extends React.Component {
               min={MIN_YEAR}
               max={MAX_YEAR}
               onChange={this.handleChange}
-              value={this.state.timeTo}
+              value={timeTo}
             />
           </div>
         </div>
