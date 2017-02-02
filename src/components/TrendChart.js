@@ -7,11 +7,11 @@ import { timeParse } from 'd3-time-format'
 import React from 'react'
 
 import { slugify } from '../util/text'
-import TimeChartDetails from './TimeChartDetails'
+import TrendChartDetails from './TrendChartDetails'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
 
-class TimeChart extends React.Component {
+class TrendChart extends React.Component {
   constructor(props) {
     super(props)
     this.state = { hover: null }
@@ -102,7 +102,7 @@ class TimeChart extends React.Component {
 
     return (
       <div>
-        <TimeChartDetails colors={colors} data={active} keys={keysWithSlugs} />
+        <TrendChartDetails colors={colors} data={active} keys={keysWithSlugs} />
         <svg
           width={size.width}
           height={size.height}
@@ -142,14 +142,14 @@ class TimeChart extends React.Component {
   }
 }
 
-TimeChart.propTypes = {
+TrendChart.propTypes = {
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 }
 
-TimeChart.defaultProps = {
+TrendChart.defaultProps = {
   margin: { top: 20, right: 20, bottom: 10, left: 30 },
   size: { width: 850, height: 300 },
   colors: ['#52687d', '#ff5e50', '#97a7b8'],
 }
 
-export default TimeChart
+export default TrendChart

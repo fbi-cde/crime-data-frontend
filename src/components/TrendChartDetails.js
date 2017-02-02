@@ -4,7 +4,7 @@ import React from 'react'
 const formatRate = format('.1f')
 const formatTotal = format(',.0f')
 
-const TimeChartDetails = ({ colors, data, keys }) => {
+const TrendChartDetails = ({ colors, data, keys }) => {
   const { name, slug } = keys[1]
   const year = data.date.getFullYear()
   const rate = data[slug]
@@ -61,4 +61,4 @@ const TimeChartDetails = ({ colors, data, keys }) => {
   )
 }
 
-export default TimeChartDetails
+export default TrendChartDetails
