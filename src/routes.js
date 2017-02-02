@@ -8,10 +8,8 @@ import history from './util/history'
 import Home from './components/Home'
 import NotFound from './components/NotFound'
 
-const scrollToTop = () => window.scrollTo(0, 0)
-
 const routes = (
-  <Router history={history} onUpdate={scrollToTop}>
+  <Router history={history}>
     <Route path='/' component={App}>
       <IndexRoute component={Home} />
       <Route path='/downloads-and-docs' component={DownloadsAndDocs} />

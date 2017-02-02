@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 const linkClass = 'mr1 pr1 white border-right border-white'
 const linkClassLast = 'white'
 
+const scrollToTop = () => window.scrollTo(0, 0)
+
 const Footer = () => (
   <footer className='py7 bg-blue white'>
     <div className='items-center container-big mx-auto mt1 px2'>
@@ -28,15 +30,31 @@ const Footer = () => (
           <div className='pb3 caps'>
             <ul className='list-style-none px0 m0 mb1'>
               <li className='inline-block'>
-                <Link className={linkClass} to='/'>Explorer</Link>
+                <Link
+                  className={linkClass}
+                  onClick={scrollToTop}
+                  to='/'
+                >
+                  Explorer
+                </Link>
               </li>
               <li className='inline-block'>
-                <Link className={linkClass} to='/downloads-and-docs'>
+                <Link
+                  className={linkClass}
+                  onClick={scrollToTop}
+                  to='/downloads-and-docs'
+                >
                   Downloads & Documentation
                 </Link>
               </li>
               <li className='inline-block'>
-                <Link className={linkClass} to='/about'>About</Link>
+                <Link
+                  className={linkClass}
+                  onClick={scrollToTop}
+                  to='/about'
+                >
+                  About
+                </Link>
               </li>
               <li className='inline-block'>
                 <Link className={linkClassLast} to='/'>Glossary</Link>
