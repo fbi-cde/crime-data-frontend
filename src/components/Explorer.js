@@ -5,7 +5,7 @@ import startCase from 'lodash.startcase'
 import AboutTheData from './AboutTheData'
 import Breadcrumbs from './Breadcrumbs'
 import NotFound from './NotFound'
-import NibrsDimensionsContainer from './NibrsDimensionsContainer'
+import NibrsContainer from './NibrsContainer'
 import Sidebar from './Sidebar'
 import Term from './Term'
 import TrendContainer from './TrendContainer'
@@ -135,19 +135,13 @@ class Explorer extends React.Component {
               loading={summaries.loading}
               keys={['National', place]}
             />
-            <div className='mb2 p2 sm-p4 bg-blue-lighter'>
-              <h2 className='m0 fs-ch1 sans-serif'>
-                {startCase(crime)} Incident Details in {place},
-                <br />
-                {filters.timeFrom}–{filters.timeTo}
-              </h2>
-            </div>
-            <div className='mb8'>
-              <NibrsDimensionsContainer
-                data={nibrsData}
-                loading={nibrs.loading}
-              />
-            </div>
+            <NibrsContainer
+              crime={crime}
+              place={place}
+              filters={filters}
+              data={nibrsData}
+              loading={nibrs.loading}
+            />
             <hr className='mt0 mb3' />
             <AboutTheData />
           </div>
