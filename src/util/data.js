@@ -271,7 +271,7 @@ const propertyCrime = [
   'All Property Crime',
   'Arson',
   'Burglary',
-  'Cargo Theft',
+  // 'Cargo Theft',
   'Larceny Theft',
   'Motor Vehicle Theft',
 ]
