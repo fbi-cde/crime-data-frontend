@@ -1,0 +1,300 @@
+states:
+  Alabama:
+  - url: http://www.acjic.alabama.gov/
+    text: Alabama UCR Program
+  - url:
+    text:
+
+  Alaska:
+  - url: http://www.dps.alaska.gov/statewide/ucr.aspx
+    text: Alaska UCR Program
+  - url:
+    text:
+
+  Arizona:
+  - url: http://www.azdps.gov/
+    text: Arizona UCR Program
+  - url:
+    text:
+
+  Arkansas:
+  - url: http://www.acic.org/
+    text: Arkansas UCR Program
+  - url:
+    text:
+
+  California:
+  - url: https://oag.ca.gov/crime
+    text: California UCR Program
+  - url:
+    text:
+
+  Colorado:
+  - url: https://www.colorado.gov/cbi
+    text: Colorado UCR Program
+  - url:
+    text:
+
+  Connecticut:
+  - url: http://www.ct.gov/despp/site/default.asp
+    text: Connecticut UCR Program
+  - url:
+    text:
+
+  Delaware:
+  - url: http://dsp.delaware.gov/state_bureau_of_identification.shtml
+    text: Delaware UCR Program
+  - url:
+    text:
+
+  Florida:
+  - url: http://www.fdle.state.fl.us/cms/home.aspx
+    text: Florida UCR Program
+  - url:
+    text:
+
+  Georgia:
+  - url: http://gbi.georgia.gov/georgia-crime-information-center
+    text: Georgia UCR Program
+  - url:
+    text:
+
+  Hawaii:
+  - url: http://ag.hawaii.gov/cpja/
+    text: Hawaii UCR Program
+  - url:
+    text:
+
+  Idaho:
+  - url: https://isp.idaho.gov/BCI/
+    text: Idaho UCR Program
+  - url:
+    text:
+
+  Illinois:
+  - url: http://www.isp.state.il.us/
+    text: Illinois UCR Program
+  - url:
+    text:
+
+  Indiana:
+  - url:
+    text:
+  - url:
+    text:
+
+  Iowa:
+  - url: http://www.dps.state.ia.us/
+    text: Iowa UCR Program
+  - url:
+    text:
+
+  Kansas:
+  - url: http://www.accesskansas.org/kbi/
+    text: Kansas UCR Program
+  - url:
+    text:
+
+  Kentucky:
+  - url: http://www.kentuckystatepolice.org/
+    text: Kentucky UCR Program
+  - url:
+    text:
+
+  Louisiana:
+  - url: http://lcle.state.la.us/
+    text: Louisiana UCR Program
+  - url:
+    text:
+
+  Maine:
+  - url: http://www.maine.gov/dps/
+    text: Maine UCR Program
+  - url:
+    text:
+
+  Maryland:
+  - url: http://mdsp.maryland.gov/Organization/Pages/SupportServicesBureau/CentralRecordsDivision.aspx
+    text: Maryland UCR Program
+  - url:
+    text:
+
+  Massachusettes:
+  - url: http://www.mass.gov/portal/residents/health-safety/
+    text: Massachusettes UCR Program
+  - url:
+    text:
+
+  Michigan:
+  - url: http://www.michigan.gov/msp
+    text: Michigan UCR Program
+  - url:
+    text:
+
+  Minnesota:
+  - url: https://dps.mn.gov/divisions/bca/bca-divisions/mnjis/Pages/default.aspx
+    text: Minnesota UCR Program
+  - url:
+    text:
+
+  Mississippi:
+  - url: http://www.dps.state.ms.us/
+    text: Mississippi UCR Program
+  - url:
+    text:
+
+  Missouri:
+  - url: https://ucr.mshp.dps.mo.gov/ucr/ucrhome.nsf/
+    text: Missouri UCR Program
+  - url:
+    text:
+
+  Montana:
+  - url: http://mbcc.mt.gov/
+    text: Montana UCR Program
+  - url:
+    text:
+
+  Nebraska:
+  - url: https://ncc.nebraska.gov/
+    text: Nebraska UCR Program
+  - url:
+    text:
+
+  Nevada:
+  - url: http://gsd.nv.gov/
+    text: Nevada UCR Program
+  - url:
+    text:
+
+  New Hampshire:
+  - url: https://www.nh.gov/safety/divisions/nhsp/ssb/crimrecords/#criminal
+    text: New Hampshire UCR Program
+  - url:
+    text:
+
+  New Jersey:
+  - url: http://www.njsp.org/
+    text: New Jersey UCR Program
+  - url:
+    text:
+
+  New Mexico:
+  - url: http://www.dps.state.nm.us/index.php/uniform-crime-reports/
+    text: New Mexico UCR Program
+  - url:
+    text:
+
+  New York:
+  - url: http://www.criminaljustice.ny.gov/
+    text: New York UCR Program
+  - url:
+    text:
+
+  North Carolina:
+  - url: http://www.ncdoj.gov/
+    text: North Carolina UCR Program
+  - url:
+    text:
+
+  North Dakota:
+  - url: https://attorneygeneral.nd.gov/
+    text: North Dakota UCR Program
+  - url:
+    text:
+
+  Ohio:
+  - url: http://www.ocjs.ohio.gov/
+    text: Ohio UCR Program
+  - url:
+    text:
+
+  Oklahoma:
+  - url: https://www.ok.gov/osbi/
+    text: Oklahoma UCR Program
+  - url:
+    text:
+
+  Oregon:
+  - url: http://www.oregon.gov/osp/cjis/Pages/index.aspx
+    text: Oregon UCR Program
+  - url:
+    text:
+
+  Pennsylvania:
+  - url: http://www.paucrs.pa.gov/
+    text: Pennsylvania UCR Program
+  - url:
+    text:
+
+  Rhode Island:
+  - url: http://risp.ri.gov/ucr/
+    text: Rhode Island UCR Program
+  - url:
+    text:
+
+  South Carolina:
+  - url: http://www.sled.sc.gov/
+    text: South Carolina UCR Program
+  - url:
+    text:
+
+  South Dakota:
+  - url: http://www.dci.sd.gov/
+    text: South Dakota UCR Program
+  - url:
+    text:
+
+  Tennessee:
+  - url: https://www.tn.gov/tbi/topic/crime-statistics
+    text: Tennessee UCR Program
+  - url:
+    text:
+
+  Texas:
+  - url: http://www.dps.texas.gov/
+    text: Texas UCR Program
+  - url:
+    text:
+
+  Utah:
+  - url: https://publicsafety.utah.gov/
+    text: Utah UCR Program
+  - url:
+    text:
+
+  Vermont:
+  - url: http://vcic.vermont.gov/
+    text: Vermont UCR Program
+  - url:
+    text:
+
+  Virginia:
+  - url: http://www.vsp.state.va.us/Crime_in_Virginia.shtm
+    text: Virginia UCR Program
+  - url:
+    text:
+
+  Washington:
+  - url: http://www.waspc.org/
+    text: Washington UCR Program
+  - url:
+    text:
+
+  West Virginia:
+  - url: http://www.wvsp.gov/about/Pages/Publications.aspx
+    text: West Virginia UCR Program
+  - url:
+    text:
+
+  Wisconsin:
+  - url: https://www.doj.state.wi.us/dles/bureau-justice-information-and-analysis
+    text: Wisconsin UCR Program
+  - url:
+    text:
+
+  Wyoming:
+  - url: http://ag.wyo.gov/
+    text: Wyoming UCR Program
+  - url:
+    text:

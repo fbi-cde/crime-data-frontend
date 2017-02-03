@@ -1,0 +1,10 @@
+caveats:
+  - heading: How these crimes are counted
+    text: The Uniform Crime Reporting Program defines aggravated assault as an unlawful attack by one person upon another for the purpose of inflicting severe or aggravated bodily injury. This type of assault is usually accompanied by the use of a weapon or by other means likely to produce death or bodily harm. Attempted aggravated assault that involves the display of or threat to use a gun, knife, or other weapon is included in this crime category because serious personal injury would likely result. When aggravated assault and larceny theft occur together, the offense is categorized as robbery.
+
+  - heading: Information about simple assaults
+    text: Assaults that do not involve a dangerous weapon or serious injuries are reported as simple assaults under the FBI’s arrests data.
+
+links:
+  - url: https://www.bjs.gov/index.cfm?ty=tp&tid=316
+    text: "Bureau of Justice Statistics: Assault"

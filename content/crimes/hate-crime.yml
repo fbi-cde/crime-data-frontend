@@ -1,0 +1,25 @@
+caveats:
+  - heading: How agencies investigate hate crimes
+    text: The Hate Crime Statistics Program of the FBI’s Uniform Crime Reporting Program collects data regarding criminal offenses that were motivated, in whole or in part, by the offender’s bias against a race, gender, gender identity, religion, disability, sexual orientation, or ethnicity, and were committed against persons, property, or society. Because motivation is subjective, it is sometimes difficult to know with certainty whether a crime resulted from the offender’s bias. Moreover, the presence of bias alone does not necessarily mean that a crime can be considered a hate crime. Only when a law enforcement investigation reveals sufficient evidence to lead a reasonable and prudent person to conclude that the offender’s actions were motivated, in whole or in part, by their bias, should an agency report an incident as a hate crime.
+  - heading: Types of incidents
+    text: The FBI collects data about both single-bias and multiple-bias hate crimes. A single-bias incident is an incident in which one or more offense types are motivated by the same bias. Beginning in 2013, law enforcement agencies could report up to five bias motivations per offense type. Therefore, the definition of a multiple-bias incident has been revised to an incident in which one or more offense types are motivated by two or more biases.
+  - heading: Avoid rankings or comparisons
+    text: Valid assessments about crime, including hate crime, are possible only with careful study and analysis of the various conditions affecting each local law enforcement jurisdiction. Some of this data may not be comparable to prior hate crime statistics because of differing levels of participation from year to year.
+
+links:
+  - url: https://ucr.fbi.gov/ucr-statistics-their-proper-use
+    text: "Uniform Crime Reporting Statistics: Their Proper Use"
+  - url: https://ucr.fbi.gov/hate-crime-technical-specification-version-1.1-pdf
+    text: Uniform Crime Reporting Hate Crime Technical Specification
+  - url: https://ucr.fbi.gov/hate-crime-data-collection-guidelines-and-training-manual.pdf
+    text: Hate Crime Data Collection Guidelines And Training Manual
+  - url: https://ucr.fbi.gov/conversion-of-nibrs-data-to-hate-crime-data.pdf
+    text: "Conversion of National Incident Based Reporting System (NIBRS) Data to Hate Crime Data"
+  - url: https://www.bjs.gov/index.cfm?ty=tp&tid=37
+    text: "Bureau of Justice Statistics: Hate Crime"
+  - url: https://www.bjs.gov/index.cfm?ty=pbdetail&iid=5844
+    text: "Crime Against Persons With Disabilities, 2009-2014"
+  - url: https://www.bjs.gov/index.cfm?ty=pbdetail&iid=4883
+    text: "Hate Crime Victimization, 2004–2012"
+  - url: https://www.nij.gov/topics/crime/hate-crime/pages/welcome.aspx
+    text: "National Institute of Justice: Hate Crime"
