@@ -278,7 +278,7 @@ const propertyCrime = [
 
 const otherCrime = [
   'Hate Crime',
-  'Human Trafficking',
+  // 'Human Trafficking',
   'Law Enforcement Officers Killed and Assaulted (LEOKA)',
 ]
 

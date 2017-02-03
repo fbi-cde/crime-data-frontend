@@ -93,7 +93,6 @@ const Home = ({ appState, dispatch, location }) => {
                   <option value='motor-vehicle-theft'>Motor Vehicle Theft</option>
                 </optgroup>
                 <option value='hate-crime'>Hate Crime</option>
-                <option value='Human trafficking'>Human trafficking</option>
                 <option value='leoka'>Law Enforcement Officers Killed and Assaulted</option>
               </select>
             </div>
