@@ -1,79 +1,79 @@
 states:
   Alabama:
   - url: http://www.acjic.alabama.gov/
-    text: Alabama Criminal Justice Information Center
+    text: Alabama UCR Program
   - url:
     text:
 
   Alaska:
   - url: http://www.dps.alaska.gov/statewide/ucr.aspx
-    text: Alaska Department of Public Safety
+    text: Alaska UCR Program
   - url:
     text:
 
   Arizona:
   - url: http://www.azdps.gov/
-    text: Arizona Department of Public Safety
+    text: Arizona UCR Program
   - url:
     text:
 
   Arkansas:
   - url: http://www.acic.org/
-    text: Arkansas Crime Information Center
+    text: Arkansas UCR Program
   - url:
     text:
 
   California:
   - url: https://oag.ca.gov/crime
-    text: California Crime Data
+    text: California UCR Program
   - url:
     text:
 
   Colorado:
   - url: https://www.colorado.gov/cbi
-    text: Colorado Department of Public Safety
+    text: Colorado UCR Program
   - url:
     text:
 
   Connecticut:
   - url: http://www.ct.gov/despp/site/default.asp
-    text: Connecticut Department of Emergency Services and Public Protection
+    text: Connecticut UCR Program
   - url:
     text:
 
   Delaware:
   - url: http://dsp.delaware.gov/state_bureau_of_identification.shtml
-    text: Delaware State Bureau of Identification
+    text: Delaware UCR Program
   - url:
     text:
 
   Florida:
   - url: http://www.fdle.state.fl.us/cms/home.aspx
-    text: Florida Department of Law Enforcement
+    text: Florida UCR Program
   - url:
     text:
 
   Georgia:
   - url: http://gbi.georgia.gov/georgia-crime-information-center
-    text: Georgia Bureau of Investigation
+    text: Georgia UCR Program
   - url:
     text:
 
   Hawaii:
   - url: http://ag.hawaii.gov/cpja/
-    text: Hawaii Crime Prevention and Justice Assistance Division
+    text: Hawaii UCR Program
   - url:
     text:
 
   Idaho:
   - url: https://isp.idaho.gov/BCI/
-    text: Idaho State Police
+    text: Idaho UCR Program
   - url:
     text:
 
   Illinois:
   - url: http://www.isp.state.il.us/
-    text: Illinois State Police
+    text: Illinois UCR Program
   - url:
     text:
 
@@ -85,216 +85,216 @@ states:
 
   Iowa:
   - url: http://www.dps.state.ia.us/
-    text: Iowa Department of Public Safety
+    text: Iowa UCR Program
   - url:
     text:
 
   Kansas:
   - url: http://www.accesskansas.org/kbi/
-    text: Kansas Bureau of Investigation
+    text: Kansas UCR Program
   - url:
     text:
 
   Kentucky:
   - url: http://www.kentuckystatepolice.org/
-    text: Kentucky State Police
+    text: Kentucky UCR Program
   - url:
     text:
 
   Louisiana:
   - url: http://lcle.state.la.us/
-    text: Louisiana Commission on Law Enforcement
+    text: Louisiana UCR Program
   - url:
     text:
 
   Maine:
   - url: http://www.maine.gov/dps/
-    text: Maine Department of Public Safety
+    text: Maine UCR Program
   - url:
     text:
 
   Maryland:
   - url: http://mdsp.maryland.gov/Organization/Pages/SupportServicesBureau/CentralRecordsDivision.aspx
-    text: Maryland Central Records Division
+    text: Maryland UCR Program
   - url:
     text:
 
   Massachusettes:
   - url: http://www.mass.gov/portal/residents/health-safety/
-    text: Massachusettes Public Safety
+    text: Massachusettes UCR Program
   - url:
     text:
 
   Michigan:
   - url: http://www.michigan.gov/msp
-    text: Michigan State Police
+    text: Michigan UCR Program
   - url:
     text:
 
   Minnesota:
   - url: https://dps.mn.gov/divisions/bca/bca-divisions/mnjis/Pages/default.aspx
-    text: Minnesota Justice Information Services
+    text: Minnesota UCR Program
   - url:
     text:
 
   Mississippi:
   - url: http://www.dps.state.ms.us/
-    text: Mississippi Department of Public Safety
+    text: Mississippi UCR Program
   - url:
     text:
 
   Missouri:
   - url: https://ucr.mshp.dps.mo.gov/ucr/ucrhome.nsf/
-    text: Missouri Department of Public Safety
+    text: Missouri UCR Program
   - url:
     text:
 
   Montana:
   - url: http://mbcc.mt.gov/
-    text: Montana Board of Crime Control
+    text: Montana UCR Program
   - url:
     text:
 
   Nebraska:
   - url: https://ncc.nebraska.gov/
-    text: Nebraska Crime Comission
+    text: Nebraska UCR Program
   - url:
     text:
 
   Nevada:
   - url: http://gsd.nv.gov/
-    text: Nevada Department of Public Safety
+    text: Nevada UCR Program
   - url:
     text:
 
   New Hampshire:
   - url: https://www.nh.gov/safety/divisions/nhsp/ssb/crimrecords/#criminal
-    text: New Hampshire Criminal Records Unit
+    text: New Hampshire UCR Program
   - url:
     text:
 
   New Jersey:
   - url: http://www.njsp.org/
-    text: New Jersey State Police
+    text: New Jersey UCR Program
   - url:
     text:
 
   New Mexico:
   - url: http://www.dps.state.nm.us/index.php/uniform-crime-reports/
-    text: New Mexico Department of Public Safety
+    text: New Mexico UCR Program
   - url:
     text:
 
   New York:
   - url: http://www.criminaljustice.ny.gov/
-    text: New York State Division of Criminal Justice Services
+    text: New York UCR Program
   - url:
     text:
 
   North Carolina:
   - url: http://www.ncdoj.gov/
-    text: North Carolina Department of Justice
+    text: North Carolina UCR Program
   - url:
     text:
 
   North Dakota:
   - url: https://attorneygeneral.nd.gov/
-    text: North Dakota Attorney General
+    text: North Dakota UCR Program
   - url:
     text:
 
   Ohio:
   - url: http://www.ocjs.ohio.gov/
-    text: Ohio Office of Criminal Justice Services
+    text: Ohio UCR Program
   - url:
     text:
 
   Oklahoma:
   - url: https://www.ok.gov/osbi/
-    text: Oklahoma State Bureau of Investigation
+    text: Oklahoma UCR Program
   - url:
     text:
 
   Oregon:
   - url: http://www.oregon.gov/osp/cjis/Pages/index.aspx
-    text: Oregon State Police
+    text: Oregon UCR Program
   - url:
     text:
 
   Pennsylvania:
   - url: http://www.paucrs.pa.gov/
-    text: Pennsylvania State Police Reporting
+    text: Pennsylvania UCR Program
   - url:
     text:
 
   Rhode Island:
   - url: http://risp.ri.gov/ucr/
-    text: Rhode Island Uniform Crime Reporting Unit
+    text: Rhode Island UCR Program
   - url:
     text:
 
   South Carolina:
   - url: http://www.sled.sc.gov/
-    text: South Carolina Law Enforcement Division
+    text: South Carolina UCR Program
   - url:
     text:
 
   South Dakota:
   - url: http://www.dci.sd.gov/
-    text: Attorney General of South Dakota
+    text: South Dakota UCR Program
   - url:
     text:
 
   Tennessee:
   - url: https://www.tn.gov/tbi/topic/crime-statistics
-    text: Tennessee Bureau of Investigation
+    text: Tennessee UCR Program
   - url:
     text:
 
   Texas:
   - url: http://www.dps.texas.gov/
-    text: Texas Department of Public Safety
+    text: Texas UCR Program
   - url:
     text:
 
   Utah:
   - url: https://publicsafety.utah.gov/
-    text: Utah Department of Public Safety
+    text: Utah UCR Program
   - url:
     text:
 
   Vermont:
   - url: http://vcic.vermont.gov/
-    text: Vermont Department of Public Safety
+    text: Vermont UCR Program
   - url:
     text:
 
   Virginia:
   - url: http://www.vsp.state.va.us/Crime_in_Virginia.shtm
-    text: Virginia State Police
+    text: Virginia UCR Program
   - url:
     text:
 
   Washington:
   - url: http://www.waspc.org/
-    text: Washington Association of Sheriffs and Police Chiefs
+    text: Washington UCR Program
   - url:
     text:
 
   West Virginia:
   - url: http://www.wvsp.gov/about/Pages/Publications.aspx
-    text: West Virginia State Police
+    text: West Virginia UCR Program
   - url:
     text:
 
   Wisconsin:
   - url: https://www.doj.state.wi.us/dles/bureau-justice-information-and-analysis
-    text: Wisconsin Department of Justice
+    text: Wisconsin UCR Program
   - url:
     text:
 
   Wyoming:
   - url: http://ag.wyo.gov/
-    text: Wyoming Attorney General
+    text: Wyoming UCR Program
   - url:
     text:
