@@ -6,6 +6,7 @@ import thunk from 'redux-thunk'
 import filters from './reducers/filtersReducer'
 import glossary from './reducers/glossaryReducer'
 import nibrs from './reducers/nibrsReducer'
+import sidebar from './reducers/sidebarReducer'
 import summaries from './reducers/summaryReducer'
 
 const logger = store => next => action => {
@@ -15,10 +16,17 @@ const logger = store => next => action => {
   return result
 }
 
+const reducer = combineReducers({
+  filters,
+  glossary,
+  nibrs,
+  sidebar,
+  summaries,
+})
+
 const middlewares = [thunk]
 if (process.env.NODE_ENV !== 'production') middlewares.push(logger)
 
-const reducer = combineReducers({ filters, glossary, nibrs, summaries })
 const store = createStore(reducer, applyMiddleware(...middlewares))
 
 export default store

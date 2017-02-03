@@ -9,11 +9,12 @@ import NibrsDimensionsContainer from './NibrsDimensionsContainer'
 import Sidebar from './Sidebar'
 import Term from './Term'
 import TrendContainer from './TrendContainer'
+
 import { fetchSummaries } from '../actions/summaryActions'
 import { fetchNibrsDimensions } from '../actions/nibrsActions'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
+import { hideSidebar, showSidebar } from '../actions/sidebarActions'
 import { crimeTypes } from '../util/data'
-
 import { slugify } from '../util/text'
 import lookup from '../util/usa'
 
@@ -54,6 +55,7 @@ class Explorer extends React.Component {
     super(props)
     this.props = props
     this.handleSidebarChange = ::this.handleSidebarChange
+    this.toggleSidebar = ::this.toggleSidebar
   }
 
   componentDidMount() {
@@ -85,6 +87,14 @@ class Explorer extends React.Component {
     this.props.dispatch(action)
   }
 
+  toggleSidebar() {
+    const { dispatch } = this.props
+    const { isOpen } = this.props.appState.sidebar
+
+    if (isOpen) return dispatch(hideSidebar())
+    return dispatch(showSidebar())
+  }
+
   render() {
     const { appState, dispatch, params, router } = this.props
     const crime = lowerCase(params.crime)
@@ -93,14 +103,30 @@ class Explorer extends React.Component {
     // show not found page if crime or place unfamiliar
     if (!crimeSlugs.includes(crime) || !lookup(place)) return <NotFound />
 
-    const { filters, nibrs, summaries } = appState
+    const { filters, nibrs, sidebar, summaries } = appState
     const nibrsData = filterNibrsData(nibrs.data, filters)
     const trendData = mungeSummaryData(summaries, params.place)
 
     return (
       <div className='site-wrapper'>
+        <div className='fixed right-0 top-0 p1'>
+          <button
+            className='btn btn-primary bg-red-bright p1 md-hide lg-hide'
+            onClick={this.toggleSidebar}
+          >
+            <img
+              className='align-middle'
+              width='22'
+              height='20'
+              src='/img/filters.svg'
+              alt='filters'
+            />
+          </button>
+        </div>
         <Sidebar
+          dispatch={dispatch}
           filters={filters}
+          isOpen={sidebar.isOpen}
           onChange={this.handleSidebarChange}
           router={router}
         />

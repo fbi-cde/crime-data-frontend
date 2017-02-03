@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="24px" height="20px" viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g id="filters" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g transform="translate(1.000000, 0.000000)">
+      <g transform="translate(11.000000, 10.000000) scale(-1, 1) translate(-11.000000, -10.000000) ">
+        <path d="M0.180175781,3 L21.1363636,3" id="Line" stroke="#111C23" stroke-width="2" stroke-linecap="round"></path>
+        <path d="M21.1363636,10 L0.180175781,10" id="Line-Copy-3" stroke="#111C23" stroke-width="2" stroke-linecap="round"></path>
+        <circle id="Oval-6" fill="#111C23" cx="5" cy="3" r="3"></circle>
+        <circle id="Oval-6-Copy" fill="#111C23" cx="16" cy="10" r="3"></circle>
+        <circle id="Oval-6-Copy-2" fill="#111C23" cx="11" cy="17" r="3"></circle>
+        <path d="M21.1363636,17 L0.180175781,17" id="Line-Copy-6" stroke="#111C23" stroke-width="2" stroke-linecap="round"></path>
+      </g>
+    </g>
+  </g>
+</svg>
