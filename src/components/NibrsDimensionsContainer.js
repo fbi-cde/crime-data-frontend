@@ -9,9 +9,9 @@ import Loading from './Loading'
 
 const raceCodes = {
   A: 'Asian',
-  AP: 'Pacific Islander',
-  B: 'Black',
-  I: 'Native American',
+  AP: 'Native Hawaiian or Pacific Islander',
+  B: 'Black or African American',
+  I: 'American Indian or Alaska Native',
   U: 'Unknown',
   W: 'White',
 }
@@ -91,7 +91,7 @@ const NibrsDimensionsContainer = ({ data, loading }) => {
   const victimDemographicData = [
     {
       data: reduceAgeData(data.victimAgeNum),
-      title: 'Age of offender',
+      title: 'Age of victim',
       type: 'histogram',
     },
     {
@@ -123,13 +123,13 @@ const NibrsDimensionsContainer = ({ data, loading }) => {
       <div className='lg-col lg-col-6 mb2 px1'>
         <IncidentDetailCard
           data={relationshipData}
-          title='Relationship of the victim to the offender'
+          title='Victim’s relationship to the offender'
         />
       </div>
       <div className='lg-col lg-col-6 mb2 px1'>
         <IncidentDetailCard
           data={locationData}
-          title='Location name'
+          title='Location type'
         />
       </div>
     </div>
