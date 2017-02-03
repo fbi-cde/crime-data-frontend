@@ -1,8 +1,9 @@
 import { format } from 'd3-format'
 import React from 'react'
 
+// TODO: refactor SORT_DETAILS and sortIdx
+
 const SORT_DETAILS = [
-  { key: 'key', order: 'asc' },
   { key: 'count', order: 'desc' },
   { key: 'count', order: 'asc' },
 ]
@@ -19,7 +20,7 @@ class IncidentDetailTable extends React.Component {
 
   changeSort(e) {
     e.preventDefault()
-    this.setState({ sortIdx: ((this.state.sortIdx + 1) % 3) })
+    this.setState({ sortIdx: ((this.state.sortIdx + 1) % 2) })
   }
 
   render() {
@@ -30,7 +31,7 @@ class IncidentDetailTable extends React.Component {
     const dataParsed = data.map(d => ({ ...d, percent: (d.count / total) }))
     const sort = SORT_DETAILS[sortIdx]
 
-    dataParsed.sort((a, b) => a[sort.key] > b[sort.key])
+    dataParsed.sort((a, b) => a[sort.key] - b[sort.key])
     if (sort.order === 'desc') dataParsed.reverse()
 
     return (
@@ -57,7 +58,7 @@ class IncidentDetailTable extends React.Component {
                 </div>
               </td>
               <td className='bold monospace right-align'>
-                {formatPercent(d.percent)}
+                {(d.percent > 0.01) ? formatPercent(d.percent) : '<1%'}
               </td>
               <td className='px1 line-height-3' title={d.key}>{d.key}</td>
               <td className='monospace right-align'>

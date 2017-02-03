@@ -4,6 +4,9 @@ import React from 'react'
 import IncidentDetailCard from './IncidentDetailCard'
 import Loading from './Loading'
 
+// TODO: import { shapeNibrsData } from '../util/data'
+// Move all data shaping logic into a utility function
+
 const raceCodes = {
   A: 'Asian',
   AP: 'Pacific Islander',
@@ -32,7 +35,7 @@ const reduceData = (data, key) => {
   }))
 }
 
-// const reduceAgeData = data => reduceData(data, 'age_num')
+const reduceAgeData = data => reduceData(data, 'age_num')
 const reduceLocationData = data => reduceData(data, 'location_name')
 const reduceRaceData = data => (
   reduceData(data, 'race_code').map(x => ({
@@ -51,53 +54,53 @@ const reduceSexData = data => (
 )
 
 const NibrsDimensionsContainer = ({ data, loading }) => {
-  if (loading) return <Loading />
+  if (loading || !data) return <Loading />
 
   const relationshipData = [
     {
-      data: reduceRelationshipData(data.victimRelationship || []),
+      data: reduceRelationshipData(data.victimRelationship),
       type: 'table',
     },
   ]
 
   const locationData = [
     {
-      data: reduceLocationData(data.victimLocationName || []),
+      data: reduceLocationData(data.victimLocationName),
       type: 'table',
     },
   ]
 
   const offenderDemographicData = [
-    // {
-    //   data: reduceAgeData(data.offenderAgeNum || []),
-    //   title: 'Age of offender',
-    //   type: 'histogram',
-    // },
     {
-      data: reduceRaceData(data.offenderRaceCode || []),
+      data: reduceAgeData(data.offenderAgeNum),
+      title: 'Age of offender',
+      type: 'histogram',
+    },
+    {
+      data: reduceRaceData(data.offenderRaceCode),
       title: 'Race of offender',
       type: 'table',
     },
     {
-      data: reduceSexData(data.offenderSexCode || []),
+      data: reduceSexData(data.offenderSexCode),
       title: 'Sex of offender',
       type: 'table',
     },
   ]
 
   const victimDemographicData = [
-    // {
-    //   data: reduceAgeData(data.offenderAgeNum || []),
-    //   title: 'Age of offender',
-    //   type: 'histogram',
-    // },
     {
-      data: reduceRaceData(data.victimRaceCode || []),
+      data: reduceAgeData(data.victimAgeNum),
+      title: 'Age of offender',
+      type: 'histogram',
+    },
+    {
+      data: reduceRaceData(data.victimRaceCode),
       title: 'Race of victim',
       type: 'table',
     },
     {
-      data: reduceSexData(data.victimSexCode || []),
+      data: reduceSexData(data.victimSexCode),
       title: 'Sex of victim',
       type: 'table',
     },

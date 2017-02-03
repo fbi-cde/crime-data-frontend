@@ -29,7 +29,11 @@ class Histogram extends React.Component {
     const height = size.height - margin.top - margin.bottom
     const width = size.width - margin.left - margin.right
 
-    const bins = data.map(d => ({ ...d, ct: +d.count }))
+    const bins = data.map(d => ({
+      x0: +d.key,
+      x1: +d.key + 10,
+      ct: +d.count,
+    }))
     const binCt = bins.length
 
     const x = scaleLinear()

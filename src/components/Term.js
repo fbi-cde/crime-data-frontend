@@ -9,14 +9,15 @@ const Term = ({ children, dispatch, id }) => {
   }
 
   return (
-    <button
-      className='btn mx-tiny p0 align-baseline border-bottom-dotted'
+    <a
+      className='mx-tiny border-bottom-dotted'
+      href='#!'
       onClick={handler}
       role='button'
     >
       {children}
       <img className='ml-tiny' width='12' src='/img/book.svg' alt='glossary lookup' />
-    </button>
+    </a>
   )
 }
 
