@@ -2,10 +2,25 @@ import React from 'react'
 import startCase from 'lodash.startcase'
 
 import Loading from './Loading'
-import NibrsCards from './NibrsCards'
+import NibrsCard from './NibrsCard'
+import parseNibrs from '../util/nibrs'
 
-const NibrsContainer = ({ crime, place, filters, data, loading }) => {
+const NibrsContainer = ({ crime, place, filters, data }) => {
   const { timeFrom, timeTo } = filters
+
+  let content = <Loading />
+  if (data) {
+    const dataParsed = parseNibrs(data)
+    content = (
+      <div className='clearfix mb8 mxn1'>
+        {dataParsed.map((d, i) => (
+          <div key={i} className='lg-col lg-col-6 mb2 px1'>
+            <NibrsCard {...d} />
+          </div>
+        ))}
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -16,7 +31,7 @@ const NibrsContainer = ({ crime, place, filters, data, loading }) => {
           {timeFrom}–{timeTo}
         </h2>
       </div>
-      {(loading || !data) ? <Loading /> : <NibrsCards data={data} />}
+      {content}
     </div>
   )
 }
