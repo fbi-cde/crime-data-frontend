@@ -11,36 +11,36 @@ import reducer from '../../src/reducers/glossaryReducer';
 describe('glossaryReducer', () => {
   it('it should return the initial state', () => {
     const initialState = reducer(undefined, { type: 'fake' })
-    expect(initialState.isVisible).toEqual(false)
+    expect(initialState.isOpen).toEqual(false)
     expect(initialState.term).toEqual(null)
   })
 
   describe('GLOSSARY_HIDE action type', () => {
-    it('should set isVisible to false', () => {
-      const initialState = { isVisible: true }
+    it('should set isOpen to false', () => {
+      const initialState = { isOpen: true }
       const actual = reducer(initialState, { type: GLOSSARY_HIDE })
-      expect(actual.isVisible).toEqual(false)
+      expect(actual.isOpen).toEqual(false)
     })
   })
 
   describe('GLOSSARY_SHOW action type', () => {
-    it('should set isVisible to true', () => {
-      const initialState = { isVisible: false }
+    it('should set isOpen to true', () => {
+      const initialState = { isOpen: false }
       const actual = reducer(initialState, { type: GLOSSARY_SHOW })
-      expect(actual.isVisible).toEqual(true)
+      expect(actual.isOpen).toEqual(true)
     })
   })
 
   describe('GLOSSARY_SHOW_TERM action type', () => {
-    it('should set isVisible to true', () => {
-      const initialState = { isVisible: false }
+    it('should set isOpen to true', () => {
+      const initialState = { isOpen: false }
       const action = { term: 'fake', type: GLOSSARY_SHOW_TERM }
       const actual = reducer(initialState, action)
-      expect(actual.isVisible).toEqual(true)
+      expect(actual.isOpen).toEqual(true)
     })
 
     it('should set term to action.term', () => {
-      const initialState = { isVisible: false }
+      const initialState = { isOpen: false }
       const action = { term: 'fake', type: GLOSSARY_SHOW_TERM }
       const actual = reducer(initialState, action)
       expect(actual.term).toEqual(action.term)

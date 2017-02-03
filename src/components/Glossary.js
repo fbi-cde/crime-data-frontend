@@ -23,8 +23,8 @@ class Glossary extends React.Component {
 
   shouldComponentUpdate() { return false }
 
-  setVisibility(isVisible) {
-    if (isVisible) this.glossaryEl.show()
+  setOpen(isOpen) {
+    if (isOpen) this.glossaryEl.show()
     else this.glossaryEl.hide()
   }
 
@@ -33,14 +33,14 @@ class Glossary extends React.Component {
   }
 
   applyProps(props) {
-    const { isVisible, term } = props
-    this.setVisibility(isVisible)
+    const { isOpen, term } = props
+    this.setOpen(isOpen)
     if (term) this.showTerm(term)
   }
 
   toggleGlossary() {
-    const { dispatch, isVisible } = this.props
-    if (isVisible) dispatch(hideGlossary())
+    const { dispatch, isOpen } = this.props
+    if (isOpen) dispatch(hideGlossary())
     else dispatch(showGlossary())
   }
 
@@ -85,12 +85,12 @@ class Glossary extends React.Component {
 }
 
 Glossary.defaultProps = {
-  isVisible: false,
+  isOpen: false,
 }
 
 Glossary.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
-  isVisible: React.PropTypes.bool,
+  isOpen: React.PropTypes.bool,
 }
 
 export default Glossary

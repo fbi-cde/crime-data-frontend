@@ -5,7 +5,7 @@ import {
 } from '../actions/actionTypes'
 
 const initialState = {
-  isVisible: false,
+  isOpen: false,
   term: null,
 }
 
@@ -14,17 +14,17 @@ export default (state = initialState, action) => {
     case GLOSSARY_HIDE:
       return {
         ...state,
-        isVisible: false,
+        isOpen: false,
       }
     case GLOSSARY_SHOW:
       return {
         ...state,
-        isVisible: true,
+        isOpen: true,
       }
     case GLOSSARY_SHOW_TERM:
       return {
         ...state,
-        isVisible: true,
+        isOpen: true,
         term: action.term,
       }
     default:
