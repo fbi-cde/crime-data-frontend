@@ -15,7 +15,7 @@ const sexCodes = {
 
 // data munging functions
 
-const reshape = (data, key) => {
+export const reshape = (data, key) => {
   const counts = data.reduce((a, b) => {
     a[b[key]] = (a[b[key]] || 0) + +b.count // eslint-disable-line no-param-reassign
     return a
@@ -24,7 +24,7 @@ const reshape = (data, key) => {
   return Object.keys(counts).map(k => ({ key: k, count: counts[k] }))
 }
 
-const rename = (data, lookup) => (
+export const rename = (data, lookup) => (
   data.map(d => ({ key: lookup[d.key], count: d.count }))
 )
 
