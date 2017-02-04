@@ -271,14 +271,14 @@ const propertyCrime = [
   'All Property Crime',
   'Arson',
   'Burglary',
-  'Cargo Theft',
+  // 'Cargo Theft',
   'Larceny Theft',
   'Motor Vehicle Theft',
 ]
 
 const otherCrime = [
   'Hate Crime',
-  'Human Trafficking',
+  // 'Human Trafficking',
   'Law Enforcement Officers Killed and Assaulted (LEOKA)',
 ]
 

@@ -88,12 +88,10 @@ const Home = ({ appState, dispatch, location }) => {
                 <optgroup label='Property Crime'>
                   <option value='arson'>Arson</option>
                   <option value='burglary'>Burglary</option>
-                  <option value='cargo-theft'>Cargo Theft</option>
                   <option value='larceny-theft'>Larceny Theft</option>
                   <option value='motor-vehicle-theft'>Motor Vehicle Theft</option>
                 </optgroup>
                 <option value='hate-crime'>Hate Crime</option>
-                <option value='Human trafficking'>Human trafficking</option>
                 <option value='leoka'>Law Enforcement Officers Killed and Assaulted</option>
               </select>
             </div>
