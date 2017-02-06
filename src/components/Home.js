@@ -9,6 +9,23 @@ import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 
 import usaSvgData from '../../data/usa-state-svg.json'
 
+
+const otherDataSets = [
+  {
+    title: 'Arrests',
+    description: `See arrest totals reported by law enforcement agencies
+    across the nation for 28 offenses, including violent crime, property
+    crime, fraud, weapons and drug violations, and common misdemeanors.`,
+  },
+  {
+    title: 'Clearances',
+    description: 'This data counts the number of offenses known by law enforcement that were cleared by arrest or exceptional means. One arrest may clear or close several offenses in a particular case.',
+  },
+  {
+    title: 'Police Employee Data',
+    description: 'See how many full-time sworn and civilian law enforcement employees serve across the nation. This data is broken down by location, population size, status, and gender.',
+  },
+]
 const scrollToBottom = () => window.scrollTo(0, window.outerHeight * 1.5)
 
 const Home = ({ appState, dispatch, location }) => {
@@ -137,17 +154,14 @@ const Home = ({ appState, dispatch, location }) => {
           </div>
           <h2 className='mt0 mb3 fs-22 sm-fs-32'>Other Data Sets</h2>
           <div className='clearfix mxn2'>
-            {[...Array(3)].map((_, i) => (
+            {otherDataSets.map((d, i) => (
               <div key={i} className='sm-col sm-col-4 px2 mb2 sm-m0'>
                 <div className='px3 py2 bg-blue-white'>
-                  <div className='mb1 pb1 fs-22 bold border-bottom border-red-bright'>
-                    Arrests
+                  <div className='mb1 pb1 fs-ch2 bold border-bottom border-red-bright'>
+                    {d.title}
                   </div>
-                  <p className='mb2 fs-14 sm-fs-16'>
-                    Lorem ipsum dolor sit amet, quis tellus nonummy id. Vitae
-                    amet vel phasellus, est cras lectus lacus.
-                  </p>
-                  <button className='mb1 btn btn-primary btn-sm fs-14'>
+                  <p className='mb2'>{d.description}</p>
+                  <button className='mb1 btn btn-primary btn-sm'>
                     View details
                   </button>
                 </div>
