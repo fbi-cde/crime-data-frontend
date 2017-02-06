@@ -61,5 +61,16 @@ footer {
 @media #{$breakpoint-md} {
   .site-wrapper { flex-direction: row; }
   .site-content { flex: 1; }
-  .site-sidebar { display: block; flex: 0 0 $sidebar-width; }
+  .site-sidebar {
+    display: block;
+    flex: 0 0 $sidebar-width;
+
+    .affix {
+      bottom: 0;
+      overflow: scroll;
+      position: fixed;
+      top: 0;
+      width: $sidebar-width;
+    }
+  }
 }

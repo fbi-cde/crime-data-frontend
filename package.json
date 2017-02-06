@@ -33,6 +33,7 @@
     "lodash.flatten": "^4.4.0",
     "lodash.range": "^3.2.0",
     "lodash.startcase": "^4.4.0",
+    "lodash.throttle": "^4.1.1",
     "newrelic": "^1.35.1",
     "normalize.css": "^5.0.0",
     "react": "^15.4.1",
