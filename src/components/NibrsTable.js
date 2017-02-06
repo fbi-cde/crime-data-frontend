@@ -1,12 +1,6 @@
 import { format } from 'd3-format'
 import React from 'react'
 
-// TODO: refactor SORT_DETAILS and sortIdx
-
-const SORT_DETAILS = [
-  { key: 'count', order: 'desc' },
-  { key: 'count', order: 'asc' },
-]
 
 const formatPercent = format('.0%')
 const formatNumber = format(',')
@@ -14,18 +8,9 @@ const formatNumber = format(',')
 class IncidentDetailTable extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      sortIdx: 0,
-      showCounts: false,
-    }
-    this.changeSort = ::this.changeSort
+    this.state = { showCounts: true }
     this.showCounts = ::this.showCounts
     this.showPercents = ::this.showPercents
-  }
-
-  changeSort(e) {
-    e.preventDefault()
-    this.setState({ sortIdx: ((this.state.sortIdx + 1) % 2) })
   }
 
   showCounts(e) {
@@ -40,18 +25,16 @@ class IncidentDetailTable extends React.Component {
 
   render() {
     const { data, title } = this.props
-    const { showCounts, sortIdx } = this.state
+    const { showCounts } = this.state
 
     const total = data.reduce((a, b) => (a + b.count), 0)
     const dataParsed = data.map(d => ({ ...d, percent: (d.count / total) }))
-    const sort = SORT_DETAILS[sortIdx]
 
     const btnCls = 'ml-tiny border border-blue rounded'
     const activeBtnCls = 'bg-blue white'
     const inactiveBtnCls = 'bg-white'
 
-    dataParsed.sort((a, b) => a[sort.key] - b[sort.key])
-    if (sort.order === 'desc') dataParsed.reverse()
+    dataParsed.sort((a, b) => b.count - a.count)
 
     return (
       <div>
@@ -72,13 +55,6 @@ class IncidentDetailTable extends React.Component {
                 {showCounts ? 'Count' : 'Percent'}
               </th>
               <th style={{ width: '52%' }}>{title}</th>
-              {/*
-              <th className='h5 right-align' style={{ width: '24%' }}>
-                <button type='button' className='btn p0 red' onClick={this.changeSort}>
-                  Incidents
-                </button>
-              </th>
-              */}
             </tr>
           </thead>
           <tbody>
