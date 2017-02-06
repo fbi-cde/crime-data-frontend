@@ -14,8 +14,13 @@ const formatNumber = format(',')
 class IncidentDetailTable extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { sortIdx: 0 }
+    this.state = {
+      sortIdx: 0,
+      showCounts: false,
+    }
     this.changeSort = ::this.changeSort
+    this.showCounts = ::this.showCounts
+    this.showPercents = ::this.showPercents
   }
 
   changeSort(e) {
@@ -23,51 +28,91 @@ class IncidentDetailTable extends React.Component {
     this.setState({ sortIdx: ((this.state.sortIdx + 1) % 2) })
   }
 
+  showCounts(e) {
+    e.preventDefault()
+    this.setState({ showCounts: true })
+  }
+
+  showPercents(e) {
+    e.preventDefault()
+    this.setState({ showCounts: false })
+  }
+
   render() {
     const { data, title } = this.props
-    const { sortIdx } = this.state
+    const { showCounts, sortIdx } = this.state
 
     const total = data.reduce((a, b) => (a + b.count), 0)
     const dataParsed = data.map(d => ({ ...d, percent: (d.count / total) }))
     const sort = SORT_DETAILS[sortIdx]
 
+    const btnCls = 'ml-tiny border border-blue rounded'
+    const activeBtnCls = 'bg-blue white'
+    const inactiveBtnCls = 'bg-white'
+
     dataParsed.sort((a, b) => a[sort.key] - b[sort.key])
     if (sort.order === 'desc') dataParsed.reverse()
 
     return (
-      <table className='mb2 pb2 border-bottom table-fixed'>
-        <caption className='bold left-align'>{title}</caption>
-        <thead>
-          <tr>
-            <th className='v-hide' style={{ width: '14%' }} />
-            <th className='v-hide' style={{ width: '10%' }}>Percent</th>
-            <th className='v-hide' style={{ width: '52%' }}>{title}</th>
-            <th className='h5 right-align' style={{ width: '24%' }}>
-              <button type='button' className='btn p0 red' onClick={this.changeSort}>
-                Incidents
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {dataParsed.map((d, i) => (
-            <tr key={i}>
-              <td className='border-right border-gray'>
-                <div className='progress-bar my1'>
-                  <span className='rtl' style={{ width: `${d.percent * 100}%` }} />
-                </div>
-              </td>
-              <td className='bold monospace right-align'>
-                {(d.percent > 0.01) ? formatPercent(d.percent) : '<1%'}
-              </td>
-              <td className='px1 line-height-3' title={d.key}>{d.key}</td>
-              <td className='monospace right-align'>
-                {formatNumber(d.count)}
-              </td>
+      <div>
+        <table className='mb2 pb2 border-bottom table-fixed'>
+          <caption className='bold left-align'>{title}</caption>
+          <thead>
+            <tr>
+              <th className='v-hide' style={{ width: '24%' }} />
+              <th className='v-hide' style={{ width: '24%' }}>
+                {showCounts ? 'Count' : 'Percent'}
+              </th>
+              <th className='v-hide' style={{ width: '52%' }}>{title}</th>
+              {/*
+              <th className='h5 right-align' style={{ width: '24%' }}>
+                <button type='button' className='btn p0 red' onClick={this.changeSort}>
+                  Incidents
+                </button>
+              </th>
+              */}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {dataParsed.map((d, i) => (
+              <tr key={i}>
+                <td className='border-right border-gray'>
+                  <div className='progress-bar my1'>
+                    <span className='rtl' style={{ width: `${d.percent * 100}%` }} />
+                  </div>
+                </td>
+                <td className='bold monospace right-align'>
+                  {
+                    /* eslint no-nested-ternary: 0 */
+                    showCounts ? formatNumber(d.count) :
+                    (d.percent > 0.01) ? formatPercent(d.percent) : '<1%'
+                  }
+                </td>
+                <td className='px1 line-height-3' title={d.key}>{d.key}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className='italic serif fs5 right-align'>
+          View by
+          <button
+            className={
+              `${btnCls} ${showCounts ? activeBtnCls : inactiveBtnCls}`
+            }
+            onClick={this.showCounts}
+          >
+            #
+          </button>
+          <button
+            className={
+              `${btnCls} ${!showCounts ? activeBtnCls : inactiveBtnCls}`
+            }
+            onClick={this.showPercents}
+          >
+            %
+          </button>
+        </div>
+      </div>
     )
   }
 }
