@@ -56,14 +56,22 @@ class IncidentDetailTable extends React.Component {
     return (
       <div>
         <table className='mb2 pb2 border-bottom table-fixed'>
-          <caption className='bold left-align'>{title}</caption>
-          <thead>
+          <caption className='left-align'>
+            <div className='bold'>{title}</div>
+            <div>
+              <span className='bold caps fs4 red'>Total Incidents</span>
+              <span className='bold fs3 ml1 monospace'>
+                {formatNumber(total)}
+              </span>
+            </div>
+          </caption>
+          <thead className='v-hide'>
             <tr>
-              <th className='v-hide' style={{ width: '24%' }} />
-              <th className='v-hide' style={{ width: '24%' }}>
+              <th style={{ width: '24%' }} />
+              <th style={{ width: '24%' }}>
                 {showCounts ? 'Count' : 'Percent'}
               </th>
-              <th className='v-hide' style={{ width: '52%' }}>{title}</th>
+              <th style={{ width: '52%' }}>{title}</th>
               {/*
               <th className='h5 right-align' style={{ width: '24%' }}>
                 <button type='button' className='btn p0 red' onClick={this.changeSort}>
