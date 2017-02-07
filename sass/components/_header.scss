@@ -1,0 +1,15 @@
+header {
+  @media #{$breakpoint-md} { height: 128px; }
+}
+
+.header-nav {
+  border-top: 1px solid $red-bright;
+  display: none;
+  &.open { display: block; }
+
+  @media #{$breakpoint-md} {
+    border: 0;
+    display: block;
+    li { display: inline-block; }
+  }
+}
