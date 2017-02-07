@@ -2,8 +2,6 @@ import React from 'react'
 
 import { content } from '../util/data'
 
-window.c = content.crimes
-
 const AboutTheData = ({ crime }) => {
   const { caveats, links } = content.crimes[crime]
 

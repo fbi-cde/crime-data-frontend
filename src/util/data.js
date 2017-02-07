@@ -22,7 +22,7 @@ const content = {
     'cargo-theft': cargoTheftContent,
     'hate-crime': hateCrimeContent,
     homicide: homicideContent,
-    larceny: larcenyContent,
+    'larceny-theft': larcenyContent,
     leoka: leokaContent,
     'motor-vehicle-theft': mvtContent,
     'property-crime': propertyCrimeContent,
