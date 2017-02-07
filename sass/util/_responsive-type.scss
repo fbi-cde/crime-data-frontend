@@ -1,0 +1,36 @@
+.fs-40 { font-size: 40px; }
+.fs-32 { font-size: 32px; }
+.fs-26 { font-size: 26px; }
+.fs-24 { font-size: 24px; }
+.fs-22 { font-size: 22px; }
+.fs-18 { font-size: 18px; }
+.fs-16 { font-size: 16px; }
+.fs-14 { font-size: 14px; }
+.fs-12 { font-size: 12px; }
+.fs-10 { font-size: 10px; }
+
+@media #{$breakpoint-sm} {
+  .sm-fs-40 { font-size: 40px; }
+  .sm-fs-32 { font-size: 32px; }
+  .sm-fs-26 { font-size: 26px; }
+  .sm-fs-24 { font-size: 24px; }
+  .sm-fs-22 { font-size: 22px; }
+  .sm-fs-18 { font-size: 18px; }
+  .sm-fs-16 { font-size: 16px; }
+  .sm-fs-14 { font-size: 14px; }
+  .sm-fs-12 { font-size: 12px; }
+  .sm-fs-10 { font-size: 10px; }
+}
+
+@media #{$breakpoint-md} {
+  .md-fs-40 { font-size: 40px; }
+  .md-fs-32 { font-size: 32px; }
+  .md-fs-26 { font-size: 26px; }
+  .md-fs-24 { font-size: 24px; }
+  .md-fs-22 { font-size: 22px; }
+  .md-fs-18 { font-size: 18px; }
+  .md-fs-16 { font-size: 16px; }
+  .md-fs-14 { font-size: 14px; }
+  .md-fs-12 { font-size: 12px; }
+  .md-fs-10 { font-size: 10px; }
+}
