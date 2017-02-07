@@ -80,7 +80,7 @@ const Home = ({ appState, dispatch, location }) => {
               >
                 <option value='' disabled>Crime Type</option>
                 <optgroup label='Violent Crime'>
-                  <option value='murder'>Homicide</option>
+                  <option value='homicide'>Homicide</option>
                   <option value='rape'>Rape</option>
                   <option value='robbery'>Robbery</option>
                   <option value='aggravated-assault'>Aggravated Assault</option>
