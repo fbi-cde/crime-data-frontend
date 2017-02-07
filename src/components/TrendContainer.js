@@ -30,13 +30,11 @@ const TrendContainer = ({
             </div>
           </div>
           <div>
-            {/*
             <DownloadDataBtn
               data={data}
               fname='summary data'
               text='Download data'
             />
-            */}
           </div>
         </div>
       </div>
