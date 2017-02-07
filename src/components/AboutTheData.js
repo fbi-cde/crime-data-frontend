@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { content } from '../util/data'
+import content from '../util/content'
 
 const AboutTheData = ({ crime }) => {
   const { caveats, links } = content.crimes[crime]

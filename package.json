@@ -10,7 +10,7 @@
     "dev": "webpack-dev-server",
     "build": "NODE_ENV=production webpack -p",
     "lint": "eslint src scripts || exit 0",
-    "test": "jest --env=jsdom",
+    "test": "jest --env=jsdom --no-cache",
     "test:debug": "node --debug-brk jest -i --env=jsdom",
     "test:watch": "jest --env=jsdom --watch",
     "coverage": "npm test -- --coverage"
