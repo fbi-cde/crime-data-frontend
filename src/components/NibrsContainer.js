@@ -25,7 +25,7 @@ const NibrsContainer = ({ crime, place, filters, data }) => {
   return (
     <div>
       <div className='mb2 p2 sm-p4 bg-blue-lighter'>
-        <h2 className='m0 fs-ch1 sans-serif'>
+        <h2 className='m0 fs-24 sm-fs-32 sans-serif'>
           {startCase(crime)} Incident Details in {startCase(place)},
           <br />
           {timeFrom}–{timeTo}

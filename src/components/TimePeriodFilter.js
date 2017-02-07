@@ -45,14 +45,12 @@ class TimePeriodFilter extends React.Component {
 
     return (
       <div id='time-period' className='mb5'>
-        <h3 className='fs1 sans-serif mt0 mb4 pb-tiny border-bottom'>
-          Time period
-        </h3>
+        <div className='mb4 fs-22 bold border-bottom'>Time period</div>
         <div className='clearfix'>
           <div className='col col-5'>
             <label htmlFor='time-from' className='hide'>Time from</label>
             <input
-              className='block field right-align m0'
+              className='col-12 field field-sm'
               type='number'
               id='timeFrom'
               min={MIN_YEAR}
@@ -61,11 +59,11 @@ class TimePeriodFilter extends React.Component {
               value={timeFrom}
             />
           </div>
-          <span className='col col-2 center lh-form-field'>to</span>
+          <span className='col col-2 fs-18 lh-32 center'>to</span>
           <div className='col col-5'>
             <label htmlFor='time-to' className='hide'>Time to</label>
             <input
-              className='block field center'
+              className='col-12 field field-sm'
               type='number'
               id='timeTo'
               min={MIN_YEAR}
@@ -75,11 +73,11 @@ class TimePeriodFilter extends React.Component {
             />
           </div>
         </div>
-        {error && <p className='mt1 mb1 h5 red'>{error}</p>}
-        <p className={`italic fs4 m0 serif ${!error && 'mt2'}`}>
-          Summary data available from 1961–2015
+        {error && <p className='mt1 mb1 fs-12 red'>{error}</p>}
+        <p className={`italic fs-12 m0 serif ${!error && 'mt2'}`}>
+          Summary data available from 1961–2015<br />
+          Incident data available from 1996–2015
         </p>
-        <p className='italic fs4 m0 serif'>Incident data available from 1996–2015</p>
       </div>
     )
   }

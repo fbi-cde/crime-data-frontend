@@ -13,19 +13,7 @@ label {
   vertical-align: middle;
 }
 
-input[type=text],
-input[type=date],
-input[type=datetime],
-input[type=datetime-local],
-input[type=email],
-input[type=month],
-input[type=number],
-input[type=password],
-input[type=search],
-input[type=tel],
-input[type=time],
-input[type=url],
-input[type=week] {
+input {
   -webkit-appearance: none;
   height: $form-field-height;
   padding: $form-field-padding-y $form-field-padding-x;
@@ -33,12 +21,9 @@ input[type=week] {
 }
 
 select {
+  height: $form-field-height;
   line-height: 1.75;
   padding: $form-field-padding-y $form-field-padding-x;
-}
-
-select:not([multiple]) {
-  height: $form-field-height;
   vertical-align: middle;
 }
 

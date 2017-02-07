@@ -17,7 +17,7 @@ const LocationSelect = ({ className, onChange, selected }) => {
         Choose a location in the United States
       </label>
       <select
-        className={className || 'block col-12 field'}
+        className={className || 'block col-12 field field-sm'}
         id='location-select'
         onChange={handleChange}
         value={(selected) ? startCase(selected) : ''}

@@ -56,15 +56,15 @@ class Glossary extends React.Component {
           <button className='right btn p0' onClick={this.toggleGlossary}>
             <img src='img/x.svg' alt='close' width='16' height='16' />
           </button>
-          <h3 className='mt1 mb2 white'>Glossary</h3>
+          <h3 className='mt1 mb2 fs-26 white'>Glossary</h3>
           <label
-            className='block mb-tiny h5 white italic'
+            className='block mb-tiny fs-14 white italic'
             htmlFor='glossary-search'
           >
             Search glossary terms
           </label>
           <input
-            className='field col-12 js-glossary-search'
+            className='field col-12 fs-14 js-glossary-search'
             id='glossary-search'
             type='search'
             placeholder='e.g. Committee'

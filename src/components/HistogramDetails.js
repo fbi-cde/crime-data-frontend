@@ -7,7 +7,7 @@ const HistogramDetails = ({ data }) => {
   const highlight = v => <span className='bold red'>{v}</span>
 
   return (
-    <div className='mt1 h5'>
+    <div className='mt1 fs-14'>
       In 2014, there were {highlight(fmt(data.ct))} incidents
       involving victims aged {highlight(`${data.x0}-${data.x1 - 1}`)}.
     </div>

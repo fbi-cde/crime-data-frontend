@@ -8,9 +8,7 @@ const { violentCrime, propertyCrime, otherCrime } = crimeTypes
 
 const CrimeTypeFilter = ({ onChange, selected }) => (
   <div id='type-of-crime' className='mb4'>
-    <h3 className='fs1 sans-serif mt0 mb3 pb-tiny border-bottom'>
-      Type of crime
-    </h3>
+    <div className='mb3 fs-22 bold border-bottom'>Type of crime</div>
     <FilterGroup
       name='crime'
       title='Violent Crime'

@@ -1,1 +1,5 @@
-.lh-form-field { line-height: $form-field-height; }
+.lh-32 { line-height: 32px; }
+
+@media #{$breakpoint-sm} {
+  .sm-lh-30 { line-height: 30px; }
+}

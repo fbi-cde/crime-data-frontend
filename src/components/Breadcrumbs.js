@@ -10,7 +10,7 @@ const Breadcrumbs = ({ crime, place }) => {
   ]
 
   return (
-    <ul className='breadcrumbs list-reset mt0 mb4 h5'>
+    <ul className='breadcrumbs list-reset mt0 mb4 fs-12 sm-fs-14'>
       {links.map((link, i) => (
         <li key={i}>
           <Link

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Disclaimer = () => (
-  <div className='clearfix h6 bg-white line-height-1'>
+  <div className='clearfix fs-12 line-height-1 bg-white'>
     <div className='sm-col p1'>
       <img
         className='mr-tiny align-bottom'

@@ -7,7 +7,9 @@ const FilterGroup = ({ name, options, onChange, selected, title }) => {
 
   return (
     <div className='mb2 rounded overflow-hidden'>
-      {title && <div className='py1 px2 bold'>{title}</div>}
+      {title && (
+        <div className='mb1 sm-m0 px2 sm-lh-30 bold'>{title}</div>
+      )}
       <div>
         {options.map((o, i) => {
           const isActive = slugify(o) === slugify(selected)
@@ -16,9 +18,9 @@ const FilterGroup = ({ name, options, onChange, selected, title }) => {
             <label
               key={i}
               className={
-                `py-tiny block cursor-pointer hover-bg-blue-light
+                `block cursor-pointer hover-bg-blue-light
                 ${isActive ? 'bg-blue white bold hover-blue' : ''}
-                ${single ? 'bold px2' : 'px3'}`
+                ${single ? 'bold px2' : 'px3 sm-lh-30'}`
               }
               htmlFor={slugify(o)}
             >

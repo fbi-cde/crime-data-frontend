@@ -24,7 +24,7 @@ const TrendContainer = ({
         <div className='md-flex items-baseline'>
           <div className='flex-auto'>
             <div className='inline-block'>
-              <h2 className='m0 fs-ch1 sans-serif'>
+              <h2 className='m0 fs-24 sm-fs-32 sans-serif'>
                 Reported {plural(lowerCase(crime))} in {startCase(place)},
                 <br />
                 {timeFrom}–{timeTo}
