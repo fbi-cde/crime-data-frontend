@@ -19,13 +19,13 @@ const otherDataSets = [
   },
   {
     title: 'Clearances',
-    description: `This data counts the number of offenses known by law 
-    enforcement that were cleared by arrest or exceptional means. One 
+    description: `This data counts the number of offenses known by law
+    enforcement that were cleared by arrest or exceptional means. One
     arrest may clear or close several offenses in a particular case.`,
   },
   {
     title: 'Police Employee Data',
-    description: `See how many full-time sworn and civilian law enforcement 
+    description: `See how many full-time sworn and civilian law enforcement
     employees serve across the nation. This data is broken down by location,
     population size, status, and gender.`,
   },
