@@ -24,6 +24,8 @@ const crimeIds = {
   'aggravated-assault': 'aggravated assault',
   burglary: 'burglary',
   homicide: 'murder and nonnegligent homicide',
+  'larceny-theft': 'larceny',
+  'motor-vehicle-theft': 'motor vehicle theft',
   rape: 'rape (legacy definition)',
   robbery: 'robbery',
 }
@@ -101,7 +103,7 @@ class Explorer extends React.Component {
     const place = startCase(params.place)
 
     // show not found page if crime or place unfamiliar
-    if (!crimeSlugs.includes(crime) || !lookup(place)) return <NotFound />
+    if (!crimeSlugs.includes(params.crime) || !lookup(place)) return <NotFound />
 
     const links = content.states[place]
     const { filters, nibrs, sidebar, summaries } = appState
@@ -134,13 +136,13 @@ class Explorer extends React.Component {
         <div className='site-content'>
           <div className='container-main mx-auto p3'>
             <Breadcrumbs {...params} />
-            <div className='md-flex items-baseline mb4 border-bottom border-blue-lighter'>
+            <div className='items-baseline mb4 border-bottom border-blue-lighter'>
               <h1 className='flex-auto mt0 mb1'>
                 {place}, {startCase(params.crime)}
               </h1>
             </div>
-            <div>
-              <p className='mb5 fs1 serif'>
+            <div className='clearfix'>
+              <p className='col col-8 mb5 fs1 serif'>
                 Incidents of
                 <Term
                   dispatch={dispatch}
@@ -154,10 +156,12 @@ class Explorer extends React.Component {
                 in 1991, with a rate of over 52 incidents per 100,000
                 people.<sup>1</sup>
               </p>
-              <ul>
+              <ul className='col col-4 list-style-none mt0'>
                 {links.map((l, i) => (
                   <li key={i}>
-                    <a href={l.url}>{l.text}</a>
+                    <a className='bold' href={l.url}>
+                      <span className='red'>&#10142;</span> {l.text}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -179,7 +183,7 @@ class Explorer extends React.Component {
               loading={nibrs.loading}
             />
             <hr className='mt0 mb3' />
-            <AboutTheData crime={crime} place={place} />
+            <AboutTheData crime={params.crime} place={place} />
           </div>
         </div>
       </div>
