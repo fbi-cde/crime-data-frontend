@@ -14,16 +14,16 @@ const TrendChartDetails = ({ colors, data, keys }) => {
   return (
     <div className='mb2 md-flex'>
       <div className='flex-auto'>
-        <h4 className='mt0 mb1 sans-serif'>{year}</h4>
-        <p className='sm-m0 md-pr4'>
+        <h4 className='mt0 mb1 fs-18 sans-serif'>{year}</h4>
+        <p className='sm-m0 md-pr4 fs-14 sm-fs-16'>
           {name}’s incident rate surpasses that of the United States, and
           in {highlight(year)} was {highlight(formatRate(rate))} incidents
           per 100,000 people.
         </p>
       </div>
       <div>
-        <table className='mt4 h5 bold'>
-          <thead className='h6 caps line-height-3'>
+        <table className='mt4 fs-14 bold'>
+          <thead className='fs-12 caps line-height-3'>
             <tr><th /><th>Rate</th><th>Total</th></tr>
           </thead>
           <tbody>
@@ -36,7 +36,7 @@ const TrendChartDetails = ({ colors, data, keys }) => {
                   />
                   {k.name}
                 </td>
-                <td className='pt1 pr3 h4 line-height-2 align-bottom'>
+                <td className='pt1 pr3 sm-fs-18 line-height-2 align-bottom'>
                   <span
                     className='inline-block border-bottom border-blue-light border-w2'
                     style={{ width: 72 }}
@@ -44,7 +44,7 @@ const TrendChartDetails = ({ colors, data, keys }) => {
                     {formatRate(data[k.slug])}
                   </span>
                 </td>
-                <td className='pt1 h4 line-height-2 align-bottom'>
+                <td className='pt1 sm-fs-18 line-height-2 align-bottom'>
                   <span
                     className='inline-block border-bottom border-blue-light border-w2'
                     style={{ width: 72 }}

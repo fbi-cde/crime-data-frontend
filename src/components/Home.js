@@ -35,10 +35,10 @@ const Home = ({ appState, dispatch, location }) => {
     <div>
       <section className='px2 bg-blue-white'>
         <div className='py7 container mx-auto relative'>
-          <h1 className='mt0 pb1 border-bottom border-red-bright'>
+          <h1 className='mt0 pb1 fs-28 sm-fs-40 border-bottom border-red-bright'>
             National, state, and local crime data
           </h1>
-          <p className='m0 col-10 fs1 serif'>
+          <p className='m0 col-10 fs-18 sm-fs-24 serif'>
             The FBI collects and publishes
             <Term
               dispatch={dispatch}
@@ -63,18 +63,20 @@ const Home = ({ appState, dispatch, location }) => {
       </section>
       <section className='px2 bg-white'>
         <div className='py7 container mx-auto'>
-          <h2 className='mt0 mb4'>Explore by type of crime and location</h2>
+          <h2 className='mt0 mb4 fs-22 sm-fs-32'>
+            Explore by type of crime and location
+          </h2>
           <div className='clearfix mxn2'>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
               <LocationSelect
-                className='col-12 bold field'
+                className='col-12 sm-fs-18 bold field'
                 onChange={selectLocation}
                 selected={place}
               />
             </div>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
               <select
-                className='col-12 bold field'
+                className='col-12 sm-fs-18 bold field'
                 onChange={selectCrime}
                 defaultValue={crime || ''}
               >
@@ -95,9 +97,9 @@ const Home = ({ appState, dispatch, location }) => {
                 <option value='leoka'>Law Enforcement Officers Killed and Assaulted</option>
               </select>
             </div>
-            <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
+            <div className='sm-col sm-col-4 px2 mb2 sm-m0 xs-hide'>
               <button
-                className='col-12 btn btn-primary h4'
+                className='col-12 btn btn-primary'
                 disabled={!isButtonDisabled}
                 onClick={handleSearchClick}
               >
@@ -105,7 +107,7 @@ const Home = ({ appState, dispatch, location }) => {
               </button>
             </div>
           </div>
-          <div className='py7 sm-col-9 mx-auto'>
+          <div className='py4 sm-py7 sm-col-9 mx-auto'>
             <svg
               className='cursor-pointer usa-map'
               viewBox='0 0 959 593'
@@ -116,9 +118,7 @@ const Home = ({ appState, dispatch, location }) => {
                 {usaSvgData.map(s => (
                   <path
                     d={s.d}
-                    className={
-                      s.id === placeId ? 'fill-red-bright' : 'fill-blue-light'
-                    }
+                    className={s.id === placeId ? 'fill-red-bright' : 'fill-blue-light'}
                     id={s.id}
                     key={s.id}
                   />
@@ -126,19 +126,28 @@ const Home = ({ appState, dispatch, location }) => {
               </g>
             </svg>
           </div>
-          <h2 className='mt0 mb3'>Other Data Sets</h2>
+          <div className='mb7 sm-hide md-hide lg-hide'>
+            <button
+              className='btn btn-primary'
+              disabled={!isButtonDisabled}
+              onClick={handleSearchClick}
+            >
+              View results
+            </button>
+          </div>
+          <h2 className='mt0 mb3 fs-22 sm-fs-32'>Other Data Sets</h2>
           <div className='clearfix mxn2'>
             {[...Array(3)].map((_, i) => (
               <div key={i} className='sm-col sm-col-4 px2 mb2 sm-m0'>
                 <div className='px3 py2 bg-blue-white'>
-                  <div className='mb1 pb1 fs-ch2 bold border-bottom border-red-bright'>
+                  <div className='mb1 pb1 fs-22 bold border-bottom border-red-bright'>
                     Arrests
                   </div>
-                  <p className='mb2'>
+                  <p className='mb2 fs-14 sm-fs-16'>
                     Lorem ipsum dolor sit amet, quis tellus nonummy id. Vitae
                     amet vel phasellus, est cras lectus lacus.
                   </p>
-                  <button className='mb1 btn btn-primary btn-sm'>
+                  <button className='mb1 btn btn-primary btn-sm fs-14'>
                     View details
                   </button>
                 </div>
@@ -149,11 +158,11 @@ const Home = ({ appState, dispatch, location }) => {
       </section>
       <section className='px2 bg-blue-white'>
         <div className='py7 container mx-auto'>
-          <h2 className='h1 mt0 mb1'>Crime Data API</h2>
-          <h3 className='mt0 mb3 pb1 border-bottom border-red-bright'>
+          <h2 className='mt0 mb1 fs-28 sm-fs-40'>Crime Data API</h2>
+          <h3 className='mt0 mb3 pb1 fs-18 sm-fs-28 border-bottom border-red-bright'>
             Use our data in your project
           </h3>
-          <p className='mb6 col-10 fs1 serif'>
+          <p className='mb3 sm-mb6 col-10 fs-18 sm-fs-24 serif'>
             An application programming interface (API) is an easy way for
             computers, programs, and developers to share and translate large
             amounts of data in meaningful ways. We recently released the
@@ -161,7 +170,7 @@ const Home = ({ appState, dispatch, location }) => {
             your own story.
           </p>
           <a
-            className='btn btn-primary h4'
+            className='btn btn-primary'
             href='https://crime-data-api.fr.cloud.gov/swagger-ui/'
           >
             See API documentation

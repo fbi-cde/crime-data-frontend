@@ -18,7 +18,7 @@ const NibrsCard = ({ data, title }) => {
 
   return (
     <div className='p2 sm-p3 bg-white'>
-      <h2 className='mt0 mb2 pb1 fs-ch2 sans-serif border-bottom'>{title}</h2>
+      <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif border-bottom'>{title}</h2>
       {charts}
     </div>
   )

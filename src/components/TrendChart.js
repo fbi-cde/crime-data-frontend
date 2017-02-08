@@ -107,8 +107,7 @@ class TrendChart extends React.Component {
           <svg
             width={size.width}
             height={size.height}
-            preserveAspectRatio='xMidYMid'
-            viewBox={`0 0 ${size.width} ${size.height}`}
+            style={{ maxWidth: '100%' }}
           >
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x} height={height} tickCt={8} />
@@ -135,7 +134,7 @@ class TrendChart extends React.Component {
             </g>
           </svg>
         </div>
-        <div className='my2 h6 bold monospace line-height-1 center'>
+        <div className='my2 fs-10 sm-fs-12 line-height-1 bold monospace center'>
           Rate per 100,000 people / Year
         </div>
       </div>

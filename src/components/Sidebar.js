@@ -15,7 +15,7 @@ const Sidebar = ({ dispatch, filters, isOpen, onChange, router }) => {
       <div className='p2 bg-red-bright line-height-1 md-hide lg-hide'>
         <button
           type='button'
-          className='right btn p0 h5 caps line-height-3 black'
+          className='right btn p0 fs-12 caps line-height-4 black'
           onClick={hide}
         >
           Close

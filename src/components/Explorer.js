@@ -1,6 +1,6 @@
 import lowerCase from 'lodash.lowercase'
-import React from 'react'
 import startCase from 'lodash.startcase'
+import React from 'react'
 
 import AboutTheData from './AboutTheData'
 import Breadcrumbs from './Breadcrumbs'
@@ -127,12 +127,12 @@ class Explorer extends React.Component {
           <div className='container-main mx-auto p3'>
             <Breadcrumbs {...params} />
             <div className='items-baseline mb4 border-bottom border-blue-lighter'>
-              <h1 className='flex-auto mt0 mb1'>
+              <h1 className='flex-auto mt0 mb1 fs-22 sm-fs-32'>
                 {startCase(params.crime)}, {filters.timeFrom}-{filters.timeTo}
               </h1>
             </div>
-            <div className='clearfix'>
-              <p className='col col-8 mb5 fs1 serif'>
+            <div className='mb5 clearfix'>
+              <p className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2 fs-18 serif'>
                 Incidents of
                 <Term
                   dispatch={dispatch}
@@ -147,7 +147,7 @@ class Explorer extends React.Component {
                 1985, and peaked in 1991, with a rate of over 52 incidents
                 per 100,000 people.<sup>1</sup>
               </p>
-              <ul className='col col-4 list-style-none mt0'>
+              <ul className='sm-col sm-col-4 m0 p0 list-style-none'>
                 {links.map((l, i) => (
                   <li key={i}>
                     <a className='bold' href={l.url}>

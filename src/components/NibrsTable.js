@@ -52,11 +52,9 @@ class IncidentDetailTable extends React.Component {
         <table className='my2 table-fixed'>
           <caption className='left-align'>
             <div className='bold'>{title}</div>
-            <div>
-              <span className='bold caps fs4 red'>Total Incidents</span>
-              <span className='bold fs3 ml1 monospace'>
-                {formatNumber(total)}
-              </span>
+            <div className='mt-tiny'>
+              <span className='bold caps fs-12 red'>Total Incidents</span>
+              <span className='bold fs-14 ml1 monospace'>{formatNumber(total)}</span>
             </div>
           </caption>
           <thead className='v-hide'>
