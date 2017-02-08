@@ -95,7 +95,7 @@ class Explorer extends React.Component {
       return <NotFound />
     }
 
-    const links = content.states[params.place]
+    const links = content.states[startCase(params.place)]
     const { filters, nibrs, sidebar, summaries } = appState
     const nibrsData = filterNibrsData(nibrs.data, filters)
     const trendData = mungeSummaryData(summaries, params.place)
@@ -131,20 +131,32 @@ class Explorer extends React.Component {
                 {startCase(params.crime)}, {filters.timeFrom}-{filters.timeTo}
               </h1>
             </div>
-            <p className='mb5 fs1 serif'>
-              Incidents of
-              <Term
-                dispatch={dispatch}
-                id={mapGlossaryTerms(params.crime) || 'undefinedTerm'}
-              >
-                {lowerCase(params.crime)}
-              </Term>
-              are on the rise in {lowerCase(params.crime)}, but lower than 5
-              or 10 years ago. {startCase(params.place)}&#39;s
-              {lowerCase(params.crime)} rate surpassed that of the U.S. in
-              1985, and peaked in 1991, with a rate of over 52 incidents
-              per 100,000 people.<sup>1</sup>
-            </p>
+            <div className='clearfix'>
+              <p className='col col-8 mb5 fs1 serif'>
+                Incidents of
+                <Term
+                  dispatch={dispatch}
+                  id={mapGlossaryTerms(params.crime) || 'undefinedTerm'}
+                >
+                  {lowerCase(params.crime)}
+                </Term>
+                are on the
+                rise in {startCase(params.place)}, but lower than 5 or 10
+                years ago. {startCase(params.place)}&#39;s
+                {lowerCase(params.crime)} rate surpassed that of the U.S. in
+                1985, and peaked in 1991, with a rate of over 52 incidents
+                per 100,000 people.<sup>1</sup>
+              </p>
+              <ul className='col col-4 list-style-none mt0'>
+                {links.map((l, i) => (
+                  <li key={i}>
+                    <a className='bold' href={l.url}>
+                      <span className='red'>&#10142;</span> {l.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
             <hr className='mt0 mb3' />
             <TrendContainer
               crime={params.crime}
