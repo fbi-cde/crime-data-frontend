@@ -1,5 +1,7 @@
+import lowerCase from 'lodash.lowercase'
 import { plural } from 'pluralize'
 import React from 'react'
+import startCase from 'lodash.startcase'
 
 import DownloadDataBtn from './DownloadDataBtn'
 import Loading from './Loading'
@@ -23,7 +25,7 @@ const TrendContainer = ({
           <div className='flex-auto'>
             <div className='inline-block'>
               <h2 className='m0 fs-ch1 sans-serif'>
-                Reported {plural(crime)} in {place},
+                Reported {plural(lowerCase(crime))} in {startCase(place)},
                 <br />
                 {timeFrom}–{timeTo}
               </h2>
