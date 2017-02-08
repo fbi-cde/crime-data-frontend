@@ -1,6 +1,6 @@
 import lowerCase from 'lodash.lowercase'
-import React from 'react'
 import startCase from 'lodash.startcase'
+import React from 'react'
 
 import AboutTheData from './AboutTheData'
 import Breadcrumbs from './Breadcrumbs'
