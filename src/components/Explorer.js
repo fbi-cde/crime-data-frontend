@@ -15,6 +15,7 @@ import { fetchNibrsDimensions } from '../actions/nibrsActions'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 import { hideSidebar, showSidebar } from '../actions/sidebarActions'
 import { crimeTypes } from '../util/data'
+import content from '../util/content'
 import { slugify } from '../util/text'
 import lookup from '../util/usa'
 
@@ -23,7 +24,9 @@ const crimeSlugs = [].concat(...Object.values(crimeTypes)).map(s => slugify(s))
 const crimeIds = {
   'aggravated-assault': 'aggravated assault',
   burglary: 'burglary',
-  murder: 'murder and nonnegligent homicide',
+  homicide: 'murder and nonnegligent homicide',
+  'larceny-theft': 'larceny',
+  'motor-vehicle-theft': 'motor vehicle theft',
   rape: 'rape (legacy definition)',
   robbery: 'robbery',
 }
@@ -101,8 +104,9 @@ class Explorer extends React.Component {
     const place = startCase(params.place)
 
     // show not found page if crime or place unfamiliar
-    if (!crimeSlugs.includes(crime) || !lookup(place)) return <NotFound />
+    if (!crimeSlugs.includes(params.crime) || !lookup(place)) return <NotFound />
 
+    const links = content.states[place]
     const { filters, nibrs, sidebar, summaries } = appState
     const nibrsData = filterNibrsData(nibrs.data, filters)
     const trendData = mungeSummaryData(summaries, params.place)
@@ -133,25 +137,36 @@ class Explorer extends React.Component {
         <div className='site-content'>
           <div className='container-main mx-auto p3'>
             <Breadcrumbs {...params} />
-            <div className='md-flex items-baseline mb4 border-bottom border-blue-lighter'>
+            <div className='items-baseline mb4 border-bottom border-blue-lighter'>
               <h1 className='flex-auto mt0 mb1'>
-                {place}, {filters.timeFrom}-{filters.timeTo}
+                {place}, {startCase(params.crime)}
               </h1>
             </div>
-            <p className='mb5 fs1 serif'>
-              Incidents of
-              <Term
-                dispatch={dispatch}
-                id={crimeIds[params.crime] || 'undefinedTerm'}
-              >
-                {crime}
-              </Term>
-              are on the
-              rise in {place}, but lower than 5 or 10 years ago.
-              {place}&#39;s {crime} rate surpassed that of the U.S. in 1985, and peaked
-              in 1991, with a rate of over 52 incidents per 100,000
-              people.<sup>1</sup>
-            </p>
+            <div className='clearfix'>
+              <p className='col col-8 mb5 fs1 serif'>
+                Incidents of
+                <Term
+                  dispatch={dispatch}
+                  id={crimeIds[params.crime] || 'undefinedTerm'}
+                >
+                  {crime}
+                </Term>
+                are on the
+                rise in {place}, but lower than 5 or 10 years ago.
+                {place}&#39;s {crime} rate surpassed that of the U.S. in 1985, and peaked
+                in 1991, with a rate of over 52 incidents per 100,000
+                people.<sup>1</sup>
+              </p>
+              <ul className='col col-4 list-style-none mt0'>
+                {links.map((l, i) => (
+                  <li key={i}>
+                    <a className='bold' href={l.url}>
+                      <span className='red'>&#10142;</span> {l.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
             <hr className='mt0 mb3' />
             <TrendContainer
               crime={crime}
@@ -169,7 +184,7 @@ class Explorer extends React.Component {
               loading={nibrs.loading}
             />
             <hr className='mt0 mb3' />
-            <AboutTheData />
+            <AboutTheData crime={params.crime} place={place} />
           </div>
         </div>
       </div>

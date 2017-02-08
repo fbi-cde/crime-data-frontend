@@ -23,12 +23,16 @@ var config = {
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        loader: 'json'
       },
       {
         test: /\.scss$/i,
         loader: ExtractTextPlugin.extract(['css', 'postcss', 'sass'])
       },
+      {
+        test: /\.ya*ml$/,
+        loaders: ['json', 'yaml']
+      }
     ]
   },
   sassLoader: {

@@ -14,7 +14,7 @@ const crimes = {
   burglary: 'Burglary',
   larceny: 'Larceny',
   'motor-vehicle-theft': 'Moter vehicle theft',
-  murder: 'Manslaughter by Negligence',
+  homicide: 'Manslaughter by Negligence',
   rape: 'Rape',
   robbery: 'Robbery',
 }
