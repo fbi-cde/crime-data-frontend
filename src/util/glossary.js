@@ -3,7 +3,7 @@ const crimeIds = {
   arson: 'arson',
   burglary: 'burglary',
   'motor-vehicle-theft': 'motor vehicle theft',
-  murder: 'murder and nonnegligent homicide',
+  homicide: 'homicide',
   larceny: 'larceny',
   rape: 'rape (legacy definition)',
   robbery: 'robbery',
