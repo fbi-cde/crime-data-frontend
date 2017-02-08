@@ -14,22 +14,11 @@ import { fetchSummaries } from '../actions/summaryActions'
 import { fetchNibrsDimensions } from '../actions/nibrsActions'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 import { hideSidebar, showSidebar } from '../actions/sidebarActions'
-import { crimeTypes } from '../util/data'
-import content from '../util/content'
-import { slugify } from '../util/text'
-import lookup from '../util/usa'
 
-const crimeSlugs = [].concat(...Object.values(crimeTypes)).map(s => slugify(s))
-/* crimeIds is for linking the crime text to the <Glossary /> component */
-const crimeIds = {
-  'aggravated-assault': 'aggravated assault',
-  burglary: 'burglary',
-  homicide: 'murder and nonnegligent homicide',
-  'larceny-theft': 'larceny',
-  'motor-vehicle-theft': 'motor vehicle theft',
-  rape: 'rape (legacy definition)',
-  robbery: 'robbery',
-}
+import content from '../util/content'
+import offenses from '../util/offenses'
+import mapGlossaryTerms from '../util/glossary'
+import lookup from '../util/usa'
 
 const filterNibrsData = (data, { timeFrom, timeTo }) => {
   if (!data) return false
@@ -100,13 +89,13 @@ class Explorer extends React.Component {
 
   render() {
     const { appState, dispatch, params, router } = this.props
-    const crime = lowerCase(params.crime)
-    const place = startCase(params.place)
 
     // show not found page if crime or place unfamiliar
-    if (!crimeSlugs.includes(params.crime) || !lookup(place)) return <NotFound />
+    if (!offenses.includes(params.crime) || !lookup(params.place)) {
+      return <NotFound />
+    }
 
-    const links = content.states[place]
+    const links = content.states[startCase(params.place)]
     const { filters, nibrs, sidebar, summaries } = appState
     const nibrsData = filterNibrsData(nibrs.data, filters)
     const trendData = mungeSummaryData(summaries, params.place)
@@ -139,7 +128,7 @@ class Explorer extends React.Component {
             <Breadcrumbs {...params} />
             <div className='items-baseline mb4 border-bottom border-blue-lighter'>
               <h1 className='flex-auto mt0 mb1'>
-                {place}, {startCase(params.crime)}
+                {startCase(params.crime)}, {filters.timeFrom}-{filters.timeTo}
               </h1>
             </div>
             <div className='clearfix'>
@@ -147,15 +136,16 @@ class Explorer extends React.Component {
                 Incidents of
                 <Term
                   dispatch={dispatch}
-                  id={crimeIds[params.crime] || 'undefinedTerm'}
+                  id={mapGlossaryTerms(params.crime) || 'undefinedTerm'}
                 >
-                  {crime}
+                  {lowerCase(params.crime)}
                 </Term>
                 are on the
-                rise in {place}, but lower than 5 or 10 years ago.
-                {place}&#39;s {crime} rate surpassed that of the U.S. in 1985, and peaked
-                in 1991, with a rate of over 52 incidents per 100,000
-                people.<sup>1</sup>
+                rise in {startCase(params.place)}, but lower than 5 or 10
+                years ago. {startCase(params.place)}&#39;s
+                {lowerCase(params.crime)} rate surpassed that of the U.S. in
+                1985, and peaked in 1991, with a rate of over 52 incidents
+                per 100,000 people.<sup>1</sup>
               </p>
               <ul className='col col-4 list-style-none mt0'>
                 {links.map((l, i) => (
@@ -169,22 +159,22 @@ class Explorer extends React.Component {
             </div>
             <hr className='mt0 mb3' />
             <TrendContainer
-              crime={crime}
-              place={place}
+              crime={params.crime}
+              place={params.place}
               filters={filters}
               data={trendData}
               loading={summaries.loading}
-              keys={['National', place]}
+              keys={['National', startCase(params.place)]}
             />
             <NibrsContainer
-              crime={crime}
-              place={place}
+              crime={params.crime}
+              place={params.place}
               filters={filters}
               data={nibrsData}
               loading={nibrs.loading}
             />
             <hr className='mt0 mb3' />
-            <AboutTheData crime={params.crime} place={place} />
+            <AboutTheData crime={params.crime} place={params.place} />
           </div>
         </div>
       </div>

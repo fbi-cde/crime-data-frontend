@@ -2,22 +2,11 @@ import startCase from 'lodash.startcase'
 import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
-
 import getStateAbbrFromName from './usa'
-
+import { mapToApiOffense, mapToApiOffenseParam } from './offenses'
 import { population as pop } from './data'
 
 const API = '/api'
-
-const crimes = {
-  'aggravated-assault': 'Assault',
-  burglary: 'Burglary',
-  larceny: 'Larceny',
-  'motor-vehicle-theft': 'Moter vehicle theft',
-  homicide: 'Manslaughter by Negligence',
-  rape: 'Rape',
-  robbery: 'Robbery',
-}
 
 const dimensionEndpoints = {
   ageNum: 'age_num',
@@ -28,8 +17,6 @@ const dimensionEndpoints = {
 }
 
 const getPop = (place = 'National') => pop[startCase(place)]
-
-const mapCrimeFilterToApiQuery = filter => crimes[filter]
 
 const stateCodes = {
   alabama: 2,
@@ -141,14 +128,14 @@ const getIncidentVictimsSex = params => (
   getVictimsDimension({ dimension: 'sexCode', ...params })
 )
 
-const getSummary = params => {
-  const crime = mapCrimeFilterToApiQuery(params.crime)
-  const population = getPop(params.place)
+const buildSummaryQueryString = params => {
+  const offense = mapToApiOffense(params.crime)
+  const offenseParam = mapToApiOffenseParam(params.crime)
   const timeFrom = parseInt(params.timeFrom, 10)
   const timeTo = parseInt(params.timeTo, 10)
   const perPage = (timeTo - timeFrom) + 1
   const qs = [
-    `offense=${crime}`,
+    `${offenseParam}=${offense}`,
     `per_page=${perPage}`,
     `year>=${timeFrom}`,
     `year<=${timeTo}`,
@@ -156,7 +143,15 @@ const getSummary = params => {
 
   if (params.place) qs.push(`state=${getStateAbbrFromName(params.place)}`)
 
-  return get(`${API}/incidents/count?${qs.join('&')}`).then(d => (
+  return qs.join('&')
+}
+
+const getSummary = params => {
+  const population = getPop(params.place)
+  const endpoint = `${API}/incidents/count`
+  const qs = buildSummaryQueryString(params)
+
+  return get(`${endpoint}?${qs}`).then(d => (
     d.results.map(r => ({
       year: r.year,
       count: r.actual,
