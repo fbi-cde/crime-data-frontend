@@ -1,9 +1,12 @@
 import { format } from 'd3-format'
 import React from 'react'
 
+import DownloadDataBtn from './DownloadDataBtn'
+
 
 const formatPercent = format('.0%')
 const formatNumber = format(',')
+const formatSI = format('.2s')
 
 class IncidentDetailTable extends React.Component {
   constructor(props) {
@@ -28,7 +31,15 @@ class IncidentDetailTable extends React.Component {
     const { showCounts } = this.state
 
     const total = data.reduce((a, b) => (a + b.count), 0)
-    const dataParsed = data.map(d => ({ ...d, percent: (d.count / total) }))
+    const dataParsed = data.map(d => {
+      const p = d.count / total
+      return {
+        ...d,
+        percent: p,
+        countFmt: formatSI(d.count),
+        percentFmt: p > 0.01 ? formatPercent(p) : '<1%',
+      }
+    })
 
     const btnCls = 'ml-tiny border border-blue rounded'
     const activeBtnCls = 'bg-blue white'
@@ -38,7 +49,7 @@ class IncidentDetailTable extends React.Component {
 
     return (
       <div>
-        <table className='mb2 pb2 border-bottom table-fixed'>
+        <table className='my2 table-fixed'>
           <caption className='left-align'>
             <div className='bold'>{title}</div>
             <div>
@@ -49,12 +60,10 @@ class IncidentDetailTable extends React.Component {
             </div>
           </caption>
           <thead className='v-hide'>
-            <tr>
-              <th style={{ width: '24%' }} />
-              <th style={{ width: '24%' }}>
-                {showCounts ? 'Count' : 'Percent'}
-              </th>
-              <th style={{ width: '52%' }}>{title}</th>
+            <tr style={{ lineHeight: '16px' }}>
+              <th style={{ width: '15%' }} />
+              <th style={{ width: '20%' }}>{showCounts ? 'Count' : 'Percent'}</th>
+              <th style={{ width: '65%' }}>{title}</th>
             </tr>
           </thead>
           <tbody>
@@ -65,36 +74,35 @@ class IncidentDetailTable extends React.Component {
                     <span className='rtl' style={{ width: `${d.percent * 100}%` }} />
                   </div>
                 </td>
-                <td className='bold monospace right-align'>
-                  {
-                    /* eslint no-nested-ternary: 0 */
-                    showCounts ? formatNumber(d.count) :
-                    (d.percent > 0.01) ? formatPercent(d.percent) : '<1%'
-                  }
+                <td className='pr-tiny bold monospace right-align'>
+                  {showCounts ? d.countFmt : d.percentFmt}
                 </td>
-                <td className='px1 line-height-3' title={d.key}>{d.key}</td>
+                <td className='px1 truncate' title={d.key}>{d.key}</td>
               </tr>
             ))}
           </tbody>
         </table>
-        <div className='italic serif fs5 right-align'>
-          View by
-          <button
-            className={
-              `${btnCls} ${showCounts ? activeBtnCls : inactiveBtnCls}`
-            }
-            onClick={this.showCounts}
-          >
-            #
-          </button>
-          <button
-            className={
-              `${btnCls} ${!showCounts ? activeBtnCls : inactiveBtnCls}`
-            }
-            onClick={this.showPercents}
-          >
-            %
-          </button>
+        <div className='clearfix'>
+          <div className='right mt-tiny italic serif fs5'>
+            View by
+            <button
+              className={`${btnCls} ${showCounts ? activeBtnCls : inactiveBtnCls}`}
+              onClick={this.showCounts}
+            >
+              #
+            </button>
+            <button
+              className={`${btnCls} ${!showCounts ? activeBtnCls : inactiveBtnCls}`}
+              onClick={this.showPercents}
+            >
+              %
+            </button>
+          </div>
+          <DownloadDataBtn
+            data={dataParsed.map(d => ({ key: d.key, count: d.count }))}
+            fname={title}
+            text='Download data'
+          />
         </div>
       </div>
     )
