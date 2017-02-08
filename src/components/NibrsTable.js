@@ -81,7 +81,7 @@ class IncidentDetailTable extends React.Component {
           </tbody>
         </table>
         <div className='clearfix'>
-          <div className='right mt-tiny italic serif fs5'>
+          <div className='right mt-tiny fs-10 italic serif'>
             View by
             <button
               className={`${btnCls} ${showCounts ? activeBtnCls : inactiveBtnCls}`}

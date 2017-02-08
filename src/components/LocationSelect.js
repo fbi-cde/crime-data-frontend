@@ -3,10 +3,10 @@ import { entries } from 'd3-collection'
 import React from 'react'
 import startCase from 'lodash.startcase'
 
-import { states } from '../util/usa'
+import { data } from '../util/usa'
 import { slugify } from '../util/text'
 
-const usaStates = entries(states).map(d => startCase(d.value))
+const places = entries(data).map(d => startCase(d.value))
 
 const LocationSelect = ({ className, onChange, selected }) => {
   const handleChange = e => onChange({ place: slugify(e.target.value) })
@@ -22,9 +22,8 @@ const LocationSelect = ({ className, onChange, selected }) => {
         onChange={handleChange}
         value={(selected) ? startCase(selected) : ''}
       >
-        <option key='0' value='' disabled>United States</option>
-        {usaStates.map((s, i) => (
-          <option key={i + 1}>{s}</option>
+        {places.map((p, i) => (
+          <option key={i}>{p}</option>
         ))}
       </select>
     </div>

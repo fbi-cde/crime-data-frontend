@@ -37,8 +37,8 @@ describe('summaryReducer', () => {
         },
       }
       const s = reducer(undefined, action)
-      expect(s.fakePlace).toEqual(action.summaries.fakePlace)
-      expect(s.secondFakePlace).toEqual(action.summaries.secondFakePlace)
+      expect(s.data.fakePlace).toEqual(action.summaries.fakePlace)
+      expect(s.data.secondFakePlace).toEqual(action.summaries.secondFakePlace)
     })
 
     it('should replace any summary which already exists', () => {
@@ -47,7 +47,7 @@ describe('summaryReducer', () => {
         summaries: { fakePlace: ['testing', 'data'] },
       }
       const s = reducer({ fakePlace: ['initial'] }, action)
-      expect(s.fakePlace).toEqual(action.summaries.fakePlace)
+      expect(s.data.fakePlace).toEqual(action.summaries.fakePlace)
     })
   })
 })

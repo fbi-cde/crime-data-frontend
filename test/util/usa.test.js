@@ -1,11 +1,11 @@
 /* eslint no-undef: 0 */
 
-import lookup, { states } from '../../src/util/usa'
+import lookup, { data as states } from '../../src/util/usa'
 
 describe('usa utility', () => {
   it('should cover all 50 states and DC', () => {
     const stateCount = Object.keys(states).length
-    expect(stateCount).toEqual(51)
+    expect(stateCount).toEqual(52)
   })
 
   describe('with an abbreviation', () => {

@@ -101,7 +101,7 @@ class TrendChart extends React.Component {
     )
 
     return (
-      <div>
+      <div className='p4 bg-white'>
         <TrendChartDetails colors={colors} data={active} keys={keysWithSlugs} />
         <div className='col-12 overflow-auto'>
           <svg

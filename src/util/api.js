@@ -2,7 +2,7 @@ import startCase from 'lodash.startcase'
 import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
-import getStateAbbrFromName from './usa'
+import lookup, { nationalKey } from './usa'
 import { mapToApiOffense, mapToApiOffenseParam } from './offenses'
 import { population as pop } from './data'
 
@@ -16,7 +16,7 @@ const dimensionEndpoints = {
   sexCode: 'sex_code',
 }
 
-const getPop = (place = 'National') => pop[startCase(place)]
+const getPop = place => pop[startCase(place)]
 
 const stateCodes = {
   alabama: 2,
@@ -129,11 +129,13 @@ const getIncidentVictimsSex = params => (
 )
 
 const buildSummaryQueryString = params => {
-  const offense = mapToApiOffense(params.crime)
-  const offenseParam = mapToApiOffenseParam(params.crime)
+  const { crime, place } = params
+  const offense = mapToApiOffense(crime)
+  const offenseParam = mapToApiOffenseParam(crime)
   const timeFrom = parseInt(params.timeFrom, 10)
   const timeTo = parseInt(params.timeTo, 10)
   const perPage = (timeTo - timeFrom) + 1
+
   const qs = [
     `${offenseParam}=${offense}`,
     `per_page=${perPage}`,
@@ -141,27 +143,47 @@ const buildSummaryQueryString = params => {
     `year<=${timeTo}`,
   ]
 
-  if (params.place) qs.push(`state=${getStateAbbrFromName(params.place)}`)
+  if (place && place !== nationalKey) {
+    qs.push(`state=${lookup(params.place)}`)
+  }
 
   return qs.join('&')
 }
 
 const getSummary = params => {
-  const population = getPop(params.place)
+  const { place } = params
+  const population = getPop(place)
   const endpoint = `${API}/incidents/count`
   const qs = buildSummaryQueryString(params)
 
-  return get(`${endpoint}?${qs}`).then(d => (
-    d.results.map(r => ({
+  return get(`${endpoint}?${qs}`).then(d => ({
+    place,
+    results: d.results.map(r => ({
       year: r.year,
       count: r.actual,
       rate: (r.actual * 100000) / population,
-    }))
-  ))
+    })),
+  }))
+}
+
+const getSummaryRequests = params => {
+  const { crime, place, timeFrom, timeTo } = params
+
+  const requests = [
+    getSummary({ crime, place, timeFrom, timeTo }),
+  ]
+
+  // add national summary request (unless you already did)
+  if (place !== nationalKey) {
+    requests.push(getSummary({ crime, place: nationalKey, timeFrom, timeTo }))
+  }
+
+  return requests
 }
 
 export default {
   getSummary,
+  getSummaryRequests,
   getIncidentVictimsLocationName,
   getIncidentOffendersSex,
   getIncidentOffendersRace,

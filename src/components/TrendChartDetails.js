@@ -5,7 +5,7 @@ const formatRate = format('.1f')
 const formatTotal = format(',.0f')
 
 const TrendChartDetails = ({ colors, data, keys }) => {
-  const { name, slug } = keys[1]
+  const { name, slug } = keys[0]
   const year = data.date.getFullYear()
   const rate = data[slug]
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const DownloadDataBtn = ({ data, fname, text }) => {
-  if (!data) return null
+  if (!data || data.length === 0) return null
 
   const file = `${fname}.csv`
   const cols = Object.keys(data[0])

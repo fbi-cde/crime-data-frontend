@@ -34,12 +34,15 @@ const filterNibrsData = (data, { timeFrom, timeTo }) => {
 }
 
 const mungeSummaryData = (summaries, place) => {
-  if (Object.keys(summaries).length === 1 || !summaries[place]) return false
-  return summaries[place].map((s, i) => ({
-    date: s.year,
-    national: summaries.national[i].rate,
-    [place]: s.rate,
-  }))
+  if (!summaries || !summaries[place]) return false
+
+  const keys = Object.keys(summaries)
+  return summaries[place].map((s, i) => (
+    Object.assign(
+      { date: s.year },
+      ...keys.map(k => ({ [k]: summaries[k][i].rate })),
+    )
+  ))
 }
 
 class Explorer extends React.Component {
@@ -89,16 +92,16 @@ class Explorer extends React.Component {
 
   render() {
     const { appState, dispatch, params, router } = this.props
+    const { crime, place } = params
 
     // show not found page if crime or place unfamiliar
-    if (!offenses.includes(params.crime) || !lookup(params.place)) {
-      return <NotFound />
-    }
+    if (!offenses.includes(crime) || !lookup(place)) return <NotFound />
 
-    const links = content.states[startCase(params.place)]
+    const links = content.states[startCase(place)] || []
     const { filters, nibrs, sidebar, summaries } = appState
     const nibrsData = filterNibrsData(nibrs.data, filters)
-    const trendData = mungeSummaryData(summaries, params.place)
+    const trendData = mungeSummaryData(summaries.data, place)
+    const trendKeys = Object.keys(summaries.data).map(k => startCase(k))
 
     return (
       <div className='site-wrapper'>
@@ -128,7 +131,7 @@ class Explorer extends React.Component {
             <Breadcrumbs {...params} />
             <div className='items-baseline mb4 border-bottom border-blue-lighter'>
               <h1 className='flex-auto mt0 mb1 fs-22 sm-fs-32'>
-                {startCase(params.crime)}, {filters.timeFrom}-{filters.timeTo}
+                {startCase(place)}, {startCase(crime)}
               </h1>
             </div>
             <div className='mb5 clearfix'>
@@ -136,14 +139,14 @@ class Explorer extends React.Component {
                 Incidents of
                 <Term
                   dispatch={dispatch}
-                  id={mapGlossaryTerms(params.crime) || 'undefinedTerm'}
+                  id={mapGlossaryTerms(crime) || 'undefinedTerm'}
                 >
-                  {lowerCase(params.crime)}
+                  {lowerCase(crime)}
                 </Term>
                 are on the
-                rise in {startCase(params.place)}, but lower than 5 or 10
-                years ago. {startCase(params.place)}&#39;s
-                {lowerCase(params.crime)} rate surpassed that of the U.S. in
+                rise in {startCase(place)}, but lower than 5 or 10
+                years ago. {startCase(place)}&#39;s
+                {lowerCase(crime)} rate surpassed that of the U.S. in
                 1985, and peaked in 1991, with a rate of over 52 incidents
                 per 100,000 people.<sup>1</sup>
               </p>
@@ -159,22 +162,22 @@ class Explorer extends React.Component {
             </div>
             <hr className='mt0 mb3' />
             <TrendContainer
-              crime={params.crime}
-              place={params.place}
+              crime={crime}
+              place={place}
               filters={filters}
               data={trendData}
               loading={summaries.loading}
-              keys={['National', startCase(params.place)]}
+              keys={trendKeys}
             />
             <NibrsContainer
-              crime={params.crime}
-              place={params.place}
+              crime={crime}
+              place={place}
               filters={filters}
               data={nibrsData}
               loading={nibrs.loading}
             />
             <hr className='mt0 mb3' />
-            <AboutTheData crime={params.crime} place={params.place} />
+            <AboutTheData crime={crime} place={place} />
           </div>
         </div>
       </div>
