@@ -1,7 +1,7 @@
 /* eslint quote-props: 0 */
 
 const population = {
-  'National': 300000000,
+  'United States': 300000000,
   'California': 38802500,
   'Texas': 26956958,
   'Florida': 19893297,

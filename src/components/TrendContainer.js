@@ -5,6 +5,7 @@ import startCase from 'lodash.startcase'
 
 import DownloadDataBtn from './DownloadDataBtn'
 import Loading from './Loading'
+import NoData from './NoData'
 import TrendChart from './TrendChart'
 
 const TrendContainer = ({
@@ -12,11 +13,11 @@ const TrendContainer = ({
   data, loading, keys,
 }) => {
   const { timeFrom, timeTo } = filters
-  const chart = (loading || !data) ? <Loading /> : (
-    <div className='p4 bg-white'>
-      <TrendChart data={data} keys={keys} />
-    </div>
-  )
+
+  let content = null
+  if (loading) content = <Loading />
+  else if (!data || data.length === 0) content = <NoData />
+  else content = <TrendChart data={data} keys={keys} />
 
   return (
     <div>
@@ -40,7 +41,7 @@ const TrendContainer = ({
           </div>
         </div>
       </div>
-      <div className='mb8'>{chart}</div>
+      <div className='mb8'>{content}</div>
     </div>
   )
 }

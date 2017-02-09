@@ -5,6 +5,7 @@ import {
 
 const initialState = {
   loading: false,
+  data: {},
 }
 
 export default (state = initialState, action) => {
@@ -17,7 +18,7 @@ export default (state = initialState, action) => {
     case SUMMARY_RECEIVED:
       return {
         ...state,
-        ...action.summaries,
+        data: { ...action.summaries },
         loading: false,
       }
     default:
