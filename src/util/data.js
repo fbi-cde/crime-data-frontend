@@ -71,13 +71,7 @@ const propertyCrime = [
   'Motor Vehicle Theft',
 ]
 
-const otherCrime = [
-  'Hate Crime',
-  // 'Human Trafficking',
-  'Law Enforcement Officers Killed and Assaulted (LEOKA)',
-]
-
-const crimeTypes = { violentCrime, propertyCrime, otherCrime }
+const crimeTypes = { violentCrime, propertyCrime }
 
 export {
   crimeTypes,

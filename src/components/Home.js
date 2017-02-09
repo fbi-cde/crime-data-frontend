@@ -82,19 +82,21 @@ const Home = ({ appState, dispatch, location }) => {
               >
                 <option value='' disabled>Crime Type</option>
                 <optgroup label='Violent Crime'>
+                  <option value='all-violent-crime'>All Violent Crime</option>
                   <option value='homicide'>Homicide</option>
                   <option value='rape'>Rape</option>
                   <option value='robbery'>Robbery</option>
                   <option value='aggravated-assault'>Aggravated Assault</option>
                 </optgroup>
                 <optgroup label='Property Crime'>
+                  <option value='all-property-crime'>
+                    All Property Crime
+                  </option>
                   <option value='arson'>Arson</option>
                   <option value='burglary'>Burglary</option>
                   <option value='larceny-theft'>Larceny Theft</option>
                   <option value='motor-vehicle-theft'>Motor Vehicle Theft</option>
                 </optgroup>
-                <option value='hate-crime'>Hate Crime</option>
-                <option value='leoka'>Law Enforcement Officers Killed and Assaulted</option>
               </select>
             </div>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0 xs-hide'>
