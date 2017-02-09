@@ -7,6 +7,7 @@ import stateLookup from '../util/usa'
 import Term from './Term'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 
+import otherDataSets from '../../content/datasets.yml'
 import usaSvgData from '../../data/usa-state-svg.json'
 
 const scrollToBottom = () => window.scrollTo(0, window.outerHeight * 1.5)
@@ -139,17 +140,14 @@ const Home = ({ appState, dispatch, location }) => {
           </div>
           <h2 className='mt0 mb3 fs-22 sm-fs-32'>Other Data Sets</h2>
           <div className='clearfix mxn2'>
-            {[...Array(3)].map((_, i) => (
+            {otherDataSets.map((d, i) => (
               <div key={i} className='sm-col sm-col-4 px2 mb2 sm-m0'>
                 <div className='px3 py2 bg-blue-white'>
-                  <div className='mb1 pb1 fs-22 bold border-bottom border-red-bright'>
-                    Arrests
+                  <div className='mb1 pb1 fs-ch2 bold border-bottom border-red-bright'>
+                    {d.title}
                   </div>
-                  <p className='mb2 fs-14 sm-fs-16'>
-                    Lorem ipsum dolor sit amet, quis tellus nonummy id. Vitae
-                    amet vel phasellus, est cras lectus lacus.
-                  </p>
-                  <button className='mb1 btn btn-primary btn-sm fs-14'>
+                  <p className='mb2'>{d.description}</p>
+                  <button className='mb1 btn btn-primary btn-sm'>
                     View details
                   </button>
                 </div>
