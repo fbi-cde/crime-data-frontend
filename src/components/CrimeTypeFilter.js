@@ -4,7 +4,7 @@ import React from 'react'
 import FilterGroup from './FilterGroup'
 import { crimeTypes } from '../util/data'
 
-const { violentCrime, propertyCrime, otherCrime } = crimeTypes
+const { violentCrime, propertyCrime } = crimeTypes
 
 const CrimeTypeFilter = ({ onChange, selected }) => (
   <div id='type-of-crime' className='mb4'>
@@ -23,15 +23,6 @@ const CrimeTypeFilter = ({ onChange, selected }) => (
       onChange={onChange}
       selected={selected}
     />
-    {otherCrime.map((o, i) => (
-      <FilterGroup
-        key={i}
-        name='crime'
-        options={[o]}
-        onChange={onChange}
-        selected={selected}
-      />
-    ))}
     <Link
       className='px2 underline'
       to='/downloads-and-docs'
