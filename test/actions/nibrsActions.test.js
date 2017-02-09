@@ -49,8 +49,8 @@ describe('nibrsAction', () => {
       expect(actual.type).toEqual(INCIDENTS_RECEIVED)
     })
 
-    const actual = receivedIncidents(action)
     it('should return incidents equal to the results array', () => {
+      const actual = receivedIncidents(action)
       expect(actual.incidents).toEqual(action.results)
     })
   })
