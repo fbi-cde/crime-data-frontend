@@ -14,24 +14,10 @@ export const receivedNibrsDimensions = data => ({
 })
 
 export const fetchNibrsDimensions = params => dispatch => {
-  const { place } = params
-  const requests = [
-    api.getIncidentOffendersSex,
-    api.getIncidentOffendersRace,
-    api.getIncidentOffendersAge,
-    api.getIncidentVictimsAge,
-    api.getIncidentVictimsLocationName,
-    api.getIncidentVictimsRace,
-    api.getIncidentVictimsSex,
-    api.getIncidentVictimsRelationship,
-  ].map(fn => fn({ place }))
-
   dispatch(fetchingNibrsDimensions())
 
-  const reduceData = (accum, next) => ({
-    ...accum,
-    [next.key]: next.data,
-  })
+  const requests = api.getNibrsRequests(params)
+  const reduceData = (accum, next) => ({ ...accum, [next.key]: next.data })
 
   return Promise.all(requests)
     .then(data => data.reduce(reduceData, {}))
