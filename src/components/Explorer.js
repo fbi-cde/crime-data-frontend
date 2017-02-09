@@ -1,4 +1,3 @@
-import lowerCase from 'lodash.lowercase'
 import startCase from 'lodash.startcase'
 import React from 'react'
 
@@ -17,7 +16,7 @@ import { hideSidebar, showSidebar } from '../actions/sidebarActions'
 
 import content from '../util/content'
 import offenses from '../util/offenses'
-import mapGlossaryTerms from '../util/glossary'
+import ucrParticipation from '../util/ucr'
 import lookup from '../util/usa'
 
 const filterNibrsData = (data, { timeFrom, timeTo }) => {
@@ -99,6 +98,7 @@ class Explorer extends React.Component {
 
     const links = content.states[startCase(place)] || []
     const { filters, nibrs, sidebar, summaries } = appState
+    const ucr = ucrParticipation(params.place)
     const nibrsData = filterNibrsData(nibrs.data, filters)
     const trendData = mungeSummaryData(summaries.data, place)
     const trendKeys = Object.keys(summaries.data).map(k => startCase(k))
@@ -134,21 +134,32 @@ class Explorer extends React.Component {
                 {startCase(place)}, {startCase(crime)}
               </h1>
             </div>
-            <div className='mb5 clearfix'>
-              <p className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2 fs-18 serif'>
-                Incidents of
-                <Term
-                  dispatch={dispatch}
-                  id={mapGlossaryTerms(crime) || 'undefinedTerm'}
-                >
-                  {lowerCase(crime)}
-                </Term>
-                are on the
-                rise in {startCase(place)}, but lower than 5 or 10
-                years ago. {startCase(place)}&#39;s
-                {lowerCase(crime)} rate surpassed that of the U.S. in
-                1985, and peaked in 1991, with a rate of over 52 incidents
-                per 100,000 people.<sup>1</sup>
+            <div className='mb5 clearfix fs-18 serif'>
+              <p className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2'>
+                {startCase(params.place)} reports {
+                  ucr.srs && ucr.nibrs && 'both'
+                }
+                {ucr.srs && (
+                  <Term
+                    dispatch={dispatch}
+                    id={'summary reporting system (srs)'}
+                  >
+                    summary (SRS)
+                  </Term>
+                )}
+                {ucr.srs && ucr.nibrs && 'and'}
+                {ucr.nibrs && (
+                  <Term
+                    dispatch={dispatch}
+                    id={'national incident-based reporting system (nibrs)'}
+                  >
+                    incident-level (NIBRS)
+                  </Term>
+                )} data to the FBI.
+              </p>
+
+              <p className='sm-col sm-col-8 sm-my1 my2 p0 sm-pr2'>
+                In {filters.timeTo}, 196 {startCase(params.place)} law enforcement agencies participated in the <Term dispatch={dispatch} id={'uniform crime reporting (ucr)'}>Uniform Crime Reporting</Term> Program, out of a total of 831 agencies. For that year, these statistics cover 38% of the state’s total population, or about 4,429,000 people.
               </p>
               <ul className='sm-col sm-col-4 m0 p0 list-style-none'>
                 {links.map((l, i) => (
@@ -169,13 +180,15 @@ class Explorer extends React.Component {
               loading={summaries.loading}
               keys={trendKeys}
             />
-            <NibrsContainer
-              crime={crime}
-              place={place}
-              filters={filters}
-              data={nibrsData}
-              loading={nibrs.loading}
-            />
+            {ucr.nibrs && (
+              <NibrsContainer
+                crime={params.crime}
+                place={params.place}
+                filters={filters}
+                data={nibrsData}
+                loading={nibrs.loading}
+              />
+            )}
             <hr className='mt0 mb3' />
             <AboutTheData crime={crime} place={place} />
           </div>
