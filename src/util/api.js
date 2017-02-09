@@ -73,61 +73,34 @@ const stateCodes = {
   wyoming: 56,
 }
 
-const getOffendersDimension = ({ dimension, place }) => {
-  const endpoint = dimensionEndpoints[dimension]
+const getNibrs = ({ dim, place, type }) => {
+  const endpoint = dimensionEndpoints[dim]
   const stateCode = stateCodes[place] || '40'
-  return get(`${API}/offenders/count/states/${stateCode}/${endpoint}`, {
-    per_page: 50,
-    aggregate_many: false,
-  }).then(res => ({
-    key: `offender${upperFirst(dimension)}`,
-    data: res.results,
+  const url = `${API}/${type}s/count/states/${stateCode}/${endpoint}`
+  const params = { per_page: 50, aggregate_many: false }
+
+  return get(url, params).then(d => ({
+    key: `${type}${upperFirst(dim)}`,
+    data: d.results,
   }))
 }
 
-const getVictimsDimension = ({ dimension, place }) => {
-  const endpoint = dimensionEndpoints[dimension]
-  const stateCode = stateCodes[place] || '40'
-  return get(`${API}/victims/count/states/${stateCode}/${endpoint}`, {
-    per_page: 50,
-    aggregate_many: false,
-  }).then(res => ({
-    key: `victim${upperFirst(dimension)}`,
-    data: res.results,
-  }))
+const getNibrsRequests = params => {
+  const { place } = params
+
+  const slices = [
+    { type: 'offender', dim: 'sexCode' },
+    { type: 'offender', dim: 'raceCode' },
+    { type: 'offender', dim: 'ageNum' },
+    { type: 'victim', dim: 'ageNum' },
+    { type: 'victim', dim: 'locationName' },
+    { type: 'victim', dim: 'raceCode' },
+    { type: 'victim', dim: 'sexCode' },
+    { type: 'victim', dim: 'relationship' },
+  ]
+
+  return slices.map(s => getNibrs({ ...s, place }))
 }
-
-const getIncidentOffendersAge = params => (
-  getOffendersDimension({ dimension: 'ageNum', ...params })
-)
-
-const getIncidentOffendersRace = params => (
-  getOffendersDimension({ dimension: 'raceCode', ...params })
-)
-
-const getIncidentOffendersSex = params => (
-  getOffendersDimension({ dimension: 'sexCode', ...params })
-)
-
-const getIncidentVictimsAge = params => (
-  getVictimsDimension({ dimension: 'ageNum', ...params })
-)
-
-const getIncidentVictimsLocationName = params => (
-  getVictimsDimension({ dimension: 'locationName', ...params })
-)
-
-const getIncidentVictimsRace = params => (
-  getVictimsDimension({ dimension: 'raceCode', ...params })
-)
-
-const getIncidentVictimsRelationship = params => (
-  getVictimsDimension({ dimension: 'relationship', ...params })
-)
-
-const getIncidentVictimsSex = params => (
-  getVictimsDimension({ dimension: 'sexCode', ...params })
-)
 
 const buildSummaryQueryString = params => {
   const { crime, place } = params
@@ -195,14 +168,8 @@ const getUcrParticipation = place => {
 }
 
 export default {
-  getIncidentOffendersAge,
-  getIncidentOffendersRace,
-  getIncidentOffendersSex,
-  getIncidentVictimsAge,
-  getIncidentVictimsLocationName,
-  getIncidentVictimsRace,
-  getIncidentVictimsRelationship,
-  getIncidentVictimsSex,
+  getNibrs,
+  getNibrsRequests,
   getSummary,
   getSummaryRequests,
   getUcrParticipation,
