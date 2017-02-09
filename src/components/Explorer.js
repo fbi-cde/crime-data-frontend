@@ -6,17 +6,18 @@ import Breadcrumbs from './Breadcrumbs'
 import NotFound from './NotFound'
 import NibrsContainer from './NibrsContainer'
 import Sidebar from './Sidebar'
-import Term from './Term'
 import TrendContainer from './TrendContainer'
+
+import UcrParticipationInformation from './UcrParticipationInformation'
 
 import { fetchSummaries } from '../actions/summaryActions'
 import { fetchNibrsDimensions } from '../actions/nibrsActions'
+import { fetchUcrParticipation } from '../actions/ucrActions'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 import { hideSidebar, showSidebar } from '../actions/sidebarActions'
 
-import content from '../util/content'
 import offenses from '../util/offenses'
-import ucrParticipation from '../util/ucr'
+
 import lookup from '../util/usa'
 
 const filterNibrsData = (data, { timeFrom, timeTo }) => {
@@ -69,6 +70,7 @@ class Explorer extends React.Component {
     if (!check(filters.timeTo)) filters.timeTo = appState.filters.timeTo
 
     dispatch(updateFilters(filters))
+    dispatch(fetchUcrParticipation(filters.place))
     if (filters.crime) {
       dispatch(fetchSummaries(filters))
       dispatch(fetchNibrsDimensions(filters))
@@ -96,9 +98,7 @@ class Explorer extends React.Component {
     // show not found page if crime or place unfamiliar
     if (!offenses.includes(crime) || !lookup(place)) return <NotFound />
 
-    const links = content.states[startCase(place)] || []
-    const { filters, nibrs, sidebar, summaries } = appState
-    const ucr = ucrParticipation(params.place)
+    const { filters, nibrs, sidebar, summaries, ucr } = appState
     const nibrsData = filterNibrsData(nibrs.data, filters)
     const trendData = mungeSummaryData(summaries.data, place)
     const trendKeys = Object.keys(summaries.data).map(k => startCase(k))
@@ -134,43 +134,12 @@ class Explorer extends React.Component {
                 {startCase(place)}, {startCase(crime)}
               </h1>
             </div>
-            <div className='mb5 clearfix fs-18 serif'>
-              <p className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2'>
-                {startCase(params.place)} reports {
-                  ucr.srs && ucr.nibrs && 'both'
-                }
-                {ucr.srs && (
-                  <Term
-                    dispatch={dispatch}
-                    id={'summary reporting system (srs)'}
-                  >
-                    summary (SRS)
-                  </Term>
-                )}
-                {ucr.srs && ucr.nibrs && 'and'}
-                {ucr.nibrs && (
-                  <Term
-                    dispatch={dispatch}
-                    id={'national incident-based reporting system (nibrs)'}
-                  >
-                    incident-level (NIBRS)
-                  </Term>
-                )} data to the FBI.
-              </p>
-
-              <p className='sm-col sm-col-8 sm-my1 my2 p0 sm-pr2'>
-                In {filters.timeTo}, 196 {startCase(params.place)} law enforcement agencies participated in the <Term dispatch={dispatch} id={'uniform crime reporting (ucr)'}>Uniform Crime Reporting</Term> Program, out of a total of 831 agencies. For that year, these statistics cover 38% of the state’s total population, or about 4,429,000 people.
-              </p>
-              <ul className='sm-col sm-col-4 m0 p0 list-style-none'>
-                {links.map((l, i) => (
-                  <li key={i}>
-                    <a className='bold' href={l.url}>
-                      <span className='red'>&#10142;</span> {l.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <UcrParticipationInformation
+              dispatch={dispatch}
+              place={params.place}
+              timeTo={filters.timeTo}
+              ucr={ucr}
+            />
             <hr className='mt0 mb3' />
             <TrendContainer
               crime={crime}
