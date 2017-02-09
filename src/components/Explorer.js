@@ -150,15 +150,13 @@ class Explorer extends React.Component {
               loading={summaries.loading}
               keys={trendKeys}
             />
-            {ucr.nibrs && (
-              <NibrsContainer
-                crime={params.crime}
-                place={params.place}
-                filters={filters}
-                data={nibrsData}
-                loading={nibrs.loading}
-              />
-            )}
+            <NibrsContainer
+              crime={params.crime}
+              place={params.place}
+              filters={filters}
+              data={nibrsData}
+              loading={nibrs.loading}
+            />
             <hr className='mt0 mb3' />
             <AboutTheData crime={crime} place={place} />
           </div>
