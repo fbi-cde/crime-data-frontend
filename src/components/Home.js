@@ -7,29 +7,9 @@ import stateLookup from '../util/usa'
 import Term from './Term'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 
+import otherDataSets from '../../content/datasets.yml'
 import usaSvgData from '../../data/usa-state-svg.json'
 
-
-const otherDataSets = [
-  {
-    title: 'Arrests',
-    description: `See arrest totals reported by law enforcement agencies
-    across the nation for 28 offenses, including violent crime, property
-    crime, fraud, weapons and drug violations, and common misdemeanors.`,
-  },
-  {
-    title: 'Clearances',
-    description: `This data counts the number of offenses known by law
-    enforcement that were cleared by arrest or exceptional means. One
-    arrest may clear or close several offenses in a particular case.`,
-  },
-  {
-    title: 'Police Employee Data',
-    description: `See how many full-time sworn and civilian law enforcement
-    employees serve across the nation. This data is broken down by location,
-    population size, status, and gender.`,
-  },
-]
 const scrollToBottom = () => window.scrollTo(0, window.outerHeight * 1.5)
 
 const Home = ({ appState, dispatch, location }) => {
