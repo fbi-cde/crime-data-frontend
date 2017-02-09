@@ -1,13 +1,38 @@
 import { format } from 'd3-format'
+import lowerCase from 'lodash.lowercase'
 import React from 'react'
+
+import mapCrimeToGlossaryTerm from '../util/glossary'
+import { nationalKey } from '../util/usa'
+import Term from './Term'
 
 const formatRate = format('.1f')
 const formatTotal = format(',.0f')
 
-const TrendChartDetails = ({ colors, data, keys }) => {
+const getComparison = ({ place, data }) => {
+  const placeRate = data[place]
+  const nationalRate = data[nationalKey]
+  const difference = (placeRate - nationalRate)
+
+  if (Math.abs(difference) < 2) return 'about the same as'
+  else if (difference > 2) return 'higher than'
+
+  return 'lower than'
+}
+
+const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
   const { name, slug } = keys[0]
-  const year = data.date.getFullYear()
+  const comparison = getComparison({ place: slug, data })
   const rate = data[slug]
+  const term = (
+    <Term
+      dispatch={dispatch}
+      id={mapCrimeToGlossaryTerm(crime)}
+    >
+      {lowerCase(crime)}
+    </Term>
+  )
+  const year = data.date.getFullYear()
 
   const highlight = v => <span className='bold blue'>{v}</span>
 
@@ -16,7 +41,7 @@ const TrendChartDetails = ({ colors, data, keys }) => {
       <div className='flex-auto'>
         <h4 className='mt0 mb1 fs-18 sans-serif'>{year}</h4>
         <p className='sm-m0 md-pr4 fs-14 sm-fs-16'>
-          {name}’s incident rate surpasses that of the United States, and
+          {name}’s {term} rate was {comparison} that of the United States, and
           in {highlight(year)} was {highlight(formatRate(rate))} incidents
           per 100,000 people.
         </p>

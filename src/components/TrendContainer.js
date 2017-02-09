@@ -9,15 +9,18 @@ import NoData from './NoData'
 import TrendChart from './TrendChart'
 
 const TrendContainer = ({
-  crime, place, filters,
-  data, loading, keys,
+  crime, place, filters, data, dispatch, loading, keys,
 }) => {
   const { timeFrom, timeTo } = filters
 
   let content = null
   if (loading) content = <Loading />
   else if (!data || data.length === 0) content = <NoData />
-  else content = <TrendChart data={data} keys={keys} />
+  else {
+    content = (
+      <TrendChart crime={crime} data={data} dispatch={dispatch} keys={keys} />
+    )
+  }
 
   return (
     <div>

@@ -146,6 +146,7 @@ class Explorer extends React.Component {
               place={place}
               filters={filters}
               data={trendData}
+              dispatch={dispatch}
               loading={summaries.loading}
               keys={trendKeys}
             />
