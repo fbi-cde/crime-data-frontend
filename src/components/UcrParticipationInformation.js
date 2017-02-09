@@ -10,22 +10,17 @@ const formatNumber = format(',')
 
 const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
   const links = content.states[startCase(place)]
-  const placeInfo = {
-    ...ucr.data[place],
-    ...ucrParticipation(place),
-  }
-  ucr.srs = true
-  ucr.nibrs = true
+  const participation = ucrParticipation(place)
+  const placeInfo = { ...ucr.data[place] }
 
-  console.log('placeInfo', placeInfo)
   return (
     <div className='mb5 clearfix fs-18 serif'>
       <div className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2'>
         <p>
           {startCase(place)} reports {
-            ucr.srs && ucr.nibrs && 'both'
+            participation.srs && participation.nibrs && 'both'
           }
-          {ucr.srs && (
+          {participation.srs && (
             <Term
               dispatch={dispatch}
               id={'summary reporting system (srs)'}
@@ -33,8 +28,8 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
               summary (SRS)
             </Term>
           )}
-          {ucr.srs && ucr.nibrs && 'and'}
-          {ucr.nibrs && (
+          {participation.srs && participation.nibrs && 'and'}
+          {participation.nibrs && (
             <Term
               dispatch={dispatch}
               id={'national incident-based reporting system (nibrs)'}
@@ -43,6 +38,7 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
             </Term>
           )} data to the FBI.
         </p>
+        {/* eslint max-len: 0 */}
         {!ucr.loading && (
         <p>
           In {timeTo}, {placeInfo.reporting_agencies} {startCase(place)} law enforcement agencies participated in the <Term dispatch={dispatch} id={'uniform crime reporting (ucr)'}>Uniform Crime Reporting</Term> Program, out of a total of {placeInfo.total_agencies} agencies. For that year, these statistics cover {Math.round(placeInfo.reporting_rate * 100)}% of the state’s total population, or about {formatNumber(placeInfo.total_population)} people.

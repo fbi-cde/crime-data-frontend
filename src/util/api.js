@@ -183,7 +183,7 @@ const getSummaryRequests = params => {
 }
 
 const getUcrParticipation = place => {
-  const state = getStateAbbrFromName(place).toUpperCase()
+  const state = lookup(place).toUpperCase()
   return get(`${API}/geo/states/${state}`).then(d => {
     const results = { ...d }
     delete results.counties
@@ -204,5 +204,6 @@ export default {
   getIncidentVictimsRelationship,
   getIncidentVictimsSex,
   getSummary,
+  getSummaryRequests,
   getUcrParticipation,
 }
