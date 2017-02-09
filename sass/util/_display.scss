@@ -1,0 +1,17 @@
+@media #{$breakpoint-sm} {
+  .sm-block { display: block; }
+  .sm-inline { display: inline; }
+  .sm-inline-block { display: inline-block; }
+}
+
+@media #{$breakpoint-md} {
+  .md-block { display: block; }
+  .md-inline { display: inline; }
+  .md-inline-block { display: inline-block; }
+}
+
+@media #{$breakpoint-lg} {
+  .lg-block { display: block; }
+  .lg-inline { display: inline; }
+  .lg-inline-block { display: inline-block; }
+}

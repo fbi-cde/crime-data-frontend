@@ -1,3 +1,7 @@
 .border-blue { border-color: $blue; }
 .border-bottom-dotted { border-bottom: $border-width dotted $black; }
 .border-w2 { border-width: 2px; }
+
+@media #{$breakpoint-md} {
+  .md-border-none { border: 0; }
+}

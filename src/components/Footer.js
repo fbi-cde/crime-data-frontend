@@ -1,9 +1,44 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const linkClass = 'mr1 pr1 white border-right border-white'
-const linkClassLast = 'white'
-
+const firstRow = [
+  {
+    text: 'Home',
+    href: '/',
+  },
+  {
+    text: 'Explorer',
+    href: '/explorer',
+  },
+  {
+    text: 'Downloads and Documentation',
+    href: '/downloads-and-docs',
+  },
+  {
+    text: 'About',
+    href: '/about',
+  },
+]
+const secondRow = [
+  {
+    text: 'Glossary',
+    href: '/#!',
+  },
+  {
+    text: 'Privacy Policy',
+    href: '/#!',
+  },
+  {
+    text: 'License',
+    href: '/#!',
+  },
+  {
+    text: 'Feedback',
+    href: '/#!',
+  },
+]
+const liCls = 'mb1 ml1 fs-10 md-fs-12 sm-block md-inline-block'
+const linkCls = 'border-left border-white white pl1'
 const scrollToTop = () => window.scrollTo(0, 0)
 
 const Footer = () => (
@@ -27,52 +62,43 @@ const Footer = () => (
           </div>
         </div>
         <div className='sm-col sm-col-6 sm-col-right fs-14'>
-          <div className='pb3 caps'>
-            <ul className='list-style-none px0 m0 mb1'>
-              <li className='inline-block'>
-                <Link
-                  className={linkClass}
-                  onClick={scrollToTop}
-                  to='/'
-                >
-                  Explorer
-                </Link>
-              </li>
-              <li className='inline-block'>
-                <Link
-                  className={linkClass}
-                  onClick={scrollToTop}
-                  to='/downloads-and-docs'
-                >
-                  Downloads & Documentation
-                </Link>
-              </li>
-              <li className='inline-block'>
-                <Link
-                  className={linkClass}
-                  onClick={scrollToTop}
-                  to='/about'
-                >
-                  About
-                </Link>
-              </li>
-              <li className='inline-block'>
-                <Link className={linkClassLast} to='/'>Glossary</Link>
-              </li>
+          <div className='pb3 caps clearfix'>
+            <ul className='list-style-none px0 m0 mb1 col col-6 md-col-12'>
+              {firstRow.map((l, i) => {
+                const isFirst = i === 0
+                return (
+                  <li
+                    key={i}
+                    className={`${liCls} ${isFirst && 'md-ml0'}`}
+                  >
+                    <Link
+                      className={`${linkCls} ${isFirst && 'md-pl0 md-border-none'}`}
+                      onClick={scrollToTop}
+                      to={l.href}
+                    >
+                      {l.text}
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
-            <ul className='list-style-none px0 my0'>
-              <li className='inline-block'>
-                <Link className={linkClass} to='/'>Accessibility</Link>
-              </li>
-              <li className='inline-block'>
-                <Link className={linkClass} to='/'>Privacy Policy</Link>
-              </li>
-              <li className='inline-block'>
-                <Link className={linkClass} to='/'>License</Link>
-              </li>
-              <li className='inline-block'>
-                <Link className={linkClassLast} to='/'>Feedback</Link>
-              </li>
+            <ul className='list-style-none px0 my0 col col-6 md-col-12'>
+              {secondRow.map((l, i) => {
+                const isFirst = i === 0
+                return (
+                  <li
+                    key={i}
+                    className={`${liCls} ${isFirst && 'md-ml0'}`}
+                  >
+                    <Link
+                      className={`${linkCls} ${isFirst && 'md-pl0 md-border-none'}`}
+                      to={l.href}
+                    >
+                      {l.text}
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           </div>
           <div>
