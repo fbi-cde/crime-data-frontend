@@ -163,8 +163,10 @@ const Home = ({ appState, dispatch, location }) => {
             Use our data in your project
           </h3>
           <p className='mb3 sm-mb6 col-10 fs-18 sm-fs-24 serif'>
-            An application programming interface (API) is an easy way for
-            developers and interactive applications to share large amounts of data in meaningful ways. We recently released the FBI’s first crime data API so you can use this data to tell your own story.
+            We recently released the FBI’s first crime data
+            <Term dispatch={dispatch} id='api'>
+              API
+            </Term> so you can use this data to tell your own story.
           </p>
           <a
             className='btn btn-primary'
