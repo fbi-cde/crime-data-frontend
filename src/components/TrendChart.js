@@ -33,7 +33,7 @@ class TrendChart extends React.Component {
   }
 
   render() {
-    const { keys, colors, data, margin, size } = this.props
+    const { keys, crime, colors, data, dispatch, margin, size } = this.props
     const { hover } = this.state
 
     const width = size.width - margin.left - margin.right
@@ -102,7 +102,13 @@ class TrendChart extends React.Component {
 
     return (
       <div className='p4 bg-white'>
-        <TrendChartDetails colors={colors} data={active} keys={keysWithSlugs} />
+        <TrendChartDetails
+          colors={colors}
+          crime={crime}
+          data={active}
+          dispatch={dispatch}
+          keys={keysWithSlugs}
+        />
         <div className='col-12 overflow-auto'>
           <svg
             width={size.width}

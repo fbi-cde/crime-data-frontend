@@ -1,4 +1,3 @@
-import lowerCase from 'lodash.lowercase'
 import startCase from 'lodash.startcase'
 import React from 'react'
 
@@ -7,17 +6,18 @@ import Breadcrumbs from './Breadcrumbs'
 import NotFound from './NotFound'
 import NibrsContainer from './NibrsContainer'
 import Sidebar from './Sidebar'
-import Term from './Term'
 import TrendContainer from './TrendContainer'
+
+import UcrParticipationInformation from './UcrParticipationInformation'
 
 import { fetchSummaries } from '../actions/summaryActions'
 import { fetchNibrsDimensions } from '../actions/nibrsActions'
+import { fetchUcrParticipation } from '../actions/ucrActions'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 import { hideSidebar, showSidebar } from '../actions/sidebarActions'
 
-import content from '../util/content'
 import offenses from '../util/offenses'
-import mapGlossaryTerms from '../util/glossary'
+
 import lookup from '../util/usa'
 
 const filterNibrsData = (data, { timeFrom, timeTo }) => {
@@ -70,6 +70,7 @@ class Explorer extends React.Component {
     if (!check(filters.timeTo)) filters.timeTo = appState.filters.timeTo
 
     dispatch(updateFilters(filters))
+    dispatch(fetchUcrParticipation(filters.place))
     if (filters.crime) {
       dispatch(fetchSummaries(filters))
       dispatch(fetchNibrsDimensions(filters))
@@ -97,8 +98,7 @@ class Explorer extends React.Component {
     // show not found page if crime or place unfamiliar
     if (!offenses.includes(crime) || !lookup(place)) return <NotFound />
 
-    const links = content.states[startCase(place)] || []
-    const { filters, nibrs, sidebar, summaries } = appState
+    const { filters, nibrs, sidebar, summaries, ucr } = appState
     const nibrsData = filterNibrsData(nibrs.data, filters)
     const trendData = mungeSummaryData(summaries.data, place)
     const trendKeys = Object.keys(summaries.data).map(k => startCase(k))
@@ -134,44 +134,25 @@ class Explorer extends React.Component {
                 {startCase(place)}, {startCase(crime)}
               </h1>
             </div>
-            <div className='mb5 clearfix'>
-              <p className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2 fs-18 serif'>
-                Incidents of
-                <Term
-                  dispatch={dispatch}
-                  id={mapGlossaryTerms(crime) || 'undefinedTerm'}
-                >
-                  {lowerCase(crime)}
-                </Term>
-                are on the
-                rise in {startCase(place)}, but lower than 5 or 10
-                years ago. {startCase(place)}&#39;s
-                {lowerCase(crime)} rate surpassed that of the U.S. in
-                1985, and peaked in 1991, with a rate of over 52 incidents
-                per 100,000 people.<sup>1</sup>
-              </p>
-              <ul className='sm-col sm-col-4 m0 p0 list-style-none'>
-                {links.map((l, i) => (
-                  <li key={i}>
-                    <a className='bold' href={l.url}>
-                      <span className='red'>&#10142;</span> {l.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <UcrParticipationInformation
+              dispatch={dispatch}
+              place={params.place}
+              timeTo={filters.timeTo}
+              ucr={ucr}
+            />
             <hr className='mt0 mb3' />
             <TrendContainer
               crime={crime}
               place={place}
               filters={filters}
               data={trendData}
+              dispatch={dispatch}
               loading={summaries.loading}
               keys={trendKeys}
             />
             <NibrsContainer
-              crime={crime}
-              place={place}
+              crime={params.crime}
+              place={params.place}
               filters={filters}
               data={nibrsData}
               loading={nibrs.loading}

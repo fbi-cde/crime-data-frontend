@@ -5,6 +5,7 @@ import { get } from './http'
 import lookup, { nationalKey } from './usa'
 import { mapToApiOffense, mapToApiOffenseParam } from './offenses'
 import { population as pop } from './data'
+import { slugify } from './text'
 
 const API = '/api'
 
@@ -154,9 +155,22 @@ const getSummaryRequests = params => {
   return requests
 }
 
+const getUcrParticipation = place => {
+  const state = lookup(place).toUpperCase()
+  return get(`${API}/geo/states/${state}`).then(d => {
+    const results = { ...d }
+    delete results.counties
+    return {
+      place: slugify(place),
+      results,
+    }
+  })
+}
+
 export default {
   getNibrs,
   getNibrsRequests,
   getSummary,
   getSummaryRequests,
+  getUcrParticipation,
 }

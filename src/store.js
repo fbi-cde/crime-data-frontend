@@ -8,6 +8,7 @@ import glossary from './reducers/glossaryReducer'
 import nibrs from './reducers/nibrsReducer'
 import sidebar from './reducers/sidebarReducer'
 import summaries from './reducers/summaryReducer'
+import ucr from './reducers/ucrReducer'
 
 const logger = store => next => action => {
   const result = next(action)
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   nibrs,
   sidebar,
   summaries,
+  ucr,
 })
 
 const middlewares = [thunk]

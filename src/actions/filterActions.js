@@ -7,6 +7,7 @@ import {
 } from './actionTypes'
 import { fetchNibrsDimensions } from './nibrsActions'
 import { fetchSummaries } from '../actions/summaryActions'
+import { fetchUcrParticipation } from '../actions/ucrActions'
 
 export const resetFilter = ({ id }) => ({
   type: FILTER_RESET,
@@ -29,6 +30,7 @@ export const updateFiltersAndUrl = ({ change, location }) => {
     dispatch(updateFilters(change))
 
     const { filters } = getState()
+    dispatch(fetchUcrParticipation(filters.place))
     if (filters.crime) dispatch(fetchSummaries(filters))
     dispatch(fetchNibrsDimensions(filters))
 

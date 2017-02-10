@@ -48,7 +48,7 @@ describe('nibrsAction', () => {
     it('should return INCIDENTS_RECEIVED type', () => {
       expect(actual.type).toEqual(INCIDENTS_RECEIVED)
     })
-    
+
     it('should return incidents equal to the results array', () => {
       expect(actual.data.results).toEqual(action.results)
     })
