@@ -1,15 +1,9 @@
-- title: Arrests
+- title: Hate Crime
   description: |
-    See arrest totals reported by law enforcement agencies across the
-    nation for 28 offenses, including violent crime, property crime, fraud,
-    weapons and drug violations, and common misdemeanors.
-- title: Clearances
+    See totals and individual incident reports for hate crimes across the nation. Each incident includes details about the bias motivation (race, religion, sexual orientation, ethnicity, national origin, or disability); victim and offender demographics; offenses; and location of the crime.
+- title: Law Enforcement Officers Killed and Assaulted (LEOKA)
   description: |
-    This data counts the number of offenses known by law enforcement that were
-    cleared by arrest or exceptional means. One arrest may clear or close
-    several offenses in a particular case.
-- title: Police Employee Data
+    See totals for officers who were feloniously or accidentally killed or assaulted in the line of duty. This data is organized by reporting agency and offense type.
+- title: Other datasets
   description: |
-    See how many full-time sworn and civilian law enforcement employees serve
-    across the nation. This data is broken down by location, population size,
-    status, and gender.
+    Browse through other FBI data downloads, including Police Employee Data, Arrests, Clearances, Human Trafficking, Cargo Theft, and individual incident reports from the National Incident-Based Reporting System (NIBRS) by state and time period.
