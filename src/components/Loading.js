@@ -1,8 +1,15 @@
 import React from 'react'
 
 const Loading = ({ text }) => (
-  <div className='mb8 p4 bg-white'>
-    <div className='fs-18 bold red-bright'>{text || 'Loading...'}</div>
+  <div className='mt3 mb8 fs-14 caps center'>
+    <img
+      className='align-middle mr1'
+      width='30'
+      height='30'
+      src='/img/loading.svg'
+      alt='loading...'
+    />
+    {text || 'Loading'}
   </div>
 )
 
