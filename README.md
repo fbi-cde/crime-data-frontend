@@ -25,7 +25,7 @@ You can lint the code with `npm run lint` and run tests with `npm run test`.
 
 ## Deployment
 
-This project is [continuously deployed](circle.yml) to [cloud.gov](https://cloud.gov) with every commit to the `master` branch. Until we have an ATO for this project, the deployed app is behind HTTP basic auth.
+This project is [continuously deployed](circle.yml) to [cloud.gov](https://cloud.gov) with every commit to the `master` branch. Right now, you can use the application at https://crime-data-explorer.fr.cloud.gov.
 
 ## Browser support
 
