@@ -138,7 +138,7 @@ const Home = ({ appState, dispatch, location }) => {
               View results
             </button>
           </div>
-          <h2 className='mt0 mb3 fs-22 sm-fs-32'>Other Data Sets</h2>
+          <h2 className='mt0 mb3 fs-22 sm-fs-32'>Data downloads</h2>
           <div className='clearfix mxn2'>
             {otherDataSets.map((d, i) => (
               <div key={i} className='sm-col sm-col-4 px2 mb2 sm-m0'>
@@ -158,16 +158,15 @@ const Home = ({ appState, dispatch, location }) => {
       </section>
       <section className='px2 bg-blue-white'>
         <div className='py7 container mx-auto'>
-          <h2 className='mt0 mb1 fs-28 sm-fs-40'>Crime Data API</h2>
+          <h2 className='mt0 mb1 fs-28 sm-fs-40'>Crime data API</h2>
           <h3 className='mt0 mb3 pb1 fs-18 sm-fs-28 border-bottom border-red-bright'>
             Use our data in your project
           </h3>
           <p className='mb3 sm-mb6 col-10 fs-18 sm-fs-24 serif'>
-            An application programming interface (API) is an easy way for
-            computers, programs, and developers to share and translate large
-            amounts of data in meaningful ways. We recently released the
-            FBI’s first crime data API so you can use this data to tell
-            your own story.
+            We recently released the FBI’s first crime data
+            <Term dispatch={dispatch} id='api'>
+              API
+            </Term> so you can use this data to tell your own story.
           </p>
           <a
             className='btn btn-primary'

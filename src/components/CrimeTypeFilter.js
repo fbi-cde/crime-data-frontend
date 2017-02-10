@@ -27,7 +27,7 @@ const CrimeTypeFilter = ({ onChange, selected }) => (
       className='px2 underline'
       to='/downloads-and-docs'
     >
-      Additional data sets
+      Additional datasets
     </Link>
   </div>
 )
