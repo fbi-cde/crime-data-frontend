@@ -27,7 +27,7 @@ app.get('/api/*', (req, res) => {
   return http.get(route, { params }).then(r => {
     res.send(r.data)
   }).catch(e => {
-    res.status(e.response.status).end()
+    res.send({ status: e.response.status, results: [] })
   })
 })
 

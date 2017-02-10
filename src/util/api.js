@@ -73,11 +73,12 @@ const stateCodes = {
   wyoming: 56,
 }
 
-const getNibrs = ({ dim, place, type }) => {
-  const endpoint = dimensionEndpoints[dim]
-  const stateCode = stateCodes[place] || '40'
-  const url = `${API}/${type}s/count/states/${stateCode}/${endpoint}`
-  const params = { per_page: 50, aggregate_many: false }
+const getNibrs = ({ crime, dim, place, type }) => {
+  const field = dimensionEndpoints[dim]
+  const loc = (place === nationalKey) ? 'national' : `states/${stateCodes[place]}`
+
+  const url = `${API}/${type}s/count/${loc}/${field}/offenses`
+  const params = { per_page: 50, aggregate_many: false, explorer_offense: crime }
 
   return get(url, params).then(d => ({
     key: `${type}${upperFirst(dim)}`,
@@ -86,7 +87,7 @@ const getNibrs = ({ dim, place, type }) => {
 }
 
 const getNibrsRequests = params => {
-  const { place } = params
+  const { crime, place } = params
 
   const slices = [
     { type: 'offender', dim: 'sexCode' },
@@ -99,7 +100,7 @@ const getNibrsRequests = params => {
     { type: 'victim', dim: 'relationship' },
   ]
 
-  return slices.map(s => getNibrs({ ...s, place }))
+  return slices.map(s => getNibrs({ ...s, crime, place }))
 }
 
 const buildSummaryQueryString = params => {
