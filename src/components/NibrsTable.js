@@ -3,12 +3,11 @@ import React from 'react'
 
 import DownloadDataBtn from './DownloadDataBtn'
 
-
-const formatPercent = format('.0%')
+const formatPercent = p => (p > 0.01 ? format('.0%')(p) : '<1%')
 const formatNumber = format(',')
 const formatSI = format('.2s')
 
-class IncidentDetailTable extends React.Component {
+class NibrsTable extends React.Component {
   constructor(props) {
     super(props)
     this.state = { showCounts: true }
@@ -27,25 +26,38 @@ class IncidentDetailTable extends React.Component {
   }
 
   render() {
-    const { data, title } = this.props
+    const { data, rowLim, title } = this.props
     const { showCounts } = this.state
+    const btnClass = 'ml-tiny border border-blue rounded'
 
-    const total = data.reduce((a, b) => (a + b.count), 0)
-    const dataParsed = data.map(d => {
+    const agg = (a, b) => a + b.count
+    const total = data.reduce(agg, 0)
+
+    let dataMunged = [...data]
+    dataMunged.sort((a, b) => +b.count - +a.count)
+
+    if (dataMunged.length > rowLim) {
+      const other = dataMunged.slice(rowLim)
+
+      dataMunged = [
+        ...dataMunged.slice(0, rowLim),
+        {
+          key: `Other (${other.length})`,
+          count: other.reduce(agg, 0),
+          children: [...other],
+        },
+      ]
+    }
+
+    const dataFormatted = dataMunged.map(d => {
       const p = d.count / total
       return {
         ...d,
         percent: p,
         countFmt: formatSI(d.count),
-        percentFmt: p > 0.01 ? formatPercent(p) : '<1%',
+        percentFmt: formatPercent(p),
       }
     })
-
-    const btnCls = 'ml-tiny border border-blue rounded'
-    const activeBtnCls = 'bg-blue white'
-    const inactiveBtnCls = 'bg-white'
-
-    dataParsed.sort((a, b) => b.count - a.count)
 
     return (
       <div>
@@ -65,7 +77,7 @@ class IncidentDetailTable extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {dataParsed.map((d, i) => (
+            {dataFormatted.map((d, i) => (
               <tr key={i}>
                 <td className='border-right border-gray'>
                   <div className='progress-bar my1'>
@@ -84,20 +96,20 @@ class IncidentDetailTable extends React.Component {
           <div className='right mt-tiny fs-10 italic serif'>
             View by
             <button
-              className={`${btnCls} ${showCounts ? activeBtnCls : inactiveBtnCls}`}
+              className={`${btnClass} ${showCounts ? 'bg-blue white' : 'bg-white'}`}
               onClick={this.showCounts}
             >
               #
             </button>
             <button
-              className={`${btnCls} ${!showCounts ? activeBtnCls : inactiveBtnCls}`}
+              className={`${btnClass} ${!showCounts ? 'bg-blue white' : 'bg-white'}`}
               onClick={this.showPercents}
             >
               %
             </button>
           </div>
           <DownloadDataBtn
-            data={dataParsed.map(d => ({ key: d.key, count: d.count }))}
+            data={data.map(d => ({ key: d.key, count: d.count }))}
             fname={title}
             text='Download data'
           />
@@ -107,4 +119,8 @@ class IncidentDetailTable extends React.Component {
   }
 }
 
-export default IncidentDetailTable
+NibrsTable.defaultProps = {
+  rowLim: 10,
+}
+
+export default NibrsTable
