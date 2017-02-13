@@ -3,6 +3,7 @@
 import { bisector, extent, max } from 'd3-array'
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
 import { line } from 'd3-shape'
+import startCase from 'lodash.startcase'
 import { timeParse } from 'd3-time-format'
 import React from 'react'
 
@@ -141,7 +142,7 @@ class TrendChart extends React.Component {
           </svg>
         </div>
         <div className='my2 fs-10 sm-fs-12 line-height-1 bold monospace center'>
-          Rate per 100,000 people / Year
+          {startCase(crime)} rate per 100,000 people (does not include estimates)
         </div>
       </div>
     )
