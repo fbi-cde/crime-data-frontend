@@ -9,7 +9,9 @@
     "watch:client": "webpack -w --progress --colors",
     "dev": "webpack-dev-server",
     "build": "NODE_ENV=production webpack -p",
-    "lint": "eslint src scripts || exit 0",
+    "lint": "npm run lint:js && npm run lint:yml",
+    "lint:js": "eslint src scripts || exit 0",
+    "lint:yml": "yamllint content/**/*.yml || exit 0",
     "test": "jest --env=jsdom --no-cache",
     "test:debug": "node --debug-brk jest -i --env=jsdom",
     "test:watch": "jest --env=jsdom --watch",
@@ -77,6 +79,7 @@
     "style-loader": "^0.13.1",
     "webpack": "1.13.2",
     "webpack-dev-server": "1.16.2",
+    "yaml-lint": "0.0.4",
     "yaml-loader": "^0.4.0"
   },
   "engines": {
