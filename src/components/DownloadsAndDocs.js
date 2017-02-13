@@ -1,19 +1,8 @@
 import React from 'react'
 
-const data = [
-  {
-    title: 'Violent Crime',
-    dates: '1960—2014',
-  },
-  {
-    title: 'Homicide',
-    dates: '1962—2014',
-  },
-  {
-    title: 'Rape',
-    dates: '1965—2014',
-  },
-]
+import otherDatasets from '../../content/datasets.yml'
+
+const border = 'border-bottom border-blue-lighter'
 
 const DownloadsAndDocs = () => (
   <section className='bg-white'>
@@ -48,30 +37,43 @@ const DownloadsAndDocs = () => (
           </div>
         </div>
       </div>
-      <h2 className='mb0 fs-22 sm-fs-32'>Datasets</h2>
-      <p className='fs-16 sm-fs-22'>
-        Explore crime data from law enforcement agencies across the nation.
-      </p>
-      {data.map((d, i) => (
-        <div key={i} className={`border-bottom ${i === 0 ? 'border-top' : ''}`}>
-          <div className='clearfix mxn2 py2'>
-            <div className='sm-col sm-col-4 px2 mb1 sm-m0'>
-              <div className='fs-16 sm-fs-22 bold'>{d.title}<br />{d.dates}</div>
-            </div>
-            <div className='sm-col sm-col-4 px2 mb1 sm-m0'>
-              <p className='m0 fs-14 sm-fs-16'>
-                Bacon ipsum dolor sit amet chuck prosciutto landjaeger ham hock filet mignon
-                shoulder hamburger pig venison. Ham bacon corned beef, sausage kielbasa flank
-                tongue pig drumstick capicola swine short loin ham hock kevin.
-              </p>
-            </div>
-            <div className='sm-col sm-col-4 px2 mb1 sm-m0 fs-14 sm-fs-16'>
-              <div><span className='blue'>▶</span> Crime trends (SRS)</div>
-              <div><span className='red'>▶</span> Incidents (NIBRS)</div>
-            </div>
-          </div>
-        </div>
-      ))}
+      <h2 className='mb2 fs-22 sm-fs-32'>Other Datasets</h2>
+      <table className='mb3'>
+        <tr className='caps serif'>
+          <th className={`${border} border-top py2 pl2`} scope='col'>
+            Type of crime
+          </th>
+          <th className={`${border} border-top py2`} scope='col'>
+            Description
+          </th>
+          <th className={`${border} border-top py2`} scope='col'>
+            Type of data
+          </th>
+        </tr>
+        {otherDatasets.map((d, i) => {
+          const base = `col-4 pt2 ${border}`
+          return (
+            <tr key={i}>
+              <td
+                className={`${base} bold fs-16 sm-fs-22 pb3 pl2 pr4`}
+              >
+                {d.title}
+              </td>
+              <td
+                className={`${base} pb3 pr4`}
+              >
+                {d.description}
+              </td>
+              <td className={base}>
+                Summary and NIBRS available
+                <a className='block underline'>
+                  <a href={d.download}>Dowload CSV</a>
+                </a>
+              </td>
+            </tr>
+          )
+        })}
+      </table>
     </div>
   </section>
 )
