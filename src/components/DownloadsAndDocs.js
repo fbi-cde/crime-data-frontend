@@ -1,5 +1,6 @@
 import React from 'react'
 
+import DownloadBulkNibrs from './DownloadBulkNibrs'
 import otherDatasets from '../../content/datasets.yml'
 
 const border = 'border-bottom border-blue-lighter'
@@ -7,18 +8,22 @@ const border = 'border-bottom border-blue-lighter'
 const DownloadsAndDocs = () => (
   <section className='bg-white'>
     <div className='px2 py3 container mx-auto'>
-      <h1 className='mt2 sm-mt4 fs-28 sm-fs-40'>Downloads & Documentation</h1>
-      <div className='clearfix mxn1 mb3'>
+      <h1 className='mt4 mb7 pb1 sm-mt4 fs-28 sm-fs-40 border-bottom border-blue-lighter'>
+        Downloads & Documentation
+      </h1>
+      <div className='clearfix mxn1 mb8'>
         <div className='sm-col sm-col-6 px1 mb2'>
-          <div className='p2 sm-p4 bg-blue-lighter'>
-            <h3 className='mt0 fs-22 sans-serif caps'>Crime Data API</h3>
+          <div className='p2 sm-p4 bg-blue-white'>
+            <h3 className='mt0 mb2 pb1 fs-22 sans-serif border-bottom border-red-bright'>
+              Crime Data API
+            </h3>
             <p>
               Bacon ipsum dolor sit amet chuck prosciutto landjaeger ham hock filet mignon
               shoulder hamburger pig venison. Ham bacon corned beef, sausage kielbasa flank
               tongue pig drumstick capicola swine short loin ham hock kevin.
             </p>
             <a
-              className='btn btn-primary bg-blue'
+              className='btn btn-primary btn-sm fs-14'
               href='https://crime-data-api.fr.cloud.gov/swagger-ui/'
             >
               See API documentation
@@ -26,54 +31,58 @@ const DownloadsAndDocs = () => (
           </div>
         </div>
         <div className='sm-col sm-col-6 px1 mb2'>
-          <div className='p2 sm-p4 bg-blue-lighter'>
-            <h3 className='mt0 fs-22 sans-serif caps'>Documentation</h3>
+          <div className='p2 sm-p4 bg-blue-white'>
+            <h3 className='mt0 mb2 pb1 fs-22 sans-serif border-bottom border-red-bright'>
+              Documentation
+            </h3>
             <p>
               Bacon ipsum dolor sit amet chuck prosciutto landjaeger ham hock filet mignon
               shoulder hamburger pig venison. Ham bacon corned beef, sausage kielbasa flank
               tongue pig drumstick capicola swine short loin ham hock kevin.
             </p>
-            <a href='#!' className='btn btn-primary bg-blue'>See UCR documentation</a>
+            <a
+              className='btn btn-primary btn-sm fs-14'
+              href='#!'
+            >
+              See UCR documentation
+            </a>
           </div>
         </div>
       </div>
-      <h2 className='mb2 fs-22 sm-fs-32'>Other Datasets</h2>
-      <table className='mb3'>
-        <tr className='caps serif'>
-          <th className={`${border} border-top py2 pl2`} scope='col'>
-            Type of crime
-          </th>
-          <th className={`${border} border-top py2`} scope='col'>
-            Description
-          </th>
-          <th className={`${border} border-top py2`} scope='col'>
-            Type of data
-          </th>
-        </tr>
-        {otherDatasets.map((d, i) => {
-          const base = `col-4 pt2 ${border}`
-          return (
-            <tr key={i}>
-              <td
-                className={`${base} bold fs-16 sm-fs-22 pb3 pl2 pr4`}
-              >
-                {d.title}
-              </td>
-              <td
-                className={`${base} pb3 pr4`}
-              >
-                {d.description}
-              </td>
-              <td className={base}>
-                Summary and NIBRS available
-                <a className='block underline'>
-                  <a href={d.download}>Dowload CSV</a>
-                </a>
-              </td>
-            </tr>
-          )
-        })}
-      </table>
+      <DownloadBulkNibrs />
+      <div className='mb6'>
+        <h2 className={`mt0 mb3 pb1 fs-22 sm-fs-32 ${border}`}>
+          Other Datasets
+        </h2>
+        <div className={`clearfix xs-hide pb1 fs-18 bold caps serif ${border}`}>
+          <div className='sm-col sm-col-4 sm-pl2'>Type of crime</div>
+          <div className='sm-col sm-col-4'>Description</div>
+          <div className='sm-col sm-col-4'>Type of data</div>
+        </div>
+        {otherDatasets.map((d, i) => (
+          <div key={i} className={`clearfix pt2 pb4 ${border}`}>
+            <div className='sm-col sm-col-4 mb1 sm-px2 fs-18 sm-fs-22 bold'>
+              {d.title}
+            </div>
+            <div className='sm-col sm-col-4 mb1 sm-pr2 md-pr4'>
+              {d.description}
+            </div>
+            <div className='sm-col sm-col-4 fs-14 bold'>
+              Summary and NIBRS available
+              <a className='block mt1 sm-mt2 fs-12 underline'>
+                <img
+                  className='mr-tiny align-tb'
+                  width='15'
+                  height='14'
+                  src='/img/download.svg'
+                  alt='download'
+                />
+                <a href={d.download}>Download CSV</a>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 )
