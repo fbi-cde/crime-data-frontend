@@ -157,7 +157,7 @@
   },
   {
     "term": "Homicide",
-    "definition": "The killing of one human being by another. The Uniform Crime Reporting program has three groups of homicide offenses: murder and nonnegligent manslaughter, negligent manslaughter, and justifiable homicide."
+    "definition": "The killing of one human being by another. As a general rule, any death caused by injuries received in a fight, argument, quarrel, assault, or commission of a crime is classified as murder or nonnegligent manslaughter. The FBI counts one offense for each victim of murder or nonnegligent manslaughter. Accidental deaths, traffic fatalities, suicides, negligent manslaughters, justifiable homicides, or attempted murders are not included."
   },
   {
     "term": "Human trafficking",
@@ -189,7 +189,7 @@
   },
   {
     "term": "Justifiable homicide",
-    "definition": "The killing of a perpetrator of a serious criminal offense by a peace officer in the line of duty, or the killing, during the commission of a serious criminal offense, of the perpetrator by a private individual."
+    "definition": "The killing of a perpetrator of a serious criminal offense by a peace officer in the line of duty, or the killing, during the commission of a serious criminal offense, of the perpetrator by a private individual. Justifiable homicide is not a crime."
   },
   {
     "term": "Kidnapping and abduction",
@@ -233,7 +233,7 @@
   },
   {
     "term": "Murder and nonnegligent homicide",
-    "definition": "The willful killing of one human being by another."
+    "definition": "The willful killing of one human being by another. As a general rule, agencies should count any death due to injuries received in a fight, argument, assault, or commission of a crime in this category."
   },
   {
     "term": "National Crime Statistics Exchange (NCS-X)",
@@ -249,11 +249,11 @@
   },
   {
     "term": "Negligent manslaughter",
-    "definition": "The killing of another person through negligence."
+    "definition": "The killing of another person through negligence. This offense includes deaths resulting from hunting and gun accidents. It does not include accidental traffic fatalities. Negligent manslaughters are not included in the Homicide data on this site."
   },
   {
     "term": "New UCR",
-    "definition": "The new system for storing and collecting Uniform Crime Reporting data, which uses a relational database for easier manipulation, querying, and exporting"
+    "definition": "The new system for storing and collecting Uniform Crime Reporting data, which uses a relational database for easier manipulation, querying, and exporting."
   },
   {
     "term": "Nonviolent family offenses",
@@ -265,7 +265,7 @@
   },
   {
     "term": "Old UCR",
-    "definition": "The mainframe-based system of data collection, separation, and analysis."
+    "definition": "The mainframe-based system of collecting, separating, and analyzing Uniform Crime Reporting data."
   },
   {
     "term": "Operating, promoting, or assisting gambling",
@@ -286,10 +286,6 @@
   {
     "term": "Pornography",
     "definition": "The violation of laws or ordinances prohibiting the manufacture, publishing, sale, purchase, or possession of sexually explicit material, including literature, photographs, etc."
-  },
-  {
-    "term": "Project Control Unit",
-    "definition": "The team in the FBI's Criminal Justice Information Services Unit that manages products and budgets."
   },
   {
     "term": "Prostitution",
@@ -313,7 +309,7 @@
   },
   {
     "term": "Return A",
-    "definition": "monthly summary data submitted by a state or agency to the FBI. Officially called the Monthly Return of Offenses Known to the Police."
+    "definition": "Monthly summary data submitted by a state or agency to the FBI. Officially called the Monthly Return of Offenses Known to the Police."
   },
   {
     "term": "Robbery",
