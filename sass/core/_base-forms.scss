@@ -22,12 +22,12 @@ input {
 
 select {
   height: $form-field-height;
-  line-height: 1.75;
+  line-height: 1.5rem;
   padding: $form-field-padding-y $form-field-padding-x;
   vertical-align: middle;
 }
 
 textarea {
-  line-height: 1.75;
+  line-height: 1.5rem;
   padding: $form-field-padding-y $form-field-padding-x;
 }

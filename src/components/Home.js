@@ -70,14 +70,14 @@ const Home = ({ appState, dispatch, location }) => {
           <div className='clearfix mxn2'>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
               <LocationSelect
-                className='col-12 sm-fs-18 bold field'
+                className='col-12 sm-fs-18 field select'
                 onChange={selectLocation}
                 selected={place}
               />
             </div>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
               <select
-                className='col-12 sm-fs-18 bold field'
+                className='col-12 sm-fs-18 field select'
                 onChange={selectCrime}
                 defaultValue={crime || ''}
               >
