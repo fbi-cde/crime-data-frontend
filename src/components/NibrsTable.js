@@ -120,7 +120,7 @@ class NibrsTable extends React.Component {
 }
 
 NibrsTable.defaultProps = {
-  rowLim: 10,
+  rowLim: 12,
 }
 
 export default NibrsTable
