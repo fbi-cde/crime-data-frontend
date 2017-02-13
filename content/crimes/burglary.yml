@@ -1,6 +1,6 @@
 caveats:
   - heading: How these crimes are counted
-    text: "The Uniform Crime Reporting Program defines burglary as the unlawful entry of a structure to commit a felony or theft. To classify an offense as a burglary, the use of force to gain entry need not have occurred. The UCR Program has three subclassifications for burglary: forcible entry, unlawful entry where no force is used, and attempted forcible entry. The UCR definition of “structure” includes an apartment, barn, house trailer or houseboat when used as a permanent dwelling, office, railroad car (but not automobile), stable, ship, or vessel."
+    text: "Burglary is the unlawful entry of a structure to commit a felony or theft. To classify an offense as a burglary, the use of force to gain entry need not have occurred. The UCR Program has three subclassifications for burglary: forcible entry, unlawful entry where no force is used, and attempted forcible entry. The UCR definition of “structure” includes an apartment, barn, house trailer or houseboat when used as a permanent dwelling, office, railroad car (but not automobile), stable, ship, or vessel."
 
 links:
   - url: https://www.bjs.gov/index.cfm?ty=tp&tid=321
