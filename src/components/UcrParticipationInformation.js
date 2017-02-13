@@ -49,7 +49,13 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
         {links.map((l, i) => (
           <li key={i}>
             <a className='bold' href={l.url}>
-              <span className='red'>&#10142;</span> {l.text}
+              <img
+                className='mr-tiny'
+                width='13'
+                src='/img/arrow-right.svg'
+                alt='bullet'
+              />
+              {l.text}
             </a>
           </li>
         ))}
