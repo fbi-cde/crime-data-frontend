@@ -16,7 +16,12 @@ const Term = ({ children, dispatch, id }) => {
       role='button'
     >
       {children}
-      <img className='ml-tiny' width='12' src='/img/book.svg' alt='glossary lookup' />
+      <img
+        className='ml-tiny'
+        width='9'
+        src='/img/glossary.svg'
+        alt='glossary lookup'
+      />
     </a>
   )
 }
