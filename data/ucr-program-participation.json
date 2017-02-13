@@ -20,8 +20,8 @@
     "hybrid": false
   },
   "california": {
-    "srs": true,
-    "nibrs": true,
+    "srs": false,
+    "nibrs": false,
     "hybrid": true
   },
   "colorado": {
@@ -39,7 +39,187 @@
     "nibrs": true,
     "hybrid": false
   },
+  "florida": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "georgia": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "hawaii": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
   "idaho": {
+    "srs": false,
+    "nibrs": true,
+    "hybrid": false
+  },
+  "illinois": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "indiana": {
+    "srs": true,
+    "nibrs": false,
+    "hybrid": false
+  },
+  "iowa": {
+    "srs": false,
+    "nibrs": true,
+    "hybrid": false
+  },
+  "kansas": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "kentucky": {
+    "srs": false,
+    "nibrs": true,
+    "hybrid": false
+  },
+  "louisiana": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "maine": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "maryland": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "massachusetts": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "michigan": {
+    "srs": false,
+    "nibrs": true,
+    "hybrid": false
+  },
+  "minnesota": {
+    "srs": true,
+    "nibrs": false,
+    "hybrid": false
+  },
+  "mississippi": {
+    "srs": true,
+    "nibrs": false,
+    "hybrid": false
+  },
+  "missouri": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "montana": {
+    "srs": false,
+    "nibrs": true,
+    "hybrid": false
+  },
+  "nebraska": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "nevada": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "new-hampshire": {
+    "srs": false,
+    "nibrs": true,
+    "hybrid": false
+  },
+  "new-jersey": {
+    "srs": true,
+    "nibrs": false,
+    "hybrid": false
+  },
+  "new-mexico": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "new-york": {
+    "srs": true,
+    "nibrs": false,
+    "hybrid": false
+  },
+  "north-carolina": {
+    "srs": true,
+    "nibrs": false,
+    "hybrid": false
+  },
+  "north-dakota": {
+    "srs": false,
+    "nibrs": true,
+    "hybrid": false
+  },
+  "ohio": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "oklahoma": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "oregon": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "pennsylvania": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "rhode-island": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "south-carolina": {
+    "srs": false,
+    "nibrs": true,
+    "hybrid": false
+  },
+  "south-dakota": {
+    "srs": false,
+    "nibrs": true,
+    "hybrid": false
+  },
+  "tennessee": {
+    "srs": false,
+    "nibrs": true,
+    "hybrid": false
+  },
+  "texas": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "utah": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "vermont": {
     "srs": false,
     "nibrs": true,
     "hybrid": false
@@ -48,5 +228,25 @@
     "srs": true,
     "nibrs": false,
     "hybrid": false
+  },
+  "washington": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "west-virginia": {
+    "srs": false,
+    "nibrs": true,
+    "hybrid": false
+  },
+  "wisconsin": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
+  },
+  "wyoming": {
+    "srs": false,
+    "nibrs": false,
+    "hybrid": true
   }
 }
