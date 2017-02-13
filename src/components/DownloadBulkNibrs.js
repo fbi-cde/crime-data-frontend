@@ -15,7 +15,7 @@ class DownloadBulkNibrs extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      place: 48,
+      place: null,
       year: null,
     }
 
@@ -44,6 +44,7 @@ class DownloadBulkNibrs extends React.Component {
 
   render() {
     const border = 'border-bottom border-blue-lighter'
+    const isBtnDisabled = !(this.state.place && this.state.year)
     return (
       <div>
         <h2 className={`${border} mb2 fs-22 sm-fs-32`}>
@@ -116,6 +117,7 @@ class DownloadBulkNibrs extends React.Component {
             </div>
             <button
               className='col col-3 btn btn-primary'
+              disabled={isBtnDisabled}
               onClick={this.handleClick}
             >
               Download
