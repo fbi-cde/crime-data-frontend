@@ -50,45 +50,39 @@ const DownloadsAndDocs = () => (
         </div>
       </div>
       <DownloadBulkNibrs />
-      <h2 className={`${border} mb2 fs-22 sm-fs-32`}>
-        Other Datasets
-      </h2>
-      <table className='mb3'>
-        <tr className='caps serif'>
-          <th className={`${border} py2 pl2`} scope='col'>
-            Type of crime
-          </th>
-          <th className={`${border} py2`} scope='col'>
-            Description
-          </th>
-          <th className={`${border} py2`} scope='col'>
-            Type of data
-          </th>
-        </tr>
-        {otherDatasets.map((d, i) => {
-          const base = `col-4 pt2 ${border}`
-          return (
-            <tr key={i}>
-              <td
-                className={`${base} bold fs-16 sm-fs-22 pb3 pl2 pr4`}
-              >
-                {d.title}
-              </td>
-              <td
-                className={`${base} pb3 pr4`}
-              >
-                {d.description}
-              </td>
-              <td className={base}>
-                Summary and NIBRS available
-                <a className='block underline'>
-                  <a href={d.download}>Dowload CSV</a>
-                </a>
-              </td>
-            </tr>
-          )
-        })}
-      </table>
+      <div className='mb6'>
+        <h2 className={`mt0 mb3 pb1 fs-22 sm-fs-32 ${border}`}>
+          Other Datasets
+        </h2>
+        <div className={`clearfix xs-hide pb1 fs-18 bold caps serif ${border}`}>
+          <div className='sm-col sm-col-4 sm-pl2'>Type of crime</div>
+          <div className='sm-col sm-col-4'>Description</div>
+          <div className='sm-col sm-col-4'>Type of data</div>
+        </div>
+        {otherDatasets.map((d, i) => (
+          <div key={i} className={`clearfix pt2 pb4 ${border}`}>
+            <div className='sm-col sm-col-4 mb1 sm-px2 fs-18 sm-fs-22 bold'>
+              {d.title}
+            </div>
+            <div className='sm-col sm-col-4 mb1 sm-pr2 md-pr4'>
+              {d.description}
+            </div>
+            <div className='sm-col sm-col-4 fs-14 bold'>
+              Summary and NIBRS available
+              <a className='block mt1 sm-mt2 fs-12 underline'>
+                <img
+                  className='mr-tiny align-tb'
+                  width='15'
+                  height='14'
+                  src='/img/download.svg'
+                  alt='download'
+                />
+                <a href={d.download}>Download CSV</a>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 )

@@ -46,7 +46,7 @@ class DownloadBulkNibrs extends React.Component {
     const isBtnDisabled = !(this.state.place && this.state.year)
 
     return (
-      <div>
+      <div className='mb8'>
         <h2 className='mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter'>
           Download incident data by state and year
         </h2>
@@ -56,7 +56,7 @@ class DownloadBulkNibrs extends React.Component {
         <form className='p2 sm-p4 bg-blue-white'>
           <legend className='mb2 fs-18 sm-fs-22 bold'>Choose a file to download</legend>
           <div className='clearfix mxn1'>
-            <div className='col col-5 px1'>
+            <div className='sm-col sm-col-5 px1 mb2 sm-m0'>
               <label className='hide' htmlFor='nibrs-state'>Select a place</label>
               <select
                 className='col-12 sm-fs-18 bold field select bg-white'
@@ -103,10 +103,10 @@ class DownloadBulkNibrs extends React.Component {
                 <option value='47'>WV</option>
               </select>
             </div>
-            <div className='col col-4 px1'>
-              <label htmlFor='nibrs-year'>Select a year</label>
+            <div className='sm-col sm-col-4 px1 mb2 sm-m0'>
+              <label className='hide' htmlFor='nibrs-year'>Select a year</label>
               <select
-                className='field'
+                className='col-12 sm-fs-18 bold field select bg-white'
                 id='nibrs-year'
                 onChange={this.handleSelectChange}
               >
@@ -127,7 +127,7 @@ class DownloadBulkNibrs extends React.Component {
                 <option>2014</option>
               </select>
             </div>
-            <div className='col col-3 px1'>
+            <div className='sm-col sm-col-3 md-col-2 px1 mb2 sm-m0'>
               <button
                 className='col-12 btn btn-primary'
                 disabled={isBtnDisabled}
