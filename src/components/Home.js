@@ -164,7 +164,7 @@ const Home = ({ appState, dispatch, location }) => {
           </h3>
           <p className='mb3 sm-mb6 col-10 fs-18 sm-fs-24 serif'>
             We recently released the FBI’s first crime data
-            <Term dispatch={dispatch} id='api'>
+            <Term dispatch={dispatch} id='application programming interface (api)'>
               API
             </Term> so you can use this data to tell your own story.
           </p>
