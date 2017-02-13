@@ -10,7 +10,7 @@ const LocationFilter = ({ onChange, selected }) => {
   return (
     <div id='location' className='mb4'>
       <div className='mb2 fs-22 bold border-bottom'>Location</div>
-      <div className='pt1 pb2 center'>
+      <div className='my4 center'>
         <StateThumbnail selected={placeDisplay} />
       </div>
       <LocationSelect
