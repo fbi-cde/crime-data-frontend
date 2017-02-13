@@ -43,23 +43,23 @@ class DownloadBulkNibrs extends React.Component {
   }
 
   render() {
-    const border = 'border-bottom border-blue-lighter'
     const isBtnDisabled = !(this.state.place && this.state.year)
+
     return (
       <div>
-        <h2 className={`${border} mb2 fs-22 sm-fs-32`}>
+        <h2 className='mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter'>
           Download incident data by state and year
         </h2>
-        <p className='fs-24'>
+        <p className='mb4 fs-18 sm-fs-24 serif'>
           To view all attributes of incident data (NIBRS) join CSV downloads into a pivot table.
         </p>
-        <form className='p2 sm-p4 bg-blue-lighter'>
-          <fielset className='clearfix'>
-            <legend>Choose a file to download</legend>
-            <div className='col col-5'>
-              <label htmlFor='nibrs-state'>Select a place</label>
+        <form className='p2 sm-p4 bg-blue-white'>
+          <legend className='mb2 fs-18 sm-fs-22 bold'>Choose a file to download</legend>
+          <div className='clearfix mxn1'>
+            <div className='col col-5 px1'>
+              <label className='hide' htmlFor='nibrs-state'>Select a place</label>
               <select
-                className='sm-fs-18 bold field'
+                className='col-12 sm-fs-18 bold field select bg-white'
                 id='nibrs-state'
                 onChange={this.handleSelectChange}
               >
@@ -103,7 +103,7 @@ class DownloadBulkNibrs extends React.Component {
                 <option value='47'>WV</option>
               </select>
             </div>
-            <div className='col col-4'>
+            <div className='col col-4 px1'>
               <label htmlFor='nibrs-year'>Select a year</label>
               <select
                 className='field'
@@ -127,14 +127,16 @@ class DownloadBulkNibrs extends React.Component {
                 <option>2014</option>
               </select>
             </div>
-            <button
-              className='col col-3 btn btn-primary'
-              disabled={isBtnDisabled}
-              onClick={this.handleClick}
-            >
-              Download
-            </button>
-          </fielset>
+            <div className='col col-3 px1'>
+              <button
+                className='col-12 btn btn-primary'
+                disabled={isBtnDisabled}
+                onClick={this.handleClick}
+              >
+                Download
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     )
