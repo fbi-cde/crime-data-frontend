@@ -18,9 +18,9 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
       <div className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2'>
         <p>
           {startCase(place)} reports {
-            participation.srs && participation.nibrs && 'both'
+            (participation.hybrid && 'both')
           }
-          {participation.srs && (
+          {(participation.srs || participation.hybrid) && (
             <Term
               dispatch={dispatch}
               id={'summary reporting system (srs)'}
@@ -28,8 +28,8 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
               summary (SRS)
             </Term>
           )}
-          {participation.srs && participation.nibrs && 'and'}
-          {participation.nibrs && (
+          {participation.hybrid && 'and'}
+          {(participation.nibrs || participation.hybrid) && (
             <Term
               dispatch={dispatch}
               id={'national incident-based reporting system (nibrs)'}
