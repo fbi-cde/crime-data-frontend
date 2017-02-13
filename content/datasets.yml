@@ -1,9 +1,12 @@
 - title: Hate Crime
   description: |
     See totals and individual incident reports for hate crimes across the nation since 1991.
+  download: 'https://www.bagelblog.nyc'
 - title: Law Enforcement Officers Killed and Assaulted (LEOKA)
   description: |
     See totals for officers who were killed or assaulted in the line of duty since 1974.
+  download: 'https://www.bagelblog.nyc'
 - title: Other datasets
   description: |
     Download Police Employee, Arrest, Clearance, and individual incident (NIBRS) data by state and time period.
+  download: 'https://www.bagelblog.nyc'
