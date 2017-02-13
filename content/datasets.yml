@@ -5,7 +5,7 @@
 - title: Law Enforcement Officers Killed and Assaulted (LEOKA)
   description: |
     See totals for officers who were killed or assaulted in the line of duty since 1974.
-  download: 'https://www.bagelblog.nyc'
+  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/other/leoka'
 - title: Police Employee Data
   description: |
     See how many full-time sworn and civilian law enforcement employees serve in your community.
