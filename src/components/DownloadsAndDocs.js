@@ -1,6 +1,7 @@
 import React from 'react'
 
 import DownloadBulkNibrs from './DownloadBulkNibrs'
+import DownloadDataBtn from './DownloadDataBtn'
 import otherDatasets from '../../content/datasets.yml'
 
 const border = 'border-bottom border-blue-lighter'
@@ -70,14 +71,10 @@ const DownloadsAndDocs = () => (
             <div className='sm-col sm-col-4 fs-14 bold'>
               Summary and NIBRS available
               <a className='block mt1 sm-mt2 fs-12 underline'>
-                <img
-                  className='mr-tiny align-tb'
-                  width='15'
-                  height='14'
-                  src='/img/download.svg'
-                  alt='download'
+                <DownloadDataBtn
+                  url={d.download}
+                  text='Download CSV'
                 />
-                <a href={d.download}>Download CSV</a>
               </a>
             </div>
           </div>
