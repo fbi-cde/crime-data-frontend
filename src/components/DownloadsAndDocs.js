@@ -1,5 +1,6 @@
 import React from 'react'
 
+import DownloadBulkNibrs from './DownloadBulkNibrs'
 import otherDatasets from '../../content/datasets.yml'
 
 const border = 'border-bottom border-blue-lighter'
@@ -37,16 +38,19 @@ const DownloadsAndDocs = () => (
           </div>
         </div>
       </div>
-      <h2 className='mb2 fs-22 sm-fs-32'>Other Datasets</h2>
+      <DownloadBulkNibrs />
+      <h2 className={`${border} mb2 fs-22 sm-fs-32`}>
+        Other Datasets
+      </h2>
       <table className='mb3'>
         <tr className='caps serif'>
-          <th className={`${border} border-top py2 pl2`} scope='col'>
+          <th className={`${border} py2 pl2`} scope='col'>
             Type of crime
           </th>
-          <th className={`${border} border-top py2`} scope='col'>
+          <th className={`${border} py2`} scope='col'>
             Description
           </th>
-          <th className={`${border} border-top py2`} scope='col'>
+          <th className={`${border} py2`} scope='col'>
             Type of data
           </th>
         </tr>
