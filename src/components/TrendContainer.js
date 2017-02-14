@@ -44,7 +44,10 @@ const TrendContainer = ({
           </div>
         </div>
       </div>
-      <div className='mb8'>{content}</div>
+      <div className='mb2'>{content}</div>
+      <div className='center italic fs-12 mb8'>
+        <p>Source: {startCase(place)} reported Summary (SRS) data from {timeFrom}–{timeTo}.</p>
+      </div>
     </div>
   )
 }
