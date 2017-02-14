@@ -3,9 +3,9 @@ import React from 'react'
 
 import DownloadDataBtn from './DownloadDataBtn'
 
-const formatPercent = p => (p > 0.01 ? format('.0%')(p) : '<1%')
 const formatNumber = format(',')
-const formatSI = format('.2s')
+const formatPercent = p => (p > 0.01 ? format('.0%')(p) : '<1%')
+const formatSI = n => (Number(n) > 10 ? format('.2s')(n) : formatNumber(n))
 
 class NibrsTable extends React.Component {
   constructor(props) {
