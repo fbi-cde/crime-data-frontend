@@ -1,6 +1,9 @@
+import md from 'markdown-it'
 import React from 'react'
 
 import content from '../util/content'
+
+const markdown = md()
 
 const AboutTheData = ({ crime }) => {
   const { caveats, links } = content.crimes[crime]
@@ -19,7 +22,10 @@ const AboutTheData = ({ crime }) => {
           {caveats.map((c, i) => (
             <div key={i}>
               <div className='bold'>{c.heading}</div>
-              <p>{c.text}</p>
+              <div
+                dangerouslySetInnerHTML={{__html: markdown.render(c.text)}}
+              >
+              </div>
             </div>
           ))}
         </div>
