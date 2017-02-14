@@ -9,7 +9,7 @@ import ucrParticipation from '../util/ucr'
 const formatNumber = format(',')
 
 const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
-  const links = content.states[startCase(place)]
+  const links = content.states[startCase(place)] || []
   const participation = ucrParticipation(place)
   const placeInfo = { ...ucr.data[place] }
 
