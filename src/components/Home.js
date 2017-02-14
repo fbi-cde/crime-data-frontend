@@ -147,7 +147,7 @@ const Home = ({ appState, dispatch, location }) => {
                     {d.title}
                   </div>
                   <p className='mb2'>{d.description}</p>
-                  <button className='mb1 btn btn-primary btn-sm'>
+                  <button className='mb1 btn btn-primary btn-sm fs-14'>
                     View details
                   </button>
                 </div>

@@ -100,7 +100,7 @@ class DownloadBulkNibrs extends React.Component {
                 ))}
               </select>
             </div>
-            <div className='sm-col sm-col-3 md-col-2 px1 mb2 sm-m0'>
+            <div className='sm-col sm-col-3 lg-col-2 px1 mb2 sm-m0'>
               <button
                 className='col-12 btn btn-primary'
                 disabled={isBtnDisabled}
