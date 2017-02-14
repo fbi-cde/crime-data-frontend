@@ -6,13 +6,18 @@ import startCase from 'lodash.startcase'
 import DownloadDataBtn from './DownloadDataBtn'
 import Loading from './Loading'
 import NoData from './NoData'
+import Term from './Term'
 import TrendChart from './TrendChart'
 
 const TrendContainer = ({
   crime, place, filters, data, dispatch, loading, keys,
 }) => {
   const { timeFrom, timeTo } = filters
-
+  const srs = (
+    <Term id='summary reporting system (srs)' dispatch={dispatch}>
+      Summary (SRS)
+    </Term>
+  )
   let content = null
   if (loading) content = <Loading />
   else if (!data || data.length === 0) content = <NoData />
@@ -45,9 +50,11 @@ const TrendContainer = ({
         </div>
       </div>
       <div className='mb2'>{content}</div>
+      {!loading && (
       <div className='center italic fs-12 mb8'>
-        <p>Source: {startCase(place)} reported Summary (SRS) data from {timeFrom}–{timeTo}.</p>
+        <p>Source: {startCase(place)} reported {srs} data from {timeFrom}–{timeTo}.</p>
       </div>
+      )}
     </div>
   )
 }
