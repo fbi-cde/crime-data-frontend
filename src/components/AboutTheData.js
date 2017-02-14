@@ -23,9 +23,8 @@ const AboutTheData = ({ crime }) => {
             <div key={i}>
               <div className='bold'>{c.heading}</div>
               <div
-                dangerouslySetInnerHTML={{__html: markdown.render(c.text)}}
-              >
-              </div>
+                dangerouslySetInnerHTML={{ __html: markdown.render(c.text) }}
+              />
             </div>
           ))}
         </div>
