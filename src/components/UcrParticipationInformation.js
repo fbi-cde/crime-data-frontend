@@ -52,7 +52,7 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
               <img
                 className='mr-tiny'
                 width='13'
-                src='/img/arrow-right.svg'
+                src='img/arrow-right.svg'
                 alt='bullet'
               />
               {l.text}

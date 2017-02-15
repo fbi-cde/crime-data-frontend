@@ -19,7 +19,7 @@ const Term = ({ children, dispatch, id }) => {
       <img
         className='ml-tiny'
         width='9'
-        src='/img/glossary.svg'
+        src='img/glossary.svg'
         alt='glossary lookup'
       />
     </a>
