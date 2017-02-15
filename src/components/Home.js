@@ -139,15 +139,15 @@ const Home = ({ appState, dispatch, location }) => {
             </button>
           </div>
           <h2 className='mt0 mb3 fs-22 sm-fs-32'>Data downloads</h2>
-          <div className='clearfix mxn2'>
+          <div className='flex flex-wrap mxn2'>
             {otherDataSets.map((d, i) => (
-              <div key={i} className='sm-col sm-col-4 px2 mb2 sm-m0'>
+              <div key={i} className='flex sm-col sm-col-4 px2 mb2 sm-m0'>
                 <div className='px3 py2 bg-blue-white'>
                   <div className='mb1 pb1 fs-ch2 bold border-bottom border-red-bright'>
                     {d.title}
                   </div>
                   <p className='mb2'>{d.description}</p>
-                  <button className='mb1 btn btn-primary btn-sm'>
+                  <button className='mb1 btn btn-primary btn-sm fs-14'>
                     View details
                   </button>
                 </div>

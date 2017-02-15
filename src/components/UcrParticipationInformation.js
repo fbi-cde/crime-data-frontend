@@ -9,13 +9,13 @@ import ucrParticipation from '../util/ucr'
 const formatNumber = format(',')
 
 const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
-  const links = content.states[startCase(place)] || []
+  const links = (content.states[startCase(place)] || []).filter(l => l.text)
   const participation = ucrParticipation(place)
   const placeInfo = { ...ucr.data[place] }
 
   return (
-    <div className='mb5 clearfix fs-18 serif'>
-      <div className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2'>
+    <div className='mb5 clearfix'>
+      <div className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2 fs-18 serif'>
         <p>
           {startCase(place)} reports {
             (participation.hybrid && 'both')
@@ -45,7 +45,7 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
         </p>
         )}
       </div>
-      <ul className='sm-col sm-col-4 m0 p0 list-style-none'>
+      <ul className='sm-col sm-col-4 m0 p0 fs-14 list-style-none'>
         {links.map((l, i) => (
           <li key={i}>
             <a className='bold' href={l.url}>
