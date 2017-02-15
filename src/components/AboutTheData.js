@@ -22,6 +22,7 @@ const AboutTheData = ({ crime }) => {
           {caveats.map((c, i) => (
             <div key={i}>
               <div className='bold'>{c.heading}</div>
+              {/* eslint react/no-danger: 0 */}
               <div
                 dangerouslySetInnerHTML={{ __html: markdown.render(c.text) }}
               />
