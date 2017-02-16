@@ -12,7 +12,8 @@ const FilterGroup = ({ name, options, onChange, selected, title }) => {
       )}
       <div>
         {options.map((o, i) => {
-          const isActive = slugify(o) === slugify(selected)
+          const id = o.id || slugify(o)
+          const isActive = id === slugify(selected)
           const single = options.length === 1
           return (
             <label
@@ -22,18 +23,18 @@ const FilterGroup = ({ name, options, onChange, selected, title }) => {
                 ${isActive ? 'bg-blue white bold hover-blue' : ''}
                 ${single ? 'bold px2' : 'px3 sm-lh-30'}`
               }
-              htmlFor={slugify(o)}
+              htmlFor={id}
             >
               <input
                 className='hide'
                 checked={isActive}
-                id={slugify(o)}
+                id={id}
                 name={name}
                 onChange={handleChange}
                 type='radio'
-                value={slugify(o)}
+                value={id}
               />
-              {o}
+              {o.text || o}
             </label>
           )
         })}

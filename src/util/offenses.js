@@ -4,10 +4,10 @@ const offenses = {
   larceny: 'Larceny',
   'motor-vehicle-theft': 'Moter vehicle theft',
   homicide: 'Homicide',
-  'all-property-crime': 'Property',
+  'property-crime': 'Property',
   rape: 'Rape',
   robbery: 'Robbery',
-  'all-violent-crime': 'Violent',
+  'violent-crime': 'Violent',
 }
 const ids = Object.keys(offenses)
 
@@ -17,10 +17,10 @@ const offenseParams = {
   larceny: 'offense',
   'motor-vehicle-theft': 'offense',
   homicide: 'offense_category',
-  'all-property-crime': 'classification',
+  'property-crime': 'classification',
   rape: 'offense',
   robbery: 'offense',
-  'all-violent-crime': 'classification',
+  'violent-crime': 'classification',
 }
 
 const mapToApiOffense = o => offenses[o]
