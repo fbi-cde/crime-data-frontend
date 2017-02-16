@@ -76,7 +76,7 @@ class Histogram extends React.Component {
             <XAxis scale={x} height={height} tickCt={binCt} />
           </g>
         </svg>
-        <HistogramDetails data={bins[active]} />
+        {bins[active] && <HistogramDetails data={bins[active]} />}
       </div>
     )
   }
