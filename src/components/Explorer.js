@@ -10,7 +10,7 @@ import TrendContainer from './TrendContainer'
 import UcrParticipationInformation from './UcrParticipationInformation'
 
 import { fetchSummaries } from '../actions/summaryActions'
-import { fetchNibrsDimensions } from '../actions/nibrsActions'
+import { fetchNibrs } from '../actions/nibrsActions'
 import { fetchUcrParticipation } from '../actions/ucrActions'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 import { hideSidebar, showSidebar } from '../actions/sidebarActions'
@@ -72,7 +72,7 @@ class Explorer extends React.Component {
     dispatch(fetchUcrParticipation(filters.place))
     if (filters.crime) {
       dispatch(fetchSummaries(filters))
-      dispatch(fetchNibrsDimensions(filters))
+      dispatch(fetchNibrs(filters))
     }
   }
 
@@ -152,10 +152,11 @@ class Explorer extends React.Component {
             />
             {participation.nibrs && (<NibrsContainer
               crime={params.crime}
-              place={params.place}
-              filters={filters}
               data={nibrsData}
+              error={nibrs.error}
+              filters={filters}
               loading={nibrs.loading}
+              place={params.place}
             />)}
             <hr className='mt0 mb3' />
             <AboutTheData crime={crime} place={place} />
