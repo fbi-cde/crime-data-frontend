@@ -1,25 +1,32 @@
 import {
-  INCIDENTS_FETCHING,
-  INCIDENTS_RECEIVED,
+  NIBRS_FAILED,
+  NIBRS_FETCHING,
+  NIBRS_RECEIVED,
 } from './actionTypes'
 import api from '../util/api'
 
-export const fetchingNibrsDimensions = () => ({
-  type: INCIDENTS_FETCHING,
+export const fetchingNibrs = () => ({
+  type: NIBRS_FETCHING,
 })
 
-export const receivedNibrsDimensions = data => ({
-  type: INCIDENTS_RECEIVED,
+export const receivedNibrs = data => ({
+  type: NIBRS_RECEIVED,
   data,
 })
 
-export const fetchNibrsDimensions = params => dispatch => {
-  dispatch(fetchingNibrsDimensions())
+export const failedNibrs = error => ({
+  type: NIBRS_FAILED,
+  error,
+})
+
+export const fetchNibrs = params => dispatch => {
+  dispatch(fetchingNibrs())
 
   const requests = api.getNibrsRequests(params)
   const reduceData = (accum, next) => ({ ...accum, [next.key]: next.data })
 
   return Promise.all(requests)
     .then(data => data.reduce(reduceData, {}))
-    .then(data => dispatch(receivedNibrsDimensions(data)))
+    .then(data => dispatch(receivedNibrs(data)))
+    .catch(error => dispatch(failedNibrs(error)))
 }

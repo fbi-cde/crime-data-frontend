@@ -20,7 +20,7 @@ const get = (url, params = {}) => {
       .then(f => f.data).then(data => {
         storage.setItem(key, data)
         return data
-      }).catch(err => { throw new Error(err) })
+      })
   })
 }
 

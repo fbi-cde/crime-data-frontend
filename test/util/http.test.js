@@ -39,17 +39,6 @@ describe('http utility', () => {
     })
   })
 
-  it('get() should throw the error if unsuccessful', done => {
-    const spy = sandbox.spy(http, 'get')
-
-    sandbox.stub(axios, 'get', () => createPromise(undefined, true))
-    http.get('API').catch(e => {
-      expect(e).toEqual(new Error(true))
-      expect(spy.callCount).toEqual(1)
-      done()
-    })
-  })
-
   it(`getAll() should call get() ${success.data.pagination.pages} times`, done => {
     const expected = success.data.pagination.pages
     const spy = sandbox.stub(axios, 'get', () => createPromise(success))
