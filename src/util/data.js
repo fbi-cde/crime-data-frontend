@@ -1,7 +1,10 @@
 /* eslint-disable quote-props,import/prefer-default-export  */
 
 const violentCrime = [
-  'All Violent Crime',
+  {
+    id: 'violent-crime',
+    text: 'All Violent Crime',
+  },
   'Homicide',
   'Rape',
   'Robbery',
@@ -9,7 +12,10 @@ const violentCrime = [
 ]
 
 const propertyCrime = [
-  'All Property Crime',
+  {
+    id: 'property-crime',
+    text: 'All Property Crime',
+  },
   'Arson',
   'Burglary',
   'Larceny Theft',

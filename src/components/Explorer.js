@@ -3,19 +3,20 @@ import React from 'react'
 
 import AboutTheData from './AboutTheData'
 import Breadcrumbs from './Breadcrumbs'
-import NotFound from './NotFound'
 import NibrsContainer from './NibrsContainer'
+import NotFound from './NotFound'
 import Sidebar from './Sidebar'
 import TrendContainer from './TrendContainer'
 import UcrParticipationInformation from './UcrParticipationInformation'
 
 import { fetchSummaries } from '../actions/summaryActions'
-import { fetchNibrsDimensions } from '../actions/nibrsActions'
+import { fetchNibrs } from '../actions/nibrsActions'
 import { fetchUcrParticipation } from '../actions/ucrActions'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 import { hideSidebar, showSidebar } from '../actions/sidebarActions'
-import offenses from '../util/offenses'
 import lookup from '../util/usa'
+import offenses from '../util/offenses'
+import ucrParticipation from '../util/ucr'
 
 const filterNibrsData = (data, { timeFrom, timeTo }) => {
   if (!data) return false
@@ -85,7 +86,7 @@ class Explorer extends React.Component {
     dispatch(fetchUcrParticipation(filters.place))
     if (filters.crime) {
       dispatch(fetchSummaries(filters))
-      dispatch(fetchNibrsDimensions(filters))
+      dispatch(fetchNibrs(filters))
     }
   }
 
@@ -111,6 +112,7 @@ class Explorer extends React.Component {
     if (!offenses.includes(crime) || !lookup(place)) return <NotFound />
 
     const { filters, nibrs, sidebar, summaries, ucr } = appState
+    const participation = ucrParticipation(place)
     const nibrsData = filterNibrsData(nibrs.data, filters)
     const trendData = mungeSummaryData(summaries.data, ucr.data, place)
     const trendKeys = Object.keys(summaries.data).map(k => startCase(k))
@@ -162,13 +164,14 @@ class Explorer extends React.Component {
               loading={summaries.loading}
               keys={trendKeys}
             />
-            <NibrsContainer
+            {participation.nibrs && (<NibrsContainer
               crime={params.crime}
-              place={params.place}
-              filters={filters}
               data={nibrsData}
+              error={nibrs.error}
+              filters={filters}
               loading={nibrs.loading}
-            />
+              place={params.place}
+            />)}
             <hr className='mt0 mb3' />
             <AboutTheData crime={crime} place={place} />
           </div>

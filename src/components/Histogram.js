@@ -44,8 +44,8 @@ class Histogram extends React.Component {
         .domain([0, max(bins, d => d.ct)])
         .range([height, 0])
 
-    // default to last bin if no interaction
-    const active = hover !== null ? hover : binCt - 1
+    // default to first bin if no interaction
+    const active = hover !== null ? hover : 0
 
     return (
       <div>
@@ -76,7 +76,7 @@ class Histogram extends React.Component {
             <XAxis scale={x} height={height} tickCt={binCt} />
           </g>
         </svg>
-        <HistogramDetails data={bins[active]} />
+        {bins[active] && <HistogramDetails data={bins[active]} />}
       </div>
     )
   }

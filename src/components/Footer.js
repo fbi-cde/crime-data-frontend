@@ -25,16 +25,12 @@ const secondRow = [
     href: '/#!',
   },
   {
-    text: 'Privacy Policy',
-    href: '/#!',
-  },
-  {
     text: 'License',
-    href: '/#!',
+    href: 'https://github.com/18F/crime-data-explorer/blob/master/LICENSE.md',
   },
   {
     text: 'Feedback',
-    href: '/#!',
+    href: 'https://github.com/18F/crime-data-explorer/issues',
   },
 ]
 const liCls = 'mb1 ml1 fs-10 md-fs-12 sm-block md-inline-block'

@@ -1,4 +1,9 @@
 {
+  "united-states": {
+    "srs": true,
+    "nibrs": false,
+    "hybrid": false
+  },
   "alabama": {
     "srs": true,
     "nibrs": false,

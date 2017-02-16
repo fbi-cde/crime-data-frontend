@@ -5,7 +5,7 @@ import {
   FILTER_RESET,
   FILTERS_UPDATE,
 } from './actionTypes'
-import { fetchNibrsDimensions } from './nibrsActions'
+import { fetchNibrs } from './nibrsActions'
 import { fetchSummaries } from '../actions/summaryActions'
 import { fetchUcrParticipation } from '../actions/ucrActions'
 
@@ -32,7 +32,7 @@ export const updateFiltersAndUrl = ({ change, location }) => {
     const { filters } = getState()
     dispatch(fetchUcrParticipation(filters.place))
     if (filters.crime) dispatch(fetchSummaries(filters))
-    dispatch(fetchNibrsDimensions(filters))
+    dispatch(fetchNibrs(filters))
 
     updateUrl({ change, location })
 

@@ -3,14 +3,15 @@
 import sinon from 'sinon'
 
 import {
-  INCIDENTS_FETCHING,
-  INCIDENTS_RECEIVED,
+  NIBRS_FAILED,
+  NIBRS_FETCHING,
+  NIBRS_RECEIVED,
 } from '../../src/actions/actionTypes'
 
 import {
-  fetchNibrsDimensions,
-  fetchingNibrsDimensions,
-  receivedNibrsDimensions,
+  fetchNibrs,
+  fetchingNibrs,
+  receivedNibrs,
 } from '../../src/actions/nibrsActions'
 import api from '../../src/util/api'
 
@@ -34,19 +35,19 @@ describe('nibrsAction', () => {
     sandbox.restore()
   })
 
-  describe('fetchingNibrsDimensions()', () => {
-    it('should return INCIDENTS_FETCHING type', () => {
-      const actual = fetchingNibrsDimensions()
-      expect(actual.type).toEqual(INCIDENTS_FETCHING)
+  describe('fetchingNibrs()', () => {
+    it('should return NIBRS_FETCHING type', () => {
+      const actual = fetchingNibrs()
+      expect(actual.type).toEqual(NIBRS_FETCHING)
     })
   })
 
-  describe('receivedNibrsDimensions()', () => {
+  describe('receivedNibrs()', () => {
     const action = { results: [1, 2, 3] }
-    const actual = receivedNibrsDimensions(action)
+    const actual = receivedNibrs(action)
 
-    it('should return INCIDENTS_RECEIVED type', () => {
-      expect(actual.type).toEqual(INCIDENTS_RECEIVED)
+    it('should return NIBRS_RECEIVED type', () => {
+      expect(actual.type).toEqual(NIBRS_RECEIVED)
     })
 
     it('should return incidents equal to the results array', () => {
@@ -54,12 +55,12 @@ describe('nibrsAction', () => {
     })
   })
 
-  describe('fetchNibrsDimensions()', () => {
+  describe('fetchNibrs()', () => {
     it('should be a function', () => {
-      expect(typeof fetchNibrsDimensions).toEqual('function')
+      expect(typeof fetchNibrs).toEqual('function')
     })
 
-    it('should dispatch INCIDENTS_FETCHING and INCIDENTS_RECEIVED', done => {
+    it('should dispatch NIBRS_FETCHING and NIBRS_RECEIVED', done => {
       const dispatch = sandbox.spy()
 
       sandbox.stub(api, 'getNibrsRequests', () => [
@@ -67,11 +68,11 @@ describe('nibrsAction', () => {
         createPromise(success),
       ])
 
-      fetchNibrsDimensions({ place: 'montana' })(dispatch).then(() => {
+      fetchNibrs({ place: 'montana' })(dispatch).then(() => {
         const first = dispatch.getCall(0)
         const second = dispatch.getCall(1)
-        expect(first.args[0].type).toEqual(INCIDENTS_FETCHING)
-        expect(second.args[0].type).toEqual(INCIDENTS_RECEIVED)
+        expect(first.args[0].type).toEqual(NIBRS_FETCHING)
+        expect(second.args[0].type).toEqual(NIBRS_RECEIVED)
         done()
       }).catch(e => console.error(e))
     })
