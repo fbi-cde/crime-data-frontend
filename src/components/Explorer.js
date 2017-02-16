@@ -18,7 +18,7 @@ import { hideSidebar, showSidebar } from '../actions/sidebarActions'
 
 import offenses from '../util/offenses'
 
-import lookup from '../util/usa'
+import lookup, { nationalKey } from '../util/usa'
 
 const filterNibrsData = (data, { timeFrom, timeTo }) => {
   if (!data) return false
@@ -33,16 +33,28 @@ const filterNibrsData = (data, { timeFrom, timeTo }) => {
   return filtered
 }
 
-const mungeSummaryData = (summaries, place) => {
+const mungeSummaryData = (summaries, ucr, place) => {
   if (!summaries || !summaries[place]) return false
 
-  const keys = Object.keys(summaries)
-  return summaries[place].map((s, i) => (
-    Object.assign(
-      { date: s.year },
-      ...keys.map(k => ({ [k]: summaries[k][i].rate })),
-    )
-  ))
+  return summaries[place].map(s => {
+    const filterYear = p => p.year === s.year
+    const nationalPop = ucr[nationalKey].find(filterYear)
+    const placePop = ucr[place].find(filterYear)
+    const nationalYear = summaries[nationalKey].find(filterYear)
+    const placeYear = summaries[place].find(filterYear)
+
+    return {
+      date: s.year,
+      [place]: {
+        rate: (placeYear.actual / placePop.total_population) * 100000,
+        count: placeYear.actual,
+      },
+      [nationalKey]: {
+        rate: (nationalYear.actual / nationalPop.total_population) * 100000,
+        count: nationalYear.actual,
+      },
+    }
+  })
 }
 
 class Explorer extends React.Component {
@@ -100,7 +112,7 @@ class Explorer extends React.Component {
 
     const { filters, nibrs, sidebar, summaries, ucr } = appState
     const nibrsData = filterNibrsData(nibrs.data, filters)
-    const trendData = mungeSummaryData(summaries.data, place)
+    const trendData = mungeSummaryData(summaries.data, ucr.data, place)
     const trendKeys = Object.keys(summaries.data).map(k => startCase(k))
 
     return (
