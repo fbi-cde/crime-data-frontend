@@ -10,31 +10,27 @@ const formatRate = format('.1f')
 const formatTotal = format(',.0f')
 
 const getComparison = ({ place, data }) => {
-  const placeRate = data[place]
-  const nationalRate = data[nationalKey]
+  const placeRate = data[place].rate
+  const nationalRate = data[nationalKey].rate
   const difference = (placeRate - nationalRate)
 
   if (Math.abs(difference) < 2) return 'about the same as'
   else if (difference > 2) return 'higher than'
-
   return 'lower than'
 }
 
 const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
   const { name, slug } = keys[0]
   const comparison = getComparison({ place: slug, data })
-  const rate = data[slug]
-  const term = (
-    <Term
-      dispatch={dispatch}
-      id={mapCrimeToGlossaryTerm(crime)}
-    >
-      {lowerCase(crime)}
-    </Term>
-  )
+  const rate = data[slug].rate
   const year = data.date.getFullYear()
 
   const highlight = v => <span className='bold blue'>{v}</span>
+  const term = (
+    <Term dispatch={dispatch} id={mapCrimeToGlossaryTerm(crime)}>
+      {lowerCase(crime)}
+    </Term>
+  )
 
   return (
     <div className='mb2 md-flex'>
@@ -66,7 +62,7 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
                     className='inline-block border-bottom border-blue-light border-w2'
                     style={{ width: 72 }}
                   >
-                    {formatRate(data[k.slug])}
+                    {formatRate(data[k.slug].rate)}
                   </span>
                 </td>
                 <td className='pt1 sm-fs-18 line-height-2 align-bottom'>
@@ -74,7 +70,7 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
                     className='inline-block border-bottom border-blue-light border-w2'
                     style={{ width: 72 }}
                   >
-                    {formatTotal(data[k.slug] * 98)}
+                    {formatTotal(data[k.slug].count)}
                   </span>
                 </td>
               </tr>

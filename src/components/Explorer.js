@@ -14,7 +14,6 @@ import { fetchNibrs } from '../actions/nibrsActions'
 import { fetchUcrParticipation } from '../actions/ucrActions'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 import { hideSidebar, showSidebar } from '../actions/sidebarActions'
-
 import lookup from '../util/usa'
 import offenses from '../util/offenses'
 import ucrParticipation from '../util/ucr'
@@ -32,14 +31,29 @@ const filterNibrsData = (data, { timeFrom, timeTo }) => {
   return filtered
 }
 
-const mungeSummaryData = (summaries, place) => {
+const dataByYear = data => (
+  Object.assign(
+    ...Object.keys(data).map(k => ({
+      [k]: Object.assign(...data[k].map(d => ({ [d.year]: d }))),
+    })),
+  )
+)
+
+const mungeSummaryData = (summaries, ucr, place) => {
   if (!summaries || !summaries[place]) return false
 
   const keys = Object.keys(summaries)
-  return summaries[place].map((s, i) => (
+  const summaryByYear = dataByYear(summaries)
+  const ucrByYear = dataByYear(ucr)
+
+  return summaries[place].map(d => (
     Object.assign(
-      { date: s.year },
-      ...keys.map(k => ({ [k]: summaries[k][i].rate })),
+      { date: d.year },
+      ...keys.map(k => {
+        const count = summaryByYear[k][d.year].actual
+        const pop = ucrByYear[k][d.year].total_population
+        return { [k]: { count, pop, rate: (count / pop) * 100000 } }
+      }),
     )
   ))
 }
@@ -98,9 +112,9 @@ class Explorer extends React.Component {
     if (!offenses.includes(crime) || !lookup(place)) return <NotFound />
 
     const { filters, nibrs, sidebar, summaries, ucr } = appState
-    const nibrsData = filterNibrsData(nibrs.data, filters)
     const participation = ucrParticipation(place)
-    const trendData = mungeSummaryData(summaries.data, place)
+    const nibrsData = filterNibrsData(nibrs.data, filters)
+    const trendData = mungeSummaryData(summaries.data, ucr.data, place)
     const trendKeys = Object.keys(summaries.data).map(k => startCase(k))
 
     return (

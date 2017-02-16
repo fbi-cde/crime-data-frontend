@@ -1,10 +1,8 @@
-import startCase from 'lodash.startcase'
 import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
 import lookup, { nationalKey } from './usa'
 import { mapToApiOffense, mapToApiOffenseParam } from './offenses'
-import { population as pop } from './data'
 import { slugify } from './text'
 
 const API = '/api'
@@ -16,8 +14,6 @@ const dimensionEndpoints = {
   relationship: 'offender_relationship',
   sexCode: 'sex_code',
 }
-
-const getPop = place => pop[startCase(place)]
 
 const stateCodes = {
   alabama: 2,
@@ -128,17 +124,12 @@ const buildSummaryQueryString = params => {
 
 const getSummary = params => {
   const { place } = params
-  const population = getPop(place)
   const endpoint = `${API}/incidents/count`
   const qs = buildSummaryQueryString(params)
 
   return get(`${endpoint}?${qs}`).then(d => ({
     place,
-    results: d.results.map(r => ({
-      year: r.year,
-      count: r.actual,
-      rate: (r.actual * 100000) / population,
-    })),
+    results: d.results,
   }))
 }
 
@@ -159,14 +150,10 @@ const getSummaryRequests = params => {
 
 const getUcrParticipation = place => {
   const state = lookup(place).toUpperCase()
-  return get(`${API}/geo/states/${state}`).then(d => {
-    const results = { ...d }
-    delete results.counties
-    return {
-      place: slugify(place),
-      results,
-    }
-  })
+  return get(`${API}/geo/states/${state}/participation`).then(results => ({
+    place: slugify(place),
+    results,
+  }))
 }
 
 export default {
