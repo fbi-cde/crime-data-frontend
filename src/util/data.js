@@ -1,4 +1,4 @@
-/* eslint quote-props: 0 */
+/* eslint-disable quote-props,import/prefer-default-export  */
 
 const violentCrime = [
   'All Violent Crime',
@@ -12,7 +12,6 @@ const propertyCrime = [
   'All Property Crime',
   'Arson',
   'Burglary',
-  // 'Cargo Theft',
   'Larceny Theft',
   'Motor Vehicle Theft',
 ]

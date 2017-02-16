@@ -7,7 +7,6 @@ import NotFound from './NotFound'
 import NibrsContainer from './NibrsContainer'
 import Sidebar from './Sidebar'
 import TrendContainer from './TrendContainer'
-
 import UcrParticipationInformation from './UcrParticipationInformation'
 
 import { fetchSummaries } from '../actions/summaryActions'
@@ -15,10 +14,8 @@ import { fetchNibrsDimensions } from '../actions/nibrsActions'
 import { fetchUcrParticipation } from '../actions/ucrActions'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 import { hideSidebar, showSidebar } from '../actions/sidebarActions'
-
 import offenses from '../util/offenses'
-
-import lookup, { nationalKey } from '../util/usa'
+import lookup from '../util/usa'
 
 const filterNibrsData = (data, { timeFrom, timeTo }) => {
   if (!data) return false
@@ -33,28 +30,31 @@ const filterNibrsData = (data, { timeFrom, timeTo }) => {
   return filtered
 }
 
+const dataByYear = data => (
+  Object.assign(
+    ...Object.keys(data).map(k => ({
+      [k]: Object.assign(...data[k].map(d => ({ [d.year]: d }))),
+    })),
+  )
+)
+
 const mungeSummaryData = (summaries, ucr, place) => {
   if (!summaries || !summaries[place]) return false
 
-  return summaries[place].map(s => {
-    const filterYear = p => p.year === s.year
-    const nationalPop = ucr[nationalKey].find(filterYear)
-    const placePop = ucr[place].find(filterYear)
-    const nationalYear = summaries[nationalKey].find(filterYear)
-    const placeYear = summaries[place].find(filterYear)
+  const keys = Object.keys(summaries)
+  const summaryByYear = dataByYear(summaries)
+  const ucrByYear = dataByYear(ucr)
 
-    return {
-      date: s.year,
-      [place]: {
-        rate: (placeYear.actual / placePop.total_population) * 100000,
-        count: placeYear.actual,
-      },
-      [nationalKey]: {
-        rate: (nationalYear.actual / nationalPop.total_population) * 100000,
-        count: nationalYear.actual,
-      },
-    }
-  })
+  return summaries[place].map(d => (
+    Object.assign(
+      { date: d.year },
+      ...keys.map(k => {
+        const count = summaryByYear[k][d.year].actual
+        const pop = ucrByYear[k][d.year].total_population
+        return { [k]: { count, pop, rate: (count / pop) * 100000 } }
+      }),
+    )
+  ))
 }
 
 class Explorer extends React.Component {

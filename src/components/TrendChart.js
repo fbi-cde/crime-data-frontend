@@ -45,20 +45,17 @@ class TrendChart extends React.Component {
 
     const keysWithSlugs = keys.map(name => ({ name, slug: slugify(name) }))
 
-    // parse date, ensure all key cols are numbers
+    // parse date
     const dataClean = data.map(d => (
       Object.assign(
         { date: parse(d.date) },
-        ...keysWithSlugs.map(k => ({ [k.slug]: +d[k.slug] })),
+        ...keysWithSlugs.map(k => ({ [k.slug]: d[k.slug] })),
       )
     ))
 
     // nest data by key, standardize naming
     const dataByKey = keysWithSlugs.map(k => {
-      const values = dataClean.map(d => ({
-        date: d.date,
-        value: d[k.slug],
-      }))
+      const values = dataClean.map(d => ({ date: d.date, value: d[k.slug] }))
       return { id: k.slug, name: k.name, values }
     })
 
@@ -67,12 +64,12 @@ class TrendChart extends React.Component {
         .range([0, width])
 
     const y = scaleLinear()
-        .domain([0, max(dataByKey, d => max(d.values, v => v.value))])
+        .domain([0, max(dataByKey, d => max(d.values, v => v.value.rate))])
         .range([height, 0])
 
     const l = line()
         .x(d => x(d.date))
-        .y(d => y(d.value))
+        .y(d => y(d.value.rate))
 
     let active = dataClean[dataClean.length - 1]
     if (hover) {
@@ -93,7 +90,7 @@ class TrendChart extends React.Component {
           <circle
             key={j}
             cx='0'
-            cy={y(active[k.slug])}
+            cy={y(active[k.slug].rate)}
             fill={color(k.slug)}
             r='4'
           />
