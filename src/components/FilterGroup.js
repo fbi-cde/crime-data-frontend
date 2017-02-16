@@ -43,4 +43,13 @@ const FilterGroup = ({ name, options, onChange, selected, title }) => {
   )
 }
 
+const defaultOnChange = e => (
+  console.log('default onChange in <FilterGroup />', e)
+)
+
+FilterGroup.defaultProps = {
+  onChange: defaultOnChange,
+  selected: '',
+}
+
 export default FilterGroup
