@@ -22,6 +22,7 @@ const LocationSelect = ({ className, onChange, selected }) => {
         onChange={handleChange}
         value={(selected) ? startCase(selected) : ''}
       >
+        <option value='' disabled>Select a place</option>
         {places.map((p, i) => (
           <option key={i}>{p}</option>
         ))}
