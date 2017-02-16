@@ -43,9 +43,7 @@ const NibrsContainer = ({ crime, data, error, filters, place }) => {
           {/* eslint max-len: 0 */}
           {!error && data && `
             There were ${formatNumber(totalCount)} individual ${crime} incidents
-            reported to the FBI between ${timeFrom} and ${timeTo}. This number
-            may differ from the totals in the previous chart because of the
-            differences in data sources.
+            reported to the FBI in {startCase(place)} between ${timeFrom} and ${timeTo}. This number may differ from the totals in the previous chart because of the differences in data sources.
           `}
           Learn more about the <a className='underline' href={fbiLink}>FBI’s data collections</a>.
         </p>
