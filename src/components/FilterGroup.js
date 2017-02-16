@@ -44,6 +44,7 @@ const FilterGroup = ({ name, options, onChange, selected, title }) => {
 }
 
 const defaultOnChange = e => (
+  /*  eslint no-console: 0 */
   console.log('default onChange in <FilterGroup />', e)
 )
 
