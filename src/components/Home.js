@@ -165,7 +165,7 @@ const Home = ({ appState, dispatch, location }) => {
           <p className='mb3 sm-mb6 col-10 fs-18 sm-fs-24 serif'>
             We recently released the FBI’s first crime data
             <Term dispatch={dispatch} id='application programming interface (api)'>
-              API
+              application programming interface (API)
             </Term> so you can use this data in your own research and investigations.
           </p>
           <a
