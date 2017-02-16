@@ -7,7 +7,6 @@ import NotFound from './NotFound'
 import NibrsContainer from './NibrsContainer'
 import Sidebar from './Sidebar'
 import TrendContainer from './TrendContainer'
-
 import UcrParticipationInformation from './UcrParticipationInformation'
 
 import { fetchSummaries } from '../actions/summaryActions'
@@ -16,9 +15,9 @@ import { fetchUcrParticipation } from '../actions/ucrActions'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 import { hideSidebar, showSidebar } from '../actions/sidebarActions'
 
-import offenses from '../util/offenses'
-
 import lookup from '../util/usa'
+import offenses from '../util/offenses'
+import ucrParticipation from '../util/ucr'
 
 const filterNibrsData = (data, { timeFrom, timeTo }) => {
   if (!data) return false
@@ -100,6 +99,7 @@ class Explorer extends React.Component {
 
     const { filters, nibrs, sidebar, summaries, ucr } = appState
     const nibrsData = filterNibrsData(nibrs.data, filters)
+    const participation = ucrParticipation(place)
     const trendData = mungeSummaryData(summaries.data, place)
     const trendKeys = Object.keys(summaries.data).map(k => startCase(k))
 
@@ -150,13 +150,13 @@ class Explorer extends React.Component {
               loading={summaries.loading}
               keys={trendKeys}
             />
-            <NibrsContainer
+            {participation.nibrs && (<NibrsContainer
               crime={params.crime}
               place={params.place}
               filters={filters}
               data={nibrsData}
               loading={nibrs.loading}
-            />
+            />)}
             <hr className='mt0 mb3' />
             <AboutTheData crime={crime} place={place} />
           </div>
