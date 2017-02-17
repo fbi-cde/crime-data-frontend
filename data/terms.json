@@ -288,6 +288,10 @@
     "definition": "The violation of laws or ordinances prohibiting the manufacture, publishing, sale, purchase, or possession of sexually explicit material, including literature, photographs, etc."
   },
   {
+    "term": "Property crime",
+    "definition": "In the Uniform Crime Reporting Program, property crime includes the offenses of burglary, larceny theft, motor vehicle theft, and arson. Theft includes taking money or property, but there is no force or threat of force involved. Property crime includes arson because the offense involves the destruction of property; however, arson victims may be subjected to force."
+  },
+  {
     "term": "Prostitution",
     "definition": "To engage in commercial sex acts for anything of value."
   },
@@ -397,7 +401,7 @@
   },
   {
     "term": "Uniform Crime Reporting (UCR)",
-    "definition": "The FBI program for collecting, publishing, and archiving crime data in the U.S."
+    "definition": "The FBI program for collecting, publishing, and archiving crime data in the U.S. The program serves as the national repository for the collection of crime statistics and its primary objective is to generate reliable information for use in law enforcement administration, operation, and management. Participation by law enforcement agencies in the program is voluntary. The FBI relies on the good faith reporting of its contributing law enforcement agencies. Although the FBI makes every effort through its editing procedures, training practices, and correspondence to ensure the validity of the data it receives, the accuracy of the statistics depends primarily on the adherence of each contributor to the established standards of reporting. It is the responsibility of each state or individual contributing law enforcement agency to submit accurate monthly statistics or correct errors in the data."
   },
   {
     "term": "Vandalism",
@@ -414,5 +418,9 @@
   {
     "term": "Wire fraud",
     "definition": "The use of an electric or electronic communications facility to intentionally transmit a false or deceptive message in furtherance of a fraudulent activity."
+  }
+  {
+    "term": "Violent crime",
+    "definition": "In the Uniform Crime Reporting Program, violent crime is composed of four offenses: murder and nonnegligent manslaughter, rape, robbery, and aggravated assault. Violent crimes involve force or threat of force."
   }
 ]
