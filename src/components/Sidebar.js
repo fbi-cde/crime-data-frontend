@@ -24,7 +24,7 @@ const Sidebar = ({ dispatch, filters, isOpen, onChange, router }) => {
           className='align-middle'
           width='22'
           height='20'
-          src='/img/filters.svg'
+          src='img/filters.svg'
           alt='filters'
         />
       </div>

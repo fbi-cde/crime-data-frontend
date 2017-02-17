@@ -56,7 +56,7 @@ const Home = ({ appState, dispatch, location }) => {
             style={{ bottom: '-30px' }}
             width='60px'
             height='60px'
-            src='/img/arrow-down-circle.svg'
+            src='img/arrow-down-circle.svg'
             alt='more information below'
             onClick={scrollToBottom}
           />

@@ -16,7 +16,7 @@ const API = 'https://crime-data-api.fr.cloud.gov'
 
 app.get('/status', (req, res) => res.send('OK'))
 
-app.use(express.static(__dirname))
+app.use('/beta', express.static(__dirname))
 
 app.get('/api/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')

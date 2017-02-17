@@ -8,7 +8,7 @@ const Disclaimer = () => (
         alt='US flag'
         width='18'
         height='12'
-        src='/img/usa-flag.png'
+        src='img/usa-flag.png'
       />
       An official website of the United States government
     </div>

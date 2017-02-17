@@ -6,7 +6,7 @@ const Loading = ({ text }) => (
       className='align-middle mr1'
       width='30'
       height='30'
-      src='/img/loading.svg'
+      src='img/loading.svg'
       alt='loading...'
     />
     {text || 'Loading'}

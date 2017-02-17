@@ -43,7 +43,7 @@ const DownloadDataBtn = ({ data, fname, text, url }) => {
         className='mr-tiny align-tb'
         width='15'
         height='14'
-        src='/img/download.svg'
+        src='img/download.svg'
         alt='download'
       />
       {text}
