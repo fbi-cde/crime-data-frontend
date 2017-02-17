@@ -27,6 +27,14 @@ You can lint the code with `npm run lint` and run tests with `npm run test`.
 
 This project is [continuously deployed](circle.yml) to [cloud.gov](https://cloud.gov) with every commit to the `master` branch. Right now, you can use the application at https://crime-data-explorer.fr.cloud.gov.
 
+### For user testing
+
+We have `manifest-demo.yml` for deploying any given branch/commit to another environment for conducting user testing. From your local machine, use the following command:
+
+`cf push -f manifest-demo.yml`
+
+The user testing app is available at https://crime-data-explorer-demo.fr.cloud.gov.
+
 ## Browser support
 
 For the MVP launch of this project (Spring 2017) we will explicitly support Chrome, Safari, IE 10+, Firefox and MS Edge.
