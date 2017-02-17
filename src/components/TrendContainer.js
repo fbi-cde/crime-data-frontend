@@ -34,7 +34,7 @@ const TrendContainer = ({
           <div className='flex-auto'>
             <div className='inline-block'>
               <h2 className='m0 fs-24 sm-fs-32 sans-serif'>
-                Reported {plural(lowerCase(crime))} in {startCase(place)},
+                {startCase(crime)} rate in {startCase(place)},
                 <br />
                 {timeFrom}–{timeTo}
               </h2>
@@ -52,7 +52,7 @@ const TrendContainer = ({
       <div className='mb2'>{content}</div>
       {!loading && (
       <div className='center italic fs-12 mb8'>
-        <p>Source: {startCase(place)} reported {srs} data from {timeFrom}–{timeTo}.</p>
+        <p>Source: Reported {srs} data from {startCase(place)}, {timeFrom}–{timeTo}.</p>
       </div>
       )}
     </div>
