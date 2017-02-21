@@ -20,6 +20,7 @@ const DownloadsAndDocs = ({ dispatch }) => (
               Crime Data API
             </h3>
             <p>
+              {/* eslint max-len: 0 */}
               Use our <Term dispatch={dispatch} id='application programming interface (api)'>application programming interface (API)</Term> to search and export the FBI’s Uniform Crime Reporting data.
             </p>
             <a
