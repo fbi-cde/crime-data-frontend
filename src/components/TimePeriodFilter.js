@@ -70,10 +70,12 @@ class TimePeriodFilter extends React.Component {
           </div>
         </div>
         {error && <p className='my1 fs-10 red-bright'>{error}</p>}
+        {/*
         <p className={`italic fs-12 m0 serif ${!error && 'mt2'}`}>
           Summary data available from 1961–2015<br />
           Incident data available from 1996–2015
         </p>
+        */}
       </div>
     )
   }
