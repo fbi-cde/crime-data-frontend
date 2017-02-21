@@ -107,11 +107,10 @@ class TrendChart extends React.Component {
           dispatch={dispatch}
           keys={keysWithSlugs}
         />
-        <div className='col-12 overflow-auto'>
+        <div className='col-12 overflow-x-scroll'>
           <svg
             width={size.width}
             height={size.height}
-            style={{ maxWidth: '100%' }}
           >
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x} height={height} tickCt={8} />
