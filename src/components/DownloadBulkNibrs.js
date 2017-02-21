@@ -73,7 +73,7 @@ class DownloadBulkNibrs extends React.Component {
     return (
       <div className='mb8'>
         <h2 className='mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter'>
-          Download crime incident reports by state and year
+          Download incident-based reports by state and year
         </h2>
         <p className='mb4 fs-18 sm-fs-24 serif'>
           See {nibrsTerm} data by offense, location, and offender demographics.
