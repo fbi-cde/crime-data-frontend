@@ -34,7 +34,7 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
               dispatch={dispatch}
               id={'national incident-based reporting system (nibrs)'}
             >
-              incident-level (NIBRS)
+              incident-based (NIBRS)
             </Term>
           )} data to the FBI.
         </p>
