@@ -1,6 +1,7 @@
 import React from 'react'
 import { IndexRoute, Route, Router } from 'react-router'
 
+import AboutPage from './components/AboutPage'
 import App from './components/App'
 import DownloadsAndDocs from './components/DownloadsAndDocs'
 import Explorer from './components/Explorer'
@@ -14,6 +15,7 @@ const routes = (
       <IndexRoute component={Home} />
       <Route path='/downloads-and-docs' component={DownloadsAndDocs} />
       <Route path='/explorer/:place/:crime' component={Explorer} />
+      <Route path='/about' component={AboutPage} />
       <Route path='/*' component={NotFound} />
     </Route>
   </Router>
