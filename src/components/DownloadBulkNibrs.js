@@ -2,6 +2,7 @@ import range from 'lodash.range'
 import React from 'react'
 import startCase from 'lodash.startcase'
 
+import Term from './Term'
 import ucrProgram from '../../data/ucr-program-participation.json'
 import ucrStateCodes from '../../data/ucr-state-codes.json'
 
@@ -61,6 +62,7 @@ class DownloadBulkNibrs extends React.Component {
   }
 
   render() {
+    const { dispatch } = this.props
     const isBtnDisabled = !(this.state.place && this.state.year)
 
     return (

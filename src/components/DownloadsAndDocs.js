@@ -3,10 +3,11 @@ import React from 'react'
 import DownloadBulkNibrs from './DownloadBulkNibrs'
 import DownloadDataBtn from './DownloadDataBtn'
 import otherDatasets from '../../content/datasets.yml'
+import Term from './Term'
 
 const border = 'border-bottom border-blue-lighter'
 
-const DownloadsAndDocs = () => (
+const DownloadsAndDocs = ({ dispatch }) => (
   <section className='bg-white'>
     <div className='px2 py3 container mx-auto'>
       <h1 className='mt4 mb7 pb1 sm-mt4 fs-28 sm-fs-40 border-bottom border-blue-lighter'>
@@ -46,7 +47,7 @@ const DownloadsAndDocs = () => (
           </div>
         </div>
       </div>
-      <DownloadBulkNibrs />
+      <DownloadBulkNibrs dispatch={dispatch} />
       <div className='mb6'>
         <h2 className={`mt0 mb3 pb1 fs-22 sm-fs-32 ${border}`}>
           Other datasets
