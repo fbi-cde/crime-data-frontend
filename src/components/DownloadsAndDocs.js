@@ -19,9 +19,7 @@ const DownloadsAndDocs = () => (
               Crime Data API
             </h3>
             <p>
-              Use our <Term dispatch={dispatch} id='application programming interface (api)'>
-                application programming interface (API)
-              </Term> to search and export the FBI’s Uniform Crime Reporting data.
+              Use our <Term dispatch={dispatch} id='application programming interface (api)'>application programming interface (API)</Term> to search and export the FBI’s Uniform Crime Reporting data.
             </p>
             <a
               className='btn btn-primary btn-sm fs-14'
