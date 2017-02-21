@@ -36,7 +36,7 @@ const Home = ({ appState, dispatch, location }) => {
           <h1 className='mt0 pb1 fs-28 sm-fs-40 border-bottom border-red-bright'>
             National, state, and local crime data
           </h1>
-          <p className='m0 col-10 fs-18 sm-fs-24 serif'>
+          <p className='m0 md-col-10 fs-18 sm-fs-24 serif'>
             The FBI collects and publishes
             <Term
               dispatch={dispatch}
@@ -115,7 +115,7 @@ const Home = ({ appState, dispatch, location }) => {
           <h2 className='mt0 mb3 fs-22 sm-fs-32'>Data downloads</h2>
           <div className='flex flex-wrap mxn2'>
             {otherDataSets.map((d, i) => (
-              <div key={i} className='flex sm-col sm-col-4 px2 mb2 sm-m0'>
+              <div key={i} className='flex sm-col sm-col-6 md-col-4 px2 mb2 sm-mb4'>
                 <div className='px3 py2 bg-blue-white'>
                   <div className='mb1 pb1 fs-ch2 bold border-bottom border-red-bright'>
                     {d.title}
@@ -136,7 +136,7 @@ const Home = ({ appState, dispatch, location }) => {
           <h3 className='mt0 mb3 pb1 fs-18 sm-fs-28 border-bottom border-red-bright'>
             Use our data in your project
           </h3>
-          <p className='mb3 sm-mb6 col-10 fs-18 sm-fs-24 serif'>
+          <p className='mb3 sm-mb6 md-col-10 fs-18 sm-fs-24 serif'>
             We recently released the FBI’s first crime data
             <Term dispatch={dispatch} id='application programming interface (api)'>
               application programming interface (API)

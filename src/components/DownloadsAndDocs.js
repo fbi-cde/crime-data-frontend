@@ -13,8 +13,8 @@ const DownloadsAndDocs = ({ dispatch }) => (
       <h1 className='mt4 mb7 pb1 sm-mt4 fs-28 sm-fs-40 border-bottom border-blue-lighter'>
         Downloads & Documentation
       </h1>
-      <div className='clearfix mxn1 mb8'>
-        <div className='sm-col sm-col-6 px1 mb2'>
+      <div className='flex flex-wrap mxn1 mb8'>
+        <div className='flex sm-col sm-col-6 px1 mb2'>
           <div className='p2 sm-p4 bg-blue-white'>
             <h3 className='mt0 mb2 pb1 fs-22 sans-serif border-bottom border-red-bright'>
               Crime Data API
