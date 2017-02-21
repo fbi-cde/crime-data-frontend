@@ -2,19 +2,16 @@
 import React from 'react'
 
 import LocationSelect from './LocationSelect'
+import Term from './Term'
+import UsaMap from './UsaMap'
+
 import { slugify } from '../util/text'
 import stateLookup from '../util/usa'
-import Term from './Term'
 import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
-
 import otherDataSets from '../../content/datasets.yml'
-import usaSvgData from '../../data/usa-state-svg.json'
-
-const scrollToBottom = () => window.scrollTo(0, window.outerHeight * 1.5)
 
 const Home = ({ appState, dispatch, location }) => {
   const { crime, place } = appState.filters
-  const placeId = place && stateLookup(place).toUpperCase()
   const isButtonDisabled = !!(crime && place) || false
 
   const handleMapClick = e => {
@@ -51,15 +48,6 @@ const Home = ({ appState, dispatch, location }) => {
             efforts to improve the accuracy and timeliness of the nation’s
             crime statistics.
           </p>
-          <img
-            className='absolute right-0 cursor-pointer'
-            style={{ bottom: '-30px' }}
-            width='60px'
-            height='60px'
-            src='/img/arrow-down-circle.svg'
-            alt='more information below'
-            onClick={scrollToBottom}
-          />
         </div>
       </section>
       <section className='px2 bg-white'>
@@ -113,23 +101,7 @@ const Home = ({ appState, dispatch, location }) => {
             </div>
           </div>
           <div className='py4 sm-py7 sm-col-9 mx-auto'>
-            <svg
-              className='cursor-pointer usa-map'
-              viewBox='0 0 959 593'
-              preserveAspectRatio='xMidYMid'
-            >
-              <title>USA</title>
-              <g onClick={handleMapClick}>
-                {usaSvgData.map(s => (
-                  <path
-                    d={s.d}
-                    className={s.id === placeId ? 'fill-red-bright' : 'fill-blue-light'}
-                    id={s.id}
-                    key={s.id}
-                  />
-                ))}
-              </g>
-            </svg>
+            <UsaMap mapClick={handleMapClick} place={place} />
           </div>
           <div className='mb7 sm-hide md-hide lg-hide'>
             <button
