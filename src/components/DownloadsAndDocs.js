@@ -19,9 +19,9 @@ const DownloadsAndDocs = () => (
               Crime Data API
             </h3>
             <p>
-              Bacon ipsum dolor sit amet chuck prosciutto landjaeger ham hock filet mignon
-              shoulder hamburger pig venison. Ham bacon corned beef, sausage kielbasa flank
-              tongue pig drumstick capicola swine short loin ham hock kevin.
+              Use our <Term dispatch={dispatch} id='application programming interface (api)'>
+                application programming interface (API)
+              </Term> to search and export the FBI’s Uniform Crime Reporting data.
             </p>
             <a
               className='btn btn-primary btn-sm fs-14'
@@ -34,16 +34,14 @@ const DownloadsAndDocs = () => (
         <div className='sm-col sm-col-6 px1 mb2'>
           <div className='p2 sm-p4 bg-blue-white'>
             <h3 className='mt0 mb2 pb1 fs-22 sans-serif border-bottom border-red-bright'>
-              Documentation
+              Uniform Crime Reporting documentation
             </h3>
             <p>
-              Bacon ipsum dolor sit amet chuck prosciutto landjaeger ham hock filet mignon
-              shoulder hamburger pig venison. Ham bacon corned beef, sausage kielbasa flank
-              tongue pig drumstick capicola swine short loin ham hock kevin.
+              Download the latest user manuals, resources, and technical specifications for the FBI’s various crime data collections.
             </p>
             <a
               className='btn btn-primary btn-sm fs-14'
-              href='#!'
+              href='https://ucr.fbi.gov/'
             >
               See UCR documentation
             </a>
@@ -53,7 +51,7 @@ const DownloadsAndDocs = () => (
       <DownloadBulkNibrs />
       <div className='mb6'>
         <h2 className={`mt0 mb3 pb1 fs-22 sm-fs-32 ${border}`}>
-          Other Datasets
+          Other datasets
         </h2>
         <div className={`clearfix xs-hide pb1 fs-18 bold caps serif ${border}`}>
           <div className='sm-col sm-col-4 sm-pl2'>Type of crime</div>
