@@ -65,8 +65,8 @@ class DownloadBulkNibrs extends React.Component {
     const { dispatch } = this.props
     const isBtnDisabled = !(this.state.place && this.state.year)
     const nibrsTerm = (
-      <Term dispatch={dispatch} id='national incident-level reporting system (nibrs)'>
-        incident-level (NIBRS)
+      <Term dispatch={dispatch} id='national incident-based reporting system (nibrs)'>
+        incident-based (NIBRS)
       </Term>
     )
 

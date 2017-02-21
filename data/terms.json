@@ -321,7 +321,7 @@
   },
     {
     "term": "Summary Reporting System (SRS)",
-    "definition": "The FBI’s reporting system for summarizing crime trends and arrests known to law enforcement. Data is collected at the aggregate level and lacks incident-level details for crimes other than homicide. Local, state, and federal law enforcement agencies tally the number of Part I offenses along with arrest data for Part I and Part II offenses, and submit the totals in a monthly summary report to the FBI or state Uniform Crime Reporting Program. The Hierarchy Rule governs multiple offenses within this system."
+    "definition": "The FBI’s reporting system for summarizing crime trends and arrests known to law enforcement. Data is collected at the aggregate level and lacks incident-based details for crimes other than homicide. Local, state, and federal law enforcement agencies tally the number of Part I offenses along with arrest data for Part I and Part II offenses, and submit the totals in a monthly summary report to the FBI or state Uniform Crime Reporting Program. The Hierarchy Rule governs multiple offenses within this system."
   },
   {
     "term": "Supplementary Homicide Report",
