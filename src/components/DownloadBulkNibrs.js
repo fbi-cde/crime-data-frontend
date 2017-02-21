@@ -2,6 +2,7 @@ import range from 'lodash.range'
 import React from 'react'
 import startCase from 'lodash.startcase'
 
+import Term from './Term'
 import ucrProgram from '../../data/ucr-program-participation.json'
 import ucrStateCodes from '../../data/ucr-state-codes.json'
 
@@ -61,15 +62,21 @@ class DownloadBulkNibrs extends React.Component {
   }
 
   render() {
+    const { dispatch } = this.props
     const isBtnDisabled = !(this.state.place && this.state.year)
+    const nibrsTerm = (
+      <Term dispatch={dispatch} id='national incident-level reporting system (nibrs)'>
+        incident-level (NIBRS)
+      </Term>
+    )
 
     return (
       <div className='mb8'>
         <h2 className='mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter'>
-          Download incident data by state and year
+          Download crime incident reports by state and year
         </h2>
         <p className='mb4 fs-18 sm-fs-24 serif'>
-          To view all attributes of incident data (NIBRS) join CSV downloads into a pivot table.
+          See {nibrsTerm} data by offense, location, and offender demographics.
         </p>
         <form className='p2 sm-p4 bg-blue-white'>
           <legend className='mb2 fs-18 sm-fs-22 bold'>Choose a file to download</legend>
