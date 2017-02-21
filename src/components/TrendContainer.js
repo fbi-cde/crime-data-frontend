@@ -1,5 +1,3 @@
-import lowerCase from 'lodash.lowercase'
-import { plural } from 'pluralize'
 import React from 'react'
 import startCase from 'lodash.startcase'
 
