@@ -3,6 +3,8 @@ caveats:
     text: Motor vehicle theft is the theft or attempted theft of a car, sport utility vehicle, truck, bus, motorcycle, motor scooter, all-terrain vehicle, or snowmobile. Motor vehicle theft does not include trains, airplanes, farm equipment, bulldozers, construction equipment, or water craft such as motorboats, sailboats, houseboats, or jet skis.
 
 links:
+  - url: https://ucr.fbi.gov/ucr-publications
+    text: "FBI: Uniform Crime Reporting Publications"
   - url: https://www.bjs.gov/index.cfm?ty=tp&tid=323
     text: "Bureau of Justice Statistics: Motor Vehicle Theft"
   - url: https://www.bjs.gov/index.cfm?ty=pbdetail&iid=476

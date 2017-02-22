@@ -7,8 +7,8 @@ caveats:
     text: Valid assessments about crime, including hate crime, are possible only with careful study and analysis of the various conditions affecting each local law enforcement jurisdiction. Some of this data may not be comparable to prior hate crime statistics because of differing levels of participation from year to year.
 
 links:
-  - url: https://ucr.fbi.gov/ucr-statistics-their-proper-use
-    text: "Uniform Crime Reporting Statistics: Their Proper Use"
+  - url: https://ucr.fbi.gov/ucr-publications
+    text: "FBI: Uniform Crime Reporting Publications"
   - url: https://ucr.fbi.gov/hate-crime-technical-specification-version-1.1-pdf
     text: Uniform Crime Reporting Hate Crime Technical Specification
   - url: https://ucr.fbi.gov/hate-crime-data-collection-guidelines-and-training-manual.pdf

@@ -5,7 +5,9 @@ caveats:
     text: "If a number of hotel rooms, motel rooms, or self-storage units are burglarized, the building manager is more likely to report the offenses to the police than individual tenants. In these cases, the law enforcement agency should report a single burglary incident to the FBI and include the number of premises that were entered."
 
 links:
+  - url: https://ucr.fbi.gov/ucr-publications
+    text: "FBI: Uniform Crime Reporting Publications"
   - url: https://www.bjs.gov/index.cfm?ty=tp&tid=321
     text: "Bureau of Justice Statistics: Burglary"
   - url: https://www.bjs.gov/content/pub/pdf/hb9411.pdf
-    text: "Household Burglary, 1994–2011"
+    text: "Special Report: Household Burglary, 1994–2011"

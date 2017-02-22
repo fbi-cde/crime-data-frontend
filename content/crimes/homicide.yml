@@ -6,6 +6,8 @@ caveats:
     text: Until 2016, the FBI recorded all same-sex couples as acquaintances under the “Homosexual Relationship” label. This category is no longer in use. After same-sex marriage was [upheld as a constitutional right in 2015](https://www.supremecourt.gov/opinions/14pdf/14-556_3204.pdf), the FBI started collecting data about crimes against same-sex partners as “Spouse” (if married) or “Boyfriend or Girlfriend” (if not married).
 
 links:
+  - url: https://ucr.fbi.gov/ucr-publications
+    text: "FBI: Uniform Crime Reporting Publications"
   - url: https://www.bjs.gov/index.cfm?ty=tp&tid=311
     text: "Bureau of Justice Statistics: Homicide"
   - url: https://www.bjs.gov/content/pub/pdf/ntmh.pdf
