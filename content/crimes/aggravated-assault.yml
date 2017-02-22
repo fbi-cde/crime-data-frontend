@@ -9,5 +9,7 @@ caveats:
     text: Assaults that do not involve a dangerous weapon or serious injuries are reported as simple assaults under the FBI’s arrests data.
 
 links:
+  - url: https://ucr.fbi.gov/ucr-publications
+    text: "FBI: Uniform Crime Reporting Publications"
   - url: https://www.bjs.gov/index.cfm?ty=tp&tid=316
     text: "Bureau of Justice Statistics: Assault"

@@ -3,6 +3,8 @@ caveats:
     text: Arson is the willful or malicious burning or attempting to burn, with or without intent to defraud, a dwelling house, public building, motor vehicle, aircraft, or personal property of another. Only the fires that investigation determined to have been willfully set are included here. Fires labeled as suspicious or of unknown origin are excluded from the data.
 
 links:
+  - url: https://ucr.fbi.gov/ucr-publications
+    text: "FBI: Uniform Crime Reporting Publications"
   - url: https://www.ncjrs.gov/pdffiles1/Digitization/156232NCJRS.pdf
     text: "FBI: Arson Homicides: Findings from a National Study"
   - url: https://www.nij.gov/topics/law-enforcement/investigations/fire-arson/pages/welcome.aspx
