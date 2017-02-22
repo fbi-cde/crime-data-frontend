@@ -33,7 +33,7 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
   )
 
   return (
-    <div className='mb2 md-flex'>
+    <div className='mb2 md-flex sm-flex-col'>
       <div className='flex-auto'>
         <h4 className='mt0 mb1 fs-18 sans-serif'>{year}</h4>
         <p className='sm-m0 md-pr4 fs-14 sm-fs-16'>

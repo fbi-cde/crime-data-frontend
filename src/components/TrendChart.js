@@ -107,36 +107,37 @@ class TrendChart extends React.Component {
           dispatch={dispatch}
           keys={keysWithSlugs}
         />
-        <div className='col-12 overflow-auto'>
-          <svg
-            width={size.width}
-            height={size.height}
-            style={{ maxWidth: '100%' }}
-          >
-            <g transform={`translate(${margin.left}, ${margin.top})`}>
-              <XAxis scale={x} height={height} tickCt={8} />
-              <YAxis scale={y} width={width} />
-              {dataByKey.map((d, i) => (
-                <g key={i} className={`series series-${d.id}`}>
-                  <path
-                    d={l(d.values)}
-                    fill='none'
-                    stroke={color(d.id)}
-                    strokeWidth='2'
-                  />
-                </g>
-              ))}
-              {callout}
-              <rect
-                width={width}
-                height={height}
-                fill='none'
-                pointerEvents='all'
-                onMouseMove={this.rememberValue}
-                onMouseOut={this.forgetValue}
-              />
-            </g>
-          </svg>
+        <div className='col-12 container'>
+          <div className='overflow-x-scroll' style={{ maxWidth: size.width }}>
+            <svg
+              width={size.width}
+              height={size.height}
+            >
+              <g transform={`translate(${margin.left}, ${margin.top})`}>
+                <XAxis scale={x} height={height} tickCt={8} />
+                <YAxis scale={y} width={width} />
+                {dataByKey.map((d, i) => (
+                  <g key={i} className={`series series-${d.id}`}>
+                    <path
+                      d={l(d.values)}
+                      fill='none'
+                      stroke={color(d.id)}
+                      strokeWidth='2'
+                    />
+                  </g>
+                ))}
+                {callout}
+                <rect
+                  width={width}
+                  height={height}
+                  fill='none'
+                  pointerEvents='all'
+                  onMouseMove={this.rememberValue}
+                  onMouseOut={this.forgetValue}
+                />
+              </g>
+            </svg>
+          </div>
         </div>
         <div className='my2 fs-10 sm-fs-12 line-height-1 bold monospace center'>
           {startCase(crime)} rate per 100,000 people (does not include estimates)

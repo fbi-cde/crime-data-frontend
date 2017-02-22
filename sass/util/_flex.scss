@@ -1,0 +1,7 @@
+@media #{$breakpoint-sm} {
+  .sm-flex-col { flex-direction: column; }
+}
+
+@media #{$breakpoint-md} {
+  .md-flex-col { flex-direction: column; }
+}
