@@ -6,3 +6,7 @@
 @import 'core/all';
 @import 'components/all';
 @import 'util/all';
+
+* {
+  box-sizing: border-box;
+}
