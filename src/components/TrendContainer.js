@@ -28,7 +28,7 @@ const TrendContainer = ({
   return (
     <div>
       <div className='mb2 p2 sm-p4 bg-blue-lighter'>
-        <div className='md-flex items-baseline'>
+        <div className='lg-flex items-baseline'>
           <div className='flex-auto'>
             <div className='inline-block'>
               <h2 className='m0 fs-24 sm-fs-32 sans-serif'>

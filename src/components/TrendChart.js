@@ -4,6 +4,7 @@ import { bisector, extent, max } from 'd3-array'
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
 import { line } from 'd3-shape'
 import startCase from 'lodash.startcase'
+import throttle from 'lodash.throttle'
 import { timeParse } from 'd3-time-format'
 import React from 'react'
 
@@ -15,9 +16,29 @@ import YAxis from './YAxis'
 class TrendChart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { hover: null }
-    this.rememberValue = ::this.rememberValue
+    this.state = { hover: null, svgParentWidth: null }
+    this.getDimensions = throttle(::this.getDimensions, 20)
     this.forgetValue = ::this.forgetValue
+    this.rememberValue = ::this.rememberValue
+  }
+
+  componentDidMount() {
+    this.getDimensions()
+    window.addEventListener('resize', this.getDimensions)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.getDimensions)
+  }
+
+  getDimensions() {
+    if (this.svgParent) {
+      this.setState({ svgParentWidth: this.svgParent.clientWidth })
+    }
+  }
+
+  forgetValue() {
+    this.setState({ hover: null })
   }
 
   rememberValue(e) {
@@ -29,17 +50,16 @@ class TrendChart extends React.Component {
     this.setState({ hover: { x: xRel / rect.width } })
   }
 
-  forgetValue() {
-    this.setState({ hover: null })
-  }
-
   render() {
     const { keys, crime, colors, data, dispatch, margin, size } = this.props
-    const { hover } = this.state
+    const { hover, svgParentWidth } = this.state
 
-    const width = size.width - margin.left - margin.right
-    const height = size.height - margin.top - margin.bottom
+    const svgWidth = svgParentWidth || size.width
+    const svgHeight = svgWidth / 2.25
+    const width = svgWidth - margin.left - margin.right
+    const height = svgHeight - margin.top - margin.bottom
 
+    const xTicks = svgWidth < 500 ? 4 : 8
     const color = scaleOrdinal(colors);
     const parse = timeParse('%Y')
 
@@ -107,14 +127,19 @@ class TrendChart extends React.Component {
           dispatch={dispatch}
           keys={keysWithSlugs}
         />
-        <div className='col-12 overflow-auto'>
+        {/* eslint-disable no-return-assign */}
+        <div
+          className='col-12'
+          ref={ref => this.svgParent = ref}
+        >
+          {/* eslint-enable no-return-assign */}
           <svg
-            width={size.width}
-            height={size.height}
+            width={svgWidth}
+            height={svgHeight}
             style={{ maxWidth: '100%' }}
           >
             <g transform={`translate(${margin.left}, ${margin.top})`}>
-              <XAxis scale={x} height={height} tickCt={8} />
+              <XAxis scale={x} height={height} tickCt={xTicks} />
               <YAxis scale={y} width={width} />
               {dataByKey.map((d, i) => (
                 <g key={i} className={`series series-${d.id}`}>
@@ -151,8 +176,8 @@ TrendChart.propTypes = {
 }
 
 TrendChart.defaultProps = {
-  margin: { top: 20, right: 20, bottom: 30, left: 30 },
-  size: { width: 735, height: 300 },
+  margin: { top: 20, right: 20, bottom: 30, left: 40 },
+  size: { width: 735 },
   colors: ['#52687d', '#ff5e50', '#97a7b8'],
 }
 
