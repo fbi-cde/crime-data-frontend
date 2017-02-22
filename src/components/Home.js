@@ -114,7 +114,7 @@ const Home = ({ appState, dispatch, location }) => {
           </div>
           <h2 className='mt0 mb3 fs-22 sm-fs-32'>Data downloads</h2>
           <div className='flex flex-wrap mxn2'>
-            {otherDataSets.map((d, i) => (
+            {otherDataSets.slice(0, 3).map((d, i) => (
               <div key={i} className='flex sm-col sm-col-6 md-col-4 px2 mb2 sm-mb4'>
                 <div className='px3 py2 bg-blue-white'>
                   <div className='mb1 pb1 fs-ch2 bold border-bottom border-red-bright'>
