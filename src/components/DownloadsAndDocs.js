@@ -17,11 +17,11 @@ const DownloadsAndDocs = ({ dispatch }) => (
         <div className='flex sm-col sm-col-6 px1 mb2'>
           <div className='p2 sm-p4 bg-blue-white'>
             <h3 className='mt0 mb2 pb1 fs-22 sans-serif border-bottom border-red-bright'>
-              Crime Data API
+              Crime data API
             </h3>
             <p>
               {/* eslint max-len: 0 */}
-              Use our <Term dispatch={dispatch} id='application programming interface (api)'>application programming interface (API)</Term> to search and export the FBI’s Uniform Crime Reporting data.
+              Use our<Term dispatch={dispatch} id='application programming interface (api)'>application programming interface (API)</Term> to search and export the FBI’s<Term dispatch={dispatch} id='uniform crime reporting (ucr) program'>Uniform Crime Reporting (UCR) Program</Term> data.
             </p>
             <a
               className='btn btn-primary btn-sm fs-14'
@@ -34,10 +34,10 @@ const DownloadsAndDocs = ({ dispatch }) => (
         <div className='sm-col sm-col-6 px1 mb2'>
           <div className='p2 sm-p4 bg-blue-white'>
             <h3 className='mt0 mb2 pb1 fs-22 sans-serif border-bottom border-red-bright'>
-              Uniform Crime Reporting documentation
+              Data documentation
             </h3>
             <p>
-              Download the latest user manuals, resources, and technical specifications for the FBI’s various crime data collections.
+              Download the latest resources, user manuals, and technical specifications for the FBI’s various crime data collections.
             </p>
             <a
               className='btn btn-primary btn-sm fs-14'
@@ -51,10 +51,10 @@ const DownloadsAndDocs = ({ dispatch }) => (
       <DownloadBulkNibrs dispatch={dispatch} />
       <div className='mb6'>
         <h2 className={`mt0 mb3 pb1 fs-22 sm-fs-32 ${border}`}>
-          Other datasets
+          Bulk downloads
         </h2>
         <div className={`clearfix xs-hide pb1 fs-18 bold caps serif ${border}`}>
-          <div className='sm-col sm-col-4 sm-pl2'>Type of crime</div>
+          <div className='sm-col sm-col-4 sm-pl2'>Dataset</div>
           <div className='sm-col sm-col-4'>Description</div>
           <div className='sm-col sm-col-4'>Type of data</div>
         </div>
@@ -67,7 +67,7 @@ const DownloadsAndDocs = ({ dispatch }) => (
               {d.description}
             </div>
             <div className='sm-col sm-col-4 fs-14 bold'>
-              Summary and NIBRS available
+              Summary (SRS) available
               <a className='block mt1 sm-mt2 fs-12 underline'>
                 <DownloadDataBtn
                   url={d.download}
