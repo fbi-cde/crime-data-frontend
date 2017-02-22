@@ -2,7 +2,7 @@ import React from 'react'
 
 import UsaMap from './UsaMap'
 
-const AboutPage = () => (
+const About = () => (
   <div>
     <section className='px2 bg-white'>
       <div className='py7 container mx-auto'>
@@ -142,4 +142,4 @@ const AboutPage = () => (
   </div>
 )
 
-export default AboutPage
+export default About
