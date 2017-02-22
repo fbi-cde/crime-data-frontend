@@ -44,16 +44,17 @@ const Home = ({ appState, dispatch, location }) => {
             >
               Uniform Crime Reporting (UCR)
             </Term>
-            data on an annual basis. This project is part of our ongoing
-            efforts to improve the accuracy and timeliness of the nation’s
-            crime statistics.
+            data on an annual basis.
+          </p>
+          <p className='mb3 sm-mb6 md-col-10 fs-14 sm-fs-18 serif'>
+            Over 18,000 law enforcement agencies across the country voluntarily participate in the program by submitting data through a state UCR program or directly to the FBI. This open data project is part of our ongoing efforts to improve the accuracy and timeliness of the nation’s crime statistics.
           </p>
         </div>
       </section>
       <section className='px2 bg-white'>
         <div className='py7 container mx-auto'>
           <h2 className='mt0 mb4 fs-22 sm-fs-32'>
-            Explore by type of crime and location
+            Explore by location and type of crime
           </h2>
           <div className='clearfix mxn2'>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
