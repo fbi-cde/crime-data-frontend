@@ -75,7 +75,11 @@ const getNibrs = ({ crime, dim, place, type }) => {
   const loc = (place === nationalKey) ? 'national' : `states/${stateCodes[place]}`
 
   const url = `${API}/${type}s/count/${loc}/${fieldPath}`
-  const params = { per_page: 50, aggregate_many: false, explorer_offense: crime }
+  const params = {
+    per_page: 50,
+    aggregate_many: false,
+    explorer_offense: mapToApiOffense(crime),
+  }
 
   return get(url, params).then(d => ({
     key: `${type}${upperFirst(dim)}`,

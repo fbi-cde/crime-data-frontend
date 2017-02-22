@@ -2,8 +2,9 @@ import { slugify } from './text'
 
 const offenses = {
   'aggravated-assault': 'aggravated-assault',
+  arson: 'arson',
   burglary: 'burglary',
-  larceny: 'larceny',
+  'larceny-theft': 'larceny',
   'motor-vehicle-theft': 'motor-vehicle-theft',
   homicide: 'homicide',
   'property-crime': 'Property',
@@ -16,7 +17,7 @@ const ids = Object.keys(offenses)
 const offenseParams = {
   'aggravated-assault': 'explorer_offense',
   burglary: 'explorer_offense',
-  larceny: 'explorer_offense',
+  'larceny-theft': 'explorer_offense',
   'motor-vehicle-theft': 'explorer_offense',
   homicide: 'offense_category',
   'property-crime': 'classification',
