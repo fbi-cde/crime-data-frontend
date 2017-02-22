@@ -47,7 +47,9 @@ const Home = ({ appState, dispatch, location }) => {
             data on an annual basis.
           </p>
           <p className='mb3 sm-mb6 md-col-10 fs-14 sm-fs-18 serif'>
+            {/* eslint max-len: 0 */}
             Over 18,000 law enforcement agencies across the country voluntarily participate in the program by submitting data through a state UCR program or directly to the FBI. This open data project is part of our ongoing efforts to improve the accuracy and timeliness of the nation’s crime statistics.
+            {/* eslint-enable */}
           </p>
         </div>
       </section>
