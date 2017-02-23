@@ -11,37 +11,20 @@ const About = () => (
         </h1>
         <div className='mb7 md-col-10 fs-18 sm-fs-24 serif'>
           <p>
-            The Crime Data Explorer makes the nation’s crime data accessible to
-            the public by providing dynamic views of the data as well bulk
-            data downloads.
-          </p>
-          <p>
-            CDE in Beta: This is a paragprah about this site currently being
-            an MVP, and there will be more features to come, etc. Law
-            enforcement agencies report crime data to the FBI using two
-            different mechanisms: summary statistics and incident-based
-            data reports.
-          </p>
-          <p>
-            The data featured comes from the Uniform Crime Reporting
-            (UCR) program, which is managed by the Federal Bureau
-            of Investigation.
+            The Crime Data Explorer is a tool built to publish nation-wide crime data collected by the FBI in a digital format. The tool allows you to view and download data for trend analysis and to get a better understanding of crime across the country. Data is also made available for download through custom queries or in bulk.
           </p>
         </div>
         <h2 className='mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light'>
-          Crime Data
+          Crime data
         </h2>
         <p className='mb4 fs-18 sm-fs-24 serif'>
-          Law enforcement agencies report crime data to the FBI using
-          two different mechanisms: summary statistics and incident-based
-          data reports. The goal is for every law enforcement agency to
-          eventually begin reporting incident-based data reports.
+          The data available here is from the FBI’s Uniform Crime Reporting program (UCR), which is made up of reports from law enforcement agencies across the country. The tool features general crime data, data specific to hate crimes, and data about police officers killed or hurt while on duty. The crime reports are submitted to the FBI in two different formats: summary statistics and incident-based reports. Generally, police departments will submit one or the other. The Crime Data Explorer displays both formats separately and attempts to draw out nuances or data caveats that could affect data analysis.
         </p>
         <div className='flex flex-wrap mxn1 mb5'>
           <div className='flex sm-col sm-col-6 px1 mb2'>
             <div className='p2 sm-p3 bg-blue-white'>
               <h3 className='mt0 mb1 pb-tiny fs-22 sans-serif border-bottom border-red-bright'>
-                Summary Data (SRS)
+                Summary (SRS) data
               </h3>
               <p className='m0'>
                 Use our application programming interface (API) to
@@ -53,7 +36,7 @@ const About = () => (
           <div className='sm-col sm-col-6 px1 mb2'>
             <div className='p2 sm-p3 bg-blue-white'>
               <h3 className='mt0 mb1 pb-tiny fs-22 sans-serif border-bottom border-red-bright'>
-                Incident-Based Data (NIBRS)
+                Incident-based (NIBRS) data
               </h3>
               <p className='m0'>
                 Use our application programming interface (API) to search
@@ -75,7 +58,7 @@ const About = () => (
           </div>
         </div>
         <div className='mt4'>
-          <a className='fs-14 bold blue' href='#!'>Download UCR Participation Data</a>
+          <a className='fs-14 bold blue' href='#!'>Download UCR participation data</a>
         </div>
       </div>
     </section>
@@ -102,32 +85,34 @@ const About = () => (
     <section className='px2 bg-blue white'>
       <div className='py7 container mx-auto'>
         <h2 className='mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright'>
-          What to Expect
+          Submit your feedback
         </h2>
-        <p className='mb4 fs-18 sm-fs-24 serif'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-          enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-          in reprehenderit in voluptate velit esse cillum dolore eu
-          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim
-          id est laborum.
+        <p>
+          This project is part of an ongoing effort to improve the accuracy and timeliness of the nation’s crime statistics. We’d love to hear what you think about the Crime Data Explorer. Help us improve the quality of the data and let us know what other features would be useful to you.
         </p>
+        <p>
+          We’re working on adding more datasets to this tool, and we’re continuing to develop new features based on your feedback. Here’s what’s next for the tool:
+        </p>
+        <ul>
+          <li>Local data to be added</li>
+          <li>More customizable data features</li>
+          <li>Updates to the data</li>
+          <li>Potential new data types</li>
+        </ul>
         <button className='btn btn-primary bg-white blue' type='button'>
-          Give Us Feedback
+          Submit feedback
         </button>
       </div>
     </section>
     <section className='px2 bg-white'>
       <div className='py7 container mx-auto'>
         <h2 className='mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light'>
-          Contact Us
+          Contact us
         </h2>
         <div className='clearfix mxn2'>
           {[...Array(3)].map((_, i) => (
             <div key={i} className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-              <h3 className='mt0 mb2 fs-22 sans-serif red'>Data Questions?</h3>
+              <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
               <p className='m0'>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
