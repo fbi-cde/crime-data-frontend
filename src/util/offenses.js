@@ -16,6 +16,7 @@ const ids = Object.keys(offenses)
 
 const offenseParams = {
   'aggravated-assault': 'explorer_offense',
+  arson: 'explorer_offense',
   burglary: 'explorer_offense',
   'larceny-theft': 'explorer_offense',
   'motor-vehicle-theft': 'explorer_offense',
