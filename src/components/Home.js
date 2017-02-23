@@ -36,7 +36,7 @@ const Home = ({ appState, dispatch, location }) => {
           <h1 className='mt0 pb1 fs-28 sm-fs-40 border-bottom border-red-bright'>
             National, state, and local crime data
           </h1>
-          <p className='m0 md-col-10 fs-18 sm-fs-24 serif'>
+          <p className='mb1 md-col-10 fs-18 sm-fs-24 serif'>
             The FBI collects and publishes
             <Term
               dispatch={dispatch}
@@ -46,10 +46,12 @@ const Home = ({ appState, dispatch, location }) => {
             </Term>
             data on an annual basis.
           </p>
-          <p className='mb3 sm-mb6 md-col-10 fs-14 sm-fs-18 serif'>
-            {/* eslint max-len: 0 */}
-            Over 18,000 law enforcement agencies across the country voluntarily participate in the program by submitting data through a state UCR program or directly to the FBI. This open data project is part of our ongoing efforts to improve the accuracy and timeliness of the nation’s crime statistics.
-            {/* eslint-enable */}
+          <p className='mb3 sm-mb6 md-col-10 fs-16 sm-fs-18 serif'>
+            Over 18,000 law enforcement agencies across the country voluntarily
+            participate in the program by submitting data through a state
+            UCR program or directly to the FBI. This open data project is
+            part of our ongoing efforts to improve the accuracy and timeliness
+            of the nation’s crime statistics.
           </p>
         </div>
       </section>

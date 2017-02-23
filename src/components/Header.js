@@ -1,9 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const isExplorerActive = location => (
-  location.pathname === '/' || location.pathname.includes('explorer')
-)
+const isHome = loc => loc.pathname === '/'
+const isExplorer = loc => loc.pathname.includes('explorer')
 
 class Header extends React.Component {
   constructor(props) {
@@ -52,7 +51,16 @@ class Header extends React.Component {
                 <Link
                   to='/'
                   className='mx2 fs-14 md-fs-18 white'
-                  style={(isExplorerActive(location) && active) || {}}
+                  style={isHome(location) ? active : {}}
+                >
+                  Home
+                </Link>
+              </li>
+              <li className='mb1 md-m0'>
+                <Link
+                  to='/explorer/united-states/robbery'
+                  className='mx2 fs-14 md-fs-18 white'
+                  style={isExplorer(location) ? active : {}}
                 >
                   Explorer
                 </Link>
