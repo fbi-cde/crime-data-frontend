@@ -50,6 +50,15 @@ class Header extends React.Component {
             <ul className='list-reset my0 mxn2'>
               <li className='mb1 md-m0'>
                 <Link
+                  to='/about'
+                  className='mx2 fs-14 md-fs-18 white'
+                  activeStyle={active}
+                >
+                  About
+                </Link>
+              </li>
+              <li className='mb1 md-m0'>
+                <Link
                   to='/'
                   className='mx2 fs-14 md-fs-18 white'
                   style={(isExplorerActive(location) && active) || {}}
@@ -64,15 +73,6 @@ class Header extends React.Component {
                   activeStyle={active}
                 >
                   Downloads & Documentation
-                </Link>
-              </li>
-              <li className='mb1 md-m0'>
-                <Link
-                  to='/about'
-                  className='mx2 fs-14 md-fs-18 white'
-                  activeStyle={active}
-                >
-                  About
                 </Link>
               </li>
             </ul>
