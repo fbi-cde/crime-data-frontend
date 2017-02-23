@@ -5,8 +5,10 @@ const crimeIds = {
   'motor-vehicle-theft': 'motor vehicle theft',
   homicide: 'homicide',
   'larceny-theft': 'larceny',
+  'property-crime': 'property crime',
   rape: 'rape (legacy definition)',
   robbery: 'robbery',
+  'violent-crime': 'violent crime',
 }
 
 const mapCrimeToGlossaryTerm = crime => crimeIds[crime]
