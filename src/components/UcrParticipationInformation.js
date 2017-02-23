@@ -15,8 +15,6 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
   const ucrPlaceInfo = ucr.data[place] || []
   const data = { ...ucrPlaceInfo.find(p => p.year === timeTo) }
 
-  console.log('data', data)
-
   return (
     <div className='mb5 clearfix'>
       <div className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2 fs-18 serif'>
