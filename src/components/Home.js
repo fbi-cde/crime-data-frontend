@@ -37,14 +37,13 @@ const Home = ({ appState, dispatch, location }) => {
             National, state, and local crime data
           </h1>
           <p className='mb1 md-col-10 fs-18 sm-fs-24 serif'>
-            The FBI collects and publishes
+            The FBI collects and publishes{' '}
             <Term
               dispatch={dispatch}
               id='uniform crime reporting (ucr) program'
             >
               Uniform Crime Reporting (UCR)
-            </Term>
-            data on an annual basis.
+            </Term> data on an annual basis.
           </p>
           <p className='mb3 sm-mb6 md-col-10 fs-16 sm-fs-18 serif'>
             Over 18,000 law enforcement agencies across the country voluntarily
@@ -142,7 +141,7 @@ const Home = ({ appState, dispatch, location }) => {
             Use our data in your project
           </h3>
           <p className='mb3 sm-mb6 md-col-10 fs-18 sm-fs-24 serif'>
-            We recently released the FBI’s first crime data
+            We recently released the FBI’s first crime data{' '}
             <Term dispatch={dispatch} id='application programming interface (api)'>
               application programming interface (API)
             </Term> so you can use this data in your own research and investigations.
