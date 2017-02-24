@@ -1,22 +1,38 @@
+import flatten from 'lodash.flatten'
 import React from 'react'
+
+const getCols = data => {
+  const firstRow = data[0]
+  const colsToFlatten = Object.keys(firstRow).map(key => {
+    if (typeof firstRow[key] !== 'object') return key
+    return Object.keys(firstRow[key]).map(childKey => `${key}.${childKey}`)
+  })
+
+  return flatten(colsToFlatten)
+}
+
+const shapeDownloadData = data => {
+  const cols = getCols(data)
+  const values = data.map(d => cols.map(c => {
+    const split = c.split('.')
+    return (split.length > 1) ? d[split[0]][split[1]] : d[split]
+  }))
+
+  return `${cols.join(',')}\n${values.join('\n')}`
+}
 
 const downloadData = (fname, data) => {
   const file = `${fname}.csv`
-  const cols = Object.keys(data[0])
-  const values = data.map(d => cols.map(c => d[c]))
-  const dataStr = `${cols.join(',')}\n${values.join('\n')}`
+  const dataStr = shapeDownloadData(data)
 
   if (window.navigator.msSaveBlob) {
     const blob = new Blob([dataStr], { type: 'text/csv' })
     window.navigator.msSaveBlob(blob, file);
   } else {
-    const body = document.body
     const a = document.createElement('a')
     a.download = file
     a.href = `data:text/csv,${encodeURIComponent(dataStr)}`
-    body.appendChild(a)
     a.click()
-    body.removeChild(a)
   }
 }
 
