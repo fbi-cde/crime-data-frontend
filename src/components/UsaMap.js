@@ -28,7 +28,8 @@ class UsaMap extends React.Component {
 
     const placeId = place && stateLookup(place).toUpperCase()
     const svgDataWithNames = svgData.map(s => ({
-      ...s, name: startCase(stateLookup(s.id)),
+      ...s,
+      name: startCase(stateLookup(s.id)),
     }))
 
     return (
