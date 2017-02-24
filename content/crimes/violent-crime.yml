@@ -3,11 +3,11 @@ caveats:
     text: "Violent crime is composed of four offenses: homicide (murder and nonnegligent manslaughter), rape, robbery, and aggravated assault. Violent crimes involve force or threat of force."
 
   - heading: How these crimes are counted
-    text: This data reflects the Hierarchy Rule, which requires that only the most serious offense in a multiple-offense criminal incident be counted. The descending order of violent crimes are homicide, rape, robbery, and aggravated assault, followed by the property crimes of burglary, larceny theft, and motor vehicle theft. Although arson is also a property crime, the Hierarchy Rule does not apply to it. In cases in which an arson occurs in conjunction with another violent or property crime, both crimes are reported.
+    text: This data reflects the Hierarchy Rule, which requires that only the most serious offense in a case be counted. The descending order of violent crimes are homicide, rape, robbery, and aggravated assault, followed by the property crimes of burglary, larceny theft, and motor vehicle theft. Although arson is also a property crime, the Hierarchy Rule does not apply to it. In cases in which an arson occurs in conjunction with another violent or property crime, both crimes are reported.
 
   - heading: Change in rape definition
     text: |
-      In 2013, the FBI started collecting rape data under a revised definition and removed “forcible” from the offense name. All reported rape incidents—whether collected under the revised definition or the legacy definition—are presented here. Since the rape definition changed, some state and local law enforcement agencies have continued to report incidents with the legacy definition, because they haven't been able to change their records management systems to accommodate the change.
+      In 2013, the FBI started collecting rape data under a revised definition and removed “forcible” from the offense name. All reported rape incidents—whether collected under the revised definition or the legacy definition—are presented here. Since the rape definition changed, some state and local law enforcement agencies have continued to report incidents with the legacy definition, because they haven’t been able to change their records management systems to accommodate the change.
 
 links:
   - url: https://ucr.fbi.gov/ucr-publications

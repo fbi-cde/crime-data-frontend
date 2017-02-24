@@ -1,6 +1,7 @@
 caveats:
   - heading: How these crimes are counted
-    text: "Burglary is the unlawful entry of a structure to commit a felony or theft. To classify an offense as a burglary, the use of force to gain entry need not have occurred. The UCR Program has three subclassifications for burglary: forcible entry, unlawful entry where no force is used, and attempted forcible entry. The UCR definition of “structure” includes an apartment, barn, house trailer or houseboat when used as a permanent dwelling, office, railroad car (but not automobile), stable, ship, or vessel."
+    text: "Burglary is the unlawful entry into a building or structure to commit a felony or theft. The FBI has three subclassifications for burglary: forcible entry, unlawful entry where no force is used, and attempted forcible entry. Structures include apartments, barns, trailers or houseboats when used as a permanent dwelling, office buildings, railroad cars (but not automobiles), stables, ships, and vessels."
+
   - heading: Hotel rule
     text: "If a number of hotel rooms, motel rooms, or self-storage units are burglarized, the building manager is more likely to report the offenses to the police than individual tenants. In these cases, the law enforcement agency should report a single burglary incident to the FBI and include the number of premises that were entered."
 
