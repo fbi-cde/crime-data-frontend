@@ -3,13 +3,42 @@
 import React from 'react'
 
 import UsaMap from './UsaMap'
+import ucr from '../util/ucr'
+import usa, { data as usaData } from '../util/usa'
+
+const colorFromUcr = info => {
+  if (info.srs && !info.nibrs) return 'fill-blue-lighter'
+  else if (!info.srs && info.nibrs) return 'fill-blue'
+  else if (info.srs && info.nibrs) return 'fill-blue-light'
+  return 'fill-red-bright'
+}
+
+const stateColors = Object.keys(usaData).map(k => {
+  const stateName = usa(k)
+  const ucrInfo = ucr(stateName)
+  return {
+    state: k,
+    color: colorFromUcr(ucrInfo),
+  }
+}).reduce((accum, next) => ({
+  ...accum,
+  [next.state]: next.color,
+}), {})
+
+const colorCounts = Object.keys(stateColors)
+  .map(c => stateColors[c])
+  .reduce((accum, next) => {
+    const count = accum[next]
+    if (count >= 0) return { ...accum, [next]: count + 1 }
+    return { ...accum, [next]: 0 }
+  }, {})
 
 const legend = [
-  { count: 16, color: '#324D5F', text: 'Incident data only' },
-  { count: 18, color: '#95AABC', text: 'Incident and Summary data' },
-  { count: 14, color: '#DFE6ED', text: 'Summary data only' },
-  { count: 1, color: '#F48E88', text: 'Establishing an incident data only program' },
-  { count: 1, color: '#FF5E50', text: 'Currently no UCR program' },
+  { count: colorCounts['fill-blue'], color: '#324D5F', text: 'Incident data only' },
+  { count: colorCounts['fill-blue-light'], color: '#95AABC', text: 'Incident and Summary data' },
+  { count: colorCounts['fill-blue-lighter'], color: '#DFE6ED', text: 'Summary data only' },
+  // { count: 1, color: '#F48E88', text: 'Establishing an incident data only program' },
+  // { count: 1, color: '#FF5E50', text: 'Currently no UCR program' },
 ]
 
 const About = () => (
@@ -61,7 +90,7 @@ const About = () => (
         </h3>
         <div className='clearfix mxn2'>
           <div className='sm-col sm-col-9 px2'>
-            <UsaMap />
+            <UsaMap colors={stateColors} />
           </div>
           <div className='sm-col sm-col-3 px2 pt1'>
             {legend.map((d, i) => (
