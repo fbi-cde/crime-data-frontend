@@ -112,8 +112,10 @@ class Explorer extends React.Component {
     if (!offenses.includes(crime) || !lookup(place)) return <NotFound />
 
     const { filters, nibrs, sidebar, summaries, ucr } = appState
-    const participation = ucrParticipation(place)
     const nibrsData = filterNibrsData(nibrs.data, filters)
+    const noNibrs = ['violent-crime', 'property-crime']
+    const participation = ucrParticipation(place)
+    const showNibrs = (!noNibrs.includes(crime) && participation.nibrs)
     const trendData = mungeSummaryData(summaries.data, ucr.data, place)
     const trendKeys = Object.keys(summaries.data).map(k => startCase(k))
 
@@ -164,7 +166,7 @@ class Explorer extends React.Component {
               loading={summaries.loading}
               keys={trendKeys}
             />
-            {participation.nibrs && (<NibrsContainer
+            {showNibrs && (<NibrsContainer
               crime={params.crime}
               data={nibrsData}
               error={nibrs.error}
