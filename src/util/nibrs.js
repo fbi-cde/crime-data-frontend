@@ -87,6 +87,11 @@ const offenderDemo = data => {
     title: 'Offender demographics',
     data: [
       {
+        data: rename(reshape(offenderSexCode, 'sex_code'), sexCodes),
+        title: 'Sex of offender',
+        type: 'donut',
+      },
+      {
         data: reshape(offenderAgeNum, 'age_num'),
         title: 'Age of offender',
         type: 'histogram',
@@ -94,11 +99,6 @@ const offenderDemo = data => {
       {
         data: rename(reshape(offenderRaceCode, 'race_code'), raceCodes),
         title: 'Race of offender',
-        type: 'table',
-      },
-      {
-        data: rename(reshape(offenderSexCode, 'sex_code'), sexCodes),
-        title: 'Sex of offender',
         type: 'table',
       },
     ],
@@ -112,6 +112,11 @@ const victimDemo = data => {
     title: 'Victim demographics',
     data: [
       {
+        data: rename(reshape(victimSexCode, 'sex_code'), sexCodes),
+        title: 'Sex of victim',
+        type: 'donut',
+      },
+      {
         data: reshape(victimAgeNum, 'age_num'),
         title: 'Age of victim',
         type: 'histogram',
@@ -119,11 +124,6 @@ const victimDemo = data => {
       {
         data: rename(reshape(victimRaceCode, 'race_code'), raceCodes),
         title: 'Race of victim',
-        type: 'table',
-      },
-      {
-        data: rename(reshape(victimSexCode, 'sex_code'), sexCodes),
-        title: 'Sex of victim',
         type: 'table',
       },
     ],

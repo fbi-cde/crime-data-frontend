@@ -1,5 +1,6 @@
 import React from 'react'
 
+import NibrsDonut from './NibrsDonut'
 import NibrsHistogram from './NibrsHistogram'
 import NibrsTable from './NibrsTable'
 
@@ -7,6 +8,8 @@ const NibrsCard = ({ data, title }) => {
   const charts = data.map((d, i) => {
     const props = { key: i, data: d.data, title: d.title }
     switch (d.type) {
+      case 'donut':
+        return <NibrsDonut {...props} />
       case 'histogram':
         return <NibrsHistogram {...props} />
       case 'table':

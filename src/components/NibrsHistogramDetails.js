@@ -3,7 +3,7 @@ import React from 'react'
 
 const fmt = format(',.0f')
 
-const HistogramDetails = ({ data }) => {
+const NibrsHistogramDetails = ({ data }) => {
   const highlight = v => <span className='bold red'>{v}</span>
 
   return (
@@ -14,4 +14,4 @@ const HistogramDetails = ({ data }) => {
   )
 }
 
-export default HistogramDetails
+export default NibrsHistogramDetails
