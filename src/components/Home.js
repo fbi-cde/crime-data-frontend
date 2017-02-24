@@ -40,7 +40,7 @@ const Home = ({ appState, dispatch, location }) => {
             The FBI collects and publishes
             <Term
               dispatch={dispatch}
-              id='uniform crime reporting (ucr)'
+              id='uniform crime reporting (ucr) program'
             >
               Uniform Crime Reporting (UCR)
             </Term>
