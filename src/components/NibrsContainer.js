@@ -10,12 +10,12 @@ import parseNibrs from '../util/nibrs'
 const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')
 
-const NibrsContainer = ({ crime, data, error, filters, place }) => {
+const NibrsContainer = ({ crime, data, error, filters, loading, place }) => {
   const { timeFrom, timeTo } = filters
   let totalCount
 
   let content = <Loading />
-  if (data) {
+  if (!loading && data) {
     const dataParsed = parseNibrs(data)
     totalCount = data.offenderRaceCode.reduce((a, b) => (a + b.count), 0)
     content = (
