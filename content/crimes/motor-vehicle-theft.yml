@@ -1,6 +1,9 @@
 caveats:
-  - heading: How these crimes are counted
+  - heading: Qualifying vehicles
     text: Motor vehicle theft is the theft or attempted theft of a car, sport utility vehicle, truck, bus, motorcycle, motor scooter, all-terrain vehicle, or snowmobile. Motor vehicle theft does not include trains, airplanes, farm equipment, bulldozers, construction equipment, or water craft such as motorboats, sailboats, houseboats, or jet skis.
+
+  - heading: How these crimes are counted
+    text: Agencies should classify incidents as motor vehicle theft when someone without lawful access takes an automobile, even if they abandon it later (this is known as joyriding). Agencies should not include temporary use of a vehicle when  the offender previously had permission, such as in family situations. As an example, if a chauffeur steals a car entrusted to their care, the responding agency should report embezzlement.
 
 links:
   - url: https://ucr.fbi.gov/ucr-publications
