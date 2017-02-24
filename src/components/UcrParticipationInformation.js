@@ -11,16 +11,18 @@ const formatNumber = format(',')
 const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
   const links = (content.states[startCase(place)] || []).filter(l => l.text)
   const participation = ucrParticipation(place)
-  const placeInfo = { ...ucr.data[place] }
+  const hybrid = (participation.srs && participation.nibrs)
+  const ucrPlaceInfo = ucr.data[place] || []
+  const data = { ...ucrPlaceInfo.find(p => p.year === timeTo) }
 
   return (
     <div className='mb5 clearfix'>
       <div className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2 fs-18 serif'>
         <p>
           {startCase(place)} reports {
-            (participation.hybrid && 'both')
+            (hybrid && 'both')
           }
-          {(participation.srs || participation.hybrid) && (
+          {(participation.srs) && (
             <Term
               dispatch={dispatch}
               id={'summary reporting system (srs)'}
@@ -28,8 +30,8 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
               summary (SRS)
             </Term>
           )}
-          {participation.hybrid && 'and'}
-          {(participation.nibrs || participation.hybrid) && (
+          {hybrid && 'and'}
+          {participation.nibrs && (
             <Term
               dispatch={dispatch}
               id={'national incident-based reporting system (nibrs)'}
@@ -39,9 +41,9 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
           )} data to the FBI.
         </p>
         {/* eslint max-len: 0 */}
-        {!ucr.loading && (
+        {!ucr.loading && data.year && (
         <p>
-          In {timeTo}, {placeInfo.reporting_agencies} {startCase(place)} law enforcement agencies participated in the <Term dispatch={dispatch} id={'uniform crime reporting (ucr)'}>Uniform Crime Reporting</Term> Program, out of a total of {placeInfo.total_agencies} agencies. For that year, these statistics cover {Math.round(placeInfo.reporting_rate * 100)}% of the state’s total population, or about {formatNumber(placeInfo.total_population)} people.
+          In {timeTo}, {data.reporting_agencies} {startCase(place)} law enforcement agencies reported data to the FBI, out of a total of {data.total_agencies}. For that year, these statistics cover {Math.round(data.reporting_rate * 100)}% of the state{'\''}s agencies or about {formatNumber(data.covered_population)} people.
         </p>
         )}
       </div>
