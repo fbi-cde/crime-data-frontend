@@ -178,7 +178,7 @@ TrendChart.propTypes = {
 TrendChart.defaultProps = {
   margin: { top: 20, right: 20, bottom: 30, left: 40 },
   size: { width: 735 },
-  colors: ['#52687d', '#ff5e50', '#97a7b8'],
+  colors: ['#ff5e50', '#52687d', '#97a7b8'],
 }
 
 export default TrendChart
