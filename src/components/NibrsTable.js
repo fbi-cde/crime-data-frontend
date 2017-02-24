@@ -78,7 +78,7 @@ class NibrsTable extends React.Component {
           </thead>
           <tbody>
             {dataFormatted.map((d, i) => (
-              <tr key={i}>
+              <tr key={i} className='fs-14'>
                 <td className='border-right border-gray'>
                   <div className='progress-bar my1'>
                     <span className='rtl' style={{ width: `${d.percent * 100}%` }} />
@@ -87,7 +87,7 @@ class NibrsTable extends React.Component {
                 <td className='pr-tiny bold monospace right-align'>
                   {showCounts ? d.countFmt : d.percentFmt}
                 </td>
-                <td className='px1 truncate' title={d.key}>{d.key}</td>
+                <td className='px1' title={d.key}>{d.key}</td>
               </tr>
             ))}
           </tbody>
