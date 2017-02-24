@@ -2,6 +2,14 @@ import React from 'react'
 
 import UsaMap from './UsaMap'
 
+const legend = [
+  { count: 16, color: '#324D5F', text: 'Incident data only' },
+  { count: 18, color: '#95AABC', text: 'Incident and Summary data' },
+  { count: 14, color: '#DFE6ED', text: 'Summary data only' },
+  { count: 1, color: '#F48E88', text: 'Establishing an incident data only program' },
+  { count: 1, color: '#FF5E50', text: 'Currently no UCR program' },
+]
+
 const About = () => (
   <div>
     <section className='px2 bg-white'>
@@ -66,12 +74,25 @@ const About = () => (
         <h3 className='mt0 mb4 fs-22 sans-serif'>
           Uniform Crime Reporting Participation, 2014
         </h3>
-        <div className='clearfix mxn1'>
-          <div className='sm-col sm-col-9 px1'>
+        <div className='clearfix mxn2'>
+          <div className='sm-col sm-col-9 px2'>
             <UsaMap />
           </div>
-          <div className='sm-col sm-col-3 px1'>
-            <div className='p3 bg-blue-white' style={{ height: 300 }}>TODO!</div>
+          <div className='sm-col sm-col-3 px2 pt1'>
+            {legend.map((d, i) => (
+              <div key={i} className='flex mt2 fs-14'>
+                <div
+                  className='flex-none mt-tiny mr1 circle'
+                  style={{ width: 16, height: 16, backgroundColor: d.color }}
+                />
+                <div className='flex-auto'>
+                  <div className='bold monospace'>
+                    {`${d.count} State${d.count !== 1 ? 's' : ''}`}
+                  </div>
+                  <div>{d.text}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <div className='mt4'>
