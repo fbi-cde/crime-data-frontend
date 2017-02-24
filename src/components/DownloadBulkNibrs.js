@@ -6,17 +6,7 @@ import Term from './Term'
 import ucrProgram from '../../data/ucr-program-participation.json'
 import ucrStateCodes from '../../data/ucr-state-codes.json'
 
-const nibrsStates = Object.keys(ucrProgram).map(s => s).filter(s => {
-  const state = ucrProgram[s]
-  return state.nibrs || state.hybrid
-}).map(s => ({
-  text: startCase(s),
-  value: ucrStateCodes[s],
-}))
-
-const firstYear = 2000
-const numberOfYears = 15
-const nibrsYears = range(numberOfYears).map(x => x + firstYear)
+const nibrsStates = Object.keys(ucrProgram).filter(s => ucrProgram[s].nibrs)
 
 const bulkNibrs = 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3'
 const createBulkNibrsUrl = (year, state) => {
@@ -38,14 +28,23 @@ class DownloadBulkNibrs extends React.Component {
       year: null,
     }
 
+    this.getYearRange = ::this.getYearRange
     this.handleClick = ::this.handleClick
     this.handleSelectChange = ::this.handleSelectChange
+  }
+
+  getYearRange() {
+    if (!this.state.place) return []
+    const { nibrs } = ucrProgram[this.state.place]
+    const initialYear = nibrs['initial-year']
+
+    return range((2014 + 1) - initialYear).map(y => initialYear + y)
   }
 
   handleClick(e) {
     e.preventDefault()
     const { place, year } = this.state
-    downloadBulkNibrs(year, place)
+    downloadBulkNibrs(year, ucrStateCodes[place])
   }
 
   handleSelectChange(e) {
@@ -69,6 +68,7 @@ class DownloadBulkNibrs extends React.Component {
         incident-based (NIBRS)
       </Term>
     )
+    const nibrsYears = this.getYearRange(this.state.place)
 
     return (
       <div className='mb8'>
@@ -90,7 +90,7 @@ class DownloadBulkNibrs extends React.Component {
               >
                 <option disabled selected>Select a place</option>
                 {nibrsStates.map((s, i) => (
-                  <option key={i} value={s.value}>{s.text}</option>
+                  <option key={i} value={s}>{startCase(s)}</option>
                 ))}
               </select>
             </div>

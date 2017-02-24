@@ -7,7 +7,7 @@ describe('ucr utility', () => {
     const place = 'california'
     const actual = dataSourcesReportedByState(place)
 
-    expect(Object.keys(actual).length).toEqual(3)
+    expect(Object.keys(actual).length).toEqual(2)
   })
 
   it('should return null for a value that doesn\'t exist', () => {

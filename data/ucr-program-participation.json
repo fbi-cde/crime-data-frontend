@@ -1,257 +1,286 @@
 {
   "united-states": {
     "srs": true,
-    "nibrs": false,
-    "hybrid": false
+    "nibrs": false
   },
   "alabama": {
     "srs": true,
-    "nibrs": false,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 1991
+    }
   },
   "alaska": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": false
   },
   "arizona": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 2004
+    }
   },
   "arkansas": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 1999
+    }
   },
   "california": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": false
   },
   "colorado": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 1992
+    }
   },
   "connecticut": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 1998
+    }
   },
   "delaware": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 2001
+    }
+  },
+  "district-of-columbia": {
+    "srs": false,
+    "nibrs": {
+      "initial-year": 2000
+    }
   },
   "florida": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": false
   },
   "georgia": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": true
   },
   "hawaii": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": false
   },
   "idaho": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 1992
+    }
   },
   "illinois": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 1993
+    }
   },
   "indiana": {
     "srs": true,
-    "nibrs": false,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 2013
+    }
   },
   "iowa": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 1991
+    }
   },
   "kansas": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 2000
+    }
   },
   "kentucky": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 1998
+    }
   },
   "louisiana": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 2003
+    }
   },
   "maine": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 2003
+    }
   },
   "maryland": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": false
   },
   "massachusetts": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 1994
+    }
   },
   "michigan": {
-    "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "srs": true,
+    "nibrs": {
+      "initial-year": 1995
+    }
   },
   "minnesota": {
     "srs": true,
-    "nibrs": false,
-    "hybrid": false
+    "nibrs": false
   },
   "mississippi": {
     "srs": true,
-    "nibrs": false,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 2009
+    }
   },
   "missouri": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 2006
+    }
   },
   "montana": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 2005
+    }
   },
   "nebraska": {
     "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "nibrs": {
+      "initial-year": 1998
+    }
   },
   "nevada": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": false
   },
   "new-hampshire": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 2002
+    }
   },
   "new-jersey": {
     "srs": true,
-    "nibrs": false,
-    "hybrid": false
+    "nibrs": false
   },
   "new-mexico": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": false
   },
   "new-york": {
     "srs": true,
-    "nibrs": false,
-    "hybrid": false
+    "nibrs": false
   },
   "north-carolina": {
     "srs": true,
-    "nibrs": false,
-    "hybrid": false
+    "nibrs": false
   },
   "north-dakota": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 1991
+    }
   },
   "ohio": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 1998
+    }
   },
   "oklahoma": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 2008
+    }
   },
   "oregon": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 2003
+    }
   },
   "pennsylvania": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 2012
+    }
   },
   "rhode-island": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 2004
+    }
   },
   "south-carolina": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 1991
+    }
   },
   "south-dakota": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 2000
+    }
   },
   "tennessee": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 1997
+    }
   },
   "texas": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 1997
+    }
   },
   "utah": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 1993
+    }
   },
   "vermont": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 1993
+    }
   },
   "virginia": {
-    "srs": true,
-    "nibrs": false,
-    "hybrid": false
+    "srs": false,
+    "nibrs": {
+      "initial-year": 1994
+    }
   },
   "washington": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 2005
+    }
   },
   "west-virginia": {
     "srs": false,
-    "nibrs": true,
-    "hybrid": false
+    "nibrs": {
+      "initial-year": 1998
+    }
   },
   "wisconsin": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": {
+      "initial-year": 2004
+    }
   },
   "wyoming": {
-    "srs": false,
-    "nibrs": false,
-    "hybrid": true
+    "srs": true,
+    "nibrs": false
   }
 }
