@@ -10,7 +10,7 @@ const Term = ({ children, dispatch, id }) => {
 
   return (
     <a
-      className='mx-tiny border-bottom-dotted'
+      className='border-bottom-dotted'
       href='#!'
       onClick={handler}
       role='button'
