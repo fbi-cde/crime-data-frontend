@@ -7,16 +7,16 @@ const firstRow = [
     href: '/',
   },
   {
+    text: 'About',
+    href: '/about',
+  },
+  {
     text: 'Explorer',
     href: '/explorer',
   },
   {
-    text: 'Downloads and Documentation',
+    text: 'Downloads & Documentation',
     href: '/downloads-and-docs',
-  },
-  {
-    text: 'About',
-    href: '/about',
   },
 ]
 const secondRow = [
