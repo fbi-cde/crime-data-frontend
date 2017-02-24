@@ -21,7 +21,10 @@ const NibrsContainer = ({ crime, data, error, filters, loading, place }) => {
     content = (
       <div className='clearfix mb8 mxn1'>
         {dataParsed.map((d, i) => (
-          <div key={i} className='lg-col lg-col-6 mb2 px1'>
+          <div
+            key={i}
+            className={`lg-col lg-col-6 mb2 px1 ${i % 2 === 0 ? 'clear-left' : ''}`}
+          >
             <NibrsCard {...d} />
           </div>
         ))}
