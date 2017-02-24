@@ -88,20 +88,42 @@ const About = () => (
     <section className='px2 bg-blue-white'>
       <div className='py7 container mx-auto'>
         <div className='clearfix mxn2'>
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-              <h3 className='mt0 mb2 fs-22 sans-serif'>New UCR</h3>
-              <p className='mb2 sm-mb4'>
-                The New UCR will improve the accuracy and timeliness of
-                the crime data collection and delivery process. The national
-                UCR Program plans to have the new system fully operational
-                in 2017.
-              </p>
-              <button className='btn btn-primary btn-sm fs-14'>
-                View details
-              </button>
-            </div>
-          ))}
+          <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
+            <h3 className='mt0 mb2 fs-22 sans-serif'>1. New UCR</h3>
+            <p className='mb2 sm-mb4'>
+              The New UCR will improve the accuracy and timeliness of
+              the crime data collection and delivery process. The national
+              UCR Program plans to have the new system fully operational
+              in 2017.
+            </p>
+            <button className='btn btn-primary btn-sm fs-14'>
+              View details
+            </button>
+          </div>
+          <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
+            <h3 className='mt0 mb2 fs-22 sans-serif'>2. New UCR</h3>
+            <p className='mb2 sm-mb4'>
+              The New UCR will improve the accuracy and timeliness of
+              the crime data collection and delivery process. The national
+              UCR Program plans to have the new system fully operational
+              in 2017.
+            </p>
+            <button className='btn btn-primary btn-sm fs-14'>
+              View details
+            </button>
+          </div>
+          <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
+            <h3 className='mt0 mb2 fs-22 sans-serif'>3. New UCR</h3>
+            <p className='mb2 sm-mb4'>
+              The New UCR will improve the accuracy and timeliness of
+              the crime data collection and delivery process. The national
+              UCR Program plans to have the new system fully operational
+              in 2017.
+            </p>
+            <button className='btn btn-primary btn-sm fs-14'>
+              View details
+            </button>
+          </div>
         </div>
       </div>
     </section>
