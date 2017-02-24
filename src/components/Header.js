@@ -60,6 +60,15 @@ class Header extends React.Component {
               </li>
               <li className='mb1 md-m0'>
                 <Link
+                  to='/about'
+                  className='mx2 fs-14 md-fs-18 white'
+                  activeStyle={active}
+                >
+                  About
+                </Link>
+              </li>
+              <li className='mb1 md-m0'>
+                <Link
                   to={`/explorer/${nationalKey}/violent-crime`}
                   className='mx2 fs-14 md-fs-18 white'
                   style={isExplorer(location) ? active : {}}
@@ -74,15 +83,6 @@ class Header extends React.Component {
                   activeStyle={active}
                 >
                   Downloads & Documentation
-                </Link>
-              </li>
-              <li className='mb1 md-m0'>
-                <Link
-                  to='/about'
-                  className='mx2 fs-14 md-fs-18 white'
-                  activeStyle={active}
-                >
-                  About
                 </Link>
               </li>
             </ul>
