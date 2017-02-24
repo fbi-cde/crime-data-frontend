@@ -58,7 +58,7 @@ class Header extends React.Component {
               </li>
               <li className='mb1 md-m0'>
                 <Link
-                  to='/explorer/united-states/robbery'
+                  to='/explorer/united-states/violent-crime'
                   className='mx2 fs-14 md-fs-18 white'
                   style={isExplorer(location) ? active : {}}
                 >
