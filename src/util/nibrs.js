@@ -98,6 +98,7 @@ const offenderDemo = data => {
       },
       {
         data: rename(reshape(offenderRaceCode, 'race_code'), raceCodes),
+        noun: 'offender',
         title: 'Race of offender',
         type: 'table',
       },
@@ -123,6 +124,7 @@ const victimDemo = data => {
       },
       {
         data: rename(reshape(victimRaceCode, 'race_code'), raceCodes),
+        noun: 'victim',
         title: 'Race of victim',
         type: 'table',
       },
@@ -138,6 +140,7 @@ const relationships = data => {
     data: [
       {
         data: reshape(victimRelationship, 'offender_relationship'),
+        noun: 'relationship',
         type: 'table',
       },
     ],
@@ -158,6 +161,7 @@ const locations = data => {
     data: [
       {
         data: reshape(locationData, 'location_name'),
+        noun: 'location',
         type: 'table',
       },
     ],
