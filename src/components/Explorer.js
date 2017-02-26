@@ -169,6 +169,7 @@ class Explorer extends React.Component {
             {showNibrs && (<NibrsContainer
               crime={params.crime}
               data={nibrsData}
+              dispatch={dispatch}
               error={nibrs.error}
               filters={filters}
               loading={nibrs.loading}

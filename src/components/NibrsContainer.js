@@ -6,14 +6,22 @@ import ErrorCard from './ErrorCard'
 import Loading from './Loading'
 import NibrsCard from './NibrsCard'
 import parseNibrs from '../util/nibrs'
+import Term from './Term'
 
 const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')
 
-const NibrsContainer = ({ crime, data, error, filters, loading, place }) => {
+const NibrsContainer = ({
+  crime, data, dispatch, error, filters, loading, place,
+}) => {
   const { timeFrom, timeTo } = filters
-  let totalCount
+  const nibrs = (
+    <Term id='national incident-based reporting system (NIBRS)' dispatch={dispatch}>
+      incident-based (NIBRS)
+    </Term>
+  )
 
+  let totalCount
   let content = <Loading />
   if (!loading && data) {
     const dataParsed = parseNibrs(data)
@@ -52,6 +60,11 @@ const NibrsContainer = ({ crime, data, error, filters, loading, place }) => {
         </p>
       </div>
       {content}
+      {!loading && (
+      <div className='center italic fs-12 mb8'>
+        <p>Source: Reported {nibrs} data from {startCase(place)}, {timeFrom}–{timeTo}.</p>
+      </div>
+      )}
     </div>
   )
 }
