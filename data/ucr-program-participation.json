@@ -1,7 +1,7 @@
 {
   "united-states": {
     "srs": true,
-    "nibrs": false
+    "nibrs": true
   },
   "alabama": {
     "srs": true,
