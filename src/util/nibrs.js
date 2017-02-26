@@ -150,8 +150,8 @@ const cleanLocationLabels = l => ({
 })
 
 const locations = data => {
-  const { victimLocationName } = data
-  const locationData = victimLocationName.map(cleanLocationLabels)
+  const { offenseLocationName } = data
+  const locationData = offenseLocationName.map(cleanLocationLabels)
 
   return {
     title: 'Location type',
