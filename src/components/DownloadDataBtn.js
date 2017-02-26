@@ -30,16 +30,22 @@ const downloadData = (fname, data) => {
     window.navigator.msSaveBlob(blob, file);
   } else {
     const a = document.createElement('a')
+    const body = document.querySelector('body')
     a.download = file
     a.href = `data:text/csv,${encodeURIComponent(dataStr)}`
+    body.appendChild(a)
     a.click()
+    body.removeChild(a)
   }
 }
 
 const downloadUrl = url => {
   const a = document.createElement('a')
+  const body = document.querySelector('body')
   a.href = url
+  body.appendChild(a)
   a.click()
+  body.removeChild(a)
 }
 
 const DownloadDataBtn = ({ data, fname, text, url }) => {
