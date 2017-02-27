@@ -59,7 +59,9 @@
   },
   "georgia": {
     "srs": true,
-    "nibrs": true
+    "nibrs": {
+      "initial-year": 1991
+    }
   },
   "hawaii": {
     "srs": true,
