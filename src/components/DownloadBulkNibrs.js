@@ -4,7 +4,52 @@ import startCase from 'lodash.startcase'
 
 import Term from './Term'
 import ucrProgram from '../../data/ucr-program-participation.json'
-import ucrStateCodes from '../../data/ucr-state-codes.json'
+
+/* these codes are repeated here (seemingly also in util/api.js) because
+   different codes are needed for different parts of the application
+*/
+const ucrStateCodes = {
+  alabama: 1,
+  arizona: 2,
+  arkansas: 3,
+  colorado: 6,
+  connecticut: 6,
+  delaware: 7,
+  'district-of-columbia': 8,
+  georgia: 13,
+  idaho: 11,
+  illinois: 12,
+  indiana: 13,
+  iowa: 14,
+  kansas: 15,
+  kentucky: 16,
+  louisiana: 17,
+  maine: 18,
+  massachusetts: 23,
+  michigan: 21,
+  mississippi: 23,
+  missouri: 24,
+  montana: 25,
+  nebraska: 26,
+  'new-hampshire': 28,
+  nevada: 26,
+  'north-dakota': 33,
+  ohio: 24,
+  oklahoma: 35,
+  oregon: 36,
+  pennsylvania: 37,
+  'rhode-island': 38,
+  'south-carolina': 39,
+  'south-dakota': 40,
+  tennessee: 41,
+  texas: 42,
+  utah: 43,
+  vermont: 44,
+  virginia: 45,
+  washington: 46,
+  wisconsin: 48,
+  'west-virginia': 47,
+}
 
 const nibrsStates = Object.keys(ucrProgram).filter(s => ucrProgram[s].nibrs)
 
