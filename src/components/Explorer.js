@@ -9,11 +9,8 @@ import Sidebar from './Sidebar'
 import TrendContainer from './TrendContainer'
 import UcrParticipationInformation from './UcrParticipationInformation'
 
-import { fetchSummaries } from '../actions/summaryActions'
-import { fetchNibrs } from '../actions/nibrsActions'
-import { fetchUcrParticipation } from '../actions/ucrActions'
-import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
 import { hideSidebar, showSidebar } from '../actions/sidebarActions'
+import { updateApp } from '../actions/compositeActions'
 import lookup from '../util/usa'
 import offenses from '../util/offenses'
 import ucrParticipation from '../util/ucr'
@@ -67,11 +64,11 @@ class Explorer extends React.Component {
   }
 
   componentDidMount() {
-    const { appState, dispatch } = this.props
+    const { appState, dispatch, router } = this.props
     const filters = {
       ...this.props.filters,
-      ...this.props.router.params,
-      ...this.props.router.location.query,
+      ...router.params,
+      ...router.location.query,
     }
 
     const check = value => {
@@ -82,18 +79,12 @@ class Explorer extends React.Component {
     if (!check(filters.timeFrom)) filters.timeFrom = appState.filters.timeFrom
     if (!check(filters.timeTo)) filters.timeTo = appState.filters.timeTo
 
-    dispatch(updateFilters(filters))
-    dispatch(fetchUcrParticipation(filters.place))
-    if (filters.crime) {
-      dispatch(fetchSummaries(filters))
-      dispatch(fetchNibrs(filters))
-    }
+    dispatch(updateApp(filters))
   }
 
   handleSidebarChange(change) {
     const { location } = this.props.router
-    const action = updateFiltersAndUrl({ change, location })
-    this.props.dispatch(action)
+    this.props.dispatch(updateApp(change, location))
   }
 
   toggleSidebar() {

@@ -8,7 +8,8 @@ import UsaMap from './UsaMap'
 
 import { slugify } from '../util/text'
 import stateLookup from '../util/usa'
-import { updateFilters, updateFiltersAndUrl } from '../actions/filterActions'
+import { updateApp } from '../actions/compositeActions'
+import { updateFilters } from '../actions/filterActions'
 import otherDataSets from '../../content/datasets.yml'
 
 const Home = ({ appState, dispatch, location }) => {
@@ -22,7 +23,7 @@ const Home = ({ appState, dispatch, location }) => {
   }
   const handleSearchClick = () => {
     const change = { crime, place }
-    dispatch(updateFiltersAndUrl({ change, location }))
+    dispatch(updateApp(change, location))
   }
   const selectCrime = e => {
     const action = updateFilters({ crime: slugify(e.target.value) })
