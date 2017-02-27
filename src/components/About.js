@@ -67,8 +67,7 @@ const About = () => (
               </h3>
               <p className='m0'>
                 Use our application programming interface (API) to
-                search and export Uniform Crime Reporting (UCR) data. Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit.
+                search and export Uniform Crime Reporting (UCR) data. 
               </p>
             </div>
           </div>
