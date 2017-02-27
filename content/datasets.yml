@@ -1,24 +1,24 @@
 - title: Hate Crime
   description: |
     See totals by state, year, and bias motivation for hate crimes across the country since 1991.
-  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/other/hate_crime'
+  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/hate_crime.csv'
 - title: Law Enforcement Officers Killed and Assaulted (LEOKA)
   description: |
     See totals for officers who were killed or assaulted in the line of duty since 1974.
-  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/other/leoka'
+  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/leoka.csv'
 - title: Police Employee Data
   description: |
     See how many full-time sworn and civilian law enforcement employees serve in your community.
-  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/other/pe_employment'
+  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/pe_employment.csv'
 - title: Uniform Crime Reporting Program Participation Data
   description: |
     See how many law enforcement agencies have participated in the UCR Program by state and year.
-  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/other/ucr_participation'
+  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/ucr_participation.csv'
 - title: Cargo Theft
   description: |
     See totals by state, year, property type, and property value for cargo thefts since 2013.
-  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/other/cargo_theft'
+  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/cargo_theft.csv'
 - title: Human Trafficking
   description: |
     See totals by state and offense for commercial sex acts and involuntary servitude since 2013.
-  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/other/human_trafficking'
+  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/human_trafficking.csv'
