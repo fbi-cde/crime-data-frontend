@@ -1,24 +1,24 @@
 - title: Hate Crime
   description: |
-    See totals by state, year, and bias motivation for hate crimes across the country since 1991.
+    See totals by state, year, and bias motivation for hate crimes across the country from 1991–2014.
   download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/hate_crime.csv'
 - title: Law Enforcement Officers Killed and Assaulted (LEOKA)
   description: |
-    See totals for officers who were killed or assaulted in the line of duty since 1974.
+    See totals for officers who were killed or assaulted in the line of duty from 1974–2014.
   download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/leoka.csv'
 - title: Police Employee Data
   description: |
-    See how many full-time sworn and civilian law enforcement employees serve in your community.
+    See how many full-time sworn and civilian law enforcement employees have served in your state from 1960–2014.
   download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/pe_employment.csv'
 - title: Uniform Crime Reporting Program Participation Data
   description: |
-    See how many law enforcement agencies have participated in the UCR Program by state and year.
+    See how many law enforcement agencies have reported crime data to the FBI by state and year from 1960–2014.
   download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/ucr_participation.csv'
 - title: Cargo Theft
   description: |
-    See totals by state, year, property type, and property value for cargo thefts since 2013.
+    See totals by state, year, property type, and property value for cargo thefts from 2013–2014.
   download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/cargo_theft.csv'
 - title: Human Trafficking
   description: |
-    See totals by state and offense for commercial sex acts and involuntary servitude since 2013.
+    See totals by state and offense for commercial sex acts and involuntary servitude from 2013–2014.
   download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/human_trafficking.csv'
