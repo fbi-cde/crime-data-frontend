@@ -66,7 +66,7 @@ const About = () => (
                 Summary (SRS) data
               </h3>
               <p className='m0'>
-                Summary data is made up of counts of each type of crime. 
+                Summary data is made up of counts of each type of crime.
               </p>
             </div>
           </div>
@@ -76,7 +76,7 @@ const About = () => (
                 Incident-based (NIBRS) data
               </h3>
               <p className='m0'>
-                Incident-based (NIBRS) data captures details 
+                Incident-based (NIBRS) data captures details
                 on each single crime incident, providing context that
                 is left out of the summary data.
 
@@ -118,27 +118,33 @@ const About = () => (
         <div className='clearfix mxn2'>
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
             <h3 className='mt0 mb2 fs-22 sans-serif'>1. About the Uniform Crime Reporting (UCR) Program</h3>
-            <p className='mb2 sm-mb4'>
-          <ul>
-            <li>a href="https://ucr.fbi.gov/">UCR Home</a></li>
-            <li><a href="https://ucr.fbi.gov/new-ucr-project">New UCR</a></li>
-         </ul>
-             </p>
+            <ul className='mb2 sm-mb4 pl2'>
+              <li><a href='https://ucr.fbi.gov/'>UCR Home</a></li>
+              <li><a href='https://ucr.fbi.gov/new-ucr-project'>New UCR</a></li>
+            </ul>
             <button className='btn btn-primary btn-sm fs-14'>
               View details
             </button>
           </div>
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
             <h3 className='mt0 mb2 fs-22 sans-serif'>2. UCR documentation</h3>
-            <p className='mb2 sm-mb4'>
-            <ul>
-              <li>a href="https://ucr.fbi.gov/ucr-publications">Publications and reports</a></li>
-              <li><a href="https://ucr.fbi.gov/new-ucr-project">NIBRS documentation</a></li>
-              <li>a href="https://ucr.fbi.gov/ucr-publications">SRS documentation</a></li>
-              <li><a href="https://ucr.fbi.gov/hate-crime-technical-specification-version-1.1-pdf">Hate Crime documentation</a></li>
-              <li><a href="https://ucr.fbi.gov/ucr-program-data-collections#Summary">LEOKA documentation</a></li>
-           </ul>
-            </p>
+            <ul className='mb2 sm-mb4 pl2'>
+              <li>
+                <a href='https://ucr.fbi.gov/ucr-publications'>Publications and reports</a>
+              </li>
+              <li>
+                <a href='https://ucr.fbi.gov/new-ucr-project'>NIBRS documentation</a>
+              </li>
+              <li>
+                <a href='https://ucr.fbi.gov/ucr-publications'>SRS documentation</a>
+              </li>
+              <li>
+                <a href='https://ucr.fbi.gov/hate-crime-technical-specification-version-1.1-pdf'>
+                  Hate Crime documentation
+                </a>
+              </li>
+              <li><a href='https://ucr.fbi.gov/ucr-program-data-collections#Summary'>LEOKA documentation</a></li>
+            </ul>
             <button className='btn btn-primary btn-sm fs-14'>
               View details
             </button>
@@ -179,7 +185,7 @@ const About = () => (
           Submit your feedback
         </h2>
         <p>
-          We’d love to hear what you think about the Crime Data Explorer. Help us improve the quality of the data and let us know what other features would be useful to you. 
+          We’d love to hear what you think about the Crime Data Explorer. Help us improve the quality of the data and let us know what other features would be useful to you.
         </p>
         <button className='btn btn-primary bg-white blue' type='button'>
           Submit feedback
