@@ -23,7 +23,7 @@ class NibrsHistogram extends React.Component {
   }
 
   render() {
-    const { data, margin, size, title } = this.props
+    const { data, margin, noun, size, title } = this.props
     const { hover } = this.state
 
     const height = size.height - margin.top - margin.bottom
@@ -78,7 +78,9 @@ class NibrsHistogram extends React.Component {
               <XAxis scale={x} height={height} tickCt={binCt} />
             </g>
           </svg>
-          {bins[active] && <NibrsHistogramDetails data={bins[active]} />}
+          {bins[active] && (
+            <NibrsHistogramDetails data={bins[active]} noun={noun} />
+          )}
         </div>
       </div>
     )
@@ -88,6 +90,10 @@ class NibrsHistogram extends React.Component {
 NibrsHistogram.defaultProps = {
   margin: { top: 20, right: 20, bottom: 30, left: 20 },
   size: { width: 360, height: 160 },
+}
+
+NibrsHistogram.propTypes = {
+  noun: React.PropTypes.string.isRequired,
 }
 
 export default NibrsHistogram
