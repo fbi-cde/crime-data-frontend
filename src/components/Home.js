@@ -1,5 +1,6 @@
 /* eslint jsx-a11y/no-static-element-interactions: 0 */
 import React from 'react'
+import { Link } from 'react-router'
 
 import LocationSelect from './LocationSelect'
 import Term from './Term'
@@ -125,12 +126,17 @@ const Home = ({ appState, dispatch, location }) => {
                     {d.title}
                   </div>
                   <p className='mb2'>{d.description}</p>
-                  <button className='mb1 btn btn-primary btn-sm fs-14'>
-                    View details
-                  </button>
                 </div>
               </div>
             ))}
+          </div>
+          <div>
+            <Link
+              className='mb1 btn btn-primary btn-lg fs-18'
+              to='/downloads-and-docs'
+            >
+              See all downloads
+            </Link>
           </div>
         </div>
       </section>
