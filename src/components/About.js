@@ -50,14 +50,14 @@ const About = () => (
         </h1>
         <div className='mb7 md-col-10 fs-18 sm-fs-24 serif'>
           <p>
-            The Crime Data Explorer is a tool built to publish nation-wide crime data collected by the FBI in a digital format. The tool allows you to view and download data for trend analysis and to get a better understanding of crime across the country. Data is also made available for download through custom queries or in bulk.
+            The Crime Data Explorer is a tool built to publish nation-wide crime data collected by the FBI in a digital format. The tool allows you to view trends and download bulk data allowing you to get a better understanding of crime across the country.
           </p>
         </div>
         <h2 className='mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light'>
           Crime data
         </h2>
         <p className='mb4 fs-18 sm-fs-24 serif'>
-          The data available here is from the FBI’s Uniform Crime Reporting program (UCR), which is made up of reports from law enforcement agencies across the country. The tool features general crime data, data specific to hate crimes, and data about police officers killed or hurt while on duty. The crime reports are submitted to the FBI in two different formats: summary statistics and incident-based reports. Generally, police departments will submit one or the other. The Crime Data Explorer displays both formats separately and attempts to draw out nuances or data caveats that could affect data analysis.
+          The data available here is from the FBI’s Uniform Crime Reporting program (UCR), which is made up of reports from law enforcement agencies across the country. The tool features general crime data, data specific to hate crimes, and data about police officers killed or hurt while on duty. The crime reports are submitted to the FBI in two different formats: summary statistics and incident-based reports. Generally, police departments submit one or the other. The Crime Data Explorer displays both datasets separately and attempts to draw out nuances or data caveats that could affect data analysis.
         </p>
         <div className='flex flex-wrap mxn1 mb5'>
           <div className='flex sm-col sm-col-6 px1 mb2'>
@@ -66,9 +66,7 @@ const About = () => (
                 Summary (SRS) data
               </h3>
               <p className='m0'>
-                Use our application programming interface (API) to
-                search and export Uniform Crime Reporting (UCR) data. Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit.
+                Summary data is made up of counts of each type of crime.
               </p>
             </div>
           </div>
@@ -78,9 +76,10 @@ const About = () => (
                 Incident-based (NIBRS) data
               </h3>
               <p className='m0'>
-                Use our application programming interface (API) to search
-                and export Uniform Crime Reporting (UCR) data. Lorem ipsum
-                dolor sit amet, consectetur adipiscing elit.
+                Incident-based (NIBRS) data captures details
+                on each single crime incident, providing context that
+                is left out of the summary data.
+
               </p>
             </div>
           </div>
@@ -110,7 +109,7 @@ const About = () => (
           </div>
         </div>
         <div className='mt4'>
-          <a className='fs-14 bold blue' href='#!'>Download UCR participation data</a>
+          <a className='fs-14 bold blue' href='#!'>The map displays the type of data reported by each state. The goal is to have every state reporting NIBRS data by 2020.</a>
         </div>
       </div>
     </section>
@@ -118,25 +117,34 @@ const About = () => (
       <div className='py7 container mx-auto'>
         <div className='clearfix mxn2'>
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-            <h3 className='mt0 mb2 fs-22 sans-serif'>1. New UCR</h3>
-            <p className='mb2 sm-mb4'>
-              The New UCR will improve the accuracy and timeliness of
-              the crime data collection and delivery process. The national
-              UCR Program plans to have the new system fully operational
-              in 2017.
-            </p>
+            <h3 className='mt0 mb2 fs-22 sans-serif'>1. About the Uniform Crime Reporting (UCR) Program</h3>
+            <ul className='mb2 sm-mb4 pl2'>
+              <li><a href='https://ucr.fbi.gov/'>UCR Home</a></li>
+              <li><a href='https://ucr.fbi.gov/new-ucr-project'>New UCR</a></li>
+            </ul>
             <button className='btn btn-primary btn-sm fs-14'>
               View details
             </button>
           </div>
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-            <h3 className='mt0 mb2 fs-22 sans-serif'>2. New UCR</h3>
-            <p className='mb2 sm-mb4'>
-              The New UCR will improve the accuracy and timeliness of
-              the crime data collection and delivery process. The national
-              UCR Program plans to have the new system fully operational
-              in 2017.
-            </p>
+            <h3 className='mt0 mb2 fs-22 sans-serif'>2. UCR documentation</h3>
+            <ul className='mb2 sm-mb4 pl2'>
+              <li>
+                <a href='https://ucr.fbi.gov/ucr-publications'>Publications and reports</a>
+              </li>
+              <li>
+                <a href='https://ucr.fbi.gov/new-ucr-project'>NIBRS documentation</a>
+              </li>
+              <li>
+                <a href='https://ucr.fbi.gov/ucr-publications'>SRS documentation</a>
+              </li>
+              <li>
+                <a href='https://ucr.fbi.gov/hate-crime-technical-specification-version-1.1-pdf'>
+                  Hate Crime documentation
+                </a>
+              </li>
+              <li><a href='https://ucr.fbi.gov/ucr-program-data-collections#Summary'>LEOKA documentation</a></li>
+            </ul>
             <button className='btn btn-primary btn-sm fs-14'>
               View details
             </button>
@@ -162,17 +170,23 @@ const About = () => (
           Submit your feedback
         </h2>
         <p>
-          This project is part of an ongoing effort to improve the accuracy and timeliness of the nation’s crime statistics. We’d love to hear what you think about the Crime Data Explorer. Help us improve the quality of the data and let us know what other features would be useful to you.
+          This project is part of an ongoing effort to improve and promote transparency behind the nation’s crime statistics. We’re working on adding more datasets to this tool, and we’re continuing to develop new features based on your feedback.
         </p>
         <p>
-          We’re working on adding more datasets to this tool, and we’re continuing to develop new features based on your feedback. Here’s what’s next for the tool:
+          Future versions will include:
         </p>
         <ul>
-          <li>Local data to be added</li>
+          <li>More granular perspectives of the data </li>
           <li>More customizable data features</li>
           <li>Updates to the data</li>
-          <li>Potential new data types</li>
+          <li>New data types</li>
         </ul>
+        <h2 className='mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright'>
+          Submit your feedback
+        </h2>
+        <p>
+          We’d love to hear what you think about the Crime Data Explorer. Help us improve the quality of the data and let us know what other features would be useful to you.
+        </p>
         <button className='btn btn-primary bg-white blue' type='button'>
           Submit feedback
         </button>
