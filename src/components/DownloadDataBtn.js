@@ -1,17 +1,17 @@
 import React from 'react'
 
+import jsonToCsv from '../util/csv'
+
 const downloadData = (fname, data) => {
   const file = `${fname}.csv`
-  const cols = Object.keys(data[0])
-  const values = data.map(d => cols.map(c => d[c]))
-  const dataStr = `${cols.join(',')}\n${values.join('\n')}`
+  const dataStr = jsonToCsv(data)
 
   if (window.navigator.msSaveBlob) {
     const blob = new Blob([dataStr], { type: 'text/csv' })
     window.navigator.msSaveBlob(blob, file);
   } else {
-    const body = document.body
     const a = document.createElement('a')
+    const body = document.querySelector('body')
     a.download = file
     a.href = `data:text/csv,${encodeURIComponent(dataStr)}`
     body.appendChild(a)
@@ -22,8 +22,11 @@ const downloadData = (fname, data) => {
 
 const downloadUrl = url => {
   const a = document.createElement('a')
+  const body = document.querySelector('body')
   a.href = url
+  body.appendChild(a)
   a.click()
+  body.removeChild(a)
 }
 
 const DownloadDataBtn = ({ data, fname, text, url }) => {
