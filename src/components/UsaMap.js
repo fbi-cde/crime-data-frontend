@@ -23,7 +23,7 @@ class UsaMap extends React.Component {
   }
 
   render() {
-    const { mapClick, place } = this.props
+    const { colors, mapClick, place } = this.props
     const { hover } = this.state
 
     const placeId = place && stateLookup(place).toUpperCase()
@@ -41,24 +41,33 @@ class UsaMap extends React.Component {
         >
           <title>USA</title>
           <g onClick={mapClick}>
-            {svgDataWithNames.map(s => (
-              <path
-                key={s.id}
-                id={s.id}
-                className={s.id === placeId ? 'fill-red-bright' : 'fill-blue-light'}
-                d={s.d}
-                pointerEvents='all'
-                onMouseOver={this.rememberValue(s.name)}
-                onMouseMove={this.rememberValue(s.name)}
-                onMouseOut={this.forgetValue}
-              />
-            ))}
+            {svgDataWithNames.map(s => {
+              const isSelected = (s.id === placeId)
+              const defaultClass = isSelected ? 'fill-red-bright' : 'fill-blue-light'
+              const suppliedColor = colors[s.id.toLowerCase()]
+              return (
+                <path
+                  key={s.id}
+                  id={s.id}
+                  className={suppliedColor || defaultClass}
+                  d={s.d}
+                  pointerEvents='all'
+                  onMouseOver={this.rememberValue(s.name)}
+                  onMouseMove={this.rememberValue(s.name)}
+                  onMouseOut={this.forgetValue}
+                />
+              )
+            })}
           </g>
         </svg>
         {hover ? <Hint {...hover} /> : null}
       </div>
     )
   }
+}
+
+UsaMap.defaultProps = {
+  colors: {},
 }
 
 export default UsaMap

@@ -31,8 +31,12 @@
 .bg-darken-3 { background-color: $darken-3; }
 .bg-darken-4 { background-color: $darken-4; }
 
+.fill-blue { fill: $blue; }
+.fill-blue-gray { fill: $blue-gray; }
 .fill-blue-light { fill: $blue-light; }
+.fill-blue-lighter { fill: $blue-lighter; }
 .fill-red-bright { fill: $red-bright; }
+.fill-red-light { fill: $red-light; }
 
 .hover-blue:hover { color: $blue; }
 .hover-bg-blue:hover { background-color: $blue; }
