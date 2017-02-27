@@ -21,7 +21,7 @@ const DownloadsAndDocs = ({ dispatch }) => (
             </h3>
             <p>
               {/* eslint max-len: 0 */}
-              Use our<Term dispatch={dispatch} id='application programming interface (api)'>application programming interface (API)</Term> to search and export the FBI’s<Term dispatch={dispatch} id='uniform crime reporting (ucr) program'>Uniform Crime Reporting (UCR) Program</Term> data.
+              Use our <Term dispatch={dispatch} id='application programming interface (api)'>application programming interface (API)</Term> to search and export the FBI’s <Term dispatch={dispatch} id='uniform crime reporting (ucr) program'>Uniform Crime Reporting (UCR) Program</Term> data.
             </p>
             <a
               className='btn btn-primary btn-sm fs-14'
