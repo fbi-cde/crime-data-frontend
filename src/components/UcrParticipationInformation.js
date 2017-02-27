@@ -20,7 +20,7 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
       <div className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2 fs-18 serif'>
         <p>
           {startCase(place)} reports {
-            (hybrid && 'both')
+            (hybrid && 'both ')
           }
           {(participation.srs) && (
             <Term
@@ -30,7 +30,7 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
               summary (SRS)
             </Term>
           )}
-          {hybrid && 'and'}
+          {hybrid && ' and '}
           {participation.nibrs && (
             <Term
               dispatch={dispatch}
