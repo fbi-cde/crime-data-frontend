@@ -41,7 +41,7 @@ const TrendContainer = ({
           <div>
             <DownloadDataBtn
               data={data}
-              fname='summary data'
+              fname={`${place}-${crime}-${timeFrom}–${timeTo}`}
               text='Download data'
             />
           </div>

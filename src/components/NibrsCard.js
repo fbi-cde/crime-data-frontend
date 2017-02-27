@@ -6,7 +6,7 @@ import NibrsTable from './NibrsTable'
 
 const NibrsCard = ({ data, title }) => {
   const charts = data.map((d, i) => {
-    const props = { key: i, data: d.data, noun: d.noun, title: d.title }
+    const props = { key: i, ...d }
     switch (d.type) {
       case 'donut':
         return <NibrsDonut {...props} />

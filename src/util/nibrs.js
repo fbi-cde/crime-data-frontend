@@ -93,6 +93,7 @@ const offenderDemo = data => {
       },
       {
         data: reshape(offenderAgeNum, 'age_num'),
+        noun: 'offender',
         title: 'Age of offender',
         type: 'histogram',
       },
@@ -119,6 +120,7 @@ const victimDemo = data => {
       },
       {
         data: reshape(victimAgeNum, 'age_num'),
+        noun: 'victim',
         title: 'Age of victim',
         type: 'histogram',
       },
