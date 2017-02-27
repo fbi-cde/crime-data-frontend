@@ -66,7 +66,7 @@ class NibrsTable extends React.Component {
           <caption className='left-align'>
             <div className='bold'>{title}</div>
             <div className='mt-tiny'>
-              <span className='bold caps fs-12 red'>Total {pluralize(noun)}</span>
+              <span className='bold caps fs-12 red'>Reported {pluralize(noun)}</span>
               <span className='bold fs-14 ml1 monospace'>{formatNumber(total)}</span>
             </div>
           </caption>
