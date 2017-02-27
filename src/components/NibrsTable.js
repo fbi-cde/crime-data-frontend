@@ -1,4 +1,5 @@
 import { format } from 'd3-format'
+import pluralize from 'pluralize'
 import React from 'react'
 
 import DownloadDataBtn from './DownloadDataBtn'
@@ -26,7 +27,7 @@ class NibrsTable extends React.Component {
   }
 
   render() {
-    const { data, rowLim, title } = this.props
+    const { data, noun, rowLim, title } = this.props
     const { showCounts } = this.state
     const btnClass = 'ml-tiny border border-blue rounded'
 
@@ -65,7 +66,7 @@ class NibrsTable extends React.Component {
           <caption className='left-align'>
             <div className='bold'>{title}</div>
             <div className='mt-tiny'>
-              <span className='bold caps fs-12 red'>Total Incidents</span>
+              <span className='bold caps fs-12 red'>Total {pluralize(noun)}</span>
               <span className='bold fs-14 ml1 monospace'>{formatNumber(total)}</span>
             </div>
           </caption>
@@ -120,6 +121,7 @@ class NibrsTable extends React.Component {
 }
 
 NibrsTable.defaultProps = {
+  noun: 'incident',
   rowLim: 12,
 }
 
