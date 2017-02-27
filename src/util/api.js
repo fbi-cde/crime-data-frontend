@@ -1,7 +1,7 @@
 import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
-import lookup, { nationalKey } from './usa'
+import lookupUsa, { nationalKey } from './usa'
 import { mapToApiOffense, mapToApiOffenseParam } from './offenses'
 import { slugify } from './text'
 
@@ -120,7 +120,7 @@ const buildSummaryQueryString = params => {
   ]
 
   if (place && place !== nationalKey) {
-    qs.push(`state=${lookup(params.place)}`)
+    qs.push(`state=${lookupUsa(params.place)}`)
   }
 
   return qs.join('&')
@@ -153,7 +153,7 @@ const getSummaryRequests = params => {
 }
 
 const getUcrParticipation = place => {
-  const state = lookup(place).toUpperCase()
+  const state = lookupUsa(place).toUpperCase()
   return get(`${API}/geo/states/${state}/participation`).then(results => ({
     place: slugify(place),
     results,
