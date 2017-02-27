@@ -82,26 +82,26 @@ class DownloadBulkNibrs extends React.Component {
           <legend className='mb2 fs-18 sm-fs-22 bold'>Choose a file to download</legend>
           <div className='clearfix mxn1'>
             <div className='sm-col sm-col-5 px1 mb2 sm-m0'>
-              <label className='hide' htmlFor='nibrs-state'>Select a place</label>
+              <label className='hide' htmlFor='nibrs-state'>Location</label>
               <select
                 className='col-12 sm-fs-18 bold field select bg-white'
                 id='nibrs-state'
                 onChange={this.handleSelectChange}
               >
-                <option disabled selected>Select a place</option>
+                <option disabled selected>Location</option>
                 {nibrsStates.map((s, i) => (
                   <option key={i} value={s}>{startCase(s)}</option>
                 ))}
               </select>
             </div>
             <div className='sm-col sm-col-4 px1 mb2 sm-m0'>
-              <label className='hide' htmlFor='nibrs-year'>Select a year</label>
+              <label className='hide' htmlFor='nibrs-year'>Year</label>
               <select
                 className='col-12 sm-fs-18 bold field select bg-white'
                 id='nibrs-year'
                 onChange={this.handleSelectChange}
               >
-                <option disabled selected>Select a year</option>
+                <option disabled selected>Year</option>
                 {nibrsYears.map((y, i) => (
                   <option key={i}>{y}</option>
                 ))}
