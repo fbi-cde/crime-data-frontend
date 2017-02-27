@@ -27,7 +27,7 @@ const NibrsContainer = ({
     const dataParsed = parseNibrs(data)
     totalCount = data.offenderRaceCode.reduce((a, b) => (a + b.count), 0)
     content = (
-      <div className='clearfix mb8 mxn1'>
+      <div className='clearfix mxn1'>
         {dataParsed.map((d, i) => (
           <div
             key={i}
