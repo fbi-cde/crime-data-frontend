@@ -66,7 +66,7 @@ const About = () => (
                 Summary (SRS) data
               </h3>
               <p className='m0'>
-                Summary data is made up of counts of each type of crime. 
+                Summary data is made up of counts of each type of crime.
               </p>
             </div>
           </div>
@@ -76,7 +76,7 @@ const About = () => (
                 Incident-based (NIBRS) data
               </h3>
               <p className='m0'>
-                Incident-based (NIBRS) data captures details 
+                Incident-based (NIBRS) data captures details
                 on each single crime incident, providing context that
                 is left out of the summary data.
 
@@ -158,7 +158,7 @@ const About = () => (
           Submit your feedback
         </h2>
         <p>
-          We’d love to hear what you think about the Crime Data Explorer. Help us improve the quality of the data and let us know what other features would be useful to you. 
+          We’d love to hear what you think about the Crime Data Explorer. Help us improve the quality of the data and let us know what other features would be useful to you.
         </p>
         <button className='btn btn-primary bg-white blue' type='button'>
           Submit feedback
@@ -173,12 +173,9 @@ const About = () => (
         <div className='clearfix mxn2'>
           {[...Array(3)].map((_, i) => (
             <div key={i} className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-              <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
+              <h3 className='mt0 mb2 fs-22 sans-serif red'>Data and technical questions</h3>
               <p className='m0'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                For questions about the data please contact the Criminal Justice Information Services (CJIS) Division of the FBI.
               </p>
             </div>
           ))}
