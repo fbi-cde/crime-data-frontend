@@ -9,19 +9,16 @@ import lookupUsa from '../util/usa'
 
 const formatNumber = format(',')
 
-const csvHost = 'https://crime-data-api.fr.cloud.gov'
-const csvParams = 'output=csv'
-
 const participationCsvLink = place => {
   const id = lookupUsa(place).toUpperCase()
   return [
     {
       text: `${startCase(place)} UCR Participation (.csv)`,
-      url: `${csvHost}/geo/states/${id}/participation?${csvParams}`,
+      url: `/api/geo/states/${id}/participation?output=csv`,
     },
     {
       text: `${startCase(place)} Population (.csv)`,
-      url: `${csvHost}/geo/states/${id}?${csvParams}`,
+      url: `/api/geo/states/${id}?output=csv`,
     },
   ]
 }
