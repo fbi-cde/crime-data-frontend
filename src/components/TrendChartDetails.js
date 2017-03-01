@@ -57,7 +57,7 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
                   />
                   {k.name}
                 </td>
-                <td className='pt1 pr3 sm-fs-18 line-height-2 align-bottom'>
+                <td className='pt1 pr3 sm-fs-14 line-height-4 align-bottom'>
                   <span
                     className='inline-block border-bottom border-blue-light border-w2'
                     style={{ width: 72 }}
@@ -65,7 +65,7 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
                     {formatRate(data[k.slug].rate)}
                   </span>
                 </td>
-                <td className='pt1 sm-fs-18 line-height-2 align-bottom'>
+                <td className='pt1 sm-fs-14 line-height-4 align-bottom'>
                   <span
                     className='inline-block border-bottom border-blue-light border-w2'
                     style={{ width: 72 }}
