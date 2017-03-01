@@ -9,6 +9,7 @@ import {
 } from '../../src/actions/constants'
 
 import {
+  failedNibrs,
   fetchNibrs,
   fetchingNibrs,
   receivedNibrs,
@@ -53,6 +54,13 @@ describe('nibrs', () => {
 
     it('should return incidents equal to the results array', () => {
       expect(actual.data.results).toEqual(action.results)
+    })
+  })
+
+  describe('failedNibrs()', () => {
+    it('should return NIBRS_FAILED type', () => {
+      const actual = failedNibrs()
+      expect(actual.type).toEqual(NIBRS_FAILED)
     })
   })
 
