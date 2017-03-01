@@ -146,18 +146,19 @@ const About = () => (
           More to come
         </h2>
         <p>
-          This project is part of an ongoing effort to improve and promote transparency behind the nation’s crime statistics. We’re working on adding more datasets to this tool, and we’re continuing to develop new features based on your feedback.
+          This project is part of an ongoing effort to improve and promote
+          transparency behind the nation’s crime statistics. We’re working
+          on adding more datasets to this tool, and we’re continuing to
+          develop new features based on your feedback.
         </p>
-        <p>
-          Future versions will include:
-        </p>
-        <ul>
+        <p className='mb1'>Future versions will include:</p>
+        <ul className='m0 pl2'>
           <li>More granular perspectives of the data </li>
           <li>More customizable data features</li>
           <li>Updates to the data</li>
           <li>New data types</li>
         </ul>
-        <h2 className='mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright'>
+        <h2 className='my4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright'>
           Submit your feedback
         </h2>
         <p>
@@ -174,17 +175,33 @@ const About = () => (
           Contact us
         </h2>
         <div className='clearfix mxn2'>
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-              <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
-              <p className='m0'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-            </div>
-          ))}
+          <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
+            <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
+            <p className='m0'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+          <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
+            <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
+            <p className='m0'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+          <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
+            <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
+            <p className='m0'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
         </div>
       </div>
     </section>
