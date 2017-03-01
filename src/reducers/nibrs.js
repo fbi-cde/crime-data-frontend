@@ -2,7 +2,7 @@ import {
   NIBRS_FAILED,
   NIBRS_FETCHING,
   NIBRS_RECEIVED,
-} from '../actions/actionTypes'
+} from '../actions/constants'
 
 const initialState = {
   loading: false,

@@ -2,7 +2,7 @@ import {
   GLOSSARY_HIDE,
   GLOSSARY_SHOW,
   GLOSSARY_SHOW_TERM,
-} from '../actions/actionTypes'
+} from '../actions/constants'
 
 const initialState = {
   isOpen: false,

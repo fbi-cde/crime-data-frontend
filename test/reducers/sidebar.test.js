@@ -3,11 +3,11 @@
 import {
   SIDEBAR_HIDE,
   SIDEBAR_SHOW,
-} from '../../src/actions/actionTypes';
+} from '../../src/actions/constants'
 
-import reducer from '../../src/reducers/sidebarReducer';
+import reducer from '../../src/reducers/sidebar'
 
-describe('sidebarReducer', () => {
+describe('sidebar', () => {
   it('it should return the initial state', () => {
     const initialState = reducer(undefined, { type: 'fake' })
     expect(initialState.isOpen).toEqual(false)

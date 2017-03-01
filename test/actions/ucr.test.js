@@ -5,13 +5,14 @@ import sinon from 'sinon'
 import {
   UCR_PARTICIPATION_FETCHING,
   UCR_PARTICIPATION_RECEIVED,
-} from '../../src/actions/actionTypes'
+} from '../../src/actions/constants'
 
 import {
   fetchingUcrParticipation,
   receivedUcrParticipation,
   fetchUcrParticipation,
-} from '../../src/actions/ucrActions'
+} from '../../src/actions/ucr'
+
 import api from '../../src/util/api'
 
 const createPromise = (res, err) => {
@@ -19,7 +20,7 @@ const createPromise = (res, err) => {
   return Promise.reject(err);
 }
 
-describe('ucrAction', () => {
+describe('ucr', () => {
   let sandbox
 
   beforeEach(() => {

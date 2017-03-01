@@ -3,11 +3,11 @@
 import {
   FILTER_RESET,
   FILTERS_UPDATE,
-} from '../../src/actions/actionTypes';
+} from '../../src/actions/constants'
 
-import reducer from '../../src/reducers/filtersReducer';
+import reducer from '../../src/reducers/filters'
 
-describe('filtersReducer', () => {
+describe('filters', () => {
   describe('initial state', () => {
     it('should return a small object with time values', () => {
       const initialState = reducer(undefined, { type: 'fake' })

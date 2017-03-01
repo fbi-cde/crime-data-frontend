@@ -3,11 +3,11 @@
 import {
   GLOSSARY_HIDE,
   GLOSSARY_SHOW,
-} from '../../src/actions/actionTypes';
+} from '../../src/actions/constants'
 
-import { hideGlossary, showGlossary } from '../../src/actions/glossaryActions';
+import { hideGlossary, showGlossary } from '../../src/actions/glossary'
 
-describe('glossaryActions', () => {
+describe('glossary', () => {
   describe('hideGlossary()', () => {
     it('should return a GLOSSARY_HIDE action', () => {
       const actual = hideGlossary()

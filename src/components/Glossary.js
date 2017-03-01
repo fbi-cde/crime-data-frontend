@@ -1,7 +1,7 @@
 import GlossaryPanel from 'glossary-panel'
 import React from 'react'
 
-import { hideGlossary, showGlossary } from '../actions/glossaryActions'
+import { hideGlossary, showGlossary } from '../actions/glossary'
 import terms from '../../data/terms.json'
 
 class Glossary extends React.Component {

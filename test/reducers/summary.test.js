@@ -3,11 +3,11 @@
 import {
   SUMMARY_FETCHING,
   SUMMARY_RECEIVED,
-} from '../../src/actions/actionTypes';
+} from '../../src/actions/constants'
 
-import reducer from '../../src/reducers/summaryReducer';
+import reducer from '../../src/reducers/summary'
 
-describe('summaryReducer', () => {
+describe('summary', () => {
   describe('initial state', () => {
     it('should have loading set to false', () => {
       const initialState = reducer(undefined, { type: 'fake' })

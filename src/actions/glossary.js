@@ -2,7 +2,7 @@ import {
   GLOSSARY_HIDE,
   GLOSSARY_SHOW,
   GLOSSARY_SHOW_TERM,
-} from './actionTypes'
+} from './constants'
 
 export const hideGlossary = () => ({
   type: GLOSSARY_HIDE,

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { showTerm } from '../actions/glossaryActions'
+import { showTerm } from '../actions/glossary'
 
 const Term = ({ children, dispatch, id }) => {
   const handler = e => {

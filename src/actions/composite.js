@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
-import { updateFilters } from './filterActions'
-import { fetchNibrs } from './nibrsActions'
-import { fetchSummaries } from '../actions/summaryActions'
-import { fetchUcrParticipation } from '../actions/ucrActions'
+import { updateFilters } from './filters'
+import { fetchNibrs } from './nibrs'
+import { fetchSummaries } from '../actions/summary'
+import { fetchUcrParticipation } from '../actions/ucr'
 import history, { createNewLocation } from '../util/history'
 import { nationalKey } from '../util/usa'
 import ucrDataCoverage from '../util/ucr'
