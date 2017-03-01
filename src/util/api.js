@@ -154,9 +154,9 @@ const getSummaryRequests = params => {
 
 const getUcrParticipation = place => {
   const state = lookupUsa(place).toUpperCase()
-  return get(`${API}/geo/states/${state}/participation`).then(results => ({
+  return get(`${API}/geo/states/${state}/participation`).then(response => ({
     place: slugify(place),
-    results,
+    results: response.results,
   }))
 }
 
