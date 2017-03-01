@@ -5,11 +5,30 @@ import startCase from 'lodash.startcase'
 import content from '../util/content'
 import Term from './Term'
 import ucrParticipation from '../util/ucr'
+import lookupUsa from '../util/usa'
 
 const formatNumber = format(',')
 
+const csvHost = 'https://crime-data-api.fr.cloud.gov'
+const csvParams = 'output=csv'
+
+const participationCsvLink = place => {
+  const id = lookupUsa(place).toUpperCase()
+  return [
+    {
+      text: `${startCase(place)} UCR Participation (.csv)`,
+      url: `${csvHost}/geo/states/${id}/participation?${csvParams}`,
+    },
+    {
+      text: `${startCase(place)} Population (.csv)`,
+      url: `${csvHost}/geo/states/${id}?${csvParams}`,
+    },
+  ]
+}
+
 const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
-  const links = (content.states[startCase(place)] || []).filter(l => l.text)
+  const csvLinks = participationCsvLink(place)
+  const links = (content.states[startCase(place)] || []).filter(l => l.text).concat(csvLinks)
   const participation = ucrParticipation(place)
   const hybrid = (participation.srs && participation.nibrs)
   const ucrPlaceInfo = ucr.data[place] || []
