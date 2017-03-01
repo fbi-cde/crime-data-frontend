@@ -1,3 +1,5 @@
+/* eslint no-undef: 0 */
+
 import { reshape, rename } from '../../src/util/nibrs'
 
 describe('nibrs utility', () => {
