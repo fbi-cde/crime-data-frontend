@@ -2,7 +2,6 @@ import startCase from 'lodash.startcase'
 import React from 'react'
 
 import AboutTheData from './AboutTheData'
-import Breadcrumbs from './Breadcrumbs'
 import NibrsContainer from './NibrsContainer'
 import NotFound from './NotFound'
 import Sidebar from './Sidebar'
@@ -144,8 +143,7 @@ class Explorer extends React.Component {
         />
         <div className='site-content'>
           <div className='container-main mx-auto p3'>
-            <Breadcrumbs {...params} />
-            <div className='items-baseline mb4 border-bottom border-blue-lighter'>
+            <div className='items-baseline my4 border-bottom border-blue-lighter'>
               <h1 className='flex-auto mt0 mb1 fs-22 sm-fs-32'>
                 {startCase(place)}, {startCase(crime)}
               </h1>
