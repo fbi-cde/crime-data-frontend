@@ -51,7 +51,9 @@ const ucrStateCodes = {
   'west-virginia': 47,
 }
 
-const nibrsStates = Object.keys(ucrProgram).filter(s => ucrProgram[s].nibrs)
+const nibrsStates = Object.keys(ucrProgram).filter(s => (
+  s !== 'united-states' && ucrProgram[s].nibrs
+))
 
 const bulkNibrs = 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3'
 const createBulkNibrsUrl = (year, state) => {
