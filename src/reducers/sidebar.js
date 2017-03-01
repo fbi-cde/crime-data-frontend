@@ -1,4 +1,4 @@
-import { SIDEBAR_HIDE, SIDEBAR_SHOW } from '../actions/actionTypes'
+import { SIDEBAR_HIDE, SIDEBAR_SHOW } from '../actions/constants'
 
 const initialState = { isOpen: false }
 

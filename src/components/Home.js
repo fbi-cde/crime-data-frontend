@@ -8,8 +8,8 @@ import UsaMap from './UsaMap'
 
 import { slugify } from '../util/text'
 import stateLookup from '../util/usa'
-import { updateApp } from '../actions/compositeActions'
-import { updateFilters } from '../actions/filterActions'
+import { updateApp } from '../actions/composite'
+import { updateFilters } from '../actions/filters'
 import otherDataSets from '../../content/datasets.yml'
 
 const Home = ({ appState, dispatch, location }) => {

@@ -2,7 +2,7 @@
 import {
   FILTER_RESET,
   FILTERS_UPDATE,
-} from '../actions/actionTypes'
+} from '../actions/constants'
 
 const initialState = {
   timeFrom: 2004,

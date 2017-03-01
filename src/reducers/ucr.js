@@ -1,7 +1,7 @@
 import {
   UCR_PARTICIPATION_FETCHING,
   UCR_PARTICIPATION_RECEIVED,
-} from '../actions/actionTypes'
+} from '../actions/constants'
 
 import { nationalKey } from '../util/usa'
 import usPopulation from '../../data/usa-population.json'

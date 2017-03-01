@@ -4,11 +4,11 @@ import {
   NIBRS_FAILED,
   NIBRS_FETCHING,
   NIBRS_RECEIVED,
-} from '../../src/actions/actionTypes'
+} from '../../src/actions/constants'
 
-import reducer from '../../src/reducers/nibrsReducer'
+import reducer from '../../src/reducers/nibrs'
 
-describe('nibrsReducer', () => {
+describe('nibrs', () => {
   describe('initial state', () => {
     it('should return loading: false and data: []', () => {
       const expected = { loading: false, data: null, error: null }

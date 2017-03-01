@@ -1,7 +1,7 @@
 import {
   UCR_PARTICIPATION_FETCHING,
   UCR_PARTICIPATION_RECEIVED,
-} from '../actions/actionTypes'
+} from './constants'
 import api from '../util/api'
 
 export const fetchingUcrParticipation = () => ({

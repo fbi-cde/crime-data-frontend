@@ -3,11 +3,11 @@
 import {
   FILTER_RESET,
   FILTERS_UPDATE,
-} from '../../src/actions/actionTypes';
+} from '../../src/actions/constants'
 
-import { resetFilter, updateFilters } from '../../src/actions/filterActions';
+import { resetFilter, updateFilters } from '../../src/actions/filters'
 
-describe('filterActions', () => {
+describe('filters', () => {
   describe('resetFilter()', () => {
     it('should return a FILTER_RESET action', () => {
       const id = 'fake-id'

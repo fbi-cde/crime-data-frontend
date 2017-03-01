@@ -4,11 +4,11 @@ import {
   GLOSSARY_HIDE,
   GLOSSARY_SHOW,
   GLOSSARY_SHOW_TERM,
-} from '../../src/actions/actionTypes';
+} from '../../src/actions/constants'
 
-import reducer from '../../src/reducers/glossaryReducer';
+import reducer from '../../src/reducers/glossary'
 
-describe('glossaryReducer', () => {
+describe('glossary', () => {
   it('it should return the initial state', () => {
     const initialState = reducer(undefined, { type: 'fake' })
     expect(initialState.isOpen).toEqual(false)

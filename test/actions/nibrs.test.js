@@ -6,13 +6,14 @@ import {
   NIBRS_FAILED,
   NIBRS_FETCHING,
   NIBRS_RECEIVED,
-} from '../../src/actions/actionTypes'
+} from '../../src/actions/constants'
 
 import {
   fetchNibrs,
   fetchingNibrs,
   receivedNibrs,
-} from '../../src/actions/nibrsActions'
+} from '../../src/actions/nibrs'
+
 import api from '../../src/util/api'
 
 const createPromise = (res, err) => {
@@ -24,7 +25,7 @@ const success = {
   results: [],
 }
 
-describe('nibrsAction', () => {
+describe('nibrs', () => {
   let sandbox
 
   beforeEach(() => {

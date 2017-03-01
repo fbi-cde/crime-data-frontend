@@ -3,11 +3,11 @@
 import {
   UCR_PARTICIPATION_FETCHING,
   UCR_PARTICIPATION_RECEIVED,
-} from '../../src/actions/actionTypes';
+} from '../../src/actions/constants'
 
-import reducer from '../../src/reducers/ucrReducer';
+import reducer from '../../src/reducers/ucr'
 
-describe('ucrReducer', () => {
+describe('ucr', () => {
   describe('initial state', () => {
     it('should have loading set to false', () => {
       const initialState = reducer(undefined, { type: 'fake' })

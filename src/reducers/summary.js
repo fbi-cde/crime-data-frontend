@@ -1,7 +1,7 @@
 import {
   SUMMARY_FETCHING,
   SUMMARY_RECEIVED,
-} from '../actions/actionTypes'
+} from '../actions/constants'
 
 const initialState = {
   loading: false,
