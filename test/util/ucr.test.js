@@ -10,10 +10,10 @@ describe('ucr utility', () => {
     expect(Object.keys(actual).length).toEqual(2)
   })
 
-  it('should return null for a value that doesn\'t exist', () => {
+  it('should return undefined for a value that doesn\'t exist', () => {
     const place = 'fake-place'
     const actual = dataSourcesReportedByState(place)
 
-    expect(actual).toEqual(null)
+    expect(actual).toEqual(undefined)
   })
 })

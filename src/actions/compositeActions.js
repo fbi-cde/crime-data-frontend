@@ -4,11 +4,15 @@ import { fetchNibrs } from './nibrsActions'
 import { fetchSummaries } from '../actions/summaryActions'
 import { fetchUcrParticipation } from '../actions/ucrActions'
 import history, { createNewLocation } from '../util/history'
+import { nationalKey } from '../util/usa'
+import ucrDataCoverage from '../util/ucr'
 
-// TODO: add should fetch logic (based on "filters" input)
-const shouldFetchUcr = () => true
-const shouldFetchSummaries = () => true
-const shouldFetchNibrs = () => true
+const shouldFetchUcr = ({ place }) => place !== nationalKey
+const shouldFetchSummaries = ({ crime, place }) => crime && place
+const shouldFetchNibrs = ({ place }) => {
+  const coverage = ucrDataCoverage(place)
+  return coverage && coverage.nibrs
+}
 
 const fetchData = () => (dispatch, getState) => {
   const { filters } = getState()
