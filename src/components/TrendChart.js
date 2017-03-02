@@ -86,6 +86,7 @@ class TrendChart extends React.Component {
     const y = scaleLinear()
         .domain([0, max(dataByKey, d => max(d.values, v => v.value.rate))])
         .range([height, 0])
+        .nice()
 
     const l = line()
         .x(d => x(d.date))
@@ -119,7 +120,7 @@ class TrendChart extends React.Component {
     )
 
     return (
-      <div className='p4 bg-white'>
+      <div className='px2 py3 sm-p4 bg-white'>
         <TrendChartDetails
           colors={colors}
           crime={crime}
