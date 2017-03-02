@@ -32,6 +32,16 @@ describe('composite actions', () => {
       expect(spy.args[0]).toEqual([changes])
     })
 
+    it('should call dispatch twice (updateFilters() and fetchData())', () => {
+      const changes = { place: 'montana', crime: 'homicide' }
+      const dispatch = sandbox.spy()
+      sandbox.stub(filterActions, 'updateFilters', noop)
+      sandbox.stub(historyUtil.default, 'push', noop)
+
+      updateApp(changes, {})(dispatch)
+      expect(dispatch.callCount).toEqual(2)
+    })
+
     it('should update history if location is provided', () => {
       const changes = { place: 'montana', crime: 'homicide' }
       const dispatch = sandbox.spy()
