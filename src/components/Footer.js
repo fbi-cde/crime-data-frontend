@@ -92,7 +92,7 @@ const Footer = () => (
               src='/img/twitter.svg'
               alt='twitter'
             />
-            <a className='white' href='#!'>@FBI</a>
+            <a className='white' href='https://twitter.com/fbi'>@FBI</a>
           </div>
           <div>
             <img
@@ -101,7 +101,7 @@ const Footer = () => (
               src='/img/github.svg'
               alt='github'
             />
-            <a className='white' href='#!'>GitHub</a>
+            <a className='white' href='https://github.com/18F/crime-data-explorer'>GitHub</a>
           </div>
         </div>
       </div>
