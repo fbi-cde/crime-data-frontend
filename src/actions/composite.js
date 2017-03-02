@@ -7,9 +7,9 @@ import history, { createNewLocation } from '../util/history'
 import { nationalKey } from '../util/usa'
 import ucrDataCoverage from '../util/ucr'
 
-const shouldFetchUcr = ({ place }) => place !== nationalKey
-const shouldFetchSummaries = ({ crime, place }) => crime && place
-const shouldFetchNibrs = ({ place }) => {
+export const shouldFetchUcr = ({ place }) => place !== nationalKey
+export const shouldFetchSummaries = ({ crime, place }) => crime && place
+export const shouldFetchNibrs = ({ place }) => {
   const coverage = ucrDataCoverage(place)
   return coverage && coverage.nibrs
 }
