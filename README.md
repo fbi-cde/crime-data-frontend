@@ -2,9 +2,7 @@
 
 [![Build status on CircleCI](https://circleci.com/gh/18F/crime-data-explorer/tree/master.svg?style=svg)](https://circleci.com/gh/18F/crime-data-explorer/tree/master) [![Code Climate GPA](https://codeclimate.com/github/18F/crime-data-explorer/badges/gpa.svg)](https://codeclimate.com/github/18F/crime-data-explorer) [![Dependency Status](https://gemnasium.com/badges/github.com/18F/crime-data-explorer.svg)](https://gemnasium.com/github.com/18F/crime-data-explorer)
 
-
-This project is the front end for the Crime Data Explorer, using data from [18f/crime-data-api](https://github.com/18f/crime-data-api). The Crime Data Explorer is a website that allows law enforcement and the general public to more easily access uniform crime data. The FBI collects this data from state and local law enforcement agencies and publishes it in the form of annual reports.  
-
+This project is the front end for the Crime Data Explorer, using data from [18f/crime-data-api](https://github.com/18f/crime-data-api). The Crime Data Explorer is a website that allows law enforcement and the general public to more easily access [Uniform Crime Reporting (UCR)](https://ucr.fbi.gov/) data. Over 18,000 city, university and college, county, state, tribal, and federal law enforcement agencies voluntarily report crime data to the program, and the FBI publishes it in [annual reports](https://ucr.fbi.gov/ucr-publications).
 
 ## Installation
 
@@ -37,4 +35,4 @@ The user testing app is available at https://crime-data-explorer-demo.fr.cloud.g
 
 ## Browser support
 
-For the MVP launch of this project (Spring 2017) we will explicitly support Chrome, Safari, IE 10+, Firefox and MS Edge.
+For the MVP launch of this project (Spring 2017), we’ll explicitly support Chrome, Safari, IE 10+, Firefox, and MS Edge.
