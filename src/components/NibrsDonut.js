@@ -37,7 +37,7 @@ class NibrsDonut extends React.Component {
       .range(colors)
 
     return (
-      <div className='mb2 pb2 border-bottom'>
+      <div className='mb2 pb2 border-bottom border-blue-light'>
         <div className='mb-tiny bold'>{title}</div>
         <div className='clearfix mxn1'>
           <div className='col col-6 px1'>

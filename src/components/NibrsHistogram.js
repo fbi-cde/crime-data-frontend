@@ -48,7 +48,7 @@ class NibrsHistogram extends React.Component {
     const active = hover !== null ? hover : 0
 
     return (
-      <div className='mb2 pb2 border-bottom'>
+      <div className='mb2 pb2 border-bottom border-blue-light'>
         <div className='mb1 bold'>{title}</div>
         <div>
           <svg
