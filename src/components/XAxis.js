@@ -24,7 +24,7 @@ const XAxis = ({
 
     return (
       <g key={i} transform={`translate(${pos}, 0)`} className='tick'>
-        <line stroke='#000' x2='0' y2='6' />
+        <line stroke='#000' x1='0.5' x2='0.5' y2='6' />
         <text fill='#000' x='0' y='9' dy='.71em'>{format(v)}</text>
       </g>
     )
@@ -32,7 +32,7 @@ const XAxis = ({
 
   return (
     <g className='axis axis--x' transform={`translate(0, ${height})`} textAnchor='middle'>
-      <path className='domain' stroke='#000' d={domain} />
+      <path className='domain display-none' stroke='#000' d={domain} />
       {ticks}
     </g>
   )

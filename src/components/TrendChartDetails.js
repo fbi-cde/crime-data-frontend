@@ -43,7 +43,7 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
         </p>
       </div>
       <div>
-        <table className='mt4 fs-14 bold'>
+        <table className='mt2 md-mt4 fs-14 bold' style={{ maxWidth: 300 }}>
           <thead className='fs-12 caps line-height-3'>
             <tr><th /><th>Rate</th><th>Total</th></tr>
           </thead>
