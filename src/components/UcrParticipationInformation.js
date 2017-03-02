@@ -66,4 +66,13 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
   )
 }
 
+/* eslint react/forbid-prop-types: 0 */
+
+UcrParticipationInformation.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
+  place: React.PropTypes.string.isRequired,
+  timeTo: React.PropTypes.number.isRequired,
+  ucr: React.PropTypes.object.isRequired,
+}
+
 export default UcrParticipationInformation
