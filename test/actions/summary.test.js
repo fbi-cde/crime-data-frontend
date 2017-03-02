@@ -13,6 +13,7 @@ import {
   receivedSummary,
 } from '../../src/actions/summary'
 
+import { nationalKey } from '../../src/util/usa'
 import api from '../../src/util/api'
 
 const createPromise = (res, err) => {
@@ -80,14 +81,22 @@ describe('summary action', () => {
       })
     })
 
-    it('should return properly formatted data', done => {
+    it('should dispatch SUMMARY_RECEIVED with properly formatted data', done => {
       const dispatch = sandbox.spy()
       sandbox.stub(api, 'getSummaryRequests', () => [
-        createPromise(success),
-        createPromise(success),
+        createPromise({
+          place: 'montana',
+          results: ['fake-one'],
+        }),
+        createPromise({
+          place: nationalKey,
+          results: ['fake-two'],
+        }),
       ])
-      fetchSummaries({ place: 'montana' })(dispatch).then(d => {
-        expect(true).toEqual(false)
+      fetchSummaries({ place: 'montana' })(dispatch).then(() => {
+        const args = dispatch.args[1][0]
+        expect(args.type).toEqual(SUMMARY_RECEIVED)
+        expect(args.summaries.montana).toEqual(['fake-one'])
         done()
       })
     })
