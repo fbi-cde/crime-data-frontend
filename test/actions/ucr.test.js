@@ -20,7 +20,7 @@ const createPromise = (res, err) => {
   return Promise.reject(err);
 }
 
-describe('ucr', () => {
+describe('ucr actions', () => {
   let sandbox
 
   beforeEach(() => {

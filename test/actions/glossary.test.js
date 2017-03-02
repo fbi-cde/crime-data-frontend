@@ -8,7 +8,7 @@ import {
 
 import { hideGlossary, showGlossary, showTerm } from '../../src/actions/glossary'
 
-describe('glossary', () => {
+describe('glossary actions', () => {
   describe('hideGlossary()', () => {
     it('should return a GLOSSARY_HIDE action', () => {
       const actual = hideGlossary()

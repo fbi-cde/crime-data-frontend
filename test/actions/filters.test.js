@@ -7,7 +7,7 @@ import {
 
 import { resetFilter, updateFilters } from '../../src/actions/filters'
 
-describe('filters', () => {
+describe('filters actions', () => {
   describe('resetFilter()', () => {
     it('should return a FILTER_RESET action', () => {
       const id = 'fake-id'

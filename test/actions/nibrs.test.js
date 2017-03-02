@@ -26,7 +26,7 @@ const success = {
   results: [],
 }
 
-describe('nibrs', () => {
+describe('nibrs actions', () => {
   let sandbox
 
   beforeEach(() => {
