@@ -47,7 +47,7 @@ const Home = ({ appState, dispatch, location }) => {
               Uniform Crime Reporting (UCR)
             </Term> data on an annual basis.
           </p>
-          <p className='mb3 sm-mb6 md-col-10 fs-16 sm-fs-18 serif'>
+          <p className='m0 md-col-10 fs-16 sm-fs-20 serif'>
             Over 18,000 law enforcement agencies across the country voluntarily
             participate in the program by submitting data through a state
             UCR program or directly to the FBI. This open data project is
