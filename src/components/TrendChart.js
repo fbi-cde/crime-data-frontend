@@ -106,7 +106,7 @@ class TrendChart extends React.Component {
 
     const callout = (
       <g transform={`translate(${x(active.date)}, 0)`}>
-        <line y2={height} stroke='#000' strokeWidth='1' strokeDasharray='3,3' />
+        <line y2={height} stroke='#95aabc' strokeWidth='1' strokeDasharray='3,3' />
         {keysWithSlugs.map((k, j) => (
           <circle
             key={j}
