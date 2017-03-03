@@ -5,7 +5,9 @@
 
 .btn-primary:disabled,
 .btn-primary.is-disabled {
-  background-color: #bec6cb;
-  color: #31515f;
+  background-color: #cbd0d4;
+  color: #697a85;
   opacity: inherit;
+
+  &:hover { box-shadow: none; }
 }
