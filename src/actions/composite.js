@@ -4,15 +4,7 @@ import { fetchNibrs } from './nibrs'
 import { fetchSummaries } from '../actions/summary'
 import { fetchUcrParticipation } from '../actions/ucr'
 import history, { createNewLocation } from '../util/history'
-import { nationalKey } from '../util/usa'
-import ucrDataCoverage from '../util/ucr'
-
-const shouldFetchUcr = ({ place }) => place !== nationalKey
-const shouldFetchSummaries = ({ crime, place }) => crime && place
-const shouldFetchNibrs = ({ place }) => {
-  const coverage = ucrDataCoverage(place)
-  return coverage && coverage.nibrs
-}
+import { shouldFetchUcr, shouldFetchSummaries, shouldFetchNibrs } from '../util/ucr'
 
 const fetchData = () => (dispatch, getState) => {
   const { filters } = getState()

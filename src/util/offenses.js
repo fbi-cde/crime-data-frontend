@@ -20,7 +20,7 @@ const offenseParams = {
   burglary: 'explorer_offense',
   'larceny-theft': 'explorer_offense',
   'motor-vehicle-theft': 'explorer_offense',
-  homicide: 'offense_category',
+  homicide: 'explorer_offense',
   'property-crime': 'classification',
   rape: 'explorer_offense',
   robbery: 'explorer_offense',

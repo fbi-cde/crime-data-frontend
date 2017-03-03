@@ -1,0 +1,34 @@
+{
+  "offenderSexCode": [
+    {"count":5,"offense_name":"homicide","sex_code":"M","year":"2006"},
+    {"count":3,"offense_name":"homicide","sex_code":"M","year":"2008"}
+  ],
+  "offenderRaceCode":[
+    {"count":5,"offense_name":"homicide","race_code":"B","year":"2006"},
+    {"count":2,"offense_name":"homicide","race_code":"B","year":"2008"}
+  ],
+  "offenderAgeNum":[
+    {"age_num":20,"count":4,"offense_name":"homicide","year":"2006"},
+    {"age_num":30,"count":1,"offense_name":"homicide","year":"2006"}
+  ],
+  "victimSexCode": [
+    {"count":5,"offense_name":"homicide","sex_code":"M","year":"2006"},
+    {"count":3,"offense_name":"homicide","sex_code":"M","year":"2008"}
+  ],
+  "victimRaceCode":[
+    {"count":5,"offense_name":"homicide","race_code":"B","year":"2006"},
+    {"count":2,"offense_name":"homicide","race_code":"B","year":"2008"}
+  ],
+  "victimAgeNum":[
+    {"age_num":20,"count":4,"offense_name":"homicide","year":"2006"},
+    {"age_num":30,"count":1,"offense_name":"homicide","year":"2006"}
+  ],
+  "victimRelationship":[
+    {"count":1,"offender_relationship":"Victim Was Acquaintance","offense_name":"homicide","year":"2006"},
+    {"count":2,"offender_relationship":"Victim Was Stranger","offense_name":"homicide","year":"2006"}
+  ],
+  "offenseLocationName":[
+    {"count":1,"location_name":"Air/Bus/Train Terminal","year":"2006"},
+    {"count":1,"location_name":"Air/Bus/Train Terminal","year":"2011"}
+  ]
+}
