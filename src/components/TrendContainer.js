@@ -1,7 +1,6 @@
 import React from 'react'
 import startCase from 'lodash.startcase'
 
-import DownloadDataBtn from './DownloadDataBtn'
 import Loading from './Loading'
 import NoData from './NoData'
 import Term from './Term'
@@ -16,36 +15,31 @@ const TrendContainer = ({
       Summary (SRS)
     </Term>
   )
+
   let content = null
   if (loading) content = <Loading />
   else if (!data || data.length === 0) content = <NoData />
   else {
     content = (
-      <TrendChart crime={crime} data={data} dispatch={dispatch} keys={keys} />
+      <TrendChart
+        crime={crime}
+        data={data}
+        dispatch={dispatch}
+        filters={filters}
+        keys={keys}
+        place={place}
+      />
     )
   }
 
   return (
     <div>
       <div className='mb2 p2 sm-p4 bg-blue-lighter'>
-        <div className='lg-flex items-baseline'>
-          <div className='flex-auto'>
-            <div className='inline-block'>
-              <h2 className='m0 fs-24 sm-fs-32 sans-serif'>
-                {startCase(crime)} rate in {startCase(place)},
-                <br />
-                {timeFrom}–{timeTo}
-              </h2>
-            </div>
-          </div>
-          <div>
-            <DownloadDataBtn
-              data={data}
-              fname={`${place}-${crime}-${timeFrom}–${timeTo}`}
-              text='Download data'
-            />
-          </div>
-        </div>
+        <h2 className='m0 fs-24 sm-fs-32 sans-serif'>
+          {startCase(crime)} rate in {startCase(place)},{' '}
+          <br className='xs-hide' />
+          {timeFrom}–{timeTo}
+        </h2>
       </div>
       <div className='mb2'>{content}</div>
       {!loading && (

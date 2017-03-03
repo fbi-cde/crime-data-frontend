@@ -46,8 +46,8 @@ const NibrsContainer = ({
     <div>
       <div className='mb2 p2 sm-p4 bg-blue-lighter'>
         <h2 className='m0 fs-24 sm-fs-32 sans-serif'>
-          {startCase(crime)} incident details in {startCase(place)},
-          <br />
+          {startCase(crime)} incident details in {startCase(place)},{' '}
+          <br className='xs-hide' />
           {timeFrom}–{timeTo}
         </h2>
         <p className='mt-tiny'>
