@@ -28,8 +28,10 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
   const links = (content.states[startCase(place)] || []).filter(l => l.text).concat(csvLinks)
   const participation = ucrParticipation(place)
   const hybrid = (participation.srs && participation.nibrs)
-  const ucrPlaceInfo = ucr.data[place] || []
-  const data = { ...ucrPlaceInfo.find(p => p.year === timeTo) }
+  const ucrPlaceInfo = !ucr.loading && ucr.data[place]
+  const data = ucrPlaceInfo && { ...ucrPlaceInfo.find(p => p.year === timeTo) }
+
+  if (!ucrPlaceInfo) return null
 
   return (
     <div className='mb5 clearfix'>
