@@ -8,7 +8,7 @@ const NibrsDonutDetails = ({ colorMap, data, selected }) => (
     <span className='mb2 bold caps fs-12 red'>Incidents</span>
     <ul className='list-style-none p0 m0 fs-14'>
       {data.map((d, i) => {
-        const active = i === selected
+        const active = d.key === selected
         const border = active ? 'border-bottom' : 'border-bottom-dashed'
         return (
           <li
@@ -17,7 +17,7 @@ const NibrsDonutDetails = ({ colorMap, data, selected }) => (
           >
             <span
               className='mr1'
-              style={{ width: 10, height: 10, backgroundColor: colorMap(i) }}
+              style={{ width: 10, height: 10, backgroundColor: colorMap(d.key) }}
             />
             <div className={`flex flex-auto justify-between ${active && 'bold'}`}>
               <span>{d.key}</span>
