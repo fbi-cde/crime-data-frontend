@@ -9,16 +9,13 @@ class NibrsHistogram extends React.Component {
   constructor(props) {
     super(props)
     this.state = { hover: null }
-    this.rememberValue = ::this.rememberValue
-    this.forgetValue = ::this.forgetValue
   }
 
-  rememberValue(e) {
-    const id = parseInt(e.target.getAttribute('data-id'), 10)
-    this.setState({ hover: id })
+  rememberValue = d => () => {
+    this.setState({ hover: d })
   }
 
-  forgetValue() {
+  forgetValue = () => {
     this.setState({ hover: null })
   }
 
@@ -29,23 +26,25 @@ class NibrsHistogram extends React.Component {
     const height = size.height - margin.top - margin.bottom
     const width = size.width - margin.left - margin.right
 
-    const bins = data.map(d => ({
+    const dataFiltered = data.filter(d => +d.key % 10 === 0)
+    const bins = dataFiltered.map(d => ({
       x0: +d.key,
       x1: +d.key + 10,
       ct: +d.count,
     }))
+
     const binCt = bins.length
+    const maxVal = max(bins, d => d.ct)
 
     const x = scaleLinear()
         .domain([min(bins, d => d.x0), max(bins, d => d.x1)])
         .range([0, width])
 
     const y = scaleLinear()
-        .domain([0, max(bins, d => d.ct)])
+        .domain([0, maxVal])
         .range([height, 0])
 
-    // default to first bin if no interaction
-    const active = hover !== null ? hover : 0
+    const active = hover || bins.filter(d => d.ct === maxVal)[0]
 
     return (
       <div className='mb2 pb2 border-bottom border-blue-light'>
@@ -64,13 +63,12 @@ class NibrsHistogram extends React.Component {
                   transform={`translate(${x(d.x0)}, ${y(d.ct)})`}
                 >
                   <rect
-                    data-id={i}
-                    x='1'
                     width={x(bins[0].x1) - x(bins[0].x0) - 1}
                     height={height - y(d.ct)}
-                    fill={(hover === null || i === active) ? '#ff5e50' : '#f4dfdd'}
+                    x='1'
+                    fill={(hover === null || d.x0 === active.x0) ? '#ff5e50' : '#f4dfdd'}
                     pointerEvents='all'
-                    onMouseOver={this.rememberValue}
+                    onMouseOver={this.rememberValue(d)}
                     onMouseOut={this.forgetValue}
                   />
                 </g>
@@ -78,8 +76,8 @@ class NibrsHistogram extends React.Component {
               <XAxis scale={x} height={height} tickCt={binCt} />
             </g>
           </svg>
-          {bins[active] && (
-            <NibrsHistogramDetails data={bins[active]} noun={noun} />
+          {active && (
+            <NibrsHistogramDetails data={active} noun={noun} />
           )}
         </div>
       </div>
