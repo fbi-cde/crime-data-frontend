@@ -1,6 +1,8 @@
 /* eslint no-undef: 0 */
 
-import { reshape, rename } from '../../src/util/nibrs'
+import parseNibrs, { reshape, rename } from '../../src/util/nibrs'
+
+import mockApiData from '../fixtures/nibrsApiResponse.json'
 
 describe('nibrs utility', () => {
   describe('reshape()', () => {
@@ -28,6 +30,19 @@ describe('nibrs utility', () => {
       expect(rename(data, lookup)).toEqual([
         { key: 'foo', count: 1 }, { key: 'bar', count: 2 },
       ])
+    })
+  })
+
+  describe('parseNibrs()', () => {
+    // TODO: add more robust tests of this function, as right now it just checks
+    // for the titles of the sections and not the shape of the data
+    it('should parse the data into an array with the proper titles', () => {
+      const actual = parseNibrs(mockApiData)
+      expect(actual.length).toEqual(4)
+      expect(actual[0].title.toLowerCase()).toEqual('offender demographics')
+      expect(actual[1].title.toLowerCase()).toEqual('victim demographics')
+      expect(actual[2].title.toLowerCase()).toEqual('victim’s relationship to the offender')
+      expect(actual[3].title.toLowerCase()).toEqual('location type')
     })
   })
 })
