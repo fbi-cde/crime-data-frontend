@@ -13,13 +13,13 @@ const participationCsvLink = place => {
   const id = lookupUsa(place).toUpperCase()
   return [
     {
-      text: `${startCase(place)} UCR Participation (.csv)`,
+      text: `${startCase(place)} UCR Participation`,
       url: `/api/geo/states/${id}/participation?output=csv`,
     },
-    {
-      text: `${startCase(place)} Population (.csv)`,
-      url: `/api/geo/states/${id}?output=csv`,
-    },
+    // {
+    //   text: `${startCase(place)} Population (.csv)`,
+    //   url: `/api/geo/states/${id}?output=csv`,
+    // },
   ]
 }
 
