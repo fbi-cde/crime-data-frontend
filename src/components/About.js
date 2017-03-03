@@ -57,7 +57,7 @@ const About = () => (
           Crime data
         </h2>
         <p className='mb4 fs-18 sm-fs-24 serif'>
-          The data available here is from the FBI’s Uniform Crime Reporting program (UCR), which is made up of reports from law enforcement agencies across the country. The tool features general crime data, data specific to hate crimes, and data about police officers killed or hurt while on duty. The crime reports are submitted to the FBI in two different formats: summary statistics and incident-based reports. Generally, police departments submit one or the other. The Crime Data Explorer displays both datasets separately and attempts to draw out nuances or data caveats that could affect data analysis.
+          The data available from the FBI’s Uniform Crime Reporting program (UCR) is made up of reports from police agencies across the country. Police agencies submit data to the FBI in one of two formats: summary statistics (SRS) or incident-based reports (NIBRS). The Crime Data Explorer makes both types of data available and displays them separately.
         </p>
         <div className='flex flex-wrap mxn1 mb5'>
           <div className='flex sm-col sm-col-6 px1 mb2'>
