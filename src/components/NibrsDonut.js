@@ -11,9 +11,8 @@ class NibrsDonut extends React.Component {
     this.state = { hover: null }
   }
 
-  rememberValue = id => () => {
-    if (id === this.state.hover) return
-    this.setState({ hover: id })
+  rememberValue = d => () => {
+    this.setState({ hover: d })
   }
 
   forgetValue = () => {
@@ -27,13 +26,19 @@ class NibrsDonut extends React.Component {
     const { height, width } = size
     const r = Math.min(width, height) / 2
 
+    const dataSorted = [...data]
+    dataSorted.sort((a, b) => +b.count - +a.count)
+
+    const keys = data.map(d => d.key)
+    keys.sort()
+
     const pieGen = pie().sort(descending).value(d => d.count)
     const arcGen = arc().innerRadius(r / 3).outerRadius(r - 20)
 
-    const dataDisplay = pieGen(data)
+    const dataDisplay = pieGen(dataSorted)
 
     const colorMap = scaleOrdinal()
-      .domain(dataDisplay.map((_, i) => i))
+      .domain(keys)
       .range(colors)
 
     return (
@@ -48,22 +53,25 @@ class NibrsDonut extends React.Component {
               style={{ width: '100%', height: '100%' }}
             >
               <g transform={`translate(${width / 2}, ${height / 2})`}>
-                {dataDisplay.map((slice, i) => (
-                  <path
-                    key={i}
-                    d={arcGen(slice)}
-                    fill={colorMap(i)}
-                    fillOpacity={hover === null || hover === i ? 1 : 0.5}
-                    pointerEvents='all'
-                    onMouseOver={this.rememberValue(i)}
-                    onMouseOut={this.forgetValue}
-                  />
-                ))}
+                {dataDisplay.map((d, i) => {
+                  const key = d.data.key
+                  return (
+                    <path
+                      key={i}
+                      d={arcGen(d)}
+                      fill={colorMap(key)}
+                      fillOpacity={hover === null || hover === key ? 1 : 0.5}
+                      pointerEvents='all'
+                      onMouseOver={this.rememberValue(key)}
+                      onMouseOut={this.forgetValue}
+                    />
+                  )
+                })}
               </g>
             </svg>
           </div>
           <div className='col col-6 px1'>
-            <NibrsDonutDetails colorMap={colorMap} data={data} selected={hover} />
+            <NibrsDonutDetails colorMap={colorMap} data={dataSorted} selected={hover} />
           </div>
         </div>
       </div>
