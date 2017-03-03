@@ -2,3 +2,12 @@
   line-height: 1;
   padding: .25rem 1rem;
 }
+
+.btn-primary:disabled,
+.btn-primary.is-disabled {
+  background-color: #cbd0d4;
+  color: #697a85;
+  opacity: inherit;
+
+  &:hover { box-shadow: none; }
+}
