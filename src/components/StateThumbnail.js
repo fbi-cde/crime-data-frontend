@@ -61,7 +61,7 @@ class StateThumbnail extends React.Component {
               <path
                 key={i}
                 d={path(d)}
-                fill={d.properties.name === selected ? '#95aabc' : '#eff4f9'}
+                fill={d.properties.name === selected || !active ? '#95aabc' : '#eff4f9'}
               />
             ))}
             <path
