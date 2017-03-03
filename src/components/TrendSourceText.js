@@ -53,7 +53,7 @@ TrendSourceText.propTypes = {
   filters: React.PropTypes.shape({
     timeFrom: React.PropTypes.number,
     timeTo: React.PropTypes.number,
-  }),
+  }).isRequired,
   place: React.PropTypes.string,
 }
 
