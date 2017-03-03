@@ -8,10 +8,12 @@ import throttle from 'lodash.throttle'
 import { timeParse } from 'd3-time-format'
 import React from 'react'
 
-import { slugify } from '../util/text'
+import DownloadDataBtn from './DownloadDataBtn'
 import TrendChartDetails from './TrendChartDetails'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
+
+import { slugify } from '../util/text'
 
 class TrendChart extends React.Component {
   constructor(props) {
@@ -51,9 +53,12 @@ class TrendChart extends React.Component {
   }
 
   render() {
-    const { keys, crime, colors, data, dispatch, margin, size } = this.props
+    const {
+      keys, crime, colors, data, dispatch, margin, place, size,
+    } = this.props
     const { hover, svgParentWidth } = this.state
 
+    const { timeFrom, timeTo } = this.props.filters
     const svgWidth = svgParentWidth || size.width
     const svgHeight = svgWidth / 2.25
     const width = svgWidth - margin.left - margin.right
@@ -167,6 +172,11 @@ class TrendChart extends React.Component {
         <div className='my2 fs-10 sm-fs-12 line-height-1 bold monospace center'>
           {startCase(crime)} rate per 100,000 people (does not include estimates)
         </div>
+        <DownloadDataBtn
+          data={data}
+          fname={`${place}-${crime}-${timeFrom}–${timeTo}`}
+          text='Download data'
+        />
       </div>
     )
   }
@@ -174,6 +184,10 @@ class TrendChart extends React.Component {
 
 TrendChart.propTypes = {
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  filters: React.PropTypes.shape({
+    timeFrom: React.PropTypes.number,
+    timeTo: React.PropTypes.number,
+  }).isRequired,
 }
 
 TrendChart.defaultProps = {

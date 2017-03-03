@@ -1,3 +1,5 @@
+/* eslint no-undef: 0 */
+
 import React from 'react';
 import { shallow } from 'enzyme';
 
@@ -9,11 +11,15 @@ describe('TrendChart', () => {
     { date: '2016-01-02', foo: 7, bar: 2 },
     { date: '2016-01-03', foo: 4, bar: 4 },
   ]
+  const filters = {
+    timeFrom: 1990,
+    timeTo: 2014,
+  }
   const keys = ['foo', 'bar']
   let chart
 
   beforeEach(() => {
-    chart = shallow(<TrendChart data={data} keys={keys} />)
+    chart = shallow(<TrendChart data={data} filters={filters} keys={keys} />)
   });
 
   it('TrendChart renders svg', () => {
