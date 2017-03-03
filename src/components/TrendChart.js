@@ -185,6 +185,10 @@ class TrendChart extends React.Component {
 
 TrendChart.propTypes = {
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  filters: React.PropTypes.shape({
+    timeFrom: React.PropTypes.number.isRequired,
+    timeTo: React.PropTypes.number.isRequired,
+  }),
 }
 
 TrendChart.defaultProps = {
