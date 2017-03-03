@@ -43,21 +43,21 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
         </p>
       </div>
       <div>
-        <table className='mt2 md-mt4 fs-14 bold' style={{ maxWidth: 300 }}>
-          <thead className='fs-12 caps line-height-3'>
-            <tr><th /><th>Rate</th><th>Total</th></tr>
+        <table className='mt2 md-mt4' style={{ maxWidth: 300 }}>
+          <thead className='fs-12 line-height-3'>
+            <tr><td /><td>Rate</td><td>Total</td></tr>
           </thead>
-          <tbody>
+          <tbody className='fs-14 bold'>
             {keys.map((k, i) => (
               <tr key={i}>
-                <td className='pr3 nowrap align-bottom'>
+                <td className='pr3 fs-12 nowrap align-bottom'>
                   <span
                     className='mr1 inline-block circle'
                     style={{ width: 8, height: 8, backgroundColor: colors[i] || '#000' }}
                   />
                   {k.name}
                 </td>
-                <td className='pt1 pr3 sm-fs-14 line-height-4 align-bottom'>
+                <td className='pt1 pr3 line-height-4 align-bottom'>
                   <span
                     className='inline-block border-bottom border-blue-light border-w2'
                     style={{ width: 72 }}
@@ -65,7 +65,7 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
                     {formatRate(data[k.slug].rate)}
                   </span>
                 </td>
-                <td className='pt1 sm-fs-14 line-height-4 align-bottom'>
+                <td className='pt1 line-height-4 align-bottom'>
                   <span
                     className='inline-block border-bottom border-blue-light border-w2'
                     style={{ width: 72 }}
