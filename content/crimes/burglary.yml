@@ -5,6 +5,9 @@ caveats:
   - heading: Hotel rule
     text: "When a number of hotel rooms, motel rooms, or self-storage units are burglarized, the building manager is more likely to report the offenses to the police than individual tenants. In these cases, the law enforcement agency should report a single burglary incident to the FBI and include the number of premises that were entered."
 
+  - heading: Avoid rankings or comparisons
+    text: Since crime is a sociological phenomenon influenced by a variety of factors, the FBI [discourages ranking locations or making comparisons](https://ucr.fbi.gov/ucr-statistics-their-proper-use) as a way of measuring law enforcement effectiveness. Some of this data may not be comparable to previous years because of differing levels of participation over time.
+
 links:
   - url: https://ucr.fbi.gov/ucr-publications
     text: "FBI: Uniform Crime Reporting Publications"

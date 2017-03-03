@@ -12,7 +12,7 @@ const links = [
     href: '/explorer',
   },
   {
-    text: 'Downloads and Documentation',
+    text: 'Downloads & Documentation',
     href: '/downloads-and-docs',
   },
   {

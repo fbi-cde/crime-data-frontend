@@ -5,6 +5,9 @@ caveats:
   - heading: How these crimes are counted
     text: This data reflects the [hierarchy rule](https://ucr.fbi.gov/nibrs/2012/resources/effects-of-nibrs-on-crime-statistics), which requires that only the most serious offense in a case be counted. The descending order of violent crimes are homicide, rape, robbery, and aggravated assault, followed by the property crimes of burglary, larceny theft, and motor vehicle theft. Although arson is also a property crime, the rule does not apply to it. In cases in which an arson occurs in conjunction with another violent or property crime, both crimes are reported.
 
+  - heading: Avoid rankings or comparisons
+    text: Since crime is a sociological phenomenon influenced by a variety of factors, the FBI [discourages ranking locations or making comparisons](https://ucr.fbi.gov/ucr-statistics-their-proper-use) as a way of measuring law enforcement effectiveness. Some of this data may not be comparable to previous years because of differing levels of participation over time.
+
 links:
   - url: https://ucr.fbi.gov/ucr-publications
     text: "FBI: Uniform Crime Reporting Publications"

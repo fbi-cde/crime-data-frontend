@@ -2,6 +2,9 @@ caveats:
   - heading: How these crimes are counted
     text: Larceny theft is the unlawful taking, carrying, leading, or riding away of property from the possession or constructive possession of another. Examples include thefts of bicycles, motor vehicle parts and accessories, shoplifting, pocket-picking, or any property taken without force or fraud. Attempted larcenies are included. Because of the volume of motor vehicle thefts, the FBI counts those offenses separately. | Local offense classifications such as grand theft, petty larceny, felony larceny, or misdemeanor larceny have no bearing on the fact that agencies should report one offense for each theft operation, regardless of the value of stolen property. When multiple types of theft occur within a single incident, agencies should report each type of theft.
 
+  - heading: Avoid rankings or comparisons
+    text: Since crime is a sociological phenomenon influenced by a variety of factors, the FBI [discourages ranking locations or making comparisons](https://ucr.fbi.gov/ucr-statistics-their-proper-use) as a way of measuring law enforcement effectiveness. Some of this data may not be comparable to previous years because of differing levels of participation over time.
+
 links:
   - url: https://ucr.fbi.gov/ucr-publications
     text: "FBI: Uniform Crime Reporting Publications"
