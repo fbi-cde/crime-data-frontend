@@ -5,6 +5,9 @@ caveats:
   - heading: Arson-related deaths and injuries
     text: The Uniform Crime Reporting Program does not include arson-related deaths and injuries of police officers and firefighters, unless they were determined to be willful murders or assaults, due to the hazardous nature of these professions.
 
+  - heading: Avoid rankings or comparisons
+    text: Since crime is a sociological phenomenon influenced by a variety of factors, the FBI [discourages ranking locations or making comparisons](https://ucr.fbi.gov/ucr-statistics-their-proper-use) as a way of measuring law enforcement effectiveness. Some of this data may not be comparable to previous years because of differing levels of participation over time.
+
 links:
   - url: https://ucr.fbi.gov/ucr-publications
     text: "FBI: Uniform Crime Reporting Publications"

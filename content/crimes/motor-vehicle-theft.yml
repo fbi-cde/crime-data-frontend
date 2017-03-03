@@ -5,6 +5,9 @@ caveats:
   - heading: How these crimes are counted
     text: Agencies should classify incidents as motor vehicle theft when someone without lawful access takes an automobile, even if they abandon it later (this is known as joyriding). Agencies should not include temporary use of a vehicle when  the offender previously had permission, such as in family situations. As an example, if a chauffeur steals a car entrusted to their care, the responding agency should report embezzlement.
 
+  - heading: Avoid rankings or comparisons
+    text: Since crime is a sociological phenomenon influenced by a variety of factors, the FBI [discourages ranking locations or making comparisons](https://ucr.fbi.gov/ucr-statistics-their-proper-use) as a way of measuring law enforcement effectiveness. Some of this data may not be comparable to previous years because of differing levels of participation over time.
+
 links:
   - url: https://ucr.fbi.gov/ucr-publications
     text: "FBI: Uniform Crime Reporting Publications"
