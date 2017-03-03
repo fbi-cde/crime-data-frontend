@@ -8,11 +8,6 @@ import TrendSourceText from './TrendSourceText'
 
 const TrendContainer = ({ crime, place, filters, data, dispatch, loading, keys }) => {
   const { timeFrom, timeTo } = filters
-  const srs = (
-    <Term id='summary reporting system (srs)' dispatch={dispatch}>
-      Summary (SRS)
-    </Term>
-  )
 
   let content = null
   if (loading) content = <Loading />
