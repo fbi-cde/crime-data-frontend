@@ -5,11 +5,27 @@ import startCase from 'lodash.startcase'
 import content from '../util/content'
 import Term from './Term'
 import ucrParticipation from '../util/ucr'
+import lookupUsa from '../util/usa'
 
 const formatNumber = format(',')
 
+const participationCsvLink = place => {
+  const id = lookupUsa(place).toUpperCase()
+  return [
+    {
+      text: `${startCase(place)} UCR Participation`,
+      url: `/api/geo/states/${id}/participation?output=csv`,
+    },
+    // {
+    //   text: `${startCase(place)} Population (.csv)`,
+    //   url: `/api/geo/states/${id}?output=csv`,
+    // },
+  ]
+}
+
 const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
-  const links = (content.states[startCase(place)] || []).filter(l => l.text)
+  const csvLinks = participationCsvLink(place)
+  const links = (content.states[startCase(place)] || []).filter(l => l.text).concat(csvLinks)
   const participation = ucrParticipation(place)
   const hybrid = (participation.srs && participation.nibrs)
   const ucrPlaceInfo = ucr.data[place] || []

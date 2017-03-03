@@ -25,6 +25,7 @@ app.get('/api/*', (req, res) => {
   if (!apiKey) return res.status(401).end()
 
   return http.get(route, { params }).then(r => {
+    res.set(r.headers)
     res.send(r.data)
   }).catch(e => {
     res.status(e.response.status).end()
