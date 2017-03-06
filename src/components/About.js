@@ -76,10 +76,7 @@ const About = () => (
                 Incident-based (NIBRS) data
               </h3>
               <p className='m0'>
-                Incident-based (NIBRS) data captures details
-                on each single crime incident, providing context that
-                is left out of the summary data.
-
+                Incident-based (NIBRS) data captures details on each single crime incident, providing context that is left out of the summary data.
               </p>
             </div>
           </div>
