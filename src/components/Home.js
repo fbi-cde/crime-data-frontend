@@ -14,21 +14,24 @@ import otherDataSets from '../../content/datasets.yml'
 
 const Home = ({ appState, dispatch, location }) => {
   const { crime, place } = appState.filters
-  const isButtonDisabled = !!(crime && place) || false
+  const isValid = !!(crime && place) || false
 
   const handleMapClick = e => {
     const id = e.target.getAttribute('id')
     if (!id) return
     dispatch(updateFilters({ place: slugify(stateLookup(id)) }))
   }
+
   const handleSearchClick = () => {
     const change = { crime, place }
     dispatch(updateApp(change, location))
   }
+
   const selectCrime = e => {
     const action = updateFilters({ crime: slugify(e.target.value) })
     dispatch(action)
   }
+
   const selectLocation = e => dispatch(updateFilters(e))
 
   return (
@@ -98,8 +101,9 @@ const Home = ({ appState, dispatch, location }) => {
             </div>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0 xs-hide'>
               <button
-                className='col-12 btn btn-primary'
-                disabled={!isButtonDisabled}
+                className={`col-12 btn btn-primary ${isValid ? '' : 'hint--bottom'}`}
+                aria-label={isValid ? '' : 'Please select a location and crime type'}
+                disabled={!isValid}
                 onClick={handleSearchClick}
               >
                 View results
@@ -112,7 +116,7 @@ const Home = ({ appState, dispatch, location }) => {
           <div className='mb7 sm-hide md-hide lg-hide'>
             <button
               className='btn btn-primary'
-              disabled={!isButtonDisabled}
+              disabled={!isValid}
               onClick={handleSearchClick}
             >
               View results
