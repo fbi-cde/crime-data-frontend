@@ -9,12 +9,16 @@ fs.readdirSync('node_modules')
   .forEach(function(mod) { nodeModules[mod] = 'commonjs ' + mod; });
 
 var config = {
-  entry: './server2.js',
+  cache: false,
+  entry: './server.js',
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'server.js'
   },
   target: 'node',
+  node: {
+    __dirname: false
+  },
   externals: nodeModules,
   module: {
     loaders: [
