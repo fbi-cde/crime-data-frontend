@@ -109,7 +109,7 @@ const About = () => (
           </div>
         </div>
         <div className='mt4'>
-          <a className='fs-14 bold blue' href='#!'>Download a list of agency level participation</a>
+          <a className='fs-14 bold blue' href='#!'>Agencies that participate in the UCR</a>
         </div>
       </div>
     </section>
@@ -148,11 +148,10 @@ const About = () => (
         <p>
           This project is part of an ongoing effort to improve and promote
           transparency behind the nation’s crime statistics. We’re working
-          on adding more datasets to this tool, and we’re continuing to
+          to add more datasets to this tool, and we’re continuing to
           develop new features based on your feedback.
         </p>
         <p>Future versions will include more granular perspectives of the data and more customizable features.
-        Please check back for new features and data updates.
         </p>
         <h2 className='my4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright'>
           Submit your feedback
@@ -172,30 +171,29 @@ const About = () => (
         </h2>
         <div className='clearfix mxn2'>
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-            <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
+            <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions</h3>
             <p className='m0'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+            Please direct questions about the data to:
+            Criminal Justice Information Services (CJIS) Division
+            cjis_comm@leo.gov
+            (304) 625-4995
+            Federal Bureau of Investigation
+            Uniform Crime Reporting Program
+            1000 Custer Hollow Road
+            Clarksburg, WV 26306
             </p>
           </div>
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-            <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
+            <h3 className='mt0 mb2 fs-22 sans-serif red'>Technical and API issues</h3>
             <p className='m0'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              Please submit technical questions about the application and the API via <a href='https://github.com/18F/crime-data-explorer'>GitHub</a>
             </p>
           </div>
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-            <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
+            <h3 className='mt0 mb2 fs-22 sans-serif red'>Follow us</h3>
             <p className='m0'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              <a href='https://twitter.com/FBI'>Twitter</a>
+              <a href='https://github.com/18F/crime-data-explorer'>GitHub</a>
             </p>
           </div>
         </div>
