@@ -1,4 +1,4 @@
-import GlossaryPanel from 'glossary-panel'
+// import GlossaryPanel from 'glossary-panel'
 import React from 'react'
 
 import { hideGlossary, showGlossary } from '../actions/glossary'
