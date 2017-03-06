@@ -1,5 +1,7 @@
 /* eslint global-require: 0 */
 
+import 'babel-polyfill'
+
 const production = (process.env.NODE_ENV === 'production')
 if (production) require('newrelic')
 
@@ -16,12 +18,18 @@ const API = 'https://crime-data-api.fr.cloud.gov'
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
+
 import routes from './src/routes'
+import store from './src/store'
 
 app.get('/status', (req, res) => res.send('OK'))
 
-app.use(express.static(__dirname))
+// app.use(express.static(__dirname))
+
+app.use(express.static('build'))
 
 app.get('*', (req, res) => {
   // match the routes to the url
@@ -30,7 +38,14 @@ app.get('*', (req, res) => {
     // `props` in its state as it listens to `browserHistory`. But on the
     // server our app is stateless, so we need to use `match` to
     // get these props before rendering.
-    const appHtml = renderToString(<RouterContext {...props}/>)
+
+    console.log(props)
+
+    const appHtml = renderToString(
+      <Provider store={store}>
+        <RouterContext {...props} />
+      </Provider>
+    )
 
     // dump the HTML into a template, lots of ways to do this, but none are
     // really influenced by React Router, so we're just using a little
@@ -38,6 +53,17 @@ app.get('*', (req, res) => {
     res.send(renderPage(appHtml))
   })
 })
+
+function renderPage(appHtml) {
+  return `
+    <!doctype html public="storage">
+    <html>
+    <meta charset=utf-8/>
+    <title>My First React Router App</title>
+    <link rel=stylesheet href='/app.css'>
+    <div id='app'>${appHtml}</div>
+   `
+}
 
 app.get('/api/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')

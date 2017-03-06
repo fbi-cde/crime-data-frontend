@@ -9,7 +9,7 @@
     "watch:client": "webpack -w --progress --colors",
     "dev": "webpack-dev-server",
     "build": "NODE_ENV=production webpack -p",
-    "build:server": "webpack -p --config webpack.node.config.js",
+    "build:server": "webpack -w --config webpack.node.config.js",
     "lint": "npm run lint:js && npm run lint:yml",
     "lint:js": "eslint src scripts || exit 0",
     "lint:yml": "yamllint content/**/*.yml || exit 0",
