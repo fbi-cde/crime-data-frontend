@@ -57,7 +57,7 @@ const About = () => (
           Crime data
         </h2>
         <p className='mb4 fs-18 sm-fs-24 serif'>
-          The data available from the FBI’s Uniform Crime Reporting program (UCR) is made up of reports from police agencies across the country. Police agencies submit data to the FBI in one of two formats: summary statistics (SRS) or incident-based reports (NIBRS). The Crime Data Explorer makes both types of data available and displays them separately.
+          The data available from the FBI’s Uniform Crime Reporting program (UCR) is made up of reports from police agencies across the country. Police agencies submit data to the FBI in one of two formats: summary statistics (SRS) or incident-based reports (NIBRS). The Crime Data Explorer makes both types of data available and displays them separately. SRS data is available for the years 1960 to 2014. Incident-based data began being collected much more recently and is available here from 1991-2014.
         </p>
         <div className='flex flex-wrap mxn1 mb5'>
           <div className='flex sm-col sm-col-6 px1 mb2'>
@@ -109,7 +109,7 @@ const About = () => (
           </div>
         </div>
         <div className='mt4'>
-          <a className='fs-14 bold blue' href='#!'>The map displays the type of data reported by each state. The goal is to have every state reporting NIBRS data by 2020.</a>
+          <a className='fs-14 bold blue' href='#!'>Download a list of agency level participation</a>
         </div>
       </div>
     </section>
@@ -151,18 +151,14 @@ const About = () => (
           on adding more datasets to this tool, and we’re continuing to
           develop new features based on your feedback.
         </p>
-        <p className='mb1'>Future versions will include:</p>
-        <ul className='m0 pl2'>
-          <li>More granular perspectives of the data </li>
-          <li>More customizable data features</li>
-          <li>Updates to the data</li>
-          <li>New data types</li>
-        </ul>
+        <p>Future versions will include more granular perspectives of the data and more customizable features.
+        Please check back for new features and data updates.
+        </p>
         <h2 className='my4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright'>
           Submit your feedback
         </h2>
         <p>
-          We’d love to hear what you think about the Crime Data Explorer. Help us improve the quality of the data and let us know what other features would be useful to you.
+          We’d love to hear what you think about the Crime Data Explorer.
         </p>
         <button className='btn btn-primary bg-white blue' type='button'>
           Submit feedback
