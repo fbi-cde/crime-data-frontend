@@ -57,7 +57,7 @@ const About = () => (
           Crime data
         </h2>
         <p className='mb4 fs-18 sm-fs-24 serif'>
-          The data available here is from the FBI’s Uniform Crime Reporting program (UCR), which is made up of reports from law enforcement agencies across the country. The tool features general crime data, data specific to hate crimes, and data about police officers killed or hurt while on duty. The crime reports are submitted to the FBI in two different formats: summary statistics and incident-based reports. Generally, police departments submit one or the other. The Crime Data Explorer displays both datasets separately and attempts to draw out nuances or data caveats that could affect data analysis.
+          The data available from the FBI’s Uniform Crime Reporting program (UCR) is made up of reports from police agencies across the country. Police agencies submit data to the FBI in one of two formats: summary statistics (SRS) or incident-based reports (NIBRS). The Crime Data Explorer makes both types of data available and displays them separately. SRS data is available for the years 1960 to 2014. Incident-based data began being collected much more recently and is available here from 1991-2014.
         </p>
         <div className='flex flex-wrap mxn1 mb5'>
           <div className='flex sm-col sm-col-6 px1 mb2'>
@@ -76,10 +76,7 @@ const About = () => (
                 Incident-based (NIBRS) data
               </h3>
               <p className='m0'>
-                Incident-based (NIBRS) data captures details
-                on each single crime incident, providing context that
-                is left out of the summary data.
-
+                Incident-based (NIBRS) data captures details on each single crime incident, providing context that is left out of the summary data.
               </p>
             </div>
           </div>
@@ -109,7 +106,7 @@ const About = () => (
           </div>
         </div>
         <div className='mt4'>
-          <a className='fs-14 bold blue' href='#!'>The map displays the type of data reported by each state. The goal is to have every state reporting NIBRS data by 2020.</a>
+          <a className='fs-14 bold blue' href='#!'>Agencies that participate in the UCR</a>
         </div>
       </div>
     </section>
@@ -148,21 +145,16 @@ const About = () => (
         <p>
           This project is part of an ongoing effort to improve and promote
           transparency behind the nation’s crime statistics. We’re working
-          on adding more datasets to this tool, and we’re continuing to
+          to add more datasets to this tool, and we’re continuing to
           develop new features based on your feedback.
         </p>
-        <p className='mb1'>Future versions will include:</p>
-        <ul className='m0 pl2'>
-          <li>More granular perspectives of the data </li>
-          <li>More customizable data features</li>
-          <li>Updates to the data</li>
-          <li>New data types</li>
-        </ul>
+        <p>Future versions will include more granular perspectives of the data and more customizable features.
+        </p>
         <h2 className='my4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright'>
           Submit your feedback
         </h2>
         <p>
-          We’d love to hear what you think about the Crime Data Explorer. Help us improve the quality of the data and let us know what other features would be useful to you.
+          We’d love to hear what you think about the Crime Data Explorer.
         </p>
         <button className='btn btn-primary bg-white blue' type='button'>
           Submit feedback
@@ -176,30 +168,29 @@ const About = () => (
         </h2>
         <div className='clearfix mxn2'>
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-            <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
+            <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions</h3>
             <p className='m0'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+            Please direct questions about the data to:
+            Criminal Justice Information Services (CJIS) Division
+            cjis_comm@leo.gov
+            (304) 625-4995
+            Federal Bureau of Investigation
+            Uniform Crime Reporting Program
+            1000 Custer Hollow Road
+            Clarksburg, WV 26306
             </p>
           </div>
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-            <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
+            <h3 className='mt0 mb2 fs-22 sans-serif red'>Technical and API issues</h3>
             <p className='m0'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              Please submit technical questions about the application and the API via <a href='https://github.com/18F/crime-data-explorer'>GitHub</a>
             </p>
           </div>
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
-            <h3 className='mt0 mb2 fs-22 sans-serif red'>Data questions?</h3>
+            <h3 className='mt0 mb2 fs-22 sans-serif red'>Follow us</h3>
             <p className='m0'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              <a href='https://twitter.com/FBI'>Twitter</a>
+              <a href='https://github.com/18F/crime-data-explorer'>GitHub</a>
             </p>
           </div>
         </div>
