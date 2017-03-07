@@ -8,6 +8,10 @@
 
 .border-w2 { border-width: 2px; }
 
+@media #{$breakpoint-sm} {
+  .sm-rounded-bottom { border-radius: 0 0 $border-radius $border-radius }
+}
+
 @media #{$breakpoint-md} {
   .md-border-none { border: 0; }
 }
