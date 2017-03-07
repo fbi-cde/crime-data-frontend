@@ -201,7 +201,7 @@
   },
   {
     "term": "National Incident-Based Reporting System (NIBRS)",
-    "definition": "The FBI’s incident-based reporting system for crimes known to law enforcement. <br /><br />Local, state, and federal law enforcement agencies collect a variety of details about each incident, including the time and location of the crime; the circumstance of the incident; the characteristics of the victim and offender (age, sex, race, and ethnicity); the victim’s relationship to the offender; the involvement of weapons or drugs; property loss; and whether the crime was motivated by bias."
+    "definition": "The FBI’s incident-based reporting system for crimes known to law enforcement.<br /><br />Local, state, and federal law enforcement agencies collect a variety of details about each incident, including the time and location of the crime; the circumstance of the incident; the characteristics of the victim and offender (age, sex, race, and ethnicity); the victim’s relationship to the offender; the involvement of weapons or drugs; property loss; and whether the crime was motivated by bias.<br /><br />Law enforcement agencies are still in the process of adopting NIBRS. During this period of transition, the FBI converts incident-based data to the traditional Summary Reporting System (SRS) format for the purpose of publishing national and state-level crime trends."
   },
   {
     "term": "Negligent manslaughter",
