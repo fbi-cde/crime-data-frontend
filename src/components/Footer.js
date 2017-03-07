@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const scrollToTop = () => window.scrollTo(0, 0)
 const links = [
   {
     text: 'Home',
@@ -51,7 +50,6 @@ const Footer = () => (
               <li key={i}>
                 <Link
                   className='white caps fs-14'
-                  onClick={scrollToTop}
                   to={l.href}
                 >
                   {l.text}
