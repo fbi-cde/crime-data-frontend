@@ -14,13 +14,13 @@ import lookup from '../util/usa'
 import offenses from '../util/offenses'
 import ucrParticipation from '../util/ucr'
 
-const filterNibrsData = (data, { timeFrom, timeTo }) => {
+const filterNibrsData = (data, { since, until }) => {
   if (!data) return false
   const filtered = {}
   Object.keys(data).forEach(key => {
     filtered[key] = data[key].filter(d => {
       const year = parseInt(d.year, 10)
-      return year >= timeFrom && year <= timeTo
+      return year >= since && year <= until
     })
   })
 
@@ -64,19 +64,20 @@ class Explorer extends React.Component {
 
   componentDidMount() {
     const { appState, dispatch, router } = this.props
+    const { since, until } = appState.filters
+    const { query } = router.location
+
+    const clean = (val, alt) => {
+      const yr = +val
+      return yr >= 1960 && yr <= 2014 ? yr : alt
+    }
+
     const filters = {
       ...this.props.filters,
       ...router.params,
-      ...router.location.query,
+      since: clean(query.since, since),
+      until: clean(query.until, until),
     }
-
-    const check = value => {
-      const year = parseInt(value, 10)
-      return year >= 1960 && year <= 2014
-    }
-
-    if (!check(filters.timeFrom)) filters.timeFrom = appState.filters.timeFrom
-    if (!check(filters.timeTo)) filters.timeTo = appState.filters.timeTo
 
     dispatch(updateApp(filters))
   }
@@ -142,7 +143,7 @@ class Explorer extends React.Component {
             <UcrParticipationInformation
               dispatch={dispatch}
               place={params.place}
-              timeTo={filters.timeTo}
+              until={filters.until}
               ucr={ucr}
             />
             <hr className='mt0 mb3' />

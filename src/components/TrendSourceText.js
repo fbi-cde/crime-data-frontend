@@ -4,11 +4,10 @@ import startCase from 'lodash.startcase'
 import Term from './Term'
 import ucrParticipation from '../util/ucr'
 
-const TrendSourceText = ({ dispatch, filters, place }) => {
-  const { timeFrom, timeTo } = filters
+const TrendSourceText = ({ dispatch, place, since, until }) => {
   const ucr = ucrParticipation(place)
-  let text
 
+  let text
   if (ucr.srs && ucr.nibrs) {
     text = (
       <span>
@@ -42,7 +41,7 @@ const TrendSourceText = ({ dispatch, filters, place }) => {
   return (
     <div className='center italic fs-12 mb8'>
       <p>
-        Source: {text} data from {startCase(place)}, {timeFrom}–{timeTo}.
+        Source: {text} data from {startCase(place)}, {since}–{until}.
       </p>
     </div>
   )
@@ -50,11 +49,9 @@ const TrendSourceText = ({ dispatch, filters, place }) => {
 
 TrendSourceText.propTypes = {
   dispatch: React.PropTypes.func,
-  filters: React.PropTypes.shape({
-    timeFrom: React.PropTypes.number,
-    timeTo: React.PropTypes.number,
-  }).isRequired,
   place: React.PropTypes.string,
+  since: React.PropTypes.number.isRequired,
+  until: React.PropTypes.number.isRequired,
 }
 
 export default TrendSourceText

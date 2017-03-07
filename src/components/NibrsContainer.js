@@ -13,20 +13,27 @@ const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')
 
 const NibrsContainer = ({
-  crime, data, dispatch, error, filters, loading, place,
+  crime,
+  data,
+  dispatch,
+  error,
+  filters,
+  loading,
+  place,
 }) => {
-  const { timeFrom, timeTo } = filters
+  const { since, until } = filters
+
   const nibrs = (
     <Term id='national incident-based reporting system (NIBRS)' dispatch={dispatch}>
       incident-based (NIBRS)
     </Term>
   )
-  const ucr = ucrParticipation(place)
-  const showTimeFrom = ucr.nibrs['initial-year'] < parseInt(timeFrom, 10)
-  const nibrsFirstYear = showTimeFrom ? timeFrom : ucr.nibrs['initial-year']
 
-  let totalCount
-  let content = <Loading />
+  const initYear = ucrParticipation(place).nibrs['initial-year']
+  const showSince = initYear < since
+  const nibrsFirstYear = showSince ? since : initYear
+
+  let [totalCount, content] = [0, <Loading />]
   if (!loading && data) {
     const dataParsed = parseNibrs(data)
     totalCount = data.offenderRaceCode.reduce((a, b) => (a + b.count), 0)
@@ -52,25 +59,29 @@ const NibrsContainer = ({
         <h2 className='m0 fs-24 sm-fs-32 sans-serif'>
           {startCase(crime)} incident details in {startCase(place)},{' '}
           <br className='xs-hide' />
-          {timeFrom}–{timeTo}
+          {since}–{until}
         </h2>
-        {/* eslint max-len: 0 */}
-        {!showTimeFrom && (
-        <p className='mt-tiny mb-tiny'>
-          {startCase(place)} started reporting incident-based (NIBRS) data to the FBI in {nibrsFirstYear}.
-        </p>
+        {!showSince && (
+          <p className='mt-tiny mb-tiny'>
+            {startCase(place)} started reporting incident-based (NIBRS) data
+            to the FBI in {nibrsFirstYear}.
+          </p>
         )}
         <p>
           {!error && data && `
-            There were ${formatNumber(totalCount)} individual ${crime} incidents reported to the FBI in ${startCase(place)} between ${nibrsFirstYear} and ${timeTo}. This number may differ from the totals in the previous chart because of the differences in data sources.
+            There were ${formatNumber(totalCount)} individual ${crime} incidents
+            reported to the FBI in ${startCase(place)} between ${nibrsFirstYear} and
+            ${until}. This number may differ from the totals in the previous chart
+            because of the differences in data sources.
           `}
-          Learn more about the <a className='underline' href={fbiLink}>FBI’s data collections</a>.
+          Learn more about the{' '}
+          <a className='underline' href={fbiLink}>FBI’s data collections</a>.
         </p>
       </div>
       {content}
       {!loading && (
       <div className='center italic fs-12 mb8'>
-        <p>Source: Reported {nibrs} data from {startCase(place)}, {timeFrom}–{timeTo}.</p>
+        <p>Source: Reported {nibrs} data from {startCase(place)}, {since}–{until}.</p>
       </div>
       )}
     </div>

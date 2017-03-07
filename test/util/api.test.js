@@ -14,8 +14,8 @@ const createPromise = (res, err) => {
 const params = {
   crime: 'homicide',
   place: 'california',
-  timeFrom: 2004,
-  timeTo: 2014,
+  since: 2004,
+  until: 2014,
 }
 
 const success = {

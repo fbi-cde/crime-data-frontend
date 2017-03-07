@@ -105,18 +105,15 @@ const getNibrsRequests = params => {
 }
 
 const buildSummaryQueryString = params => {
-  const { crime, place } = params
+  const { crime, place, since, until } = params
   const offense = mapToApiOffense(crime)
   const offenseParam = mapToApiOffenseParam(crime)
-  const timeFrom = parseInt(params.timeFrom, 10)
-  const timeTo = parseInt(params.timeTo, 10)
-  const perPage = (timeTo - timeFrom) + 1
 
   const qs = [
     `${offenseParam}=${offense}`,
-    `per_page=${perPage}`,
-    `year>=${timeFrom}`,
-    `year<=${timeTo}`,
+    `per_page=${(until - since) + 1}`,
+    `year>=${since}`,
+    `year<=${until}`,
   ]
 
   if (place && place !== nationalKey) {
@@ -138,15 +135,15 @@ const getSummary = params => {
 }
 
 const getSummaryRequests = params => {
-  const { crime, place, timeFrom, timeTo } = params
+  const { crime, place, since, until } = params
 
   const requests = [
-    getSummary({ crime, place, timeFrom, timeTo }),
+    getSummary({ crime, place, since, until }),
   ]
 
   // add national summary request (unless you already did)
   if (place !== nationalKey) {
-    requests.push(getSummary({ crime, place: nationalKey, timeFrom, timeTo }))
+    requests.push(getSummary({ crime, place: nationalKey, since, until }))
   }
 
   return requests

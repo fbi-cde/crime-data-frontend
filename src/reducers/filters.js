@@ -5,8 +5,8 @@ import {
 } from '../actions/constants'
 
 const initialState = {
-  timeFrom: 2004,
-  timeTo: 2014,
+  since: 2004,
+  until: 2014,
 }
 
 export default (state = initialState, action) => {
