@@ -1,12 +1,15 @@
-var fs = require('fs');
-var path = require('path');
+/* eslint-disable comma-dangle, no-var, quote-props, vars-on-top
+*/
 
-var webpack = require('webpack');
+var fs = require('fs')
+var path = require('path')
 
-var nodeModules = {};
+var webpack = require('webpack')
+
+var nodeModules = {}
 fs.readdirSync('node_modules')
-  .filter(function(x) { return ['.bin'].indexOf(x) === -1; })
-  .forEach(function(mod) { nodeModules[mod] = 'commonjs ' + mod; });
+  .filter(x => ['.bin'].indexOf(x) === -1)
+  .forEach(mod => { nodeModules[mod] = `commonjs ${mod}` })
 
 var config = {
   cache: false,
@@ -39,7 +42,7 @@ var config = {
   },
   plugins: [
     new webpack.IgnorePlugin(/\.(css|less)$/),
-    new webpack.BannerPlugin('require("source-map-support").install();',
+    new webpack.BannerPlugin('require("source-map-support").install()',
                              { raw: true, entryOnly: false })
   ]
 }
