@@ -1,4 +1,4 @@
-/* eslint global-require: 0, import/first: 0, no-console: 0 */
+/* eslint-disable comma-dangle, global-require, import/first, no-console */
 
 const production = (process.env.NODE_ENV === 'production')
 
