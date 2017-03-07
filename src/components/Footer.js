@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router'
+
+import Link from './Link'
 
 const scrollToTop = () => window.scrollTo(0, 0)
 const links = [
