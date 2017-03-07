@@ -24,10 +24,10 @@ describe('history utility', () => {
     })
 
     it('should put other changes in the query object', () => {
-      const change = { timeTo: 2017 }
+      const change = { until: 2017 }
       const location = { pathname: '/explorer/oregon/murder', query: { } }
       const actual = createNewLocation({ change, location })
-      expect(actual.query.timeTo).toEqual(2017)
+      expect(actual.query.until).toEqual(2017)
     })
 
     it('should ignore place and crime for the query', () => {

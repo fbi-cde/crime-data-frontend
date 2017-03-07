@@ -34,9 +34,8 @@ const Sidebar = ({ dispatch, filters, isOpen, onChange, router }) => {
           selected={place}
         />
         <TimePeriodFilter
-          timeFrom={filters.timeFrom}
-          timeTo={filters.timeTo}
           onChange={onChange}
+          {...filters}
         />
         <CrimeTypeFilter
           onChange={onChange}

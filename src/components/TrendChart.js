@@ -54,11 +54,19 @@ class TrendChart extends React.Component {
 
   render() {
     const {
-      keys, crime, colors, data, dispatch, margin, place, size,
+      keys,
+      crime,
+      colors,
+      data,
+      dispatch,
+      margin,
+      place,
+      since,
+      size,
+      until,
     } = this.props
     const { hover, svgParentWidth } = this.state
 
-    const { timeFrom, timeTo } = this.props.filters
     const svgWidth = svgParentWidth || size.width
     const svgHeight = svgWidth / 2.25
     const width = svgWidth - margin.left - margin.right
@@ -174,7 +182,7 @@ class TrendChart extends React.Component {
         </div>
         <DownloadDataBtn
           data={data}
-          fname={`${place}-${crime}-${timeFrom}–${timeTo}`}
+          fname={`${place}-${crime}-${since}–${until}`}
           text='Download data'
         />
       </div>
@@ -184,10 +192,8 @@ class TrendChart extends React.Component {
 
 TrendChart.propTypes = {
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-  filters: React.PropTypes.shape({
-    timeFrom: React.PropTypes.number,
-    timeTo: React.PropTypes.number,
-  }).isRequired,
+  since: React.PropTypes.number.isRequired,
+  until: React.PropTypes.number.isRequired,
 }
 
 TrendChart.defaultProps = {

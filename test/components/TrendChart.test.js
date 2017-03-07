@@ -11,10 +11,7 @@ describe('TrendChart', () => {
     { date: '2016-01-02', foo: 7, bar: 2 },
     { date: '2016-01-03', foo: 4, bar: 4 },
   ]
-  const filters = {
-    timeFrom: 1990,
-    timeTo: 2014,
-  }
+  const filters = { since: 1990, until: 2014 }
   const keys = ['foo', 'bar']
   let chart
 

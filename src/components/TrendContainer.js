@@ -7,7 +7,7 @@ import TrendChart from './TrendChart'
 import TrendSourceText from './TrendSourceText'
 
 const TrendContainer = ({ crime, place, filters, data, dispatch, loading, keys }) => {
-  const { timeFrom, timeTo } = filters
+  const { since, until } = filters
 
   let content = null
   if (loading) content = <Loading />
@@ -18,9 +18,10 @@ const TrendContainer = ({ crime, place, filters, data, dispatch, loading, keys }
         crime={crime}
         data={data}
         dispatch={dispatch}
-        filters={filters}
         keys={keys}
         place={place}
+        since={since}
+        until={until}
       />
     )
   }
@@ -31,12 +32,17 @@ const TrendContainer = ({ crime, place, filters, data, dispatch, loading, keys }
         <h2 className='m0 fs-24 sm-fs-32 sans-serif'>
           {startCase(crime)} rate in {startCase(place)},{' '}
           <br className='xs-hide' />
-          {timeFrom}–{timeTo}
+          {since}–{until}
         </h2>
       </div>
       <div className='mb2'>{content}</div>
       {!loading && (
-        <TrendSourceText dispatch={dispatch} filters={filters} place={place} />
+        <TrendSourceText
+          dispatch={dispatch}
+          place={place}
+          since={since}
+          until={until}
+        />
       )}
     </div>
   )
