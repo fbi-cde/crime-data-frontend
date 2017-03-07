@@ -1,8 +1,10 @@
-import GlossaryPanel from 'glossary-panel'
 import React from 'react'
 
 import { hideGlossary, showGlossary } from '../actions/glossary'
 import terms from '../../data/terms.json'
+
+let GlossaryPanel
+if (typeof window !== 'undefined') GlossaryPanel = require('glossary-panel')
 
 class Glossary extends React.Component {
   constructor() {
