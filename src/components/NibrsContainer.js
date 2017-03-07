@@ -7,6 +7,7 @@ import Loading from './Loading'
 import NibrsCard from './NibrsCard'
 import parseNibrs from '../util/nibrs'
 import Term from './Term'
+import ucrParticipation from '../util/ucr'
 
 const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')
@@ -20,6 +21,9 @@ const NibrsContainer = ({
       incident-based (NIBRS)
     </Term>
   )
+  const ucr = ucrParticipation(place)
+  const showTimeFrom = ucr.nibrs['initial-year'] < parseInt(timeFrom, 10)
+  const nibrsFirstYear = showTimeFrom ? timeFrom : ucr.nibrs['initial-year']
 
   let totalCount
   let content = <Loading />
@@ -50,11 +54,15 @@ const NibrsContainer = ({
           <br className='xs-hide' />
           {timeFrom}–{timeTo}
         </h2>
-        <p className='mt-tiny'>
-          {/* eslint max-len: 0 */}
+        {/* eslint max-len: 0 */}
+        {!showTimeFrom && (
+        <p className='mt-tiny mb-tiny'>
+          {startCase(place)} started reporting incident-based (NIBRS) data to the FBI in {nibrsFirstYear}.
+        </p>
+        )}
+        <p>
           {!error && data && `
-            There were ${formatNumber(totalCount)} individual ${crime} incidents
-            reported to the FBI in ${startCase(place)} between ${timeFrom} and ${timeTo}. This number may differ from the totals in the previous chart because of the differences in data sources.
+            There were ${formatNumber(totalCount)} individual ${crime} incidents reported to the FBI in ${startCase(place)} between ${nibrsFirstYear} and ${timeTo}. This number may differ from the totals in the previous chart because of the differences in data sources.
           `}
           Learn more about the <a className='underline' href={fbiLink}>FBI’s data collections</a>.
         </p>
