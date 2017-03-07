@@ -12,10 +12,10 @@ const Disclaimer = () => (
       />
       An official website of the United States government
     </div>
-    <div className='sm-col-right xs-hide'>
-      <span className='mr2 red bold'>This site is in beta.&nbsp;</span>
+    <div className='flex sm-col-right items-center justify-between '>
+      <span className='ml1 mr2 red bold'>This site is in beta.&nbsp;</span>
       <a
-        className='px5 py1 inline-block bold caps white bg-red'
+        className='bg-red bold caps inline-block px5 py1 white'
         href='https://github.com/18F/crime-data-explorer/issues'
       >
         Feedback
