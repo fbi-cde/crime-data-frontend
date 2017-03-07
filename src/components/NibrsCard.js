@@ -1,3 +1,4 @@
+import pluralize from 'pluralize'
 import React from 'react'
 
 import NibrsDonut from './NibrsDonut'
@@ -19,12 +20,21 @@ const NibrsCard = ({ data, title }) => {
     }
   })
 
+  const dataIsEmpty = (data.filter(d => d.data.length === 0).length === data.length)
+  const noun = data.map(d => d.noun).pop()
+
   return (
     <div className='p2 sm-p3 bg-white'>
       <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif border-bottom border-blue-light'>
         {title}
       </h2>
-      {charts}
+      {!dataIsEmpty && charts}
+      {dataIsEmpty && (
+        <div className='mt-tiny'>
+          <span className='bold caps fs-12 red'>Reported {pluralize(noun)}</span>
+          <span className='bold fs-14 ml1 monospace'>0</span>
+        </div>
+      )}
     </div>
   )
 }
