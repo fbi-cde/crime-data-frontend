@@ -54,12 +54,10 @@ const UcrParticipationInformation = ({ dispatch, place, timeTo, ucr }) => {
             </Term>
           )} data to the FBI.
         </p>
+        {/* eslint max-len: 0 */}
         {!ucr.loading && data.year && (
           <p>
-            In {timeTo}, {data.reporting_agencies} {startCase(place)} law enforcement
-            agencies reported data to the FBI, out of a total of {data.total_agencies}.
-            For that year, these statistics cover {Math.round(data.reporting_rate * 100)}%
-            of the state’s agencies or about {formatNumber(data.covered_population)} people.
+            In {timeTo}, {data.reporting_agencies} {startCase(place)} law enforcement agencies reported data to the FBI, out of a total of {data.total_agencies}. For that year, these statistics cover {Math.round(data.reporting_rate * 100)}% of the state’s agencies or about {formatNumber(data.covered_population)} people.
           </p>
         )}
       </div>
