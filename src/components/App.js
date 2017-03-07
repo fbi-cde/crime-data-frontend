@@ -3,6 +3,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import BetaBanner from './BetaBanner'
 import Disclaimer from './Disclaimer'
 import Footer from './Footer'
 import Glossary from './Glossary'
@@ -11,6 +12,7 @@ import Header from './Header'
 const App = ({ appState, children, dispatch, location }) => (
   <div className='site'>
     <Disclaimer />
+    <BetaBanner />
     <Header location={location} />
     <main className='site-main'>
       {children && React.cloneElement(children, { appState, dispatch })}
