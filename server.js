@@ -1,4 +1,4 @@
-/* eslint global-require: 0, import/first: 0 */
+/* eslint global-require: 0, import/first: 0, no-console: 0 */
 
 const production = (process.env.NODE_ENV === 'production')
 
@@ -14,13 +14,15 @@ import http from 'axios'
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
+import thunk from 'redux-thunk'
 
+import { updateApp } from './src/actions/composite'
 import history from './src/util/history'
+import reducers from './src/reducers'
 import routes from './src/routes'
-import store from './src/store'
 
 const env = cfenv.getAppEnv()
 const credService = env.getService('crime-data-api-creds') || { credentials: {} }
@@ -30,9 +32,7 @@ const API = 'https://crime-data-api.fr.cloud.gov'
 const app = express()
 const appShell = fs.readFileSync('index.html').toString()
 
-const renderPage = appHtml => (
-  appShell.replace('<div id=\'app\'></div>', `<div id='app'>${appHtml}</div>`)
-)
+const store = createStore(reducers, applyMiddleware(thunk))
 
 app.use(express.static(__dirname))
 
@@ -61,13 +61,21 @@ app.get('/*', (req, res) => {
     // server our app is stateless, so we need to use `match` to
     // get these props before rendering.
 
+    const filters = {
+      ...props.location.query,
+      ...props.params,
+    }
+    const action = updateApp(filters)
+    console.log('filters', filters)
+    console.log('action', action)
+
     const appHtml = renderToString(
       <Provider store={store}>
         <RouterContext {...props} />
       </Provider>
     )
     const page = appShell.replace('<div id=\'app\'></div>', `<div id='app'>${appHtml}</div>`)
-    res.send(renderPage(page))
+    res.send(page)
   })
 })
 

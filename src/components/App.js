@@ -5,13 +5,8 @@ import { connect } from 'react-redux'
 
 import Disclaimer from './Disclaimer'
 import Footer from './Footer'
-// import Glossary from './Glossary'
+import Glossary from './Glossary'
 import Header from './Header'
-
-// <Glossary
-//   dispatch={dispatch}
-//   {...appState.glossary}
-// />
 
 const App = ({ appState, children, dispatch, location }) => (
   <div className='site'>
@@ -20,6 +15,10 @@ const App = ({ appState, children, dispatch, location }) => (
     <main className='site-main'>
       {children && React.cloneElement(children, { appState, dispatch })}
     </main>
+    <Glossary
+      dispatch={dispatch}
+      {...appState.glossary}
+    />
     <Footer />
   </div>
 )
