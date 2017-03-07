@@ -65,10 +65,6 @@ class NibrsTable extends React.Component {
         <table className='my2 table-fixed'>
           <caption className='left-align'>
             <div className='bold'>{title}</div>
-            <div className='mt-tiny'>
-              <span className='bold caps fs-12 red'>Reported {pluralize(noun)}</span>
-              <span className='bold fs-14 ml1 monospace'>{formatNumber(total)}</span>
-            </div>
           </caption>
           <thead className='v-hide'>
             <tr style={{ lineHeight: '16px' }}>
@@ -93,6 +89,10 @@ class NibrsTable extends React.Component {
             ))}
           </tbody>
         </table>
+        <div className='mt-tiny fs-14 mb3'>
+          {/* eslint max-len: 0 */}
+          There were <span className='bold red'>{formatNumber(total)}</span> reported {pluralize(noun)}.
+        </div>
         <div className='clearfix'>
           <div className='right mt-tiny fs-10 italic serif'>
             View by
