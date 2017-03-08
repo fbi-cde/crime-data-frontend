@@ -37,8 +37,6 @@ class NibrsHistogram extends React.Component {
     const maxVal = max(bins, d => d.ct)
     const total = data.map(d => d.count).reduce((a, n) => a + n, 0)
 
-    console.log('total', total)
-
     const x = scaleLinear()
         .domain([min(bins, d => d.x0), max(bins, d => d.x1)])
         .range([0, width])
