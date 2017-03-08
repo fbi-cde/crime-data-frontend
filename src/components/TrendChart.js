@@ -215,21 +215,16 @@ class TrendChart extends React.Component {
                 onMouseOut={this.forgetValue}
               />
               {(timeTo >= 2013 && crime === 'rape') && (
-                <g>
-                  <g>
-                    <rect
-                      className='fill-blue-light'
-                      height={8}
-                      width={8}
-                      x={x(new Date('2013-01-01'))}
-                      y={height - 10}
-                      transform={`rotate(45 ${x(new Date('2013-01-01'))} ${height - 10})`}
-                    />
-                  </g>
+                <g transform={`translate(${x(new Date('2013-01-01'))}, ${height})`}>
+                  <rect
+                    className='fill-blue-light'
+                    height={8}
+                    transform='rotate(45) translate(-8, -8)'
+                    width={8}
+                  />
                   <text
                     className='fill-blue-light fs-10 italic serif'
-                    x={x(new Date('2013-01-01')) - 80}
-                    y={height - 30}
+                    transform='translate(-45, -30)'
                   >
                     Revised rape definition
                   </text>
