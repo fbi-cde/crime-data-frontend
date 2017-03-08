@@ -32,7 +32,7 @@ const appShell = fs.readFileSync('index.html').toString()
 const store = createStore(reducers, applyMiddleware(thunk))
 
 app.use(express.static(__dirname))
-app.use(express.static(path.join(__dirname, '..')))
+app.use(express.static(path.join(__dirname, '..', 'public')))
 
 app.get('/status', (req, res) => res.send(`OK ${__dirname}`))
 
