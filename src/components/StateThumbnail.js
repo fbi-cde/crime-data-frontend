@@ -1,7 +1,8 @@
-import axios from 'axios'
 import { geoAlbersUsa, geoPath } from 'd3-geo'
 import React from 'react'
 import { feature, mesh } from 'topojson'
+
+import data from '../../data/geo-usa-states.json'
 
 const Container = ({ children }) => (
   <div className='aspect-ratio aspect-ratio--4x3'>{children}</div>
@@ -10,12 +11,7 @@ const Container = ({ children }) => (
 class StateThumbnail extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { usa: null }
-  }
-
-  componentDidMount() {
-    axios.get('/data/geo-usa-states.json')
-      .then(response => { this.setState({ usa: response.data }) })
+    this.state = { usa: data }
   }
 
   render() {
