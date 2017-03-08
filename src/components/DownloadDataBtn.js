@@ -1,9 +1,10 @@
 import React from 'react'
 
 import jsonToCsv from '../util/csv'
+import { slugify } from '../util/text'
 
 const downloadData = (fname, data) => {
-  const file = `${fname}.csv`
+  const file = `${slugify(fname)}.csv`
   const dataStr = jsonToCsv(data)
 
   if (window.navigator.msSaveBlob) {
@@ -52,6 +53,13 @@ const DownloadDataBtn = ({ data, fname, text, url }) => {
       {text}
     </button>
   )
+}
+
+DownloadDataBtn.propTypes = {
+  data: React.PropTypes.arrayOf(React.PropTypes.object),
+  fname: React.PropTypes.string.isRequired,
+  text: React.PropTypes.string.isRequired,
+  url: React.PropTypes.string,
 }
 
 export default DownloadDataBtn
