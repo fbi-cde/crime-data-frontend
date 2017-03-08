@@ -2,13 +2,13 @@
 // scss-lint:disable ImportantRule,MergeableSelector,PropertySortOrder
 // scss-lint:disable PseudoElement,VendorPrefix
 
-[class*="hint--"] {
+[class*="hint-"] {
   position: relative;
   display: inline-block;
 }
 
-[class*="hint--"]:before,
-[class*="hint--"]:after {
+[class*="hint-"]:before,
+[class*="hint-"]:after {
   position: absolute;
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
@@ -21,20 +21,20 @@
   transition-delay: 0ms;
 }
 
-[class*="hint--"]:hover:before,
-[class*="hint--"]:hover:after {
+[class*="hint-"]:hover:before,
+[class*="hint-"]:hover:after {
   visibility: visible;
   opacity: 1;
 }
 
-[class*="hint--"]:hover:before,
-[class*="hint--"]:hover:after {
+[class*="hint-"]:hover:before,
+[class*="hint-"]:hover:after {
   -webkit-transition-delay: 100ms;
   -moz-transition-delay: 100ms;
   transition-delay: 100ms;
 }
 
-[class*="hint--"]:before {
+[class*="hint-"]:before {
   content: '';
   position: absolute;
   background: transparent;
@@ -42,7 +42,7 @@
   z-index: 1000001;
 }
 
-[class*="hint--"]:after {
+[class*="hint-"]:after {
   background: #383838;
   border-radius: $border-radius;
   color: $white;
@@ -53,11 +53,11 @@
   white-space: nowrap;
 }
 
-[class*="hint--"][aria-label]:after {
+[class*="hint-"][aria-label]:after {
   content: attr(aria-label);
 }
 
-[class*="hint--"][data-hint]:after {
+[class*="hint-"][data-hint]:after {
   content: attr(data-hint);
 }
 
@@ -68,44 +68,44 @@
   display: none !important;
 }
 
-.hint--bottom:before {
+.hint-bottom:before {
   border-bottom-color: #383838;
 }
 
-.hint--bottom:before {
+.hint-bottom:before {
   margin-top: -11px;
 }
 
-.hint--bottom:before,
-.hint--bottom:after {
+.hint-bottom:before,
+.hint-bottom:after {
   top: 100%;
   left: 50%;
 }
 
-.hint--bottom:before {
+.hint-bottom:before {
   left: calc(50% - 6px);
 }
 
-.hint--bottom:after {
+.hint-bottom:after {
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
   transform: translateX(-50%);
 }
 
-.hint--bottom:hover:before {
+.hint-bottom:hover:before {
   -webkit-transform: translateY(8px);
   -moz-transform: translateY(8px);
   transform: translateY(8px);
 }
 
-.hint--bottom:hover:after {
+.hint-bottom:hover:after {
   -webkit-transform: translateX(-50%) translateY(8px);
   -moz-transform: translateX(-50%) translateY(8px);
   transform: translateX(-50%) translateY(8px);
 }
 
-.hint--no-animate:before,
-.hint--no-animate:after {
+.hint-no-animate:before,
+.hint-no-animate:after {
   -webkit-transition-duration: 0ms;
   -moz-transition-duration: 0ms;
   transition-duration: 0ms;

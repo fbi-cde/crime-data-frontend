@@ -101,7 +101,7 @@ const Home = ({ appState, dispatch, location }) => {
             </div>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0 xs-hide'>
               <button
-                className={`col-12 btn btn-primary ${isValid ? '' : 'hint--bottom'}`}
+                className={`col-12 btn btn-primary ${isValid ? '' : 'hint-bottom'}`}
                 aria-label={isValid ? '' : 'Please select a location and crime type'}
                 disabled={!isValid}
                 onClick={handleSearchClick}
