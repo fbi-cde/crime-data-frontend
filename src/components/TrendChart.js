@@ -139,7 +139,7 @@ class TrendChart extends React.Component {
 
     const callout = (
       <g transform={`translate(${x(active.date)}, 0)`}>
-        <line y2={height} stroke='#95aabc' strokeWidth='1' strokeDasharray='3,3' />
+        <line y2={height} stroke='#95aabc' strokeWidth='1' />
         {keysWithSlugs.map((k, j) => (
           <circle
             key={j}
@@ -167,10 +167,10 @@ class TrendChart extends React.Component {
           ref={ref => this.svgParent = ref}
         >
           {gapRanges.length > 0 && (
-            <div className='fs-12 serif italic'>
+            <div className='pl5 fs-12 serif italic'>
               <span
-                className='mr1 inline-block align-middle bg-blue-white'
-                style={{ width: 16, height: 16 }}
+                className='mr1 inline-block align-middle bg-blue-white blue-light border rounded'
+                style={{ width: 14, height: 14 }}
               />
               Insufficent state data reported
             </div>
@@ -181,8 +181,6 @@ class TrendChart extends React.Component {
             style={{ maxWidth: '100%' }}
           >
             <g transform={`translate(${margin.left}, ${margin.top})`}>
-              <XAxis scale={x} height={height} tickCt={xTicks} />
-              <YAxis scale={y} width={width} />
               {gapRanges.map((d, i) => (
                 <rect
                   className='fill-blue-white'
@@ -192,6 +190,8 @@ class TrendChart extends React.Component {
                   height={height}
                 />
               ))}
+              <XAxis scale={x} height={height} tickCt={xTicks} />
+              <YAxis scale={y} width={width} />
               {dataByKey.map((d, i) => (
                 <g key={i} className={`series series-${d.id}`}>
                   {d.segments.map((s, j) => (
@@ -205,6 +205,39 @@ class TrendChart extends React.Component {
                   ))}
                 </g>
               ))}
+              {(until >= 2013 && crime === 'rape') && (
+                <g transform={`translate(${x(new Date('2013-01-01'))}, ${height})`}>
+                  <line
+                    stroke='#95aabc'
+                    strokeWidth='1'
+                    strokeDasharray='2,3'
+                    y2={-height}
+                  />
+                  <rect
+                    className='fill-blue'
+                    height='8'
+                    transform='rotate(45 4 4)'
+                    width='8'
+                    x={-4 * Math.sqrt(2)}
+                  />
+                  <text
+                    className='fill-blue fs-10 italic serif'
+                    textAnchor='end'
+                    x='-4'
+                    y='-22'
+                  >
+                    Revised rape
+                  </text>
+                  <text
+                    className='fill-blue fs-10 italic serif'
+                    textAnchor='end'
+                    x='-4'
+                    y='-10'
+                  >
+                    definition
+                  </text>
+                </g>
+              )}
               {callout}
               <rect
                 width={width}
@@ -214,22 +247,6 @@ class TrendChart extends React.Component {
                 onMouseMove={this.rememberValue}
                 onMouseOut={this.forgetValue}
               />
-              {(until >= 2013 && crime === 'rape') && (
-                <g transform={`translate(${x(new Date('2013-01-01'))}, ${height})`}>
-                  <rect
-                    className='fill-blue-light'
-                    height={8}
-                    transform='rotate(45) translate(-8, -8)'
-                    width={8}
-                  />
-                  <text
-                    className='fill-blue-light fs-10 italic serif'
-                    transform='translate(-45, -30)'
-                  >
-                    Revised rape definition
-                  </text>
-                </g>
-              )}
             </g>
           </svg>
         </div>
