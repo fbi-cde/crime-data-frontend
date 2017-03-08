@@ -1,11 +1,12 @@
 import pluralize from 'pluralize'
 import React from 'react'
 
+import DownloadDataBtn from './DownloadDataBtn'
 import NibrsDonut from './NibrsDonut'
 import NibrsHistogram from './NibrsHistogram'
 import NibrsTable from './NibrsTable'
 
-const NibrsCard = ({ data, title }) => {
+const NibrsCard = ({ crime, data, place, title }) => {
   const charts = data.map((d, i) => {
     const props = { key: i, ...d }
     switch (d.type) {
@@ -35,12 +36,19 @@ const NibrsCard = ({ data, title }) => {
           <span className='bold fs-14 ml1 monospace'>0</span>
         </div>
       )}
+      <DownloadDataBtn
+        data={data[0].data.map(d => ({ key: d.key, count: d.count }))}
+        fname={`${place}-${crime}-${data[0].title || title}`}
+        text='Download data'
+      />
     </div>
   )
 }
 
 NibrsCard.propTypes = {
+  crime: React.PropTypes.string,
   data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  place: React.PropTypes.string,
   title: React.PropTypes.string.isRequired,
 }
 
