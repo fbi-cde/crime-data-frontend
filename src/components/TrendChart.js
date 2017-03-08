@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 
-import { bisector, extent, max } from 'd3-array'
+import { bisector, extent, max, min } from 'd3-array'
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
 import { line } from 'd3-shape'
 import startCase from 'lodash.startcase'
@@ -78,19 +78,39 @@ class TrendChart extends React.Component {
 
     const keysWithSlugs = keys.map(name => ({ name, slug: slugify(name) }))
 
-    // parse date
     const dataClean = data.map(d => (
       Object.assign(
-        { date: parse(d.date) },
+        { year: +d.date, date: parse(d.date) },
         ...keysWithSlugs.map(k => ({ [k.slug]: d[k.slug] })),
       )
     ))
 
-    // nest data by key, standardize naming
+    const gaps = []
     const dataByKey = keysWithSlugs.map(k => {
-      const values = dataClean.map(d => ({ date: d.date, value: d[k.slug] }))
-      return { id: k.slug, name: k.name, values }
+      const segments = [[]]
+      const values = dataClean.map(d => ({
+        year: d.year,
+        date: d.date,
+        value: d[k.slug],
+      }))
+
+      values.forEach(d => {
+        if (d.value.count !== 0) {
+          segments[segments.length - 1].push(d)
+        } else {
+          gaps.push(d.year)
+          segments.push([])
+        }
+      })
+
+      return { id: k.slug, name: k.name, values, segments }
     })
+
+    const gapRanges = gaps.map(year => ([
+      max([year - 1, since]),
+      year,
+      min([year + 1, until]),
+    ].map(y => parse(y))))
 
     const x = scaleTime()
         .domain(extent(dataClean, d => d.date))
@@ -126,7 +146,7 @@ class TrendChart extends React.Component {
             cx='0'
             cy={y(active[k.slug].rate)}
             fill={color(k.slug)}
-            r='4'
+            r={active[k.slug].count ? '4' : '0'}
           />
         ))}
       </g>
@@ -146,7 +166,15 @@ class TrendChart extends React.Component {
           className='col-12'
           ref={ref => this.svgParent = ref}
         >
-          {/* eslint-enable no-return-assign */}
+          {gapRanges.length > 0 && (
+            <div className='fs-12 serif italic'>
+              <span
+                className='mr1 inline-block align-middle bg-blue-white'
+                style={{ width: 16, height: 16 }}
+              />
+              Insufficent state data reported
+            </div>
+          )}
           <svg
             width={svgWidth}
             height={svgHeight}
@@ -155,14 +183,26 @@ class TrendChart extends React.Component {
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x} height={height} tickCt={xTicks} />
               <YAxis scale={y} width={width} />
+              {gapRanges.map((d, i) => (
+                <rect
+                  className='fill-blue-white'
+                  key={i}
+                  x={x(d[0])}
+                  width={x(d[2]) - x(d[0])}
+                  height={height}
+                />
+              ))}
               {dataByKey.map((d, i) => (
                 <g key={i} className={`series series-${d.id}`}>
-                  <path
-                    d={l(d.values)}
-                    fill='none'
-                    stroke={color(d.id)}
-                    strokeWidth='2'
-                  />
+                  {d.segments.map((s, j) => (
+                    <path
+                      key={j}
+                      d={l(s)}
+                      fill='none'
+                      stroke={color(d.id)}
+                      strokeWidth='2'
+                    />
+                  ))}
                 </g>
               ))}
               {callout}
