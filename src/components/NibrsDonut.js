@@ -71,7 +71,14 @@ class NibrsDonut extends React.Component {
             </svg>
           </div>
           <div className='col col-6 px1'>
-            <NibrsDonutDetails colorMap={colorMap} data={dataSorted} selected={hover} />
+            <NibrsDonutDetails
+              colorMap={colorMap}
+              data={dataSorted}
+              hover={hover}
+              onMouseOver={this.rememberValue}
+              onMouseOut={this.forgetValue}
+              selected={hover}
+            />
           </div>
         </div>
       </div>
