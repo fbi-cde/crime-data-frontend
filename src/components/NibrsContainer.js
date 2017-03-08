@@ -44,7 +44,7 @@ const NibrsContainer = ({
             key={i}
             className={`lg-col lg-col-6 mb2 px1 ${i % 2 === 0 ? 'clear-left' : ''}`}
           >
-            <NibrsCard {...d} />
+            <NibrsCard crime={crime} place={place} {...d} />
           </div>
         ))}
       </div>

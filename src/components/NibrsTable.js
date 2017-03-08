@@ -2,8 +2,6 @@ import { format } from 'd3-format'
 import pluralize from 'pluralize'
 import React from 'react'
 
-import DownloadDataBtn from './DownloadDataBtn'
-
 const formatNumber = format(',')
 const formatPercent = p => (p > 0.01 ? format('.0%')(p) : '<1%')
 const formatSI = n => (Number(n) > 10 ? format('.2s')(n) : formatNumber(n))
@@ -109,11 +107,6 @@ class NibrsTable extends React.Component {
               %
             </button>
           </div>
-          <DownloadDataBtn
-            data={data.map(d => ({ key: d.key, count: d.count }))}
-            fname={title}
-            text='Download data'
-          />
         </div>
       </div>
     )
