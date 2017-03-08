@@ -86,7 +86,7 @@ const About = () => (
         </h3>
         <div className='clearfix mxn2'>
           <div className='sm-col sm-col-9 px2'>
-            <UsaMap colors={stateColors} />
+            <UsaMap colors={stateColors} changeColorOnHover={false} />
           </div>
           <div className='sm-col sm-col-3 px2 pt1'>
             {legend.map((d, i) => (

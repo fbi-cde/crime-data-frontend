@@ -13,6 +13,9 @@
 .usa-map path {
   stroke: $white;
   stroke-width: 2px;
-  &:hover { fill: $red-light; }
   @media #{$breakpoint-sm} { stroke-width: 1px; }
+}
+
+.usa-map:not(.no-hover) path:hover {
+  fill: $red-light;
 }
