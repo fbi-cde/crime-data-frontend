@@ -15,7 +15,7 @@ const NibrsDonutDetails = ({ colorMap, data, hover, onMouseOver, onMouseOut, sel
           <li
             key={i}
             className={`mb1 flex items-baseline ${border} cursor-pointer`}
-            onMouseOver={() => onMouseOver(d.key)}
+            onMouseOver={onMouseOver(d.key)}
             onMouseOut={onMouseOut}
           >
             <span

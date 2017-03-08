@@ -11,10 +11,6 @@ class NibrsDonut extends React.Component {
     this.state = { hover: null }
   }
 
-  onDetailHover = d => {
-    this.setState({ hover: d })
-  }
-
   rememberValue = d => () => {
     this.setState({ hover: d })
   }
@@ -79,7 +75,7 @@ class NibrsDonut extends React.Component {
               colorMap={colorMap}
               data={dataSorted}
               hover={hover}
-              onMouseOver={this.onDetailHover}
+              onMouseOver={this.rememberValue}
               onMouseOut={this.forgetValue}
               selected={hover}
             />
