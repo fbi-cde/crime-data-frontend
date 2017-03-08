@@ -20,7 +20,7 @@ class NibrsHistogram extends React.Component {
   }
 
   render() {
-    const { data, margin, noun, size, title } = this.props
+    const { data, margin, noun, size, title, xLabel, yLabel } = this.props
     const { hover } = this.state
 
     const height = size.height - margin.top - margin.bottom
@@ -35,6 +35,9 @@ class NibrsHistogram extends React.Component {
 
     const binCt = bins.length
     const maxVal = max(bins, d => d.ct)
+    const total = data.map(d => d.count).reduce((a, n) => a + n, 0)
+
+    console.log('total', total)
 
     const x = scaleLinear()
         .domain([min(bins, d => d.x0), max(bins, d => d.x1)])
@@ -44,11 +47,10 @@ class NibrsHistogram extends React.Component {
         .domain([0, maxVal])
         .range([height, 0])
 
-    const active = hover || bins.filter(d => d.ct === maxVal)[0]
-
     return (
       <div className='mb2 pb2 border-bottom border-blue-light'>
         <div className='mb1 bold'>{title}</div>
+        {yLabel && <div className='bold caps fs-14 red'>{yLabel}</div>}
         <div>
           <svg
             preserveAspectRatio='xMidYMid'
@@ -56,6 +58,16 @@ class NibrsHistogram extends React.Component {
             style={{ width: '100%', height: '100%' }}
           >
             <g transform={`translate(${margin.left}, ${margin.top})`}>
+              <g className='axis'>
+                <line
+                  x1='0'
+                  y1='0'
+                  x2='0'
+                  y2={height}
+                  strokeWidth='1'
+                  strokeDasharray='3,3'
+                />
+              </g>
               {bins.map((d, i) => (
                 <g
                   key={i}
@@ -66,19 +78,22 @@ class NibrsHistogram extends React.Component {
                     width={x(bins[0].x1) - x(bins[0].x0) - 1}
                     height={height - y(d.ct)}
                     x='1'
-                    fill={(hover === null || d.x0 === active.x0) ? '#ff5e50' : '#f4dfdd'}
+                    fill={(hover === null || d.x0 === hover.x0) ? '#ff5e50' : '#f4dfdd'}
                     pointerEvents='all'
                     onMouseOver={this.rememberValue(d)}
                     onMouseOut={this.forgetValue}
                   />
                 </g>
               ))}
+
               <XAxis scale={x} height={height} tickCt={binCt} />
             </g>
           </svg>
-          {active && (
-            <NibrsHistogramDetails data={active} noun={noun} />
-          )}
+          {xLabel && <div className='bold caps center fs-14 red'>{xLabel}</div>}
+          <NibrsHistogramDetails
+            data={hover || { ct: total }}
+            noun={noun}
+          />
         </div>
       </div>
     )
@@ -92,6 +107,8 @@ NibrsHistogram.defaultProps = {
 
 NibrsHistogram.propTypes = {
   noun: React.PropTypes.string.isRequired,
+  xLabel: React.PropTypes.string,
+  yLabel: React.PropTypes.string,
 }
 
 export default NibrsHistogram
