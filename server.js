@@ -1,12 +1,10 @@
-/* eslint comma-dangle: 0, global-require: 0, import/first: 0, no-console: 0 */
+/* eslint-disable comma-dangle, global-require, import/first, no-console */
 
-const production = (process.env.NODE_ENV === 'production')
+if (process.env.NODE_ENV === 'production') require('newrelic')
 
 import 'babel-polyfill'
-
-if (production) require('newrelic')
-
 import fs from 'fs'
+import path from 'path'
 
 import cfenv from 'cfenv'
 import express from 'express'
@@ -19,7 +17,6 @@ import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
 import thunk from 'redux-thunk'
 
-import { updateApp } from './src/actions/composite'
 import history from './src/util/history'
 import reducers from './src/reducers'
 import routes from './src/routes'
@@ -35,8 +32,9 @@ const appShell = fs.readFileSync('index.html').toString()
 const store = createStore(reducers, applyMiddleware(thunk))
 
 app.use(express.static(__dirname))
+app.use(express.static(path.join(__dirname, '..')))
 
-app.get('/status', (req, res) => res.send('OK'))
+app.get('/status', (req, res) => res.send(`OK ${__dirname}`))
 
 app.get('/api/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')
@@ -48,27 +46,12 @@ app.get('/api/*', (req, res) => {
     res.set(r.headers)
     res.send(r.data)
   }).catch(e => {
-    // console.error(e)
     res.status(e.response.status).end()
   })
 })
 
 app.get('/*', (req, res) => {
-  // match the routes to the url
   match({ history, routes, location: req.url }, (err, redirect, props) => {
-    // `RouterContext` is what the `Router` renders. `Router` keeps these
-    // `props` in its state as it listens to `browserHistory`. But on the
-    // server our app is stateless, so we need to use `match` to
-    // get these props before rendering.
-
-    const filters = {
-      ...props.location.query,
-      ...props.params,
-    }
-    const action = updateApp(filters)
-    console.log('filters', filters)
-    console.log('action', action)
-
     const appHtml = renderToString(
       <Provider store={store}>
         <RouterContext {...props} />

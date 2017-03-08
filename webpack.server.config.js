@@ -1,5 +1,4 @@
-/* eslint-disable comma-dangle, no-var, quote-props, vars-on-top
-*/
+/* eslint-disable comma-dangle, no-var, quote-props, vars-on-top */
 
 var fs = require('fs')
 var path = require('path')
@@ -42,8 +41,6 @@ var config = {
   },
   plugins: [
     new webpack.IgnorePlugin(/\.(css|less)$/),
-    new webpack.BannerPlugin('require("source-map-support").install()',
-                             { raw: true, entryOnly: false })
   ]
 }
 
