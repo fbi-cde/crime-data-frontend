@@ -59,7 +59,6 @@ class TrendChart extends React.Component {
       colors,
       data,
       dispatch,
-      margin,
       place,
       since,
       size,
@@ -67,15 +66,8 @@ class TrendChart extends React.Component {
     } = this.props
     const { hover, svgParentWidth } = this.state
 
-    const svgWidth = svgParentWidth || size.width
-    const svgHeight = svgWidth / 2.25
-    const width = svgWidth - margin.left - margin.right
-    const height = svgHeight - margin.top - margin.bottom
-
-    const xTicks = svgWidth < 500 ? 4 : 8
     const color = scaleOrdinal(colors);
     const parse = timeParse('%Y')
-
     const keysWithSlugs = keys.map(name => ({ name, slug: slugify(name) }))
 
     const dataClean = data.map(d => (
@@ -112,12 +104,20 @@ class TrendChart extends React.Component {
       min([year + 1, until]),
     ].map(y => parse(y))))
 
+    const maxValue = max(dataByKey, d => max(d.values, v => v.value.rate))
+
+    const svgWidth = svgParentWidth || size.width
+    const svgHeight = svgWidth / 2.25
+    const margin = { ...size.margin, left: maxValue > 1000 ? 48 : 36 }
+    const width = svgWidth - margin.left - margin.right
+    const height = svgHeight - margin.top - margin.bottom
+
     const x = scaleTime()
         .domain(extent(dataClean, d => d.date))
         .range([0, width])
 
     const y = scaleLinear()
-        .domain([0, max(dataByKey, d => max(d.values, v => v.value.rate))])
+        .domain([0, maxValue])
         .range([height, 0])
         .nice()
 
@@ -167,7 +167,7 @@ class TrendChart extends React.Component {
           ref={ref => this.svgParent = ref}
         >
           {gapRanges.length > 0 && (
-            <div className='pl5 fs-12 serif italic'>
+            <div className='mb1 fs-12 serif italic'>
               <span
                 className='mr1 inline-block align-middle bg-blue-white blue-light border rounded'
                 style={{ width: 14, height: 14 }}
@@ -190,7 +190,7 @@ class TrendChart extends React.Component {
                   height={height}
                 />
               ))}
-              <XAxis scale={x} height={height} tickCt={xTicks} />
+              <XAxis scale={x} height={height} tickCt={svgWidth < 500 ? 4 : 8} />
               <YAxis scale={y} width={width} />
               {dataByKey.map((d, i) => (
                 <g key={i} className={`series series-${d.id}`}>
@@ -250,8 +250,9 @@ class TrendChart extends React.Component {
             </g>
           </svg>
         </div>
-        <div className='my2 fs-10 sm-fs-12 line-height-1 bold monospace center'>
-          {startCase(crime)} rate per 100,000 people (does not include estimates)
+        <div className='my1 fs-10 sm-fs-12 monospace center'>
+          <div className='bold'>{startCase(crime)} rate per 100,000 people</div>
+          <div>(Does not include estimates)</div>
         </div>
         <DownloadDataBtn
           data={data}
@@ -270,8 +271,10 @@ TrendChart.propTypes = {
 }
 
 TrendChart.defaultProps = {
-  margin: { top: 20, right: 20, bottom: 30, left: 40 },
-  size: { width: 735 },
+  size: {
+    width: 735,
+    margin: { top: 16, right: 16, bottom: 24, left: 36 },
+  },
   colors: ['#ff5e50', '#52687d', '#97a7b8'],
 }
 

@@ -24,7 +24,7 @@ const YAxis = ({
 
     return (
       <g key={i} transform={`translate(0, ${pos})`} className='tick'>
-        <line stroke='#000' x2={width} y2='0' />
+        <line x2={width} y2='0' />
         <text fill='#000' x='-9' y='0' dy='.32em'>{fmt(v)}</text>
       </g>
     )
