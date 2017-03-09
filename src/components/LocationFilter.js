@@ -2,24 +2,18 @@ import React from 'react'
 import startCase from 'lodash.startcase'
 
 import LocationSelect from './LocationSelect'
-import StateThumbnail from './StateThumbnail'
+import PlaceThumbnail from './PlaceThumbnail'
 
-const LocationFilter = ({ onChange, selected }) => {
-  const placeDisplay = startCase(selected)
-
-  return (
-    <div id='location' className='mb4'>
-      <div className='mb2 fs-22 bold border-bottom'>Location</div>
-      <div className='my4 center'>
-        <StateThumbnail selected={placeDisplay} />
-      </div>
-      <LocationSelect
-        onChange={onChange}
-        selected={placeDisplay}
-      />
-    </div>
-  )
-}
+const LocationFilter = ({ onChange, selected }) => (
+  <div id='location' className='mb4'>
+    <div className='mb2 fs-22 bold border-bottom'>Location</div>
+    <PlaceThumbnail place={selected} />
+    <LocationSelect
+      onChange={onChange}
+      selected={startCase(selected)}
+    />
+  </div>
+)
 
 LocationFilter.defaultProps = {
   selected: '',
