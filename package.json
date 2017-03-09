@@ -1,6 +1,10 @@
 {
   "name": "crime-data-explorer",
   "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": "6.9.x"
+  },
   "scripts": {
     "start": "node build/server.js",
     "build": "npm run build:client && npm run build:server",
@@ -84,8 +88,5 @@
     "webpack": "1.13.2",
     "yaml-lint": "0.0.4",
     "yaml-loader": "^0.4.0"
-  },
-  "engines": {
-    "node": "6.9.x"
   }
 }
