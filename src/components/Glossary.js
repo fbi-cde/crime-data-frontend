@@ -1,8 +1,11 @@
-import GlossaryPanel from 'glossary-panel'
+/* eslint-disable global-require */
 import React from 'react'
 
 import { hideGlossary, showGlossary } from '../actions/glossary'
 import terms from '../../data/terms.json'
+
+let GlossaryPanel
+if (typeof window !== 'undefined') GlossaryPanel = require('glossary-panel')
 
 class Glossary extends React.Component {
   constructor() {
@@ -54,7 +57,7 @@ class Glossary extends React.Component {
           aria-hidden='true'
         >
           <button className='right btn p0' onClick={this.toggleGlossary}>
-            <img src='img/x.svg' alt='close' width='16' height='16' />
+            <img src='/img/x.svg' alt='close' width='16' height='16' />
           </button>
           <h3 className='mt1 mb2 fs-26 white'>Glossary</h3>
           <label

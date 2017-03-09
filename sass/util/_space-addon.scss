@@ -138,6 +138,6 @@
 
 @media #{$breakpoint-md} {
   .md-ml0 { margin-left: 0; }
-
   .md-pl0 { padding-left: 0; }
+  .md-pr7 { padding-right: $space-7; }
 }

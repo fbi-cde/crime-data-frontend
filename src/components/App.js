@@ -16,11 +16,11 @@ const App = ({ appState, children, dispatch, location }) => (
     <Header location={location} />
     <main className='site-main'>
       {children && React.cloneElement(children, { appState, dispatch })}
-      <Glossary
-        dispatch={dispatch}
-        {...appState.glossary}
-      />
     </main>
+    <Glossary
+      dispatch={dispatch}
+      {...appState.glossary}
+    />
     <Footer />
   </div>
 )

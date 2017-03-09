@@ -14,7 +14,7 @@ class StateThumbnail extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('data/geo-usa-states.json')
+    axios.get('/data/geo-usa-states.json')
       .then(response => { this.setState({ usa: response.data }) })
   }
 
