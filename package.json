@@ -7,9 +7,9 @@
   },
   "scripts": {
     "start": "node build/server.js",
-    "build": "npm run build:client && npm run build:server",
+    "build": "export NODE_ENV=production && npm run build:client && npm run build:server",
     "build:client": "webpack -p --progress --config webpack.client.config.js",
-    "build:server": "webpack --config webpack.server.config.js",
+    "build:server": "webpack -p --config webpack.server.config.js",
     "watch": "npm run watch:server & npm run watch:client",
     "watch:server": "webpack -w --config webpack.server.config.js & nodemon build/server.js",
     "watch:client": "webpack -w --progress --config webpack.client.config.js",
