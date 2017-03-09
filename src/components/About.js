@@ -120,7 +120,7 @@ const About = () => (
           </h3>
           <div className='mb4 clearfix'>
             <div className='md-col md-col-9 md-pr7'>
-              <UsaMap colors={stateColors} />
+              <UsaMap colors={stateColors} changeColorOnHover={false} />
             </div>
             <div className='md-col md-col-3 pt1'>
               {legend.map((d, i) => (
