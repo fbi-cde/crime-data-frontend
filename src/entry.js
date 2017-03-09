@@ -5,9 +5,12 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
 import routes from './routes'
-import store from './store'
+import configureStore from './store'
 
 import '../sass/app.scss'
+
+const preloadedState = window.__STATE__
+const store = configureStore(preloadedState)
 
 const render = () => {
   ReactDOM.render(

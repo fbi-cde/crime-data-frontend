@@ -1,24 +1,24 @@
-/* eslint-disable comma-dangle, global-require, import/first, no-console */
-
-if (process.env.NODE_ENV === 'production') require('newrelic')
+/* eslint-disable comma-dangle, global-require, import/first, no-console, padded-blocks */
 
 import 'babel-polyfill'
-import fs from 'fs'
+
 import path from 'path'
 
 import cfenv from 'cfenv'
 import express from 'express'
 import http from 'axios'
-
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
-import thunk from 'redux-thunk'
 
+if (process.env.NODE_ENV === 'production') {
+  require('newrelic')
+}
+
+import configureStore from './src/store'
 import history from './src/util/history'
-import reducers from './src/reducers'
+import renderHtml from './src/html'
 import routes from './src/routes'
 
 const env = cfenv.getAppEnv()
@@ -27,9 +27,6 @@ const apiKey = credService.credentials.API_KEY || process.env.API_KEY || false
 const API = 'https://crime-data-api.fr.cloud.gov'
 
 const app = express()
-const appShell = fs.readFileSync('index.html').toString()
-
-const store = createStore(reducers, applyMiddleware(thunk))
 
 app.use(express.static(__dirname))
 app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -51,14 +48,29 @@ app.get('/api/*', (req, res) => {
 })
 
 app.get('/*', (req, res) => {
+  const store = configureStore()
+
   match({ history, routes, location: req.url }, (err, redirect, props) => {
-    const appHtml = renderToString(
-      <Provider store={store}>
-        <RouterContext {...props} />
-      </Provider>
-    )
-    const page = appShell.replace('<div id=\'app\'></div>', `<div id='app'>${appHtml}</div>`)
-    res.send(page)
+    if (err) {
+
+      res.status(500).send('Internal Server Error')
+
+    } else if (redirect) {
+
+      const { pathname, search } = redirect
+      res.redirect(`${pathname}${search}`)
+
+    } else if (props) {
+
+      const html = renderToString(
+        <Provider store={store}>
+          <RouterContext {...props} />
+        </Provider>
+      )
+      const state = store.getState()
+      res.send(renderHtml(html, state))
+
+    }
   })
 })
 
