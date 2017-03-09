@@ -33,7 +33,7 @@ class TimePeriodFilter extends React.Component {
 
     return (
       <div id='time-period' className='mb5'>
-        <div className='mb4 fs-22 bold border-bottom'>Time period</div>
+        <div className='mb3 fs-22 bold border-bottom'>Time period</div>
         <div className='clearfix'>
           <div className='col col-5'>
             <label htmlFor='since' className='hide'>Time from</label>
