@@ -138,14 +138,26 @@ const victimDemo = data => {
   }
 }
 
+const cleanRelationshipLabels = r => {
+  if (!r.offender_relationship) return r
+  const reg = new RegExp('victim was', 'gi')
+
+  return {
+    ...r,
+    offender_relationship: r.offender_relationship.replace(reg, '').trim(),
+  }
+}
+
 const relationships = data => {
   const { victimRelationship } = data
+
+  const relationshipData = victimRelationship.map(cleanRelationshipLabels)
 
   return {
     title: 'Victim’s relationship to the offender',
     data: [
       {
-        data: reshape(victimRelationship, 'offender_relationship'),
+        data: reshape(relationshipData, 'offender_relationship'),
         noun: 'relationship',
         type: 'table',
       },
