@@ -96,6 +96,8 @@ const offenderDemo = data => {
         noun: 'offender',
         title: 'Age of offender',
         type: 'histogram',
+        xLabel: 'Offender Age',
+        yLabel: 'Incidents',
       },
       {
         data: rename(reshape(offenderRaceCode, 'race_code'), raceCodes),
@@ -123,6 +125,8 @@ const victimDemo = data => {
         noun: 'victim',
         title: 'Age of victim',
         type: 'histogram',
+        xLabel: 'Victim Age',
+        yLabel: 'Incidents',
       },
       {
         data: rename(reshape(victimRaceCode, 'race_code'), raceCodes),
