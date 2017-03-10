@@ -12,6 +12,8 @@ import '../sass/app.scss'
 const preloadedState = window.__STATE__
 const store = configureStore(preloadedState)
 
+delete window.__STATE__
+
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>{routes}</Provider>,
