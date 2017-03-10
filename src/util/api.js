@@ -71,7 +71,7 @@ const stateCodes = {
 
 const getNibrs = ({ crime, dim, place, type }) => {
   const field = dimensionEndpoints[dim]
-  const fieldPath = `${field}${dim !== 'locationName' ? '/offenses' : ''}`
+  const fieldPath = `${field}/offenses`
   const loc = (place === nationalKey) ? 'national' : `states/${stateCodes[place]}`
 
   const url = `${API}/${type}s/count/${loc}/${fieldPath}`
