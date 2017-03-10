@@ -123,10 +123,12 @@ class DownloadBulkNibrs extends React.Component {
           Download incident reports by state and year
         </h2>
         <p className='mb4 fs-18 sm-fs-24 serif'>
-          See {nibrsTerm} data by offense, location, victim and offender demographics, and arrestee.
+          See {nibrsTerm} data by offense, location, victim and offender
+          demographics, and arrestee. For more information, please see the{' '}
+          <a className='bold' href='/pdf/README.pdf'>README</a> and{' '}
+          <a className='bold' href='/pdf/NIBRS-data-diagram.pdf'>NIBRS data diagram</a>.
         </p>
         <form className='p2 sm-p4 bg-blue-white'>
-
           <div className='clearfix mxn1'>
             <div className='sm-col sm-col-5 px1 mb2 sm-m0'>
               <label className='hide' htmlFor='nibrs-state'>Location</label>
