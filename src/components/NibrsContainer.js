@@ -14,12 +14,9 @@ const formatNumber = format(',')
 
 const initialNibrsYear = ({ place, since }) => {
   const participation = ucrParticipation(place)
-  if (!participation) return since
+  const initYear = participation && participation.nibrs['initial-year']
 
-  const initYear = participation.nibrs['initial-year']
-
-  if (!initYear) return since
-  else if (initYear > since) return initYear
+  if (initYear && initYear > since) return initYear
   return since
 }
 
