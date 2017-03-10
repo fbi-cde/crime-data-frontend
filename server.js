@@ -16,6 +16,7 @@ if (process.env.NODE_ENV === 'production') {
   require('newrelic')
 }
 
+import { updateFilters } from './src/actions/filters'
 import configureStore from './src/store'
 import history from './src/util/history'
 import renderHtml from './src/html'
@@ -67,9 +68,10 @@ app.get('/*', (req, res) => {
           <RouterContext {...props} />
         </Provider>
       )
-      const state = store.getState()
-      res.send(renderHtml(html, state))
 
+      const action = updateFilters({ ...props.router.params })
+      store.dispatch(action)
+      res.send(renderHtml(html, store.getState()))
     }
   })
 })
