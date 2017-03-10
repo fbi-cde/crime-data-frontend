@@ -16,7 +16,7 @@ describe('TrendChart', () => {
   let chart
 
   beforeEach(() => {
-    chart = shallow(<TrendChart data={data} filters={filters} keys={keys} />)
+    chart = shallow(<TrendChart data={data} keys={keys} {...filters} />)
   });
 
   it('TrendChart renders svg', () => {

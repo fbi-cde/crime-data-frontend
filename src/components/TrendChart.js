@@ -77,6 +77,11 @@ class TrendChart extends React.Component {
       )
     ))
 
+    const download = [{
+      data,
+      filename: `${place}-${crime}-${since}–${until}`,
+    }]
+
     const gaps = []
     const dataByKey = keysWithSlugs.map(k => {
       const segments = [[]]
@@ -254,11 +259,7 @@ class TrendChart extends React.Component {
           <div className='bold'>{startCase(crime)} rate per 100,000 people</div>
           <div>(Does not include estimates)</div>
         </div>
-        <DownloadDataBtn
-          data={data}
-          fname={`${place}-${crime}-${since}–${until}`}
-          text='Download data'
-        />
+        <DownloadDataBtn data={download} />
       </div>
     )
   }

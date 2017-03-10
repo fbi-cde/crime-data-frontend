@@ -69,10 +69,7 @@ const DownloadsAndDocs = ({ dispatch }) => (
             <div className='sm-col sm-col-4 fs-14 bold'>
               Summary (SRS) available
               <a className='block mt1 sm-mt2 fs-12 underline'>
-                <DownloadDataBtn
-                  url={d.download}
-                  text='Download CSV'
-                />
+                <DownloadDataBtn data={[{ url: d.download }]} />
               </a>
             </div>
           </div>

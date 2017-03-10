@@ -30,15 +30,17 @@ const downloadUrl = url => {
   body.removeChild(a)
 }
 
-const DownloadDataBtn = ({ data, fname, text, url }) => {
-  if ((!data || data.length === 0) && !url) return null
+const DownloadDataBtn = ({ data, text }) => {
+  if (!data || data.length === 0) return null
 
   const clickHander = () => {
-    if (url) {
-      downloadUrl(url)
-    } else if (data.length > 0) {
-      downloadData(fname, data)
-    }
+    data.forEach(d => {
+      if (d.url) {
+        downloadUrl(d.url)
+      } else if (d.data.length > 0) {
+        downloadData(d.filename, d.data)
+      }
+    })
   }
 
   return (
@@ -56,10 +58,16 @@ const DownloadDataBtn = ({ data, fname, text, url }) => {
 }
 
 DownloadDataBtn.propTypes = {
-  data: React.PropTypes.arrayOf(React.PropTypes.object),
-  fname: React.PropTypes.string.isRequired,
-  text: React.PropTypes.string.isRequired,
-  url: React.PropTypes.string,
+  data: React.PropTypes.arrayOf(React.PropTypes.shape({
+    data: React.PropTypes.arrayOf(React.PropTypes.object),
+    filename: React.PropTypes.string,
+    url: React.PropTypes.string,
+  })),
+  text: React.PropTypes.string,
+}
+
+DownloadDataBtn.defaultProps = {
+  text: 'Download data',
 }
 
 export default DownloadDataBtn

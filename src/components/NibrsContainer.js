@@ -12,6 +12,14 @@ import ucrParticipation from '../util/ucr'
 const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')
 
+const initialNibrsYear = ({ place, since }) => {
+  const participation = ucrParticipation(place)
+  const initYear = participation && participation.nibrs['initial-year']
+
+  if (initYear && initYear > since) return initYear
+  return since
+}
+
 const NibrsContainer = ({
   crime,
   data,
@@ -29,9 +37,7 @@ const NibrsContainer = ({
     </Term>
   )
 
-  const initYear = ucrParticipation(place).nibrs['initial-year']
-  const showSince = initYear < since
-  const nibrsFirstYear = showSince ? since : initYear
+  const nibrsFirstYear = initialNibrsYear({ place, since })
 
   let [totalCount, content] = [0, <Loading />]
   if (!loading && data) {
@@ -44,7 +50,13 @@ const NibrsContainer = ({
             key={i}
             className={`lg-col lg-col-6 mb2 px1 ${i % 2 === 0 ? 'clear-left' : ''}`}
           >
-            <NibrsCard crime={crime} place={place} {...d} />
+            <NibrsCard
+              crime={crime}
+              place={place}
+              since={nibrsFirstYear}
+              until={until}
+              {...d}
+            />
           </div>
         ))}
       </div>
@@ -61,7 +73,7 @@ const NibrsContainer = ({
           <br className='xs-hide' />
           {since}–{until}
         </h2>
-        {!showSince && (
+        {(nibrsFirstYear !== since) && (
           <p className='mt-tiny mb-tiny'>
             {startCase(place)} started reporting incident-based (NIBRS) data
             to the FBI in {nibrsFirstYear}.
@@ -81,7 +93,7 @@ const NibrsContainer = ({
       {content}
       {!loading && (
       <div className='center italic fs-12 mb8'>
-        <p>Source: Reported {nibrs} data from {startCase(place)}, {since}–{until}.</p>
+        <p>Source: Reported {nibrs} data from {startCase(place)}, {nibrsFirstYear}–{until}.</p>
       </div>
       )}
     </div>
