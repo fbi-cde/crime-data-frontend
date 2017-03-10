@@ -71,7 +71,7 @@ const stateCodes = {
 
 const getNibrs = ({ crime, dim, place, type }) => {
   const field = dimensionEndpoints[dim]
-  const fieldPath = `${field}${dim !== 'locationName' ? '/offenses' : ''}`
+  const fieldPath = `${field}/offenses`
   const loc = (place === nationalKey) ? 'national' : `states/${stateCodes[place]}`
 
   const url = `${API}/${type}s/count/${loc}/${fieldPath}`
@@ -150,8 +150,11 @@ const getSummaryRequests = params => {
 }
 
 const getUcrParticipation = place => {
-  const state = lookupUsa(place).toUpperCase()
-  return get(`${API}/geo/states/${state}/participation`).then(response => ({
+  const path = (place === nationalKey)
+    ? 'participation/national'
+    : `geo/states/${lookupUsa(place).toUpperCase()}/participation`
+
+  return get(`${API}/${path}`).then(response => ({
     place: slugify(place),
     results: response.results,
   }))

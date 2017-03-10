@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node build/server.js",
-    "build": "export NODE_ENV=production && npm run build:client && npm run build:server",
+    "build": "export NODE_ENV=production && npm run build:client && npm run build:server && unset NODE_ENV",
     "build:client": "webpack -p --progress --config webpack.client.config.js",
     "build:server": "webpack --config webpack.server.config.js",
     "watch": "npm run watch:server & npm run watch:client",
