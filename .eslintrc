@@ -9,6 +9,7 @@
     "arrow-parens": [2, "as-needed"],
     "import/no-extraneous-dependencies": 0,
     "max-len": [1, 100],
+    "no-underscore-dangle": 0,
     "react/jsx-filename-extension": 0,
     "react/prop-types": 0,
     "semi": 0,
