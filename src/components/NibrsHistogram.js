@@ -48,7 +48,7 @@ class NibrsHistogram extends React.Component {
     return (
       <div className='mb2 pb2 border-bottom border-blue-light'>
         <div className='mb1 bold'>{title}</div>
-        {yLabel && <div className='bold caps fs-14 red'>{yLabel}</div>}
+        {yLabel && <div className='mb1 fs-12 bold caps red'>{yLabel}</div>}
         <div>
           <svg
             preserveAspectRatio='xMidYMid'
@@ -84,7 +84,7 @@ class NibrsHistogram extends React.Component {
               <XAxis scale={x} height={height} tickCt={binCt} />
             </g>
           </svg>
-          {xLabel && <div className='bold caps center fs-14 red'>{xLabel}</div>}
+          {xLabel && <div className='mb1 fs-12 bold caps red center'>{xLabel}</div>}
           <NibrsHistogramDetails
             data={hover || { ct: total }}
             noun={noun}
