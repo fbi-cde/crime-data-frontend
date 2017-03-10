@@ -10,7 +10,7 @@ const NibrsHistogramDetails = ({ data, noun }) => {
   const strong = v => <strong className='red'>{v}</strong>
 
   return (
-    <div className='mh6 mt1 fs-14'>
+    <div className='mh6 fs-14'>
       There {pluralize('were', ct)} {strong(fmt(ct))} {pluralize('incidents', ct)}
       {noSelection ? <span>.</span> : (
         <span>{' '}involving {pluralize(noun)} aged {strong(`${x0}-${x1 - 1}`)}.</span>

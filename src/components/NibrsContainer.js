@@ -74,12 +74,12 @@ const NibrsContainer = ({
           {since}–{until}
         </h2>
         {(nibrsFirstYear !== since) && (
-          <p className='mt-tiny mb-tiny'>
+          <p className='my-tiny'>
             {startCase(place)} started reporting incident-based (NIBRS) data
             to the FBI in {nibrsFirstYear}.
           </p>
         )}
-        <p>
+        <p className='m0'>
           {!error && data && `
             There were ${formatNumber(totalCount)} individual ${crime} incidents
             reported to the FBI in ${startCase(place)} between ${nibrsFirstYear} and
