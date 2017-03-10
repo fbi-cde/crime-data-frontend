@@ -42,8 +42,6 @@ const NibrsContainer = ({
 
   const nibrsFirstYear = initialNibrsYear({ place, since })
 
-  console.log('nibrsFirstYear', nibrsFirstYear)
-
   let [totalCount, content] = [0, <Loading />]
   if (!loading && data) {
     const dataParsed = parseNibrs(data)
