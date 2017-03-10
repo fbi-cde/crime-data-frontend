@@ -5,16 +5,19 @@ import startCase from 'lodash.startcase'
 import content from '../util/content'
 import Term from './Term'
 import ucrParticipation from '../util/ucr'
-import lookupUsa from '../util/usa'
+import lookupUsa, { nationalKey } from '../util/usa'
 
 const formatNumber = format(',')
 
 const participationCsvLink = place => {
-  const id = lookupUsa(place).toUpperCase()
+  const path = (place === nationalKey)
+    ? 'participation/national'
+    : `geo/states/${lookupUsa(place).toUpperCase()}/participation`
+
   return [
     {
       text: 'Download participation and population data',
-      url: `/api/geo/states/${id}/participation?output=csv`,
+      url: `/api/${path}?output=csv`,
     },
   ]
 }
@@ -31,7 +34,7 @@ const UcrParticipationInformation = ({ dispatch, place, until, ucr }) => {
 
   return (
     <div className='mb5 clearfix'>
-      <div className='sm-col sm-col-8 mb2 sm-m0 p0 sm-pr2 fs-18 serif'>
+      <div className='lg-col lg-col-8 mb2 lg-m0 p0 lg-pr4 fs-18 serif'>
         <p>
           {startCase(place)} reports {
             (hybrid && 'both ')
@@ -61,21 +64,16 @@ const UcrParticipationInformation = ({ dispatch, place, until, ucr }) => {
           </p>
         )}
       </div>
-      <ul className='sm-col sm-col-4 m0 p0 fs-14 list-style-none'>
-        {links.map((l, i) => (
-          <li key={i}>
-            <a className='bold' href={l.url}>
-              <img
-                className='mr-tiny'
-                width='13'
-                src='/img/arrow-right.svg'
-                alt='bullet'
-              />
-              {l.text}
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div className='lg-col lg-col-4'>
+        <h3 className='mt0 mb2 fs-18 sm-fs-22'>UCR Resources</h3>
+        <ul className='m0 p0 fs-14 sm-fs-16 left-bars'>
+          {links.map((l, i) => (
+            <li className='mb1' key={i}>
+              <a href={l.url}>{l.text}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
