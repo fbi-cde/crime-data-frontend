@@ -1,4 +1,5 @@
 import React from 'react'
+import startCase from 'lodash.startcase'
 
 import CrimeTypeFilter from './CrimeTypeFilter'
 import LocationFilter from './LocationFilter'
@@ -31,7 +32,7 @@ const Sidebar = ({ dispatch, filters, isOpen, onChange, router }) => {
       <div className='p6 sm-p3 md-p4'>
         <LocationFilter
           onChange={onChange}
-          selected={place}
+          selected={startCase(place)}
         />
         <TimePeriodFilter
           onChange={onChange}
