@@ -32,6 +32,11 @@ describe('ucr utility', () => {
       const result = shouldFetchUcr({ place: 'montana' })
       expect(result).toEqual(true)
     })
+
+    it('should return false for invalid state names', () => {
+      const result = shouldFetchUcr({ place: 'not-a-place' })
+      expect(result).toEqual(false)
+    })
   })
 
   describe('shouldFetchSummaries()', () => {
