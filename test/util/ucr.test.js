@@ -40,9 +40,19 @@ describe('ucr utility', () => {
   })
 
   describe('shouldFetchSummaries()', () => {
-    it('should return undefined if crime or place are missing', () => {
+    it('should return false if crime or place are missing', () => {
       const result = shouldFetchSummaries({ place: nationalKey })
-      expect(result).toEqual(undefined)
+      expect(result).toEqual(false)
+    })
+
+    it('should return false if crime is not valid', () => {
+      const result = shouldFetchSummaries({ crime: 'fake-crime' })
+      expect(result).toEqual(false)
+    })
+
+    it('should return false if place is not valid', () => {
+      const result = shouldFetchSummaries({ place: 'fake-place' })
+      expect(result).toEqual(false)
     })
 
     it('should return a truthy value if crime and place are present', () => {
@@ -52,6 +62,11 @@ describe('ucr utility', () => {
   })
 
   describe('shouldFetchNibrs()', () => {
+    it('should return false if place does not exist', () => {
+      const result = shouldFetchNibrs({ place: 'fake-place' })
+      expect(result).toEqual(false)
+    })
+
     it('should return false if place does not submit NIBRS', () => {
       const result = shouldFetchNibrs({ place: 'new-york' })
       expect(result).toEqual(false)
