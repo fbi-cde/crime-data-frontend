@@ -62,6 +62,12 @@ describe('ucr utility', () => {
   })
 
   describe('shouldFetchNibrs()', () => {
+    it('should return false for all violent crime', () => {
+      const filters = { place: 'montana', crime: 'violent-crime' }
+      const result = shouldFetchNibrs(filters)
+      expect(result).toEqual(false)
+    })
+
     it('should return false if place does not exist', () => {
       const result = shouldFetchNibrs({ place: 'fake-place' })
       expect(result).toEqual(false)

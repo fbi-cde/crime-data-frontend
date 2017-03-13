@@ -17,7 +17,10 @@ export const shouldFetchSummaries = ({ crime, place }) => (
   isValidCrime(crime) && isValidPlace(place)
 )
 
-export const shouldFetchNibrs = ({ place }) => {
+const noNibrs = ['violent-crime', 'property-crime']
+
+export const shouldFetchNibrs = ({ crime, place }) => {
+  if (noNibrs.includes(crime)) return false
   if (!isValidPlace(place)) return false
   const coverage = lookup(place)
   return coverage && coverage.nibrs
