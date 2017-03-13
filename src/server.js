@@ -12,15 +12,15 @@ import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
 
-if (process.env.NODE_ENV === 'production') {
-  require('newrelic')
-}
-
 import { updateFilters } from './actions/filters'
 import configureStore from './store'
 import history from './util/history'
 import renderHtml from './html'
 import routes from './routes'
+
+if (process.env.NODE_ENV === 'production') {
+  require('newrelic')
+}
 
 const env = cfenv.getAppEnv()
 const credService = env.getService('crime-data-api-creds') || { credentials: {} }
