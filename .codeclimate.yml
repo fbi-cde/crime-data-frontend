@@ -1,7 +1,7 @@
 engines:
   eslint:
     enabled: true
-    channel: 'eslint-2'
+    channel: 'eslint-3'
   csslint:
     enabled: true
   scss-lint:
