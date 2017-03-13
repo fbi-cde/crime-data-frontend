@@ -1,20 +1,6 @@
 /* eslint-disable max-len */
 
-import pluralize from 'pluralize'
-import startCase from 'lodash.startcase'
-
-const openGraphTags = state => {
-  const { crime, place, since, until } = state.filters
-
-  if (!crime || !place || !since || !until) return ''
-
-  return `<meta property="og:title" content="Reported ${pluralize(crime, 2)} in ${startCase(place)} from ${since} until ${until} as reported to the FBI UCR program" />`
-}
-
-const twitterCardTags = () => (
-  `<meta name="twitter:card" content="summary" />
-   <meta name="twitter:site" content="@fbi" />`
-)
+import sharingMetaTags from './util/sharing'
 
 export default function renderHtml(content, state) {
   return `
@@ -23,8 +9,7 @@ export default function renderHtml(content, state) {
       <head>
         <meta charset='utf-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
-        ${openGraphTags(state)}
-        ${twitterCardTags(state)}
+        ${sharingMetaTags(state)}
         <title>Crime Data Explorer</title>
         <link href='/app.css' rel='stylesheet'>
       </head>
