@@ -116,10 +116,11 @@ class TrendChart extends React.Component {
     const margin = { ...size.margin, left: maxValue > 1000 ? 48 : 36 }
     const width = svgWidth - margin.left - margin.right
     const height = svgHeight - margin.top - margin.bottom
+    const xPadding = svgWidth < 500 ? 20 : 40
 
     const x = scaleTime()
         .domain(extent(dataClean, d => d.date))
-        .range([0, width])
+        .range([0 + xPadding, width - xPadding])
 
     const y = scaleLinear()
         .domain([0, maxValue])
@@ -274,7 +275,7 @@ TrendChart.propTypes = {
 TrendChart.defaultProps = {
   size: {
     width: 735,
-    margin: { top: 16, right: 16, bottom: 24, left: 36 },
+    margin: { top: 16, right: 0, bottom: 24, left: 36 },
   },
   colors: ['#ff5e50', '#52687d', '#97a7b8'],
 }

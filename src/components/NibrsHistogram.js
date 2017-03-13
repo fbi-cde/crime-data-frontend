@@ -1,4 +1,4 @@
-import { max, min } from 'd3-array'
+import { max } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import React from 'react'
 
@@ -25,6 +25,7 @@ class NibrsHistogram extends React.Component {
 
     const height = size.height - margin.top - margin.bottom
     const width = size.width - margin.left - margin.right
+    const xPadding = 20
 
     const dataFiltered = data.filter(d => +d.key % 10 === 0)
     const bins = dataFiltered.map(d => ({
@@ -33,13 +34,12 @@ class NibrsHistogram extends React.Component {
       ct: +d.count,
     }))
 
-    const binCt = bins.length
     const maxVal = max(bins, d => d.ct)
     const total = data.map(d => d.count).reduce((a, n) => a + n, 0)
 
     const x = scaleLinear()
-        .domain([min(bins, d => d.x0), max(bins, d => d.x1)])
-        .range([0, width])
+        .domain([0, 100])
+        .range([0 + xPadding, width - xPadding])
 
     const y = scaleLinear()
         .domain([0, maxVal])
@@ -56,13 +56,6 @@ class NibrsHistogram extends React.Component {
             style={{ width: '100%', height: '100%' }}
           >
             <g transform={`translate(${margin.left}, ${margin.top})`}>
-              <g className='axis'>
-                <line
-                  y2={height}
-                  strokeWidth='1'
-                  strokeDasharray='3,3'
-                />
-              </g>
               {bins.map((d, i) => (
                 <g
                   key={i}
@@ -80,8 +73,13 @@ class NibrsHistogram extends React.Component {
                   />
                 </g>
               ))}
-
-              <XAxis scale={x} height={height} tickCt={binCt} />
+              <XAxis height={height} scale={x} />
+              <g className='axis'>
+                <line y2={height} strokeWidth='1' strokeDasharray='3,3' />
+              </g>
+              <g className='axis' transform={`translate(0, ${height})`}>
+                <line x2={width} strokeWidth='1' />
+              </g>
             </g>
           </svg>
           {xLabel && <div className='mb1 fs-12 bold caps red center'>{xLabel}</div>}

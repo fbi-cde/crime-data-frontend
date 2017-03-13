@@ -20,25 +20,26 @@ class NibrsDonut extends React.Component {
   }
 
   render() {
-    const { colors, data, size, title } = this.props
+    const { colors, keys, data, size, title } = this.props
     const { hover } = this.state
 
     const { height, width } = size
     const r = Math.min(width, height) / 2
 
-    const dataSorted = [...data]
-    dataSorted.sort((a, b) => +b.count - +a.count)
-
-    const keys = data.map(d => d.key)
-    keys.sort()
+    let dataClean = [...data]
+    if (keys) {
+      const lookup = Object.assign(...data.map(d => ({ [d.key]: d.count })))
+      dataClean = keys.map(key => ({ key, count: lookup[key] || 0 }))
+    }
+    dataClean.sort((a, b) => +b.count - +a.count)
 
     const pieGen = pie().sort(descending).value(d => d.count)
     const arcGen = arc().innerRadius(r / 3).outerRadius(r - 20)
 
-    const dataDisplay = pieGen(dataSorted)
+    const dataDisplay = pieGen(dataClean)
 
     const colorMap = scaleOrdinal()
-      .domain(keys)
+      .domain(keys || data.map(d => d.key).sort())
       .range(colors)
 
     return (
@@ -73,7 +74,7 @@ class NibrsDonut extends React.Component {
           <div className='col col-6 px1'>
             <NibrsDonutDetails
               colorMap={colorMap}
-              data={dataSorted}
+              data={dataClean}
               hover={hover}
               onMouseOver={this.rememberValue}
               onMouseOut={this.forgetValue}
