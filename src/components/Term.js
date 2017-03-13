@@ -10,7 +10,7 @@ const Term = ({ children, dispatch, id }) => {
 
   return (
     <button
-      className='bg-transparent border-none border-bottom-dotted font-family-inherit font-size-inherit color-inherit'
+      className='btn p0 regular border-none border-bottom-dotted align-inherit line-height-3'
       onClick={handler}
     >
       {children}
