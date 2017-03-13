@@ -1,7 +1,10 @@
 engines:
   eslint:
     enabled: true
-    channel: 'eslint-2'
+    channel: 'eslint-3'
+    checks:
+      import/no-unresolved:
+        enabled: false
   csslint:
     enabled: true
   scss-lint:

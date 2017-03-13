@@ -12,15 +12,15 @@ import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
 
+import { updateFilters } from './actions/filters'
+import configureStore from './store'
+import history from './util/history'
+import renderHtml from './html'
+import routes from './routes'
+
 if (process.env.NODE_ENV === 'production') {
   require('newrelic')
 }
-
-import { updateFilters } from './src/actions/filters'
-import configureStore from './src/store'
-import history from './src/util/history'
-import renderHtml from './src/html'
-import routes from './src/routes'
 
 const env = cfenv.getAppEnv()
 const credService = env.getService('crime-data-api-creds') || { credentials: {} }
@@ -32,7 +32,7 @@ const app = express()
 app.use(express.static(__dirname))
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
-app.get('/status', (req, res) => res.send(`OK ${__dirname}`))
+app.get('/status', (req, res) => res.send('OK'))
 
 app.get('/api/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')

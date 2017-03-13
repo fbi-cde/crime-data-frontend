@@ -12,7 +12,7 @@ fs.readdirSync('node_modules')
 
 var config = {
   cache: false,
-  entry: './server.js',
+  entry: './src/server.js',
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'server.js'

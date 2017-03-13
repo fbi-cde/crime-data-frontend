@@ -14,7 +14,7 @@
     "watch:server": "webpack -w --config webpack.server.config.js & nodemon build/server.js",
     "watch:client": "webpack -w --progress --config webpack.client.config.js",
     "lint": "npm run lint:js && npm run lint:yml",
-    "lint:js": "eslint src scripts server.js || exit 0",
+    "lint:js": "eslint src scripts server.js --ignore-path .gitignore || exit 0",
     "lint:yml": "yamllint content/**/*.yml || exit 0",
     "test": "jest --env=jsdom --no-cache",
     "test:debug": "node --debug-brk jest -i --env=jsdom",
@@ -70,10 +70,11 @@
     "enzyme": "^2.6.0",
     "eslint": "^3.11.1",
     "eslint-config-airbnb": "^13.0.0",
+    "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-plugin-babel": "^4.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0",
+    "eslint-plugin-react": "^6.10.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "jest": "^17.0.3",
     "js-yaml": "^3.7.0",
@@ -88,5 +89,8 @@
     "webpack": "1.13.2",
     "yaml-lint": "0.0.4",
     "yaml-loader": "^0.4.0"
+  },
+  "babel": {
+    "presets": ["es2015", "stage-0", "react"]
   }
 }
