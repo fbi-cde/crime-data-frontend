@@ -52,5 +52,18 @@ describe('filters', () => {
       expect(actual.fakeOne).toEqual('yo')
       expect(actual.fakeTwo).toEqual('hey')
     })
+
+    it('should not change any other filter values not in the action', () => {
+      const action = {
+        type: FILTERS_UPDATE,
+        filters: {
+          fakeTwo: 'hey',
+        },
+      }
+      const actual = reducer({ fakeOne: 'yo' }, action)
+      expect(Object.keys(actual).length).toEqual(2)
+      expect(actual.fakeOne).toEqual('yo')
+      expect(actual.fakeTwo).toEqual('hey')
+    })
   })
 })
