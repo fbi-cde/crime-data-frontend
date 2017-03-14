@@ -112,19 +112,21 @@ class Explorer extends React.Component {
 
     return (
       <div className='site-wrapper'>
-        <div className='fixed right-0 top-0 p1'>
-          <button
-            className='btn btn-primary bg-red-bright p1 md-hide lg-hide'
-            onClick={this.toggleSidebar}
-          >
-            <img
-              className='align-middle'
-              width='22'
-              height='20'
-              src='/img/filters.svg'
-              alt='filters'
-            />
-          </button>
+        <div style={{ position: 'sticky', top: 0 }}>
+          <div className='inline-block p1 bg-red-bright md-hide lg-hide'>
+            <button
+              className='btn p1 line-height-1 border-none'
+              onClick={this.toggleSidebar}
+            >
+              <img
+                className='align-middle'
+                width='22'
+                height='20'
+                src='/img/filters.svg'
+                alt='filters'
+              />
+            </button>
+          </div>
         </div>
         <Sidebar
           dispatch={dispatch}
@@ -134,7 +136,7 @@ class Explorer extends React.Component {
           router={router}
         />
         <div className='site-content'>
-          <div className='container-main mx-auto p3'>
+          <div className='container-main mx-auto px3 md-p3'>
             <div className='items-baseline my4 border-bottom border-blue-lighter'>
               <h1 className='flex-auto mt0 mb1 fs-22 sm-fs-32'>
                 {startCase(place)}, {startCase(crime)}
