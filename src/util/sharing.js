@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 import pluralize from 'pluralize'
 import startCase from 'lodash.startcase'
 
