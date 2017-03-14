@@ -9,7 +9,7 @@ const NibrsDonutDetails = ({ colorMap, data, hover, onMouseOver, onMouseOut, sel
     <ul className='list-style-none p0 m0 fs-14'>
       {data.map((d, i) => {
         const active = d.key === selected
-        const border = active ? 'border-bottom' : 'border-bottom-dashed'
+        const border = active ? 'border-bottom border-w2' : 'border-bottom-dashed'
         const opacity = hover === null || active ? 1 : 0.5
         return (
           <li

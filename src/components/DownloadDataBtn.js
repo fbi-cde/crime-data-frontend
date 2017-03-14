@@ -44,7 +44,7 @@ const DownloadDataBtn = ({ data, text }) => {
   }
 
   return (
-    <button className='btn p0 fs-12 nowrap' onClick={clickHander}>
+    <button className='btn p0 fs-12 blue nowrap' onClick={clickHander}>
       <img
         className='mr-tiny align-tb'
         width='15'
