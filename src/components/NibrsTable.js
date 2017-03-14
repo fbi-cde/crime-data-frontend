@@ -27,7 +27,7 @@ class NibrsTable extends React.Component {
   render() {
     const { data, noun, rowLim, title } = this.props
     const { showCounts } = this.state
-    const btnClass = 'ml-tiny border border-blue rounded'
+    const btnClass = 'btn btn-primary p0 ml-tiny line-height-4 sans-serif regular'
 
     const agg = (a, b) => a + b.count
     const total = data.reduce(agg, 0)
@@ -62,7 +62,7 @@ class NibrsTable extends React.Component {
       <div>
         <table className='my2 table-fixed'>
           <caption className='left-align'>
-            <div className='bold'>{title}</div>
+            <div className='blue bold'>{title}</div>
           </caption>
           <thead className='v-hide'>
             <tr style={{ lineHeight: '16px' }}>
@@ -95,14 +95,16 @@ class NibrsTable extends React.Component {
           <div className='right mt-tiny fs-10 italic serif'>
             View by
             <button
-              className={`${btnClass} ${showCounts ? 'bg-blue white' : 'bg-white'}`}
+              className={`${btnClass} ${!showCounts && 'bg-white blue border-blue'}`}
               onClick={this.showCounts}
+              style={{ width: 18 }}
             >
               #
             </button>
             <button
-              className={`${btnClass} ${!showCounts ? 'bg-blue white' : 'bg-white'}`}
+              className={`${btnClass} ${showCounts && 'bg-white blue border-blue'}`}
               onClick={this.showPercents}
+              style={{ width: 18 }}
             >
               %
             </button>
