@@ -10,11 +10,11 @@ const basicTitle = 'The Crime Data Explorer publishes nation-wide crime data col
 
 const openGraphTags = state => {
   const { crime, place, since, until } = state.filters
-  const isKnownCrime = offenses.includes(crime)
-  const isKnownPlace = usa(place)
+  const isKnownCrime = crime && offenses.includes(crime)
+  const isKnownPlace = place && usa(place)
   let title = basicTitle
 
-  if ((crime && isKnownCrime) && (place && isKnownPlace) && since && until) {
+  if (isKnownCrime && isKnownPlace && since && until) {
     title = `Reported ${pluralize(crime, 2)} in ${startCase(place)} from ${since} until ${until} as reported to the FBI UCR program`
   }
 
