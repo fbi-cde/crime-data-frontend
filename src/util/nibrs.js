@@ -90,6 +90,7 @@ const offenderDemo = data => {
         data: rename(reshape(offenderSexCode, 'sex_code'), sexCodes),
         title: 'Sex of offender',
         type: 'donut',
+        keys: Object.values(sexCodes),
       },
       {
         data: reshape(offenderAgeNum, 'age_num'),
@@ -119,6 +120,7 @@ const victimDemo = data => {
         data: rename(reshape(victimSexCode, 'sex_code'), sexCodes),
         title: 'Sex of victim',
         type: 'donut',
+        keys: Object.values(sexCodes),
       },
       {
         data: reshape(victimAgeNum, 'age_num'),

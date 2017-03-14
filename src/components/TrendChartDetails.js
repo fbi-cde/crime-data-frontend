@@ -36,28 +36,28 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
     <div className='mb2 md-flex'>
       <div className='flex-auto'>
         <h4 className='mt0 mb1 fs-18 sans-serif'>{year}</h4>
-        <p className='sm-m0 md-pr4 fs-14 sm-fs-16'>
+        <p className='mb1 sm-m0 md-pr4 fs-14 sm-fs-16'>
           {name}’s {term} rate was {comparison} that of the United States, and
           in {highlight(year)} was {highlight(formatRate(rate))} incidents
           per 100,000 people.
         </p>
       </div>
       <div>
-        <table className='mt2 md-mt4' style={{ maxWidth: 300 }}>
+        <table style={{ maxWidth: 300 }}>
           <thead className='fs-12 line-height-3'>
             <tr><td /><td>Rate</td><td>Total</td></tr>
           </thead>
           <tbody className='fs-14 bold'>
             {keys.map((k, i) => (
               <tr key={i}>
-                <td className='pr3 fs-12 nowrap align-bottom'>
+                <td className='pr2 sm-pr3 fs-12 nowrap align-bottom'>
                   <span
                     className='mr1 inline-block circle'
                     style={{ width: 8, height: 8, backgroundColor: colors[i] || '#000' }}
                   />
                   {k.name}
                 </td>
-                <td className='pt1 pr3 line-height-4 align-bottom'>
+                <td className='pt1 pr2 sm-pr3 line-height-4 align-bottom'>
                   <span
                     className='inline-block border-bottom border-blue-light border-w2'
                     style={{ width: 72 }}
