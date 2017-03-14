@@ -47,7 +47,7 @@ class NibrsHistogram extends React.Component {
 
     return (
       <div className='mb2 pb2 border-bottom border-blue-light'>
-        <div className='mb1 bold'>{title}</div>
+        <div className='mb1 blue bold'>{title}</div>
         {yLabel && <div className='mb1 fs-12 bold caps red'>{yLabel}</div>}
         <div>
           <svg

@@ -62,7 +62,7 @@ class NibrsTable extends React.Component {
       <div>
         <table className='my2 table-fixed'>
           <caption className='left-align'>
-            <div className='bold'>{title}</div>
+            <div className='blue bold'>{title}</div>
           </caption>
           <thead className='v-hide'>
             <tr style={{ lineHeight: '16px' }}>
