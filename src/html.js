@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
 
+import sharingMetaTags from './util/sharing'
+
 export default function renderHtml(content, state) {
   return `
     <!DOCTYPE html>
@@ -7,6 +9,7 @@ export default function renderHtml(content, state) {
       <head>
         <meta charset='utf-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
+        ${sharingMetaTags(state)}
         <title>Crime Data Explorer</title>
         <link href='/app.css' rel='stylesheet'>
       </head>
