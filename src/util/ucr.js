@@ -5,23 +5,20 @@ import { slugify } from './text'
 
 const lookup = state => data[slugify(state)]
 
-const isValidCrime = crime => offenses.includes(crime)
 const isValidPlace = place => lookupUsa(place)
+const isValidCrime = crime => offenses.includes(crime)
+const noNibrs = ['violent-crime', 'property-crime']
 
-export const shouldFetchUcr = ({ place }) => {
-  if (!isValidPlace(place) || place === nationalKey) return false
-  return true
-}
+export const shouldFetchUcr = ({ place }) => (
+  !!(isValidPlace(place) && place !== nationalKey)
+)
 
 export const shouldFetchSummaries = ({ crime, place }) => (
   isValidCrime(crime) && isValidPlace(place)
 )
 
-const noNibrs = ['violent-crime', 'property-crime']
-
 export const shouldFetchNibrs = ({ crime, place }) => {
-  if (noNibrs.includes(crime)) return false
-  if (!isValidPlace(place)) return false
+  if (noNibrs.includes(crime) || !isValidPlace(place)) return false
   const coverage = lookup(place)
   return coverage && coverage.nibrs
 }
