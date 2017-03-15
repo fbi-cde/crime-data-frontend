@@ -29,7 +29,7 @@ class Header extends React.Component {
           <div className='flex-auto'>
             <div className='right md-hide lg-hide'>
               <button
-                className='bg-transparent block bold border-none caps fs-12 red-bright'
+                className='block btn p0 line-height-1 caps fs-12 red-bright'
                 onClick={this.toggleMenu}
               >
                 {isOpen ? 'Close' : 'Menu'}
