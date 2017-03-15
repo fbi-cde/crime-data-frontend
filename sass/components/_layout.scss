@@ -44,17 +44,29 @@ footer {
 }
 
 @media #{$breakpoint-max-md} {
-  .site-sidebar.open {
+  .site-sidebar {
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+    animation-duration: 400ms;
     bottom: 0;
     box-sizing: border-box;
     display: block;
-    left: 0;
     max-width: 90%;
+    opacity: 0;
     overflow-y: auto;
     position: fixed;
     top: 0;
+    transform: translate(-100%, 0);
     width: $sidebar-width;
     z-index: 1;
+  }
+
+  .site-sidebar.has-opened:not(.open) {
+    animation-name: slideout;
+  }
+
+  .site-sidebar.open {
+    animation-name: slidein;
   }
 }
 

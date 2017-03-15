@@ -60,6 +60,10 @@ class Explorer extends React.Component {
     this.props = props
     this.handleSidebarChange = ::this.handleSidebarChange
     this.toggleSidebar = ::this.toggleSidebar
+
+    this.state = {
+      sidebarHasOpened: false,
+    }
   }
 
   componentDidMount() {
@@ -91,12 +95,15 @@ class Explorer extends React.Component {
     const { dispatch } = this.props
     const { isOpen } = this.props.appState.sidebar
 
+    this.setState({ sidebarHasOpened: true })
+
     if (isOpen) return dispatch(hideSidebar())
     return dispatch(showSidebar())
   }
 
   render() {
     const { appState, dispatch, params, router } = this.props
+    const { sidebarHasOpened } = this.state
     const { crime, place } = params
 
     // show not found page if crime or place unfamiliar
@@ -131,6 +138,7 @@ class Explorer extends React.Component {
         <Sidebar
           dispatch={dispatch}
           filters={filters}
+          hasOpened={sidebarHasOpened}
           isOpen={sidebar.isOpen}
           onChange={this.handleSidebarChange}
           router={router}
