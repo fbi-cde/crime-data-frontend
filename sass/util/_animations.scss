@@ -1,0 +1,30 @@
+@keyframes slidein {
+  from {
+    transform: translate(-100%, 0);
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideout {
+  from {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+
+  99% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translate(-100%, 0);
+    opacity: 0;
+  }
+}

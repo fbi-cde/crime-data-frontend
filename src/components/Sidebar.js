@@ -7,12 +7,13 @@ import TimePeriodFilter from './TimePeriodFilter'
 
 import { hideSidebar } from '../actions/sidebar'
 
-const Sidebar = ({ dispatch, filters, isOpen, onChange, router }) => {
+const Sidebar = ({ dispatch, filters, hasOpened, isOpen, onChange, router }) => {
   const { crime, place } = router.params
   const hide = () => dispatch(hideSidebar())
+  const cls = `${isOpen && 'open'} ${hasOpened && 'has-opened'}`
 
   return (
-    <nav className={`site-sidebar bg-white ${isOpen ? 'open' : ''}`}>
+    <nav className={`site-sidebar bg-white ${cls}`}>
       <div className='p2 bg-red-bright line-height-1 md-hide lg-hide'>
         <button
           type='button'
@@ -48,6 +49,7 @@ const Sidebar = ({ dispatch, filters, isOpen, onChange, router }) => {
 }
 
 Sidebar.propTypes = {
+  hasOpened: React.PropTypes.bool,
   onChange: React.PropTypes.func,
 }
 
