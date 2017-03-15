@@ -40,7 +40,7 @@ var config = {
     includePaths: ['node_modules']
   },
   postcss: [
-    autoprefixer({ browsers: ['last 2 versions', '> 2%'] })
+    autoprefixer({ browsers: ['last 2 versions', '> 5%'] })
   ],
   plugins: [
     new ExtractTextPlugin('app.css'),
