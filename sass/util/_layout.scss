@@ -3,3 +3,7 @@
 @media #{$breakpoint-sm} {
   .sm-absolute { position: absolute; }
 }
+
+@media #{$breakpoint-md} {
+  .md-absolute { position: absolute; }
+}
