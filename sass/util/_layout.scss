@@ -3,3 +3,7 @@
 @media #{$breakpoint-sm} {
   .sm-absolute { position: absolute; }
 }
+
+.sticky {
+  position: sticky;
+}

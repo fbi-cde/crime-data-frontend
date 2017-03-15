@@ -112,7 +112,7 @@ class Explorer extends React.Component {
 
     return (
       <div className='site-wrapper'>
-        <div style={{ position: 'sticky', top: 0 }}>
+        <div className='sticky top-0'>
           <div className='inline-block p1 bg-red-bright md-hide lg-hide'>
             <button
               className='btn p1 line-height-1 border-none'
