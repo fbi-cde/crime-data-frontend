@@ -1,4 +1,5 @@
 .clear-left { clear: left; }
+.sticky { position: sticky; }
 
 @media #{$breakpoint-sm} {
   .sm-absolute { position: absolute; }

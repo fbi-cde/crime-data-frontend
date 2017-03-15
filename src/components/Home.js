@@ -73,8 +73,12 @@ const Home = ({ appState, dispatch, location }) => {
               />
             </div>
             <div className='sm-col sm-col-4 px2 mb2 sm-m0'>
+              <label htmlFor='crime-select' className='hide'>
+                Choose a crime
+              </label>
               <select
                 className='col-12 sm-fs-18 field select'
+                id='crime-select'
                 onChange={selectCrime}
                 defaultValue={crime || ''}
               >

@@ -77,7 +77,7 @@ class Glossary extends React.Component {
           </div>
         </div>
         <div className='display-none'>
-          <button className='js-glossary-toggle' />
+          <button className='js-glossary-toggle' title='Glossary toggle' />
           <button className='js-glossary-close btn btn-primary toggle'>
             <span className='u-visually-hidden'>Hide glossary</span>
           </button>
