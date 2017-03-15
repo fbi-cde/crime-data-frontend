@@ -28,13 +28,12 @@ class Header extends React.Component {
         <div className='md-flex flex-auto items-baseline container-big mx-auto px2'>
           <div className='flex-auto'>
             <div className='right md-hide lg-hide'>
-              <a
-                className='block fs-12 bold caps red-bright'
-                href='#!'
+              <button
+                className='bg-transparent block bold border-none caps fs-12 red-bright'
                 onClick={this.toggleMenu}
               >
                 {isOpen ? 'Close' : 'Menu'}
-              </a>
+              </button>
             </div>
             <div className='inline-block'>
               <span
