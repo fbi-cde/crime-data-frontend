@@ -40,12 +40,14 @@ We keep a running list of changes to this application in the [CHANGELOG](CHANGEL
   - Jest
 - View layer
   - [React (15.4.x)](https://facebook.github.io/react/docs/getting-started.html)
-- Data/model layer (not yet selected)
+- Data/model layer
+  - [Redux](http://redux.js.org/)
 - Build
   - [Webpack](http://webpack.github.io/docs/)
   - [UglifyJS](https://github.com/mishoo/UglifyJS)
   - [Babel](https://babeljs.io/docs/setup/)
-- Front end router (not yet selected)
+- Front end router
+  - [React Router](https://github.com/ReactTraining/react-router/tree/v3/docs)
 
 ### Workflow
 - Open branches off main repo due to secure CircleCI env vars.
@@ -102,7 +104,7 @@ The code base includes linting configurations and tools, but is currently not fu
 ### Device support
 - Browser support is all major browsers and Internet Explorer 10 and up.
 - Pages and views should work on different device screen-sizes, and should work as specified in design mockups.
-  - If making a feature work on mobile is time-consuming, and there isnt' an official design for the mobile view of the feature yet, the mobile view can be held off until a design becomes available.
+  - If making a feature work on mobile is time-consuming, and there isn't an official design for the mobile view of the feature yet, the mobile view can be held off until a design becomes available.
 - Support for browsers not running javascript should be attempted if it's easy, but not a major focus
   - Eventually the react code base will allow server-side, isomorphic rendering
     for both performance and support reasons. This means code should attempt to
