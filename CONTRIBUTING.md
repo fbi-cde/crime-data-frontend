@@ -16,7 +16,9 @@ The Crime Data Explorer project is composed of three repositories:
 1. [18f/crime-data-explorer](/18f/crime-data-explorer) (you are here)
 2. [18f/crime-data-style](/18f/crime-data-style)
 
-We track work and progress through [ZenHub](https://www.zenhub.io/), which adds a browser extension to add additional agile features to GitHub. ZenHub adds a "Boards" page, which is an agile board detailing the state of work for the dashboard.
+We track work and progress through [ZenHub](https://www.zenhub.io/), which is a browser extension that adds additional agile features to GitHub. For example, ZenHub adds a "Boards" page, which is an agile board detailing the state of work for the dashboard.
+
+We keep a running list of changes to this application in the [CHANGELOG](CHANGELOG.md).
 
 ### Board workflow
 
@@ -50,7 +52,7 @@ We track work and progress through [ZenHub](https://www.zenhub.io/), which adds 
 - Add the "ready for review" label when the code is ready to be reviewed by another team member. You can also request a review from a specific person in Github.
   - Work-in-progress PRs are encouraged. Be sure to tag the review with "ready for review" when it's ready though.
 - As another team member, review the code and ensure it conforms to the coding standards and exit criteria
-  - PR's do not need to be assigned due to small team size
+  - PRs do not need to be assigned due to small team size
 - When it is reviewed and ready to be merged, use Github's [Code
   Review](https://help.github.com/articles/approving-a-pull-request-with-required-reviews/)
   feature to approve the pull request.
