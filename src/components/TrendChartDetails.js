@@ -33,17 +33,17 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
   )
 
   return (
-    <div className='mb2 md-flex'>
+    <div className='mb2 lg-flex'>
       <div className='flex-auto'>
         <h4 className='mt0 mb1 fs-18 sans-serif'>{year}</h4>
-        <p className='mb1 sm-m0 md-pr4 fs-14 sm-fs-16'>
+        <p className='mb1 lg-m0 lg-pr4 lg-mh-72p fs-14 sm-fs-16'>
           {name}’s {term} rate was {comparison} that of the United States, and
           in {highlight(year)} was {highlight(formatRate(rate))} incidents
           per 100,000 people.
         </p>
       </div>
       <div>
-        <table style={{ maxWidth: 300 }}>
+        <table className='mb1 lg-m0' style={{ maxWidth: 300 }}>
           <thead className='fs-12 line-height-3'>
             <tr><td /><td>Rate</td><td>Total</td></tr>
           </thead>

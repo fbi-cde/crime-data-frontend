@@ -1,1 +1,5 @@
 .mh6 { min-height: $space-6; }
+
+@media #{$breakpoint-lg} {
+  .lg-mh-72p { min-height: 72px; }
+}
