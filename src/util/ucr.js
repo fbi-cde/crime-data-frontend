@@ -1,5 +1,5 @@
 import data from '../../data/ucr-program-participation.json'
-import lookupUsa, { nationalKey } from './usa'
+import lookupUsa from './usa'
 import offenses from './offenses'
 import { slugify } from './text'
 
@@ -9,9 +9,7 @@ const isValidPlace = place => lookupUsa(place)
 const isValidCrime = crime => offenses.includes(crime)
 const noNibrs = ['violent-crime', 'property-crime']
 
-export const shouldFetchUcr = ({ place }) => (
-  !!(isValidPlace(place) && place !== nationalKey)
-)
+export const shouldFetchUcr = ({ place }) => !!isValidPlace(place)
 
 export const shouldFetchSummaries = ({ crime, place }) => (
   isValidCrime(crime) && isValidPlace(place)

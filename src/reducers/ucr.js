@@ -3,14 +3,9 @@ import {
   UCR_PARTICIPATION_RECEIVED,
 } from '../actions/constants'
 
-import { nationalKey } from '../util/usa'
-import usPopulation from '../../data/usa-population.json'
-
 const initialState = {
   loading: false,
-  data: {
-    [nationalKey]: usPopulation,
-  },
+  data: {},
 }
 
 export default (state = initialState, action) => {
