@@ -178,7 +178,7 @@ class TrendChart extends React.Component {
                 className='mr1 inline-block align-middle bg-blue-white blue-light border rounded'
                 style={{ width: 14, height: 14 }}
               />
-              Insufficent state data reported ({gaps.join(', ')})
+              Insufficent state data reported for {gaps.join(', ')}
             </div>
           )}
           <svg
