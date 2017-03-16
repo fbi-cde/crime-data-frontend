@@ -178,7 +178,7 @@ class TrendChart extends React.Component {
                 className='mr1 inline-block align-middle bg-blue-white blue-light border rounded'
                 style={{ width: 14, height: 14 }}
               />
-              Insufficent state data reported
+              Insufficent state data reported ({gaps.join(', ')})
             </div>
           )}
           <svg
@@ -258,7 +258,7 @@ class TrendChart extends React.Component {
         </div>
         <div className='my1 fs-10 sm-fs-12 monospace center'>
           <div className='bold'>{startCase(crime)} rate per 100,000 people</div>
-          <div>(Does not include estimates)</div>
+          <div className='italic'>(Does not include estimates)</div>
         </div>
         <DownloadDataBtn data={download} />
       </div>
