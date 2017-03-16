@@ -1,6 +1,7 @@
-import { Link } from 'react-router'
-import React from 'react'
 import startCase from 'lodash.startcase'
+import React from 'react'
+import { Link } from 'react-router'
+
 
 const Breadcrumbs = ({ crime, place }) => {
   const links = [

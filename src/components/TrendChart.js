@@ -3,17 +3,17 @@
 import { bisector, extent, max, min } from 'd3-array'
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
 import { line } from 'd3-shape'
+import { timeParse } from 'd3-time-format'
 import startCase from 'lodash.startcase'
 import throttle from 'lodash.throttle'
-import { timeParse } from 'd3-time-format'
 import React from 'react'
 
 import DownloadDataBtn from './DownloadDataBtn'
 import TrendChartDetails from './TrendChartDetails'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
-
 import { slugify } from '../util/text'
+
 
 class TrendChart extends React.Component {
   constructor(props) {

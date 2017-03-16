@@ -1,5 +1,6 @@
 import { SIDEBAR_HIDE, SIDEBAR_SHOW } from '../actions/constants'
 
+
 const initialState = { isOpen: false }
 
 export default (state = initialState, action) => {

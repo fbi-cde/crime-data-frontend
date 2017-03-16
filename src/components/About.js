@@ -1,11 +1,10 @@
-/* eslint-disable max-len */
-
 import React from 'react'
 
 import UsaMap from './UsaMap'
 
 import ucr from '../util/ucr'
 import usa, { data as usaData } from '../util/usa'
+
 
 const colorFromUcr = info => {
   if (info.srs && !info.nibrs) return 'fill-blue-lighter'
@@ -192,7 +191,8 @@ const About = () => (
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>
             <h3 className='mt0 mb2 fs-22 sans-serif red'>Technical issues?</h3>
             <p className='m0'>
-              Please submit technical questions about the application and the API via <a href='https://github.com/18F/crime-data-explorer'>GitHub</a>
+              Please submit technical questions about the application and the API
+              via <a href='https://github.com/18F/crime-data-explorer'>GitHub</a>
             </p>
           </div>
           <div className='sm-col sm-col-4 px2 mb4 sm-mb0'>

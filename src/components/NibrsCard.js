@@ -7,6 +7,7 @@ import NibrsHistogram from './NibrsHistogram'
 import NibrsTable from './NibrsTable'
 import { slugify } from '../util/text'
 
+
 const NibrsCard = ({ crime, data, place, since, title, until }) => {
   const charts = data.map((d, i) => {
     const props = { key: i, ...d }

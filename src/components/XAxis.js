@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const XAxis = ({
   tickCt = 8,
   tickSizeOuter = 6,

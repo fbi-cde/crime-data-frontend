@@ -1,6 +1,6 @@
 import { format } from 'd3-format'
-import React from 'react'
 import startCase from 'lodash.startcase'
+import React from 'react'
 
 import ErrorCard from './ErrorCard'
 import Loading from './Loading'
@@ -8,6 +8,7 @@ import NibrsCard from './NibrsCard'
 import parseNibrs from '../util/nibrs'
 import Term from './Term'
 import ucrParticipation from '../util/ucr'
+
 
 const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')

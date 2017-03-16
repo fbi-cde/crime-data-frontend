@@ -1,6 +1,7 @@
 import { FILTER_RESET, FILTERS_UPDATE } from './constants'
-import lookupUsa from '../util/usa'
 import offenses from '../util/offenses'
+import lookupUsa from '../util/usa'
+
 
 const isValidCrime = crime => offenses.includes(crime)
 const isValidPlace = place => lookupUsa(place)

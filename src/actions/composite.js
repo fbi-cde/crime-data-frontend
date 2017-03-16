@@ -6,6 +6,7 @@ import { fetchUcrParticipation } from '../actions/ucr'
 import history, { createNewLocation } from '../util/history'
 import { shouldFetchUcr, shouldFetchSummaries, shouldFetchNibrs } from '../util/ucr'
 
+
 const fetchData = () => (dispatch, getState) => {
   const { filters } = getState()
 

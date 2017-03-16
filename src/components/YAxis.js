@@ -1,6 +1,7 @@
 import { format } from 'd3-format'
 import React from 'react'
 
+
 const getTickVals = (domain, ticks) => {
   const [s, e] = domain
   const step = ((e - s) * 1.0) / (ticks - 1)

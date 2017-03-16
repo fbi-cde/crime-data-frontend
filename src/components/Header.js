@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 
 import { nationalKey } from '../util/usa'
 
+
 const isHome = loc => loc.pathname === '/'
 const isExplorer = loc => loc.pathname.includes('explorer')
 

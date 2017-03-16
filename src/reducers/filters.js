@@ -4,6 +4,7 @@ import {
   FILTERS_UPDATE,
 } from '../actions/constants'
 
+
 const initialState = {
   since: 2004,
   until: 2014,

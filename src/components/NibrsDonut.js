@@ -5,6 +5,7 @@ import React from 'react'
 
 import NibrsDonutDetails from './NibrsDonutDetails'
 
+
 class NibrsDonut extends React.Component {
   constructor(props) {
     super(props)

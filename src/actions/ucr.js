@@ -4,6 +4,7 @@ import {
 } from './constants'
 import api from '../util/api'
 
+
 export const fetchingUcrParticipation = () => ({
   type: UCR_PARTICIPATION_FETCHING,
 })

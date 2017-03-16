@@ -2,6 +2,7 @@
 
 import React from 'react'
 
+
 const BetaBanner = () => (
   <div className='md-absolute top-0 right-0 fs-10 md-fs-16 center'>
     <div className='md-mr2 p1 md-py2 md-pl3 md-pr4 md-inline-block md-rounded-bottom bg-red white'>

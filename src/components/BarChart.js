@@ -5,6 +5,7 @@ import React from 'react'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
 
+
 const BarChart = ({
   size = { width: 600, height: 400 },
   margin = { top: 20, right: 20, bottom: 30, left: 50 },

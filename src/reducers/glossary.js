@@ -4,6 +4,7 @@ import {
   GLOSSARY_SHOW_TERM,
 } from '../actions/constants'
 
+
 const initialState = {
   isOpen: false,
   term: null,

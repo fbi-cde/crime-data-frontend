@@ -1,10 +1,11 @@
-import React from 'react'
 import startCase from 'lodash.startcase'
+import React from 'react'
 
 import Loading from './Loading'
 import NoData from './NoData'
 import TrendChart from './TrendChart'
 import TrendSourceText from './TrendSourceText'
+
 
 const TrendContainer = ({ crime, place, filters, data, dispatch, loading, keys }) => {
   const { since, until } = filters
