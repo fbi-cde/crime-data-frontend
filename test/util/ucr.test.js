@@ -23,9 +23,9 @@ describe('ucr utility', () => {
   })
 
   describe('shouldFetchUcr()', () => {
-    it('should return false for national key', () => {
+    it('should return true for national key', () => {
       const result = shouldFetchUcr({ place: nationalKey })
-      expect(result).toEqual(false)
+      expect(result).toEqual(true)
     })
 
     it('should return true for valid state names', () => {
