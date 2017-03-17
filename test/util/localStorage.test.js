@@ -2,6 +2,7 @@
 
 import storage from '../../src/util/localStorage'
 
+
 const createStorageMock = () => {
   const store = {}
 

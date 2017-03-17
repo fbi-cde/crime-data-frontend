@@ -4,8 +4,8 @@ import {
   SIDEBAR_HIDE,
   SIDEBAR_SHOW,
 } from '../../src/actions/constants'
-
 import reducer from '../../src/reducers/sidebar'
+
 
 describe('sidebar', () => {
   it('it should return the initial state', () => {

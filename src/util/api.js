@@ -1,9 +1,10 @@
 import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
-import lookupUsa, { nationalKey } from './usa'
 import { mapToApiOffense, mapToApiOffenseParam } from './offenses'
 import { slugify } from './text'
+import lookupUsa, { nationalKey } from './usa'
+
 
 const API = '/api'
 

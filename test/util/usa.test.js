@@ -2,6 +2,7 @@
 
 import lookup, { data as states } from '../../src/util/usa'
 
+
 describe('usa utility', () => {
   describe('with an abbreviation', () => {
     it('should return the proper state', () => {

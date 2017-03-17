@@ -3,6 +3,7 @@
 import { SIDEBAR_HIDE, SIDEBAR_SHOW } from '../../src/actions/constants'
 import { hideSidebar, showSidebar } from '../../src/actions/sidebar'
 
+
 describe('sidebar actions', () => {
   describe('hideSidebar()', () => {
     it('should return a SIDEBAR_HIDE action', () => {

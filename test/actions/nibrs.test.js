@@ -7,15 +7,14 @@ import {
   NIBRS_FETCHING,
   NIBRS_RECEIVED,
 } from '../../src/actions/constants'
-
 import {
   failedNibrs,
   fetchNibrs,
   fetchingNibrs,
   receivedNibrs,
 } from '../../src/actions/nibrs'
-
 import api from '../../src/util/api'
+
 
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)

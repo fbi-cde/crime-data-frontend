@@ -4,8 +4,8 @@ import {
   UCR_PARTICIPATION_FETCHING,
   UCR_PARTICIPATION_RECEIVED,
 } from '../../src/actions/constants'
-
 import reducer from '../../src/reducers/ucr'
+
 
 describe('ucr', () => {
   describe('initial state', () => {

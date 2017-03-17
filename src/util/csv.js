@@ -1,5 +1,6 @@
 import flatten from 'lodash.flatten'
 
+
 const flattenCols = data => {
   const firstRow = data[0]
   const colsToFlatten = Object.keys(firstRow).map(key => {

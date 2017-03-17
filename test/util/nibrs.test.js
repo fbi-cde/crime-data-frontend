@@ -1,8 +1,8 @@
 /* eslint no-undef: 0 */
 
+import mockApiData from '../fixtures/nibrsApiResponse.json'
 import parseNibrs, { reshape, rename } from '../../src/util/nibrs'
 
-import mockApiData from '../fixtures/nibrsApiResponse.json'
 
 describe('nibrs utility', () => {
   describe('reshape()', () => {

@@ -2,6 +2,7 @@
 
 import history, { createNewLocation } from '../../src/util/history'
 
+
 describe('history utility', () => {
   it('should export a react-router history singleton', () => {
     expect(typeof history.createHref).toEqual('function')

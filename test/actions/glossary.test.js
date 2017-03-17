@@ -5,8 +5,8 @@ import {
   GLOSSARY_SHOW,
   GLOSSARY_SHOW_TERM,
 } from '../../src/actions/constants'
-
 import { hideGlossary, showGlossary, showTerm } from '../../src/actions/glossary'
+
 
 describe('glossary actions', () => {
   describe('hideGlossary()', () => {

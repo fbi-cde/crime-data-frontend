@@ -2,8 +2,8 @@
 
 import sinon from 'sinon'
 
-import * as http from '../../src/util/http'
 import api from '../../src/util/api'
+import * as http from '../../src/util/http'
 
 
 const createPromise = (res, err) => {

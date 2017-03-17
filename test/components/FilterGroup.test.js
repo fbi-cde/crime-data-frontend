@@ -1,9 +1,10 @@
 /* eslint no-undef: 0 */
 
-import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow } from 'enzyme'
+import React from 'react'
 
-import FilterGroup from '../../src/components/FilterGroup';
+import FilterGroup from '../../src/components/FilterGroup'
+
 
 describe('FilterGroup', () => {
   const title = 'FilterGroup'

@@ -1,4 +1,3 @@
-
 const getItem = key => {
   if (!window || !window.localStorage) return Promise.resolve(null)
 

@@ -1,7 +1,9 @@
-import data from '../../data/ucr-program-participation.json'
-import lookupUsa from './usa'
 import offenses from './offenses'
 import { slugify } from './text'
+import lookupUsa from './usa'
+
+import data from '../../data/ucr-program-participation.json'
+
 
 const lookup = state => data[slugify(state)]
 

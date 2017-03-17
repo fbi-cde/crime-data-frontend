@@ -5,9 +5,10 @@ import About from './components/About'
 import App from './components/App'
 import DownloadsAndDocs from './components/DownloadsAndDocs'
 import Explorer from './components/Explorer'
-import history from './util/history'
 import Home from './components/Home'
 import NotFound from './components/NotFound'
+import history from './util/history'
+
 
 const scrollToTop = () => window.scroll(0, 0)
 

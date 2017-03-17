@@ -7,6 +7,7 @@ import dataSourcesReportedByState, {
 } from '../../src/util/ucr'
 import { nationalKey } from '../../src/util/usa'
 
+
 describe('ucr utility', () => {
   it('should return a value for california', () => {
     const place = 'california'
