@@ -62,6 +62,8 @@ class Glossary extends React.Component {
   }
 
   render() {
+    const { error } = this.state
+
     return (
       <div>
         <div
@@ -86,8 +88,8 @@ class Glossary extends React.Component {
             type='search'
             placeholder='e.g. Committee'
           />
-          {this.state.error && (
-            <p className='fs-14 italic mt-tiny red'>{this.state.error}</p>
+          {error && (
+            <p className='my1 p1 fs-14 bold bg-red-bright white'>{error}</p>
           )}
           <div className='glossary__content' id='glossary-result'>
             <ul className='js-glossary-list' />
