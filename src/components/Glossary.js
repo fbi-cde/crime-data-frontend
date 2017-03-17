@@ -13,6 +13,8 @@ class Glossary extends React.Component {
     this.applyProps = ::this.applyProps
     this.showTerm = ::this.showTerm
     this.toggleGlossary = ::this.toggleGlossary
+
+    this.state = { error: null }
   }
 
   componentDidMount() {
@@ -24,7 +26,10 @@ class Glossary extends React.Component {
     this.applyProps(nextProps)
   }
 
-  shouldComponentUpdate() { return false }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.error) return true
+    return false
+  }
 
   setOpen(isOpen) {
     if (isOpen) this.glossaryEl.show()
@@ -32,7 +37,16 @@ class Glossary extends React.Component {
   }
 
   showTerm(term) {
-    if (term) this.glossaryEl.findTerm(term)
+    if (!term) return
+
+    try {
+      this.glossaryEl.findTerm(term.toLowerCase())
+      this.setState({ error: null })
+    } catch (e) {
+      if (e.message === 'Cannot read property \'elm\' of undefined') {
+        this.setState({ error: `Cannot find "${term}".` })
+      }
+    }
   }
 
   applyProps(props) {
@@ -48,6 +62,8 @@ class Glossary extends React.Component {
   }
 
   render() {
+    const { error } = this.state
+
     return (
       <div>
         <div
@@ -72,6 +88,9 @@ class Glossary extends React.Component {
             type='search'
             placeholder='e.g. Committee'
           />
+          {error && (
+            <p className='my1 p1 fs-14 bold bg-red-bright white'>{error}</p>
+          )}
           <div className='glossary__content' id='glossary-result'>
             <ul className='js-glossary-list' />
           </div>
