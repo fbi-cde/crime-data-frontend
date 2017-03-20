@@ -5,6 +5,7 @@ import {
 } from './constants'
 import api from '../util/api'
 
+
 export const fetchingNibrs = () => ({
   type: NIBRS_FETCHING,
 })

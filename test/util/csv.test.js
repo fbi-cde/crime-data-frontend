@@ -2,6 +2,7 @@
 
 import jsonToCsv from '../../src/util/csv'
 
+
 const simpleJson = [
   { simpleKey: 'value1A', secondKey: 'value1B' },
   { simpleKey: 'value2A', secondKey: 'value2B' },

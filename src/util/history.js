@@ -1,6 +1,5 @@
 import { browserHistory } from 'react-router'
 
-export default browserHistory
 
 const splitPath = path => {
   const split = path.split('/')
@@ -35,3 +34,5 @@ export const createNewLocation = ({ change, location }) => {
     pathname,
   }
 }
+
+export default browserHistory

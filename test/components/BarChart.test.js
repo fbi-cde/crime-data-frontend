@@ -1,9 +1,10 @@
 /* eslint no-undef: 0 */
 
-import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow } from 'enzyme'
+import React from 'react'
 
-import BarChart from '../../src/components/BarChart';
+import BarChart from '../../src/components/BarChart'
+
 
 describe('BarChart', () => {
   const data = [['red', 5], ['green', 7], ['yellow', 2]]

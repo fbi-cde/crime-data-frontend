@@ -13,6 +13,7 @@ import robberyContent from '../../content/crimes/robbery.yml'
 import stateContent from '../../content/locations/states.yml'
 import violentCrimeContent from '../../content/crimes/violent-crime.yml'
 
+
 const content = {
   ...stateContent,
   crimes: {

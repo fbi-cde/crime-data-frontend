@@ -1,10 +1,12 @@
 /* eslint no-console: 0 */
-import { entries } from 'd3-collection'
-import React from 'react'
-import startCase from 'lodash.startcase'
 
-import { data } from '../util/usa'
+import { entries } from 'd3-collection'
+import startCase from 'lodash.startcase'
+import React from 'react'
+
 import { slugify } from '../util/text'
+import { data } from '../util/usa'
+
 
 const places = entries(data).map(d => startCase(d.value))
 

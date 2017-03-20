@@ -2,8 +2,9 @@ import http from 'axios'
 import flatten from 'lodash.flatten'
 import range from 'lodash.range'
 
-import createUrl from './url'
 import storage from './localStorage'
+import createUrl from './url'
+
 
 const get = (url, params = {}) => {
   const key = createUrl(url, params)

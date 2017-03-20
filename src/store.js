@@ -6,6 +6,7 @@ import thunk from 'redux-thunk'
 
 import reducer from './reducers'
 
+
 const middlewares = [thunk]
 if (process.env.NODE_ENV !== 'production') middlewares.push(createLogger())
 

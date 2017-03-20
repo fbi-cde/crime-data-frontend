@@ -2,6 +2,7 @@
 
 import createUrl from '../../src/util/url'
 
+
 describe('url utility', () => {
   it('should properly form a url with an alphabetized query string', () => {
     const actual = createUrl('fake-url.com', { param: 'fake-param', another: 'more-fake' })

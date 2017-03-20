@@ -1,11 +1,11 @@
-import React from 'react'
 import startCase from 'lodash.startcase'
+import React from 'react'
 
 import CrimeTypeFilter from './CrimeTypeFilter'
 import LocationFilter from './LocationFilter'
 import TimePeriodFilter from './TimePeriodFilter'
-
 import { hideSidebar } from '../actions/sidebar'
+
 
 const Sidebar = ({ dispatch, filters, isOpen, onChange, router }) => {
   const { crime, place } = router.params

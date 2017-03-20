@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const Hint = ({ value, position }) => {
   const width = String(value).length * 10
   const style = {

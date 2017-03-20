@@ -2,6 +2,7 @@
 
 import mapCrimeToGlossaryTerm from '../../src/util/glossary'
 
+
 describe('glossary utility', () => {
   it('default export should be a function', () => {
     expect(typeof mapCrimeToGlossaryTerm).toEqual('function')

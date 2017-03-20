@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const Disclaimer = () => (
   <div className='clearfix p1 fs-10 sm-fs-12 line-height-1 bg-white'>
     <img

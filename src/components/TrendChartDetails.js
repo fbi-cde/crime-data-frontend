@@ -2,9 +2,10 @@ import { format } from 'd3-format'
 import lowerCase from 'lodash.lowercase'
 import React from 'react'
 
+import Term from './Term'
 import mapCrimeToGlossaryTerm from '../util/glossary'
 import { nationalKey } from '../util/usa'
-import Term from './Term'
+
 
 const formatRate = format('.1f')
 const formatTotal = format(',.0f')

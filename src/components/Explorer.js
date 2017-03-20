@@ -7,12 +7,12 @@ import NotFound from './NotFound'
 import Sidebar from './Sidebar'
 import TrendContainer from './TrendContainer'
 import UcrParticipationInformation from './UcrParticipationInformation'
-
-import { hideSidebar, showSidebar } from '../actions/sidebar'
 import { updateApp } from '../actions/composite'
-import lookup from '../util/usa'
+import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offenses from '../util/offenses'
 import ucrParticipation from '../util/ucr'
+import lookup from '../util/usa'
+
 
 const filterNibrsData = (data, { since, until }) => {
   if (!data) return false

@@ -3,6 +3,7 @@ import React from 'react'
 import jsonToCsv from '../util/csv'
 import { slugify } from '../util/text'
 
+
 const downloadData = (fname, data) => {
   const file = `${slugify(fname)}.csv`
   const dataStr = jsonToCsv(data)

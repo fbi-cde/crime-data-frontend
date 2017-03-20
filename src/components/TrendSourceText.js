@@ -1,8 +1,9 @@
-import React from 'react'
 import startCase from 'lodash.startcase'
+import React from 'react'
 
 import Term from './Term'
 import ucrParticipation from '../util/ucr'
+
 
 const TrendSourceText = ({ dispatch, place, since, until }) => {
   const ucr = ucrParticipation(place)

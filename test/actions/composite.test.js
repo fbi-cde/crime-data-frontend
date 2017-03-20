@@ -2,10 +2,10 @@
 
 import sinon from 'sinon'
 
-
-import * as historyUtil from '../../src/util/history'
-import * as filterActions from '../../src/actions/filters'
 import { updateApp } from '../../src/actions/composite'
+import * as filterActions from '../../src/actions/filters'
+import * as historyUtil from '../../src/util/history'
+
 
 const noop = () => {}
 

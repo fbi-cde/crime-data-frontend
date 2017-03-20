@@ -6,6 +6,7 @@ import sinon from 'sinon'
 import * as http from '../../src/util/http'
 import storage from '../../src/util/localStorage'
 
+
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)
   return Promise.reject(err);

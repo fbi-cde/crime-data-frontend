@@ -1,11 +1,12 @@
 import { format } from 'd3-format'
-import React from 'react'
 import startCase from 'lodash.startcase'
+import React from 'react'
 
-import content from '../util/content'
 import Term from './Term'
+import content from '../util/content'
 import ucrParticipation from '../util/ucr'
 import lookupUsa, { nationalKey } from '../util/usa'
+
 
 const formatNumber = format(',')
 

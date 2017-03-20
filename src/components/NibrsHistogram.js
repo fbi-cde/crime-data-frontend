@@ -5,6 +5,7 @@ import React from 'react'
 import NibrsHistogramDetails from './NibrsHistogramDetails'
 import XAxis from './XAxis'
 
+
 class NibrsHistogram extends React.Component {
   constructor(props) {
     super(props)

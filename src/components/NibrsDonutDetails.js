@@ -1,6 +1,7 @@
 import { format } from 'd3-format'
 import React from 'react'
 
+
 const fmt = format(',.0f')
 
 const NibrsDonutDetails = ({ colorMap, data, hover, onMouseOver, onMouseOut, selected }) => (

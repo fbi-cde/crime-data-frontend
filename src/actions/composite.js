@@ -7,6 +7,7 @@ import history, { createNewLocation } from '../util/history'
 import { shouldFetchUcr, shouldFetchSummaries, shouldFetchNibrs } from '../util/ucr'
 import { nationalKey } from '../util/usa'
 
+
 const fetchData = () => (dispatch, getState) => {
   const { filters, ucr } = getState()
   const fetchNational = !ucr.data[nationalKey] && filters.place !== nationalKey

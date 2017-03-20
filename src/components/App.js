@@ -9,6 +9,7 @@ import Footer from './Footer'
 import Glossary from './Glossary'
 import Header from './Header'
 
+
 const App = ({ appState, children, dispatch, location }) => (
   <div className='site'>
     <Disclaimer />

@@ -1,5 +1,6 @@
 import { slugify } from './text'
 
+
 const offenses = {
   'aggravated-assault': 'aggravated-assault',
   arson: 'arson',
@@ -30,8 +31,4 @@ const offenseParams = {
 const mapToApiOffense = o => offenses[o] || slugify(o)
 const mapToApiOffenseParam = o => offenseParams[o]
 
-export default ids
-export {
-  mapToApiOffense,
-  mapToApiOffenseParam,
-}
+export { ids as default, mapToApiOffense, mapToApiOffenseParam }

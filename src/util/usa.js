@@ -2,6 +2,7 @@ import lowerCase from 'lodash.lowercase'
 
 import { slugify } from '../util/text'
 
+
 const data = {
   usa: 'united states',
   ak: 'alaska',

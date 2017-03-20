@@ -1,26 +1,24 @@
-/* eslint-disable comma-dangle, global-require, import/first, no-console, padded-blocks */
+/* eslint-disable global-require, no-console, padded-blocks */
 
 import 'babel-polyfill'
 
-import path from 'path'
-
+import http from 'axios'
 import cfenv from 'cfenv'
 import express from 'express'
-import http from 'axios'
+import path from 'path'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
 
-import { updateFilters } from './actions/filters'
-import configureStore from './store'
-import history from './util/history'
 import renderHtml from './html'
 import routes from './routes'
+import configureStore from './store'
+import { updateFilters } from './actions/filters'
+import history from './util/history'
 
-if (process.env.NODE_ENV === 'production') {
-  require('newrelic')
-}
+if (process.env.NODE_ENV === 'production') require('newrelic')
+
 
 const env = cfenv.getAppEnv()
 const credService = env.getService('crime-data-api-creds') || { credentials: {} }

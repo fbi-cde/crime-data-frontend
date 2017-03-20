@@ -2,8 +2,9 @@ import React from 'react'
 
 import DownloadBulkNibrs from './DownloadBulkNibrs'
 import DownloadDataBtn from './DownloadDataBtn'
-import otherDatasets from '../../content/datasets.yml'
 import Term from './Term'
+import otherDatasets from '../../content/datasets.yml'
+
 
 const border = 'border-bottom border-blue-lighter'
 

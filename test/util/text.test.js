@@ -2,6 +2,7 @@
 
 import { slugify } from '../../src/util/text'
 
+
 describe('text utility', () => {
   describe('slugify()', () => {
     it('should lowercase and replace spaces with hyphens', () => {

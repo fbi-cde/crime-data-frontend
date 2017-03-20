@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const Loading = ({ text }) => (
   <div className='mt3 mb8 fs-14 caps center'>
     <img

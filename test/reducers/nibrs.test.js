@@ -5,8 +5,8 @@ import {
   NIBRS_FETCHING,
   NIBRS_RECEIVED,
 } from '../../src/actions/constants'
-
 import reducer from '../../src/reducers/nibrs'
+
 
 describe('nibrs', () => {
   describe('initial state', () => {

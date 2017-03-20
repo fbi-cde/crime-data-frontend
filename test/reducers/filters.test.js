@@ -4,8 +4,8 @@ import {
   FILTER_RESET,
   FILTERS_UPDATE,
 } from '../../src/actions/constants'
-
 import reducer from '../../src/reducers/filters'
+
 
 describe('filters', () => {
   describe('initial state', () => {

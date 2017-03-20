@@ -3,6 +3,7 @@ import {
   SUMMARY_RECEIVED,
 } from '../actions/constants'
 
+
 const initialState = {
   loading: false,
   data: {},

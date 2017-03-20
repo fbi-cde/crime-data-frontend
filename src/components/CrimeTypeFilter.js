@@ -1,8 +1,9 @@
-import { Link } from 'react-router'
 import React from 'react'
+import { Link } from 'react-router'
 
 import FilterGroup from './FilterGroup'
 import { crimeTypes } from '../util/data'
+
 
 const { violentCrime, propertyCrime } = crimeTypes
 

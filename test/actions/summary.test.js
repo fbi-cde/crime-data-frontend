@@ -6,15 +6,14 @@ import {
   SUMMARY_FETCHING,
   SUMMARY_RECEIVED,
 } from '../../src/actions/constants'
-
 import {
   fetchSummaries,
   fetchingSummary,
   receivedSummary,
 } from '../../src/actions/summary'
-
-import { nationalKey } from '../../src/util/usa'
 import api from '../../src/util/api'
+import { nationalKey } from '../../src/util/usa'
+
 
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)

@@ -2,6 +2,7 @@ import { format } from 'd3-format'
 import pluralize from 'pluralize'
 import React from 'react'
 
+
 const fmt = format(',.0f')
 
 const NibrsHistogramDetails = ({ data, noun }) => {

@@ -5,8 +5,8 @@ import {
   GLOSSARY_SHOW,
   GLOSSARY_SHOW_TERM,
 } from '../../src/actions/constants'
-
 import reducer from '../../src/reducers/glossary'
+
 
 describe('glossary', () => {
   it('it should return the initial state', () => {

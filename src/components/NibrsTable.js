@@ -2,6 +2,7 @@ import { format } from 'd3-format'
 import pluralize from 'pluralize'
 import React from 'react'
 
+
 const formatNumber = format(',')
 const formatPercent = p => (p > 0.01 ? format('.0%')(p) : '<1%')
 const formatSI = n => (Number(n) > 10 ? format('.2s')(n) : formatNumber(n))

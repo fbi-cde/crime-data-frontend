@@ -5,12 +5,12 @@ import { Link } from 'react-router'
 import LocationSelect from './LocationSelect'
 import Term from './Term'
 import UsaMap from './UsaMap'
-
-import { slugify } from '../util/text'
-import stateLookup from '../util/usa'
 import { updateApp } from '../actions/composite'
 import { updateFilters } from '../actions/filters'
+import { slugify } from '../util/text'
+import stateLookup from '../util/usa'
 import otherDataSets from '../../content/datasets.yml'
+
 
 const Home = ({ appState, dispatch, location }) => {
   const { crime, place } = appState.filters

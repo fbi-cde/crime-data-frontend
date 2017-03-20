@@ -6,14 +6,13 @@ import {
   UCR_PARTICIPATION_FETCHING,
   UCR_PARTICIPATION_RECEIVED,
 } from '../../src/actions/constants'
-
 import {
   fetchingUcrParticipation,
   receivedUcrParticipation,
   fetchUcrParticipation,
 } from '../../src/actions/ucr'
-
 import api from '../../src/util/api'
+
 
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)

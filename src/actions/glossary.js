@@ -4,6 +4,7 @@ import {
   GLOSSARY_SHOW_TERM,
 } from './constants'
 
+
 export const hideGlossary = () => ({
   type: GLOSSARY_HIDE,
 })

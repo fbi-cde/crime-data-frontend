@@ -2,6 +2,7 @@ import React from 'react'
 
 import { slugify } from '../util/text'
 
+
 const FilterGroup = ({ name, options, onChange, selected, title }) => {
   const handleChange = e => onChange({ crime: e.target.value })
 
