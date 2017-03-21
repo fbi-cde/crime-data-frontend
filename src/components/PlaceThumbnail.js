@@ -17,7 +17,7 @@ class StateThumbnail extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/data/geo-usa-states.json')
+    axios.get('/data/geo-usa.json')
       .then(response => { this.setState({ usa: response.data }) })
   }
 
@@ -30,9 +30,16 @@ class StateThumbnail extends React.Component {
     const [w, h] = [400, 300]
     const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
-    const geoStates = feature(usa, usa.objects.units).features
-    const meshed = mesh(usa, usa.objects.units, (a, b) => (a !== b))
+    const meshed = mesh(usa, usa.objects.states, (a, b) => (a !== b))
+
+    const geoStates = feature(usa, usa.objects.states).features
     const active = geoStates.find(s => (s.properties.name === selected))
+
+    const geoCounties = feature(usa, usa.objects.counties).features
+    const countiesActive = geoCounties.filter(c => c.properties.state === selected)
+
+    const geoCities = feature(usa, usa.objects.places).features
+    const citiesActive = geoCities.filter(c => c.properties.state === selected)
 
     let strokeWidth
     let transform
@@ -45,7 +52,7 @@ class StateThumbnail extends React.Component {
       const scale = 0.8 / Math.max(dx / w, dy / h)
       const translate = [(w / 2) - (scale * x), (h / 2) - (scale * y)]
 
-      strokeWidth = active ? `${2.5 / scale}px` : 1
+      strokeWidth = active ? (3 / scale) : 1
       transform = `translate(${translate})scale(${scale})`
     }
 
@@ -57,7 +64,7 @@ class StateThumbnail extends React.Component {
           viewBox={`0 0 ${w} ${h}`}
         >
           <g
-            strokeWidth={strokeWidth}
+            strokeWidth={`${strokeWidth}px`}
             transform={transform}
           >
             {geoStates.map((d, i) => (
@@ -74,6 +81,23 @@ class StateThumbnail extends React.Component {
               strokeLinecap='round'
               strokeLinejoin='round'
             />
+            {countiesActive.map((d, i) => (
+              <path
+                key={i}
+                d={path(d)}
+                fill='none'
+                stroke='#fff'
+                strokeWidth={`${strokeWidth / 3}px`}
+              />
+            ))}
+            {citiesActive.map((d, i) => (
+              <circle
+                key={i}
+                fill='#ff5e50'
+                r={strokeWidth * 3}
+                transform={`translate(${projection(d.geometry.coordinates)})`}
+              />
+            ))}
           </g>
         </svg>
       </Container>
