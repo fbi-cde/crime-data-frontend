@@ -69,7 +69,7 @@ const UcrParticipationInformation = ({ dispatch, place, until, ucr }) => {
         )}
       </div>
       <div className='lg-col lg-col-4'>
-        <h3 className='mt0 mb2 fs-18 sm-fs-22'>UCR Resources</h3>
+        <h3 className='mt0 mb2 fs-18 sm-fs-22'>UCR resources</h3>
         <ul className='m0 p0 fs-14 sm-fs-16 left-bars'>
           {links.map((l, i) => (
             <li className='mb1' key={i}>
