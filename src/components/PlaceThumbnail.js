@@ -3,6 +3,9 @@ import { geoAlbersUsa, geoPath } from 'd3-geo'
 import React from 'react'
 import { feature, mesh } from 'topojson'
 
+import MapCities from './MapCities'
+import MapCounties from './MapCounties'
+
 
 const Container = ({ children }) => (
   <div className='my4 center'>
@@ -33,12 +36,11 @@ class StateThumbnail extends React.Component {
     const meshed = mesh(usa, usa.objects.states, (a, b) => (a !== b))
 
     const geoStates = feature(usa, usa.objects.states).features
-    const active = geoStates.find(s => (s.properties.name === selected))
-
     const geoCounties = feature(usa, usa.objects.counties).features
-    const countiesActive = geoCounties.filter(c => c.properties.state === selected)
-
     const geoCities = feature(usa, usa.objects.places).features
+
+    const active = geoStates.find(s => (s.properties.name === selected))
+    const countiesActive = geoCounties.filter(c => c.properties.state === selected)
     const citiesActive = geoCities.filter(c => c.properties.state === selected)
 
     let strokeWidth
@@ -81,23 +83,16 @@ class StateThumbnail extends React.Component {
               strokeLinecap='round'
               strokeLinejoin='round'
             />
-            {countiesActive.map((d, i) => (
-              <path
-                key={i}
-                d={path(d)}
-                fill='none'
-                stroke='#fff'
-                strokeWidth={`${strokeWidth / 3}px`}
-              />
-            ))}
-            {citiesActive.map((d, i) => (
-              <circle
-                key={i}
-                fill='#ff5e50'
-                r={strokeWidth * 3}
-                transform={`translate(${projection(d.geometry.coordinates)})`}
-              />
-            ))}
+            <MapCounties
+              counties={countiesActive}
+              path={path}
+              strokeWidth={strokeWidth}
+            />
+            <MapCities
+              cities={citiesActive}
+              projection={projection}
+              strokeWidth={strokeWidth}
+            />
           </g>
         </svg>
       </Container>
