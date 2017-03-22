@@ -6,7 +6,7 @@ const MapCities = ({ cities, projection, strokeWidth }) => (
     {cities.map((c, i) => (
       <circle
         key={i}
-        fill='#ff5e50'
+        fill='#284152'
         r={strokeWidth * 3}
         transform={`translate(${projection(c.geometry.coordinates)})`}
       />
