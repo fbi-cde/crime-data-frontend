@@ -38,7 +38,7 @@ const Footer = () => (
   <footer className='py6 bg-blue white'>
     <div className='container-big mx-auto px2'>
       <div className='mt1 mb4'>
-        <span className='mb1 fs-10 md-fs-12 caps bold line-height-1 blue-gray block'>
+        <span className='mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block'>
           Federal Bureau of Investigation
         </span>
         <Link to='/' className='fs-24 md-fs-32 serif line-height-1 white'>
@@ -47,11 +47,11 @@ const Footer = () => (
       </div>
       <div className='clearfix mxn2'>
         <div className='md-col md-col-5 px2 mb3 md-m0'>
-          <ul className='list-style-none m0 p0'>
+          <ul className='m0 p0 fs-14 list-style-none left-bars'>
             {links.map((l, i) => (
               <li key={i}>
                 <Link
-                  className='white caps fs-14'
+                  className='white caps'
                   to={l.href}
                 >
                   {l.text}
@@ -61,7 +61,7 @@ const Footer = () => (
           </ul>
         </div>
         <div className='md-col md-col-5 px2 mb3 md-m0 fs-14 white'>
-          <div className='mb1 bold fs-18 serif red-bright'>Contact us</div>
+          <div className='mb1 bold fs-18 serif blue-light-508'>Contact us</div>
           <div className='mb3'>
             <div className='bold'>Criminal Justice Information Services (CJIS) Division</div>
             <a
@@ -84,7 +84,7 @@ const Footer = () => (
           </div>
         </div>
         <div className='md-col md-col-2 px2 fs-14'>
-          <div className='mb1 bold fs-18 serif red-bright'>Follow us</div>
+          <div className='mb1 bold fs-18 serif blue-light-508'>Follow us</div>
           <div className='mb2'>
             <img
               className='mr1 align-middle'

@@ -38,7 +38,7 @@ class Header extends React.Component {
             </div>
             <div className='inline-block'>
               <span
-                className='mb1 fs-10 md-fs-12 caps bold line-height-1 blue-gray block'
+                className='mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block'
               >
                 Federal Bureau of Investigation
               </span>
