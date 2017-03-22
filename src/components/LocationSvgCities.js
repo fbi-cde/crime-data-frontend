@@ -1,8 +1,8 @@
 import React from 'react'
 
 
-const MapCities = ({ cities, projection, strokeWidth }) => (
-  <g>
+const LocationSvgCities = ({ cities, projection, strokeWidth }) => (
+  <g className='cities'>
     {cities.map((c, i) => (
       <circle
         key={i}
@@ -14,4 +14,4 @@ const MapCities = ({ cities, projection, strokeWidth }) => (
   </g>
 )
 
-export default MapCities
+export default LocationSvgCities

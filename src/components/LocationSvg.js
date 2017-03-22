@@ -3,8 +3,8 @@ import { geoAlbersUsa, geoPath } from 'd3-geo'
 import React from 'react'
 import { feature, mesh } from 'topojson'
 
-import MapCities from './MapCities'
-import MapCounties from './MapCounties'
+import LocationSvgCities from './LocationSvgCities'
+import LocationSvgCounties from './LocationSvgCounties'
 
 
 const Container = ({ children }) => (
@@ -13,7 +13,7 @@ const Container = ({ children }) => (
   </div>
 )
 
-class StateThumbnail extends React.Component {
+class LocationSvg extends React.Component {
   constructor(props) {
     super(props)
     this.state = { usa: null }
@@ -25,7 +25,7 @@ class StateThumbnail extends React.Component {
   }
 
   render() {
-    const { selected } = this.props
+    const { selected, usCounty, usCountyUpdate } = this.props
     const { usa } = this.state
 
     if (!usa) return <Container />
@@ -69,26 +69,30 @@ class StateThumbnail extends React.Component {
             strokeWidth={`${strokeWidth}px`}
             transform={transform}
           >
-            {geoStates.map((d, i) => (
+            <g className='states'>
+              {geoStates.map((d, i) => (
+                <path
+                  key={i}
+                  d={path(d)}
+                  fill={d.properties.name === selected || !active ? '#95aabc' : '#eff4f9'}
+                />
+              ))}
               <path
-                key={i}
-                d={path(d)}
-                fill={d.properties.name === selected || !active ? '#95aabc' : '#eff4f9'}
+                d={path(meshed)}
+                fill='none'
+                stroke='#fff'
+                strokeLinecap='round'
+                strokeLinejoin='round'
               />
-            ))}
-            <path
-              d={path(meshed)}
-              fill='none'
-              stroke='#fff'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            />
-            <MapCounties
+            </g>
+            <LocationSvgCounties
               counties={countiesActive}
               path={path}
               strokeWidth={strokeWidth}
+              selected={usCounty}
+              update={usCountyUpdate}
             />
-            <MapCities
+            <LocationSvgCities
               cities={citiesActive}
               projection={projection}
               strokeWidth={strokeWidth}
@@ -100,4 +104,4 @@ class StateThumbnail extends React.Component {
   }
 }
 
-export default StateThumbnail
+export default LocationSvg

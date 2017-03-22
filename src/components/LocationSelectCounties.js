@@ -5,10 +5,9 @@ import React from 'react'
 import data from '../../data/counties-by-state.json'
 
 
-const LocationCountySelect = ({ selectedState }) => {
-  const handleChange = e => console.log(e.target.value)
-  const counties = data[selectedState] || []
-
+const LocationSelectCounties = ({ usCounty, usCountyUpdate, usState }) => {
+  const onChange = e => usCountyUpdate(e.target.value)
+  const counties = data[usState] || []
   if (!counties.length) return null
 
   return (
@@ -19,8 +18,8 @@ const LocationCountySelect = ({ selectedState }) => {
       <select
         className='block col-12 field field-sm select border'
         id='location-county-select'
-        onChange={handleChange}
-        defaultValue={''}
+        onChange={onChange}
+        value={usCounty || ''}
       >
         <option value='' disabled>County</option>
         {counties.map(c => (
@@ -31,4 +30,4 @@ const LocationCountySelect = ({ selectedState }) => {
   )
 }
 
-export default LocationCountySelect
+export default LocationSelectCounties
