@@ -10,7 +10,7 @@ const formatSI = n => (Number(n) > 10 ? format('.2s')(n) : formatNumber(n))
 class NibrsTable extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { showCounts: true }
+    this.state = { showCounts: false }
     this.showCounts = ::this.showCounts
     this.showPercents = ::this.showPercents
   }
