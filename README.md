@@ -15,7 +15,7 @@ You will need `node` and `npm` to install and run this project.
 
 Make sure to set the `API_KEY` environment variable with your API key for the [Crime Data API](//github.com/18f/crime-data-api). It should be an environment variable so that it doesn't leak to the client side application.
 
-Use `npm run watch` to start the continuous `webpack` process and a webserver.
+Use `npm run watch` to start the continuous `webpack` processes and a webserver.
 
 ## Running tests
 
@@ -23,15 +23,19 @@ You can lint the code with `npm run lint` and run tests with `npm run test`.
 
 ## Deployment
 
+### `master` branch
+
 This project is [continuously deployed](circle.yml) to [cloud.gov](https://cloud.gov) with every commit to the `master` branch. Right now, you can use the application at https://crime-data-explorer.fr.cloud.gov.
 
-### For user testing
+### Stable
 
-We have `manifest-demo.yml` for deploying any given branch/commit to another environment for conducting user testing. From your local machine, use the following command:
+Tagged releases are deployed to https://crime-data-explorer-demo.fr.cloud.gov.
 
-`cf push -f manifest-demo.yml`
+### Staging
 
-The user testing app is available at https://crime-data-explorer-demo.fr.cloud.gov.
+A third, and less formal, environment is available at https://crime-data-explorer-staging.fr.cloud.gov. This is for ad-hoc usage and testing.
+
+Use `cf push -f manifest/staging.yml` to deploy. Remember that `cf` pushes from your local file structure and won't build the app on its own, so make sure you run `npm run build` before pushing.
 
 ## Browser support
 
