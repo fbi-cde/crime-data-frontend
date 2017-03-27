@@ -120,9 +120,6 @@ class DownloadBulkNibrs extends React.Component {
 
     return (
       <div className='mb8'>
-        <h2 className='mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter'>
-          Download incident reports by state and year
-        </h2>
         <p className='mb4 fs-18 sm-fs-24 serif'>
           See {nibrsTerm} data by offense, location, victim and offender
           demographics, and arrestee. For more information, please see the{' '}
@@ -157,7 +154,7 @@ class DownloadBulkNibrs extends React.Component {
                 ))}
               </select>
             </div>
-            <div className='sm-col sm-col-3 lg-col-2 px1 mb2 sm-m0'>
+            <div className='sm-col sm-col-3 px1 mb2 sm-m0'>
               <button
                 className='col-12 btn btn-primary'
                 disabled={isBtnDisabled}
