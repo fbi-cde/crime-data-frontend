@@ -10,8 +10,9 @@ const Term = ({ children, dispatch, id }) => {
   }
 
   return (
-    <button
-      className='btn p0 regular border-none border-bottom-dotted align-inherit line-height-3'
+    <a
+      className='border-bottom-dotted'
+      href='#!'
       onClick={handler}
     >
       {children}
@@ -21,7 +22,7 @@ const Term = ({ children, dispatch, id }) => {
         src='/img/glossary.svg'
         alt='glossary lookup'
       />
-    </button>
+    </a>
   )
 }
 
