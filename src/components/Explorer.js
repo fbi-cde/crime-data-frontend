@@ -136,7 +136,7 @@ class Explorer extends React.Component {
           router={router}
         />
         <div className='site-content'>
-          <div className='container-main mx-auto px3 md-p3'>
+          <div className='container-main mx-auto px3 md-py3 lg-px8'>
             <div className='items-baseline my4 border-bottom border-blue-lighter'>
               <h1 className='flex-auto mt0 mb1 fs-22 sm-fs-32'>
                 {startCase(place)}, {startCase(crime)}
