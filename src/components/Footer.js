@@ -13,12 +13,12 @@ const links = [
     href: '/explorer/united-states/violent-crime',
   },
   {
-    text: 'Downloads & Documentation',
-    href: '/downloads-and-docs',
-  },
-  {
     text: 'About',
     href: '/about',
+  },
+  {
+    text: 'Downloads & Documentation',
+    href: '/downloads-and-docs',
   },
   {
     text: 'Glossary',
