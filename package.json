@@ -28,7 +28,7 @@
     "cfenv": "^1.0.3",
     "connect-gzip-static": "^2.0.1",
     "d3-array": "^1.0.2",
-    "d3-collection": "^1.0.2",
+    "d3-collection": "^1.0.3",
     "d3-format": "^1.0.2",
     "d3-geo": "^1.4.0",
     "d3-scale": "^1.0.4",

@@ -89,7 +89,7 @@ const offenderDemo = data => {
       {
         data: rename(reshape(offenderSexCode, 'sex_code'), sexCodes),
         title: 'Sex of offender',
-        type: 'donut',
+        type: 'stacked',
         keys: Object.values(sexCodes),
       },
       {
@@ -119,7 +119,7 @@ const victimDemo = data => {
       {
         data: rename(reshape(victimSexCode, 'sex_code'), sexCodes),
         title: 'Sex of victim',
-        type: 'donut',
+        type: 'stacked',
         keys: Object.values(sexCodes),
       },
       {
