@@ -27,11 +27,6 @@ class Glossary extends React.Component {
     this.applyProps(nextProps)
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.error) return true
-    return false
-  }
-
   setOpen(isOpen) {
     if (isOpen) this.glossaryEl.show()
     else this.glossaryEl.hide()
@@ -40,9 +35,10 @@ class Glossary extends React.Component {
   showTerm(term) {
     if (!term) return
 
+    this.setState({ error: null })
+
     try {
       this.glossaryEl.findTerm(term.toLowerCase())
-      this.setState({ error: null })
     } catch (e) {
       if (e.message === 'Cannot read property \'elm\' of undefined') {
         this.setState({ error: `Cannot find "${term}".` })
@@ -53,7 +49,10 @@ class Glossary extends React.Component {
   applyProps(props) {
     const { isOpen, term } = props
     this.setOpen(isOpen)
-    if (term) this.showTerm(term)
+    if (term) {
+      this.setState({ error: null })
+      this.showTerm(term)
+    }
   }
 
   toggleGlossary() {
