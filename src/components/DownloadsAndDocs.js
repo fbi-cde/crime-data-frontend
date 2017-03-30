@@ -62,7 +62,7 @@ const DownloadsAndDocs = ({ dispatch }) => (
               </p>
               <a
                 className='btn btn-primary btn-sm fs-14'
-                href='https://crime-data-api.fr.cloud.gov/swagger-ui/'
+                href='https://crime-data-api.fr.cloud.gov/'
               >
                 See API documentation
               </a>
