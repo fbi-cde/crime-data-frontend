@@ -38,12 +38,12 @@ describe('api utility', () => {
   })
 
   describe('getNibrs()', () => {
-    it('should call the /offenders/count/states/:id/:dim/offenses endpoint', done => {
+    it('should call the /offenders/count/states/:postal_abbr/:dim/offenses endpoint', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
       const args = { ...params, type: 'offender', dim: 'sexCode' }
       api.getNibrs(args).then(() => {
         const spyArgs = spy.args[0]
-        const expectedUrl = '/api/offenders/count/states/6/sex_code/offenses'
+        const expectedUrl = '/api/offenders/count/states/CA/sex_code/offenses'
         expect(spyArgs[0]).toEqual(expectedUrl)
         expect(spyArgs[1].explorer_offense).toEqual(params.crime)
         done()
