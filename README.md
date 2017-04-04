@@ -39,18 +39,20 @@ Use `cf push -f manifest/staging.yml` to deploy. Remember that `cf` pushes from 
 
 ## Release process
 
-This app follows [semver](http://semver.org/) and [tags releases](https://github.com/18F/crime-data-explorer/releases) with the version number. You can see all notable changes in [CHANGELOG.md](changelog.md).
+This app follows [semver](http://semver.org/) and has [tagged releases](https://github.com/18F/crime-data-explorer/releases) by version number. You can see all notable changes in [CHANGELOG.md](https://github.com/18F/crime-data-explorer/blob/master/CHANGELOG.md).
 
-### Manual testing
+### Manual verification
 
-1. Load homepage
+Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2340`](https://github.com/18F/crime-data-explorer/commit/cdb2340830b0325dc9a05ba443a1a84c2e835430) it was about 77% of all statements), we run through a few basic user scenarios before tagging a release to check the application.
+
+1. Load homepage from `master` branch. Can be local or https://crime-data-explorer.fr.cloud.gov
 2. Select "Explorer" from navigation
 3. Ensure that a trend chart renders to show "Violent Crime rate in United States"
 4. Select "Alabama" as the location in the left hand side menu
 5. Select "Robbery" as the crime in the left hand side menu
 6. Ensure that the URL is now `/explorer/alabama/robbery`
 7. Ensure that a trend chart renders to show "Robbery rate in Alabama, 2004–2014"
-8. Scroll down and ensure donut charts, histograms, and tables render to show Robbery incident details in Alabama, 2004–2014"
+8. Scroll down and ensure donut charts, histograms, and tables render to show "Robbery incident details in Alabama, 2004–2014"
 9. Scroll down and ensure there is a section called "About the data"
 10. Select "Downloads & Documentation" from the navigation at the top of the page or the footer at the bottom
 11. Select "Alabama" as the "Location" and "2000" as the "Year". Click download and ensure that a `.zip` file is downloaded
@@ -58,7 +60,7 @@ This app follows [semver](http://semver.org/) and [tags releases](https://github
 
 ### Tagging a release
 
-1. Compile the notable changes into the [CHANGELOG.md](changelog.md). You can use the `/compare/:lastVersion...master` endpoint on Github. For example, this [`/compare` link was used to determine the changes in `v1.1.0`](https://github.com/18F/crime-data-explorer/compare/v1.0.0...33edf933009664a74e2601aa369f4bb6a67394c5)
+1. Compile the notable changes into the [CHANGELOG.md](https://github.com/18F/crime-data-explorer/blob/master/CHANGELOG.md). You can use the `/compare/:lastVersion...master` endpoint on Github. For example, this [`/compare` link was used to determine the changes in `v1.1.0`](https://github.com/18F/crime-data-explorer/compare/v1.0.0...33edf933009664a74e2601aa369f4bb6a67394c5)
 2. Determine if the version should be increased by a major, minor, or patch version
 3. Adjust the version number in `package.json` accordingly
 4. Submit a pull request without tagging the commit
