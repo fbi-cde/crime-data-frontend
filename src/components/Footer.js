@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Link from './Link'
-
+import packageJson from '../../package.json'
 
 const links = [
   {
@@ -44,6 +44,15 @@ const Footer = () => (
         <Link to='/' className='fs-24 md-fs-32 serif line-height-1 white'>
           Crime Data Explorer
         </Link>
+        <span className='block fs-10'>
+          v{packageJson.version} -{' '}
+          <a
+            className='white'
+            href='https://github.com/18F/crime-data-explorer/blob/master/CHANGELOG.md'
+          >
+            Changelog
+          </a>
+        </span>
       </div>
       <div className='clearfix mxn2'>
         <div className='md-col md-col-5 px2 mb3 md-m0'>

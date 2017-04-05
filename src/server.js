@@ -11,6 +11,7 @@ import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
 
+import packageJson from '../package.json'
 import renderHtml from './html'
 import routes from './routes'
 import configureStore from './store'
@@ -30,7 +31,7 @@ const app = express()
 app.use(express.static(__dirname))
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
-app.get('/status', (req, res) => res.send('OK'))
+app.get('/status', (req, res) => res.send(`OK v${packageJson.version}`))
 
 app.get('/api/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')
