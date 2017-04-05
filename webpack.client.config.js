@@ -3,7 +3,9 @@
 var path = require('path')
 
 var autoprefixer = require('autoprefixer')
+var CompressionPlugin = require('compression-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 var webpack = require('webpack')
 
 var env = process.env.NODE_ENV || 'development'
@@ -43,6 +45,13 @@ var config = {
     autoprefixer({ browsers: ['last 2 versions', '> 5%'] })
   ],
   plugins: [
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$/,
+      threshold: 10240,
+      minRatio: 0.8
+    }),
     new ExtractTextPlugin('app.css'),
     new webpack.DefinePlugin({
       'process.env': {
