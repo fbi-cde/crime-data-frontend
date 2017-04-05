@@ -24,10 +24,8 @@ const participationCsvLink = place => {
 }
 
 const locationLinks = place => {
-  console.log('place', place === nationalKey)
   let links
   if (place === nationalKey) {
-    console.log('yo!')
     links = content.locations.national
   } else {
     links = content.locations.states[startCase(place)] || []
