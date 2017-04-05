@@ -54,7 +54,9 @@ const DownloadDataBtn = ({ data, filename, text }) => {
         type: 'application/zip;base64',
       })
     }).catch(e => {
+      /* eslint-disable */
       console.error('error from b64 zip', { err: e, args: { data, filename, text } })
+      /* eslint-enable */
     })
   }
 
