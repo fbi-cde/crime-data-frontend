@@ -8,3 +8,4 @@ services:
 - crime-data-api-creds
 env:
   NODE_ENV: 'production'
+  CDE_API: 'https://crime-data-api.fr.cloud.gov'

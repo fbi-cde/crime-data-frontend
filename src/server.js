@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production') require('newrelic')
 const env = cfenv.getAppEnv()
 const credService = env.getService('crime-data-api-creds') || { credentials: {} }
 const apiKey = credService.credentials.API_KEY || process.env.API_KEY || false
-const API = 'https://crime-data-api.fr.cloud.gov'
+const API = process.env.CDE_API
 
 const app = express()
 
