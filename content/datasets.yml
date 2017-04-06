@@ -9,7 +9,7 @@
 - title: Police Employee Data
   description: |
     See how many full-time sworn and civilian law enforcement employees have served in your state from 1960–2014.
-  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/pe_employment.csv'
+  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/pe_employee_data.csv'
 - title: Uniform Crime Reporting Program Participation Data
   description: |
     See how many law enforcement agencies have reported crime data to the FBI by state and year from 1960–2014.
