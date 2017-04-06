@@ -5,6 +5,7 @@ import 'babel-polyfill'
 import http from 'axios'
 import cfenv from 'cfenv'
 import express from 'express'
+import gzipStatic from 'connect-gzip-static'
 import path from 'path'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
@@ -27,8 +28,8 @@ const API = process.env.CDE_API
 
 const app = express()
 
-app.use(express.static(__dirname))
-app.use(express.static(path.join(__dirname, '..', 'public')))
+app.use(gzipStatic(__dirname))
+app.use(gzipStatic(path.join(__dirname, '..', 'public')))
 
 app.get('/status', (req, res) => res.send('OK'))
 
