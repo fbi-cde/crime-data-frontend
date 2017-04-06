@@ -23,9 +23,19 @@ const participationCsvLink = place => {
   ]
 }
 
+const locationLinks = place => {
+  let links
+  if (place === nationalKey) {
+    links = content.locations.national
+  } else {
+    links = content.locations.states[startCase(place)] || []
+  }
+  return links.filter(l => l.text)
+}
+
 const UcrParticipationInformation = ({ dispatch, place, until, ucr }) => {
   const csvLinks = participationCsvLink(place)
-  const links = (content.states[startCase(place)] || []).filter(l => l.text).concat(csvLinks)
+  const links = locationLinks(place).concat(csvLinks)
   const participation = ucrParticipation(place)
   const hybrid = (participation.srs && participation.nibrs)
   const ucrPlaceInfo = !ucr.loading && ucr.data[place]

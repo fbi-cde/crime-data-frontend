@@ -6,16 +6,18 @@ import hateCrimeContent from '../../content/crimes/hate-crime.yml'
 import homicideContent from '../../content/crimes/homicide.yml'
 import larcenyContent from '../../content/crimes/larceny-theft.yml'
 import leokaContent from '../../content/crimes/leoka.yml'
+import locationContent from '../../content/locations.yml'
 import mvtContent from '../../content/crimes/motor-vehicle-theft.yml'
 import propertyCrimeContent from '../../content/crimes/property-crime.yml'
 import rapeContent from '../../content/crimes/rape.yml'
 import robberyContent from '../../content/crimes/robbery.yml'
-import stateContent from '../../content/locations/states.yml'
 import violentCrimeContent from '../../content/crimes/violent-crime.yml'
 
 
 const content = {
-  ...stateContent,
+  locations: {
+    ...locationContent,
+  },
   crimes: {
     'aggravated-assault': assaultContent,
     arson: arsonContent,
