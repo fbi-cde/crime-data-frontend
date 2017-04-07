@@ -72,7 +72,7 @@ const buildSummaryQueryString = params => {
 
 const getSummary = params => {
   const { place } = params
-  const endpoint = `${API}/incidents/count`
+  const endpoint = `${API}/counts`
   const qs = buildSummaryQueryString(params)
 
   return get(`${endpoint}?${qs}`).then(d => ({
