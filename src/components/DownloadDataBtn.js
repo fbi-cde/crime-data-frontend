@@ -41,7 +41,7 @@ const DownloadDataBtn = ({ data, filename, text }) => {
 
     if (!multipleFiles && first.url) return triggerUrlDownload(first.url)
 
-    zip.file(`${dirname}/README.md`, `#${lowerCase(dirname)}\n`)
+    zip.file(`${dirname}/README.md`, `# ${lowerCase(dirname)}\n`)
     data.forEach(d => (
       zip.file(`${dirname}/${slugify(d.filename)}.csv`, jsonToCsv(d.data))
     ))
