@@ -27,6 +27,7 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
   const year = data.date.getFullYear()
 
   const highlight = v => <span className='bold blue'>{v}</span>
+  const isOnlyNational = keys.length === 1
   const term = (
     <Term dispatch={dispatch} id={mapCrimeToGlossaryTerm(crime)}>
       {lowerCase(crime)}
@@ -38,10 +39,10 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
       <div className='flex-auto'>
         <h4 className='mt0 mb1 fs-18 sans-serif'>{year}</h4>
         <p className='mb1 lg-m0 lg-pr4 lg-mh-72p fs-14 sm-fs-16'>
-          {keys.length === 1 && (<span>
+          {isOnlyNational && (<span>
             There were {highlight(formatRate(rate))} incidents of {term} per 100,000 people.
           </span>)}
-          {keys.length > 1 && (<span>
+          {!isOnlyNational && (<span>
             {name}’s {term} rate was {comparison} that of the United States, and
             in {highlight(year)} was {highlight(formatRate(rate))} incidents
             per 100,000 people.
