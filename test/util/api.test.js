@@ -72,11 +72,11 @@ describe('api utility', () => {
   })
 
   describe('getSummary()', () => {
-    it('should call the /incidents/count endpoint', done => {
+    it('should call the /count endpoint', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
       api.getSummary(params).then(() => {
         const url = spy.args[0].pop()
-        expect(url.includes('/incidents/count')).toEqual(true)
+        expect(url.includes('/count')).toEqual(true)
         expect(url.includes('?explorer_offense=homicide')).toEqual(true)
         done()
       })
@@ -103,12 +103,11 @@ describe('api utility', () => {
   })
 
   describe('getUcrParticipation()', () => {
-    it('should call the /geo/states/:id/participation endpoint', done => {
+    it('should call the /participation/states/:id endpoint', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
       api.getUcrParticipation('california').then(() => {
         const url = spy.args[0].pop()
-        expect(url.includes('/geo/states')).toEqual(true)
-        expect(url.includes('/participation')).toEqual(true)
+        expect(url.includes('/participation/states')).toEqual(true)
         done()
       })
     })
