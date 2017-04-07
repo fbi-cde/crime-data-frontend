@@ -99,7 +99,7 @@ const getSummaryRequests = params => {
 const getUcrParticipation = place => {
   const path = (place === nationalKey)
     ? 'participation/national'
-    : `geo/states/${lookupUsa(place).toUpperCase()}/participation`
+    : `participation/states/${lookupUsa(place).toUpperCase()}`
 
   return get(`${API}/${path}`).then(response => ({
     place: slugify(place),
