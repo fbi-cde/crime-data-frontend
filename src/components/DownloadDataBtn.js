@@ -1,28 +1,27 @@
+import lowerCase from 'lodash.lowercase'
 import React from 'react'
+import Zip from 'jszip'
 
 import jsonToCsv from '../util/csv'
 import { slugify } from '../util/text'
 
 
-const downloadData = (fname, data) => {
-  const file = `${slugify(fname)}.csv`
-  const dataStr = jsonToCsv(data)
-
+const triggerDataDownload = ({ content, filename, type }) => {
   if (window.navigator.msSaveBlob) {
-    const blob = new Blob([dataStr], { type: 'text/csv' })
-    window.navigator.msSaveBlob(blob, file);
+    const blob = new Blob([content], { type })
+    window.navigator.msSaveBlob(blob, filename);
   } else {
     const a = document.createElement('a')
     const body = document.querySelector('body')
-    a.download = file
-    a.href = `data:text/csv,${encodeURIComponent(dataStr)}`
+    a.download = filename
+    a.href = `data:${type},${encodeURIComponent(content)}`
     body.appendChild(a)
     a.click()
     body.removeChild(a)
   }
 }
 
-const downloadUrl = url => {
+const triggerUrlDownload = url => {
   const a = document.createElement('a')
   const body = document.querySelector('body')
   a.href = url
@@ -31,16 +30,33 @@ const downloadUrl = url => {
   body.removeChild(a)
 }
 
-const DownloadDataBtn = ({ data, text }) => {
+const DownloadDataBtn = ({ data, filename, text }) => {
   if (!data || data.length === 0) return null
 
   const clickHander = () => {
-    data.forEach(d => {
-      if (d.url) {
-        downloadUrl(d.url)
-      } else if (d.data.length > 0) {
-        downloadData(d.filename, d.data)
-      }
+    const first = data[0]
+    const dirname = filename || `${first.filename}`
+    const multipleFiles = data.length > 1
+    const zip = new Zip()
+
+    if (!multipleFiles && first.url) return triggerUrlDownload(first.url)
+
+    zip.file(`${dirname}/README.md`, `# ${lowerCase(dirname)}\n`)
+    data.forEach(d => (
+      zip.file(`${dirname}/${slugify(d.filename)}.csv`, jsonToCsv(d.data))
+    ))
+
+
+    return zip.generateAsync({ type: 'base64' }).then(content => {
+      triggerDataDownload({
+        content,
+        filename: `${dirname}.zip`,
+        type: 'application/zip;base64',
+      })
+    }).catch(e => {
+      /* eslint-disable */
+      console.error('error from b64 zip', { err: e, args: { data, filename, text } })
+      /* eslint-enable */
     })
   }
 

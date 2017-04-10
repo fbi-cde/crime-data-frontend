@@ -45,6 +45,7 @@ const NibrsCard = ({ crime, data, place, since, title, until }) => {
       )}
       <DownloadDataBtn
         data={download}
+        filename={`${place}-${crime}-${slugify(title)}-${since}-${until}`}
         text='Download data'
       />
     </div>
