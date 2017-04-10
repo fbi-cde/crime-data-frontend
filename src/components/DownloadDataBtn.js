@@ -80,7 +80,6 @@ DownloadDataBtn.propTypes = {
     filename: React.PropTypes.string,
     url: React.PropTypes.string,
   })),
-  filename: React.PropTypes.string,
   text: React.PropTypes.string,
 }
 
