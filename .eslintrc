@@ -12,6 +12,7 @@
       "exceptMethods": ["shouldComponentUpdate"]
     }],
     "comma-dangle": 0,
+    "import/extensions": 0,
     "import/no-extraneous-dependencies": 0,
     "max-len": [1, 100],
     "no-underscore-dangle": 0,

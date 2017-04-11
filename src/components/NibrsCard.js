@@ -4,6 +4,7 @@ import React from 'react'
 import DownloadDataBtn from './DownloadDataBtn'
 import NibrsDonut from './NibrsDonut'
 import NibrsHistogram from './NibrsHistogram'
+import NibrsStackedBar from './NibrsStackedBar'
 import NibrsTable from './NibrsTable'
 import { slugify } from '../util/text'
 
@@ -16,6 +17,8 @@ const NibrsCard = ({ crime, data, place, since, title, until }) => {
         return <NibrsDonut {...props} />
       case 'histogram':
         return <NibrsHistogram {...props} />
+      case 'stacked':
+        return <NibrsStackedBar {...props} />
       case 'table':
         return <NibrsTable {...props} />
       default:
