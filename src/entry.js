@@ -10,9 +10,9 @@ import configureStore from './store'
 import '../sass/app.scss'
 
 const preloadedState = window.__STATE__
-const store = configureStore(preloadedState)
-
 delete window.__STATE__
+
+const store = configureStore(preloadedState)
 
 const render = () => {
   ReactDOM.render(
@@ -21,7 +21,9 @@ const render = () => {
   )
 }
 
-if (window && window.localStorage) window.localStorage.clear()
+if (window && window.localStorage && process.env.NODE_ENV === 'production') {
+  window.localStorage.clear()
+}
 
 render()
 store.subscribe(render)
