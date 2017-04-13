@@ -10,25 +10,17 @@ We encourage you to read this project's CONTRIBUTING policy (you are here), its 
 * To contribute a specific change to the site, outside contributors will need to fork this repo.
 
 ## High-level roadmap
-The Crime Data Explorer project is composed of three repositories:
+The Crime Data Explorer project is composed of a few repositories:
 
-0. [18f/crime-data-api](/18f/crime-data-api)
-1. [18f/crime-data-explorer](/18f/crime-data-explorer) (you are here)
-2. [18f/crime-data-style](/18f/crime-data-style)
+0. [18f/crime-data-explorer](/18f/crime-data-explorer) - Main project repo
+1. [18f/crime-data-api](/18f/crime-data-api)
+2. [18f/crime-data-frontend](/18f/crime-data-frontend) - You are here
+3. [18f/crime-data-prototypes](/18f/crime-data-prototypes)
+4. [18f/crime-data-style](/18f/crime-data-style)
 
-We track work and progress through [ZenHub](https://www.zenhub.io/), which is a browser extension that adds additional agile features to GitHub. For example, ZenHub adds a "Boards" page, which is an agile board detailing the state of work for the dashboard.
+We track work across these repositories with [this Waffle.io board](https://waffle.io/18F/crime-data-explorer).
 
 We keep a running list of changes to this application in the [CHANGELOG](CHANGELOG.md).
-
-### Board workflow
-
-1. "New Issues" - new issues, bugs or ideas start here
-2. "Backlog"  - issues are prioritized and defined
-3. "To Do (Current Sprint)" - culled from the "Backlog" for the current spring
-4. "In Progress" - all issues are assigned and are actively being worked on
-5. "Review/QA" - for development issues this lane is used for code review and testing
-6. "Done" - once pull requests are merged, the issues can be
-7. "Closed" - at the end of each sprint, issues are moved from "Done" to "Closed"
 
 ## Code standards
 
@@ -50,7 +42,7 @@ We keep a running list of changes to this application in the [CHANGELOG](CHANGEL
   - [React Router](https://github.com/ReactTraining/react-router/tree/v3/docs)
 
 ### Workflow
-- Open branches off main repo due to secure CircleCI env vars.
+- Open branches off main repo (as opposed to a fork) due to secure CircleCI env vars.
 - Add the "ready for review" label when the code is ready to be reviewed by another team member. You can also request a review from a specific person in Github.
   - Work-in-progress PRs are encouraged. Be sure to tag the review with "ready for review" when it's ready though.
 - As another team member, review the code and ensure it conforms to the coding standards and exit criteria
