@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2017-04-13
+### Fixed
+- Fixed test failures due to a changed dependency ([#690](https://github.com/18F/crime-data-frontend/pull/690))
+
 ## [1.2.0] - 2017-04-12
 ### Added
 - Document the release process for this application ([#674](https://github.com/18F/crime-data-frontend/pull/674))
