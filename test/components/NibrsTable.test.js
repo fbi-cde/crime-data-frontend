@@ -1,3 +1,5 @@
+/* eslint no-undef: 0 */
+
 import { shallow } from 'enzyme'
 import React from 'react'
 
