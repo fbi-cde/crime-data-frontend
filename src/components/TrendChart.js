@@ -152,7 +152,7 @@ class TrendChart extends React.Component {
             cx='0'
             cy={y(active[k.slug].rate)}
             fill={color(k.slug)}
-            r={active[k.slug].count ? '4' : '0'}
+            r={active[k.slug].count ? '5' : '0'}
           />
         ))}
       </g>
@@ -200,14 +200,24 @@ class TrendChart extends React.Component {
               <YAxis scale={y} width={width} />
               {dataByKey.map((d, i) => (
                 <g key={i} className={`series series-${d.id}`}>
-                  {d.segments.map((s, j) => (
-                    <path
-                      key={j}
-                      d={l(s)}
-                      fill='none'
-                      stroke={color(d.id)}
-                      strokeWidth='2'
-                    />
+                  {d.segments.map((segment, j) => (
+                    <g key={j}>
+                      <path
+                        d={l(segment)}
+                        fill='none'
+                        stroke={color(d.id)}
+                        strokeWidth='2'
+                      />
+                      {segment.map((datum, k) => (
+                        <circle
+                          key={k}
+                          cx={x(datum.date)}
+                          cy={y(datum.value.rate)}
+                          fill={color(d.id)}
+                          r='3'
+                        />
+                      ))}
+                    </g>
                   ))}
                 </g>
               ))}
