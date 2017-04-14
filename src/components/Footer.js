@@ -36,7 +36,7 @@ const links = [
 
 const Footer = () => (
   <footer className='py6 bg-blue white'>
-    <div className='container-big mx-auto px2'>
+    <div className='px2 md-px6'>
       <div className='mt1 mb4'>
         <span className='mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block'>
           Federal Bureau of Investigation

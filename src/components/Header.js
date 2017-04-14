@@ -26,7 +26,7 @@ class Header extends React.Component {
 
     return (
       <header className='pt3 pb2 md-p0 flex items-center bg-blue white'>
-        <div className='md-flex flex-auto items-baseline container-big mx-auto px2'>
+        <div className='md-flex flex-auto items-baseline px2 md-px6'>
           <div className='flex-auto'>
             <div className='right md-hide lg-hide'>
               <button
@@ -48,11 +48,11 @@ class Header extends React.Component {
             </div>
           </div>
           <div className={`mt2 md-m0 pt2 md-m0 header-nav ${isOpen ? 'open' : ''}`}>
-            <ul className='list-reset my0 mxn2'>
+            <ul className='list-reset my0 mxn1 lg-mxn2'>
               <li className='mb1 md-m0'>
                 <Link
                   to='/'
-                  className='mx2 fs-14 md-fs-18 white'
+                  className='mx1 lg-mx2 fs-14 md-fs-18 white'
                   style={isHome(location) ? active : {}}
                 >
                   Home
@@ -61,7 +61,7 @@ class Header extends React.Component {
               <li className='mb1 md-m0'>
                 <Link
                   to={`/explorer/${nationalKey}/violent-crime`}
-                  className='mx2 fs-14 md-fs-18 white'
+                  className='mx1 lg-mx2 fs-14 md-fs-18 white'
                   style={isExplorer(location) ? active : {}}
                 >
                   Explorer
@@ -70,7 +70,7 @@ class Header extends React.Component {
               <li className='mb1 md-m0'>
                 <Link
                   to='/about'
-                  className='mx2 fs-14 md-fs-18 white'
+                  className='mx1 lg-mx2 fs-14 md-fs-18 white'
                   activeStyle={active}
                 >
                   About
@@ -79,7 +79,7 @@ class Header extends React.Component {
               <li className='mb1 md-m0'>
                 <Link
                   to='/downloads-and-docs'
-                  className='mx2 fs-14 md-fs-18 white'
+                  className='mx1 lg-mx2 fs-14 md-fs-18 white'
                   activeStyle={active}
                 >
                   Downloads & Documentation

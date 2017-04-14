@@ -115,11 +115,11 @@ $darken-4: rgba(0, 0, 0, .5) !default;
 $lighten-1: rgba(255, 255, 255, .5) !default;
 
 $breakpoint-sm: '(min-width: 40rem)' !default;
-$breakpoint-md: '(min-width: 52rem)' !default;
+$breakpoint-md: '(min-width: 54rem)' !default;
 $breakpoint-lg: '(min-width: 64rem)' !default;
-$breakpoint-sm-md: '(min-width: 40rem) and (max-width: 52rem)' !default;
-$breakpoint-md-lg: '(min-width: 52rem) and (max-width: 64rem)' !default;
-$breakpoint-max-md: '(max-width: 52rem)' !default;
+$breakpoint-sm-md: '(min-width: 40rem) and (max-width: 54rem)' !default;
+$breakpoint-md-lg: '(min-width: 54rem) and (max-width: 64rem)' !default;
+$breakpoint-max-md: '(max-width: 54rem)' !default;
 
 $container-width: 940px !default;
 $container-main-width: 800px !default;
