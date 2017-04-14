@@ -4,12 +4,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import BetaBanner from './BetaBanner'
-import BetaModal from './BetaModal'
 import Disclaimer from './Disclaimer'
 import Footer from './Footer'
 import Glossary from './Glossary'
 import Header from './Header'
-import { hideModal as hideModalAction } from '../actions/modal'
 
 
 const App = ({ appState, children, dispatch, location }) => (
@@ -20,10 +18,7 @@ const App = ({ appState, children, dispatch, location }) => (
     <main className='site-main'>
       {children && React.cloneElement(children, { appState, dispatch })}
     </main>
-    <Glossary
-      dispatch={dispatch}
-      {...appState.glossary}
-    />
+    <Glossary dispatch={dispatch} {...appState.glossary} />
     <Footer />
     {process.env.NODE_ENV !== 'production' && (
       <button
@@ -34,7 +29,6 @@ const App = ({ appState, children, dispatch, location }) => (
         ⟲
       </button>
     )}
-    {appState.modal.isShown && (<BetaModal onConfirm={() => dispatch(hideModalAction())} />)}
   </div>
 )
 
