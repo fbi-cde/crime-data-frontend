@@ -13,7 +13,7 @@ import { hideModal as hideModalAction } from '../actions/modal'
 
 
 const App = ({ appState, children, dispatch, location }) => (
-  <div className='site'>
+  <div className='site overflow-hidden'>
     <Disclaimer />
     <BetaBanner />
     <Header location={location} />

@@ -3,6 +3,7 @@
 
 @media #{$breakpoint-sm} {
   .sm-absolute { position: absolute; }
+  .sm-mx-auto { margin-left: auto; margin-right: auto; }
 }
 
 @media #{$breakpoint-md} {
