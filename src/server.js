@@ -3,6 +3,7 @@
 import 'babel-polyfill'
 
 import http from 'axios'
+import basicAuth from 'basic-auth-connect'
 import cfenv from 'cfenv'
 import express from 'express'
 import gzipStatic from 'connect-gzip-static'
@@ -19,15 +20,20 @@ import configureStore from './store'
 import { updateFilters } from './actions/filters'
 import history from './util/history'
 
-if (process.env.NODE_ENV === 'production') require('newrelic')
+const isProd = process.env.NODE_ENV === 'production'
 
+if (isProd) require('newrelic')
 
 const env = cfenv.getAppEnv()
 const credService = env.getService('crime-data-api-creds') || { credentials: {} }
-const apiKey = credService.credentials.API_KEY || process.env.API_KEY || false
+
+const { API_KEY, HTTP_BASIC_USERNAME, HTTP_BASIC_PASSWORD } = credService.credentials
+const apiKey = API_KEY || process.env.API_KEY || false
 const API = process.env.CDE_API
 
 const app = express()
+
+if (isProd) app.use(basicAuth(HTTP_BASIC_USERNAME, HTTP_BASIC_PASSWORD))
 
 app.use(gzipStatic(__dirname))
 app.use(gzipStatic(path.join(__dirname, '..', 'public')))
