@@ -42,7 +42,7 @@ We keep a running list of changes to this application in the [CHANGELOG](CHANGEL
   - [React Router](https://github.com/ReactTraining/react-router/tree/v3/docs)
 
 ### Workflow
-- Open branches off main repo (as opposed to a fork) due to secure CircleCI env vars.
+- Open a branch (not a fork) from `master` in the main repo.
 - Add the "ready for review" label when the code is ready to be reviewed by another team member. You can also request a review from a specific person in Github.
   - Work-in-progress PRs are encouraged. Be sure to tag the review with "ready for review" when it's ready though.
 - As another team member, review the code and ensure it conforms to the coding standards and exit criteria
