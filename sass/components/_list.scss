@@ -9,8 +9,9 @@
       border-left: 2px solid $red-bright;
       content: '';
       display: inline-block;
-      height: .5rem;
+      height: 1rem;
       padding-right: $space-1;
+      vertical-align: text-top;
     }
   }
 }
