@@ -68,7 +68,7 @@ const NibrsContainer = ({
 
   return (
     <div>
-      <div className='mb2 p2 sm-p4 bg-blue-lighter'>
+      <div className='mb2 p2 sm-p4 bg-white border-top border-blue border-w8'>
         <h2 className='m0 fs-24 sm-fs-32 sans-serif'>
           {startCase(crime)} incident details in {startCase(place)},{' '}
           <br className='xs-hide' />

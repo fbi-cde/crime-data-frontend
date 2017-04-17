@@ -29,14 +29,14 @@ const TrendContainer = ({ crime, place, filters, data, dispatch, loading, keys }
 
   return (
     <div>
-      <div className='mb2 p2 sm-p4 bg-blue-lighter'>
-        <h2 className='m0 fs-24 sm-fs-32 sans-serif'>
+      <div className='mb2 p2 sm-p4 bg-white border-top border-blue border-w8'>
+        <h2 className='mt0 mb3 fs-24 sm-fs-32 sans-serif'>
           {startCase(crime)} rate in {startCase(place)},{' '}
           <br className='xs-hide' />
           {since}–{until}
         </h2>
+        {content}
       </div>
-      <div className='mb2'>{content}</div>
       {!loading && (
         <TrendSourceText
           dispatch={dispatch}
