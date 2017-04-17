@@ -202,7 +202,7 @@ const About = ({ dispatch }) => (
               <a className='bold' href='https://github.com/18F/crime-data-explorer'>GitHub</a>.
             </p>
           </div>
-          <div className='md-col md-col-4 px6 mb4 md-mb0'>
+          <div className='md-col md-col-4 px6 md-pl8 mb4 md-mb0'>
             <h3 className='mt0 mb2 fs-22 sans-serif red'>Follow us</h3>
             <div className='mb2'>
               <img
