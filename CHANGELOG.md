@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2017-04-17
+### Added
+- HTTP Basic Authentication added to production applications ([#695](https://github.com/18F/crime-data-frontend/pull/695))
+
+### Fixed
+- Unify header, body, and footer alignment on wide displays ([#697](https://github.com/18F/crime-data-frontend/pull/697))
+
+
 ## [1.2.1] - 2017-04-13
 ### Fixed
 - Fixed test failures due to a changed dependency ([#690](https://github.com/18F/crime-data-frontend/pull/690))
