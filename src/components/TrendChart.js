@@ -60,6 +60,7 @@ class TrendChart extends React.Component {
       data,
       dispatch,
       place,
+      showMarkers,
       since,
       size,
       until,
@@ -152,7 +153,7 @@ class TrendChart extends React.Component {
             cx='0'
             cy={y(active[k.slug].rate)}
             fill={color(k.slug)}
-            r={active[k.slug].count ? '5' : '0'}
+            r={active[k.slug].count ? '4.5' : '0'}
           />
         ))}
       </g>
@@ -206,15 +207,15 @@ class TrendChart extends React.Component {
                         d={l(segment)}
                         fill='none'
                         stroke={color(d.id)}
-                        strokeWidth='2'
+                        strokeWidth='2.5'
                       />
-                      {segment.map((datum, k) => (
+                      {showMarkers && segment.map((datum, k) => (
                         <circle
                           key={k}
                           cx={x(datum.date)}
                           cy={y(datum.value.rate)}
                           fill={color(d.id)}
-                          r='3'
+                          r='2.5'
                         />
                       ))}
                     </g>
@@ -288,6 +289,7 @@ TrendChart.defaultProps = {
     margin: { top: 16, right: 0, bottom: 24, left: 36 },
   },
   colors: ['#ff5e50', '#52687d', '#97a7b8'],
+  showMarkers: false,
 }
 
 export default TrendChart
