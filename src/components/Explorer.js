@@ -64,7 +64,12 @@ class Explorer extends React.Component {
   render() {
     const { appState, dispatch, params, router } = this.props
     const { crime } = params
-    const { place, placeType } = getPlaceInfo(params)
+    let { place, placeType } = params
+
+    if (!params.place && !params.placeType) {
+      place = nationalKey
+      placeType = 'national'
+    }
 
     // show not found page if crime or place unfamiliar
     if (!offenses.includes(crime) || !lookup(place, placeType)) {
@@ -129,6 +134,7 @@ class Explorer extends React.Component {
             {showNibrs && (<NibrsContainer
               crime={params.crime}
               dispatch={dispatch}
+              filters={filters}
               nibrs={nibrs}
               place={place}
               since={filters.since}

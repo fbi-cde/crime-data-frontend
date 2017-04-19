@@ -37,9 +37,9 @@ const mungeSummaryData = (summaries, ucr, place) => {
 
 const TrendContainer = ({
   crime,
+  dispatch,
   place,
   placeType,
-  dispatch,
   since,
   summaries,
   ucr,
