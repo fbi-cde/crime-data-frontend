@@ -2,6 +2,7 @@ import { format } from 'd3-format'
 import startCase from 'lodash.startcase'
 import React from 'react'
 
+import Loading from './Loading'
 import Term from './Term'
 import content from '../util/content'
 import ucrParticipation from '../util/ucr'
@@ -10,7 +11,9 @@ import lookupUsa, { nationalKey } from '../util/usa'
 
 const formatNumber = format(',')
 
-const participationCsvLink = place => {
+const participationCsvLink = (place, type) => {
+  if (type === 'agency') return []
+
   const path = (place === nationalKey)
     ? 'participation/national'
     : `geo/states/${lookupUsa(place).toUpperCase()}/participation`
@@ -23,7 +26,9 @@ const participationCsvLink = place => {
   ]
 }
 
-const locationLinks = place => {
+const locationLinks = (place, type) => {
+  if (type === 'agency') return []
+
   let links
   if (place === nationalKey) {
     links = content.locations.national
@@ -33,15 +38,15 @@ const locationLinks = place => {
   return links.filter(l => l.text)
 }
 
-const UcrParticipationInformation = ({ dispatch, place, until, ucr }) => {
-  const csvLinks = participationCsvLink(place)
-  const links = locationLinks(place).concat(csvLinks)
+const UcrParticipationInformation = ({ dispatch, place, placeType, until, ucr }) => {
+  const csvLinks = participationCsvLink(place, placeType)
+  const links = locationLinks(place, placeType).concat(csvLinks)
   const participation = ucrParticipation(place)
   const hybrid = (participation.srs && participation.nibrs)
   const ucrPlaceInfo = !ucr.loading && ucr.data[place]
   const data = ucrPlaceInfo && { ...ucrPlaceInfo.find(p => p.year === until) }
 
-  if (!ucrPlaceInfo) return null
+  // if (!ucrPlaceInfo) return null
 
   return (
     <div className='mb5 clearfix'>
@@ -68,6 +73,7 @@ const UcrParticipationInformation = ({ dispatch, place, until, ucr }) => {
             </Term>
           )} data to the FBI.
         </p>
+        {ucr.loading && <Loading />}
         {!ucr.loading && data.year && (
           <p>
             In {until}, {formatNumber(data.reporting_agencies)} {startCase(place)} law

@@ -12,7 +12,7 @@ import stateLookup from '../util/usa'
 import otherDataSets from '../../content/datasets.yml'
 
 
-const Home = ({ appState, dispatch, location }) => {
+const Home = ({ appState, dispatch, router }) => {
   const { crime, place } = appState.filters
   const isValid = !!(crime && place) || false
 
@@ -24,7 +24,7 @@ const Home = ({ appState, dispatch, location }) => {
 
   const handleSearchClick = () => {
     const change = { crime, place }
-    dispatch(updateApp(change, location))
+    dispatch(updateApp(change, router))
   }
 
   const selectCrime = e => {

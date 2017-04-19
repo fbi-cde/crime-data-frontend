@@ -7,24 +7,63 @@ import TrendChart from './TrendChart'
 import TrendSourceText from './TrendSourceText'
 
 
-const TrendContainer = ({ crime, place, filters, data, dispatch, loading, keys }) => {
+const dataByYear = data => (
+  Object.assign(
+    ...Object.keys(data).map(k => ({
+      [k]: Object.assign(...data[k].map(d => ({ [d.year]: d }))),
+    })),
+  )
+)
+
+const mungeSummaryData = (summaries, ucr, place) => {
+  if (!summaries || !summaries[place]) return false
+
+  const keys = Object.keys(summaries)
+  const summaryByYear = dataByYear(summaries)
+  const ucrByYear = dataByYear(ucr)
+
+  return summaries[place].map(d => (
+    Object.assign(
+      { date: d.year },
+      ...keys.map(k => {
+        const count = summaryByYear[k][d.year].actual
+        const pop = ucrByYear[k][d.year].total_population
+        return { [k]: { count, pop, rate: (count / pop) * 100000 } }
+      }),
+    )
+  ))
+}
+
+const TrendContainer = ({
+  crime,
+  place,
+  placeType,
+  filters,
+  dispatch,
+  summaries,
+  ucr,
+}) => {
+  const loading = summaries.loading || ucr.loading
   const { since, until } = filters
 
   let content = null
   if (loading) content = <Loading />
-  else if (!data || data.length === 0) content = <NoData />
   else {
-    content = (
-      <TrendChart
-        crime={crime}
-        data={data}
-        dispatch={dispatch}
-        keys={keys}
-        place={place}
-        since={since}
-        until={until}
-      />
-    )
+    const data = mungeSummaryData(summaries.data, ucr.data, place)
+    if (!data || data.length === 0) content = <NoData />
+    else {
+      content = (
+        <TrendChart
+          crime={crime}
+          data={data}
+          dispatch={dispatch}
+          keys={Object.keys(summaries.data).map(k => startCase(k))}
+          place={place}
+          since={since}
+          until={until}
+        />
+      )
+    }
   }
 
   return (
@@ -41,6 +80,7 @@ const TrendContainer = ({ crime, place, filters, data, dispatch, loading, keys }
         <TrendSourceText
           dispatch={dispatch}
           place={place}
+          placeType={placeType}
           since={since}
           until={until}
         />

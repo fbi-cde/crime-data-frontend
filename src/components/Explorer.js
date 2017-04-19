@@ -27,33 +27,6 @@ const filterNibrsData = (data, { since, until }) => {
   return filtered
 }
 
-const dataByYear = data => (
-  Object.assign(
-    ...Object.keys(data).map(k => ({
-      [k]: Object.assign(...data[k].map(d => ({ [d.year]: d }))),
-    })),
-  )
-)
-
-const mungeSummaryData = (summaries, ucr, place) => {
-  if (!summaries || !summaries[place]) return false
-
-  const keys = Object.keys(summaries)
-  const summaryByYear = dataByYear(summaries)
-  const ucrByYear = dataByYear(ucr)
-
-  return summaries[place].map(d => (
-    Object.assign(
-      { date: d.year },
-      ...keys.map(k => {
-        const count = summaryByYear[k][d.year].actual
-        const pop = ucrByYear[k][d.year].total_population
-        return { [k]: { count, pop, rate: (count / pop) * 100000 } }
-      }),
-    )
-  ))
-}
-
 class Explorer extends React.Component {
   constructor(props) {
     super(props)
@@ -83,8 +56,8 @@ class Explorer extends React.Component {
   }
 
   handleSidebarChange(change) {
-    const { location } = this.props.router
-    this.props.dispatch(updateApp(change, location))
+    const { router } = this.props
+    this.props.dispatch(updateApp(change, router))
   }
 
   toggleSidebar() {
@@ -97,18 +70,18 @@ class Explorer extends React.Component {
 
   render() {
     const { appState, dispatch, params, router } = this.props
-    const { crime, place } = params
+    const { crime, place, placeType } = params
 
     // show not found page if crime or place unfamiliar
-    if (!offenses.includes(crime) || !lookup(place)) return <NotFound />
+    if (!offenses.includes(crime) || !lookup(place, placeType)) {
+      return <NotFound />
+    }
 
     const { filters, nibrs, sidebar, summaries, ucr } = appState
     const nibrsData = filterNibrsData(nibrs.data, filters)
     const noNibrs = ['violent-crime', 'property-crime']
     const participation = ucrParticipation(place)
     const showNibrs = (!noNibrs.includes(crime) && participation.nibrs)
-    const trendData = mungeSummaryData(summaries.data, ucr.data, place)
-    const trendKeys = Object.keys(summaries.data).map(k => startCase(k))
 
     return (
       <div className='site-wrapper'>
@@ -144,7 +117,8 @@ class Explorer extends React.Component {
             </div>
             <UcrParticipationInformation
               dispatch={dispatch}
-              place={params.place}
+              place={place}
+              placeType={placeType}
               until={filters.until}
               ucr={ucr}
             />
@@ -152,11 +126,11 @@ class Explorer extends React.Component {
             <TrendContainer
               crime={crime}
               place={place}
+              placeType={placeType}
               filters={filters}
-              data={trendData}
               dispatch={dispatch}
-              loading={summaries.loading}
-              keys={trendKeys}
+              summaries={summaries}
+              ucr={ucr}
             />
             {showNibrs && (<NibrsContainer
               crime={params.crime}
@@ -165,7 +139,7 @@ class Explorer extends React.Component {
               error={nibrs.error}
               filters={filters}
               loading={nibrs.loading}
-              place={params.place}
+              place={place}
             />)}
             <hr className='mt0 mb3' />
             <AboutTheData crime={crime} place={place} />
@@ -174,10 +148,6 @@ class Explorer extends React.Component {
       </div>
     )
   }
-}
-
-Explorer.defaultProps = {
-  params: { crime: 'murder', place: 'ohio' },
 }
 
 export default Explorer

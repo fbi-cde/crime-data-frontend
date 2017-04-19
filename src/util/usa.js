@@ -68,7 +68,9 @@ const getPlaceAbbrFromName = name => (
   )).pop()
 )
 
-const lookup = query => {
+const lookup = (query, type) => {
+  if (type === 'agency') return ['foo', 'bar'].includes(query)
+
   if (query.length <= 3) return getPlaceNameFromAbbr(query)
   return getPlaceAbbrFromName(lowerCase(query))
 }

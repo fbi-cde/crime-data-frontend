@@ -9,16 +9,21 @@ export const fetchingUcrParticipation = () => ({
   type: UCR_PARTICIPATION_FETCHING,
 })
 
-export const receivedUcrParticipation = ({ place, results }) => ({
+export const receivedUcrParticipation = results => ({
   type: UCR_PARTICIPATION_RECEIVED,
-  place,
   results,
 })
 
-export const fetchUcrParticipation = place => dispatch => {
+export const fetchUcrParticipation = params => dispatch => {
   dispatch(fetchingUcrParticipation())
 
-  return api.getUcrParticipation(place).then(d => (
-    dispatch(receivedUcrParticipation(d))
-  ))
+  const requests = api.getUcrParticipationRequests(params)
+
+  return Promise.all(requests).then(data => {
+    const results = Object.assign(
+      ...data.map(d => ({ [d.place]: d.results })),
+    )
+
+    dispatch(receivedUcrParticipation(results))
+  })
 }

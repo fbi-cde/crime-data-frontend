@@ -5,7 +5,7 @@ import lookupUsa from './usa'
 import data from '../../data/ucr-program-participation.json'
 
 
-const lookup = state => data[slugify(state)]
+const lookup = state => data[slugify(state)] || {}
 
 const isValidPlace = place => lookupUsa(place)
 const isValidCrime = crime => offenses.includes(crime)

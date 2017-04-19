@@ -30,6 +30,7 @@ const credService = env.getService('crime-data-api-creds') || { credentials: {} 
 const { API_KEY, HTTP_BASIC_USERNAME, HTTP_BASIC_PASSWORD } = credService.credentials
 const apiKey = API_KEY || process.env.API_KEY || false
 const API = process.env.CDE_API
+const initState = { ucr: { loading: true }, summaries: { loading: true }}
 
 const app = express()
 
@@ -55,8 +56,6 @@ app.get('/api/*', (req, res) => {
 })
 
 app.get('/*', (req, res) => {
-  const store = configureStore()
-
   match({ history, routes, location: req.url }, (err, redirect, props) => {
     if (err) {
 
@@ -68,7 +67,7 @@ app.get('/*', (req, res) => {
       res.redirect(`${pathname}${search}`)
 
     } else if (props) {
-
+      const store = configureStore(initState)
       const html = renderToString(
         <Provider store={store}>
           <RouterContext {...props} />
