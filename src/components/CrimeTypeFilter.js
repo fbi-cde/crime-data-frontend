@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 
 import FilterGroup from './FilterGroup'
-import { crimeTypes } from '../util/data'
+import { crimeTypes } from '../util/offenses'
 
 
 const { violentCrime, propertyCrime } = crimeTypes
@@ -32,6 +32,11 @@ const CrimeTypeFilter = ({ onChange, selected }) => (
     </Link>
   </div>
 )
+
+CrimeTypeFilter.propTypes = {
+  onChange: React.PropTypes.func.isRequired,
+  selected: React.PropTypes.string,
+}
 
 CrimeTypeFilter.defaultProps = {
   selected: '',
