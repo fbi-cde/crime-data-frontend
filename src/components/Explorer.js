@@ -134,7 +134,6 @@ class Explorer extends React.Component {
             {showNibrs && (<NibrsContainer
               crime={params.crime}
               dispatch={dispatch}
-              filters={filters}
               nibrs={nibrs}
               place={place}
               since={filters.since}
