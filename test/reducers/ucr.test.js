@@ -33,27 +33,29 @@ describe('ucr', () => {
     it('should set place and results from action', () => {
       const action = {
         type: UCR_PARTICIPATION_RECEIVED,
-        place: 'fake-place',
-        results: [],
+        results: {
+          'fake-place': []
+        }
       }
       const initialState = reducer(undefined, action)
-      expect(initialState.data[action.place]).toEqual(action.results)
+      expect(initialState.data['fake-place']).toEqual([])
     })
 
     it('should not alter previous data in state', () => {
       const action = {
         type: UCR_PARTICIPATION_RECEIVED,
-        place: 'fake-other-place',
-        results: ['new-data'],
+        results: {
+          'other-fake-place': ['new-data']
+        }
       }
       const initialState = {
         loading: false,
         data: {
-          'fake-place': ['existing-data'],
+          'initial-fake-place': ['existing-data'],
         },
       }
       const state = reducer(initialState, action)
-      expect(state.data['fake-place']).toEqual(['existing-data'])
+      expect(state.data['initial-fake-place']).toEqual(['existing-data'])
     })
   })
 })

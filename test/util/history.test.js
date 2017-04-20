@@ -10,31 +10,35 @@ describe('history utility', () => {
   })
 
   describe('createNewLocation()', () => {
+    const mockRouter = {
+      location: { query: {} },
+      params: { crime: 'murder', place: 'oregon' }
+    }
     it('should change the place value in pathname', () => {
       const change = { place: 'california' }
-      const location = { pathname: '/explorer/oregon/murder' }
-      const actual = createNewLocation({ change, location })
-      expect(actual.pathname).toEqual('/explorer/california/murder')
+      const router = Object.assign({}, mockRouter)
+      const actual = createNewLocation({ change, router })
+      expect(actual.pathname).toEqual('/explorer/state/california/murder')
     })
 
     it('should change the crime value in pathname', () => {
       const change = { crime: 'robbery' }
-      const location = { pathname: '/explorer/oregon/murder' }
-      const actual = createNewLocation({ change, location })
-      expect(actual.pathname).toEqual('/explorer/oregon/robbery')
+      const router = Object.assign({}, mockRouter)
+      const actual = createNewLocation({ change, router })
+      expect(actual.pathname).toEqual('/explorer/state/oregon/robbery')
     })
 
     it('should put other changes in the query object', () => {
       const change = { until: 2017 }
-      const location = { pathname: '/explorer/oregon/murder', query: { } }
-      const actual = createNewLocation({ change, location })
+      const router = Object.assign({}, mockRouter)
+      const actual = createNewLocation({ change, router })
       expect(actual.query.until).toEqual(2017)
     })
 
     it('should ignore place and crime for the query', () => {
       const change = { crime: 'robbery' }
-      const location = { pathname: '/explorer/oregon/murder', query: { } }
-      const actual = createNewLocation({ change, location })
+      const router = Object.assign({}, mockRouter)
+      const actual = createNewLocation({ change, router })
       expect(actual.query).toEqual({})
     })
   })

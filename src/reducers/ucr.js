@@ -19,7 +19,10 @@ export default (state = initialState, action) => {
     case UCR_PARTICIPATION_RECEIVED:
       return {
         ...state,
-        data: { ...action.results },
+        data: {
+          ...state.data,
+          ...action.results,
+        },
         loading: false,
       }
     default:

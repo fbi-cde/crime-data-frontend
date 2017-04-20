@@ -39,25 +39,23 @@ describe('ucr actions', () => {
 
   describe('receivedUcrParticipation()', () => {
     const action = {
-      place: 'california',
-      results: [1, 2, 3],
+      'north-carolina': [1, 2, 3],
     }
 
     it('should return a UCR_PARTICIPATION_RECEIVED type action', () => {
       const actual = receivedUcrParticipation(action)
       expect(actual.type).toEqual(UCR_PARTICIPATION_RECEIVED)
-      expect(actual.place).toEqual('california')
-      expect(actual.results).toEqual(action.results)
+      expect(actual.results['north-carolina']).toEqual([1, 2, 3])
     })
   })
 
   describe('fetchUcrParticipation()', () => {
     it('should trigger fetching and received actions', done => {
       const dispatch = sandbox.spy()
-      const fn = () => createPromise({ place: 'california', results: [] })
-      sandbox.stub(api, 'getUcrParticipation', fn)
+      const fn = () => [createPromise({ place: 'california', results: [] })]
+      sandbox.stub(api, 'getUcrParticipationRequests', fn)
 
-      fetchUcrParticipation('california')(dispatch).then(() => {
+      fetchUcrParticipation({ place: 'california' })(dispatch).then(() => {
         const first = dispatch.getCall(0)
         const second = dispatch.getCall(1)
         expect(first.args[0].type).toEqual(UCR_PARTICIPATION_FETCHING)
@@ -66,11 +64,11 @@ describe('ucr actions', () => {
       })
     })
 
-    it('should call api.getUcrParticipation', done => {
+    it('should call api.getUcrParticipationRequests', done => {
       const dispatch = sandbox.spy()
-      const fn = () => createPromise({ place: 'california', results: [] })
-      const spy = sandbox.stub(api, 'getUcrParticipation', fn)
-      fetchUcrParticipation('california')(dispatch).then(() => {
+      const fn = () => [createPromise({ place: 'california', results: [] })]
+      const spy = sandbox.stub(api, 'getUcrParticipationRequests', fn)
+      fetchUcrParticipation({ place: 'california' })(dispatch).then(() => {
         expect(spy.callCount).toEqual(1)
         done()
       })
