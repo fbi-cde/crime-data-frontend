@@ -13,20 +13,6 @@ import offenses from '../util/offenses'
 import ucrParticipation from '../util/ucr'
 import lookup from '../util/usa'
 
-
-const filterNibrsData = (data, { since, until }) => {
-  if (!data) return false
-  const filtered = {}
-  Object.keys(data).forEach(key => {
-    filtered[key] = data[key].filter(d => {
-      const year = parseInt(d.year, 10)
-      return year >= since && year <= until
-    })
-  })
-
-  return filtered
-}
-
 class Explorer extends React.Component {
   constructor(props) {
     super(props)
@@ -78,7 +64,6 @@ class Explorer extends React.Component {
     }
 
     const { filters, nibrs, sidebar, summaries, ucr } = appState
-    const nibrsData = filterNibrsData(nibrs.data, filters)
     const noNibrs = ['violent-crime', 'property-crime']
     const participation = ucrParticipation(place)
     const showNibrs = (!noNibrs.includes(crime) && participation.nibrs)
@@ -134,11 +119,9 @@ class Explorer extends React.Component {
             />
             {showNibrs && (<NibrsContainer
               crime={params.crime}
-              data={nibrsData}
               dispatch={dispatch}
-              error={nibrs.error}
               filters={filters}
-              loading={nibrs.loading}
+              nibrs={nibrs}
               place={place}
             />)}
             <hr className='mt0 mb3' />

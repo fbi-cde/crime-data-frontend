@@ -21,18 +21,30 @@ const initialNibrsYear = ({ place, since }) => {
   return since
 }
 
+const filterNibrsData = (data, { since, until }) => {
+  if (!data) return false
+  const filtered = {}
+  Object.keys(data).forEach(key => {
+    filtered[key] = data[key].filter(d => {
+      const year = parseInt(d.year, 10)
+      return year >= since && year <= until
+    })
+  })
+
+  return filtered
+}
+
 const NibrsContainer = ({
   crime,
-  data,
   dispatch,
-  error,
   filters,
-  loading,
+  nibrs,
   place,
 }) => {
   const { since, until } = filters
+  const { data, error, loading } = nibrs
 
-  const nibrs = (
+  const nibrsTerm = (
     <Term id='national incident-based reporting system (NIBRS)' dispatch={dispatch}>
       incident-based (NIBRS)
     </Term>
@@ -42,7 +54,8 @@ const NibrsContainer = ({
 
   let [totalCount, content] = [0, <Loading />]
   if (!loading && data) {
-    const dataParsed = parseNibrs(data)
+    const filteredData = filterNibrsData(data, filters)
+    const dataParsed = parseNibrs(filteredData)
     totalCount = data.offenderRaceCode.reduce((a, b) => (a + b.count), 0)
     content = (
       <div className='clearfix mxn1'>
@@ -76,7 +89,7 @@ const NibrsContainer = ({
         </h2>
         {(nibrsFirstYear !== since) && (
           <p className='my-tiny'>
-            {startCase(place)} started reporting {nibrs} data
+            {startCase(place)} started reporting {nibrsTerm} data
             to the FBI in {nibrsFirstYear}.
           </p>
         )}
@@ -94,11 +107,25 @@ const NibrsContainer = ({
       {content}
       {!loading && (
       <div className='center italic fs-12 mb8'>
-        <p>Source: Reported {nibrs} data from {startCase(place)}, {nibrsFirstYear}–{until}.</p>
+        <p>Source: Reported {nibrsTerm} data from {startCase(place)}, {nibrsFirstYear}–{until}.</p>
       </div>
       )}
     </div>
   )
+}
+
+NibrsContainer.propTypes = {
+  crime: React.PropTypes.string,
+  dispatch: React.PropTypes.func,
+  filters: React.PropTypes.shape({
+    since: React.PropTypes.number,
+    until: React.PropTypes.number,
+  }),
+  nibrs: React.PropTypes.shape({
+    data: React.PropTypes.object,
+    loading: React.PropTypes.boolean,
+  }),
+  place: React.PropTypes.string,
 }
 
 export default NibrsContainer
