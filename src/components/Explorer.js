@@ -110,19 +110,21 @@ class Explorer extends React.Component {
             <hr className='mt0 mb3' />
             <TrendContainer
               crime={crime}
+              dispatch={dispatch}
               place={place}
               placeType={placeType}
-              filters={filters}
-              dispatch={dispatch}
+              since={filters.since}
               summaries={summaries}
               ucr={ucr}
+              until={filters.until}
             />
             {showNibrs && (<NibrsContainer
               crime={params.crime}
               dispatch={dispatch}
-              filters={filters}
               nibrs={nibrs}
               place={place}
+              since={filters.since}
+              until={filters.until}
             />)}
             <hr className='mt0 mb3' />
             <AboutTheData crime={crime} place={place} />

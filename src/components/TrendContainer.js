@@ -38,13 +38,13 @@ const TrendContainer = ({
   crime,
   place,
   placeType,
-  filters,
   dispatch,
+  since,
   summaries,
   ucr,
+  until,
 }) => {
   const loading = summaries.loading || ucr.loading
-  const { since, until } = filters
 
   let content = null
   if (loading) content = <Loading />
@@ -87,6 +87,23 @@ const TrendContainer = ({
       )}
     </div>
   )
+}
+
+TrendContainer.propTypes = {
+  crime: React.PropTypes.string.isRequired,
+  dispatch: React.PropTypes.func.isRequired,
+  place: React.PropTypes.string.isRequired,
+  placeType: React.PropTypes.string.isRequired,
+  since: React.PropTypes.number.isRequired,
+  summaries: React.PropTypes.shape({
+    data: React.PropTypes.object,
+    loading: React.PropTypes.boolean,
+  }).isRequired,
+  ucr: React.PropTypes.shape({
+    data: React.PropTypes.object,
+    loading: React.PropTypes.boolean,
+  }).isRequired,
+  until: React.PropTypes.number.isRequired,
 }
 
 export default TrendContainer

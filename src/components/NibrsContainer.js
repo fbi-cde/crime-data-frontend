@@ -37,11 +37,11 @@ const filterNibrsData = (data, { since, until }) => {
 const NibrsContainer = ({
   crime,
   dispatch,
-  filters,
   nibrs,
   place,
+  since,
+  until,
 }) => {
-  const { since, until } = filters
   const { data, error, loading } = nibrs
 
   const nibrsTerm = (
@@ -54,7 +54,7 @@ const NibrsContainer = ({
 
   let [totalCount, content] = [0, <Loading />]
   if (!loading && data) {
-    const filteredData = filterNibrsData(data, filters)
+    const filteredData = filterNibrsData(data, { since, until })
     const dataParsed = parseNibrs(filteredData)
     totalCount = data.offenderRaceCode.reduce((a, b) => (a + b.count), 0)
     content = (
@@ -115,17 +115,15 @@ const NibrsContainer = ({
 }
 
 NibrsContainer.propTypes = {
-  crime: React.PropTypes.string,
-  dispatch: React.PropTypes.func,
-  filters: React.PropTypes.shape({
-    since: React.PropTypes.number,
-    until: React.PropTypes.number,
-  }),
+  crime: React.PropTypes.string.isRequired,
+  dispatch: React.PropTypes.func.isRequired,
   nibrs: React.PropTypes.shape({
     data: React.PropTypes.object,
     loading: React.PropTypes.boolean,
-  }),
-  place: React.PropTypes.string,
+  }).isRequired,
+  place: React.PropTypes.string.isRequired,
+  since: React.PropTypes.number.isRequired,
+  until: React.PropTypes.number.isRequired,
 }
 
 export default NibrsContainer

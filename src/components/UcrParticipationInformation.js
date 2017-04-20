@@ -46,8 +46,6 @@ const UcrParticipationInformation = ({ dispatch, place, placeType, until, ucr })
   const ucrPlaceInfo = !ucr.loading && ucr.data[place]
   const data = ucrPlaceInfo && { ...ucrPlaceInfo.find(p => p.year === until) }
 
-  // if (!ucrPlaceInfo) return null
-
   return (
     <div className='mb5 clearfix'>
       <div className='lg-col lg-col-8 mb2 lg-m0 p0 lg-pr4 fs-18 serif'>
@@ -98,13 +96,15 @@ const UcrParticipationInformation = ({ dispatch, place, placeType, until, ucr })
   )
 }
 
-/* eslint react/forbid-prop-types: 0 */
-
 UcrParticipationInformation.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
   place: React.PropTypes.string.isRequired,
+  placeType: React.PropTypes.string.isRequired,
   until: React.PropTypes.number.isRequired,
-  ucr: React.PropTypes.object.isRequired,
+  ucr: React.PropTypes.shape({
+    data: React.PropTypes.object,
+    loading: React.PropTypes.boolean,
+  }).isRequired,
 }
 
 export default UcrParticipationInformation
