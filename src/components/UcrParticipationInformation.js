@@ -1,5 +1,6 @@
 import { format } from 'd3-format'
 import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import Loading from './Loading'
@@ -97,13 +98,13 @@ const UcrParticipationInformation = ({ dispatch, place, placeType, until, ucr })
 }
 
 UcrParticipationInformation.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  place: React.PropTypes.string.isRequired,
-  placeType: React.PropTypes.string.isRequired,
-  until: React.PropTypes.number.isRequired,
-  ucr: React.PropTypes.shape({
-    data: React.PropTypes.object,
-    loading: React.PropTypes.boolean,
+  dispatch: PropTypes.func.isRequired,
+  place: PropTypes.string.isRequired,
+  placeType: PropTypes.string.isRequired,
+  until: PropTypes.number.isRequired,
+  ucr: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
   }).isRequired,
 }
 

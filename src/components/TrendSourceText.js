@@ -1,4 +1,5 @@
 import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import Term from './Term'
@@ -49,10 +50,10 @@ const TrendSourceText = ({ dispatch, place, since, until }) => {
 }
 
 TrendSourceText.propTypes = {
-  dispatch: React.PropTypes.func,
-  place: React.PropTypes.string,
-  since: React.PropTypes.number.isRequired,
-  until: React.PropTypes.number.isRequired,
+  dispatch: PropTypes.func,
+  place: PropTypes.string,
+  since: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 export default TrendSourceText

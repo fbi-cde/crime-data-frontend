@@ -1,4 +1,5 @@
 import pluralize from 'pluralize'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import DownloadDataBtn from './DownloadDataBtn'
@@ -56,12 +57,12 @@ const NibrsCard = ({ crime, data, place, since, title, until }) => {
 }
 
 NibrsCard.propTypes = {
-  crime: React.PropTypes.string,
-  data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-  place: React.PropTypes.string,
-  since: React.PropTypes.number.isRequired,
-  title: React.PropTypes.string.isRequired,
-  until: React.PropTypes.number.isRequired,
+  crime: PropTypes.string,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  place: PropTypes.string,
+  since: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 export default NibrsCard

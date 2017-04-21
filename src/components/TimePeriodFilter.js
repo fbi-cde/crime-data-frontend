@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import range from 'lodash.range'
 import React from 'react'
 
@@ -67,8 +68,8 @@ class TimePeriodFilter extends React.Component {
 }
 
 TimePeriodFilter.propTypes = {
-  since: React.PropTypes.number.isRequired,
-  until: React.PropTypes.number.isRequired,
+  since: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 export default TimePeriodFilter

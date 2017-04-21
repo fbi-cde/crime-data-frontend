@@ -6,6 +6,7 @@ import { line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import startCase from 'lodash.startcase'
 import throttle from 'lodash.throttle'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import DownloadDataBtn from './DownloadDataBtn'
@@ -278,9 +279,9 @@ class TrendChart extends React.Component {
 }
 
 TrendChart.propTypes = {
-  data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-  since: React.PropTypes.number.isRequired,
-  until: React.PropTypes.number.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  since: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 TrendChart.defaultProps = {

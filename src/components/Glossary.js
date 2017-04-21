@@ -1,4 +1,5 @@
 /* eslint-disable global-require */
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import { hideGlossary, showGlossary } from '../actions/glossary'
@@ -111,8 +112,8 @@ Glossary.defaultProps = {
 }
 
 Glossary.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  isOpen: React.PropTypes.bool,
+  dispatch: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool,
 }
 
 export default Glossary
