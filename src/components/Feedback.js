@@ -7,13 +7,13 @@ class Feedback extends React.Component {
     super(props)
 
     this.state = {
-      show: false,
       data: { improve: '', general: '', next: '' },
+      result: {},
+      show: false,
     }
   }
 
-  createIssueBody = () => {
-    return `
+  createIssueBody = () => (`
 ## What brought you to the site and how can we improve it?\n
 ${this.state.data.improve}\n\n
 
@@ -22,8 +22,7 @@ ${this.state.data.general}\n\n
 
 ## How do you plan to use the information you found here?\n
 ${this.state.data.next}\n\n
-    `
-  }
+    `)
 
   handleSubmit = e => {
     e.preventDefault()
@@ -31,11 +30,15 @@ ${this.state.data.next}\n\n
     const title = 'User feedback'
     http.post('/feedback', { body, title }).then(response => {
       const { html_url } = response.data
-      const msg = `thanks for your feedback! it was logged here: ${html_url}`
-      this.setState({ msg })
-      setTimeout(() => this.setState({ show: false, msg: null }), 4000)
+      this.setState({ result: { type: 'success', url: html_url } })
+      // setTimeout(() => this.setState({ show: false, result: {}, data={} }), 4000)
     }).catch(httpErr => {
-      if (status === 404) this.setState({ msg: httpErr.response.statusText })
+      if (status === 404) {
+        this.setState({ result: {
+          type: 'error',
+          msg: httpErr.response.statusText
+        } })
+      }
     })
   }
 
@@ -44,15 +47,19 @@ ${this.state.data.next}\n\n
       this.setState({ data: { ...this.state.data, [e.target.name]: e.target.value } })
     )
 
+    const { result, show } = this.state
+
     return (
       <div>
-        <div className={`fixed bg-black feedback p2 pb4 white z4 ${this.state.show && 'show'}`}>
-          <button
-            className='absolute right-5'
-            onClick={() => this.setState({ show: false })}
-          >
-            Close
-          </button>
+        <div className={`fixed bg-black feedback p2 pb4 white z4 ${show && 'show'}`}>
+          <div>
+            <button
+              className='absolute right-5'
+              onClick={() => this.setState({ show: false })}
+            >
+              Close
+            </button>
+          </div>
           <form>
             <legend className='bold'>
               Help us improve the Crime Data Explorer
@@ -84,13 +91,25 @@ ${this.state.data.next}\n\n
               onChange={handleChange}
               value={this.state.data.next}
             />
-            <button
-              className='block btn btn-primary bg-blue-lighter black mt1'
-              onClick={this.handleSubmit}
-            >
-              Submit
-            </button>
-            <div className='red'>{ this.state.msg }</div>
+            <div className='flex mt1'>
+              <button
+                className='btn btn-primary bg-blue-lighter black maxh5'
+                disabled={this.state.result.type === 'success'}
+                onClick={this.handleSubmit}
+              >
+                Submit
+              </button>
+              <div className='mw8 ml1'>
+                {result.type === 'success' && (
+                  <span>
+                    Thank you for your feedback. It was <a className='white underline' href={result.url}>logged here</a>.
+                  </span>
+                )}
+                {result.type === 'error' && (
+                  <span>There was an error: {result.msg}.</span>
+                )}
+              </div>
+            </div>
           </form>
         </div>
         <button
