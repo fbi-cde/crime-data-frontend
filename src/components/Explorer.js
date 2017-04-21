@@ -11,7 +11,7 @@ import { updateApp } from '../actions/composite'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offenses from '../util/offenses'
 import ucrParticipation from '../util/ucr'
-import lookup from '../util/usa'
+import lookup, { nationalKey } from '../util/usa'
 
 class Explorer extends React.Component {
   constructor(props) {
@@ -23,8 +23,13 @@ class Explorer extends React.Component {
 
   componentDidMount() {
     const { appState, dispatch, router } = this.props
-    const { since, until } = appState.filters
+    const { placeType, since, until } = appState.filters
     const { query } = router.location
+    let { place } = appState.filters
+
+    if (!place && !placeType) {
+      place = nationalKey
+    }
 
     const clean = (val, alt) => {
       const yr = +val
@@ -32,6 +37,7 @@ class Explorer extends React.Component {
     }
 
     const filters = {
+      place,
       ...this.props.filters,
       ...router.params,
       since: clean(query.since, since),
@@ -56,7 +62,13 @@ class Explorer extends React.Component {
 
   render() {
     const { appState, dispatch, params, router } = this.props
-    const { crime, place, placeType } = params
+    const { crime } = params
+    let { place, placeType } = params
+
+    if (!params.place && !params.placeType) {
+      place = nationalKey
+      placeType = 'national'
+    }
 
     // show not found page if crime or place unfamiliar
     if (!offenses.includes(crime) || !lookup(place, placeType)) {

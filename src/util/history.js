@@ -1,9 +1,14 @@
 import { browserHistory } from 'react-router'
 
+import { nationalKey } from './usa'
 
 const createNewPathname = ({ change, params }) => {
   const { crime, place } = change
-  return `/explorer/state/${place || params.place}/${crime || params.crime}`
+  if (place && place !== nationalKey) {
+    return `/explorer/state/${place || params.place}/${crime || params.crime}`
+  }
+
+  return `/explorer/${crime || params.crime}`
 }
 
 const createNewQuery = ({ change, oldQuery }) => {

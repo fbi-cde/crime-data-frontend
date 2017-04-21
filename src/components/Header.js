@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import { nationalKey } from '../util/usa'
-
 
 const isHome = loc => loc.pathname === '/'
 const isExplorer = loc => loc.pathname.includes('explorer')
@@ -60,7 +58,7 @@ class Header extends React.Component {
               </li>
               <li className='mb1 md-m0'>
                 <Link
-                  to={`/explorer/${nationalKey}/violent-crime`}
+                  to={'/explorer/violent-crime'}
                   className='mx1 lg-mx2 fs-14 md-fs-18 white'
                   style={isExplorer(location) ? active : {}}
                 >
