@@ -4,6 +4,7 @@ import 'babel-polyfill'
 
 import http from 'axios'
 import basicAuth from 'basic-auth-connect'
+import bodyParser from 'body-parser'
 import cfenv from 'cfenv'
 import express from 'express'
 import gzipStatic from 'connect-gzip-static'
@@ -18,6 +19,7 @@ import renderHtml from './html'
 import routes from './routes'
 import configureStore from './store'
 import { updateFilters } from './actions/filters'
+import { createIssue } from './util/github'
 import history from './util/history'
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -38,12 +40,20 @@ const apiKey = API_KEY || process.env.API_KEY || false
 const API = process.env.CDE_API
 const initState = { ucr: { loading: true }, summaries: { loading: true } }
 
+const acceptHostname = hostname => {
+  if (!isProd) return true
+
+  const prodHost = /crime-data-explorer.*\.fr.cloud.gov$/
+  return hostname.match(prodHost)
+}
+
 const app = express()
 
 if (isProd) app.use(basicAuth(HTTP_BASIC_USERNAME, HTTP_BASIC_PASSWORD))
 
 app.use(gzipStatic(__dirname))
 app.use(gzipStatic(path.join(__dirname, '..', 'public')))
+app.use(bodyParser.json())
 
 app.get('/status', (req, res) => res.send(`OK v${packageJson.version}`))
 
@@ -62,6 +72,20 @@ app.get('/api/*', (req, res) => {
     .catch(e => {
       res.status(e.response.status).end()
     })
+})
+
+app.post('/feedback', (req, res) => {
+  const { body, title } = req.body
+  const owner = process.env.GITHUB_ISSUE_REPO_OWNER
+  const repo = process.env.GITHUB_ISSUE_REPO_NAME
+  const token = process.env.GITHUB_ISSUE_BOT_TOKEN
+  const allEnvs = owner && repo && token
+
+  if (!allEnvs || !acceptHostname(req.hostname)) return res.status(401).end()
+
+  return createIssue({ body, owner, repo, title, token })
+    .then(issue => res.send(issue.data))
+    .catch(e => res.status(e.response.status).end())
 })
 
 app.get('/*', (req, res) => {
