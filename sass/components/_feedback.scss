@@ -1,0 +1,11 @@
+.feedback {
+  top: 100%;
+  right: 5%;
+  transition-property: top;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.feedback.show {
+  top: 42%;
+}

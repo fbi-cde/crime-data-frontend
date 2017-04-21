@@ -14,4 +14,5 @@
 @media #{$breakpoint-md} {
   .md-border-none { border: 0; }
   .md-rounded-bottom { border-radius: 0 0 $border-radius $border-radius; }
+  .md-rounded-top { border-radius: $border-radius $border-radius 0 0; }
 }

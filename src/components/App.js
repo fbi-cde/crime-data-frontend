@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import BetaBanner from './BetaBanner'
 import BetaModal from './BetaModal'
 import Disclaimer from './Disclaimer'
+import Feedback from './Feedback'
 import Footer from './Footer'
 import Glossary from './Glossary'
 import Header from './Header'
@@ -29,9 +30,12 @@ const App = ({ appState, children, dispatch, location }) => (
         onClick={() => window.localStorage.clear()}
       >
         ⟲
-      </button>}
+      </button>
+    }
     {appState.modal.isShown &&
-      <BetaModal onConfirm={() => dispatch(hideModal())} />}
+      <BetaModal onConfirm={() => dispatch(hideModal())} />
+    }
+    <Feedback dispatch={dispatch} />
   </div>
 )
 
