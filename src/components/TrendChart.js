@@ -270,7 +270,7 @@ class TrendChart extends React.Component {
         </div>
         <div className='my1 fs-10 sm-fs-12 monospace center'>
           <div className='bold'>{startCase(crime)} rate per 100,000 people</div>
-          <div className='italic'>(Does not include estimates)</div>
+          <div className='italic'>(Crime counts include FBI estimates)</div>
         </div>
         <DownloadDataBtn data={download} />
       </div>
