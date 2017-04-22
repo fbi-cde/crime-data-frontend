@@ -132,7 +132,6 @@ class Explorer extends React.Component {
               placeType={placeType}
               since={filters.since}
               summaries={summaries}
-              ucr={ucr}
               until={filters.until}
             />
             {showNibrs && (<NibrsContainer

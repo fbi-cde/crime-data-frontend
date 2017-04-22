@@ -2,7 +2,6 @@ import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
 import { mapToApiOffense } from './offenses'
-import { slugify } from './text'
 import lookupUsa, { nationalKey } from './usa'
 
 

@@ -1,3 +1,4 @@
+import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -8,31 +9,22 @@ import TrendChart from './TrendChart'
 import TrendSourceText from './TrendSourceText'
 
 
-const dataByYear = data => (
-  Object.assign(
-    ...Object.keys(data).map(k => ({
-      [k]: Object.assign(...data[k].map(d => ({ [d.year]: d }))),
-    })),
-  )
-)
-
-const mungeSummaryData = (summaries, ucr, place) => {
+const mungeSummaryData = (crime, summaries, place) => {
   if (!summaries || !summaries[place]) return false
 
   const keys = Object.keys(summaries)
-  const summaryByYear = dataByYear(summaries)
-  const ucrByYear = dataByYear(ucr)
-
-  return summaries[place].map(d => (
-    Object.assign(
-      { date: d.year },
-      ...keys.map(k => {
-        const count = summaryByYear[k][d.year].actual
-        const pop = ucrByYear[k][d.year].total_population
-        return { [k]: { count, pop, rate: (count / pop) * 100000 } }
-      }),
-    )
-  ))
+  return summaries[place].map(year => {
+    const data = { date: year.year }
+    keys.forEach(key => {
+      const source = key !== place ? summaries[key].find(d => d.year === data.date) : year
+      data[key] = {
+        pop: source.population,
+        count: source[crime],
+        rate: (source[crime] / source.population) * 100000,
+      }
+    })
+    return data
+  })
 }
 
 const TrendContainer = ({
@@ -42,15 +34,14 @@ const TrendContainer = ({
   placeType,
   since,
   summaries,
-  ucr,
   until,
 }) => {
-  const loading = summaries.loading || ucr.loading
+  const loading = summaries.loading
 
   let content = null
   if (loading) content = <Loading />
   else {
-    const data = mungeSummaryData(summaries.data, ucr.data, place)
+    const data = mungeSummaryData(snakeCase(crime), summaries.data, place)
     if (!data || data.length === 0) content = <NoData />
     else {
       content = (
@@ -100,11 +91,7 @@ TrendContainer.propTypes = {
     data: PropTypes.object,
     loading: PropTypes.boolean,
   }).isRequired,
-  ucr: PropTypes.shape({
-    data: PropTypes.object,
-    loading: PropTypes.boolean,
-  }).isRequired,
-  until: PropTypes.number.isRequired,
+  until: React.PropTypes.number.isRequired,
 }
 
 export default TrendContainer
