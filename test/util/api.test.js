@@ -4,6 +4,7 @@ import sinon from 'sinon'
 
 import api from '../../src/util/api'
 import * as http from '../../src/util/http'
+import { nationalKey } from '../../src/util/usa'
 
 
 const createPromise = (res, err) => {
@@ -72,12 +73,20 @@ describe('api utility', () => {
   })
 
   describe('getSummary()', () => {
-    it('should call the /count endpoint', done => {
+    it('should request /estimates/national for national', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      api.getSummary(params).then(() => {
+      api.getSummary({ place: nationalKey }).then(() => {
         const url = spy.args[0].pop()
-        expect(url.includes('/count')).toEqual(true)
-        expect(url.includes('?explorer_offense=homicide')).toEqual(true)
+        expect(url.includes('/estimates/national')).toEqual(true)
+        done()
+      })
+    })
+
+    it('should request /estimates/states/:state if place is a state', done => {
+      const spy = sandbox.stub(http, 'get', () => createPromise(success))
+      api.getSummary({ place: 'california' }).then(() => {
+        const url = spy.args[0].pop()
+        expect(url.includes('/estimates/states/CA')).toEqual(true)
         done()
       })
     })

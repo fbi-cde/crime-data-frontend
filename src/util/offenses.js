@@ -38,21 +38,6 @@ const propertyCrime = [
 ]
 
 const crimeTypes = { violentCrime, propertyCrime }
-
-const offenseParams = {
-  'aggravated-assault': 'explorer_offense',
-  arson: 'explorer_offense',
-  burglary: 'explorer_offense',
-  'larceny-theft': 'explorer_offense',
-  'motor-vehicle-theft': 'explorer_offense',
-  homicide: 'explorer_offense',
-  'property-crime': 'classification',
-  rape: 'explorer_offense',
-  robbery: 'explorer_offense',
-  'violent-crime': 'classification',
-}
-
 const mapToApiOffense = o => offenses[o] || slugify(o)
-const mapToApiOffenseParam = o => offenseParams[o]
 
-export { ids as default, mapToApiOffense, mapToApiOffenseParam, crimeTypes }
+export { ids as default, mapToApiOffense, crimeTypes }
