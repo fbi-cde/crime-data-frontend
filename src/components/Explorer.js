@@ -11,48 +11,12 @@ import { updateApp } from '../actions/composite'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offenses from '../util/offenses'
 import ucrParticipation from '../util/ucr'
-import lookup from '../util/usa'
+import lookup, { nationalKey } from '../util/usa'
 
-
-const filterNibrsData = (data, { since, until }) => {
-  if (!data) return false
-  const filtered = {}
-  Object.keys(data).forEach(key => {
-    filtered[key] = data[key].filter(d => {
-      const year = parseInt(d.year, 10)
-      return year >= since && year <= until
-    })
-  })
-
-  return filtered
-}
-
-const dataByYear = data => (
-  Object.assign(
-    ...Object.keys(data).map(k => ({
-      [k]: Object.assign(...data[k].map(d => ({ [d.year]: d }))),
-    })),
-  )
-)
-
-const mungeSummaryData = (summaries, ucr, place) => {
-  if (!summaries || !summaries[place]) return false
-
-  const keys = Object.keys(summaries)
-  const summaryByYear = dataByYear(summaries)
-  const ucrByYear = dataByYear(ucr)
-
-  return summaries[place].map(d => (
-    Object.assign(
-      { date: d.year },
-      ...keys.map(k => {
-        const count = summaryByYear[k][d.year].actual
-        const pop = ucrByYear[k][d.year].total_population
-        return { [k]: { count, pop, rate: (count / pop) * 100000 } }
-      }),
-    )
-  ))
-}
+const getPlaceInfo = ({ place, placeType }) => ({
+  place: place || nationalKey,
+  placeType: placeType || 'national',
+})
 
 class Explorer extends React.Component {
   constructor(props) {
@@ -64,8 +28,9 @@ class Explorer extends React.Component {
 
   componentDidMount() {
     const { appState, dispatch, router } = this.props
-    const { since, until } = appState.filters
     const { query } = router.location
+    const { since, until } = appState.filters
+    const { place } = getPlaceInfo(appState.filters)
 
     const clean = (val, alt) => {
       const yr = +val
@@ -73,6 +38,7 @@ class Explorer extends React.Component {
     }
 
     const filters = {
+      place,
       ...this.props.filters,
       ...router.params,
       since: clean(query.since, since),
@@ -83,8 +49,8 @@ class Explorer extends React.Component {
   }
 
   handleSidebarChange(change) {
-    const { location } = this.props.router
-    this.props.dispatch(updateApp(change, location))
+    const { router } = this.props
+    this.props.dispatch(updateApp(change, router))
   }
 
   toggleSidebar() {
@@ -97,18 +63,18 @@ class Explorer extends React.Component {
 
   render() {
     const { appState, dispatch, params, router } = this.props
-    const { crime, place } = params
+    const { crime } = params
+    const { place, placeType } = getPlaceInfo(params)
 
     // show not found page if crime or place unfamiliar
-    if (!offenses.includes(crime) || !lookup(place)) return <NotFound />
+    if (!offenses.includes(crime) || !lookup(place, placeType)) {
+      return <NotFound />
+    }
 
     const { filters, nibrs, sidebar, summaries, ucr } = appState
-    const nibrsData = filterNibrsData(nibrs.data, filters)
     const noNibrs = ['violent-crime', 'property-crime']
     const participation = ucrParticipation(place)
     const showNibrs = (!noNibrs.includes(crime) && participation.nibrs)
-    const trendData = mungeSummaryData(summaries.data, ucr.data, place)
-    const trendKeys = Object.keys(summaries.data).map(k => startCase(k))
 
     return (
       <div className='site-wrapper'>
@@ -144,28 +110,29 @@ class Explorer extends React.Component {
             </div>
             <UcrParticipationInformation
               dispatch={dispatch}
-              place={params.place}
+              place={place}
+              placeType={placeType}
               until={filters.until}
               ucr={ucr}
             />
             <hr className='mt0 mb3' />
             <TrendContainer
               crime={crime}
-              place={place}
-              filters={filters}
-              data={trendData}
               dispatch={dispatch}
-              loading={summaries.loading}
-              keys={trendKeys}
+              place={place}
+              placeType={placeType}
+              since={filters.since}
+              summaries={summaries}
+              ucr={ucr}
+              until={filters.until}
             />
             {showNibrs && (<NibrsContainer
               crime={params.crime}
-              data={nibrsData}
               dispatch={dispatch}
-              error={nibrs.error}
-              filters={filters}
-              loading={nibrs.loading}
-              place={params.place}
+              nibrs={nibrs}
+              place={place}
+              since={filters.since}
+              until={filters.until}
             />)}
             <hr className='mt0 mb3' />
             <AboutTheData crime={crime} place={place} />
@@ -174,10 +141,6 @@ class Explorer extends React.Component {
       </div>
     )
   }
-}
-
-Explorer.defaultProps = {
-  params: { crime: 'murder', place: 'ohio' },
 }
 
 export default Explorer

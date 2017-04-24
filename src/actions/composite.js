@@ -5,24 +5,21 @@ import { fetchSummaries } from '../actions/summary'
 import { fetchUcrParticipation } from '../actions/ucr'
 import history, { createNewLocation } from '../util/history'
 import { shouldFetchUcr, shouldFetchSummaries, shouldFetchNibrs } from '../util/ucr'
-import { nationalKey } from '../util/usa'
 
 
 const fetchData = () => (dispatch, getState) => {
-  const { filters, ucr } = getState()
-  const fetchNational = !ucr.data[nationalKey] && filters.place !== nationalKey
+  const { filters } = getState()
 
-  if (fetchNational) dispatch(fetchUcrParticipation(nationalKey))
-  if (shouldFetchUcr(filters)) dispatch(fetchUcrParticipation(filters.place))
+  if (shouldFetchUcr(filters)) dispatch(fetchUcrParticipation(filters))
   if (shouldFetchSummaries(filters)) dispatch(fetchSummaries(filters))
   if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
 }
 
-export const updateApp = (change, location) => dispatch => {
+export const updateApp = (change, router) => dispatch => {
   dispatch(updateFilters(change))
 
-  if (location) {
-    history.push(createNewLocation({ change, location }))
+  if (router) {
+    history.push(createNewLocation({ change, router }))
   }
 
   return dispatch(fetchData())

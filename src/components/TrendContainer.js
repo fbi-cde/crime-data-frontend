@@ -7,24 +7,63 @@ import TrendChart from './TrendChart'
 import TrendSourceText from './TrendSourceText'
 
 
-const TrendContainer = ({ crime, place, filters, data, dispatch, loading, keys }) => {
-  const { since, until } = filters
+const dataByYear = data => (
+  Object.assign(
+    ...Object.keys(data).map(k => ({
+      [k]: Object.assign(...data[k].map(d => ({ [d.year]: d }))),
+    })),
+  )
+)
+
+const mungeSummaryData = (summaries, ucr, place) => {
+  if (!summaries || !summaries[place]) return false
+
+  const keys = Object.keys(summaries)
+  const summaryByYear = dataByYear(summaries)
+  const ucrByYear = dataByYear(ucr)
+
+  return summaries[place].map(d => (
+    Object.assign(
+      { date: d.year },
+      ...keys.map(k => {
+        const count = summaryByYear[k][d.year].actual
+        const pop = ucrByYear[k][d.year].total_population
+        return { [k]: { count, pop, rate: (count / pop) * 100000 } }
+      }),
+    )
+  ))
+}
+
+const TrendContainer = ({
+  crime,
+  place,
+  placeType,
+  dispatch,
+  since,
+  summaries,
+  ucr,
+  until,
+}) => {
+  const loading = summaries.loading || ucr.loading
 
   let content = null
   if (loading) content = <Loading />
-  else if (!data || data.length === 0) content = <NoData />
   else {
-    content = (
-      <TrendChart
-        crime={crime}
-        data={data}
-        dispatch={dispatch}
-        keys={keys}
-        place={place}
-        since={since}
-        until={until}
-      />
-    )
+    const data = mungeSummaryData(summaries.data, ucr.data, place)
+    if (!data || data.length === 0) content = <NoData />
+    else {
+      content = (
+        <TrendChart
+          crime={crime}
+          data={data}
+          dispatch={dispatch}
+          keys={Object.keys(summaries.data).map(k => startCase(k))}
+          place={place}
+          since={since}
+          until={until}
+        />
+      )
+    }
   }
 
   return (
@@ -41,12 +80,30 @@ const TrendContainer = ({ crime, place, filters, data, dispatch, loading, keys }
         <TrendSourceText
           dispatch={dispatch}
           place={place}
+          placeType={placeType}
           since={since}
           until={until}
         />
       )}
     </div>
   )
+}
+
+TrendContainer.propTypes = {
+  crime: React.PropTypes.string.isRequired,
+  dispatch: React.PropTypes.func.isRequired,
+  place: React.PropTypes.string.isRequired,
+  placeType: React.PropTypes.string.isRequired,
+  since: React.PropTypes.number.isRequired,
+  summaries: React.PropTypes.shape({
+    data: React.PropTypes.object,
+    loading: React.PropTypes.boolean,
+  }).isRequired,
+  ucr: React.PropTypes.shape({
+    data: React.PropTypes.object,
+    loading: React.PropTypes.boolean,
+  }).isRequired,
+  until: React.PropTypes.number.isRequired,
 }
 
 export default TrendContainer

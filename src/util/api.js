@@ -2,7 +2,6 @@ import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
 import { mapToApiOffense, mapToApiOffenseParam } from './offenses'
-import { slugify } from './text'
 import lookupUsa, { nationalKey } from './usa'
 
 
@@ -75,9 +74,9 @@ const getSummary = params => {
   const endpoint = `${API}/counts`
   const qs = buildSummaryQueryString(params)
 
-  return get(`${endpoint}?${qs}`).then(d => ({
+  return get(`${endpoint}?${qs}`).then(response => ({
     place,
-    results: d.results,
+    results: response.results,
   }))
 }
 
@@ -102,9 +101,24 @@ const getUcrParticipation = place => {
     : `participation/states/${lookupUsa(place).toUpperCase()}`
 
   return get(`${API}/${path}`).then(response => ({
-    place: slugify(place),
+    place,
     results: response.results,
   }))
+}
+
+const getUcrParticipationRequests = params => {
+  const { place } = params
+
+  const requests = [
+    getUcrParticipation(place),
+  ]
+
+  // add national request (unless you already did)
+  if (place !== nationalKey) {
+    requests.push(getUcrParticipation(nationalKey))
+  }
+
+  return requests
 }
 
 export default {
@@ -113,4 +127,5 @@ export default {
   getSummary,
   getSummaryRequests,
   getUcrParticipation,
+  getUcrParticipationRequests,
 }

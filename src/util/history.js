@@ -1,18 +1,14 @@
 import { browserHistory } from 'react-router'
 
+import { nationalKey } from './usa'
 
-const splitPath = path => {
-  const split = path.split('/')
-  return {
-    place: split[2],
-    crime: split[3],
-  }
-}
-
-const createNewPathname = ({ change, oldPath }) => {
-  const params = splitPath(oldPath)
+const createNewPathname = ({ change, params }) => {
   const { crime, place } = change
-  return `/explorer/${place || params.place}/${crime || params.crime}`
+  if (place && place !== nationalKey) {
+    return `/explorer/state/${place || params.place}/${crime || params.crime}`
+  }
+
+  return `/explorer/${crime || params.crime}`
 }
 
 const createNewQuery = ({ change, oldQuery }) => {
@@ -24,8 +20,10 @@ const createNewQuery = ({ change, oldQuery }) => {
   }
 }
 
-export const createNewLocation = ({ change, location }) => {
-  const pathname = createNewPathname({ change, oldPath: location.pathname })
+export const createNewLocation = ({ change, router }) => {
+  const { location, params } = router
+
+  const pathname = createNewPathname({ change, params })
   const query = createNewQuery({ change, oldQuery: location.query })
 
   return {

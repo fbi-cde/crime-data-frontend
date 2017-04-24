@@ -17,7 +17,8 @@ const routes = (
     <Route path='/' component={App}>
       <IndexRoute component={Home} />
       <Route path='/downloads-and-docs' component={DownloadsAndDocs} />
-      <Route path='/explorer/:place/:crime' component={Explorer} />
+      <Route path='/explorer/:crime' component={Explorer} />
+      <Route path='/explorer/:placeType/:place/:crime' component={Explorer} />
       <Route path='/about' component={About} />
       <Route path='/*' component={NotFound} />
     </Route>
