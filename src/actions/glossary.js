@@ -1,9 +1,4 @@
-import {
-  GLOSSARY_HIDE,
-  GLOSSARY_SHOW,
-  GLOSSARY_SHOW_TERM,
-} from './constants'
-
+import { GLOSSARY_HIDE, GLOSSARY_SHOW, GLOSSARY_SHOW_TERM } from './constants'
 
 export const hideGlossary = () => ({
   type: GLOSSARY_HIDE,

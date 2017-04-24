@@ -15,7 +15,6 @@ import XAxis from './XAxis'
 import YAxis from './YAxis'
 import { slugify } from '../util/text'
 
-
 class TrendChart extends React.Component {
   constructor(props) {
     super(props)
@@ -68,21 +67,23 @@ class TrendChart extends React.Component {
     } = this.props
     const { hover, svgParentWidth } = this.state
 
-    const color = scaleOrdinal(colors);
+    const color = scaleOrdinal(colors)
     const parse = timeParse('%Y')
     const keysWithSlugs = keys.map(name => ({ name, slug: slugify(name) }))
 
-    const dataClean = data.map(d => (
+    const dataClean = data.map(d =>
       Object.assign(
         { year: +d.date, date: parse(d.date) },
         ...keysWithSlugs.map(k => ({ [k.slug]: d[k.slug] })),
-      )
-    ))
+      ),
+    )
 
-    const download = [{
-      data,
-      filename: `${place}-${crime}-${since}–${until}`,
-    }]
+    const download = [
+      {
+        data,
+        filename: `${place}-${crime}-${since}–${until}`,
+      },
+    ]
 
     const gaps = []
     const dataByKey = keysWithSlugs.map(k => {
@@ -105,11 +106,9 @@ class TrendChart extends React.Component {
       return { id: k.slug, name: k.name, values, segments }
     })
 
-    const gapRanges = gaps.map(year => ([
-      max([year - 1, since]),
-      year,
-      min([year + 1, until]),
-    ].map(y => parse(y))))
+    const gapRanges = gaps.map(year =>
+      [max([year - 1, since]), year, min([year + 1, until])].map(y => parse(y)),
+    )
 
     const maxValue = max(dataByKey, d => max(d.values, v => v.value.rate))
 
@@ -121,17 +120,12 @@ class TrendChart extends React.Component {
     const xPadding = svgWidth < 500 ? 20 : 40
 
     const x = scaleTime()
-        .domain(extent(dataClean, d => d.date))
-        .range([0 + xPadding, width - xPadding])
+      .domain(extent(dataClean, d => d.date))
+      .range([0 + xPadding, width - xPadding])
 
-    const y = scaleLinear()
-        .domain([0, maxValue])
-        .range([height, 0])
-        .nice()
+    const y = scaleLinear().domain([0, maxValue]).range([height, 0]).nice()
 
-    const l = line()
-        .x(d => x(d.date))
-        .y(d => y(d.value.rate))
+    const l = line().x(d => x(d.date)).y(d => y(d.value.rate))
 
     let active = dataClean[dataClean.length - 1]
     if (hover) {
@@ -141,17 +135,17 @@ class TrendChart extends React.Component {
       const [d0, d1] = [dataClean[i - 1], dataClean[i]]
 
       if (d0 && d1) {
-        active = (x0 - d0.date > d1.date - x0) ? d1 : d0
+        active = x0 - d0.date > d1.date - x0 ? d1 : d0
       }
     }
 
     const callout = (
       <g transform={`translate(${x(active.date)}, 0)`}>
-        <line y2={height} stroke='#95aabc' strokeWidth='1' />
+        <line y2={height} stroke="#95aabc" strokeWidth="1" />
         {keysWithSlugs.map((k, j) => (
           <circle
             key={j}
-            cx='0'
+            cx="0"
             cy={y(active[k.slug].rate)}
             fill={color(k.slug)}
             r={active[k.slug].count ? '4.5' : '0'}
@@ -170,35 +164,31 @@ class TrendChart extends React.Component {
           keys={keysWithSlugs}
         />
         {/* eslint-disable no-return-assign */}
-        <div
-          className='col-12'
-          ref={ref => this.svgParent = ref}
-        >
-          {gapRanges.length > 0 && (
-            <div className='mb1 fs-12 serif italic'>
+        <div className="col-12" ref={ref => (this.svgParent = ref)}>
+          {gapRanges.length > 0 &&
+            <div className="mb1 fs-12 serif italic">
               <span
-                className='mr1 inline-block align-middle bg-blue-white blue-light border rounded'
+                className="mr1 inline-block align-middle bg-blue-white blue-light border rounded"
                 style={{ width: 14, height: 14 }}
               />
               Insufficent state data reported for {gaps.join(', ')}
-            </div>
-          )}
-          <svg
-            width={svgWidth}
-            height={svgHeight}
-            style={{ maxWidth: '100%' }}
-          >
+            </div>}
+          <svg width={svgWidth} height={svgHeight} style={{ maxWidth: '100%' }}>
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               {gapRanges.map((d, i) => (
                 <rect
-                  className='fill-blue-white'
+                  className="fill-blue-white"
                   key={i}
                   x={x(d[0])}
                   width={x(d[2]) - x(d[0])}
                   height={height}
                 />
               ))}
-              <XAxis scale={x} height={height} tickCt={svgWidth < 500 ? 4 : 8} />
+              <XAxis
+                scale={x}
+                height={height}
+                tickCt={svgWidth < 500 ? 4 : 8}
+              />
               <YAxis scale={y} width={width} />
               {dataByKey.map((d, i) => (
                 <g key={i} className={`series series-${d.id}`}>
@@ -206,71 +196,76 @@ class TrendChart extends React.Component {
                     <g key={j}>
                       <path
                         d={l(segment)}
-                        fill='none'
+                        fill="none"
                         stroke={color(d.id)}
-                        strokeWidth='2.5'
+                        strokeWidth="2.5"
                       />
-                      {showMarkers && segment.map((datum, k) => (
-                        <circle
-                          key={k}
-                          cx={x(datum.date)}
-                          cy={y(datum.value.rate)}
-                          fill={color(d.id)}
-                          r='2.5'
-                        />
-                      ))}
+                      {showMarkers &&
+                        segment.map((datum, k) => (
+                          <circle
+                            key={k}
+                            cx={x(datum.date)}
+                            cy={y(datum.value.rate)}
+                            fill={color(d.id)}
+                            r="2.5"
+                          />
+                        ))}
                     </g>
                   ))}
                 </g>
               ))}
-              {(until >= 2013 && crime === 'rape') && (
-                <g transform={`translate(${x(new Date('2013-01-01'))}, ${height})`}>
+              {until >= 2013 &&
+                crime === 'rape' &&
+                <g
+                  transform={`translate(${x(new Date('2013-01-01'))}, ${height})`}
+                >
                   <line
-                    stroke='#95aabc'
-                    strokeWidth='1'
-                    strokeDasharray='2,3'
+                    stroke="#95aabc"
+                    strokeWidth="1"
+                    strokeDasharray="2,3"
                     y2={-height}
                   />
                   <rect
-                    className='fill-blue'
-                    height='8'
-                    transform='rotate(45 4 4)'
-                    width='8'
+                    className="fill-blue"
+                    height="8"
+                    transform="rotate(45 4 4)"
+                    width="8"
                     x={-4 * Math.sqrt(2)}
                   />
                   <text
-                    className='fill-blue fs-10 italic serif'
-                    textAnchor='end'
-                    x='-4'
-                    y='-22'
+                    className="fill-blue fs-10 italic serif"
+                    textAnchor="end"
+                    x="-4"
+                    y="-22"
                   >
                     Revised rape
                   </text>
                   <text
-                    className='fill-blue fs-10 italic serif'
-                    textAnchor='end'
-                    x='-4'
-                    y='-10'
+                    className="fill-blue fs-10 italic serif"
+                    textAnchor="end"
+                    x="-4"
+                    y="-10"
                   >
                     definition
                   </text>
-                </g>
-              )}
+                </g>}
               {callout}
               <rect
                 width={width}
                 height={height}
-                fill='none'
-                pointerEvents='all'
+                fill="none"
+                pointerEvents="all"
                 onMouseMove={this.rememberValue}
                 onMouseOut={this.forgetValue}
               />
             </g>
           </svg>
         </div>
-        <div className='my1 fs-10 sm-fs-12 monospace center'>
-          <div className='bold'>{startCase(crime)} rate per 100,000 people</div>
-          <div className='italic'>(Crime counts include FBI estimates; rates are rounded)</div>
+        <div className="my1 fs-10 sm-fs-12 monospace center">
+          <div className="bold">{startCase(crime)} rate per 100,000 people</div>
+          <div className="italic">
+            (Crime counts include FBI estimates; rates are rounded)
+          </div>
         </div>
         <DownloadDataBtn data={download} />
       </div>

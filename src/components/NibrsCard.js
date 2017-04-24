@@ -9,7 +9,6 @@ import NibrsStackedBar from './NibrsStackedBar'
 import NibrsTable from './NibrsTable'
 import { slugify } from '../util/text'
 
-
 const NibrsCard = ({ crime, data, place, since, title, until }) => {
   const charts = data.map((d, i) => {
     const props = { key: i, ...d }
@@ -27,7 +26,8 @@ const NibrsCard = ({ crime, data, place, since, title, until }) => {
     }
   })
 
-  const dataIsEmpty = (data.filter(d => d.data.length === 0).length === data.length)
+  const dataIsEmpty =
+    data.filter(d => d.data.length === 0).length === data.length
   const noun = data.map(d => d.noun).pop()
 
   const download = data.map(d => ({
@@ -36,21 +36,22 @@ const NibrsCard = ({ crime, data, place, since, title, until }) => {
   }))
 
   return (
-    <div className='p2 sm-p3 bg-white black'>
-      <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'>
+    <div className="p2 sm-p3 bg-white black">
+      <h2 className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
         {title}
       </h2>
       {!dataIsEmpty && charts}
-      {dataIsEmpty && (
-        <div className='mt-tiny'>
-          <span className='bold caps fs-12 red'>Reported {pluralize(noun)}</span>
-          <span className='bold fs-14 ml1 monospace'>0</span>
-        </div>
-      )}
+      {dataIsEmpty &&
+        <div className="mt-tiny">
+          <span className="bold caps fs-12 red">
+            Reported {pluralize(noun)}
+          </span>
+          <span className="bold fs-14 ml1 monospace">0</span>
+        </div>}
       <DownloadDataBtn
         data={download}
         filename={`${place}-${crime}-${slugify(title)}-${since}-${until}`}
-        text='Download data'
+        text="Download data"
       />
     </div>
   )

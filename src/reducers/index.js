@@ -9,7 +9,6 @@ import sidebar from './sidebar'
 import summaries from './summary'
 import ucr from './ucr'
 
-
 export default combineReducers({
   filters,
   glossary,

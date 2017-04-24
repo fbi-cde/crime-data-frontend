@@ -1,6 +1,5 @@
 import { slugify } from './text'
 
-
 const offenses = {
   'aggravated-assault': 'aggravated-assault',
   arson: 'arson',

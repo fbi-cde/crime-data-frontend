@@ -5,5 +5,5 @@ const createUrlQueryString = obj => {
 
 export default (url, p = {}) => {
   const paramNum = Object.keys(p).length
-  return (paramNum > 0) ? `${url}?${createUrlQueryString(p)}` : url
+  return paramNum > 0 ? `${url}?${createUrlQueryString(p)}` : url
 }

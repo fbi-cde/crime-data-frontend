@@ -2,7 +2,6 @@ import startCase from 'lodash.startcase'
 import React from 'react'
 import { Link } from 'react-router'
 
-
 const Breadcrumbs = ({ crime, place }) => {
   const links = [
     ['/explorer', 'Explorer'],
@@ -11,7 +10,7 @@ const Breadcrumbs = ({ crime, place }) => {
   ]
 
   return (
-    <ul className='breadcrumbs list-reset mt0 mb4 fs-12 sm-fs-14'>
+    <ul className="breadcrumbs list-reset mt0 mb4 fs-12 sm-fs-14">
       {links.map((link, i) => (
         <li key={i}>
           <Link

@@ -3,10 +3,9 @@ import { geoAlbersUsa, geoPath } from 'd3-geo'
 import React from 'react'
 import { feature, mesh } from 'topojson'
 
-
 const Container = ({ children }) => (
-  <div className='my4 center'>
-    <div className='aspect-ratio aspect-ratio--4x3'>{children}</div>
+  <div className="my4 center">
+    <div className="aspect-ratio aspect-ratio--4x3">{children}</div>
   </div>
 )
 
@@ -17,8 +16,9 @@ class StateThumbnail extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/data/geo-usa-states.json')
-      .then(response => { this.setState({ usa: response.data }) })
+    axios.get('/data/geo-usa-states.json').then(response => {
+      this.setState({ usa: response.data })
+    })
   }
 
   render() {
@@ -31,8 +31,8 @@ class StateThumbnail extends React.Component {
     const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
     const geoStates = feature(usa, usa.objects.units).features
-    const meshed = mesh(usa, usa.objects.units, (a, b) => (a !== b))
-    const active = geoStates.find(s => (s.properties.name === selected))
+    const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
+    const active = geoStates.find(s => s.properties.name === selected)
 
     let strokeWidth
     let transform
@@ -43,7 +43,7 @@ class StateThumbnail extends React.Component {
       const x = (bounds[0][0] + bounds[1][0]) / 2
       const y = (bounds[0][1] + bounds[1][1]) / 2
       const scale = 0.8 / Math.max(dx / w, dy / h)
-      const translate = [(w / 2) - (scale * x), (h / 2) - (scale * y)]
+      const translate = [w / 2 - scale * x, h / 2 - scale * y]
 
       strokeWidth = active ? `${2.5 / scale}px` : 1
       transform = `translate(${translate})scale(${scale})`
@@ -52,27 +52,28 @@ class StateThumbnail extends React.Component {
     return (
       <Container>
         <svg
-          className='aspect-ratio--object'
-          preserveAspectRatio='xMidYMid'
+          className="aspect-ratio--object"
+          preserveAspectRatio="xMidYMid"
           viewBox={`0 0 ${w} ${h}`}
         >
-          <g
-            strokeWidth={strokeWidth}
-            transform={transform}
-          >
+          <g strokeWidth={strokeWidth} transform={transform}>
             {geoStates.map((d, i) => (
               <path
                 key={i}
                 d={path(d)}
-                fill={d.properties.name === selected || !active ? '#95aabc' : '#eff4f9'}
+                fill={
+                  d.properties.name === selected || !active
+                    ? '#95aabc'
+                    : '#eff4f9'
+                }
               />
             ))}
             <path
               d={path(meshed)}
-              fill='none'
-              stroke='#fff'
-              strokeLinecap='round'
-              strokeLinejoin='round'
+              fill="none"
+              stroke="#fff"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </g>
         </svg>

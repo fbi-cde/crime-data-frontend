@@ -1,8 +1,4 @@
-import {
-  SUMMARY_FETCHING,
-  SUMMARY_RECEIVED,
-} from '../actions/constants'
-
+import { SUMMARY_FETCHING, SUMMARY_RECEIVED } from '../actions/constants'
 
 const initialState = {
   loading: false,

@@ -10,26 +10,24 @@ import Footer from './Footer'
 import Glossary from './Glossary'
 import Header from './Header'
 
-
 const App = ({ appState, children, dispatch, location }) => (
-  <div className='site'>
+  <div className="site">
     <Disclaimer />
     <BetaBanner />
     <Header location={location} />
-    <main className='site-main'>
+    <main className="site-main">
       {children && React.cloneElement(children, { appState, dispatch })}
     </main>
     <Glossary dispatch={dispatch} {...appState.glossary} />
     <Footer />
-    {process.env.NODE_ENV !== 'production' && (
+    {process.env.NODE_ENV !== 'production' &&
       <button
-        type='button'
-        className='fixed bottom-0 left-0 m1 px-tiny py0 btn btn-primary bg-red-bright'
+        type="button"
+        className="fixed bottom-0 left-0 m1 px-tiny py0 btn btn-primary bg-red-bright"
         onClick={() => window.localStorage.clear()}
       >
         ⟲
-      </button>
-    )}
+      </button>}
   </div>
 )
 

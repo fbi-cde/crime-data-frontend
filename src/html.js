@@ -2,8 +2,8 @@
 
 import sharingMetaTags from './util/sharing'
 
-
-export default (content, state) => (`
+export default (content, state) =>
+  `
   <!DOCTYPE html>
   <html lang='en'>
     <head>
@@ -23,4 +23,4 @@ export default (content, state) => (`
       <script src='https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js' id='_fed_an_ua_tag'></script>
     </body>
   </html>
-`)
+`

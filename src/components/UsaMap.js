@@ -5,7 +5,6 @@ import Hint from './Hint'
 import stateLookup from '../util/usa'
 import svgData from '../../data/usa-state-svg.json'
 
-
 class UsaMap extends React.Component {
   constructor(props) {
     super(props)
@@ -36,14 +35,16 @@ class UsaMap extends React.Component {
       <div>
         <svg
           className={`cursor-pointer usa-map ${!changeColorOnHover && 'no-hover'}`}
-          viewBox='0 0 959 593'
-          preserveAspectRatio='xMidYMid'
+          viewBox="0 0 959 593"
+          preserveAspectRatio="xMidYMid"
         >
           <title>USA</title>
           <g onClick={mapClick}>
             {svgDataWithNames.map(s => {
-              const isSelected = (s.id === placeId)
-              const defaultClass = isSelected ? 'fill-red-bright' : 'fill-blue-light'
+              const isSelected = s.id === placeId
+              const defaultClass = isSelected
+                ? 'fill-red-bright'
+                : 'fill-blue-light'
               const suppliedColor = colors[s.id.toLowerCase()]
               return (
                 <path
@@ -51,7 +52,7 @@ class UsaMap extends React.Component {
                   id={s.id}
                   className={suppliedColor || defaultClass}
                   d={s.d}
-                  pointerEvents='all'
+                  pointerEvents="all"
                   onMouseOver={this.rememberValue(s.name)}
                   onMouseMove={this.rememberValue(s.name)}
                   onMouseOut={this.forgetValue}

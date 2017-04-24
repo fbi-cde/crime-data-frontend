@@ -2,15 +2,12 @@ import React from 'react'
 
 import { slugify } from '../util/text'
 
-
 const FilterGroup = ({ name, options, onChange, selected, title }) => {
   const handleChange = e => onChange({ crime: e.target.value })
 
   return (
-    <div className='mb2 rounded overflow-hidden'>
-      {title && (
-        <div className='mb1 sm-m0 px2 sm-lh-30 bold'>{title}</div>
-      )}
+    <div className="mb2 rounded overflow-hidden">
+      {title && <div className="mb1 sm-m0 px2 sm-lh-30 bold">{title}</div>}
       <div>
         {options.map((o, i) => {
           const id = o.id || slugify(o)
@@ -19,20 +16,18 @@ const FilterGroup = ({ name, options, onChange, selected, title }) => {
           return (
             <label
               key={i}
-              className={
-                `block cursor-pointer hover-bg-blue-light
+              className={`block cursor-pointer hover-bg-blue-light
                 ${isActive ? 'bg-blue white bold hover-blue' : ''}
-                ${single ? 'bold px2' : 'px3 sm-lh-30'}`
-              }
+                ${single ? 'bold px2' : 'px3 sm-lh-30'}`}
               htmlFor={id}
             >
               <input
-                className='hide'
+                className="hide"
                 checked={isActive}
                 id={id}
                 name={name}
                 onChange={handleChange}
-                type='radio'
+                type="radio"
                 value={id}
               />
               {o.text || o}
@@ -44,10 +39,9 @@ const FilterGroup = ({ name, options, onChange, selected, title }) => {
   )
 }
 
-const defaultOnChange = e => (
+const defaultOnChange = e =>
   /*  eslint no-console: 0 */
   console.log('default onChange in <FilterGroup />', e)
-)
 
 FilterGroup.defaultProps = {
   onChange: defaultOnChange,

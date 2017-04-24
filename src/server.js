@@ -25,9 +25,15 @@ const isProd = process.env.NODE_ENV === 'production'
 if (isProd) require('newrelic')
 
 const env = cfenv.getAppEnv()
-const credService = env.getService('crime-data-api-creds') || { credentials: {} }
+const credService = env.getService('crime-data-api-creds') || {
+  credentials: {},
+}
 
-const { API_KEY, HTTP_BASIC_USERNAME, HTTP_BASIC_PASSWORD } = credService.credentials
+const {
+  API_KEY,
+  HTTP_BASIC_USERNAME,
+  HTTP_BASIC_PASSWORD,
+} = credService.credentials
 const apiKey = API_KEY || process.env.API_KEY || false
 const API = process.env.CDE_API
 const initState = { ucr: { loading: true }, summaries: { loading: true } }
@@ -47,31 +53,30 @@ app.get('/api/*', (req, res) => {
 
   if (!apiKey) return res.status(401).end()
 
-  return http.get(route, { params }).then(r => {
-    res.set(r.headers)
-    res.send(r.data)
-  }).catch(e => {
-    res.status(e.response.status).end()
-  })
+  return http
+    .get(route, { params })
+    .then(r => {
+      res.set(r.headers)
+      res.send(r.data)
+    })
+    .catch(e => {
+      res.status(e.response.status).end()
+    })
 })
 
 app.get('/*', (req, res) => {
   match({ history, routes, location: req.url }, (err, redirect, props) => {
     if (err) {
-
       res.status(500).send('Internal Server Error')
-
     } else if (redirect) {
-
       const { pathname, search } = redirect
       res.redirect(`${pathname}${search}`)
-
     } else if (props) {
       const store = configureStore(initState)
       const html = renderToString(
         <Provider store={store}>
           <RouterContext {...props} />
-        </Provider>
+        </Provider>,
       )
 
       const action = updateFilters({ ...props.router.params })

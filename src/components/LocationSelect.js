@@ -7,7 +7,6 @@ import React from 'react'
 import { slugify } from '../util/text'
 import { data } from '../util/usa'
 
-
 const places = entries(data).map(d => startCase(d.value))
 
 const LocationSelect = ({ className, onChange, selected }) => {
@@ -15,19 +14,19 @@ const LocationSelect = ({ className, onChange, selected }) => {
 
   return (
     <div>
-      <label htmlFor='location-select' className='hide'>
+      <label htmlFor="location-select" className="hide">
         Choose a location in the United States
       </label>
       <select
-        className={className || 'block col-12 field field-sm select select-dark'}
-        id='location-select'
+        className={
+          className || 'block col-12 field field-sm select select-dark'
+        }
+        id="location-select"
         onChange={handleChange}
-        value={(selected) ? startCase(selected) : ''}
+        value={selected ? startCase(selected) : ''}
       >
-        <option value='' disabled>Location</option>
-        {places.map((p, i) => (
-          <option key={i}>{p}</option>
-        ))}
+        <option value="" disabled>Location</option>
+        {places.map((p, i) => <option key={i}>{p}</option>)}
       </select>
     </div>
   )

@@ -19,7 +19,8 @@
     "test": "jest --env=jsdom --no-cache",
     "test:debug": "node --debug-brk jest -i --env=jsdom",
     "test:watch": "jest --env=jsdom --watch",
-    "coverage": "npm test -- --coverage"
+    "coverage": "npm test -- --coverage",
+    "prettier": "prettier --single-quote --trailing-comma all --semi false --write \"src/**/*.js\""
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -88,6 +89,7 @@
     "node-sass": "^3.13.0",
     "nodemon": "^1.11.0",
     "postcss-loader": "^1.2.1",
+    "prettier": "^1.2.2",
     "react-test-renderer": "^15.5.4",
     "sass-loader": "^4.0.2",
     "sinon": "^1.17.6",

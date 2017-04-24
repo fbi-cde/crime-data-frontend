@@ -3,7 +3,6 @@ import React from 'react'
 
 import content from '../util/content'
 
-
 const markdown = md()
 
 const AboutTheData = ({ crime }) => {
@@ -11,18 +10,18 @@ const AboutTheData = ({ crime }) => {
 
   return (
     <div>
-      <h3 className='mt0 mb4 fs-22 sm-fs-26'>About the data</h3>
-      <div className='lg-flex'>
-        <div className='flex-auto mb1 fs-14 sm-fs-16 black'>
+      <h3 className="mt0 mb4 fs-22 sm-fs-26">About the data</h3>
+      <div className="lg-flex">
+        <div className="flex-auto mb1 fs-14 sm-fs-16 black">
           <p>
             The FBI collects crime data through the&nbsp;
-            <a className='blue underline' href='https://ucr.fbi.gov/'>
+            <a className="blue underline" href="https://ucr.fbi.gov/">
               Uniform Crime Reporting (UCR) Program
             </a>.
           </p>
           {caveats.map((c, i) => (
             <div key={i}>
-              <div className='bold'>{c.heading}</div>
+              <div className="bold">{c.heading}</div>
               {/* eslint react/no-danger: 0 */}
               <div
                 dangerouslySetInnerHTML={{ __html: markdown.render(c.text) }}
@@ -31,15 +30,15 @@ const AboutTheData = ({ crime }) => {
           ))}
         </div>
         <div
-          className='flex-none ml3 xs-hide sm-hide md-hide'
+          className="flex-none ml3 xs-hide sm-hide md-hide"
           style={{ width: 300 }}
         >
-          <div className='p2 sm-px4 sm-py3 bg-blue white'>
-            <h4 className='mt0 mb1 fs-18'>Further reading</h4>
-            <ul className='m0 p0 fs-14 sm-fs-16 left-bars'>
+          <div className="p2 sm-px4 sm-py3 bg-blue white">
+            <h4 className="mt0 mb1 fs-18">Further reading</h4>
+            <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
               {links.map((l, i) => (
-                <li key={i} className='mb1'>
-                  <a className='white' href={l.url}>{l.text}</a>
+                <li key={i} className="mb1">
+                  <a className="white" href={l.url}>{l.text}</a>
                 </li>
               ))}
             </ul>

@@ -5,38 +5,37 @@ import DownloadDataBtn from './DownloadDataBtn'
 import Term from './Term'
 import otherDatasets from '../../content/datasets.yml'
 
-
 const border = 'border-bottom border-blue-lighter'
 
 const DownloadsAndDocs = ({ dispatch }) => (
-  <section className='bg-white'>
-    <div className='px2 py3 container mx-auto'>
+  <section className="bg-white">
+    <div className="px2 py3 container mx-auto">
       <h1 className={`mt4 mb5 pb1 sm-mt4 fs-28 sm-fs-40 ${border}`}>
         Downloads & Documentation
       </h1>
 
       <DownloadBulkNibrs dispatch={dispatch} />
 
-      <div className='mb8'>
+      <div className="mb8">
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
           Bulk downloads
         </h2>
         <div className={`clearfix xs-hide pb1 fs-18 bold caps serif ${border}`}>
-          <div className='sm-col sm-col-4 sm-pl2'>Dataset</div>
-          <div className='sm-col sm-col-4'>Description</div>
-          <div className='sm-col sm-col-4'>Type of data</div>
+          <div className="sm-col sm-col-4 sm-pl2">Dataset</div>
+          <div className="sm-col sm-col-4">Description</div>
+          <div className="sm-col sm-col-4">Type of data</div>
         </div>
         {otherDatasets.map((d, i) => (
           <div key={i} className={`clearfix pt2 pb4 ${border}`}>
-            <div className='sm-col sm-col-4 mb1 sm-px2 fs-18 sm-fs-22 bold'>
+            <div className="sm-col sm-col-4 mb1 sm-px2 fs-18 sm-fs-22 bold">
               {d.title}
             </div>
-            <div className='sm-col sm-col-4 mb1 sm-pr2 md-pr4'>
+            <div className="sm-col sm-col-4 mb1 sm-pr2 md-pr4">
               {d.description}
             </div>
-            <div className='sm-col sm-col-4 fs-14 bold'>
+            <div className="sm-col sm-col-4 fs-14 bold">
               Summary (SRS) available
-              <a className='block mt1 sm-mt2 fs-12 underline'>
+              <a className="block mt1 sm-mt2 fs-12 underline">
                 <DownloadDataBtn data={[{ url: d.download }]} />
               </a>
             </div>
@@ -44,33 +43,41 @@ const DownloadsAndDocs = ({ dispatch }) => (
         ))}
       </div>
 
-      <div className='mb8'>
+      <div className="mb8">
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
           Documentation
         </h2>
-        <div className='flex flex-wrap mxn1'>
-          <div className='flex sm-col sm-col-6 px1 mb2'>
-            <div className='p2 sm-p4 bg-blue-white'>
-              <h3 className='mt0 mb2 pb1 fs-22 sans-serif border-bottom border-red-bright'>
+        <div className="flex flex-wrap mxn1">
+          <div className="flex sm-col sm-col-6 px1 mb2">
+            <div className="p2 sm-p4 bg-blue-white">
+              <h3 className="mt0 mb2 pb1 fs-22 sans-serif border-bottom border-red-bright">
                 Crime data API
               </h3>
               <p>
-                Use our <Term dispatch={dispatch} id='application programming interface (api)'>
-                application programming interface (API)</Term> to search and export the
-                FBI’s <Term dispatch={dispatch} id='uniform crime reporting (ucr) program'>
-                Uniform Crime Reporting (UCR) Program</Term> data.
+                Use our <Term
+                  dispatch={dispatch}
+                  id="application programming interface (api)"
+                >
+                  application programming interface (API)
+                </Term> to search and export the
+                FBI’s <Term
+                  dispatch={dispatch}
+                  id="uniform crime reporting (ucr) program"
+                >
+                  Uniform Crime Reporting (UCR) Program
+                </Term> data.
               </p>
               <a
-                className='btn btn-primary btn-sm fs-14'
-                href='https://crime-data-api.fr.cloud.gov/'
+                className="btn btn-primary btn-sm fs-14"
+                href="https://crime-data-api.fr.cloud.gov/"
               >
                 See API documentation
               </a>
             </div>
           </div>
-          <div className='sm-col sm-col-6 px1 mb2'>
-            <div className='p2 sm-p4 bg-blue-white'>
-              <h3 className='mt0 mb2 pb1 fs-22 sans-serif border-bottom border-red-bright'>
+          <div className="sm-col sm-col-6 px1 mb2">
+            <div className="p2 sm-p4 bg-blue-white">
+              <h3 className="mt0 mb2 pb1 fs-22 sans-serif border-bottom border-red-bright">
                 Data documentation
               </h3>
               <p>
@@ -78,8 +85,8 @@ const DownloadsAndDocs = ({ dispatch }) => (
                 specifications for the FBI’s various crime data collections.
               </p>
               <a
-                className='btn btn-primary btn-sm fs-14'
-                href='https://ucr.fbi.gov/'
+                className="btn btn-primary btn-sm fs-14"
+                href="https://ucr.fbi.gov/"
               >
                 See UCR documentation
               </a>

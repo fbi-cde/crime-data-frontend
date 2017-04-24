@@ -6,16 +6,11 @@ import thunk from 'redux-thunk'
 
 import reducer from './reducers'
 
-
 const middlewares = [thunk]
 if (process.env.NODE_ENV !== 'production') middlewares.push(createLogger())
 
 const configureStore = (preloadedState = {}) => {
-  return createStore(
-    reducer,
-    preloadedState,
-    applyMiddleware(...middlewares),
-  )
+  return createStore(reducer, preloadedState, applyMiddleware(...middlewares))
 }
 
 export default configureStore

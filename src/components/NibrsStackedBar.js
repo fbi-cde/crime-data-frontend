@@ -5,7 +5,6 @@ import React from 'react'
 
 import NibrsStackedBarDetails from './NibrsStackedBarDetails'
 
-
 class NibrsStackedBar extends React.Component {
   constructor(props) {
     super(props)
@@ -29,15 +28,9 @@ class NibrsStackedBar extends React.Component {
 
     const totalCt = data.reduce((a, b) => a + +b.count, 0)
 
-    const x = scaleBand()
-      .domain([null])
-      .rangeRound([0, width])
-      .padding(0.4)
+    const x = scaleBand().domain([null]).rangeRound([0, width]).padding(0.4)
 
-    const y = scaleLinear()
-      .domain([0, totalCt])
-      .rangeRound([height, 0])
-      .nice()
+    const y = scaleLinear().domain([0, totalCt]).rangeRound([height, 0]).nice()
 
     const colorMap = scaleOrdinal()
       .domain(keys || data.map(d => d.key).sort())
@@ -56,14 +49,14 @@ class NibrsStackedBar extends React.Component {
     const dataEntries = entries(dataClean).sort((a, b) => b.value - a.value)
 
     return (
-      <div className='mb2 pb2 border-bottom border-blue-light'>
-        <div className='mb1 blue bold'>{title}</div>
-        <div className='mb1 fs-12 bold caps red'>Incidents</div>
-        <div className='flex flex-wrap items-end mxn1 mb2'>
-          <div className='col px1' style={{ width: '55%' }}>
+      <div className="mb2 pb2 border-bottom border-blue-light">
+        <div className="mb1 blue bold">{title}</div>
+        <div className="mb1 fs-12 bold caps red">Incidents</div>
+        <div className="flex flex-wrap items-end mxn1 mb2">
+          <div className="col px1" style={{ width: '55%' }}>
             <svg
-              className='block'
-              preserveAspectRatio='xMidYMid'
+              className="block"
+              preserveAspectRatio="xMidYMid"
               viewBox={`0 0 ${size.width} ${size.height}`}
               style={{ width: '100%', height: '100%' }}
             >
@@ -71,9 +64,9 @@ class NibrsStackedBar extends React.Component {
                 {dataStacked.map(d => (
                   <g
                     key={d.key}
-                    className='cursor-pointer'
+                    className="cursor-pointer"
                     fill={colorMap(d.key)}
-                    pointerEvents='all'
+                    pointerEvents="all"
                     onMouseOver={this.rememberValue(d.key)}
                     onMouseOut={this.forgetValue}
                   >
@@ -85,17 +78,17 @@ class NibrsStackedBar extends React.Component {
                     />
                   </g>
                 ))}
-                <g className='axis'>
-                  <line y2={height} strokeWidth='1' strokeDasharray='3,3' />
+                <g className="axis">
+                  <line y2={height} strokeWidth="1" strokeDasharray="3,3" />
                 </g>
-                <g className='axis' transform={`translate(0, ${height})`}>
-                  <line x2={width} strokeWidth='1' />
+                <g className="axis" transform={`translate(0, ${height})`}>
+                  <line x2={width} strokeWidth="1" />
                 </g>
               </g>
             </svg>
           </div>
 
-          <div className='col px1' style={{ width: '45%' }}>
+          <div className="col px1" style={{ width: '45%' }}>
             <NibrsStackedBarDetails
               colorMap={colorMap}
               data={dataEntries}

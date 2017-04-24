@@ -1,9 +1,5 @@
-import {
-  SUMMARY_FETCHING,
-  SUMMARY_RECEIVED,
-} from './constants'
+import { SUMMARY_FETCHING, SUMMARY_RECEIVED } from './constants'
 import api from '../util/api'
-
 
 export const fetchingSummary = () => ({
   type: SUMMARY_FETCHING,
