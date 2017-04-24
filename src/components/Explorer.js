@@ -13,6 +13,11 @@ import offenses from '../util/offenses'
 import ucrParticipation from '../util/ucr'
 import lookup, { nationalKey } from '../util/usa'
 
+const getPlaceInfo = ({ place, placeType }) => ({
+  place: place || nationalKey,
+  placeType: placeType || 'national',
+})
+
 class Explorer extends React.Component {
   constructor(props) {
     super(props)
@@ -23,13 +28,9 @@ class Explorer extends React.Component {
 
   componentDidMount() {
     const { appState, dispatch, router } = this.props
-    const { placeType, since, until } = appState.filters
     const { query } = router.location
-    let { place } = appState.filters
-
-    if (!place && !placeType) {
-      place = nationalKey
-    }
+    const { since, until } = appState.filters
+    const { place } = getPlaceInfo(appState.filters)
 
     const clean = (val, alt) => {
       const yr = +val
@@ -63,12 +64,7 @@ class Explorer extends React.Component {
   render() {
     const { appState, dispatch, params, router } = this.props
     const { crime } = params
-    let { place, placeType } = params
-
-    if (!params.place && !params.placeType) {
-      place = nationalKey
-      placeType = 'national'
-    }
+    const { place, placeType } = getPlaceInfo(params)
 
     // show not found page if crime or place unfamiliar
     if (!offenses.includes(crime) || !lookup(place, placeType)) {
