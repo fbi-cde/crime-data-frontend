@@ -125,7 +125,7 @@ class Feedback extends React.Component {
 
 Feedback.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
-  isOpen: React.PropTypes.boolean,
+  isOpen: React.PropTypes.bool,
 }
 
 Feedback.defaultProps = {
