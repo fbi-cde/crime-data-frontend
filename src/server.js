@@ -27,18 +27,21 @@ const isProd = process.env.NODE_ENV === 'production'
 if (isProd) require('newrelic')
 
 const env = cfenv.getAppEnv()
-const credService = env.getService('crime-data-api-creds') || {
-  credentials: {},
+
+const credService = env.getService('crime-data-api-creds') || { credentials: {} }
+const getEnvVar = name => {
+  if (credService.credentials[name]) return credService.credentials[name]
+  if (process.env[name]) return process.env[name]
+  return false
 }
 
-const {
-  API_KEY,
-  HTTP_BASIC_USERNAME,
-  HTTP_BASIC_PASSWORD,
-} = credService.credentials
-const apiKey = API_KEY || process.env.API_KEY || false
+const { HTTP_BASIC_USERNAME, HTTP_BASIC_PASSWORD } = credService.credentials
 const API = process.env.CDE_API
+const apiKey = getEnvVar('API_KEY')
 const initState = { ucr: { loading: true }, summaries: { loading: true } }
+const repoOwner = getEnvVar('GITHUB_ISSUE_REPO_OWNER')
+const repoName = getEnvVar('GITHUB_ISSUE_REPO_NAME')
+const repoToken = getEnvVar('GITHUB_ISSUE_BOT_TOKEN')
 
 const acceptHostname = hostname => {
   if (!isProd) return true
@@ -76,14 +79,11 @@ app.get('/api/*', (req, res) => {
 
 app.post('/feedback', (req, res) => {
   const { body, title } = req.body
-  const owner = process.env.GITHUB_ISSUE_REPO_OWNER
-  const repo = process.env.GITHUB_ISSUE_REPO_NAME
-  const token = process.env.GITHUB_ISSUE_BOT_TOKEN
-  const allEnvs = owner && repo && token
+  const allEnvs = repoOwner && repoName && repoToken
 
   if (!allEnvs || !acceptHostname(req.hostname)) return res.status(401).end()
 
-  return createIssue({ body, owner, repo, title, token })
+  return createIssue({ body, owner: repoOwner, repo: repoName, title, token: repoToken })
     .then(issue => res.send(issue.data))
     .catch(e => res.status(e.response.status).end())
 })
