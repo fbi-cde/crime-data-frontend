@@ -32,10 +32,10 @@ class Feedback extends React.Component {
     http.post('/feedback', { body, title }).then(response => {
       const { html_url } = response.data
       this.setState({ result: { type: 'success', url: html_url } })
-      // setTimeout(() => {
-      //   this.setState({ result: {}, data: {} })
-      //   this.props.dispatch(hideFeedback())
-      // }, 8000)
+      setTimeout(() => {
+        this.setState({ result: {}, data: {} })
+        this.props.dispatch(hideFeedback())
+      }, 8000)
     }).catch(httpErr => {
       if (status === 404) {
         this.setState({ result: {
@@ -56,7 +56,7 @@ class Feedback extends React.Component {
 
     return (
       <div>
-        <div className={`fixed bg-black feedback p2 pb4 white z4 ${isOpen && 'show'}`}>
+        <div className={`bg-blue feedback fixed p2 pb4 white z4 ${isOpen && 'show'}`}>
           <div>
             <button
               className='absolute btn cursor-pointer p1 right-0 top-0'
