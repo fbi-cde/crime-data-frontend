@@ -1,4 +1,5 @@
 import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import CrimeTypeFilter from './CrimeTypeFilter'
@@ -48,7 +49,7 @@ const Sidebar = ({ dispatch, filters, isOpen, onChange }) => {
 }
 
 Sidebar.propTypes = {
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
 }
 
 export default Sidebar

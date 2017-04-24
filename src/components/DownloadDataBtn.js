@@ -1,4 +1,5 @@
 import lowerCase from 'lodash.lowercase'
+import PropTypes from 'prop-types'
 import React from 'react'
 import Zip from 'jszip'
 
@@ -75,12 +76,12 @@ const DownloadDataBtn = ({ data, filename, text }) => {
 }
 
 DownloadDataBtn.propTypes = {
-  data: React.PropTypes.arrayOf(React.PropTypes.shape({
-    data: React.PropTypes.arrayOf(React.PropTypes.object),
-    filename: React.PropTypes.string,
-    url: React.PropTypes.string,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.object),
+    filename: PropTypes.string,
+    url: PropTypes.string,
   })),
-  text: React.PropTypes.string,
+  text: PropTypes.string,
 }
 
 DownloadDataBtn.defaultProps = {

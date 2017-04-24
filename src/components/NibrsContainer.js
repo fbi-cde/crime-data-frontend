@@ -1,5 +1,6 @@
 import { format } from 'd3-format'
 import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import ErrorCard from './ErrorCard'
@@ -115,15 +116,15 @@ const NibrsContainer = ({
 }
 
 NibrsContainer.propTypes = {
-  crime: React.PropTypes.string.isRequired,
-  dispatch: React.PropTypes.func.isRequired,
-  nibrs: React.PropTypes.shape({
-    data: React.PropTypes.object,
-    loading: React.PropTypes.boolean,
+  crime: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  nibrs: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
   }).isRequired,
-  place: React.PropTypes.string.isRequired,
-  since: React.PropTypes.number.isRequired,
-  until: React.PropTypes.number.isRequired,
+  place: PropTypes.string.isRequired,
+  since: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 export default NibrsContainer

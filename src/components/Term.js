@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import { showTerm } from '../actions/glossary'
@@ -27,8 +28,8 @@ const Term = ({ children, dispatch, id }) => {
 }
 
 Term.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  id: React.PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
 }
 
 export default Term

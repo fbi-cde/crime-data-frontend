@@ -1,5 +1,6 @@
 import { max } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import NibrsHistogramDetails from './NibrsHistogramDetails'
@@ -100,9 +101,9 @@ NibrsHistogram.defaultProps = {
 }
 
 NibrsHistogram.propTypes = {
-  noun: React.PropTypes.string.isRequired,
-  xLabel: React.PropTypes.string,
-  yLabel: React.PropTypes.string,
+  noun: PropTypes.string.isRequired,
+  xLabel: PropTypes.string,
+  yLabel: PropTypes.string,
 }
 
 export default NibrsHistogram

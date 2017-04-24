@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'react-router'
 
@@ -34,8 +35,8 @@ const CrimeTypeFilter = ({ onChange, selected }) => (
 )
 
 CrimeTypeFilter.propTypes = {
-  onChange: React.PropTypes.func.isRequired,
-  selected: React.PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  selected: PropTypes.string,
 }
 
 CrimeTypeFilter.defaultProps = {

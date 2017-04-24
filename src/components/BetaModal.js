@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 
@@ -50,7 +51,7 @@ const BetaModal = ({ onConfirm }) => {
 }
 
 BetaModal.propTypes = {
-  onConfirm: React.PropTypes.func
+  onConfirm: PropTypes.func
 }
 
 export default BetaModal

@@ -1,5 +1,6 @@
 /* eslint react/forbid-prop-types: 0 */
 
+import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -33,8 +34,8 @@ const App = ({ appState, children, dispatch, location }) => (
 )
 
 App.propTypes = {
-  appState: React.PropTypes.object,
-  dispatch: React.PropTypes.func,
+  appState: PropTypes.object,
+  dispatch: PropTypes.func,
 }
 
 const mapStateToProps = state => ({ appState: state })

@@ -1,4 +1,5 @@
 import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import Loading from './Loading'
@@ -90,20 +91,20 @@ const TrendContainer = ({
 }
 
 TrendContainer.propTypes = {
-  crime: React.PropTypes.string.isRequired,
-  dispatch: React.PropTypes.func.isRequired,
-  place: React.PropTypes.string.isRequired,
-  placeType: React.PropTypes.string.isRequired,
-  since: React.PropTypes.number.isRequired,
-  summaries: React.PropTypes.shape({
-    data: React.PropTypes.object,
-    loading: React.PropTypes.boolean,
+  crime: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  place: PropTypes.string.isRequired,
+  placeType: PropTypes.string.isRequired,
+  since: PropTypes.number.isRequired,
+  summaries: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
   }).isRequired,
-  ucr: React.PropTypes.shape({
-    data: React.PropTypes.object,
-    loading: React.PropTypes.boolean,
+  ucr: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
   }).isRequired,
-  until: React.PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 export default TrendContainer
