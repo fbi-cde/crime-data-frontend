@@ -1,37 +1,41 @@
 import http from 'axios' // use axios to skip localStorage
 import React from 'react'
 
+import { hideFeedback } from '../actions/feedback'
+
+const createIssueBody = ({ general, improve, next }) => (`
+## What brought you to the site and how can we improve it?\n
+${improve}\n\n
+
+## General feedback about the site?\n
+${general}\n\n
+
+## How do you plan to use the information you found here?\n
+${next}\n\n
+`)
 
 class Feedback extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      data: { improve: '', general: '', next: '' },
+      data: { general: '', improve: '', next: '' },
       result: {},
-      show: false,
     }
   }
 
-  createIssueBody = () => (`
-## What brought you to the site and how can we improve it?\n
-${this.state.data.improve}\n\n
-
-## General feedback about the site?\n
-${this.state.data.general}\n\n
-
-## How do you plan to use the information you found here?\n
-${this.state.data.next}\n\n
-    `)
-
   handleSubmit = e => {
     e.preventDefault()
-    const body = this.createIssueBody()
+    const { general, improve, next } = this.state.data
+    const body = createIssueBody({ general, improve, next })
     const title = 'User feedback'
     http.post('/feedback', { body, title }).then(response => {
       const { html_url } = response.data
       this.setState({ result: { type: 'success', url: html_url } })
-      // setTimeout(() => this.setState({ show: false, result: {}, data={} }), 4000)
+      // setTimeout(() => {
+      //   this.setState({ result: {}, data: {} })
+      //   this.props.dispatch(hideFeedback())
+      // }, 8000)
     }).catch(httpErr => {
       if (status === 404) {
         this.setState({ result: {
@@ -47,17 +51,19 @@ ${this.state.data.next}\n\n
       this.setState({ data: { ...this.state.data, [e.target.name]: e.target.value } })
     )
 
-    const { result, show } = this.state
+    const { dispatch, isOpen } = this.props
+    const { result } = this.state
 
     return (
       <div>
-        <div className={`fixed bg-black feedback p2 pb4 white z4 ${show && 'show'}`}>
+        <div className={`fixed bg-black feedback p2 pb4 white z4 ${isOpen && 'show'}`}>
           <div>
             <button
-              className='absolute right-5'
-              onClick={() => this.setState({ show: false })}
+              className='absolute btn cursor-pointer p1 right-0 top-0'
+              onClick={() => dispatch(hideFeedback())}
+              title='Close feedback'
             >
-              Close
+              &#10005;
             </button>
           </div>
           <form>
@@ -68,7 +74,7 @@ ${this.state.data.next}\n\n
               What brought you to the site and how can we improve it?
             </label>
             <textarea
-              className='col-12'
+              className='col-12 no-resize'
               name='improve'
               onChange={handleChange}
               value={this.state.data.improve}
@@ -77,7 +83,7 @@ ${this.state.data.next}\n\n
               General feedback about the site?
             </label>
             <textarea
-              className='col-12'
+              className='col-12 no-resize'
               name='general'
               onChange={handleChange}
               value={this.state.data.general}
@@ -86,7 +92,7 @@ ${this.state.data.next}\n\n
               How do you plan to use the information you found here?
             </label>
             <textarea
-              className='col-12'
+              className='col-12 no-resize'
               name='next'
               onChange={handleChange}
               value={this.state.data.next}
@@ -112,12 +118,6 @@ ${this.state.data.next}\n\n
             </div>
           </form>
         </div>
-        <button
-          className='bg-blue-lighter black btn md-rounded-top fixed bottom-0 right-5'
-          onClick={() => this.setState({ show: true })}
-        >
-          Give feedback
-        </button>
       </div>
     )
   }
@@ -125,6 +125,11 @@ ${this.state.data.next}\n\n
 
 Feedback.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
+  isOpen: React.PropTypes.boolean,
+}
+
+Feedback.defaultProps = {
+  isOpen: false,
 }
 
 export default Feedback

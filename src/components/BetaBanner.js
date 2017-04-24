@@ -2,9 +2,11 @@
 
 import React from 'react'
 
-const BetaBanner = () => (
-  <div className="md-absolute top-0 right-0 fs-10 md-fs-16">
-    <div className="md-mr2 p1 md-py2 md-pl3 md-pr4 md-inline-block md-rounded-bottom bg-red white">
+import { showFeedback } from '../actions/feedback'
+
+const BetaBanner = ({ dispatch }) => (
+  <div className='md-absolute top-0 right-0 fs-10 md-fs-16'>
+    <div className='md-mr2 p1 md-py2 md-pl3 md-pr4 md-inline-block md-rounded-bottom bg-red white'>
       <svg
         className="mr1 align-tb xs-hide"
         width="18"
@@ -16,14 +18,18 @@ const BetaBanner = () => (
       </svg>
       <span className="bold">This site is in beta.</span>{' '}
       Help us make it better:{' '}
-      <a
-        className="bold white border-bottom"
-        href="https://github.com/18F/crime-data-explorer/issues"
+      <button
+        className='bg-transparent bold border-none border-bottom cursor-pointer underline white'
+        onClick={() => dispatch(showFeedback())}
       >
         Submit feedback
-      </a>
+      </button>
     </div>
   </div>
 )
+
+BetaBanner.propTypes = {
+  dispatch: React.PropTypes.func,
+}
 
 export default BetaBanner

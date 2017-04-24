@@ -16,7 +16,7 @@ import { hideModal } from '../actions/modal'
 const App = ({ appState, children, dispatch, location }) => (
   <div className="site">
     <Disclaimer />
-    <BetaBanner />
+    <BetaBanner dispatch={dispatch} />
     <Header location={location} />
     <main className="site-main">
       {children && React.cloneElement(children, { appState, dispatch })}
@@ -35,7 +35,7 @@ const App = ({ appState, children, dispatch, location }) => (
     {appState.modal.isShown &&
       <BetaModal onConfirm={() => dispatch(hideModal())} />
     }
-    <Feedback dispatch={dispatch} />
+    <Feedback dispatch={dispatch} isOpen={appState.feedback.isOpen} />
   </div>
 )
 
