@@ -161,7 +161,7 @@ class TrendChart extends React.Component {
     )
 
     return (
-      <div className='px2 py3 sm-p4 bg-white'>
+      <div>
         <TrendChartDetails
           colors={colors}
           crime={crime}
@@ -270,7 +270,7 @@ class TrendChart extends React.Component {
         </div>
         <div className='my1 fs-10 sm-fs-12 monospace center'>
           <div className='bold'>{startCase(crime)} rate per 100,000 people</div>
-          <div className='italic'>(Crime counts include FBI estimates)</div>
+          <div className='italic'>(Crime counts include FBI estimates; rates are rounded)</div>
         </div>
         <DownloadDataBtn data={download} />
       </div>

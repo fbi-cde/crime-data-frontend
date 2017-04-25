@@ -7,6 +7,8 @@
 .border-bottom-dotted { border-bottom: $border-width dotted $body-color; }
 
 .border-w2 { border-width: 2px; }
+.border-w8 { border-width: 8px; }
+
 .rounded-br { border-bottom-right-radius: $border-radius; }
 
 @media #{$breakpoint-md} {

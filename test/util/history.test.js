@@ -12,7 +12,7 @@ describe('history utility', () => {
   describe('createNewLocation()', () => {
     const mockRouter = {
       location: { query: {} },
-      params: { crime: 'murder', place: 'oregon' }
+      params: { crime: 'murder', place: 'oregon' },
     }
 
     it('should change the place value in pathname if it is a state', () => {
@@ -41,6 +41,13 @@ describe('history utility', () => {
       const router = Object.assign({}, mockRouter)
       const actual = createNewLocation({ change, router })
       expect(actual.query.until).toEqual(2017)
+    })
+
+    it('should persist state if time filter changed', () => {
+      const change = { since: 2000 }
+      const router = Object.assign({}, mockRouter)
+      const actual = createNewLocation({ change, router })
+      expect(actual.pathname).toEqual('/explorer/state/oregon/murder')
     })
 
     it('should ignore place and crime for the query', () => {
