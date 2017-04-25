@@ -2,10 +2,7 @@
 
 import sinon from 'sinon'
 
-import {
-  SUMMARY_FETCHING,
-  SUMMARY_RECEIVED,
-} from '../../src/actions/constants'
+import { SUMMARY_FETCHING, SUMMARY_RECEIVED } from '../../src/actions/constants'
 import {
   fetchSummaries,
   fetchingSummary,
@@ -14,10 +11,9 @@ import {
 import api from '../../src/util/api'
 import { nationalKey } from '../../src/util/usa'
 
-
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)
-  return Promise.reject(err);
+  return Promise.reject(err)
 }
 
 const success = {

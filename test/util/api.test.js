@@ -6,10 +6,9 @@ import api from '../../src/util/api'
 import * as http from '../../src/util/http'
 import { nationalKey } from '../../src/util/usa'
 
-
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)
-  return Promise.reject(err);
+  return Promise.reject(err)
 }
 
 const params = {

@@ -2,10 +2,12 @@
 
 import createUrl from '../../src/util/url'
 
-
 describe('url utility', () => {
   it('should properly form a url with an alphabetized query string', () => {
-    const actual = createUrl('fake-url.com', { param: 'fake-param', another: 'more-fake' })
+    const actual = createUrl('fake-url.com', {
+      param: 'fake-param',
+      another: 'more-fake',
+    })
     expect(actual).toEqual('fake-url.com?another=more-fake&param=fake-param')
   })
 

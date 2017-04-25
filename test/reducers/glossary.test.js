@@ -7,7 +7,6 @@ import {
 } from '../../src/actions/constants'
 import reducer from '../../src/reducers/glossary'
 
-
 describe('glossary', () => {
   it('it should return the initial state', () => {
     const initialState = reducer(undefined, { type: 'fake' })

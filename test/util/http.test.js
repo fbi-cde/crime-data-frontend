@@ -6,10 +6,9 @@ import sinon from 'sinon'
 import * as http from '../../src/util/http'
 import storage from '../../src/util/localStorage'
 
-
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)
-  return Promise.reject(err);
+  return Promise.reject(err)
 }
 
 const success = {
@@ -42,10 +41,14 @@ describe('http utility', () => {
       })
     })
 
-    it('should first check localStorage and make a request if it isn\'t there', done => {
+    it("should first check localStorage and make a request if it isn't there", done => {
       const httpSpy = sandbox.stub(axios, 'get', () => createPromise(success))
-      const storageGetSpy = sandbox.stub(storage, 'getItem', () => createPromise(null))
-      const storageSetSpy = sandbox.stub(storage, 'setItem', () => createPromise(true))
+      const storageGetSpy = sandbox.stub(storage, 'getItem', () =>
+        createPromise(null),
+      )
+      const storageSetSpy = sandbox.stub(storage, 'setItem', () =>
+        createPromise(true),
+      )
       http.get('API').then(data => {
         expect(storageGetSpy.callCount).toEqual(1)
         expect(httpSpy.callCount).toEqual(1)
@@ -57,8 +60,12 @@ describe('http utility', () => {
 
     it('should first check localStorage and return data if it is found', done => {
       const httpSpy = sandbox.stub(axios, 'get', () => createPromise(success))
-      const storageGetSpy = sandbox.stub(storage, 'getItem', () => createPromise(success.data))
-      const storageSetSpy = sandbox.stub(storage, 'setItem', () => createPromise(true))
+      const storageGetSpy = sandbox.stub(storage, 'getItem', () =>
+        createPromise(success.data),
+      )
+      const storageSetSpy = sandbox.stub(storage, 'setItem', () =>
+        createPromise(true),
+      )
       http.get('API').then(data => {
         expect(storageGetSpy.callCount).toEqual(1)
         expect(httpSpy.callCount).toEqual(0)

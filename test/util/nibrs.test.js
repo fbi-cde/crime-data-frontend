@@ -3,7 +3,6 @@
 import mockApiData from '../fixtures/nibrsApiResponse.json'
 import parseNibrs, { reshape, rename } from '../../src/util/nibrs'
 
-
 describe('nibrs utility', () => {
   describe('reshape()', () => {
     it('should aggregate counts by key, convert to array', () => {
@@ -28,7 +27,8 @@ describe('nibrs utility', () => {
       const lookup = { a: 'foo', b: 'bar' }
 
       expect(rename(data, lookup)).toEqual([
-        { key: 'foo', count: 1 }, { key: 'bar', count: 2 },
+        { key: 'foo', count: 1 },
+        { key: 'bar', count: 2 },
       ])
     })
   })
@@ -41,7 +41,9 @@ describe('nibrs utility', () => {
       expect(actual.length).toEqual(4)
       expect(actual[0].title.toLowerCase()).toEqual('offender demographics')
       expect(actual[1].title.toLowerCase()).toEqual('victim demographics')
-      expect(actual[2].title.toLowerCase()).toEqual('victim’s relationship to the offender')
+      expect(actual[2].title.toLowerCase()).toEqual(
+        'victim’s relationship to the offender',
+      )
       expect(actual[3].title.toLowerCase()).toEqual('location type')
     })
   })

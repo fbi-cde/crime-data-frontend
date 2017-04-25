@@ -5,7 +5,6 @@ import React from 'react'
 
 import FilterGroup from '../../src/components/FilterGroup'
 
-
 describe('FilterGroup', () => {
   const title = 'FilterGroup'
   it('accepts an array of strings', () => {

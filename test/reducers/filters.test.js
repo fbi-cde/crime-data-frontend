@@ -1,11 +1,7 @@
 /* eslint no-undef: 0 */
 
-import {
-  FILTER_RESET,
-  FILTERS_UPDATE,
-} from '../../src/actions/constants'
+import { FILTER_RESET, FILTERS_UPDATE } from '../../src/actions/constants'
 import reducer from '../../src/reducers/filters'
-
 
 describe('filters', () => {
   describe('initial state', () => {
@@ -26,7 +22,7 @@ describe('filters', () => {
   })
 
   describe('FILTERS_UPDATE action type', () => {
-    it('should set all of the filters\' values', () => {
+    it("should set all of the filters' values", () => {
       const action = {
         type: FILTERS_UPDATE,
         filters: {

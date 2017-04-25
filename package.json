@@ -20,7 +20,7 @@
     "test:debug": "node --debug-brk jest -i --env=jsdom",
     "test:watch": "jest --env=jsdom --watch",
     "coverage": "npm test -- --coverage",
-    "prettier": "prettier --single-quote --trailing-comma all --semi false --write \"src/**/*.js\""
+    "prettier": "prettier --single-quote --trailing-comma all --semi false --write \"{src,test}/**/*.js\""
   },
   "dependencies": {
     "axios": "^0.15.3",
