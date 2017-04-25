@@ -52,12 +52,9 @@ const getNibrsRequests = params => {
 
 const getSummary = params => {
   const { place } = params
-  let endpoint
-  if (place === nationalKey) {
-    endpoint = `${API}/estimates/national`
-  } else {
-    endpoint = `${API}/estimates/states/${lookupUsa(place).toUpperCase()}`
-  }
+  const endpoint = (place === nationalKey)
+    ? `${API}/estimates/national`
+    : `${API}/estimates/states/${lookupUsa(place).toUpperCase()}`
 
   return get(`${endpoint}?per_page=50`).then(response => ({
     place,

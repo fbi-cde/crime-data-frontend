@@ -10,14 +10,6 @@ import TrendSourceText from './TrendSourceText'
 import mungeSummaryData from '../util/summary'
 
 
-const filterDataWithinYears = ({ data, since, until }) => {
-  const places = Object.keys(data)
-  const yearData = places.map(place => ({
-    [place]: data[place].filter(d => d.year <= until && d.year >= since)
-  }))
-  return Object.assign(...yearData)
-}
-
 const TrendContainer = ({
   crime,
   dispatch,
@@ -32,8 +24,13 @@ const TrendContainer = ({
   let content = null
   if (loading) content = <Loading />
   else {
-    const dataWithinYears = filterDataWithinYears({ data: summaries.data, since, until })
-    const data = mungeSummaryData(snakeCase(crime), dataWithinYears, place)
+    const data = mungeSummaryData({
+      crime: snakeCase(crime),
+      summaries: summaries.data,
+      place,
+      since,
+      until,
+    })
     if (!data || data.length === 0) content = <NoData />
     else {
       content = (
