@@ -16,11 +16,11 @@ describe('ucr utility', () => {
     expect(Object.keys(actual).length).toEqual(2)
   })
 
-  it('should return an empty object for a value that doesn\'t exist', () => {
+  it('should return undefined for a value that doesn\'t exist', () => {
     const place = 'fake-place'
     const actual = dataSourcesReportedByState(place)
 
-    expect(actual).toEqual({})
+    expect(actual).toEqual(undefined)
   })
 
   describe('shouldFetchUcr()', () => {
