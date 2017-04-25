@@ -28,13 +28,9 @@ class Explorer extends React.Component {
 
   componentDidMount() {
     const { appState, dispatch, router } = this.props
-    const { placeType, since, until } = appState.filters
+    const { since, until } = appState.filters
     const { query } = router.location
-    let { place } = appState.filters
-
-    if (!place && !placeType) {
-      place = nationalKey
-    }
+    const { place } = getPlaceInfo(appState.filters)
 
     const clean = (val, alt) => {
       const yr = +val
