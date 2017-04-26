@@ -1,6 +1,23 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2017-04-26
+### Added
+- Draw data points as circles on trend lines based on `showMarker` prop passed to `<TrendChart />` ([#702](https://github.com/18F/crime-data-frontend/pull/702))
+- Include [`prettier`](https://www.npmjs.com/package/prettier) for code style consistency ([#708](https://github.com/18F/crime-data-frontend/pull/708))
+- Display a beta stage modal on all initial page loads ([#711](https://github.com/18F/crime-data-frontend/pull/711))
+
+### Changed
+- Rename repo (and supporting documentation) from `crime-data-explorer` to `crime-data-frontend` ([#688](https://github.com/18F/crime-data-frontend/pull/688))
+- Trend chart refinements such as more explicit comparison text between the state and national trend lines ([#701](https://github.com/18F/crime-data-frontend/pull/701))
+- Breaking changes to routing to accommodate upcoming agency view ([#703](https://github.com/18F/crime-data-frontend/pull/703))
+- Use `prop-types` library instead of `React.PropTypes` ([#706](https://github.com/18F/crime-data-frontend/pull/706))
+- Use estimated data to draw trend lines instead of un-estimated data ([#707](https://github.com/18F/crime-data-frontend/pull/707))
+
+### Removed
+- API helper functions to fetch un-estimated data ([#707](https://github.com/18F/crime-data-frontend/pull/707))
+
+
 ## [1.3.0] - 2017-04-17
 ### Added
 - HTTP Basic Authentication added to production applications ([#695](https://github.com/18F/crime-data-frontend/pull/695))
@@ -30,7 +47,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Add UCR link for the national view ([#534](https://github.com/18F/crime-data-frontend/issues/534))
-- **NOT YET CLOSED** National trend chart text should not be a comparison with itself ([#634](https://github.com/18F/crime-data-frontend/issues/634))
+- National trend chart text should not be a comparison with itself ([#634](https://github.com/18F/crime-data-frontend/issues/634))
 - Glossary clears previous errors ([#642](https://github.com/18F/crime-data-frontend/issues/642))
 - Update API documentation link ([#644](https://github.com/18F/crime-data-frontend/issues/644))
 - Fix police employee data download link ([#675](https://github.com/18F/crime-data-frontend/issues/675))
