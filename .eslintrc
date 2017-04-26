@@ -15,6 +15,7 @@
     "import/extensions": 0,
     "import/no-extraneous-dependencies": 0,
     "max-len": [1, 100],
+    "no-mixed-operators": 0,
     "no-underscore-dangle": 0,
     "react/jsx-filename-extension": 0,
     "react/no-unused-prop-types": [2, {
@@ -22,6 +23,6 @@
     }],
     "react/prop-types": 0,
     "semi": 0,
-    "jsx-quotes": [2, "prefer-single"]
+    "jsx-quotes": 0
   }
 }

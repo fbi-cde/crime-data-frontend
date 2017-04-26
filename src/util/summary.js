@@ -16,7 +16,7 @@ const mungeSummaryData = ({ crime, summaries, place, since, until }) => {
         data[key] = {
           pop: source.population,
           count: source[crime],
-          rate: (source[crime] / source.population) * 100000,
+          rate: source[crime] / source.population * 100000,
         }
       })
       return data
