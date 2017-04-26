@@ -5,10 +5,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import BetaBanner from './BetaBanner'
+import BetaModal from './BetaModal'
 import Disclaimer from './Disclaimer'
 import Footer from './Footer'
 import Glossary from './Glossary'
 import Header from './Header'
+import { hideModal } from '../actions/modal'
 
 const App = ({ appState, children, dispatch, location }) => (
   <div className="site">
@@ -28,6 +30,8 @@ const App = ({ appState, children, dispatch, location }) => (
       >
         ⟲
       </button>}
+    {appState.modal.isShown &&
+      <BetaModal onConfirm={() => dispatch(hideModal())} />}
   </div>
 )
 
