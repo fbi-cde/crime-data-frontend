@@ -11,7 +11,6 @@ import Feedback from './Feedback'
 import Footer from './Footer'
 import Glossary from './Glossary'
 import Header from './Header'
-import { hideModal } from '../actions/modal'
 
 const App = ({ appState, children, dispatch, location }) => (
   <div className="site">
@@ -33,7 +32,7 @@ const App = ({ appState, children, dispatch, location }) => (
       </button>
     )}
     {appState.modal.isShown &&
-      <BetaModal onConfirm={() => dispatch(hideModal())} />
+      <BetaModal dispatch={dispatch} />
     }
     <Feedback dispatch={dispatch} isOpen={appState.feedback.isOpen} />
   </div>

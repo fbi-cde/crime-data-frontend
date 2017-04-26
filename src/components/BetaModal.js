@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const BetaModal = ({ onConfirm }) => {
+import { showFeedback } from '../actions/feedback'
+import { hideModal } from '../actions/modal'
+
+
+const BetaModal = ({ dispatch }) => {
   const fixed = 'fixed top-0 bottom-0 left-0 right-0'
 
   return (
@@ -30,19 +34,19 @@ const BetaModal = ({ onConfirm }) => {
         </p>
         <button
           className="btn btn-primary my4 sm-my6 mx-auto block bg-white blue btn col-10 sm-col-7"
-          onClick={onConfirm}
+          onClick={() => dispatch(hideModal())}
         >
           Take me to the beta site
         </button>
         <div className="fs-16 sm-fs-18 center">
           Help us make it better:{' '}
           <br className="sm-hide md-hide lg-hide" />
-          <a
-            className="white bold border-bottom"
-            href="https://github.com/18F/crime-data-explorer/issues"
+          <button
+            className="bg-transparent bold border-none border-bottom cursor-pointer white"
+            onClick={() => dispatch(showFeedback())}
           >
             Submit feedback
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -50,7 +54,7 @@ const BetaModal = ({ onConfirm }) => {
 }
 
 BetaModal.propTypes = {
-  onConfirm: PropTypes.func,
+  dispatch: PropTypes.func,
 }
 
 export default BetaModal
