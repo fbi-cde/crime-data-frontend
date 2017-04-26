@@ -272,6 +272,10 @@
     "definition": "A person under 18 years of age who has left home without permission of their parents or legal guardian."
   },
   {
+    "term": "Rural",
+    "definition": "An area is determined rural if it is not within a Metropolitan Statistical Area. Metropolitan Statistical Areas are defined by the Census Bureau."
+  },
+  {
     "term": "Sex offenses (forcible)",
     "definition": "Any sexual act directed against another person, without the consent of the victim, including instances where the victim is incapable of giving consent."
   },
@@ -307,7 +311,11 @@
     "term": "Stolen property offenses",
     "definition": "Receiving, buying, selling, possessing, concealing, or transporting any property with the knowledge that it has been unlawfully taken, as by burglary, embezzlement, fraud, larceny, or robbery, etc."
   },
-    {
+  {
+    "term": "Suburban",
+    "definition": "An area is defined as suburban if it is part of a Metropolitan Statistical Area but not flagged as the core city as determined by the FBI. Metropolitan Statistical Areas are defined by the Census Bureau."
+  },
+  {
     "term": "Summary Reporting System (SRS)",
     "definition": "The FBI’s reporting system for summarizing crime trends and arrests known to law enforcement. Data is collected at the aggregate level and lacks incident-based details for crimes other than homicide. Local, state, and federal law enforcement agencies tally the number of Part I offenses along with arrest data for Part I and Part II offenses, and submit the totals in a monthly summary report to the FBI or state Uniform Crime Reporting Program. The Hierarchy Rule governs multiple offenses within this system."
   },
@@ -338,6 +346,10 @@
   {
     "term": "Uniform Crime Reporting (UCR) Program",
     "definition": "The FBI program for collecting, publishing, and archiving crime data in the U.S. <br /><br />The program serves as the national repository for the collection of crime statistics and its primary objective is to generate reliable information for use in law enforcement administration, operation, and management. Participation by law enforcement agencies in the program is voluntary. <br /><br /> The FBI relies on the good faith reporting of its contributing law enforcement agencies. Although the FBI makes every effort through its editing procedures, training practices, and correspondence to ensure the validity of the data it receives, the accuracy of the statistics depends primarily on the adherence of each contributor to the established standards of reporting. It is the responsibility of each state or individual contributing law enforcement agency to submit accurate monthly statistics or correct errors in the data."
+  },
+  {
+    "term": "Urban",
+    "definition": "An area is defined as urban if it is flagged as part of the core city within a Metropolitan Statistical Area as determined by the FBI. Metropolitan Statistical Areas are defined by the Census Bureau."
   },
   {
     "term": "Vandalism",
