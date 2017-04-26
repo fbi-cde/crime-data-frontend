@@ -1,3 +1,4 @@
+import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -6,51 +7,28 @@ import Loading from './Loading'
 import NoData from './NoData'
 import TrendChart from './TrendChart'
 import TrendSourceText from './TrendSourceText'
-
-
-const dataByYear = data => (
-  Object.assign(
-    ...Object.keys(data).map(k => ({
-      [k]: Object.assign(...data[k].map(d => ({ [d.year]: d }))),
-    })),
-  )
-)
-
-const mungeSummaryData = (summaries, ucr, place) => {
-  if (!summaries || !summaries[place]) return false
-
-  const keys = Object.keys(summaries)
-  const summaryByYear = dataByYear(summaries)
-  const ucrByYear = dataByYear(ucr)
-
-  return summaries[place].map(d => (
-    Object.assign(
-      { date: d.year },
-      ...keys.map(k => {
-        const count = summaryByYear[k][d.year].actual
-        const pop = ucrByYear[k][d.year].total_population
-        return { [k]: { count, pop, rate: (count / pop) * 100000 } }
-      }),
-    )
-  ))
-}
+import mungeSummaryData from '../util/summary'
 
 const TrendContainer = ({
   crime,
+  dispatch,
   place,
   placeType,
-  dispatch,
   since,
   summaries,
-  ucr,
   until,
 }) => {
-  const loading = summaries.loading || ucr.loading
-
+  const { loading } = summaries
   let content = null
   if (loading) content = <Loading />
   else {
-    const data = mungeSummaryData(summaries.data, ucr.data, place)
+    const data = mungeSummaryData({
+      crime: snakeCase(crime),
+      summaries: summaries.data,
+      place,
+      since,
+      until,
+    })
     if (!data || data.length === 0) content = <NoData />
     else {
       content = (
@@ -69,23 +47,22 @@ const TrendContainer = ({
 
   return (
     <div>
-      <div className='mb2 p2 sm-p4 bg-white border-top border-blue border-w8'>
-        <h2 className='mt0 mb3 fs-24 sm-fs-32 sans-serif'>
+      <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
+        <h2 className="mt0 mb3 fs-24 sm-fs-32 sans-serif">
           {startCase(crime)} rate in {startCase(place)},{' '}
-          <br className='xs-hide' />
+          <br className="xs-hide" />
           {since}–{until}
         </h2>
         {content}
       </div>
-      {!loading && (
+      {!loading &&
         <TrendSourceText
           dispatch={dispatch}
           place={place}
           placeType={placeType}
           since={since}
           until={until}
-        />
-      )}
+        />}
     </div>
   )
 }
@@ -100,11 +77,7 @@ TrendContainer.propTypes = {
     data: PropTypes.object,
     loading: PropTypes.boolean,
   }).isRequired,
-  ucr: PropTypes.shape({
-    data: PropTypes.object,
-    loading: PropTypes.boolean,
-  }).isRequired,
-  until: PropTypes.number.isRequired,
+  until: React.PropTypes.number.isRequired,
 }
 
 export default TrendContainer

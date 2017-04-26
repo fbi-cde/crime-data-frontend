@@ -28,8 +28,8 @@ class Explorer extends React.Component {
 
   componentDidMount() {
     const { appState, dispatch, router } = this.props
-    const { query } = router.location
     const { since, until } = appState.filters
+    const { query } = router.location
     const { place } = getPlaceInfo(appState.filters)
 
     const clean = (val, alt) => {
@@ -74,22 +74,22 @@ class Explorer extends React.Component {
     const { filters, nibrs, sidebar, summaries, ucr } = appState
     const noNibrs = ['violent-crime', 'property-crime']
     const participation = ucrParticipation(place)
-    const showNibrs = (!noNibrs.includes(crime) && participation.nibrs)
+    const showNibrs = !noNibrs.includes(crime) && participation.nibrs
 
     return (
-      <div className='site-wrapper'>
-        <div className='sticky top-0'>
-          <div className='inline-block p1 bg-red-bright rounded-br md-hide lg-hide'>
+      <div className="site-wrapper">
+        <div className="sticky top-0">
+          <div className="inline-block p1 bg-red-bright rounded-br md-hide lg-hide">
             <button
-              className='btn p1 line-height-1 border-none'
+              className="btn p1 line-height-1 border-none"
               onClick={this.toggleSidebar}
             >
               <img
-                className='align-middle'
-                width='22'
-                height='20'
-                src='/img/filters.svg'
-                alt='filters'
+                className="align-middle"
+                width="22"
+                height="20"
+                src="/img/filters.svg"
+                alt="filters"
               />
             </button>
           </div>
@@ -101,10 +101,10 @@ class Explorer extends React.Component {
           onChange={this.handleSidebarChange}
           router={router}
         />
-        <div className='site-content'>
-          <div className='container-main mx-auto px2 md-py3 lg-px8'>
-            <div className='items-baseline my4 border-bottom border-blue-lighter'>
-              <h1 className='flex-auto mt0 mb1 fs-22 sm-fs-32'>
+        <div className="site-content">
+          <div className="container-main mx-auto px2 md-py3 lg-px8">
+            <div className="items-baseline my4 border-bottom border-blue-lighter">
+              <h1 className="flex-auto mt0 mb1 fs-22 sm-fs-32">
                 {startCase(place)}, {startCase(crime)}
               </h1>
             </div>
@@ -115,7 +115,7 @@ class Explorer extends React.Component {
               until={filters.until}
               ucr={ucr}
             />
-            <hr className='mt0 mb3' />
+            <hr className="mt0 mb3" />
             <TrendContainer
               crime={crime}
               dispatch={dispatch}
@@ -123,18 +123,18 @@ class Explorer extends React.Component {
               placeType={placeType}
               since={filters.since}
               summaries={summaries}
-              ucr={ucr}
               until={filters.until}
             />
-            {showNibrs && (<NibrsContainer
-              crime={params.crime}
-              dispatch={dispatch}
-              nibrs={nibrs}
-              place={place}
-              since={filters.since}
-              until={filters.until}
-            />)}
-            <hr className='mt0 mb3' />
+            {showNibrs &&
+              <NibrsContainer
+                crime={params.crime}
+                dispatch={dispatch}
+                nibrs={nibrs}
+                place={place}
+                since={filters.since}
+                until={filters.until}
+              />}
+            <hr className="mt0 mb3" />
             <AboutTheData crime={crime} place={place} />
           </div>
         </div>

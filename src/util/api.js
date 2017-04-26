@@ -1,7 +1,7 @@
 import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
-import { mapToApiOffense, mapToApiOffenseParam } from './offenses'
+import { mapToApiOffense } from './offenses'
 import lookupUsa, { nationalKey } from './usa'
 
 
@@ -50,46 +50,28 @@ const getNibrsRequests = params => {
   return slices.map(s => getNibrs({ ...s, crime, place }))
 }
 
-const buildSummaryQueryString = params => {
-  const { crime, place, since, until } = params
-  const offense = mapToApiOffense(crime)
-  const offenseParam = mapToApiOffenseParam(crime)
-
-  const qs = [
-    `${offenseParam}=${offense}`,
-    `per_page=${(until - since) + 1}`,
-    `year>=${since}`,
-    `year<=${until}`,
-  ]
-
-  if (place && place !== nationalKey) {
-    qs.push(`state=${lookupUsa(params.place)}`)
-  }
-
-  return qs.join('&')
-}
-
 const getSummary = params => {
   const { place } = params
-  const endpoint = `${API}/counts`
-  const qs = buildSummaryQueryString(params)
+  const endpoint = (place === nationalKey)
+    ? `${API}/estimates/national`
+    : `${API}/estimates/states/${lookupUsa(place).toUpperCase()}`
 
-  return get(`${endpoint}?${qs}`).then(response => ({
+  return get(`${endpoint}?per_page=50`).then(response => ({
     place,
     results: response.results,
   }))
 }
 
 const getSummaryRequests = params => {
-  const { crime, place, since, until } = params
+  const { place, since, until } = params
 
   const requests = [
-    getSummary({ crime, place, since, until }),
+    getSummary({ place, since, until }),
   ]
 
   // add national summary request (unless you already did)
   if (place !== nationalKey) {
-    requests.push(getSummary({ crime, place: nationalKey, since, until }))
+    requests.push(getSummary({ place: nationalKey, since, until }))
   }
 
   return requests

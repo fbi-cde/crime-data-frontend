@@ -14,6 +14,7 @@ describe('history utility', () => {
       location: { query: {} },
       params: { crime: 'murder', place: 'oregon' },
     }
+
     it('should change the place value in pathname if it is a state', () => {
       const change = { place: 'california' }
       const router = Object.assign({}, mockRouter)
