@@ -6,7 +6,6 @@ import {
 } from '../../src/actions/constants'
 import reducer from '../../src/reducers/ucr'
 
-
 describe('ucr', () => {
   describe('initial state', () => {
     it('should have loading set to false', () => {
@@ -34,8 +33,8 @@ describe('ucr', () => {
       const action = {
         type: UCR_PARTICIPATION_RECEIVED,
         results: {
-          'fake-place': []
-        }
+          'fake-place': [],
+        },
       }
       const initialState = reducer(undefined, action)
       expect(initialState.data['fake-place']).toEqual([])
@@ -45,8 +44,8 @@ describe('ucr', () => {
       const action = {
         type: UCR_PARTICIPATION_RECEIVED,
         results: {
-          'other-fake-place': ['new-data']
-        }
+          'other-fake-place': ['new-data'],
+        },
       }
       const initialState = {
         loading: false,

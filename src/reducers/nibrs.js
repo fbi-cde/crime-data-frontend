@@ -4,7 +4,6 @@ import {
   NIBRS_RECEIVED,
 } from '../actions/constants'
 
-
 const initialState = {
   loading: false,
   data: null,

@@ -7,7 +7,6 @@ import {
 } from '../../src/actions/constants'
 import reducer from '../../src/reducers/nibrs'
 
-
 describe('nibrs', () => {
   describe('initial state', () => {
     it('should return loading: false and data: []', () => {

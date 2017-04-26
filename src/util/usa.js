@@ -2,7 +2,6 @@ import lowerCase from 'lodash.lowercase'
 
 import { slugify } from '../util/text'
 
-
 const data = {
   usa: 'united states',
   ak: 'alaska',
@@ -62,11 +61,8 @@ const nationalKey = slugify(data.usa)
 
 const getPlaceNameFromAbbr = abbr => data[abbr.toLowerCase()]
 
-const getPlaceAbbrFromName = name => (
-  Object.keys(data).filter(key => (
-    data[key] === name.toLowerCase()
-  )).pop()
-)
+const getPlaceAbbrFromName = name =>
+  Object.keys(data).filter(key => data[key] === name.toLowerCase()).pop()
 
 const lookup = (query, type) => {
   if (!query) return null

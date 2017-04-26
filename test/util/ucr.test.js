@@ -7,7 +7,6 @@ import dataSourcesReportedByState, {
 } from '../../src/util/ucr'
 import { nationalKey } from '../../src/util/usa'
 
-
 describe('ucr utility', () => {
   it('should return a value for california', () => {
     const place = 'california'
@@ -16,7 +15,7 @@ describe('ucr utility', () => {
     expect(Object.keys(actual).length).toEqual(2)
   })
 
-  it('should return undefined for a value that doesn\'t exist', () => {
+  it("should return undefined for a value that doesn't exist", () => {
     const place = 'fake-place'
     const actual = dataSourcesReportedByState(place)
 
@@ -57,7 +56,10 @@ describe('ucr utility', () => {
     })
 
     it('should return a truthy value if crime and place are present', () => {
-      const result = shouldFetchSummaries({ crime: 'homicide', place: 'montana' })
+      const result = shouldFetchSummaries({
+        crime: 'homicide',
+        place: 'montana',
+      })
       expect(!!result).toEqual(true)
     })
   })
@@ -81,7 +83,9 @@ describe('ucr utility', () => {
 
     it('should return an object with "initial-year"if place submits NIBRS', () => {
       const result = shouldFetchNibrs({ place: 'montana' })
-      expect(Object.prototype.hasOwnProperty.call(result, 'initial-year')).toEqual(true)
+      expect(
+        Object.prototype.hasOwnProperty.call(result, 'initial-year'),
+      ).toEqual(true)
     })
   })
 })

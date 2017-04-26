@@ -13,10 +13,9 @@ import {
 } from '../../src/actions/ucr'
 import api from '../../src/util/api'
 
-
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)
-  return Promise.reject(err);
+  return Promise.reject(err)
 }
 
 describe('ucr actions', () => {

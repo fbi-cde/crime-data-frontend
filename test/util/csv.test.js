@@ -2,7 +2,6 @@
 
 import jsonToCsv from '../../src/util/csv'
 
-
 const simpleJson = [
   { simpleKey: 'value1A', secondKey: 'value1B' },
   { simpleKey: 'value2A', secondKey: 'value2B' },
@@ -24,7 +23,8 @@ describe('csv utility', () => {
   describe('when json is nested', () => {
     it('should return a csv string with derived columns', () => {
       const csv = jsonToCsv([...nestedJson])
-      const expected = 'simpleKey,secondKey.childKey\nvalue1A,value1B1\nvalue2A,value2B1'
+      const expected =
+        'simpleKey,secondKey.childKey\nvalue1A,value1B1\nvalue2A,value2B1'
       expect(csv).toEqual(expected)
     })
   })

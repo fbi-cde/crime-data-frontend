@@ -5,7 +5,6 @@ import React from 'react'
 import { hideGlossary, showGlossary } from '../actions/glossary'
 import terms from '../../data/terms.json'
 
-
 let GlossaryPanel
 if (typeof window !== 'undefined') GlossaryPanel = require('glossary-panel')
 
@@ -41,7 +40,7 @@ class Glossary extends React.Component {
     try {
       this.glossaryEl.findTerm(term.toLowerCase())
     } catch (e) {
-      if (e.message === 'Cannot read property \'elm\' of undefined') {
+      if (e.message === "Cannot read property 'elm' of undefined") {
         this.setState({ error: `Cannot find "${term}".` })
       }
     }
@@ -68,38 +67,37 @@ class Glossary extends React.Component {
     return (
       <div>
         <div
-          className='p2 sm-p3 bg-black white glossary'
-          id='glossary'
-          aria-describedby='glossary-result'
-          aria-hidden='true'
+          className="p2 sm-p3 bg-black white glossary"
+          id="glossary"
+          aria-describedby="glossary-result"
+          aria-hidden="true"
         >
-          <button className='right btn p0' onClick={this.toggleGlossary}>
-            <img src='/img/x.svg' alt='close' width='16' height='16' />
+          <button className="right btn p0" onClick={this.toggleGlossary}>
+            <img src="/img/x.svg" alt="close" width="16" height="16" />
           </button>
-          <h3 className='mt1 mb2 fs-26 white'>Glossary</h3>
+          <h3 className="mt1 mb2 fs-26 white">Glossary</h3>
           <label
-            className='block mb-tiny fs-14 white italic'
-            htmlFor='glossary-search'
+            className="block mb-tiny fs-14 white italic"
+            htmlFor="glossary-search"
           >
             Search glossary terms
           </label>
           <input
-            className='field col-12 fs-14 js-glossary-search'
-            id='glossary-search'
-            type='search'
-            placeholder='e.g. Committee'
+            className="field col-12 fs-14 js-glossary-search"
+            id="glossary-search"
+            type="search"
+            placeholder="e.g. Committee"
           />
-          {error && (
-            <p className='my1 p1 fs-14 bold bg-red-bright white'>{error}</p>
-          )}
-          <div className='glossary__content' id='glossary-result'>
-            <ul className='js-glossary-list' />
+          {error &&
+            <p className="my1 p1 fs-14 bold bg-red-bright white">{error}</p>}
+          <div className="glossary__content" id="glossary-result">
+            <ul className="js-glossary-list" />
           </div>
         </div>
-        <div className='display-none'>
-          <button className='js-glossary-toggle' title='Glossary toggle' />
-          <button className='js-glossary-close btn btn-primary toggle'>
-            <span className='u-visually-hidden'>Hide glossary</span>
+        <div className="display-none">
+          <button className="js-glossary-toggle" title="Glossary toggle" />
+          <button className="js-glossary-close btn btn-primary toggle">
+            <span className="u-visually-hidden">Hide glossary</span>
           </button>
         </div>
       </div>

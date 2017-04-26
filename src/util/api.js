@@ -4,7 +4,6 @@ import { get } from './http'
 import { mapToApiOffense } from './offenses'
 import lookupUsa, { nationalKey } from './usa'
 
-
 const API = '/api'
 
 const dimensionEndpoints = {
@@ -18,7 +17,9 @@ const dimensionEndpoints = {
 const getNibrs = ({ crime, dim, place, type }) => {
   const field = dimensionEndpoints[dim]
   const fieldPath = `${field}/offenses`
-  const loc = (place === nationalKey) ? 'national' : `states/${lookupUsa(place).toUpperCase()}`
+  const loc = place === nationalKey
+    ? 'national'
+    : `states/${lookupUsa(place).toUpperCase()}`
 
   const url = `${API}/${type}s/count/${loc}/${fieldPath}`
   const params = {
@@ -52,7 +53,7 @@ const getNibrsRequests = params => {
 
 const getSummary = params => {
   const { place } = params
-  const endpoint = (place === nationalKey)
+  const endpoint = place === nationalKey
     ? `${API}/estimates/national`
     : `${API}/estimates/states/${lookupUsa(place).toUpperCase()}`
 
@@ -65,9 +66,7 @@ const getSummary = params => {
 const getSummaryRequests = params => {
   const { place, since, until } = params
 
-  const requests = [
-    getSummary({ place, since, until }),
-  ]
+  const requests = [getSummary({ place, since, until })]
 
   // add national summary request (unless you already did)
   if (place !== nationalKey) {
@@ -78,7 +77,7 @@ const getSummaryRequests = params => {
 }
 
 const getUcrParticipation = place => {
-  const path = (place === nationalKey)
+  const path = place === nationalKey
     ? 'participation/national'
     : `participation/states/${lookupUsa(place).toUpperCase()}`
 
@@ -91,9 +90,7 @@ const getUcrParticipation = place => {
 const getUcrParticipationRequests = params => {
   const { place } = params
 
-  const requests = [
-    getUcrParticipation(place),
-  ]
+  const requests = [getUcrParticipation(place)]
 
   // add national request (unless you already did)
   if (place !== nationalKey) {

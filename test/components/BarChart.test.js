@@ -5,7 +5,6 @@ import React from 'react'
 
 import BarChart from '../../src/components/BarChart'
 
-
 describe('BarChart', () => {
   const data = [['red', 5], ['green', 7], ['yellow', 2]]
   let chart

@@ -74,9 +74,8 @@ export const reshape = (data, key) => {
   return Object.keys(counts).map(k => ({ key: k, count: counts[k] }))
 }
 
-export const rename = (data, lookup) => (
+export const rename = (data, lookup) =>
   data.map(d => ({ key: lookup[d.key], count: d.count }))
-)
 
 // nibrs cards
 
@@ -188,11 +187,11 @@ const locations = data => {
   }
 }
 
-const parseNibrs = data => ([
+const parseNibrs = data => [
   offenderDemo(data),
   victimDemo(data),
   relationships(data),
   locations(data),
-])
+]
 
 export default parseNibrs

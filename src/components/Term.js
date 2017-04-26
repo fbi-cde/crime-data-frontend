@@ -3,7 +3,6 @@ import React from 'react'
 
 import { showTerm } from '../actions/glossary'
 
-
 const Term = ({ children, dispatch, id }) => {
   const handler = e => {
     e.preventDefault()
@@ -11,17 +10,13 @@ const Term = ({ children, dispatch, id }) => {
   }
 
   return (
-    <a
-      className='border-bottom-dotted'
-      href='#!'
-      onClick={handler}
-    >
+    <a className="border-bottom-dotted" href="#!" onClick={handler}>
       {children}
       <img
-        className='ml-tiny'
-        width='9'
-        src='/img/glossary.svg'
-        alt='glossary lookup'
+        className="ml-tiny"
+        width="9"
+        src="/img/glossary.svg"
+        alt="glossary lookup"
       />
     </a>
   )

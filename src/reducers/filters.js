@@ -1,9 +1,5 @@
 /* eslint no-param-reassign: 0 */
-import {
-  FILTER_RESET,
-  FILTERS_UPDATE,
-} from '../actions/constants'
-
+import { FILTER_RESET, FILTERS_UPDATE } from '../actions/constants'
 
 const initialState = {
   since: 2004,

@@ -6,8 +6,8 @@ import pluralize from 'pluralize'
 import offenses from './offenses'
 import usa from './usa'
 
-
-const basicTitle = 'The Crime Data Explorer publishes nation-wide crime data collected by the FBI in a digital format. The tool allows you to view trends and download bulk data allowing you to get a better understanding of crime across the country.'
+const basicTitle =
+  'The Crime Data Explorer publishes nation-wide crime data collected by the FBI in a digital format. The tool allows you to view trends and download bulk data allowing you to get a better understanding of crime across the country.'
 
 const openGraphTags = state => {
   const { crime, place, since, until } = state.filters
@@ -22,10 +22,11 @@ const openGraphTags = state => {
   return `<meta property="og:title" content="${title}" />`
 }
 
-const twitterCardTags = () => (`
+const twitterCardTags = () =>
+  `
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@fbi" />
-`.trim())
+`.trim()
 
 export default function createSharingMetaTagsFromState(state) {
   return `${openGraphTags(state)}\n${twitterCardTags(state)}`

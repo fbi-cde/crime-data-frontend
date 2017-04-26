@@ -1,11 +1,7 @@
 /* eslint no-undef: 0 */
 
-import {
-  FILTER_RESET,
-  FILTERS_UPDATE,
-} from '../../src/actions/constants'
+import { FILTER_RESET, FILTERS_UPDATE } from '../../src/actions/constants'
 import { resetFilter, updateFilters } from '../../src/actions/filters'
-
 
 describe('filters actions', () => {
   describe('resetFilter()', () => {

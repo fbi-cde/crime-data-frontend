@@ -15,10 +15,9 @@ import {
 } from '../../src/actions/nibrs'
 import api from '../../src/util/api'
 
-
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)
-  return Promise.reject(err);
+  return Promise.reject(err)
 }
 
 const success = {
@@ -76,13 +75,15 @@ describe('nibrs actions', () => {
         createPromise(success),
       ])
 
-      fetchNibrs({ place: 'montana' })(dispatch).then(() => {
-        const first = dispatch.getCall(0)
-        const second = dispatch.getCall(1)
-        expect(first.args[0].type).toEqual(NIBRS_FETCHING)
-        expect(second.args[0].type).toEqual(NIBRS_RECEIVED)
-        done()
-      }).catch(e => console.error(e))
+      fetchNibrs({ place: 'montana' })(dispatch)
+        .then(() => {
+          const first = dispatch.getCall(0)
+          const second = dispatch.getCall(1)
+          expect(first.args[0].type).toEqual(NIBRS_FETCHING)
+          expect(second.args[0].type).toEqual(NIBRS_RECEIVED)
+          done()
+        })
+        .catch(e => console.error(e))
     })
   })
 })

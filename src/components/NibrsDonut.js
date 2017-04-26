@@ -5,7 +5,6 @@ import React from 'react'
 
 import NibrsDonutDetails from './NibrsDonutDetails'
 
-
 class NibrsDonut extends React.Component {
   constructor(props) {
     super(props)
@@ -44,13 +43,13 @@ class NibrsDonut extends React.Component {
       .range(colors)
 
     return (
-      <div className='mb2 pb2 border-bottom border-blue-light'>
-        <div className='mb-tiny blue bold'>{title}</div>
-        <div className='clearfix mxn1'>
-          <div className='col col-6 px1'>
+      <div className="mb2 pb2 border-bottom border-blue-light">
+        <div className="mb-tiny blue bold">{title}</div>
+        <div className="clearfix mxn1">
+          <div className="col col-6 px1">
             <svg
-              className='cursor-pointer'
-              preserveAspectRatio='xMidYMid'
+              className="cursor-pointer"
+              preserveAspectRatio="xMidYMid"
               viewBox={`0 0 ${size.width} ${size.height}`}
               style={{ width: '100%', height: '100%' }}
             >
@@ -63,7 +62,7 @@ class NibrsDonut extends React.Component {
                       d={arcGen(d)}
                       fill={colorMap(key)}
                       fillOpacity={hover === null || hover === key ? 1 : 0.5}
-                      pointerEvents='all'
+                      pointerEvents="all"
                       onMouseOver={this.rememberValue(key)}
                       onMouseOut={this.forgetValue}
                     />
@@ -72,7 +71,7 @@ class NibrsDonut extends React.Component {
               </g>
             </svg>
           </div>
-          <div className='col col-6 px1'>
+          <div className="col col-6 px1">
             <NibrsDonutDetails
               colorMap={colorMap}
               data={dataClean}

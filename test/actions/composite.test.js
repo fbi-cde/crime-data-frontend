@@ -6,7 +6,6 @@ import { updateApp } from '../../src/actions/composite'
 import * as filterActions from '../../src/actions/filters'
 import * as historyUtil from '../../src/util/history'
 
-
 const noop = () => {}
 
 describe('composite actions', () => {

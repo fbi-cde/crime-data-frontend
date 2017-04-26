@@ -5,7 +5,6 @@ import React from 'react'
 
 import NibrsTable from '../../src/components/NibrsTable'
 
-
 describe('NibrsTable', () => {
   const data = n => [...Array(n)].map((_, i) => ({ key: i, count: 10 }))
 

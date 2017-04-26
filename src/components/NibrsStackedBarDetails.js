@@ -1,7 +1,6 @@
 import { format } from 'd3-format'
 import React from 'react'
 
-
 const fmt = p => (p > 0.01 ? format('.0%')(p) : '<1%')
 
 const NibrsStackedBarDetails = ({
@@ -12,7 +11,7 @@ const NibrsStackedBarDetails = ({
   selected,
   total,
 }) => (
-  <ul className='list-style-none p0 m0 fs-14'>
+  <ul className="list-style-none p0 m0 fs-14">
     {data.map((d, i) => {
       const active = d.key === selected
       const border = active ? 'border-bottom' : 'border-bottom-dashed'
@@ -25,12 +24,12 @@ const NibrsStackedBarDetails = ({
           onMouseOut={onMouseOut}
         >
           <span
-            className='mr1'
+            className="mr1"
             style={{ width: 10, height: 10, backgroundColor: colorMap(d.key) }}
           />
           <div className={`flex flex-auto justify-between ${active && 'bold'}`}>
             <span>{d.key}</span>
-            <span className='monospace'>{fmt(d.value / total)}</span>
+            <span className="monospace">{fmt(d.value / total)}</span>
           </div>
         </li>
       )

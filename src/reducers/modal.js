@@ -1,6 +1,5 @@
 import { MODAL_HIDE, MODAL_SHOW } from '../actions/constants'
 
-
 const initialState = { isShown: true }
 
 export default (state = initialState, action) => {

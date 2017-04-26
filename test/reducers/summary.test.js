@@ -1,11 +1,7 @@
 /* eslint no-undef: 0 */
 
-import {
-  SUMMARY_FETCHING,
-  SUMMARY_RECEIVED,
-} from '../../src/actions/constants'
+import { SUMMARY_FETCHING, SUMMARY_RECEIVED } from '../../src/actions/constants'
 import reducer from '../../src/reducers/summary'
-
 
 describe('summary', () => {
   describe('initial state', () => {

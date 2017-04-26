@@ -5,7 +5,6 @@ import React from 'react'
 
 import TrendChart from '../../src/components/TrendChart'
 
-
 describe('TrendChart', () => {
   const data = [
     { date: '2016-01-01', foo: 5, bar: 7 },
@@ -18,7 +17,7 @@ describe('TrendChart', () => {
 
   beforeEach(() => {
     chart = shallow(<TrendChart data={data} keys={keys} {...filters} />)
-  });
+  })
 
   it('TrendChart renders svg', () => {
     expect(chart.find('svg').length).toEqual(1)

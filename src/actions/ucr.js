@@ -4,7 +4,6 @@ import {
 } from './constants'
 import api from '../util/api'
 
-
 export const fetchingUcrParticipation = () => ({
   type: UCR_PARTICIPATION_FETCHING,
 })
@@ -20,9 +19,7 @@ export const fetchUcrParticipation = params => dispatch => {
   const requests = api.getUcrParticipationRequests(params)
 
   return Promise.all(requests).then(data => {
-    const results = Object.assign(
-      ...data.map(d => ({ [d.place]: d.results })),
-    )
+    const results = Object.assign(...data.map(d => ({ [d.place]: d.results })))
 
     dispatch(receivedUcrParticipation(results))
   })
