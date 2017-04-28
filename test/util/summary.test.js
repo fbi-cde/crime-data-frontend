@@ -2,7 +2,6 @@
 
 import mungeSummaryData from '../../src/util/summary'
 
-
 describe('summary data munging utility', () => {
   it('should return false if summaries is not supplied', () => {
     const crime = 'violent-crime'
@@ -22,12 +21,18 @@ describe('summary data munging utility', () => {
       { year: 2013, 'violent-crime': 10, population: 100 },
       { year: 2012, 'violent-crime': 10, population: 100 },
       { year: 2011, 'violent-crime': 10, population: 100 },
-      { year: 2010, 'violent-crime': 10, population: 100 }
+      { year: 2010, 'violent-crime': 10, population: 100 },
     ]
     const crime = 'violent-crime'
     const summaries = { california: data, 'united-states': data }
     const place = 'california'
-    const actual = mungeSummaryData({ crime, summaries, place, since: 2013, until: 2014 })
+    const actual = mungeSummaryData({
+      crime,
+      summaries,
+      place,
+      since: 2013,
+      until: 2014,
+    })
     expect(actual.length).toEqual(2)
   })
 
@@ -43,7 +48,7 @@ describe('summary data munging utility', () => {
         date: 2014,
         california: { count: 10, pop: 100, rate: 10000 },
         'united-states': { count: 10, pop: 100, rate: 10000 },
-      }
+      },
     ])
   })
 })

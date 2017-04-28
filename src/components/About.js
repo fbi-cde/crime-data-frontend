@@ -3,6 +3,7 @@ import React from 'react'
 import Term from './Term'
 import UsaMap from './UsaMap'
 
+import { showFeedback } from '../actions/feedback'
 import ucr from '../util/ucr'
 import usa, { data as usaData } from '../util/usa'
 
@@ -192,7 +193,11 @@ const About = ({ dispatch }) => (
             We’d love to hear what you think about the Crime Data Explorer.
           </p>
         </div>
-        <button className="btn btn-primary bg-white blue" type="button">
+        <button
+          className="btn btn-primary bg-white blue"
+          onClick={() => dispatch(showFeedback())}
+          type="button"
+        >
           Submit feedback
         </button>
       </div>

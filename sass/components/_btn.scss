@@ -9,5 +9,8 @@
   color: #697a85;
   opacity: inherit;
 
-  &:hover { box-shadow: none; }
+  &:hover,
+  &:focus {
+    box-shadow: none;
+  }
 }

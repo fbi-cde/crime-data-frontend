@@ -1,0 +1,16 @@
+$feedback-height: 350px;
+
+.feedback {
+  bottom: $feedback-height * -1.5;
+  max-height: $feedback-height;
+  overflow: scroll;
+  right: 5%;
+
+  transition-property: bottom;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.feedback.show {
+  bottom: 0;
+}

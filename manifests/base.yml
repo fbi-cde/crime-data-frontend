@@ -1,0 +1,10 @@
+applications:
+- buildpack: nodejs_buildpack
+  memory: 512M
+  domain: fr.cloud.gov
+services:
+- crime-data-api-creds
+env:
+  GITHUB_ISSUE_REPO_OWNER: '18f'
+  GITHUB_ISSUE_REPO_NAME: 'crime-data-explorer'
+  NODE_ENV: 'production'

@@ -13,6 +13,8 @@
 .white { color: $white; }
 .black { color: $black; }
 
+.bg-black { background-color: $black; }
+.bg-black-translucent { background-color: rgba(17, 17, 17, 0.875); }
 .bg-blue { background-color: $blue; }
 .bg-blue-gray { background-color: $blue-gray; }
 .bg-blue-medium { background-color: $blue-medium; }
@@ -24,9 +26,8 @@
 .bg-red-bright { background-color: $red-bright; }
 .bg-red-light { background-color: $red-light; }
 .bg-red-lighter { background-color: $red-lighter; }
+.bg-transparent { background-color: transparent; }
 .bg-white { background-color: $white; }
-.bg-black { background-color: $black; }
-.bg-black-translucent { background-color: rgba(17, 17, 17, .875); }
 
 .bg-darken-1 { background-color: $darken-1; }
 .bg-darken-2 { background-color: $darken-2; }

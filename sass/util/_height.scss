@@ -3,3 +3,5 @@
 @media #{$breakpoint-lg} {
   .lg-mh-72p { min-height: 72px; }
 }
+
+.maxh5 { max-height: $space-5; }

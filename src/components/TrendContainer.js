@@ -23,7 +23,7 @@ const TrendContainer = ({
   if (loading) content = <Loading />
   else {
     const data = mungeSummaryData({
-      crime: snakeCase((crime === 'rape') ? 'rape_legacy' : crime),
+      crime: snakeCase(crime === 'rape' ? 'rape_legacy' : crime),
       summaries: summaries.data,
       place,
       since,

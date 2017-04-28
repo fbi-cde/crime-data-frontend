@@ -31,3 +31,5 @@ textarea {
   line-height: 1.5rem;
   padding: $form-field-padding-y $form-field-padding-x;
 }
+
+[disabled] { cursor: not-allowed; }

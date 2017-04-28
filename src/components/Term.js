@@ -1,3 +1,4 @@
+import lowerCase from 'lodash.lowercase'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -10,13 +11,19 @@ const Term = ({ children, dispatch, id }) => {
   }
 
   return (
-    <a className="border-bottom-dotted" href="#!" onClick={handler}>
+    <a
+      aria-label={`show ${lowerCase(id)} in the glossary`}
+      className="border-bottom-dotted"
+      href="#!"
+      onClick={handler}
+    >
       {children}
       <img
-        className="ml-tiny"
-        width="9"
-        src="/img/glossary.svg"
         alt="glossary lookup"
+        aria-hidden="true"
+        className="ml-tiny"
+        src="/img/glossary.svg"
+        width="9"
       />
     </a>
   )

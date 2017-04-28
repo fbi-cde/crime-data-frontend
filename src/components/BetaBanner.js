@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-const BetaBanner = () => (
+const BetaBanner = ({ onClick }) => (
   <div className="md-absolute top-0 right-0 fs-10 md-fs-16">
     <div className="md-mr2 p1 md-py2 md-pl3 md-pr4 md-inline-block md-rounded-bottom bg-red white">
       <svg
@@ -16,14 +16,15 @@ const BetaBanner = () => (
       </svg>
       <span className="bold">This site is in beta.</span>{' '}
       Help us make it better:{' '}
-      <a
-        className="bold white border-bottom"
-        href="https://github.com/18F/crime-data-explorer/issues"
-      >
+      <button className="btn p0" onClick={onClick}>
         Submit feedback
-      </a>
+      </button>
     </div>
   </div>
 )
+
+BetaBanner.propTypes = {
+  onClick: React.PropTypes.func,
+}
 
 export default BetaBanner

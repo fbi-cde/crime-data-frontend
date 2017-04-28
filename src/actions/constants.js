@@ -3,6 +3,9 @@
   by nouns will show up near each other in an alphabetized list
 */
 
+export const FEEDBACK_HIDE = 'FEEDBACK_HIDE'
+export const FEEDBACK_SHOW = 'FEEDBACK_SHOW'
+
 export const FILTER_RESET = 'FILTER_RESET'
 export const FILTERS_UPDATE = 'FILTERS_UPDATE'
 
