@@ -135,7 +135,7 @@ class Explorer extends React.Component {
                 until={filters.until}
               />}
             <hr className="mt0 mb3" />
-            <AboutTheData crime={crime} place={place} />
+            <AboutTheData crime={crime} dispatch={dispatch} />
           </div>
         </div>
       </div>
