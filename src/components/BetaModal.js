@@ -27,7 +27,9 @@ class BetaModal extends React.Component {
   }
 
   closeOnEsc = event => {
-    if (event.keyCode === 27) { this.close() }
+    if (event.keyCode === 27) {
+      this.close()
+    }
   }
 
   render() {
@@ -55,7 +57,10 @@ class BetaModal extends React.Component {
               height="60"
             />
           </div>
-          <h1 className="fs-24 sm-fs-32 my3 sm-mt5 sans-serif" id="beta-modal-title">
+          <h1
+            className="fs-24 sm-fs-32 my3 sm-mt5 sans-serif"
+            id="beta-modal-title"
+          >
             The Crime Data Explorer site is in beta.
           </h1>
           <p className="m0 fs-16 sm-fs-20" id="beta-modal-description">
@@ -65,8 +70,12 @@ class BetaModal extends React.Component {
           </p>
           <button
             className="btn btn-primary my4 sm-my6 mx-auto block bg-white blue btn col-10 sm-col-7"
-            onClick={() => { this.close() }}
-            ref={el => { this.closeBtn = el }}
+            onClick={() => {
+              this.close()
+            }}
+            ref={el => {
+              this.closeBtn = el
+            }}
           >
             Take me to the beta site
           </button>
@@ -75,13 +84,16 @@ class BetaModal extends React.Component {
             <br className="sm-hide md-hide lg-hide" />
             <button
               className="bg-transparent bold border-none border-bottom cursor-pointer white"
-              onClick={() => { this.close(); onFeedbackClick() }}
+              onClick={() => {
+                this.close()
+                onFeedbackClick()
+              }}
             >
               Submit feedback
             </button>
             <button
-              className='bg-transparent border-none inline right'
-              id='beta-modal-trap-focus'
+              className="bg-transparent border-none inline right"
+              id="beta-modal-trap-focus"
             />
           </div>
         </div>

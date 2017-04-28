@@ -194,9 +194,9 @@ const About = ({ dispatch }) => (
           </p>
         </div>
         <button
-          className='btn btn-primary bg-white blue'
+          className="btn btn-primary bg-white blue"
           onClick={() => dispatch(showFeedback())}
-          type='button'
+          type="button"
         >
           Submit feedback
         </button>

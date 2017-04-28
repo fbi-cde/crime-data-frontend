@@ -3,7 +3,6 @@
 import { FEEDBACK_HIDE, FEEDBACK_SHOW } from '../../src/actions/constants'
 import { hideFeedback, showFeedback } from '../../src/actions/feedback'
 
-
 describe('feedback actions', () => {
   describe('hideFeedback()', () => {
     it('should return a FEEDBACK_HIDE action', () => {

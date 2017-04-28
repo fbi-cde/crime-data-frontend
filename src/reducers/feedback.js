@@ -1,6 +1,5 @@
 import { FEEDBACK_HIDE, FEEDBACK_SHOW } from '../actions/constants'
 
-
 const initialState = { isOpen: false }
 
 export default (state = initialState, action) => {

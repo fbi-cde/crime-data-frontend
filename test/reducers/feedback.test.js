@@ -1,11 +1,7 @@
 /* eslint no-undef: 0 */
 
-import {
-  FEEDBACK_HIDE,
-  FEEDBACK_SHOW,
-} from '../../src/actions/constants'
+import { FEEDBACK_HIDE, FEEDBACK_SHOW } from '../../src/actions/constants'
 import reducer from '../../src/reducers/feedback'
-
 
 describe('feedback', () => {
   it('it should return the initial state', () => {

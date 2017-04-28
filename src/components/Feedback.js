@@ -41,50 +41,57 @@ class Feedback extends React.Component {
     this.props.onClose()
   }
 
-  createIssueBody = () => (
-    this.props.fields.map(f => ({
-      id: f.id,
-      label: f.label,
-      data: this.state.data[f.id]
-    })).map(d => (
-      `## ${d.label}\n${d.data}\n\n`
-    )).join('\n')
-  )
+  createIssueBody = () =>
+    this.props.fields
+      .map(f => ({
+        id: f.id,
+        label: f.label,
+        data: this.state.data[f.id],
+      }))
+      .map(d => `## ${d.label}\n${d.data}\n\n`)
+      .join('\n')
 
-  handleChange = e => (
-    this.setState({ data: { ...this.state.data, [e.target.name]: e.target.value } })
-  )
+  handleChange = e =>
+    this.setState({
+      data: { ...this.state.data, [e.target.name]: e.target.value },
+    })
 
   handleFocus = e => {
     const { isOpen } = this.props
     if (!isOpen) return
     if (e.target.closest('#feedback-trap-focus')) {
-      e.preventDefault();
+      e.preventDefault()
       this.setFocus()
     }
   }
 
   handleKeydown = e => {
     const { isOpen } = this.props
-    if (isOpen && e.keyCode === 27) { this.close() } // 27 is ESC key
+    if (isOpen && e.keyCode === 27) {
+      this.close()
+    } // 27 is ESC key
   }
 
   handleSubmit = e => {
     e.preventDefault()
 
-    http.post('/feedback', {
-      body: this.createIssueBody(),
-      title: 'User feedback',
-    }).then(this.handleSubmitSuccess)
+    http
+      .post('/feedback', {
+        body: this.createIssueBody(),
+        title: 'User feedback',
+      })
+      .then(this.handleSubmitSuccess)
       .catch(this.handleSubmitError)
   }
 
   handleSubmitError = err => {
     if (err.status === 404) {
-      this.setState({ result: {
-        type: 'error',
-        msg: err.response.statusText
-      } })
+      this.setState({
+        result: {
+          type: 'error',
+          msg: err.response.statusText,
+        },
+      })
     }
   }
 
@@ -102,56 +109,66 @@ class Feedback extends React.Component {
     const { data, result } = this.state
 
     return (
-      <div aria-label='Provide feedback to help us improve the Crime Data Explorer' role='dialog'>
-        <div className={`bg-blue feedback fixed p2 pb4 white z3 ${isOpen && 'show'}`}>
+      <div
+        aria-label="Provide feedback to help us improve the Crime Data Explorer"
+        role="dialog"
+      >
+        <div
+          className={`bg-blue feedback fixed p2 pb4 white z3 ${isOpen && 'show'}`}
+        >
           <form>
-            <legend className='bold'>
+            <legend className="bold">
               Help us improve the Crime Data Explorer
             </legend>
             {fields.map((field, i) => (
               <div key={i}>
-                <label className='block' htmlFor={field.id}>
+                <label className="block" htmlFor={field.id}>
                   {field.label}
                 </label>
                 <textarea
-                  className='col-12 no-resize'
+                  className="col-12 no-resize"
                   name={field.id}
                   onChange={this.handleChange}
-                  ref={el => { if (i === 0) this.firstTextarea = el }}
+                  ref={el => {
+                    if (i === 0) this.firstTextarea = el
+                  }}
                   value={data[field.id]}
                 />
               </div>
             ))}
-            <div className='flex mt1'>
+            <div className="flex mt1">
               <button
-                className='btn btn-primary bg-blue-lighter black maxh5'
+                className="btn btn-primary bg-blue-lighter black maxh5"
                 disabled={result.type === 'success'}
                 onClick={this.handleSubmit}
               >
                 Submit
               </button>
-              <div className='mw20 ml1'>
-                {result.type === 'success' && (
-                  <span role='alert'>
-                    Thank you for your feedback. It was <a className='white underline' href={result.url}>logged here</a>.
-                  </span>
-                )}
-                {result.type === 'error' && (
-                  <span role='alert'>There was an error: {result.msg}.</span>
-                )}
+              <div className="mw20 ml1">
+                {result.type === 'success' &&
+                  <span role="alert">
+                    Thank you for your feedback. It was
+                    {' '}
+                    <a className="white underline" href={result.url}>
+                      logged here
+                    </a>
+                    .
+                  </span>}
+                {result.type === 'error' &&
+                  <span role="alert">There was an error: {result.msg}.</span>}
               </div>
             </div>
           </form>
           <button
-            aria-label='Close feedback form'
-            className='absolute btn cursor-pointer p1 right-0 top-0'
+            aria-label="Close feedback form"
+            className="absolute btn cursor-pointer p1 right-0 top-0"
             onClick={this.close}
           >
-            &#10005;
+            ✕
           </button>
           <button
-            className='bg-transparent border-none inline right'
-            id='feedback-trap-focus'
+            className="bg-transparent border-none inline right"
+            id="feedback-trap-focus"
           />
         </div>
       </div>
@@ -160,10 +177,12 @@ class Feedback extends React.Component {
 }
 
 Feedback.propTypes = {
-  fields: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.string,
-    label: React.PropTypes.string,
-  })),
+  fields: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      id: React.PropTypes.string,
+      label: React.PropTypes.string,
+    }),
+  ),
   onClose: React.PropTypes.func.isRequired,
   isOpen: React.PropTypes.bool,
 }

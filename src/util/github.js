@@ -10,7 +10,7 @@ export const createIssue = ({
   owner,
   repo,
   title,
-  token
+  token,
 }) => {
   const data = { body, labels, title }
   const headers = {

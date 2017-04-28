@@ -28,7 +28,9 @@ if (isProd) require('newrelic')
 
 const env = cfenv.getAppEnv()
 
-const credService = env.getService('crime-data-api-creds') || { credentials: {} }
+const credService = env.getService('crime-data-api-creds') || {
+  credentials: {},
+}
 const getEnvVar = name => {
   if (credService.credentials[name]) return credService.credentials[name]
   if (process.env[name]) return process.env[name]
@@ -83,7 +85,13 @@ app.post('/feedback', (req, res) => {
 
   if (!allEnvs || !acceptHostname(req.hostname)) return res.status(401).end()
 
-  return createIssue({ body, owner: repoOwner, repo: repoName, title, token: repoToken })
+  return createIssue({
+    body,
+    owner: repoOwner,
+    repo: repoName,
+    title,
+    token: repoToken,
+  })
     .then(issue => res.send(issue.data))
     .catch(e => res.status(e.response.status).end())
 })
