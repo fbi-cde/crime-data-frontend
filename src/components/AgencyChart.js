@@ -3,6 +3,8 @@ import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
 import throttle from 'lodash.throttle'
 import React from 'react'
 
+import AgencyChartDetails from './AgencyChartDetails'
+import DownloadDataBtn from './DownloadDataBtn'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
 
@@ -38,7 +40,7 @@ class AgencyChart extends React.Component {
 
   render() {
     const { colors, size } = this.props
-    const { svgParentWidth } = this.state
+    const { hover, svgParentWidth } = this.state
 
     const svgWidth = svgParentWidth || size.width
     const svgHeight = svgWidth / 3
@@ -66,6 +68,7 @@ class AgencyChart extends React.Component {
 
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()
+
     const x0 = scaleBand()
       .domain(data.map(d => d.x))
       .rangeRound([0 + xPadding, width - xPadding])
@@ -75,9 +78,15 @@ class AgencyChart extends React.Component {
       .rangeRound([0, x0.bandwidth()])
       .padding(0)
 
+    const active = hover || data[data.length - 1]
+
     return (
-      <div className="mb3 px2 py3 sm-p4 bg-white">
-        <div className="col-12" ref={ref => (this.svgParent = ref)}>
+      <div>
+        <AgencyChartDetails colors={colorMap} data={active} keys={keys} />
+        <div className="mb2 h6 bold monospace black">
+          Total incidents reported by year
+        </div>
+        <div className="mb3 col-12" ref={ref => (this.svgParent = ref)}>
           <svg width={svgWidth} height={svgHeight} style={{ maxWidth: '100%' }}>
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x0} height={height} />
@@ -92,9 +101,10 @@ class AgencyChart extends React.Component {
                       height={Math.max(0, height - y(d[k]))}
                       width={x1.bandwidth()}
                       fill={colorMap(k)}
+                      fillOpacity={!active || active.x === d.x ? '1' : '.25'}
                       className="cursor-pointer"
                       pointerEvents="all"
-                      onMouseOver={this.rememberValue(d.x)}
+                      onMouseOver={this.rememberValue(d)}
                       onMouseOut={this.forgetValue}
                     />
                   ))}
@@ -103,6 +113,7 @@ class AgencyChart extends React.Component {
             </g>
           </svg>
         </div>
+        <DownloadDataBtn data={[{ data, filename: 'agency-data' }]} />
       </div>
     )
   }
@@ -110,7 +121,7 @@ class AgencyChart extends React.Component {
 
 AgencyChart.defaultProps = {
   size: {
-    width: 735,
+    width: 720,
     margin: { top: 16, right: 0, bottom: 24, left: 36 },
   },
   colors: ['#6F2925', '#FD5F55'],

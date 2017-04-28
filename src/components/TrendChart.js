@@ -163,6 +163,9 @@ class TrendChart extends React.Component {
           dispatch={dispatch}
           keys={keysWithSlugs}
         />
+        <div className="mb1 fs-12 bold monospace">
+          {startCase(crime)} rate per 100,000 people
+        </div>
         {/* eslint-disable no-return-assign */}
         <div className="col-12" ref={ref => (this.svgParent = ref)}>
           {gapRanges.length > 0 &&
@@ -261,11 +264,8 @@ class TrendChart extends React.Component {
             </g>
           </svg>
         </div>
-        <div className="my1 fs-10 sm-fs-12 monospace center">
-          <div className="bold">{startCase(crime)} rate per 100,000 people</div>
-          <div className="italic">
-            (Crime counts include FBI estimates; rates are rounded)
-          </div>
+        <div className="my1 fs-10 sm-fs-12 italic monospace center">
+          (Crime counts include FBI estimates; rates are rounded)
         </div>
         <DownloadDataBtn data={download} />
       </div>

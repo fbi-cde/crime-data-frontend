@@ -15,6 +15,8 @@ import Header from './Header'
 import { hideFeedback, showFeedback } from '../actions/feedback'
 import { hideModal } from '../actions/modal'
 
+const isProd = process.env.NODE_ENV === 'production'
+
 const App = ({ appState, children, dispatch, location }) => (
   <div className="site">
     <Disclaimer />
@@ -25,15 +27,16 @@ const App = ({ appState, children, dispatch, location }) => (
     </main>
     <Glossary dispatch={dispatch} {...appState.glossary} />
     <Footer dispatch={dispatch} />
-    {process.env.NODE_ENV !== 'production' &&
+    {!isProd &&
       <button
         type="button"
         className="fixed bottom-0 left-0 m1 px-tiny py0 btn btn-primary bg-red-bright"
         onClick={() => window.localStorage.clear()}
       >
         ⟲
-      </button>}
-    {appState.modal.isShown &&
+      </button>
+    }
+    {isProd && appState.modal.isShown &&
       <BetaModal
         onClose={() => {
           dispatch(hideModal())
@@ -41,7 +44,8 @@ const App = ({ appState, children, dispatch, location }) => (
         onFeedbackClick={() => {
           dispatch(showFeedback())
         }}
-      />}
+      />
+    }
     <Feedback
       isOpen={appState.feedback.isOpen}
       onClose={() => dispatch(hideFeedback())}
