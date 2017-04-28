@@ -34,4 +34,16 @@ const content = {
   },
 }
 
+export const generateCrimeReadme = ({ crime, title = 'README' }) => {
+  const crimeJson = content.crimes[crime]
+  const caveats = crimeJson.caveats.map(c => (
+    `### ${c.heading}\n${c.text}\n`
+  )).join('\n')
+  const links = crimeJson.links.map(l => (
+    `* [${l.text}](${l.url})`
+  )).join('\n')
+
+  return `# ${title}\n## Caveats\n${caveats}\n## Links\n${links}`
+}
+
 export default content

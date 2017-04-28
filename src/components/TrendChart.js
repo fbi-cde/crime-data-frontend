@@ -6,6 +6,7 @@ import { line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import startCase from 'lodash.startcase'
 import throttle from 'lodash.throttle'
+import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -13,6 +14,7 @@ import DownloadDataBtn from './DownloadDataBtn'
 import TrendChartDetails from './TrendChartDetails'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
+import { generateCrimeReadme } from '../util/content'
 import { slugify } from '../util/text'
 
 class TrendChart extends React.Component {
@@ -81,7 +83,14 @@ class TrendChart extends React.Component {
     const download = [
       {
         data,
-        filename: `${place}-${crime}-${since}–${until}`,
+        filename: `${place}-${crime}-${since}–${until}.csv`,
+      },
+      {
+        content: generateCrimeReadme({
+          crime,
+          title: `Reported ${pluralize(crime)} in ${startCase(place)}, ${since}-${until}`,
+        }),
+        filename: 'README.md',
       },
     ]
 
