@@ -67,9 +67,14 @@ class Feedback extends React.Component {
 
   handleKeydown = e => {
     const { isOpen } = this.props
-    if (isOpen && e.keyCode === 27) {
+    const escKey = e.keyCode === 27
+    const tabKey = event.keyCode === 9
+    if (isOpen && escKey) {
       this.close()
-    } // 27 is ESC key
+    } else if (event.shiftKey && tabKey && e.target === this.firstTextarea) {
+      e.preventDefault()
+      this.closeButton.focus()
+    }
   }
 
   handleSubmit = e => {
@@ -161,6 +166,9 @@ class Feedback extends React.Component {
             aria-label="Close feedback form"
             className="absolute right-0 top-0 btn m1 p0"
             onClick={this.close}
+            ref={el => {
+              this.closeButton = el
+            }}
           >
             ✕
           </button>

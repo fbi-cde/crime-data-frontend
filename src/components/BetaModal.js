@@ -3,27 +3,47 @@ import React from 'react'
 
 class BetaModal extends React.Component {
   componentDidMount() {
-    document.addEventListener('keydown', this.closeOnEsc)
     this.triggerElement = document.activeElement || document.body
+
+    document.addEventListener('focus', this.handleFocus, true)
+    document.addEventListener('keydown', this.handleKeydown)
+
     this.closeBtn.focus()
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.closeOnEsc)
+    document.removeEventListener('focus', this.handleFocus)
+    document.removeEventListener('keydown', this.handleKeydown)
   }
 
-  close = () => {
+  restoreFocus = () => {
     this.triggerElement.focus()
     this.props.onClose()
   }
 
-  closeOnEsc = e => {
-    if (e.keyCode === 27) this.close()
+  close = () => {
+    this.restoreFocus()
+    this.props.onClose()
   }
 
-  openFeedback = () => {
-    this.close()
-    this.props.onFeedbackClick()
+  handleFocus = e => {
+    if (e.target.closest('#beta-modal-trap-focus')) {
+      console.log('yo')
+      e.preventDefault()
+      this.closeBtn.focus()
+    }
+  }
+
+  handleKeydown = e => {
+    const escKey = e.keyCode === 27
+    const tabKey = e.keyCode === 9
+
+    if (escKey) {
+      this.close()
+    } else if (event.shiftKey && tabKey && e.target === this.closeBtn) {
+      e.preventDefault()
+      this.feedbackBtn.focus()
+    }
   }
 
   render() {
@@ -73,7 +93,13 @@ class BetaModal extends React.Component {
             <br className="sm-hide md-hide lg-hide" />
             <button
               className="bg-transparent bold border-none border-bottom cursor-pointer white"
-              onClick={this.openFeedback}
+              onClick={() => {
+                this.close()
+                this.props.onFeedbackClick()
+              }}
+              ref={el => {
+                this.feedbackBtn = el
+              }}
             >
               Submit feedback
             </button>
