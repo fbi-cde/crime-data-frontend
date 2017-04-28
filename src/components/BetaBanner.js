@@ -19,7 +19,7 @@ const BetaBanner = ({ dispatch }) => (
       <span className="bold">This site is in beta.</span>{' '}
       Help us make it better:{' '}
       <button
-        className='bg-transparent bold border-none border-bottom cursor-pointer underline white'
+        className='btn p0'
         onClick={() => dispatch(showFeedback())}
       >
         Submit feedback

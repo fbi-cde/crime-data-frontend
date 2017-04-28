@@ -9,11 +9,10 @@ const Term = ({ children, dispatch, id }) => {
     e.preventDefault()
     dispatch(showTerm(id))
   }
-  const readable = lowerCase(id)
 
   return (
     <a
-      aria-label={`show ${readable} in the glossary`}
+      aria-label={`show ${lowerCase(id)} in the glossary`}
       className="border-bottom-dotted"
       href="#!"
       onClick={handler}

@@ -3,24 +3,12 @@ import React from 'react'
 
 import { hideFeedback } from '../actions/feedback'
 
-const createIssueBody = data => (
-  data.map(d => (
-    `## ${d.label}\n${d.data}\n\n`
-  )).join('\n')
-)
-
 class Feedback extends React.Component {
   constructor(props) {
     super(props)
 
-    const data = props.fields.map(f => f.id).reduce((a, n) => {
-      const d = { ...a }
-      d[n] = ''
-      return d
-    }, {})
-
     this.state = {
-      data,
+      data: Object.assign(...props.fields.map(f => ({ [f.id]: '' }))),
       result: {},
     }
   }
@@ -46,6 +34,24 @@ class Feedback extends React.Component {
     document.removeEventListener('keydown', this.closeOnEsc)
   }
 
+  onSubmitError = err => {
+    if (err.status === 404) {
+      this.setState({ result: {
+        type: 'error',
+        msg: err.response.statusText
+      } })
+    }
+  }
+
+  onSubmitSuccess = response => {
+    const { html_url } = response.data
+    this.setState({ result: { type: 'success', url: html_url } })
+    setTimeout(() => {
+      this.setState({ result: {}, data: {} })
+      this.close()
+    }, 8000)
+  }
+
   setFocus = () => {
     this.firstTextarea.focus()
   }
@@ -56,58 +62,51 @@ class Feedback extends React.Component {
     this.triggerElement.focus()
   }
 
-  closeOnEsc = event => {
+  closeOnEsc = e => {
     const { isOpen } = this.props
-    if (isOpen && event.keyCode === 27) { this.close() }
+    if (isOpen && e.keyCode === 27) { this.close() }
   }
 
-  trapFocus = event => {
+  createIssueBody = () => (
+    this.props.fields.map(f => ({
+      id: f.id,
+      label: f.label,
+      data: this.state.data[f.id]
+    })).map(d => (
+      `## ${d.label}\n${d.data}\n\n`
+    )).join('\n')
+  )
+
+  trapFocus = e => {
     const { isOpen } = this.props
     if (!isOpen) return
-    if (event.target.closest('#feedback-trap-focus')) {
-      event.preventDefault();
+    if (e.target.closest('#feedback-trap-focus')) {
+      e.preventDefault();
       this.setFocus()
     }
   }
 
+  handleChange = e => (
+    this.setState({ data: { ...this.state.data, [e.target.name]: e.target.value } })
+  )
+
   handleSubmit = e => {
     e.preventDefault()
 
-    const data = this.props.fields.map(f => ({
-      id: f.id,
-      label: f.label,
-      data: this.state.data[f.id]
-    }))
-    const body = createIssueBody(data)
-    const title = 'User feedback'
-    http.post('/feedback', { body, title }).then(response => {
-      const { html_url } = response.data
-      this.setState({ result: { type: 'success', url: html_url } })
-      setTimeout(() => {
-        this.setState({ result: {}, data: {} })
-        this.close()
-      }, 8000)
-    }).catch(httpErr => {
-      if (status === 404) {
-        this.setState({ result: {
-          type: 'error',
-          msg: httpErr.response.statusText
-        } })
-      }
-    })
+    http.post('/feedback', {
+      body: this.createIssueBody(),
+      title: 'User feedback',
+    }).then(this.onSubmitSuccess)
+      .catch(this.onSubmitError)
   }
 
   render() {
-    const handleChange = e => (
-      this.setState({ data: { ...this.state.data, [e.target.name]: e.target.value } })
-    )
-
-    const { dispatch, fields, isOpen } = this.props
-    const { result } = this.state
+    const { fields, isOpen } = this.props
+    const { data, result } = this.state
 
     return (
       <div aria-label='Provide feedback to help us improve the Crime Data Explorer' role='dialog'>
-        <div className={`bg-blue feedback fixed p2 pb4 white z4 ${isOpen && 'show'}`}>
+        <div className={`bg-blue feedback fixed p2 pb4 white z3 ${isOpen && 'show'}`}>
           <form>
             <legend className='bold'>
               Help us improve the Crime Data Explorer
@@ -120,21 +119,21 @@ class Feedback extends React.Component {
                 <textarea
                   className='col-12 no-resize'
                   name={field.id}
-                  onChange={handleChange}
+                  onChange={this.handleChange}
                   ref={el => { if (i === 0) this.firstTextarea = el }}
-                  value={this.state.data[field.id]}
+                  value={data[field.id]}
                 />
               </div>
             ))}
             <div className='flex mt1'>
               <button
                 className='btn btn-primary bg-blue-lighter black maxh5'
-                disabled={this.state.result.type === 'success'}
+                disabled={result.type === 'success'}
                 onClick={this.handleSubmit}
               >
                 Submit
               </button>
-              <div className='mw8 ml1'>
+              <div className='mw20 ml1'>
                 {result.type === 'success' && (
                   <span role='alert'>
                     Thank you for your feedback. It was <a className='white underline' href={result.url}>logged here</a>.
@@ -149,7 +148,7 @@ class Feedback extends React.Component {
           <button
             aria-label='Close feedback form'
             className='absolute btn cursor-pointer p1 right-0 top-0'
-            onClick={() => dispatch(hideFeedback())}
+            onClick={this.close}
           >
             &#10005;
           </button>

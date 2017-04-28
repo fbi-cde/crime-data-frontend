@@ -62,13 +62,22 @@ const Footer = ({ dispatch }) => {
             <ul className='m0 p0 fs-14 list-style-none left-bars'>
               {links.map((l, i) => (
                 <li key={i}>
-                  <Link
-                    className='cursor-pointer white caps'
-                    to={l.href || ''}
-                    onClick={l.onClick && (e => { e.preventDefault(); l.onClick(e); })}
-                  >
-                    {l.text}
-                  </Link>
+                  {(l.onClick) ? (
+                    <Link
+                      className='cursor-pointer white caps'
+                      to={'#!'}
+                      onClick={l.onClick && (e => { e.preventDefault(); l.onClick(e); })}
+                    >
+                      {l.text}
+                    </Link>
+                  ) : (
+                    <Link
+                      className='cursor-pointer white caps'
+                      to={l.href}
+                    >
+                      {l.text}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

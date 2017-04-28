@@ -40,7 +40,7 @@ class BetaModal extends React.Component {
 
     return (
       <div
-        className={`${fixed} flex flex-column items-center justify-center z5`}
+        className={`${fixed} flex flex-column items-center justify-center z4`}
         aria-labelledby="beta-modal-title"
         aria-describedby="beta-modal-description"
         role="alertdialog"
