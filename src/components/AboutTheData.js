@@ -3,10 +3,20 @@ import md from 'markdown-it'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { showTerm } from '../actions/glossary'
 import content from '../util/content'
 
 const markdown = md()
+const defaultLinkRender =
+  markdown.renderer.rules.link_open ||
+  ((tokens, idx, options, env, self) => self.renderToken(tokens, idx, options))
+
+markdown.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+  tokens[idx].attrPush(['class', 'underline'])
+  return defaultLinkRender(tokens, idx, options, env, self)
+}
+
+// adopted from examples in markdown-it docs
+// https://github.com/markdown-it/markdown-it/blob/master/docs/architecture.md#renderer
 
 class AboutTheData extends React.Component {
   componentDidMount() {
@@ -18,14 +28,14 @@ class AboutTheData extends React.Component {
   }
 
   triggerGlossaryTerm = event => {
-    const { dispatch } = this.props
+    const { onTermClick } = this.props
     const { target } = event
-    if (!target.closest('.about-the-data')) return
+    if (!target.closest('.about-the-data .caveats')) return
     if (!target.href || !target.href.match(/#glossary\?term=/)) return
     const term = lowerCase(target.href.split('term=')[1])
 
     event.preventDefault()
-    dispatch(showTerm(term))
+    onTermClick(term)
   }
 
   render() {
@@ -33,7 +43,7 @@ class AboutTheData extends React.Component {
     const { caveats, links } = content.crimes[crime]
 
     return (
-      <div className='about-the-data'>
+      <div className="about-the-data">
         <h3 className="mt0 mb4 fs-22 sm-fs-26">About the data</h3>
         <div className="lg-flex">
           <div className="flex-auto mb1 fs-14 sm-fs-16 black">
@@ -43,21 +53,21 @@ class AboutTheData extends React.Component {
                 Uniform Crime Reporting (UCR) Program
               </a>.
             </p>
-            <div className='caveats'>
+            <div className="caveats">
               {caveats.map((c, i) => (
                 <div key={i}>
                   <div className="bold">{c.heading}</div>
                   {/* eslint react/no-danger: 0 */}
                   <div
-                    dangerouslySetInnerHTML={{ __html: markdown.render(c.text) }}
+                    dangerouslySetInnerHTML={{
+                      __html: markdown.render(c.text),
+                    }}
                   />
                 </div>
               ))}
             </div>
           </div>
-          <div
-            className="flex-none mb2 col-12 lg-block lg-col-4 lg-ml3 lg-mb0"
-          >
+          <div className="flex-none mb2 col-12 lg-block lg-col-4 lg-ml3 lg-mb0">
             <div className="p2 sm-px4 sm-py3 bg-blue white">
               <h4 className="mt0 mb1 fs-18">Further reading</h4>
               <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
@@ -77,11 +87,7 @@ class AboutTheData extends React.Component {
 
 AboutTheData.propTypes = {
   crime: PropTypes.string.isRequired,
-  dispatch: PropTypes.func,
-}
-
-AboutTheData.defaultProps = {
-  dispatch: () => {},
+  onTermClick: PropTypes.func.isRequired,
 }
 
 export default AboutTheData

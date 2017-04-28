@@ -8,6 +8,7 @@ import Sidebar from './Sidebar'
 import TrendContainer from './TrendContainer'
 import UcrParticipationInformation from './UcrParticipationInformation'
 import { updateApp } from '../actions/composite'
+import { showTerm } from '../actions/glossary'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offenses from '../util/offenses'
 import ucrParticipation from '../util/ucr'
@@ -135,7 +136,10 @@ class Explorer extends React.Component {
                 until={filters.until}
               />}
             <hr className="mt0 mb3" />
-            <AboutTheData crime={crime} dispatch={dispatch} />
+            <AboutTheData
+              crime={crime}
+              onTermClick={term => dispatch(showTerm(term))}
+            />
           </div>
         </div>
       </div>
