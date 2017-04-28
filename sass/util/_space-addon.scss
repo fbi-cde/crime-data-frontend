@@ -145,5 +145,7 @@
 }
 
 @media #{$breakpoint-lg} {
+  .lg-mb0 { margin-bottom: 0; }
+  .lg-ml3 { margin-left: $space-3; }
   .lg-px8 { padding-left: $space-8; padding-right: $space-8; }
 }

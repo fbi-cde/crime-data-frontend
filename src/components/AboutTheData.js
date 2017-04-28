@@ -56,8 +56,7 @@ class AboutTheData extends React.Component {
             </div>
           </div>
           <div
-            className="flex-none ml3 xs-hide sm-hide md-hide"
-            style={{ width: 300 }}
+            className="flex-none mb2 col-12 lg-block lg-col-4 lg-ml3 lg-mb0"
           >
             <div className="p2 sm-px4 sm-py3 bg-blue white">
               <h4 className="mt0 mb1 fs-18">Further reading</h4>
