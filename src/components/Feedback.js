@@ -3,38 +3,89 @@ import React from 'react'
 
 import { hideFeedback } from '../actions/feedback'
 
-const createIssueBody = ({ general, improve, next }) => (`
-## What brought you to the site and how can we improve it?\n
-${improve}\n\n
-
-## General feedback about the site?\n
-${general}\n\n
-
-## How do you plan to use the information you found here?\n
-${next}\n\n
-`)
+const createIssueBody = data => (
+  data.map(d => (
+    `## ${d.label}\n${d.data}\n\n`
+  )).join('\n')
+)
 
 class Feedback extends React.Component {
   constructor(props) {
     super(props)
 
+    const data = props.fields.map(f => f.id).reduce((a, n) => {
+      const d = { ...a }
+      d[n] = ''
+      return d
+    }, {})
+
     this.state = {
-      data: { general: '', improve: '', next: '' },
+      data,
       result: {},
+    }
+  }
+
+  componentDidMount() {
+    const { isOpen } = this.props
+    document.addEventListener('focus', this.trapFocus, true)
+    document.addEventListener('keydown', this.closeOnEsc)
+    if (isOpen) this.setFocus()
+  }
+
+  componentDidUpdate(prevProps) {
+    const wasOpen = prevProps.isOpen
+    const { isOpen } = this.props
+    if (isOpen && !wasOpen) {
+      this.triggerElement = document.activeElement
+      this.setFocus()
+    }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('focus', this.trapFocus)
+    document.removeEventListener('keydown', this.closeOnEsc)
+  }
+
+  setFocus = () => {
+    this.firstTextarea.focus()
+  }
+
+  close = () => {
+    const { dispatch } = this.props
+    dispatch(hideFeedback())
+    this.triggerElement.focus()
+  }
+
+  closeOnEsc = event => {
+    const { isOpen } = this.props
+    if (isOpen && event.keyCode === 27) { this.close() }
+  }
+
+  trapFocus = event => {
+    const { isOpen } = this.props
+    if (!isOpen) return
+    if (event.target.closest('#feedback-trap-focus')) {
+      event.preventDefault();
+      this.setFocus()
     }
   }
 
   handleSubmit = e => {
     e.preventDefault()
-    const { general, improve, next } = this.state.data
-    const body = createIssueBody({ general, improve, next })
+
+    const data = this.props.fields.map(f => ({
+      id: f.id,
+      label: f.label,
+      data: this.state.data[f.id]
+    }))
+    const body = createIssueBody(data)
     const title = 'User feedback'
     http.post('/feedback', { body, title }).then(response => {
       const { html_url } = response.data
       this.setState({ result: { type: 'success', url: html_url } })
       setTimeout(() => {
         this.setState({ result: {}, data: {} })
-        this.props.dispatch(hideFeedback())
+        this.close()
       }, 8000)
     }).catch(httpErr => {
       if (status === 404) {
@@ -51,52 +102,30 @@ class Feedback extends React.Component {
       this.setState({ data: { ...this.state.data, [e.target.name]: e.target.value } })
     )
 
-    const { dispatch, isOpen } = this.props
+    const { dispatch, fields, isOpen } = this.props
     const { result } = this.state
 
     return (
-      <div>
+      <div aria-label='Provide feedback to help us improve the Crime Data Explorer' role='dialog'>
         <div className={`bg-blue feedback fixed p2 pb4 white z4 ${isOpen && 'show'}`}>
-          <div>
-            <button
-              className='absolute btn cursor-pointer p1 right-0 top-0'
-              onClick={() => dispatch(hideFeedback())}
-              title='Close feedback'
-            >
-              &#10005;
-            </button>
-          </div>
           <form>
             <legend className='bold'>
               Help us improve the Crime Data Explorer
             </legend>
-            <label className='block' htmlFor='improve'>
-              What brought you to the site and how can we improve it?
-            </label>
-            <textarea
-              className='col-12 no-resize'
-              name='improve'
-              onChange={handleChange}
-              value={this.state.data.improve}
-            />
-            <label className='block' htmlFor='general'>
-              General feedback about the site?
-            </label>
-            <textarea
-              className='col-12 no-resize'
-              name='general'
-              onChange={handleChange}
-              value={this.state.data.general}
-            />
-            <label className='block' htmlFor='next'>
-              How do you plan to use the information you found here?
-            </label>
-            <textarea
-              className='col-12 no-resize'
-              name='next'
-              onChange={handleChange}
-              value={this.state.data.next}
-            />
+            {fields.map((field, i) => (
+              <div key={i}>
+                <label className='block' htmlFor={field.id}>
+                  {field.label}
+                </label>
+                <textarea
+                  className='col-12 no-resize'
+                  name={field.id}
+                  onChange={handleChange}
+                  ref={el => { if (i === 0) this.firstTextarea = el }}
+                  value={this.state.data[field.id]}
+                />
+              </div>
+            ))}
             <div className='flex mt1'>
               <button
                 className='btn btn-primary bg-blue-lighter black maxh5'
@@ -107,16 +136,27 @@ class Feedback extends React.Component {
               </button>
               <div className='mw8 ml1'>
                 {result.type === 'success' && (
-                  <span>
+                  <span role='alert'>
                     Thank you for your feedback. It was <a className='white underline' href={result.url}>logged here</a>.
                   </span>
                 )}
                 {result.type === 'error' && (
-                  <span>There was an error: {result.msg}.</span>
+                  <span role='alert'>There was an error: {result.msg}.</span>
                 )}
               </div>
             </div>
           </form>
+          <button
+            aria-label='Close feedback form'
+            className='absolute btn cursor-pointer p1 right-0 top-0'
+            onClick={() => dispatch(hideFeedback())}
+          >
+            &#10005;
+          </button>
+          <button
+            className='bg-transparent border-none inline right'
+            id='feedback-trap-focus'
+          />
         </div>
       </div>
     )
@@ -125,10 +165,28 @@ class Feedback extends React.Component {
 
 Feedback.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
+  fields: React.PropTypes.arrayOf(React.PropTypes.shape({
+    id: React.PropTypes.string,
+    label: React.PropTypes.string,
+  })),
   isOpen: React.PropTypes.bool,
 }
 
 Feedback.defaultProps = {
+  fields: [
+    {
+      id: 'improve',
+      label: 'What brought you to the site and how can we improve it?',
+    },
+    {
+      id: 'general',
+      label: 'General feedback about the site?',
+    },
+    {
+      id: 'next',
+      label: 'How do you plan to use the information you found here?',
+    },
+  ],
   isOpen: false,
 }
 

@@ -37,6 +37,7 @@
     "d3-scale": "^1.0.4",
     "d3-shape": "^1.0.4",
     "d3-time-format": "^2.0.3",
+    "element-closest": "^2.0.2",
     "express": "^4.14.0",
     "glossary-panel": "^0.2.0",
     "js-yaml": "^3.7.0",
