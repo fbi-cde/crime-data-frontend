@@ -1,10 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { showFeedback } from '../actions/feedback'
-import { hideModal } from '../actions/modal'
-
-
 class BetaModal extends React.Component {
   componentDidMount() {
     this.triggerElement = document.activeElement || document.body
@@ -25,9 +21,9 @@ class BetaModal extends React.Component {
   }
 
   close = () => {
-    const { dispatch } = this.props
-    dispatch(hideModal())
+    const { onClose } = this.props
     this.restoreFocus()
+    onClose()
   }
 
   closeOnEsc = event => {
@@ -35,7 +31,7 @@ class BetaModal extends React.Component {
   }
 
   render() {
-    const { dispatch } = this.props
+    const { onFeedbackClick } = this.props
     const fixed = 'fixed top-0 bottom-0 left-0 right-0'
 
     return (
@@ -79,7 +75,7 @@ class BetaModal extends React.Component {
             <br className="sm-hide md-hide lg-hide" />
             <button
               className="bg-transparent bold border-none border-bottom cursor-pointer white"
-              onClick={() => { this.close(); dispatch(showFeedback()) }}
+              onClick={() => { this.close(); onFeedbackClick() }}
             >
               Submit feedback
             </button>
@@ -95,7 +91,8 @@ class BetaModal extends React.Component {
 }
 
 BetaModal.propTypes = {
-  dispatch: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
+  onFeedbackClick: PropTypes.func.isRequired,
 }
 
 export default BetaModal

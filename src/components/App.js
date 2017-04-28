@@ -12,10 +12,13 @@ import Footer from './Footer'
 import Glossary from './Glossary'
 import Header from './Header'
 
+import { hideFeedback, showFeedback } from '../actions/feedback'
+import { hideModal } from '../actions/modal'
+
 const App = ({ appState, children, dispatch, location }) => (
   <div className="site">
     <Disclaimer />
-    <BetaBanner dispatch={dispatch} />
+    <BetaBanner onClick={() => dispatch(showFeedback())} />
     <Header location={location} />
     <main className="site-main">
       {children && React.cloneElement(children, { appState, dispatch })}
@@ -32,9 +35,15 @@ const App = ({ appState, children, dispatch, location }) => (
       </button>
     )}
     {appState.modal.isShown &&
-      <BetaModal dispatch={dispatch} />
+      <BetaModal
+        onClose={() => { dispatch(hideModal()) }}
+        onFeedbackClick={() => { dispatch(showFeedback()) }}
+      />
     }
-    <Feedback dispatch={dispatch} isOpen={appState.feedback.isOpen} />
+    <Feedback
+      isOpen={appState.feedback.isOpen}
+      onClose={() => dispatch(hideFeedback())}
+    />
   </div>
 )
 

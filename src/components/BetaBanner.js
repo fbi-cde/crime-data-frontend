@@ -2,9 +2,7 @@
 
 import React from 'react'
 
-import { showFeedback } from '../actions/feedback'
-
-const BetaBanner = ({ dispatch }) => (
+const BetaBanner = ({ onClick }) => (
   <div className='md-absolute top-0 right-0 fs-10 md-fs-16'>
     <div className='md-mr2 p1 md-py2 md-pl3 md-pr4 md-inline-block md-rounded-bottom bg-red white'>
       <svg
@@ -20,7 +18,7 @@ const BetaBanner = ({ dispatch }) => (
       Help us make it better:{' '}
       <button
         className='btn p0'
-        onClick={() => dispatch(showFeedback())}
+        onClick={onClick}
       >
         Submit feedback
       </button>
@@ -29,7 +27,7 @@ const BetaBanner = ({ dispatch }) => (
 )
 
 BetaBanner.propTypes = {
-  dispatch: React.PropTypes.func,
+  onClick: React.PropTypes.func,
 }
 
 export default BetaBanner

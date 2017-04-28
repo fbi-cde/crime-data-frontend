@@ -1,8 +1,6 @@
 import http from 'axios' // use axios to skip localStorage
 import React from 'react'
 
-import { hideFeedback } from '../actions/feedback'
-
 class Feedback extends React.Component {
   constructor(props) {
     super(props)
@@ -15,8 +13,8 @@ class Feedback extends React.Component {
 
   componentDidMount() {
     const { isOpen } = this.props
-    document.addEventListener('focus', this.trapFocus, true)
-    document.addEventListener('keydown', this.closeOnEsc)
+    document.addEventListener('focus', this.handleFocus, true)
+    document.addEventListener('keydown', this.handleKeydown)
     if (isOpen) this.setFocus()
   }
 
@@ -30,26 +28,8 @@ class Feedback extends React.Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('focus', this.trapFocus)
-    document.removeEventListener('keydown', this.closeOnEsc)
-  }
-
-  onSubmitError = err => {
-    if (err.status === 404) {
-      this.setState({ result: {
-        type: 'error',
-        msg: err.response.statusText
-      } })
-    }
-  }
-
-  onSubmitSuccess = response => {
-    const { html_url } = response.data
-    this.setState({ result: { type: 'success', url: html_url } })
-    setTimeout(() => {
-      this.setState({ result: {}, data: {} })
-      this.close()
-    }, 8000)
+    document.removeEventListener('focus', this.handleFocus)
+    document.removeEventListener('keydown', this.handleKeydown)
   }
 
   setFocus = () => {
@@ -57,14 +37,8 @@ class Feedback extends React.Component {
   }
 
   close = () => {
-    const { dispatch } = this.props
-    dispatch(hideFeedback())
     this.triggerElement.focus()
-  }
-
-  closeOnEsc = e => {
-    const { isOpen } = this.props
-    if (isOpen && e.keyCode === 27) { this.close() }
+    this.props.onClose()
   }
 
   createIssueBody = () => (
@@ -77,7 +51,11 @@ class Feedback extends React.Component {
     )).join('\n')
   )
 
-  trapFocus = e => {
+  handleChange = e => (
+    this.setState({ data: { ...this.state.data, [e.target.name]: e.target.value } })
+  )
+
+  handleFocus = e => {
     const { isOpen } = this.props
     if (!isOpen) return
     if (e.target.closest('#feedback-trap-focus')) {
@@ -86,9 +64,10 @@ class Feedback extends React.Component {
     }
   }
 
-  handleChange = e => (
-    this.setState({ data: { ...this.state.data, [e.target.name]: e.target.value } })
-  )
+  handleKeydown = e => {
+    const { isOpen } = this.props
+    if (isOpen && e.keyCode === 27) { this.close() } // 27 is ESC key
+  }
 
   handleSubmit = e => {
     e.preventDefault()
@@ -96,8 +75,26 @@ class Feedback extends React.Component {
     http.post('/feedback', {
       body: this.createIssueBody(),
       title: 'User feedback',
-    }).then(this.onSubmitSuccess)
-      .catch(this.onSubmitError)
+    }).then(this.handleSubmitSuccess)
+      .catch(this.handleSubmitError)
+  }
+
+  handleSubmitError = err => {
+    if (err.status === 404) {
+      this.setState({ result: {
+        type: 'error',
+        msg: err.response.statusText
+      } })
+    }
+  }
+
+  handleSubmitSuccess = response => {
+    const { html_url } = response.data
+    this.setState({ result: { type: 'success', url: html_url } })
+    setTimeout(() => {
+      this.setState({ result: {}, data: {} })
+      this.close()
+    }, 8000)
   }
 
   render() {
@@ -163,11 +160,11 @@ class Feedback extends React.Component {
 }
 
 Feedback.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
   fields: React.PropTypes.arrayOf(React.PropTypes.shape({
     id: React.PropTypes.string,
     label: React.PropTypes.string,
   })),
+  onClose: React.PropTypes.func.isRequired,
   isOpen: React.PropTypes.bool,
 }
 
