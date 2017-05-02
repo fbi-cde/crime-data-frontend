@@ -1,7 +1,3 @@
-applications:
-- buildpack: nodejs_buildpack
-  memory: 512M
-  domain: fr.cloud.gov
 services:
 - crime-data-api-creds
 env:

@@ -1,6 +1,10 @@
+---
 inherit: base.yml
 applications:
 - name: crime-data-explorer-staging
   host: crime-data-explorer-staging
+  buildpack: nodejs_buildpack
+  memory: 512M
+  domain: fr.cloud.gov
 env:
   CDE_API: 'https://crime-data-api.fr.cloud.gov'
