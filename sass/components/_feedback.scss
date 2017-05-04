@@ -1,16 +1,15 @@
-$feedback-height: 350px;
+$feedback-height: 450px;
 
 .feedback {
   bottom: $feedback-height * -1.5;
   max-height: $feedback-height;
   overflow: scroll;
-  right: 5%;
+  right: 0;
 
-  transition-property: bottom;
   transition-duration: 1s;
-  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-}
+  transition-property: bottom;
+  transition-timing-function: cubic-bezier(0, 1, .5, 1);
 
-.feedback.show {
-  bottom: 0;
+  @media #{$breakpoint-md} { right: 5%; }
+  &.show { bottom: 0; }
 }

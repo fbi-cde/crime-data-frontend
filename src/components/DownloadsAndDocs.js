@@ -13,9 +13,7 @@ const DownloadsAndDocs = ({ dispatch }) => (
       <h1 className={`mt4 mb5 pb1 sm-mt4 fs-28 sm-fs-40 ${border}`}>
         Downloads & Documentation
       </h1>
-
       <DownloadBulkNibrs dispatch={dispatch} />
-
       <div className="mb8">
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
           Bulk downloads
@@ -42,7 +40,6 @@ const DownloadsAndDocs = ({ dispatch }) => (
           </div>
         ))}
       </div>
-
       <div className="mb8">
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
           Documentation
@@ -94,7 +91,6 @@ const DownloadsAndDocs = ({ dispatch }) => (
           </div>
         </div>
       </div>
-
     </div>
   </section>
 )

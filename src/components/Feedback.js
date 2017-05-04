@@ -114,19 +114,19 @@ class Feedback extends React.Component {
         role="dialog"
       >
         <div
-          className={`bg-blue feedback fixed p2 pb4 white z3 ${isOpen && 'show'}`}
+          className={`fixed p2 bg-blue white md-rounded-top z3 feedback ${isOpen ? 'show' : ''}`}
         >
           <form>
-            <legend className="bold">
+            <legend className="mb2 fs-18 bold">
               Help us improve the Crime Data Explorer
             </legend>
             {fields.map((field, i) => (
               <div key={i}>
-                <label className="block" htmlFor={field.id}>
+                <label className="mb-tiny block" htmlFor={field.id}>
                   {field.label}
                 </label>
                 <textarea
-                  className="col-12 no-resize"
+                  className="mb1 col-12 no-resize fs-14 field"
                   name={field.id}
                   onChange={this.handleChange}
                   ref={el => {
@@ -138,7 +138,7 @@ class Feedback extends React.Component {
             ))}
             <div className="flex mt1">
               <button
-                className="btn btn-primary bg-blue-lighter black maxh5"
+                className="btn btn-primary bg-blue-lighter blue"
                 disabled={result.type === 'success'}
                 onClick={this.handleSubmit}
               >
@@ -147,12 +147,10 @@ class Feedback extends React.Component {
               <div className="mw20 ml1">
                 {result.type === 'success' &&
                   <span role="alert">
-                    Thank you for your feedback. It was
-                    {' '}
+                    Thank you for your feedback. It was{' '}
                     <a className="white underline" href={result.url}>
                       logged here
-                    </a>
-                    .
+                    </a>.
                   </span>}
                 {result.type === 'error' &&
                   <span role="alert">There was an error: {result.msg}.</span>}
@@ -161,15 +159,12 @@ class Feedback extends React.Component {
           </form>
           <button
             aria-label="Close feedback form"
-            className="absolute btn cursor-pointer p1 right-0 top-0"
+            className="absolute right-0 top-0 btn m1 p0"
             onClick={this.close}
           >
             ✕
           </button>
-          <button
-            className="bg-transparent border-none inline right"
-            id="feedback-trap-focus"
-          />
+          <button className="btn p0 inline right" id="feedback-trap-focus" />
         </div>
       </div>
     )

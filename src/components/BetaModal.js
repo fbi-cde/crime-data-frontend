@@ -3,37 +3,30 @@ import React from 'react'
 
 class BetaModal extends React.Component {
   componentDidMount() {
-    this.triggerElement = document.activeElement || document.body
     document.addEventListener('keydown', this.closeOnEsc)
-    this.setFocus()
+    this.triggerElement = document.activeElement || document.body
+    this.closeBtn.focus()
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.closeOnEsc)
   }
 
-  setFocus = () => {
-    this.closeBtn.focus()
-  }
-
-  restoreFocus = () => {
-    this.triggerElement.focus()
-  }
-
   close = () => {
-    const { onClose } = this.props
-    this.restoreFocus()
-    onClose()
+    this.triggerElement.focus()
+    this.props.onClose()
   }
 
-  closeOnEsc = event => {
-    if (event.keyCode === 27) {
-      this.close()
-    }
+  closeOnEsc = e => {
+    if (e.keyCode === 27) this.close()
+  }
+
+  openFeedback = () => {
+    this.close()
+    this.props.onFeedbackClick()
   }
 
   render() {
-    const { onFeedbackClick } = this.props
     const fixed = 'fixed top-0 bottom-0 left-0 right-0'
 
     return (
@@ -70,12 +63,8 @@ class BetaModal extends React.Component {
           </p>
           <button
             className="btn btn-primary my4 sm-my6 mx-auto block bg-white blue btn col-10 sm-col-7"
-            onClick={() => {
-              this.close()
-            }}
-            ref={el => {
-              this.closeBtn = el
-            }}
+            onClick={this.close}
+            ref={el => (this.closeBtn = el)}
           >
             Take me to the beta site
           </button>
@@ -84,10 +73,7 @@ class BetaModal extends React.Component {
             <br className="sm-hide md-hide lg-hide" />
             <button
               className="bg-transparent bold border-none border-bottom cursor-pointer white"
-              onClick={() => {
-                this.close()
-                onFeedbackClick()
-              }}
+              onClick={this.openFeedback}
             >
               Submit feedback
             </button>

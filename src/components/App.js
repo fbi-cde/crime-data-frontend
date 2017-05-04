@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 import BetaBanner from './BetaBanner'
 import BetaModal from './BetaModal'
+import ClearLocalStorageBtn from './ClearLocalStorageBtn'
 import Disclaimer from './Disclaimer'
 import Feedback from './Feedback'
 import Footer from './Footer'
@@ -27,25 +28,13 @@ const App = ({ appState, children, dispatch, location }) => (
     </main>
     <Glossary dispatch={dispatch} {...appState.glossary} />
     <Footer dispatch={dispatch} />
-    {!isProd &&
-      <button
-        type="button"
-        className="fixed bottom-0 left-0 m1 px-tiny py0 btn btn-primary bg-red-bright"
-        onClick={() => window.localStorage.clear()}
-      >
-        ⟲
-      </button>
-    }
-    {isProd && appState.modal.isShown &&
+    {!isProd && <ClearLocalStorageBtn />}
+    {isProd &&
+      appState.modal.isShown &&
       <BetaModal
-        onClose={() => {
-          dispatch(hideModal())
-        }}
-        onFeedbackClick={() => {
-          dispatch(showFeedback())
-        }}
-      />
-    }
+        onClose={() => dispatch(hideModal())}
+        onFeedbackClick={() => dispatch(showFeedback())}
+      />}
     <Feedback
       isOpen={appState.feedback.isOpen}
       onClose={() => dispatch(hideFeedback())}

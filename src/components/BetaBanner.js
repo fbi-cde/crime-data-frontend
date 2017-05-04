@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-
 import React from 'react'
 
 const BetaBanner = ({ onClick }) => (
@@ -16,7 +14,7 @@ const BetaBanner = ({ onClick }) => (
       </svg>
       <span className="bold">This site is in beta.</span>{' '}
       Help us make it better:{' '}
-      <button className="btn p0" onClick={onClick}>
+      <button className="btn p0 line-height-1" onClick={onClick}>
         Submit feedback
       </button>
     </div>

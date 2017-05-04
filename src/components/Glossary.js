@@ -9,14 +9,7 @@ let GlossaryPanel
 if (typeof window !== 'undefined') GlossaryPanel = require('glossary-panel')
 
 class Glossary extends React.Component {
-  constructor() {
-    super()
-    this.applyProps = ::this.applyProps
-    this.showTerm = ::this.showTerm
-    this.toggleGlossary = ::this.toggleGlossary
-
-    this.state = { error: null }
-  }
+  state = { error: null }
 
   componentDidMount() {
     this.glossaryEl = new GlossaryPanel(terms) // eslint-disable-line no-new
@@ -27,14 +20,13 @@ class Glossary extends React.Component {
     this.applyProps(nextProps)
   }
 
-  setOpen(isOpen) {
+  setOpen = isOpen => {
     if (isOpen) this.glossaryEl.show()
     else this.glossaryEl.hide()
   }
 
-  showTerm(term) {
+  showTerm = term => {
     if (!term) return
-
     this.setState({ error: null })
 
     try {
@@ -46,16 +38,13 @@ class Glossary extends React.Component {
     }
   }
 
-  applyProps(props) {
+  applyProps = props => {
     const { isOpen, term } = props
     this.setOpen(isOpen)
-    if (term) {
-      this.setState({ error: null })
-      this.showTerm(term)
-    }
+    if (term) this.showTerm(term)
   }
 
-  toggleGlossary() {
+  toggleGlossary = () => {
     const { dispatch, isOpen } = this.props
     if (isOpen) dispatch(hideGlossary())
     else dispatch(showGlossary())

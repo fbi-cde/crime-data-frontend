@@ -5,13 +5,9 @@ const isHome = loc => loc.pathname === '/'
 const isExplorer = loc => loc.pathname.includes('explorer')
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { isOpen: false }
-    this.toggleMenu = ::this.toggleMenu
-  }
+  state = { isOpen: false }
 
-  toggleMenu(e) {
+  toggleMenu = e => {
     e.preventDefault()
     this.setState({ isOpen: !this.state.isOpen })
   }
