@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import BetaBanner from './BetaBanner'
 import BetaModal from './BetaModal'
-import DevBtn from './DevBtn'
+import ClearLocalStorageBtn from './ClearLocalStorageBtn'
 import Disclaimer from './Disclaimer'
 import Feedback from './Feedback'
 import Footer from './Footer'
@@ -28,7 +28,7 @@ const App = ({ appState, children, dispatch, location }) => (
     </main>
     <Glossary dispatch={dispatch} {...appState.glossary} />
     <Footer dispatch={dispatch} />
-    {!isProd && <DevBtn />}
+    {!isProd && <ClearLocalStorageBtn />}
     {isProd &&
       appState.modal.isShown &&
       <BetaModal

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DevBtn = () => (
+const ClearLocalStorageBtn = () => (
   <button
     type="button"
     className="fixed bottom-0 left-0 m1 px-tiny py0 btn btn-primary bg-red-bright"
@@ -10,4 +10,4 @@ const DevBtn = () => (
   </button>
 )
 
-export default DevBtn
+export default ClearLocalStorageBtn
