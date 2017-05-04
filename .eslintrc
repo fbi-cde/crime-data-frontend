@@ -14,11 +14,12 @@
     "comma-dangle": 0,
     "import/extensions": 0,
     "import/no-extraneous-dependencies": 0,
-    "max-len": [1, 100],
+    "max-len": 0,
     "no-mixed-operators": 0,
     "no-underscore-dangle": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-indent": 0,
+    "react/jsx-indent-props": 0,
     "react/no-unused-prop-types": [2, {
       "skipShapeProps": true
     }],

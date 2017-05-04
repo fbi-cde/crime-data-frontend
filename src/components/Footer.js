@@ -5,37 +5,43 @@ import { showFeedback } from '../actions/feedback'
 import { showGlossary } from '../actions/glossary'
 import packageJson from '../../package.json'
 
+const links = [
+  {
+    text: 'Home',
+    href: '/',
+  },
+  {
+    text: 'Explorer',
+    href: '/explorer/united-states/violent-crime',
+  },
+  {
+    text: 'About',
+    href: '/about',
+  },
+  {
+    text: 'Downloads & Documentation',
+    href: '/downloads-and-docs',
+  },
+  {
+    text: 'Glossary',
+    onClick: showGlossary,
+  },
+  {
+    text: 'License',
+    href: 'https://github.com/18F/crime-data-frontend/blob/master/LICENSE.md',
+  },
+  {
+    text: 'Feedback',
+    onClick: showFeedback,
+  },
+]
+
 const Footer = ({ dispatch }) => {
-  const links = [
-    {
-      text: 'Home',
-      href: '/',
-    },
-    {
-      text: 'Explorer',
-      href: '/explorer/united-states/violent-crime',
-    },
-    {
-      text: 'About',
-      href: '/about',
-    },
-    {
-      text: 'Downloads & Documentation',
-      href: '/downloads-and-docs',
-    },
-    {
-      text: 'Glossary',
-      onClick: () => dispatch(showGlossary()),
-    },
-    {
-      text: 'License',
-      href: 'https://github.com/18F/crime-data-frontend/blob/master/LICENSE.md',
-    },
-    {
-      text: 'Feedback',
-      onClick: () => dispatch(showFeedback()),
-    },
-  ]
+  const clickHandler = action => e => {
+    if (!action) return null
+    e.preventDefault()
+    return dispatch(action())
+  }
 
   return (
     <footer className="py6 bg-blue white">
@@ -62,23 +68,13 @@ const Footer = ({ dispatch }) => {
             <ul className="m0 p0 fs-14 list-style-none left-bars">
               {links.map((l, i) => (
                 <li key={i}>
-                  {l.onClick
-                    ? <Link
-                        className="cursor-pointer white caps"
-                        to={'#!'}
-                        onClick={
-                          l.onClick &&
-                            (e => {
-                              e.preventDefault()
-                              l.onClick(e)
-                            })
-                        }
-                      >
-                        {l.text}
-                      </Link>
-                    : <Link className="cursor-pointer white caps" to={l.href}>
-                        {l.text}
-                      </Link>}
+                  <Link
+                    className="cursor-pointer white caps"
+                    to={l.href || '#!'}
+                    onClick={clickHandler(l.onClick)}
+                  >
+                    {l.text}
+                  </Link>
                 </li>
               ))}
             </ul>

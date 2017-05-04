@@ -1,22 +1,9 @@
 import lowerCase from 'lodash.lowercase'
-import md from 'markdown-it'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import content from '../util/content'
-
-const markdown = md()
-const defaultLinkRender =
-  markdown.renderer.rules.link_open ||
-  ((tokens, idx, options, env, self) => self.renderToken(tokens, idx, options))
-
-markdown.renderer.rules.link_open = (tokens, idx, options, env, self) => {
-  tokens[idx].attrPush(['class', 'underline'])
-  return defaultLinkRender(tokens, idx, options, env, self)
-}
-
-// adopted from examples in markdown-it docs
-// https://github.com/markdown-it/markdown-it/blob/master/docs/architecture.md#renderer
+import markdown from '../util/md'
 
 class AboutTheData extends React.Component {
   componentDidMount() {
@@ -27,15 +14,15 @@ class AboutTheData extends React.Component {
     document.removeEventListener('click', this.triggerGlossaryTerm)
   }
 
-  triggerGlossaryTerm = event => {
-    const { onTermClick } = this.props
-    const { target } = event
+  triggerGlossaryTerm = e => {
+    e.preventDefault()
+    const { target } = e
+
     if (!target.closest('.about-the-data .caveats')) return
     if (!target.href || !target.href.match(/#glossary\?term=/)) return
-    const term = lowerCase(target.href.split('term=')[1])
 
-    event.preventDefault()
-    onTermClick(term)
+    const term = lowerCase(target.href.split('term=')[1])
+    this.props.onTermClick(term)
   }
 
   render() {
