@@ -23,6 +23,7 @@
     "prettier": "prettier --single-quote --trailing-comma all --semi false --write \"{src,test}/**/*.js\""
   },
   "dependencies": {
+    "autotrack": "^2.3.2",
     "axios": "^0.15.3",
     "babel-polyfill": "^6.20.0",
     "basic-auth-connect": "^1.0.0",
