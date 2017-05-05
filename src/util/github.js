@@ -6,7 +6,7 @@ const API = 'https://api.github.com'
 
 export const createIssue = ({
   body,
-  labels = [],
+  labels = ['feedback'],
   owner,
   repo,
   title,
