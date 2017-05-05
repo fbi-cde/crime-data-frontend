@@ -52,7 +52,7 @@ const NibrsContainer = ({ crime, dispatch, nibrs, place, since, until }) => {
   if (!loading && data) {
     const filteredData = filterNibrsData(data, { since, until })
     const dataParsed = parseNibrs(filteredData)
-    totalCount = data.offenderRaceCode.reduce((a, b) => a + b.count, 0)
+    totalCount = filteredData.offenderRaceCode.reduce((a, b) => a + b.count, 0)
     content = (
       <div className="clearfix mxn1">
         {dataParsed.map((d, i) => (
