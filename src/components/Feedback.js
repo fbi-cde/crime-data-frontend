@@ -61,16 +61,16 @@ class Feedback extends React.Component {
       .catch(this.handleSubmitError)
   }
 
-  handleSubmitError = err => {
-    if (err.response && err.response.status === 404) {
+  handleSubmitError = ({ response }) => {
+    if (response && response.status === 404) {
       this.setState({
         result: {
           type: 'error',
-          msg: err.response.statusText,
+          msg: response.statusText,
         },
       })
       throw new Error(
-        `Feedback component submission error: ${err.response.statusText}`,
+        `Feedback component submission error: ${response.statusText}`,
       )
     }
   }
