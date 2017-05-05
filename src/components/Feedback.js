@@ -62,13 +62,16 @@ class Feedback extends React.Component {
   }
 
   handleSubmitError = err => {
-    if (err.status === 404) {
+    if (err.response && err.response.status === 404) {
       this.setState({
         result: {
           type: 'error',
           msg: err.response.statusText,
         },
       })
+      throw new Error(
+        `Feedback component submission error: ${err.response.statusText}`,
+      )
     }
   }
 
@@ -104,11 +107,24 @@ class Feedback extends React.Component {
             role="dialog"
           >
             <div
-              className={`fixed p2 bg-blue white md-rounded-top z3 feedback ${isOpen ? 'show' : ''}`}
+              className={`fixed p3 bg-blue-dark white md-rounded-top mw30 z3 feedback ${isOpen ? 'show' : ''}`}
             >
               <form>
-                <legend className="mb2 fs-18 bold">
-                  Help us improve the Crime Data Explorer
+                <legend className="mb2">
+                  <h1 className="fs-14 md-fs-18 bold mt0 sans-serif">
+                    Help us improve the Crime Data Explorer
+                  </h1>
+                  <p className="fs-12 italic serif">
+                    This information will be reported on Github, where it will be publically visible. You can review all reported feedback on our
+                    {' '}
+                    <a
+                      className="cursor-pointer underline white"
+                      href="https://github.com/18F/crime-data-explorer/labels/feedback"
+                    >
+                      Github page
+                    </a>
+                    .
+                  </p>
                 </legend>
                 {fields.map((field, i) => (
                   <div key={i}>
@@ -126,7 +142,7 @@ class Feedback extends React.Component {
                     />
                   </div>
                 ))}
-                <div className="flex mt1">
+                <div className="flex flex-row-reverse justify-between mt1">
                   <button
                     className="btn btn-primary bg-blue-lighter blue"
                     disabled={result.type === 'success'}
@@ -134,7 +150,7 @@ class Feedback extends React.Component {
                   >
                     Submit
                   </button>
-                  <div className="mw20 ml1">
+                  <div className="fs-14 mw20">
                     {result.type === 'success' &&
                       <span role="alert">
                         Thank you for your feedback. It was{' '}
@@ -143,7 +159,7 @@ class Feedback extends React.Component {
                         </a>.
                       </span>}
                     {result.type === 'error' &&
-                      <span role="alert">
+                      <span className="red-bright" role="alert">
                         There was an error: {result.msg}.
                       </span>}
                   </div>
@@ -151,7 +167,7 @@ class Feedback extends React.Component {
               </form>
               <button
                 aria-label="Close feedback form"
-                className="absolute right-0 top-0 btn m1 p0"
+                className="absolute fw-100 right-0 top-0 btn mr3 mt1 sm-mt2 p0"
                 onClick={this.close}
                 ref={el => {
                   this.closeButton = el
@@ -182,7 +198,7 @@ Feedback.defaultProps = {
   fields: [
     {
       id: 'improve',
-      label: 'What brought you to the site and how can we improve it?',
+      label: 'What brought you to the site and how can we improve your experience here?',
     },
     {
       id: 'general',
@@ -190,7 +206,7 @@ Feedback.defaultProps = {
     },
     {
       id: 'next',
-      label: 'How do you plan to use the information you found here?',
+      label: 'Using this data for something cool? Tell us about it!',
     },
   ],
   isOpen: false,
