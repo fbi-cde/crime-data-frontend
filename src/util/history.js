@@ -1,3 +1,4 @@
+/* eslint no-unused-vars: 0 */
 import { browserHistory } from 'react-router'
 
 import { nationalKey } from './usa'
@@ -11,7 +12,7 @@ const createNewPathname = ({ change, params }) => {
 }
 
 const createNewQuery = ({ change, oldQuery }) => {
-  const { crime, place, ...rest } = change /* eslint no-unused-vars: 0 */
+  const { crime, place, placeType, ...rest } = change
 
   return {
     ...oldQuery,

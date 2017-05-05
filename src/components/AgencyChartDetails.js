@@ -3,12 +3,12 @@ import React from 'react'
 const highlight = v => <span className="bold blue">{v}</span>
 
 const AgencyChartDetails = ({ colors, data, keys }) => {
-  const { x: year, a } = data
+  const { year, reported } = data
 
   return (
     <div className="mb3 lg-flex">
       <div className="mb1 flex-auto">
-        In {highlight(year)}, there were {highlight(a)} reported
+        In {highlight(year)}, there were {highlight(reported)} reported
         homicides in Hoover.
       </div>
       <div style={{ width: 210 }}>
