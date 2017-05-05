@@ -15,11 +15,13 @@ class AboutTheData extends React.Component {
   }
 
   triggerGlossaryTerm = e => {
-    e.preventDefault()
     const { target } = e
 
     if (!target.closest('.about-the-data .caveats')) return
     if (!target.href || !target.href.match(/#glossary\?term=/)) return
+
+    // only prevent default if the click event is a glossary term link
+    e.preventDefault()
 
     const term = lowerCase(target.href.split('term=')[1])
     this.props.onTermClick(term)
