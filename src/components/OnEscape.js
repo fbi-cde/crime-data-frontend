@@ -11,9 +11,8 @@ class OnEscape extends React.Component {
   }
 
   handleKeydown = e => {
-    if (e.keyCode === 27) {
-      this.props.handler(e)
-    }
+    if (e.keyCode !== 27) return
+    this.props.handler(e)
   }
 
   render() {

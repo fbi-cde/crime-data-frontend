@@ -7,7 +7,6 @@ import FocusTrap from './FocusTrap'
 class BetaModal extends React.Component {
   componentDidMount() {
     this.triggerElement = document.activeElement || document.body
-
     this.firstEl.focus()
   }
 
@@ -16,9 +15,14 @@ class BetaModal extends React.Component {
     this.props.onClose()
   }
 
+  handleSubmitFeedback = () => {
+    this.close()
+    this.props.onFeedbackClick()
+  }
+
   render() {
     return (
-      <OnEscape handler={() => this.close()}>
+      <OnEscape handler={this.close}>
         <FocusTrap
           setFirstFocus={() => this.firstEl.focus()}
           setLastFocus={() => this.lastEl.focus()}
@@ -65,14 +69,9 @@ class BetaModal extends React.Component {
                 Help us make it better:{' '}
                 <br className="sm-hide md-hide lg-hide" />
                 <button
-                  className="bg-transparent bold border-none border-bottom cursor-pointer white"
-                  onClick={() => {
-                    this.close()
-                    this.props.onFeedbackClick()
-                  }}
-                  ref={el => {
-                    this.lastEl = el
-                  }}
+                  className="btn p0 align-baseline"
+                  onClick={this.handleSubmitFeedback}
+                  ref={el => (this.lastEl = el)}
                 >
                   Submit feedback
                 </button>

@@ -19,7 +19,7 @@ class FocusTrap extends React.Component {
   }
 
   handleKeydown = e => {
-    if (event.shiftKey && e.keyCode === 9 && e.target === this.firstTrapEl) {
+    if (e.shiftKey && e.keyCode === 9 && e.target === this.firstTrapEl) {
       this.props.setLastFocus(e)
     }
   }
@@ -27,15 +27,9 @@ class FocusTrap extends React.Component {
   render() {
     return (
       <div>
-        <button
-          className="bg-transparent border-none inline right"
-          ref={el => (this.firstTrapEl = el)}
-        />
+        <button className="btn p0 right" ref={el => (this.firstTrapEl = el)} />
         {this.props.children}
-        <button
-          className="bg-transparent border-none inline right"
-          ref={el => (this.lastTrapEl = el)}
-        />
+        <button className="btn p0 right" ref={el => (this.lastTrapEl = el)} />
       </div>
     )
   }

@@ -15,7 +15,7 @@ class Feedback extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.isOpen) this.firstTextarea.focus()
+    this.handleFirstFocus()
   }
 
   componentDidUpdate(prevProps) {
@@ -28,8 +28,10 @@ class Feedback extends React.Component {
   }
 
   close = () => {
+    const { isOpen, onClose } = this.props
+    if (!isOpen) return
     this.triggerElement.focus()
-    this.props.onClose()
+    onClose()
   }
 
   createIssueBody = () =>
@@ -80,15 +82,11 @@ class Feedback extends React.Component {
   }
 
   handleFirstFocus = () => {
-    if (this.props.isOpen) {
-      this.firstTextarea.focus()
-    }
+    if (this.props.isOpen) this.firstTextarea.focus()
   }
 
   handleLastFocus = () => {
-    if (this.props.isOpen) {
-      this.closeButton.focus()
-    }
+    if (this.props.isOpen) this.closeButton.focus()
   }
 
   render() {
@@ -96,7 +94,7 @@ class Feedback extends React.Component {
     const { data, result } = this.state
 
     return (
-      <OnEscape handler={() => this.close()}>
+      <OnEscape handler={this.close}>
         <FocusTrap
           setFirstFocus={this.handleFirstFocus}
           setLastFocus={this.handleLastFocus}
