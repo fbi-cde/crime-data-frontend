@@ -16,7 +16,7 @@ const participationCsvLink = (place, type) => {
 
   const path = place === nationalKey
     ? 'participation/national'
-    : `geo/states/${lookupUsa(place).toUpperCase()}/participation`
+    : `participation/states/${lookupUsa(place).toUpperCase()}`
 
   return [
     {
