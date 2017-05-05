@@ -1,6 +1,22 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2017-05-05
+### Added
+- Feedback mechanism ([#705](https://github.com/18F/crime-data-frontend/issues/705))
+- Rural, suburban, and urban added as glossary terms ([#717](https://github.com/18F/crime-data-frontend/pull/717))
+- Include chart details and hover interaction to bar chart ([#718](https://github.com/18F/crime-data-frontend/pull/718))
+
+### Changed
+- Moved trend chart y axis above chart ([#692](https://github.com/18F/crime-data-frontend/issues/692))
+- Miscellaneous design fixes ([#728](https://github.com/18F/crime-data-frontend/pull/728))
+
+### Fixed
+- Properly handle Shift+Tab for <BetaModal /> ([#726](https://github.com/18F/crime-data-frontend/pull/726))
+- Track single page app URL changes as different page views ([#729](https://github.com/18F/crime-data-frontend/pull/729))
+- Only use relevant NIBRS years when calculating incident totals ([#731](https://github.com/18F/crime-data-frontend/pull/731))
+
+
 ## [2.0.0] - 2017-04-26
 ### Added
 - Draw data points as circles on trend lines based on `showMarker` prop passed to `<TrendChart />` ([#702](https://github.com/18F/crime-data-frontend/pull/702))
