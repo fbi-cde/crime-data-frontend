@@ -6,42 +6,43 @@ var path = require('path')
 var webpack = require('webpack')
 
 var nodeModules = {}
-fs.readdirSync('node_modules')
+fs
+  .readdirSync('node_modules')
   .filter(x => ['.bin'].indexOf(x) === -1)
-  .forEach(mod => { nodeModules[mod] = `commonjs ${mod}` })
+  .forEach(mod => {
+    nodeModules[mod] = `commonjs ${mod}`
+  })
 
 var config = {
   cache: false,
   entry: './src/server.js',
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'server.js'
+    filename: 'server.js',
   },
   target: 'node',
   node: {
-    __dirname: false
+    __dirname: false,
   },
   externals: nodeModules,
   module: {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel'
+        exclude: /node_modules\/(?!autotrack|dom-utils)/,
+        loader: 'babel',
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json',
       },
       {
         test: /\.ya*ml$/,
-        loaders: ['json', 'yaml']
-      }
-    ]
+        loaders: ['json', 'yaml'],
+      },
+    ],
   },
-  plugins: [
-    new webpack.IgnorePlugin(/\.(css|less)$/),
-  ]
+  plugins: [new webpack.IgnorePlugin(/\.(css|less)$/)],
 }
 
 module.exports = config

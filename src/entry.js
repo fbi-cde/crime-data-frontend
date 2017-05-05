@@ -1,3 +1,5 @@
+import 'autotrack/lib/plugins/outbound-link-tracker'
+import 'autotrack/lib/plugins/url-change-tracker'
 import 'babel-polyfill'
 import 'element-closest'
 
