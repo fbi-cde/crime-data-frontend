@@ -1,12 +1,15 @@
 import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
+import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import DownloadDataBtn from './DownloadDataBtn'
 import Loading from './Loading'
 import NoData from './NoData'
 import TrendChart from './TrendChart'
 import TrendSourceText from './TrendSourceText'
+import { generateCrimeReadme } from '../util/content'
 import mungeSummaryData from '../util/summary'
 
 const TrendContainer = ({
@@ -18,29 +21,49 @@ const TrendContainer = ({
   summaries,
   until,
 }) => {
+  let chart
   const { loading } = summaries
-  let content = null
-  if (loading) content = <Loading />
+  const download = [
+    {
+      content: generateCrimeReadme({
+        crime,
+        title: `Reported ${pluralize(crime)} in ${startCase(place)}, ${since}-${until}`,
+      }),
+      filename: 'README.md',
+    },
+  ]
+
+  if (loading) chart = <Loading />
   else {
     const data = mungeSummaryData({
-      crime: snakeCase((crime === 'rape') ? 'rape_legacy' : crime),
+      crime: snakeCase(crime === 'rape' ? 'rape_legacy' : crime),
       summaries: summaries.data,
       place,
       since,
       until,
     })
-    if (!data || data.length === 0) content = <NoData />
+    if (!data || data.length === 0) chart = <NoData />
     else {
-      content = (
-        <TrendChart
-          crime={crime}
-          data={data}
-          dispatch={dispatch}
-          keys={Object.keys(summaries.data).map(k => startCase(k))}
-          place={place}
-          since={since}
-          until={until}
-        />
+      download.push({
+        data,
+        filename: `${place}-${crime}-${since}–${until}.csv`,
+      })
+      chart = (
+        <div>
+          <TrendChart
+            crime={crime}
+            data={data}
+            dispatch={dispatch}
+            keys={Object.keys(summaries.data).map(k => startCase(k))}
+            place={place}
+            since={since}
+            until={until}
+          />
+          <DownloadDataBtn
+            data={download}
+            filename={`${place}-${crime}-${since}–${until}`}
+          />
+        </div>
       )
     }
   }
@@ -53,7 +76,7 @@ const TrendContainer = ({
           <br className="xs-hide" />
           {since}–{until}
         </h2>
-        {content}
+        {chart}
       </div>
       {!loading &&
         <TrendSourceText

@@ -4,7 +4,6 @@ import React from 'react'
 import Zip from 'jszip'
 
 import jsonToCsv from '../util/csv'
-import { slugify } from '../util/text'
 
 const triggerDataDownload = ({ content, filename, type }) => {
   if (window.navigator.msSaveBlob) {
@@ -43,7 +42,7 @@ const DownloadDataBtn = ({ data, filename, text }) => {
 
     zip.file(`${dirname}/README.md`, `# ${lowerCase(dirname)}\n`)
     data.forEach(d => {
-      const content = (d.data) ? jsonToCsv(d.data) : `${d.content}`
+      const content = d.data ? jsonToCsv(d.data) : `${d.content}`
       zip.file(`${dirname}/${d.filename}`, content)
     })
 
