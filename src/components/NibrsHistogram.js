@@ -95,7 +95,7 @@ class NibrsHistogram extends React.Component {
 }
 
 NibrsHistogram.defaultProps = {
-  margin: { top: 5, right: 10, bottom: 20, left: 5 },
+  margin: { top: 5, right: 10, bottom: 24, left: 5 },
   size: { width: 360, height: 160 },
 }
 

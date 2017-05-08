@@ -71,9 +71,8 @@ const TrendContainer = ({
   return (
     <div>
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
-        <h2 className="mt0 mb3 fs-24 sm-fs-32 sans-serif">
+        <h2 className="mt0 mb3 sm-mb5 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} rate in {startCase(place)},{' '}
-          <br className="xs-hide" />
           {since}–{until}
         </h2>
         {chart}

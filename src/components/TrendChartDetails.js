@@ -33,6 +33,9 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
   const rate = data[slug].rate
   const year = data.date.getFullYear()
 
+  const borderColor = { borderColor: '#c8d3dd' }
+  const cellStyle = { width: 68, ...borderColor }
+
   const isOnlyNational = keys.length === 1
   const term = (
     <Term dispatch={dispatch} id={mapCrimeToGlossaryTerm(crime)}>
@@ -41,49 +44,42 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
   )
 
   return (
-    <div className="mb3 lg-flex">
+    <div className="mb3 sm-mb5 lg-flex">
       <div className="flex-auto">
-        <h4 className="mt0 mb1 fs-18 sans-serif">{year}</h4>
-        <p className="mb1 lg-m0 lg-pr4 lg-mh-72p fs-14 sm-fs-16">
+        <p className="mb1 lg-m0 lg-pr5 lg-mh-72p fs-14">
           {isOnlyNational &&
             <span>
-              There were
-              {' '}
-              {highlight(formatRate(rate))}
-              {' '}
-              incidents of
-              {' '}
-              {term}
-              {' '}
+              There were{' '}
+              {highlight(formatRate(rate))}{' '}
+              incidents of {term}{' '}
               per 100,000 people.
             </span>}
           {!isOnlyNational &&
             <span>
-              {name}
-              ’s
-              {' '}
-              {term}
-              {' '}
-              rate was
-              {' '}
-              {comparison}
-              {' '}
-              that of the United States, and
-              in {highlight(year)} was {highlight(formatRate(rate))} incidents
+              {name}’s {term} rate was {comparison}{' '}
+              that of the United States, and in{' '}
+              {highlight(year)} was {highlight(formatRate(rate))} incidents
               per 100,000 people.
             </span>}
         </p>
       </div>
-      <div>
-        <table className="mb1 lg-m0 p2 md-p3 col-12 sm-col-5 bg-blue-white">
-          <thead className="fs-12 line-height-3">
-            <tr><td /><td>Rate</td><td>Total</td></tr>
+      <div className="flex-none overflow-auto">
+        <table className="mb1 lg-m0 p2 col-12 sm-col-5 bg-blue-white">
+          <thead className="fs-10 line-height-4 right-align">
+            <tr>
+              <td />
+              <td className="pr2">Rate</td>
+              <td className="pr2">Total</td>
+              <td className="pl2 border-left" style={borderColor}>
+                Population
+              </td>
+            </tr>
           </thead>
-          <tbody className="fs-14 bold">
+          <tbody className="fs-12 bold line-height-4">
             {keys.map((k, i) => (
               <tr key={i}>
                 <td
-                  className="pr2 sm-pr3 fs-12 nowrap truncate align-bottom"
+                  className="pr2 nowrap truncate align-bottom"
                   style={{ maxWidth: 125 }}
                 >
                   <span
@@ -96,20 +92,31 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
                   />
                   {k.name}
                 </td>
-                <td className="pt1 pr2 sm-pr3 line-height-4 align-bottom">
+                <td className="pt1 pr2 align-bottom right-align">
                   <span
-                    className="inline-block border-bottom border-blue-light border-w2"
-                    style={{ width: 72 }}
+                    className="inline-block border-bottom"
+                    style={cellStyle}
                   >
                     {formatRate(data[k.slug].rate)}
                   </span>
                 </td>
-                <td className="pt1 line-height-4 align-bottom">
+                <td className="pt1 pr2 align-bottom right-align">
                   <span
-                    className="inline-block border-bottom border-blue-light border-w2"
-                    style={{ width: 72 }}
+                    className="inline-block border-bottom"
+                    style={cellStyle}
                   >
                     {formatTotal(data[k.slug].count)}
+                  </span>
+                </td>
+                <td
+                  className="pt1 pl2 align-bottom right-align border-left"
+                  style={borderColor}
+                >
+                  <span
+                    className="inline-block border-bottom"
+                    style={cellStyle}
+                  >
+                    {formatTotal(data[k.slug].pop)}
                   </span>
                 </td>
               </tr>
