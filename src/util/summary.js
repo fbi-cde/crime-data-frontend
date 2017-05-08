@@ -7,6 +7,7 @@ const mungeSummaryData = ({ crime, summaries, place, since, until }) => {
       if (!since || !until) return true
       return d.year >= since && d.year <= until
     })
+    .sort((a, b) => new Date(a.year) - new Date(b.year))
     .map(year => {
       const data = { date: year.year }
       keys.forEach(key => {
