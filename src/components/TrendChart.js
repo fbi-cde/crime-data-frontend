@@ -9,7 +9,6 @@ import throttle from 'lodash.throttle'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import DownloadDataBtn from './DownloadDataBtn'
 import TrendChartDetails from './TrendChartDetails'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
@@ -59,7 +58,6 @@ class TrendChart extends React.Component {
       colors,
       data,
       dispatch,
-      place,
       showMarkers,
       since,
       size,
@@ -77,13 +75,6 @@ class TrendChart extends React.Component {
         ...keysWithSlugs.map(k => ({ [k.slug]: d[k.slug] })),
       ),
     )
-
-    const download = [
-      {
-        data,
-        filename: `${place}-${crime}-${since}–${until}`,
-      },
-    ]
 
     const gaps = []
     const dataByKey = keysWithSlugs.map(k => {
@@ -267,7 +258,6 @@ class TrendChart extends React.Component {
         <div className="my1 fs-10 sm-fs-12 italic monospace center">
           (Crime counts include FBI estimates; rates are rounded)
         </div>
-        <DownloadDataBtn data={download} />
       </div>
     )
   }

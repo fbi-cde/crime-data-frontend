@@ -1,3 +1,4 @@
+import startCase from 'lodash.startcase'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -7,6 +8,7 @@ import NibrsDonut from './NibrsDonut'
 import NibrsHistogram from './NibrsHistogram'
 import NibrsStackedBar from './NibrsStackedBar'
 import NibrsTable from './NibrsTable'
+import { generateCrimeReadme } from '../util/content'
 import { slugify } from '../util/text'
 
 const NibrsCard = ({ crime, data, place, since, title, until }) => {
@@ -32,8 +34,16 @@ const NibrsCard = ({ crime, data, place, since, title, until }) => {
 
   const download = data.map(d => ({
     data: d.data,
-    filename: `${place}-${crime}-${slugify(d.title || title)}-${since}-${until}`,
+    filename: `${place}-${crime}-${slugify(d.title || title)}-${since}-${until}.csv`,
   }))
+
+  download.push({
+    content: generateCrimeReadme({
+      crime,
+      title: `${title} of reported ${pluralize(crime)} in ${startCase(place)}, ${since}-${until}`,
+    }),
+    filename: 'README.md',
+  })
 
   return (
     <div className="p2 sm-p3 bg-white black">
