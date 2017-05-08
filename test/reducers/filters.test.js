@@ -7,7 +7,7 @@ describe('filters', () => {
   describe('initial state', () => {
     it('should return a small object with time values', () => {
       const initialState = reducer(undefined, { type: 'fake' })
-      expect(Object.keys(initialState).length).toEqual(2)
+      expect(Object.keys(initialState).length).toEqual(3)
     })
   })
 
