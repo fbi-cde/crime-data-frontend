@@ -2,6 +2,7 @@
 import { FILTER_RESET, FILTERS_UPDATE } from '../actions/constants'
 
 const initialState = {
+  crime: 'violent-crime',
   since: 2004,
   until: 2014,
 }
