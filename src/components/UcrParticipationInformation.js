@@ -16,7 +16,7 @@ const participationCsvLink = (place, type) => {
 
   const path = place === nationalKey
     ? 'participation/national'
-    : `geo/states/${lookupUsa(place).toUpperCase()}/participation`
+    : `participation/states/${lookupUsa(place).toUpperCase()}`
 
   return [
     {
@@ -79,7 +79,7 @@ const UcrParticipationInformation = ({
             {until}
             ,
             {' '}
-            {formatNumber(data.reporting_agencies)}
+            {formatNumber(data.participating_agencies)}
             {' '}
             {startCase(place)}
             {' '}
@@ -89,10 +89,10 @@ const UcrParticipationInformation = ({
             {' '}
             {formatNumber(data.total_agencies)}
             . For that year, these statistics
-            cover {Math.round(data.reporting_rate * 100)}% of the
+            cover {Math.round(data.participation_rate * 100)}% of the
             state’s agencies or about
             {' '}
-            {formatNumber(data.covered_population)}
+            {formatNumber(data.participating_population)}
             {' '}
             people.
           </p>}
