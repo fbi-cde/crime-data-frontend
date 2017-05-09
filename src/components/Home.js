@@ -18,7 +18,10 @@ const Home = ({ appState, dispatch, router }) => {
   const handleMapClick = e => {
     const id = e.target.getAttribute('id')
     if (!id) return
-    dispatch(updateFilters({ place: slugify(stateLookup(id)) }))
+
+    const placeNew = { place: slugify(stateLookup(id)) }
+    dispatch(updateFilters(placeNew))
+    dispatch(updateApp({ crime, ...placeNew }, router))
   }
 
   const handleSearchClick = () => {
