@@ -19,7 +19,7 @@ const createPromise = (res, err) => {
 const success = {
   results: [
     {
-      place: 'montana',
+      key: 'montana',
       results: ['fake'],
     },
   ],
@@ -80,11 +80,11 @@ describe('summary action', () => {
       const dispatch = sandbox.spy()
       sandbox.stub(api, 'getSummaryRequests', () => [
         createPromise({
-          place: 'montana',
+          key: 'montana',
           results: ['fake-one'],
         }),
         createPromise({
-          place: nationalKey,
+          key: nationalKey,
           results: ['fake-two'],
         }),
       ])

@@ -100,7 +100,7 @@ TrendContainer.propTypes = {
     data: PropTypes.object,
     loading: PropTypes.boolean,
   }).isRequired,
-  until: React.PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 export default TrendContainer

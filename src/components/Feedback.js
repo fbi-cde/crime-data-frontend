@@ -1,4 +1,5 @@
 import http from 'axios' // use axios to skip localStorage
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import OnEscape from './OnEscape'
@@ -184,14 +185,14 @@ class Feedback extends React.Component {
 }
 
 Feedback.propTypes = {
-  fields: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      id: React.PropTypes.string,
-      label: React.PropTypes.string,
+  fields: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      label: PropTypes.string,
     }),
   ),
-  onClose: React.PropTypes.func.isRequired,
-  isOpen: React.PropTypes.bool,
+  onClose: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool,
 }
 
 Feedback.defaultProps = {

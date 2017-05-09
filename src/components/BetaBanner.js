@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const BetaBanner = ({ onClick }) => (
@@ -22,7 +23,7 @@ const BetaBanner = ({ onClick }) => (
 )
 
 BetaBanner.propTypes = {
-  onClick: React.PropTypes.func,
+  onClick: PropTypes.func,
 }
 
 export default BetaBanner

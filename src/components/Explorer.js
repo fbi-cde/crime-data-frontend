@@ -1,11 +1,12 @@
-import startCase from 'lodash.startcase'
 import React from 'react'
 
 import AboutTheData from './AboutTheData'
 import AgencyChartContainer from './AgencyChartContainer'
+import ExplorerHeader from './ExplorerHeader'
 import NibrsContainer from './NibrsContainer'
 import NotFound from './NotFound'
 import Sidebar from './Sidebar'
+import Sparklines from './Sparklines'
 import TrendContainer from './TrendContainer'
 import UcrParticipationInformation from './UcrParticipationInformation'
 import { updateApp } from '../actions/composite'
@@ -73,11 +74,12 @@ class Explorer extends React.Component {
       return <NotFound />
     }
 
-    const { filters, nibrs, sidebar, summaries, ucr } = appState
+    const { agency, filters, nibrs, sidebar, summaries, ucr } = appState
     const { since, until } = filters
     const noNibrs = ['violent-crime', 'property-crime']
     const participation = ucrParticipation(place)
     const showNibrs = !noNibrs.includes(crime) && participation.nibrs
+    const isAgency = placeType === 'agency'
 
     return (
       <div className="site-wrapper">
@@ -106,11 +108,12 @@ class Explorer extends React.Component {
         />
         <div className="site-content">
           <div className="container-main mx-auto px2 md-py3 lg-px8">
-            <div className="items-baseline my4 border-bottom border-blue-lighter">
-              <h1 className="flex-auto mt0 mb1 fs-22 sm-fs-32">
-                {startCase(place)}, {startCase(crime)}
-              </h1>
-            </div>
+            <ExplorerHeader
+              agency={agency}
+              crime={crime}
+              place={place}
+              placeType={placeType}
+            />
             <UcrParticipationInformation
               dispatch={dispatch}
               place={place}
@@ -119,7 +122,8 @@ class Explorer extends React.Component {
               ucr={ucr}
             />
             <hr className="mt0 mb3" />
-            {placeType === 'agency'
+            {isAgency && <Sparklines place={place} summaries={summaries} />}
+            {isAgency
               ? <AgencyChartContainer
                   crime={crime}
                   place={place}

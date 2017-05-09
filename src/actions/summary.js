@@ -16,10 +16,7 @@ export const fetchSummaries = params => dispatch => {
   const requests = api.getSummaryRequests(params)
 
   return Promise.all(requests).then(data => {
-    const summaries = Object.assign(
-      ...data.map(d => ({ [d.place]: d.results })),
-    )
-
+    const summaries = Object.assign(...data.map(d => ({ [d.key]: d.results })))
     dispatch(receivedSummary(summaries))
   })
 }
