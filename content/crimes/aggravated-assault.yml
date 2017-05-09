@@ -11,6 +11,17 @@ caveats:
   - heading: Information about simple assaults
     text: Assaults that do not involve a dangerous weapon or serious injuries are reported as simple assaults under the FBI’s arrest data.
 
+  - heading: Data considerations
+    text: |
+      It's important to consider the various factors that lead to crime activity and crime reporting in a community before interpreting the data. Without these considerations the available data can be deceiving:
+      * Population size and density
+      * Economic conditions
+      * Employment rates
+      * Prosecutorial, judicial, and correctional policies
+      * Administrative and investigative emphases of law enforcement
+      * Citizens’ attitudes toward crime and policing
+      * Effective strength of the police force
+
 links:
   - url: https://ucr.fbi.gov/ucr-publications
     text: "FBI: Uniform Crime Reporting Publications"

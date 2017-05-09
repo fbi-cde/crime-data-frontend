@@ -8,9 +8,21 @@ caveats:
   - heading: Avoid rankings or comparisons
     text: Since crime is a sociological phenomenon influenced by a variety of factors, the FBI [discourages ranking locations or making comparisons](https://ucr.fbi.gov/ucr-statistics-their-proper-use) as a way of measuring law enforcement effectiveness. Some of this data may not be comparable to previous years because of differing levels of participation over time.
 
+  - heading: Data considerations
+    text: |
+      It's important to consider the various factors that lead to crime activity and crime reporting in a community before interpreting the data. Without these considerations the available data can be deceiving:
+      * Population size and density
+      * Economic conditions
+      * Employment rates
+      * Prosecutorial, judicial, and correctional policies
+      * Administrative and investigative emphases of law enforcement
+      * Citizens’ attitudes toward crime and policing
+      * Effective strength of the police force
+
   - heading: Change in rape definition
     text: |
       In 2013, the FBI started collecting rape data under a revised definition and removed “forcible” from the offense name. All reported rape incidents—whether collected under the revised definition or the legacy definition—are presented here. Since the rape definition changed, some state and local law enforcement agencies have continued to report incidents with the legacy definition, because they haven’t been able to change their records management systems to accommodate the change.
+
 
 links:
   - url: https://ucr.fbi.gov/ucr-publications
