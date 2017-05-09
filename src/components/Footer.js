@@ -12,7 +12,7 @@ const links = [
   },
   {
     text: 'Explorer',
-    href: '/explorer/united-states/violent-crime',
+    href: '/explorer/violent-crime',
   },
   {
     text: 'About',
