@@ -90,6 +90,16 @@ describe('api utility', () => {
       })
     })
 
+    it('should request */agencies/count/* if place is an agency', done => {
+      const spy = sandbox.stub(http, 'get', () => createPromise(success))
+      api.getSummary({ place: 'NJ123', placeType: 'agency' }).then(() => {
+        const url = spy.args[0].pop()
+        const pathPartial = '/agencies/count/states/offenses/NJ/NJ123'
+        expect(url.includes(pathPartial)).toEqual(true)
+        done()
+      })
+    })
+
     it('should return a data structure with the place and the results', () => {
       sandbox.stub(http, 'get', () => createPromise(success))
       api.getSummary(params).then(data => {

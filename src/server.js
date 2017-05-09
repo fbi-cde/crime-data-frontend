@@ -105,14 +105,14 @@ app.get('/*', (req, res) => {
       res.redirect(`${pathname}${search}`)
     } else if (props) {
       const store = configureStore(initState)
+      store.dispatch(updateFilters({ ...props.router.params }))
+
       const html = renderToString(
         <Provider store={store}>
           <RouterContext {...props} />
         </Provider>,
       )
 
-      const action = updateFilters({ ...props.router.params })
-      store.dispatch(action)
       res.send(renderHtml(html, store.getState()))
     }
   })

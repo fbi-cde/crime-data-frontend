@@ -51,26 +51,34 @@ const getNibrsRequests = params => {
   return slices.map(s => getNibrs({ ...s, crime, place }))
 }
 
-const getSummary = params => {
-  const { place } = params
-  const endpoint = place === nationalKey
+const getSummaryEndpoint = ({ place, placeType }) => {
+  if (placeType === 'agency') {
+    const state = place.slice(0, 2)
+    return `${API}/agencies/count/states/offenses/${state}/${place}`
+  }
+
+  return place === nationalKey
     ? `${API}/estimates/national`
     : `${API}/estimates/states/${lookupUsa(place).toUpperCase()}`
+}
 
-  return get(`${endpoint}?per_page=50`).then(response => ({
+const getSummary = params => {
+  const { place } = params
+  const endpoint = getSummaryEndpoint(params)
+
+  return get(`${endpoint}?per_page=200`).then(response => ({
     place,
     results: response.results,
   }))
 }
 
 const getSummaryRequests = params => {
-  const { place, since, until } = params
-
-  const requests = [getSummary({ place, since, until })]
+  const { place, placeType } = params
+  const requests = [getSummary({ place, placeType })]
 
   // add national summary request (unless you already did)
-  if (place !== nationalKey) {
-    requests.push(getSummary({ place: nationalKey, since, until }))
+  if (place !== nationalKey && placeType !== 'agency') {
+    requests.push(getSummary({ place: nationalKey }))
   }
 
   return requests

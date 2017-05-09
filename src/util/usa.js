@@ -66,7 +66,9 @@ const getPlaceAbbrFromName = name =>
 
 const lookup = (query, type) => {
   if (!query) return null
-  if (type === 'agency') return ['foo', 'bar'].includes(query)
+
+  // TODO: better check for proper agency ids
+  if (type === 'agency') return true
 
   if (query.length <= 3) return getPlaceNameFromAbbr(query)
   return getPlaceAbbrFromName(lowerCase(query))

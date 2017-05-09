@@ -2,6 +2,7 @@ import startCase from 'lodash.startcase'
 import React from 'react'
 
 import AboutTheData from './AboutTheData'
+import AgencyChartContainer from './AgencyChartContainer'
 import NibrsContainer from './NibrsContainer'
 import NotFound from './NotFound'
 import Sidebar from './Sidebar'
@@ -73,6 +74,7 @@ class Explorer extends React.Component {
     }
 
     const { filters, nibrs, sidebar, summaries, ucr } = appState
+    const { since, until } = filters
     const noNibrs = ['violent-crime', 'property-crime']
     const participation = ucrParticipation(place)
     const showNibrs = !noNibrs.includes(crime) && participation.nibrs
@@ -117,23 +119,31 @@ class Explorer extends React.Component {
               ucr={ucr}
             />
             <hr className="mt0 mb3" />
-            <TrendContainer
-              crime={crime}
-              dispatch={dispatch}
-              place={place}
-              placeType={placeType}
-              since={filters.since}
-              summaries={summaries}
-              until={filters.until}
-            />
+            {placeType === 'agency'
+              ? <AgencyChartContainer
+                  crime={crime}
+                  place={place}
+                  since={since}
+                  summary={summaries}
+                  until={until}
+                />
+              : <TrendContainer
+                  crime={crime}
+                  dispatch={dispatch}
+                  place={place}
+                  placeType={placeType}
+                  since={since}
+                  summaries={summaries}
+                  until={until}
+                />}
             {showNibrs &&
               <NibrsContainer
                 crime={params.crime}
                 dispatch={dispatch}
                 nibrs={nibrs}
                 place={place}
-                since={filters.since}
-                until={filters.until}
+                since={since}
+                until={until}
               />}
             <hr className="mt0 mb3" />
             <AboutTheData
