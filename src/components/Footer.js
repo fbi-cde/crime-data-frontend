@@ -57,7 +57,7 @@ const Footer = ({ dispatch }) => {
             v{packageJson.version} -{' '}
             <a
               className="white"
-              href="https://github.com/18F/crime-data-explorer/blob/master/CHANGELOG.md"
+              href="https://github.com/18F/crime-data-frontend/blob/master/CHANGELOG.md"
             >
               Changelog
             </a>
