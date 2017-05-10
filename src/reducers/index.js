@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import { combineReducers } from 'redux'
 
-import agency from './agency'
+import agencies from './agencies'
 import feedback from './feedback'
 import filters from './filters'
 import glossary from './glossary'
@@ -12,7 +12,7 @@ import summaries from './summary'
 import ucr from './ucr'
 
 export default combineReducers({
-  agency,
+  agencies,
   feedback,
   filters,
   glossary,

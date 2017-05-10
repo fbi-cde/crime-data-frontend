@@ -74,7 +74,7 @@ class Explorer extends React.Component {
       return <NotFound />
     }
 
-    const { agency, filters, nibrs, sidebar, summaries, ucr } = appState
+    const { agencies, filters, nibrs, sidebar, summaries, ucr } = appState
     const { since, until } = filters
     const noNibrs = ['violent-crime', 'property-crime']
     const participation = ucrParticipation(place)
@@ -109,7 +109,7 @@ class Explorer extends React.Component {
         <div className="site-content">
           <div className="container-main mx-auto px2 md-py3 lg-px8">
             <ExplorerHeader
-              agency={agency}
+              agency={agencies}
               crime={crime}
               place={place}
               placeType={placeType}
