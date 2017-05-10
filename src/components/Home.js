@@ -177,7 +177,7 @@ const Home = ({ appState, dispatch, router }) => {
           </p>
           <a
             className="btn btn-primary"
-            href="https://crime-data-api.fr.cloud.gov/swagger-ui/"
+            href="https://crime-data-api.fr.cloud.gov/"
           >
             See API documentation
           </a>
