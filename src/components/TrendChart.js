@@ -17,10 +17,8 @@ import { slugify } from '../util/text'
 class TrendChart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { hover: null, svgParentWidth: null }
-    this.getDimensions = throttle(::this.getDimensions, 20)
-    this.forgetValue = ::this.forgetValue
-    this.rememberValue = ::this.rememberValue
+    this.state = { hover: null, svgParentWidth: null, yearSelected: null }
+    this.getDimensions = throttle(this.getDimensions, 20)
   }
 
   componentDidMount() {
@@ -32,23 +30,27 @@ class TrendChart extends React.Component {
     window.removeEventListener('resize', this.getDimensions)
   }
 
-  getDimensions() {
+  getDimensions = () => {
     if (this.svgParent) {
       this.setState({ svgParentWidth: this.svgParent.clientWidth })
     }
   }
 
-  forgetValue() {
+  forgetValue = () => {
     this.setState({ hover: null })
   }
 
-  rememberValue(e) {
+  updateYear = year => {
+    this.setState({ yearSelected: year })
+  }
+
+  rememberValue = e => {
     // get mouse x position, relative to container
     const node = e.target
     const rect = node.getBoundingClientRect()
     const xRel = e.clientX - rect.left - node.clientLeft
 
-    this.setState({ hover: { x: xRel / rect.width } })
+    this.setState({ hover: { x: xRel / rect.width }, yearSelected: null })
   }
 
   render() {
@@ -63,7 +65,7 @@ class TrendChart extends React.Component {
       size,
       until,
     } = this.props
-    const { hover, svgParentWidth } = this.state
+    const { hover, svgParentWidth, yearSelected } = this.state
 
     const color = scaleOrdinal(colors)
     const parse = timeParse('%Y')
@@ -84,6 +86,7 @@ class TrendChart extends React.Component {
         date: d.date,
         value: d[k.slug],
       }))
+      const ends = [values[0], values[values.length - 1]]
 
       values.forEach(d => {
         if (d.value.count !== 0) {
@@ -94,7 +97,7 @@ class TrendChart extends React.Component {
         }
       })
 
-      return { id: k.slug, name: k.name, values, segments }
+      return { id: k.slug, name: k.name, ends, segments, values }
     })
 
     const gapRanges = gaps.map(year =>
@@ -103,9 +106,9 @@ class TrendChart extends React.Component {
 
     const maxValue = max(dataByKey, d => max(d.values, v => v.value.rate))
 
+    const { margin } = size
     const svgWidth = svgParentWidth || size.width
     const svgHeight = svgWidth / 2.25
-    const margin = { ...size.margin, left: maxValue > 1000 ? 48 : 36 }
     const width = svgWidth - margin.left - margin.right
     const height = svgHeight - margin.top - margin.bottom
     const xPadding = svgWidth < 500 ? 20 : 40
@@ -118,7 +121,10 @@ class TrendChart extends React.Component {
 
     const l = line().x(d => x(d.date)).y(d => y(d.value.rate))
 
-    let active = dataClean[dataClean.length - 1]
+    let active = yearSelected
+      ? dataClean.find(d => d.year === yearSelected)
+      : dataClean[dataClean.length - 1]
+
     if (hover) {
       const bisectDate = bisector(d => d.date).left
       const x0 = x.invert(hover.x * width)
@@ -132,7 +138,12 @@ class TrendChart extends React.Component {
 
     const callout = (
       <g transform={`translate(${x(active.date)}, 0)`}>
-        <line y2={height} stroke="#95aabc" strokeWidth="1" />
+        <line
+          y2={height}
+          stroke="#95aabc"
+          strokeDasharray="2,3"
+          strokeWidth="1"
+        />
         {keysWithSlugs.map((k, j) => (
           <circle
             key={j}
@@ -153,12 +164,15 @@ class TrendChart extends React.Component {
           data={active}
           dispatch={dispatch}
           keys={keysWithSlugs}
+          since={since}
+          updateYear={this.updateYear}
+          until={until}
         />
-        <div className="mb1 fs-12 bold monospace">
+        <div className="mb3 fs-10 bold monospace black">
           {startCase(crime)} rate per 100,000 people
         </div>
         {/* eslint-disable no-return-assign */}
-        <div className="col-12" ref={ref => (this.svgParent = ref)}>
+        <div className="mb3 col-12" ref={ref => (this.svgParent = ref)}>
           {gapRanges.length > 0 &&
             <div className="mb1 fs-12 serif italic">
               <span
@@ -179,6 +193,7 @@ class TrendChart extends React.Component {
                 />
               ))}
               <XAxis
+                active={active && active.date}
                 scale={x}
                 height={height}
                 tickCt={svgWidth < 500 ? 4 : 8}
@@ -206,6 +221,15 @@ class TrendChart extends React.Component {
                         ))}
                     </g>
                   ))}
+                  {d.ends.map((datum, j) => (
+                    <circle
+                      key={j}
+                      cx={x(datum.date)}
+                      cy={y(datum.value.rate)}
+                      fill={color(d.id)}
+                      r="3"
+                    />
+                  ))}
                 </g>
               ))}
               {until >= 2013 &&
@@ -213,12 +237,7 @@ class TrendChart extends React.Component {
                 <g
                   transform={`translate(${x(new Date('2013-01-01'))}, ${height})`}
                 >
-                  <line
-                    stroke="#95aabc"
-                    strokeWidth="1"
-                    strokeDasharray="2,3"
-                    y2={-height}
-                  />
+                  <line stroke="#95aabc" strokeWidth="1" y2={-height} />
                   <rect
                     className="fill-blue"
                     height="8"
@@ -255,9 +274,6 @@ class TrendChart extends React.Component {
             </g>
           </svg>
         </div>
-        <div className="my1 fs-10 sm-fs-12 italic monospace center">
-          (Crime counts include FBI estimates; rates are rounded)
-        </div>
       </div>
     )
   }
@@ -272,9 +288,9 @@ TrendChart.propTypes = {
 TrendChart.defaultProps = {
   size: {
     width: 735,
-    margin: { top: 16, right: 0, bottom: 24, left: 36 },
+    margin: { top: 16, right: 0, bottom: 24, left: 32 },
   },
-  colors: ['#ff5e50', '#52687d', '#97a7b8'],
+  colors: ['#ff5e50', '#95aabc', '#52687d'],
   showMarkers: false,
 }
 

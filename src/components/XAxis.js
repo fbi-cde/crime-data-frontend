@@ -1,6 +1,7 @@
 import React from 'react'
 
 const XAxis = ({
+  active,
   tickCt = 8,
   tickSizeOuter = 6,
   height,
@@ -26,9 +27,13 @@ const XAxis = ({
     }
 
     return (
-      <g key={i} transform={`translate(${pos}, 0)`} className="tick">
+      <g
+        key={i}
+        transform={`translate(${pos}, 0)`}
+        className={`tick ${String(v) === String(active) ? 'bold' : ''}`}
+      >
         <line stroke="#000" y2="6" />
-        <text fill="#000" x="0" y="9" dy=".71em">{format(v)}</text>
+        <text fill="#000" x="0" y="12" dy=".71em">{format(v)}</text>
       </g>
     )
   })

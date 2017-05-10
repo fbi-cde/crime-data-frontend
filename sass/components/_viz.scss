@@ -1,15 +1,16 @@
 .axis {
   fill: none;
   font-family: $font-monospace;
-  font-size: $h6;
+  font-size: 10px;
 
   line,
   path {
     stroke: $blue-light;
-    stroke-opacity: .25;
     stroke-width: 1px;
   }
 }
+
+.axis--y text { text-anchor: start; }
 
 .usa-map path {
   stroke: $white;
