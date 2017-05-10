@@ -2,7 +2,7 @@
   description: |
     See totals by state, year, and bias motivation for hate crimes across the country from 1991–2014.
   download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/hate_crime.csv'
-- title: Law Enforcement Officers Killed and Assaulted (LEOKA)
+- title: Assaults on Law Enforcement Officers
   description: |
     See totals for officers who were killed or assaulted in the line of duty from 1974–2014.
   download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/leoka.csv'
