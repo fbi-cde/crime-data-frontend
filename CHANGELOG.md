@@ -1,6 +1,24 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2017-05-10
+### Added
+- Augment Explorer page download with a readme ([#716](https://github.com/18F/crime-data-frontend/issues/716))
+- Agency data fetching and reducers ([#745](https://github.com/18F/crime-data-frontend/pull/745))
+
+### Changed
+- Default to "All violent crime" on home page ([#739](https://github.com/18F/crime-data-frontend/pull/739))
+- Clicking a state on the home page map should bring the user to that state's page with "All violent crime" selected ([#740](https://github.com/18F/crime-data-frontend/pull/740))
+
+### Fixed
+- Fix participation download link ([#736](https://github.com/18F/crime-data-frontend/pull/736))
+- Show numerical values in Explorer introduction paragraph instead of `NaN` ([#737](https://github.com/18F/crime-data-frontend/issues/737))
+- Sort trend data so the line does not double back on itself ([#738](https://github.com/18F/crime-data-frontend/pull/738))
+- Fix Explorer link in the footer ([#744](https://github.com/18F/crime-data-frontend/pull/744))
+
+### Removed
+-  Remove years in NIBRS section title ([#741](https://github.com/18F/crime-data-frontend/pull/741))
+
 ## [2.1.0] - 2017-05-05
 ### Added
 - Feedback mechanism ([#705](https://github.com/18F/crime-data-frontend/issues/705))
