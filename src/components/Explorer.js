@@ -118,11 +118,18 @@ class Explorer extends React.Component {
               dispatch={dispatch}
               place={place}
               placeType={placeType}
-              until={filters.until}
+              until={until}
               ucr={ucr}
             />
             <hr className="mt0 mb3" />
-            {isAgency && <Sparklines place={place} summaries={summaries} />}
+            {isAgency &&
+              <Sparklines
+                crime={crime}
+                place={place}
+                since={since}
+                summaries={summaries}
+                until={until}
+              />}
             {isAgency
               ? <AgencyChartContainer
                   crime={crime}
