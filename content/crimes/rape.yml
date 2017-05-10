@@ -12,6 +12,17 @@ caveats:
   - heading: Victim’s relationship to offender
     text: Until 2016, the FBI recorded all same-sex couples as acquaintances under the “Homosexual Relationship” label. This category is no longer in use. After same-sex marriage was [upheld as a constitutional right in 2015](https://www.supremecourt.gov/opinions/14pdf/14-556_3204.pdf), the FBI started collecting data about crimes against same-sex partners as “Spouse” (if married) or “Boyfriend or Girlfriend” (if not married).
 
+  - heading: Data considerations
+    text: |
+      It's important to consider the various factors that lead to crime activity and crime reporting in a community before interpreting the data. Without these considerations the available data can be deceiving:
+      * Population size and density
+      * Economic conditions
+      * Employment rates
+      * Prosecutorial, judicial, and correctional policies
+      * Administrative and investigative emphases of law enforcement
+      * Citizens’ attitudes toward crime and policing
+      * Effective strength of the police force
+
 links:
   - url: https://ucr.fbi.gov/ucr-publications
     text: "FBI: Uniform Crime Reporting Publications"

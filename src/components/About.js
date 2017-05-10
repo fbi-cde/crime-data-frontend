@@ -105,13 +105,7 @@ const About = ({ dispatch }) => (
         <div className="clearfix">
           <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-18 serif">
             <p className="mb3">
-              The data available from the FBI’s Uniform Crime Reporting program (UCR)
-              is made up of reports from police agencies across the country. Police
-              agencies submit data to the FBI in one of two formats: summary statistics
-              (SRS) or incident-based reports (NIBRS). The Crime Data Explorer makes both
-              types of data available and displays them separately. SRS data is available
-              for the years 1960 to 2014. Incident-based data began being collected much
-              more recently and is available here from 1991-2014.
+              The data available from the FBI’s Uniform Crime Reporting program (UCR) is made up of reports from police agencies across the country. Law enforcement agencies submit data to the FBI in one of two formats: summary statistics (SRS) or incident-based reports (NIBRS). The Crime Data Explorer makes both types of data available through the API and the bulk downloads. SRS data is available for the years 1960 to 2014. Incident-based data began being collected much more recently and is available here from 1991-2014.
             </p>
             <div className="bold">Summary (SRS) data</div>
             <p className="mb3">

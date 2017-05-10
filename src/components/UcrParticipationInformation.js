@@ -52,50 +52,55 @@ const UcrParticipationInformation = ({
   const ucrPlaceInfo = !ucr.loading && ucr.data[place]
   const data = ucrPlaceInfo && { ...ucrPlaceInfo.find(p => p.year === until) }
 
+  const reports = (
+    <span>
+      {hybrid && 'both '}
+      {participation.srs &&
+        <Term dispatch={dispatch} id={'summary reporting system (srs)'}>
+          summary (SRS)
+        </Term>}
+      {hybrid && ' and '}
+      {participation.nibrs &&
+        <Term
+          dispatch={dispatch}
+          id={'national incident-based reporting system (nibrs)'}
+        >
+          incident-based (NIBRS)
+        </Term>}
+    </span>
+  )
+
   return (
     <div className="mb5 clearfix">
       <div className="lg-col lg-col-8 mb2 lg-m0 p0 lg-pr4 fs-18 serif">
-        <p>
-          {startCase(place)} reports {hybrid && 'both '}
-          {participation.srs &&
-            <Term dispatch={dispatch} id={'summary reporting system (srs)'}>
-              summary (SRS)
-            </Term>}
-          {hybrid && ' and '}
-          {participation.nibrs &&
-            <Term
-              dispatch={dispatch}
-              id={'national incident-based reporting system (nibrs)'}
-            >
-              incident-based (NIBRS)
-            </Term>} data to the FBI.
-        </p>
         {ucr.loading && <Loading />}
         {!ucr.loading &&
           data.year &&
-          <p>
-            In
-            {' '}
-            {until}
-            ,
-            {' '}
-            {formatNumber(data.participating_agencies)}
-            {' '}
-            {startCase(place)}
-            {' '}
-            law
-            enforcement agencies reported data to the FBI, out of a total
-            of
-            {' '}
-            {formatNumber(data.total_agencies)}
-            . For that year, these statistics
-            cover {Math.round(data.participation_rate * 100)}% of the
-            state’s agencies or about
-            {' '}
-            {formatNumber(data.participating_population)}
-            {' '}
-            people.
-          </p>}
+          <div>
+            <p>
+              Crime rates for
+              {' '}
+              {startCase(place)}
+              {' '}
+              are derived from
+              {' '}
+              {reports} reports sent to the FBI.
+            </p>
+            <p>
+              In
+              {' '}
+              {until}
+              , the FBI estimated crime statistics for
+              {' '}
+              {place !== nationalKey ? startCase(place) : 'the nation'}
+              {' '}
+              based on data voluntarily reported by
+              {' '}
+              {formatNumber(data.participating_agencies)}
+              {' '}
+              law enforcement agencies. The charts below feature estimated data.
+            </p>
+          </div>}
       </div>
       <div className="lg-col lg-col-4">
         <h3 className="mt0 mb2 fs-18 sm-fs-22">UCR resources</h3>
