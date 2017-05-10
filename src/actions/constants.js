@@ -3,6 +3,9 @@
   by nouns will show up near each other in an alphabetized list
 */
 
+export const AGENCY_FETCHING = 'AGENCY_FETCHING'
+export const AGENCY_RECEIVED = 'AGENCY_RECEIVED'
+
 export const FEEDBACK_HIDE = 'FEEDBACK_HIDE'
 export const FEEDBACK_SHOW = 'FEEDBACK_SHOW'
 

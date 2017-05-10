@@ -14,6 +14,7 @@ const createPromise = (res, err) => {
 const params = {
   crime: 'homicide',
   place: 'california',
+  placeType: 'state',
   since: 2004,
   until: 2014,
 }
@@ -71,10 +72,10 @@ describe('api utility', () => {
     })
   })
 
-  describe('getSummary()', () => {
+  describe('fetching summary data', () => {
     it('should request /estimates/national for national', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      api.getSummary({ place: nationalKey }).then(() => {
+      api.fetchNationalEstimates({ place: nationalKey }).then(() => {
         const url = spy.args[0].pop()
         expect(url.includes('/estimates/national')).toEqual(true)
         done()
@@ -83,7 +84,7 @@ describe('api utility', () => {
 
     it('should request /estimates/states/:state if place is a state', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      api.getSummary({ place: 'california' }).then(() => {
+      api.fetchStateEstimates('california').then(() => {
         const url = spy.args[0].pop()
         expect(url.includes('/estimates/states/CA')).toEqual(true)
         done()
@@ -92,7 +93,7 @@ describe('api utility', () => {
 
     it('should request */agencies/count/* if place is an agency', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      api.getSummary({ place: 'NJ123', placeType: 'agency' }).then(() => {
+      api.fetchAgencyAggregates('NJ123', 'NJ').then(() => {
         const url = spy.args[0].pop()
         const pathPartial = '/agencies/count/states/offenses/NJ/NJ123'
         expect(url.includes(pathPartial)).toEqual(true)
@@ -100,21 +101,11 @@ describe('api utility', () => {
       })
     })
 
-    it('should return a data structure with the place and the results', () => {
+    it('should return a data structure with key and results', done => {
       sandbox.stub(http, 'get', () => createPromise(success))
-      api.getSummary(params).then(data => {
-        expect(data.place).toEqual(summaryParms.place)
+      api.fetchStateEstimates('CA').then(data => {
+        expect(data.key).toEqual('CA')
         expect(data.results).toEqual(success.results)
-        done()
-      })
-    })
-  })
-
-  describe('getSummaryRequests()', () => {
-    it('should call getSummary twice', done => {
-      const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      Promise.all(api.getSummaryRequests(params)).then(() => {
-        expect(spy.callCount).toEqual(2)
         done()
       })
     })

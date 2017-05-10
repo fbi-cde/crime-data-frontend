@@ -14,6 +14,11 @@ const dimensionEndpoints = {
   sexCode: 'sex_code',
 }
 
+const getAgency = ori =>
+  get(`${API}/agencies/${ori}`).then(response => ({
+    [ori]: response,
+  }))
+
 const getNibrs = ({ crime, dim, place, type }) => {
   const field = dimensionEndpoints[dim]
   const fieldPath = `${field}/offenses`
@@ -51,37 +56,42 @@ const getNibrsRequests = params => {
   return slices.map(s => getNibrs({ ...s, crime, place }))
 }
 
-const getSummaryEndpoint = ({ place, placeType }) => {
-  if (placeType === 'agency') {
-    const state = place.slice(0, 2)
-    return `${API}/agencies/count/states/offenses/${state}/${place}`
-  }
-
-  return place === nationalKey
-    ? `${API}/estimates/national`
-    : `${API}/estimates/states/${lookupUsa(place).toUpperCase()}`
-}
-
-const getSummary = params => {
-  const { place } = params
-  const endpoint = getSummaryEndpoint(params)
-
-  return get(`${endpoint}?per_page=200`).then(response => ({
-    place,
+const fetchResults = (key, path) =>
+  get(`${API}/${path}?per_page=200`).then(response => ({
+    key,
     results: response.results,
   }))
+
+const fetchNationalEstimates = () =>
+  fetchResults(nationalKey, 'estimates/national')
+
+const fetchStateEstimates = state => {
+  const stateFmt = state.length === 2 ? state : lookupUsa(state)
+  const path = `estimates/states/${stateFmt.toUpperCase()}`
+  return fetchResults(state, path)
 }
 
-const getSummaryRequests = params => {
-  const { place, placeType } = params
-  const requests = [getSummary({ place, placeType })]
+const fetchAgencyAggregates = (ori, state) => {
+  const path = `agencies/count/states/offenses/${state}/${ori}`
+  return fetchResults(ori, path)
+}
 
-  // add national summary request (unless you already did)
-  if (place !== nationalKey && placeType !== 'agency') {
-    requests.push(getSummary({ place: nationalKey }))
+const getSummaryRequests = ({ place, placeType }) => {
+  if (placeType === 'agency') {
+    const state = place.slice(0, 2)
+
+    return [
+      fetchAgencyAggregates(place, state),
+      fetchStateEstimates(state),
+      fetchNationalEstimates(),
+    ]
   }
 
-  return requests
+  if (placeType === 'state') {
+    return [fetchStateEstimates(place), fetchNationalEstimates()]
+  }
+
+  return [fetchNationalEstimates()]
 }
 
 const getUcrParticipation = place => {
@@ -109,9 +119,12 @@ const getUcrParticipationRequests = params => {
 }
 
 export default {
+  fetchNationalEstimates,
+  fetchStateEstimates,
+  fetchAgencyAggregates,
+  getAgency,
   getNibrs,
   getNibrsRequests,
-  getSummary,
   getSummaryRequests,
   getUcrParticipation,
   getUcrParticipationRequests,

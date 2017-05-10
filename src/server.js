@@ -40,7 +40,11 @@ const getEnvVar = name => {
 const { HTTP_BASIC_USERNAME, HTTP_BASIC_PASSWORD } = credService.credentials
 const API = process.env.CDE_API
 const apiKey = getEnvVar('API_KEY')
-const initState = { ucr: { loading: true }, summaries: { loading: true } }
+const initState = {
+  agency: { loading: true },
+  ucr: { loading: true },
+  summaries: { loading: true },
+}
 const repoOwner = getEnvVar('GITHUB_ISSUE_REPO_OWNER')
 const repoName = getEnvVar('GITHUB_ISSUE_REPO_NAME')
 const repoToken = getEnvVar('GITHUB_ISSUE_BOT_TOKEN')
