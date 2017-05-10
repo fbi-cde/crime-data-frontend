@@ -61,7 +61,7 @@ const TrendChartDetails = ({
         <p className="mb1 lg-m0 lg-pr5 lg-mh-72p fs-14">
           {isOnlyNational &&
             <span>
-              There were{' '}
+              In {highlight(year)}, there were{' '}
               {highlight(formatRate(rate))}{' '}
               incidents of {term}{' '}
               per 100,000 people.
