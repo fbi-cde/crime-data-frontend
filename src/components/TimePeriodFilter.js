@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types'
-import range from 'lodash.range'
 import React from 'react'
 
-const MIN_YEAR = 1995
-const MAX_YEAR = 2014
-const YEAR_RANGE = range(MIN_YEAR, MAX_YEAR + 1)
+import { YEAR_RANGE } from '../util/years'
 
 class TimePeriodFilter extends React.Component {
   state = { error: null }

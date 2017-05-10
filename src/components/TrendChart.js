@@ -17,10 +17,8 @@ import { slugify } from '../util/text'
 class TrendChart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { hover: null, svgParentWidth: null }
-    this.getDimensions = throttle(::this.getDimensions, 20)
-    this.forgetValue = ::this.forgetValue
-    this.rememberValue = ::this.rememberValue
+    this.state = { hover: null, svgParentWidth: null, yearSelected: null }
+    this.getDimensions = throttle(this.getDimensions, 20)
   }
 
   componentDidMount() {
@@ -32,23 +30,27 @@ class TrendChart extends React.Component {
     window.removeEventListener('resize', this.getDimensions)
   }
 
-  getDimensions() {
+  getDimensions = () => {
     if (this.svgParent) {
       this.setState({ svgParentWidth: this.svgParent.clientWidth })
     }
   }
 
-  forgetValue() {
+  forgetValue = () => {
     this.setState({ hover: null })
   }
 
-  rememberValue(e) {
+  updateYear = year => {
+    this.setState({ yearSelected: year })
+  }
+
+  rememberValue = e => {
     // get mouse x position, relative to container
     const node = e.target
     const rect = node.getBoundingClientRect()
     const xRel = e.clientX - rect.left - node.clientLeft
 
-    this.setState({ hover: { x: xRel / rect.width } })
+    this.setState({ hover: { x: xRel / rect.width }, yearSelected: null })
   }
 
   render() {
@@ -63,7 +65,7 @@ class TrendChart extends React.Component {
       size,
       until,
     } = this.props
-    const { hover, svgParentWidth } = this.state
+    const { hover, svgParentWidth, yearSelected } = this.state
 
     const color = scaleOrdinal(colors)
     const parse = timeParse('%Y')
@@ -119,7 +121,10 @@ class TrendChart extends React.Component {
 
     const l = line().x(d => x(d.date)).y(d => y(d.value.rate))
 
-    let active = dataClean[dataClean.length - 1]
+    let active = yearSelected
+      ? dataClean.find(d => d.year === yearSelected)
+      : dataClean[dataClean.length - 1]
+
     if (hover) {
       const bisectDate = bisector(d => d.date).left
       const x0 = x.invert(hover.x * width)
@@ -159,6 +164,9 @@ class TrendChart extends React.Component {
           data={active}
           dispatch={dispatch}
           keys={keysWithSlugs}
+          since={since}
+          updateYear={this.updateYear}
+          until={until}
         />
         <div className="mb3 fs-10 bold monospace black">
           {startCase(crime)} rate per 100,000 people

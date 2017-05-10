@@ -4,7 +4,6 @@
   padding-top: .25rem;
 }
 
-
 // custom select inputs (with chevron arrow)
 
 .select {
@@ -26,6 +25,13 @@
   color: $white;
 }
 
+.select-sm {
+  background-position: center right .5rem;
+  background-size: .5rem .5rem;
+  height: 1.5rem;
+  line-height: 1;
+  padding: 0 .5rem;
+}
 
 // subset of wtf-forms
 // http://wtfforms.com/

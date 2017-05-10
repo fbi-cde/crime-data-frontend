@@ -1,4 +1,5 @@
 import { format } from 'd3-format'
+import range from 'lodash.range'
 import lowerCase from 'lodash.lowercase'
 import React from 'react'
 
@@ -27,11 +28,22 @@ const getComparison = ({ place, data }) => {
       </span>
 }
 
-const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
+const TrendChartDetails = ({
+  colors,
+  crime,
+  data,
+  dispatch,
+  keys,
+  since,
+  updateYear,
+  until,
+}) => {
   const { name, slug } = keys[0]
   const comparison = getComparison({ place: slug, data })
   const rate = data[slug].rate
   const year = data.date.getFullYear()
+  const yearRange = range(since, until + 1)
+  const handleSelectChange = e => updateYear(Number(e.target.value))
 
   const borderColor = { borderColor: '#c8d3dd' }
   const cellStyle = { width: 68, ...borderColor }
@@ -56,10 +68,9 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
             </span>}
           {!isOnlyNational &&
             <span>
-              {name}’s {term} rate was {comparison}{' '}
-              that of the United States, and in{' '}
-              {highlight(year)} was {highlight(formatRate(rate))} incidents
-              per 100,000 people.
+              In {highlight(year)}, {name}’s {term} rate was{' '}
+              {highlight(formatRate(rate))} incidents per 100,000 people,
+              which was {comparison} that of the United States.
             </span>}
         </p>
       </div>
@@ -67,10 +78,23 @@ const TrendChartDetails = ({ colors, crime, data, dispatch, keys }) => {
         <table className="mb1 lg-m0 p2 col-12 sm-col-5 bg-blue-white">
           <thead className="fs-10 line-height-4 right-align">
             <tr>
-              <td />
-              <td className="pr2">Rate</td>
-              <td className="pr2">Total</td>
-              <td className="pl2 border-left" style={borderColor}>
+              <td className="left-align">
+                <label htmlFor="year-selected" className="hide">
+                  Year selected
+                </label>
+                <select
+                  className="col-12 field select select-sm select-dark fs-12"
+                  id="year-selected"
+                  style={{ width: 100 }}
+                  onChange={handleSelectChange}
+                  value={year}
+                >
+                  {yearRange.map((y, i) => <option key={i}>{y}</option>)}
+                </select>
+              </td>
+              <td className="pr2 align-middle">Rate</td>
+              <td className="pr2 align-middle">Total</td>
+              <td className="pl2 align-middle border-left" style={borderColor}>
                 Population
               </td>
             </tr>
