@@ -169,7 +169,7 @@ class TrendChart extends React.Component {
           until={until}
         />
         <div className="mb3 fs-10 bold monospace black">
-          {startCase(crime)} rate per 100,000 people
+          Rate per 100,000 people, by year
         </div>
         {/* eslint-disable no-return-assign */}
         <div className="mb3 col-12" ref={ref => (this.svgParent = ref)}>

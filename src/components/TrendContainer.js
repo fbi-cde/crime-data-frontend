@@ -10,7 +10,6 @@ import NoData from './NoData'
 import TrendChart from './TrendChart'
 import TrendSourceText from './TrendSourceText'
 import { generateCrimeReadme } from '../util/content'
-import { mapToApiOffense } from '../util/offenses'
 import mungeSummaryData from '../util/summary'
 
 const TrendContainer = ({
@@ -37,9 +36,7 @@ const TrendContainer = ({
   if (loading) chart = <Loading />
   else {
     const data = mungeSummaryData({
-      crime: snakeCase(
-        mapToApiOffense(crime === 'rape' ? 'rape_legacy' : crime),
-      ),
+      crime: snakeCase(crime === 'rape' ? 'rape_legacy' : crime),
       summaries: summaries.data,
       place,
       since,

@@ -7,7 +7,7 @@ import Term from './Term'
 import mapCrimeToGlossaryTerm from '../util/glossary'
 import { nationalKey } from '../util/usa'
 
-const formatRate = n => format(`,.${+n > 10 ? 0 : 1}f`)(n)
+const formatRate = n => format(`,.${+n > 250 ? 0 : 1}f`)(n)
 const formatTotal = format(',.0f')
 
 const highlight = v => <span className="bold blue">{v}</span>
@@ -75,7 +75,7 @@ const TrendChartDetails = ({
         </p>
       </div>
       <div className="flex-none overflow-auto">
-        <table className="mb1 lg-m0 p2 col-12 sm-col-5 bg-blue-white">
+        <table className="mb1 lg-m0 p2 col-12 sm-col-5 bg-blue-white rounded">
           <thead className="fs-10 line-height-4 right-align">
             <tr>
               <td className="left-align">

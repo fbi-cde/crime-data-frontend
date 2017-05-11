@@ -8,7 +8,7 @@ describe('glossary utility', () => {
   })
 
   it('should return a term if it exists', () => {
-    const actual = mapCrimeToGlossaryTerm('larceny-theft')
+    const actual = mapCrimeToGlossaryTerm('larceny')
     expect(actual).toEqual('larceny')
   })
 
