@@ -62,36 +62,56 @@ const fetchResults = (key, path) =>
     results: response.results,
   }))
 
-const fetchNationalEstimates = () =>
-  fetchResults(nationalKey, 'estimates/national')
-
-const fetchStateEstimates = state => {
-  const stateFmt = state.length === 2 ? state : lookupUsa(state)
-  const path = `estimates/states/${stateFmt.toUpperCase()}`
-  return fetchResults(state, path)
+const fetchArson = place => {
+  const placeFilter = place ? `&state=${lookupUsa(place).toUpperCase()}` : ''
+  const url = `${API}/counts?explorer_offense=arson&per_page=100${placeFilter}`
+  return get(url).then(({ results }) =>
+    results.map(d => ({ year: d.year, arson: d.actual })),
+  )
 }
 
-const fetchAgencyAggregates = (ori, state) => {
+const fetchAggregates = place => {
+  const estimatesApi = place
+    ? `estimates/states/${lookupUsa(place).toUpperCase()}`
+    : 'estimates/national'
+
+  const requests = [
+    fetchResults(place || nationalKey, estimatesApi),
+    fetchArson(place),
+  ]
+
+  return Promise.all(requests).then(parseAggregates)
+}
+
+const parseAggregates = ([estimates, arsons]) => ({
+  ...estimates,
+  results: estimates.results.map(datum => ({
+    ...datum,
+    arson: (arsons.find(a => a.year === datum.year) || {}).arson,
+  })),
+})
+
+const fetchAgencyAggregates = ori => {
+  const state = ori.slice(0, 2)
   const path = `agencies/count/states/offenses/${state}/${ori}`
   return fetchResults(ori, path)
 }
 
 const getSummaryRequests = ({ place, placeType }) => {
   if (placeType === 'agency') {
-    const state = place.slice(0, 2)
-
+    const stateName = lookupUsa(place.slice(0, 2))
     return [
-      fetchAgencyAggregates(place, state),
-      fetchStateEstimates(state),
-      fetchNationalEstimates(),
+      fetchAgencyAggregates(place),
+      fetchAggregates(stateName),
+      fetchAggregates(),
     ]
   }
 
   if (placeType === 'state') {
-    return [fetchStateEstimates(place), fetchNationalEstimates()]
+    return [fetchAggregates(place), fetchAggregates()]
   }
 
-  return [fetchNationalEstimates()]
+  return [fetchAggregates()]
 }
 
 const getUcrParticipation = place => {
@@ -119,8 +139,7 @@ const getUcrParticipationRequests = params => {
 }
 
 export default {
-  fetchNationalEstimates,
-  fetchStateEstimates,
+  fetchAggregates,
   fetchAgencyAggregates,
   getAgency,
   getNibrs,
