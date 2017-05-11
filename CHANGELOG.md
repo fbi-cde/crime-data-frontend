@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.4.0] - 2017-05-11
+### Added
+- "Participation" included in glossary terms ([#600](https://github.com/18F/crime-data-frontend/issues/600))
+
+### Fixed
+- Show arson trend line for states and national views ([#759](https://github.com/18F/crime-data-frontend/pull/759))
+
 ## [2.3.1] - 2017-05-11
 ### Fixed
 - Violent crime trend line ([#758](https://github.com/18F/crime-data-frontend/pull/758))
