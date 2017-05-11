@@ -228,6 +228,10 @@
     "definition": "A law enforcement agency’s unique identification number."
   },
   {
+    "term": "Participation",
+    "definition": "Law enforcement agencies participate in the UCR program by submitting data directly to the FBI or a state-level UCR contact. The participation rate is based on the number of state or local agencies that submit data for a full year."
+  },
+  {
     "term": "Peeping tom",
     "definition": "To secretly look through a window, doorway, keyhole, or other aperture for the purpose of voyeurism."
   },
