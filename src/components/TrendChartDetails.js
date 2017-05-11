@@ -7,7 +7,7 @@ import Term from './Term'
 import mapCrimeToGlossaryTerm from '../util/glossary'
 import { nationalKey } from '../util/usa'
 
-const formatRate = n => format(`,.${+n > 250 ? 0 : 1}f`)(n)
+const formatRate = n => format(`,.${+n > 500 ? 0 : 1}f`)(n)
 const formatTotal = format(',.0f')
 
 const highlight = v => <span className="bold blue">{v}</span>

@@ -63,35 +63,37 @@ const fetchResults = (key, path) =>
   }))
 
 const fetchArson = place => {
-  const placeFilter = !place ? '' : `&state=${lookupUsa(place).toUpperCase()}`
+  const placeFilter = place ? `&state=${lookupUsa(place).toUpperCase()}` : ''
   const url = `${API}/counts?explorer_offense=arson&per_page=100${placeFilter}`
   return get(url).then(({ results }) =>
-    results.map(d => ({
-      year: d.year,
-      arson: d.actual,
-    })),
+    results.map(d => ({ year: d.year, arson: d.actual })),
   )
 }
 
 const fetchAggregates = place => {
-  const estimatesApi = !place
-    ? 'estimates/national'
-    : `estimates/states/${lookupUsa(place).toUpperCase()}`
+  const estimatesApi = place
+    ? `estimates/states/${lookupUsa(place).toUpperCase()}`
+    : 'estimates/national'
 
-  return Promise.all([
+  const requests = [
     fetchResults(place || nationalKey, estimatesApi),
     fetchArson(place),
-  ]).then(([estimates, arsons]) => ({
-    ...estimates,
-    results: estimates.results.map(e => ({
-      ...e,
-      arson: (arsons.find(a => a.year === e.year) || {}).arson,
-    })),
-  }))
+  ]
+
+  return Promise.all(requests).then(parseAggregates)
 }
 
+const parseAggregates = ([estimates, arsons]) => ({
+  ...estimates,
+  results: estimates.results.map(datum => ({
+    ...datum,
+    arson: (arsons.find(a => a.year === datum.year) || {}).arson,
+  })),
+})
+
 const fetchAgencyAggregates = ori => {
-  const path = `agencies/count/states/offenses/${ori.slice(0, 2)}/${ori}`
+  const state = ori.slice(0, 2)
+  const path = `agencies/count/states/offenses/${state}/${ori}`
   return fetchResults(ori, path)
 }
 
