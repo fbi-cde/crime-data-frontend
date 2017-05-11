@@ -100,7 +100,7 @@ const Home = ({ appState, dispatch, router }) => {
                   </option>
                   <option value="arson">Arson</option>
                   <option value="burglary">Burglary</option>
-                  <option value="larceny-theft">Larceny Theft</option>
+                  <option value="larceny">Larceny Theft</option>
                   <option value="motor-vehicle-theft">
                     Motor Vehicle Theft
                   </option>

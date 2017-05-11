@@ -4,7 +4,7 @@ const offenses = {
   'aggravated-assault': 'aggravated-assault',
   arson: 'arson',
   burglary: 'burglary',
-  'larceny-theft': 'larceny',
+  larceny: 'larceny',
   'motor-vehicle-theft': 'motor-vehicle-theft',
   homicide: 'homicide',
   'property-crime': 'Property',
@@ -32,7 +32,10 @@ const propertyCrime = [
   },
   'Arson',
   'Burglary',
-  'Larceny Theft',
+  {
+    id: 'larceny',
+    text: 'Larceny Theft',
+  },
   'Motor Vehicle Theft',
 ]
 

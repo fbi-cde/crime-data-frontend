@@ -4,7 +4,7 @@ import burglaryContent from '../../content/crimes/burglary.yml'
 import cargoTheftContent from '../../content/crimes/cargo-theft.yml'
 import hateCrimeContent from '../../content/crimes/hate-crime.yml'
 import homicideContent from '../../content/crimes/homicide.yml'
-import larcenyContent from '../../content/crimes/larceny-theft.yml'
+import larcenyContent from '../../content/crimes/larceny.yml'
 import leokaContent from '../../content/crimes/leoka.yml'
 import locationContent from '../../content/locations.yml'
 import mvtContent from '../../content/crimes/motor-vehicle-theft.yml'
@@ -24,7 +24,7 @@ const content = {
     'cargo-theft': cargoTheftContent,
     'hate-crime': hateCrimeContent,
     homicide: homicideContent,
-    'larceny-theft': larcenyContent,
+    larceny: larcenyContent,
     leoka: leokaContent,
     'motor-vehicle-theft': mvtContent,
     'property-crime': propertyCrimeContent,
@@ -36,12 +36,10 @@ const content = {
 
 export const generateCrimeReadme = ({ crime, title = 'README' }) => {
   const crimeJson = content.crimes[crime]
-  const caveats = crimeJson.caveats.map(c => (
-    `### ${c.heading}\n${c.text}\n`
-  )).join('\n')
-  const links = crimeJson.links.map(l => (
-    `* [${l.text}](${l.url})`
-  )).join('\n')
+  const caveats = crimeJson.caveats
+    .map(c => `### ${c.heading}\n${c.text}\n`)
+    .join('\n')
+  const links = crimeJson.links.map(l => `* [${l.text}](${l.url})`).join('\n')
 
   return `# ${title}\n## Caveats\n${caveats}\n## Links\n${links}`
 }
