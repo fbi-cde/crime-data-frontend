@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.3.1] - 2017-05-11
+### Fixed
+- Violent crime trend line ([#758](https://github.com/18F/crime-data-frontend/pull/758))
+
+
 ## [2.3.0] - 2017-05-11
 ### Changed
 - Design of trend chart ([#742](https://github.com/18F/crime-data-frontend/pull/742))
