@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.2.1] - 2017-05-11
+### Fixed
+- Draw trend line for reported larceny theft rates ([#755](https://github.com/18F/crime-data-frontend/pull/755))
+
 ## [2.2.0] - 2017-05-10
 ### Added
 - Augment Explorer page download with a readme ([#716](https://github.com/18F/crime-data-frontend/issues/716))
