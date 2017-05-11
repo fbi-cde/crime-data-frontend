@@ -1,8 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [2.2.1] - 2017-05-11
+## [2.3.0] - 2017-05-11
+### Changed
+- Design of trend chart ([#742](https://github.com/18F/crime-data-frontend/pull/742))
+- Use a different title of assaults on law enforcement officers dataset  ([#750](https://github.com/18F/crime-data-frontend/pull/750))
+
 ### Fixed
+-  Link to API documentation no longer 404s ([#111](https://github.com/18F/crime-data-explorer/issues/111))
+- Changelog link in footer goes to frontend repo instead of explorer repo ([#749](https://github.com/18F/crime-data-frontend/pull/749))
 - Draw trend line for reported larceny theft rates ([#755](https://github.com/18F/crime-data-frontend/pull/755))
 
 ## [2.2.0] - 2017-05-10
