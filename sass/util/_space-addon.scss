@@ -67,6 +67,8 @@
 .px8 { padding-left: $space-8; padding-right: $space-8; }
 
 @media #{$breakpoint-sm} {
+  .sm-px1 { padding-left: $space-1; padding-right: $space-1; }
+
   .sm-m5 { margin: $space-5; }
   .sm-mt5 { margin-top: $space-5; }
   .sm-mr5 { margin-right: $space-5; }
