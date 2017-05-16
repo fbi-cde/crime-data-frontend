@@ -101,8 +101,6 @@ class TrendChart extends React.Component {
       return { id: k.slug, name: k.name, ends, segments, values }
     })
 
-    labels.sort((a, b) => b.value.rate - a.value.rate)
-
     const gapRanges = gaps.map(year =>
       [max([year - 1, since]), year, min([year + 1, until])].map(y => parse(y)),
     )
@@ -238,19 +236,21 @@ class TrendChart extends React.Component {
                   ))}
                 </g>
               ))}
-              {labels.map((d, i) => (
-                <text
-                  dy="0.35em"
-                  key={d.name}
-                  className="fs-10 bold xs-hide"
-                  textAnchor="start"
-                  transform={`translate(${x(d.date)}, ${y(d.value.rate)})`}
-                  x="4"
-                  y={18 * (i === 0 ? -1 : 1)}
-                >
-                  {d.name}
-                </text>
-              ))}
+              {labels
+                .sort((a, b) => b.value.rate - a.value.rate)
+                .map((d, i) => (
+                  <text
+                    dy="0.35em"
+                    key={d.name}
+                    className="fs-10 bold xs-hide"
+                    textAnchor="start"
+                    transform={`translate(${x(d.date)}, ${y(d.value.rate)})`}
+                    x="4"
+                    y={18 * (i === 0 ? -1 : 1)}
+                  >
+                    {d.name}
+                  </text>
+                ))}
               {until >= 2013 &&
                 crime === 'rape' &&
                 <g

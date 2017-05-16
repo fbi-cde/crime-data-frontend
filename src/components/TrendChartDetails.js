@@ -18,7 +18,7 @@ const getComparison = ({ place, data }) => {
   const diff = (placeRate / nationalRate - 1) * 100
 
   return Math.abs(diff) < threshold
-    ? <span>the same as</span>
+    ? <span>about the same (within {threshold}%) as</span>
     : <span>{highlight(`${diff > 0 ? 'higher' : 'lower'}`)} than</span>
 }
 
