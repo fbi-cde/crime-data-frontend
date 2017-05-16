@@ -2,9 +2,8 @@
 
 import { bisector, extent, max, min } from 'd3-array'
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
-import { line } from 'd3-shape'
+import { curveCardinal, line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
-import startCase from 'lodash.startcase'
 import throttle from 'lodash.throttle'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -78,15 +77,17 @@ class TrendChart extends React.Component {
       ),
     )
 
-    const gaps = []
+    const [gaps, labels] = [[], []]
     const dataByKey = keysWithSlugs.map(k => {
-      const segments = [[]]
       const values = dataClean.map(d => ({
         year: d.year,
         date: d.date,
         value: d[k.slug],
       }))
       const ends = [values[0], values[values.length - 1]]
+      const segments = [[]]
+
+      labels.push({ name: k.name, ...ends[1] })
 
       values.forEach(d => {
         if (d.value.count !== 0) {
@@ -111,15 +112,18 @@ class TrendChart extends React.Component {
     const svgHeight = svgWidth / 2.25
     const width = svgWidth - margin.left - margin.right
     const height = svgHeight - margin.top - margin.bottom
-    const xPadding = svgWidth < 500 ? 20 : 40
+    const xPadding = svgWidth < 500 ? 30 : 80
 
     const x = scaleTime()
       .domain(extent(dataClean, d => d.date))
-      .range([0 + xPadding, width - xPadding])
+      .range([30, width - xPadding])
 
     const y = scaleLinear().domain([0, maxValue]).range([height, 0]).nice()
 
-    const l = line().x(d => x(d.date)).y(d => y(d.value.rate))
+    const l = line()
+      .curve(curveCardinal)
+      .x(d => x(d.date))
+      .y(d => y(d.value.rate))
 
     let active = yearSelected
       ? dataClean.find(d => d.year === yearSelected)
@@ -227,11 +231,26 @@ class TrendChart extends React.Component {
                       cx={x(datum.date)}
                       cy={y(datum.value.rate)}
                       fill={color(d.id)}
-                      r="3"
+                      r="3.5"
                     />
                   ))}
                 </g>
               ))}
+              {labels
+                .sort((a, b) => b.value.rate - a.value.rate)
+                .map((d, i) => (
+                  <text
+                    dy="0.35em"
+                    key={d.name}
+                    className="fs-10 bold xs-hide"
+                    textAnchor="start"
+                    transform={`translate(${x(d.date)}, ${y(d.value.rate)})`}
+                    x="4"
+                    y={18 * (i === 0 ? -1 : 1)}
+                  >
+                    {d.name}
+                  </text>
+                ))}
               {until >= 2013 &&
                 crime === 'rape' &&
                 <g
@@ -248,16 +267,16 @@ class TrendChart extends React.Component {
                   <text
                     className="fill-blue fs-10 italic serif"
                     textAnchor="end"
-                    x="-4"
-                    y="-22"
+                    x="-12"
+                    y="-26"
                   >
                     Revised rape
                   </text>
                   <text
                     className="fill-blue fs-10 italic serif"
                     textAnchor="end"
-                    x="-4"
-                    y="-10"
+                    x="-12"
+                    y="-14"
                   >
                     definition
                   </text>

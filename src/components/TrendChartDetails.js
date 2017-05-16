@@ -7,7 +7,7 @@ import Term from './Term'
 import mapCrimeToGlossaryTerm from '../util/glossary'
 import { nationalKey } from '../util/usa'
 
-const formatRate = n => format(`,.${+n > 500 ? 0 : 1}f`)(n)
+const formatRate = format(',.1f')
 const formatTotal = format(',.0f')
 
 const highlight = v => <span className="bold blue">{v}</span>
@@ -16,16 +16,10 @@ const getComparison = ({ place, data }) => {
   const placeRate = data[place].rate
   const nationalRate = data[nationalKey].rate
   const diff = (placeRate / nationalRate - 1) * 100
-  const diffAbs = Math.abs(diff)
 
-  return diffAbs < threshold
-    ? <span>{highlight(`about the same (within ${threshold}%)`)} as</span>
-    : <span>
-        {highlight(
-          `${formatRate(diffAbs)}% ${diff > threshold ? 'higher' : 'lower'}`,
-        )}
-        {' '}than
-      </span>
+  return Math.abs(diff) < threshold
+    ? <span>about the same (within {threshold}%) as</span>
+    : <span>{highlight(`${diff > 0 ? 'higher' : 'lower'}`)} than</span>
 }
 
 const TrendChartDetails = ({
@@ -69,8 +63,8 @@ const TrendChartDetails = ({
           {!isOnlyNational &&
             <span>
               In {highlight(year)}, {name}’s {term} rate was{' '}
-              {highlight(formatRate(rate))} incidents per 100,000 people,
-              which was {comparison} that of the United States.
+              {highlight(formatRate(rate))} incidents per 100,000 people.
+              The rate for that year was {comparison} that of the United States.
             </span>}
         </p>
       </div>
