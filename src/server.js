@@ -60,8 +60,9 @@ const app = express()
 
 if (isProd) app.use(basicAuth(HTTP_BASIC_USERNAME, HTTP_BASIC_PASSWORD))
 
+const publicDirPath = path.join(__dirname, '..', 'public')
 app.use(gzipStatic(__dirname))
-app.use(gzipStatic(path.join(__dirname, '..', 'public')))
+app.use(gzipStatic(publicDirPath))
 app.use(bodyParser.json())
 
 app.get('/status', (req, res) => res.send(`OK v${packageJson.version}`))
@@ -81,6 +82,10 @@ app.get('/api/*', (req, res) => {
     .catch(e => {
       res.status(e.response.status).end()
     })
+})
+
+app.get('/docs', (req, res) => {
+  res.sendfile('/swagger/index.html', { root: publicDirPath })
 })
 
 app.post('/feedback', (req, res) => {

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crime Data API Documentation</title>
+    <link href="/swagger/vendor/css/reset.css" media="screen" rel="stylesheet"/>
+    <link href="/swagger/vendor/css/screen.css" media="screen" rel="stylesheet"/>
+    <link rel="stylesheet" href="/app.css">
+    <link rel="stylesheet" href="/swagger/crime-data-style.css">
+  </head>
+  <body>
+    <div class="site">
+      <div class="clearfix p1 fs-10 sm-fs-12 line-height-1 bg-white">
+        <img
+          class="mr-tiny align-bottom"
+          alt="US flag"
+          width="18"
+          height="12"
+          src="/img/usa-flag.png"
+        />
+        An official website of the United States government
+      </div>
+      <header class="pt3 pb2 md-p0 flex items-center bg-blue white">
+        <div class="md-flex flex-auto items-baseline px2 md-px6">
+          <div class="flex-auto">
+            <div class="inline-block">
+              <span class="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">
+                Federal Bureau of Investigation
+              </span>
+              <a href="/" class="fs-24 md-fs-32 serif line-height-1 white">
+                Crime Data Explorer
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="site-main swagger-section container mx-auto my3">
+        <form class="bg-white hide p3" id="api-key-container">
+          <div>
+            <label class="block bold mb1 serif" for="api-key">Add your API key</label>
+            <input class="border border-blue col-6 monospace" type="text" id="api-key">
+            <button class="btn btn-primary" id="api-key-btn">Update</button>
+          </div>
+          <p class="mb0 mt1">You can signup for one at <a class="underline" href="https://api.data.gov/signup/">https://api.data.gov/signup/</a>.</p>
+          <div class="hide" id="api-key-current">
+            <span class="bold">Current API key:</span>
+            <span class="monospace mr1" id="current"></span>
+          </div>
+        </form>
+
+        <div class="swagger-ui-wrap" id="swagger-ui">
+          <div class="mt3 mb8 fs-14 caps sans-serif center">
+            <img
+              class="align-middle mr1"
+              width="30"
+              height="30"
+              src="/img/loading.svg"
+              alt="loading..."
+            />
+              Loading
+          </div>
+        </div>
+      </main>
+
+      <footer class="py6 bg-blue white">
+        <div class="px2 md-px6">
+          <div class="mt1 mb4">
+            <span class="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">
+              Federal Bureau of Investigation
+            </span>
+            <a href="/" class="fs-24 md-fs-32 serif line-height-1 white">
+              Crime Data Explorer
+            </a>
+          </div>
+          <div class="clearfix mxn2">
+            <div class="md-col md-col-5 px2 mb3 md-m0">
+              <ul class="m0 p0 fs-14 list-style-none left-bars">
+                <li>
+                  <a class="cursor-pointer white caps" href="/">Home</a>
+                </li>
+                <li>
+                  <a class="cursor-pointer white caps" href="/explorer/violent-crime">Explorer</a>
+                </li>
+                <li>
+                  <a class="cursor-pointer white caps" href="/about">About</a>
+                </li>
+                <li>
+                  <a class="cursor-pointer white caps" href="/downloads-and-docs">Downloads and Documentation</a>
+                </li>
+              </ul>
+            </div>
+            <div class="md-col md-col-5 px2 mb3 md-m0 fs-14 white">
+              <div class="mb1 bold fs-18 serif blue-light-508">
+                Contact us
+              </div>
+              <div class="mb3">
+                <div class="bold">
+                  Criminal Justice Information Services (CJIS) Division
+                </div>
+                <a
+                  class="mr1 pr1 white border-white border-right"
+                  href="mailto:cjis_comm@leo.gov"
+                >
+                  cjis_comm@leo.gov
+                </a>
+                <a class="white" href="tel:3046254995">
+                  (304) 625-4995
+                </a>
+              </div>
+              <div class="bold">FBI Uniform Crime Reporting Program</div>
+              <div>
+                <span class="mr1 pr1 border-right border-white">
+                  1000 Custer Hollow Road
+                </span>
+                <span>Clarksburg, WV 26306</span>
+              </div>
+            </div>
+            <div class="md-col md-col-2 px2 fs-14">
+              <div class="mb1 bold fs-18 serif blue-light-508">Follow us</div>
+              <div class="mb2">
+                <img
+                  class="mr1 align-middle"
+                  width="20"
+                  src="/img/twitter.svg"
+                  alt="twitter"
+                />
+                <a class="white" href="https://twitter.com/fbi">@FBI</a>
+              </div>
+              <div>
+                <img
+                  class="mr1 align-middle"
+                  width="20"
+                  src="/img/github.svg"
+                  alt="github"
+                />
+                <a
+                  class="white"
+                  href="https://github.com/18F/crime-data-explorer"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="/swagger/vendor/lib/object-assign-pollyfill.js"></script>
+    <script src="/swagger/vendor/lib/jquery-1.8.0.min.js"></script>
+    <script src="/swagger/vendor/lib/jquery.slideto.min.js"></script>
+    <script src="/swagger/vendor/lib/jquery.wiggle.min.js"></script>
+    <script src="/swagger/vendor/lib/jquery.ba-bbq.min.js"></script>
+    <script src="/swagger/vendor/lib/handlebars-4.0.5.js"></script>
+    <script src="/swagger/vendor/lib/lodash.min.js"></script>
+    <script src="/swagger/vendor/lib/backbone-min.js"></script>
+    <script src="/swagger/vendor/swagger-ui.js"></script>
+    <script src="/swagger/vendor/lib/highlight.9.1.0.pack.js"></script>
+    <script src="/swagger/vendor/lib/highlight.9.1.0.pack_extended.js"></script>
+    <script src="/swagger/vendor/lib/jsoneditor.min.js"></script>
+    <script src="/swagger/vendor/lib/marked.js"></script>
+    <script src="/swagger/vendor/lib/swagger-oauth.js"></script>
+    <script>
+    ;(function() {
+  window.swaggerUi = new SwaggerUi({
+    url: '/swagger/swagger.json',
+    dom_id: 'swagger-ui',
+    operationsSorter: 'alpha',
+    docExpansion: 'list',
+    onComplete: function() {
+      showApiKeyForm()
+      $('#api-key-btn').on('click', handleApiKeyChange)
+    },
+  })
+
+  function changeApiKey(apiKey) {
+    var auth = new SwaggerClient.ApiKeyAuthorization('api_key', apiKey, 'query')
+    window.swaggerUi.api.clientAuthorizations.add('auth_name', auth)
+  }
+
+  function handleApiKeyChange(e) {
+    e.preventDefault()
+    const field = document.querySelector('#api-key')
+    const btn = document.querySelector('#api-key-btn')
+
+    changeApiKey(sanitize(field.value))
+    updateCurrentApiKeyUI(sanitize(field.value))
+
+    field.value = ''
+  }
+
+  function sanitize(str) {
+    var div = document.createElement('div')
+    div.appendChild(document.createTextNode(str))
+    return div.innerHTML
+  }
+
+  function showApiKeyForm() {
+    var container = document.querySelector('#api-key-container')
+    var target = document.querySelector('#api_info')
+    target.appendChild(container)
+    container.classList.remove('hide')
+  }
+
+  function updateCurrentApiKeyUI(newKey) {
+    var container = document.querySelector('#api-key-current')
+    container.classList.remove('hide')
+    container.querySelector('#current').innerText = newKey
+  }
+
+  window.swaggerUi.load()
+})()
+</script>
+  </body>
+</html>

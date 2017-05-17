@@ -10,6 +10,7 @@
     "build": "export NODE_ENV=production && npm run build:client && npm run build:server && unset NODE_ENV",
     "build:client": "webpack -p --progress --config webpack.client.config.js",
     "build:server": "webpack --config webpack.server.config.js",
+    "swagger": "rm -f node_modules/swagger-ui/dist/*.html && mkdir -p public/swagger/vendor && cp -r node_modules/swagger-ui/dist/* public/swagger/vendor",
     "watch": "npm run watch:server & npm run watch:client",
     "watch:server": "webpack -w --config webpack.server.config.js & nodemon build/server.js",
     "watch:client": "webpack -w --progress --config webpack.client.config.js",
@@ -65,6 +66,7 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.1.0",
     "source-map-support": "^0.4.11",
+    "swagger-ui": "^2.2.6",
     "topojson": "^2.2.0"
   },
   "devDependencies": {
