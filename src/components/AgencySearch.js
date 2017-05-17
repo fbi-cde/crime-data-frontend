@@ -4,23 +4,14 @@ import React, { Component } from 'react'
 import AgencySearchRefine from './AgencySearchRefine'
 import AgencySearchResults from './AgencySearchResults'
 
-const matches = (a, b) => a.toUpperCase().includes(b.toUpperCase())
-
-const initRefinements = {
-  agency_name: '',
-  agency_type: '',
-  city_name: '',
-  county_name: '',
-}
-
 class AgencySearch extends Component {
   state = {
     data: [],
+    keyword: '',
     search: '',
     selected: null,
     isFetching: true,
     refine: false,
-    ...initRefinements,
   }
 
   componentDidMount() {
@@ -48,33 +39,20 @@ class AgencySearch extends Component {
     this.setState({ refine: false })
   }
 
-  refineClear = () => {
-    this.setState({ ...initRefinements })
-  }
-
   refineInputHandler = e => {
     const { name, value } = e.target
     this.setState({ [name]: value })
   }
 
   removeSelection = () => {
-    this.setState({ selected: null, search: '', ...initRefinements })
+    this.setState({ selected: null, search: '', keyword: '' })
   }
 
   render() {
-    const {
-      data,
-      search,
-      selected,
-      refine,
-      agency_name,
-      agency_type,
-      city_name,
-      county_name,
-    } = this.state
+    const { data, keyword, search, selected, refine } = this.state
 
     const searchUpper = search.toUpperCase()
-    let dataFiltered = data.filter(d => {
+    const dataFiltered = data.filter(d => {
       const words = `
         ${d.agency_name} ${d.agency_type}
         ${d.city_name} ${d.county_name}
@@ -83,57 +61,48 @@ class AgencySearch extends Component {
       return words.includes(searchUpper)
     })
 
-    // TODO: refactor this grossness
-    const hasRefinement = agency_name || agency_type || city_name || county_name
-    if (hasRefinement) {
-      dataFiltered = dataFiltered.filter(
-        d =>
-          (!agency_name ||
-            (matches(d.agency_name, agency_name) ||
-              matches(d.ori, agency_name))) &&
-          matches(d.agency_type, agency_type) &&
-          matches(d.city_name, city_name) &&
-          matches(d.county_name, county_name),
-      )
-    }
-
-    const hasSearch = searchUpper.length || hasRefinement
+    const showRefinement = false
+    const hasSearch = searchUpper.length || keyword
     const showOris = hasSearch && dataFiltered.length > 0
 
     return (
       <div className="mt2">
         {selected
-          ? <div className="flex mb2">
+          ? <div className="mb2 relative">
               <input
                 type="text"
-                className="flex-auto col-12 m0 h5 field field-sm rounded-left"
-                placeholder="Search..."
-                defaultValue={selected['agency_name']}
+                className="col-12 field field-sm bg-white border-blue pr5 truncate"
+                defaultValue={selected.agency_name}
               />
               <button
-                className="btn btn-sm px2 bg-blue-white rounded-right"
-                style={{ borderLeft: 0 }}
+                className="absolute btn p0 line-height-1"
+                style={{ top: '.5rem', right: '1rem' }}
                 onClick={this.removeSelection}
               >
-                ✕
+                <img src="/img/x-navy.svg" alt="close" width="12" height="12" />
               </button>
             </div>
           : <div className="relative">
-              <div className="flex">
+              <div className="relative">
                 <input
                   type="text"
-                  className="flex-auto col-12 m0 h5 field field-sm rounded-left"
-                  placeholder="Search..."
+                  className="col-12 field field-sm bg-white border-blue rounded-none"
+                  placeholder="Search for an agency..."
                   value={search}
                   onChange={this.handleChange}
                 />
-                {!refine &&
+                {showRefinement &&
                   <button
-                    className="btn btn-sm px2 bg-blue-white rounded-right"
-                    style={{ borderLeft: 0 }}
+                    className="absolute btn p0 line-height-1"
+                    style={{ top: '.5rem', right: '1rem' }}
                     onClick={this.refineToggle}
                   >
-                    ...
+                    <img
+                      src="/img/chevron-down-navy.svg"
+                      alt="expand"
+                      width="12"
+                      height="12"
+                    />
                   </button>}
               </div>
               {showOris &&
@@ -143,14 +112,9 @@ class AgencySearch extends Component {
                 />}
               {refine &&
                 <AgencySearchRefine
-                  agency_name={agency_name}
-                  agency_type={agency_type}
-                  city_name={city_name}
-                  county_name={county_name}
-                  onClear={this.refineClear}
+                  keyword={keyword}
                   onChange={this.refineInputHandler}
                   onSubmit={this.refineSubmit}
-                  onClose={this.refineToggle}
                 />}
             </div>}
       </div>
