@@ -9,6 +9,7 @@
 .border-w2 { border-width: 2px; }
 .border-w8 { border-width: 8px; }
 
+.rounded-none { border-radius: 0; }
 .rounded-br { border-bottom-right-radius: $border-radius; }
 
 @media #{$breakpoint-md} {

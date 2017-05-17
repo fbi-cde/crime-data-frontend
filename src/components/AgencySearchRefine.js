@@ -1,75 +1,44 @@
 import React from 'react'
 
-const AgencySearchRefine = ({
-  agency_name,
-  agency_type,
-  city_name,
-  county_name,
-  onClear,
-  onChange,
-  onSubmit,
-  onClose,
-}) => (
+const agencyTypes = [
+  'City',
+  'County',
+  'Federal',
+  'State Police',
+  'University or college',
+  'Tribal',
+  'Other',
+]
+
+const AgencySearchRefine = ({ keyword, onChange, onSubmit }) => (
   <div
-    className="mtn1 p2 absolute col-12 border-box bg-white border rounded"
-    style={{ minHeight: 280 }}
+    className="p2 absolute col-12 border-box bg-white border"
+    style={{ marginTop: -1, minHeight: 280 }}
   >
-    <button
-      className="absolute top-0 right-0 btn p-tiny h6 line-height-1"
-      onClick={onClose}
-    >
-      ✕
-    </button>
-    <label className="mb05 h5 bold block">Agency name / ORI number</label>
-    <input
-      className="mb2 col-12 field"
-      type="text"
-      name="agency_name"
-      value={agency_name}
-      onChange={onChange}
-    />
-
-    <label className="mb05 h5 bold block">Agency type</label>
-    <input
-      className="mb2 col-12 field"
-      type="text"
-      name="agency_type"
-      value={agency_type}
-      onChange={onChange}
-    />
-
-    <label className="mb05 h5 bold block">City name</label>
-    <input
-      className="mb2 col-12 field"
-      type="text"
-      name="city_name"
-      value={city_name}
-      onChange={onChange}
-    />
-
-    <label className="mb05 h5 bold block">County name</label>
-    <input
-      className="mb2 col-12 field"
-      type="text"
-      name="county_name"
-      value={county_name}
-      onChange={onChange}
-    />
-
-    <div className="mt1 clearfix">
-      <div className="left">
-        <button
-          className="btn px0 py-tiny line-height-1 navy h5 regular underline"
-          onClick={onClear}
-        >
-          Clear
-        </button>
-      </div>
-      <div className="right">
-        <button className="btn btn-sm btn-primary bg-navy" onClick={onSubmit}>
-          Search
-        </button>
-      </div>
+    <div>
+      <label className="mb-tiny fs-18 bold block">Keyword</label>
+      <input
+        className="mb2 col-12 field field-sm bg-white border-blue"
+        type="text"
+        name="keyword"
+        value={keyword}
+        onChange={onChange}
+      />
+    </div>
+    <div>
+      <label className="mb-tiny fs-18 bold block">Agency type</label>
+      {agencyTypes.map((d, i) => (
+        <label key={i} className="block control checkbox">
+          <input type="checkbox" value={d} />
+          <span className="indicator" />
+          <span className="fs-12">{d}</span>
+        </label>
+      ))}
+    </div>
+    <div className="mt1">
+      <button className="btn btn-sm btn-primary bg-navy" onClick={onSubmit}>
+        View results
+      </button>
     </div>
   </div>
 )
