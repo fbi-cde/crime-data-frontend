@@ -7,10 +7,10 @@
   },
   "scripts": {
     "start": "node build/server.js",
+    "postinstall": "npm run swagger",
     "build": "export NODE_ENV=production && npm run build:client && npm run build:server && unset NODE_ENV",
     "build:client": "webpack -p --progress --config webpack.client.config.js",
     "build:server": "webpack --config webpack.server.config.js",
-    "swagger": "rm -f node_modules/swagger-ui/dist/*.html && mkdir -p public/swagger/vendor && cp -r node_modules/swagger-ui/dist/* public/swagger/vendor",
     "watch": "npm run watch:server & npm run watch:client",
     "watch:server": "webpack -w --config webpack.server.config.js & nodemon build/server.js",
     "watch:client": "webpack -w --progress --config webpack.client.config.js",
@@ -21,7 +21,8 @@
     "test:debug": "node --debug-brk jest -i --env=jsdom",
     "test:watch": "jest --env=jsdom --watch",
     "coverage": "npm test -- --coverage",
-    "prettier": "prettier --single-quote --trailing-comma all --semi false --write \"{src,test}/**/*.js\""
+    "prettier": "prettier --single-quote --trailing-comma all --semi false --write \"{src,test}/**/*.js\"",
+    "swagger": "rm -f node_modules/swagger-ui/dist/*.html && mkdir -p public/swagger/vendor && cp -r node_modules/swagger-ui/dist/* public/swagger/vendor"
   },
   "dependencies": {
     "autotrack": "^2.3.2",

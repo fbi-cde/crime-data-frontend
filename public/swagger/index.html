@@ -171,6 +171,7 @@
     onComplete: function() {
       showApiKeyForm()
       $('#api-key-btn').on('click', handleApiKeyChange)
+      restructureEndpointHeadings()
     },
   })
 
@@ -181,13 +182,36 @@
 
   function handleApiKeyChange(e) {
     e.preventDefault()
-    const field = document.querySelector('#api-key')
-    const btn = document.querySelector('#api-key-btn')
+    var $field = $('#api-key')
+    var $btn = $('#api-key-btn')
 
-    changeApiKey(sanitize(field.value))
-    updateCurrentApiKeyUI(sanitize(field.value))
+    changeApiKey($field.val())
+    updateCurrentApiKeyUI($field.val())
 
-    field.value = ''
+    $field.val('')
+  }
+
+  function restructureEndpointHeadings() {
+    $('.resource > .heading').each(function(i, heading) {
+      var $heading = $(heading)
+      var $h2 = $heading.children('h2')
+      var $options = $heading.children('.options')
+
+      var $flex = $('<div class="flex flex-justify"></div>')
+      var split = $h2.text().split(' : ')
+      var $p = $('<p class="mb0"></p>')
+
+      if (split.length === 1) return
+
+      $h2.text(split[0])
+      $p.text(split[1])
+
+      $flex.append($h2)
+      $flex.append($options)
+
+      $heading.append($flex)
+      $heading.append($p)
+    })
   }
 
   function sanitize(str) {
@@ -197,16 +221,17 @@
   }
 
   function showApiKeyForm() {
-    var container = document.querySelector('#api-key-container')
-    var target = document.querySelector('#api_info')
-    target.appendChild(container)
-    container.classList.remove('hide')
+    var $container = $('#api-key-container')
+    var $target = $('#api_info')
+    $target.append($container)
+    $container.removeClass('hide')
   }
 
   function updateCurrentApiKeyUI(newKey) {
-    var container = document.querySelector('#api-key-current')
-    container.classList.remove('hide')
-    container.querySelector('#current').innerText = newKey
+    var cleaned = sanitize(newKey)
+    var $container = $('#api-key-current')
+    $container.removeClass('hide')
+    $container.children('#current').text(cleaned)
   }
 
   window.swaggerUi.load()

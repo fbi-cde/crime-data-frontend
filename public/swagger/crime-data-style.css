@@ -3,6 +3,14 @@
 .site .swagger-ui-wrap .wrapper { width: auto; }
 .site .swagger-ui-wrap .info_title { font-family: serif; }
 .site .swagger-ui-wrap .info p { color: inherit; font-size: 1rem; }
+.site .swagger-ui-wrap .resource {
+  background-color: white !important;
+  margin-top: 1.3rem !important;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.site .swagger-ui-wrap li.resource:last-child { border-bottom: 1px solid #dddddd !important; }
+.site .swagger-ui-wrap .resource .heading h2 { margin-top: 0; }
 .site .swagger-ui-wrap .opblock-tag {
   display: block;
   margin: 0;
@@ -40,4 +48,9 @@
   height: auto;
   vertical-align: middle;
   -webkit-appearance: none;
+}
+
+
+.flex-justify {
+  justify-content: space-between;
 }
