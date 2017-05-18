@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Loading from './Loading'
+import PlaceThumbnail from './PlaceThumbnail'
 import Term from './Term'
 import content from '../util/content'
 import ucrParticipation from '../util/ucr'
@@ -72,45 +73,35 @@ const UcrParticipationInformation = ({
 
   return (
     <div className="mb5 clearfix">
-      <div className="lg-col lg-col-8 mb2 lg-m0 p0 lg-pr4 fs-18 serif">
+      <div className="lg-col lg-col-8 mb2 lg-m0 p0 lg-pr6 fs-18">
         {ucr.loading && <Loading />}
         {!ucr.loading &&
           data.year &&
           <div>
-            <p>
-              Crime rates for
-              {' '}
-              {startCase(place)}
-              {' '}
-              are derived from
-              {' '}
-              {reports} reports sent to the FBI.
+            <p className="serif">
+              Crime rates for {startCase(place)}{' '}
+              are derived from {reports} reports sent to the FBI.
             </p>
-            <p>
-              In
-              {' '}
-              {until}
-              , the FBI estimated crime statistics for
-              {' '}
-              {place !== nationalKey ? startCase(place) : 'the nation'}
-              {' '}
-              based on data voluntarily reported by
-              {' '}
-              {formatNumber(data.participating_agencies)}
-              {' '}
-              law enforcement agencies. The charts below feature estimated data.
+            <p className="serif">
+              In {until}, the FBI estimated crime statistics for{' '}
+              {place !== nationalKey ? startCase(place) : 'the nation'}{' '}
+              based on data voluntarily reported by{' '}
+              {formatNumber(data.participating_agencies)}{' '}
+              law enforcement agencies. The charts below
+              feature estimated data.
             </p>
+            <h3 className="mt4 mb1 fs-18">UCR resources</h3>
+            <ul className="m0 p0 fs-14 left-bars">
+              {links.map((l, i) => (
+                <li className="mb1" key={i}>
+                  <a href={l.url}>{l.text}</a>
+                </li>
+              ))}
+            </ul>
           </div>}
       </div>
-      <div className="lg-col lg-col-4">
-        <h3 className="mt0 mb2 fs-18 sm-fs-22">UCR resources</h3>
-        <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
-          {links.map((l, i) => (
-            <li className="mb1" key={i}>
-              <a href={l.url}>{l.text}</a>
-            </li>
-          ))}
-        </ul>
+      <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">
+        <PlaceThumbnail selected={startCase(place)} />
       </div>
     </div>
   )

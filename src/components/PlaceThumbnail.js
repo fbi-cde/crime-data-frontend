@@ -4,12 +4,12 @@ import React from 'react'
 import { feature, mesh } from 'topojson'
 
 const Container = ({ children }) => (
-  <div className="my4 center">
+  <div className="center bg-white border border-blue">
     <div className="aspect-ratio aspect-ratio--4x3">{children}</div>
   </div>
 )
 
-class StateThumbnail extends React.Component {
+class PlaceThumbnail extends React.Component {
   constructor(props) {
     super(props)
     this.state = { usa: null }
@@ -82,4 +82,4 @@ class StateThumbnail extends React.Component {
   }
 }
 
-export default StateThumbnail
+export default PlaceThumbnail

@@ -70,6 +70,14 @@ const fetchArson = place => {
   )
 }
 
+const parseAggregates = ([estimates, arsons]) => ({
+  ...estimates,
+  results: estimates.results.map(datum => ({
+    ...datum,
+    arson: (arsons.find(a => a.year === datum.year) || {}).arson,
+  })),
+})
+
 const fetchAggregates = place => {
   const estimatesApi = place
     ? `estimates/states/${lookupUsa(place).toUpperCase()}`
@@ -82,14 +90,6 @@ const fetchAggregates = place => {
 
   return Promise.all(requests).then(parseAggregates)
 }
-
-const parseAggregates = ([estimates, arsons]) => ({
-  ...estimates,
-  results: estimates.results.map(datum => ({
-    ...datum,
-    arson: (arsons.find(a => a.year === datum.year) || {}).arson,
-  })),
-})
 
 const fetchAgencyAggregates = ori => {
   const state = ori.slice(0, 2)
