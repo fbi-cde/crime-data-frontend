@@ -66,7 +66,9 @@ class Explorer extends React.Component {
 
     const { agencies, filters, summaries } = appState
     const noNibrs = ['violent-crime', 'property-crime']
-    const participation = ucrParticipation(place)
+    const participation = ucrParticipation(
+      placeType === 'agency' ? 'ohio' : place,
+    )
     const showNibrs = !noNibrs.includes(crime) && participation.nibrs
     const isAgency = placeType === 'agency'
 

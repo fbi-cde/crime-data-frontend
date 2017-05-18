@@ -15,7 +15,11 @@ const fetchData = () => (dispatch, getState) => {
   const { filters } = getState()
   const { placeType } = filters
 
-  if (placeType === 'agency') dispatch(fetchAgency(filters))
+  if (placeType === 'agency') {
+    dispatch(fetchAgency(filters))
+    dispatch(fetchNibrs({ ...filters, placeType: 'state', place: 'ohio' }))
+  }
+
   if (shouldFetchUcr(filters)) dispatch(fetchUcrParticipation(filters))
   if (shouldFetchSummaries(filters)) dispatch(fetchSummaries(filters))
   if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))

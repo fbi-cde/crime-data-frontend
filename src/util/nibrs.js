@@ -77,6 +77,20 @@ export const reshape = (data, key) => {
 export const rename = (data, lookup) =>
   data.map(d => ({ key: lookup[d.key], count: d.count }))
 
+export const binAge = data => {
+  const cts = {}
+  data.forEach(d => {
+    const binNum = Math.floor(+d.key / 10) * 10
+    const [binStart, binEnd] = [binNum, binNum + 9]
+    const binKey = `${binStart}-${binEnd}`
+
+    if (!cts[binKey]) cts[binKey] = { binStart, binEnd, count: d.count }
+    else cts[binKey].count += d.count
+  })
+
+  return Object.keys(cts).map(key => ({ key, ...cts[key] }))
+}
+
 // nibrs cards
 
 const offenderDemo = data => {
@@ -92,7 +106,7 @@ const offenderDemo = data => {
         keys: Object.values(sexCodes),
       },
       {
-        data: reshape(offenderAgeNum, 'age_num'),
+        data: binAge(reshape(offenderAgeNum, 'age_num')),
         noun: 'offender',
         title: 'Age of offender',
         type: 'histogram',
@@ -122,7 +136,7 @@ const victimDemo = data => {
         keys: Object.values(sexCodes),
       },
       {
-        data: reshape(victimAgeNum, 'age_num'),
+        data: binAge(reshape(victimAgeNum, 'age_num')),
         noun: 'victim',
         title: 'Age of victim',
         type: 'histogram',

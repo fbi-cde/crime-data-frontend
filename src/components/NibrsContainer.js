@@ -35,7 +35,7 @@ const filterNibrsData = (data, { since, until }) => {
   return filtered
 }
 
-const NibrsContainer = ({ crime, nibrs, place, since, until }) => {
+const NibrsContainer = ({ crime, nibrs, place, placeType, since, until }) => {
   const { data, error, loading } = nibrs
 
   const nibrsTerm = (
@@ -43,11 +43,7 @@ const NibrsContainer = ({ crime, nibrs, place, since, until }) => {
       incident-based (NIBRS)
     </Term>
   )
-  const unestimatedTerm = (
-    <Term id="unestimated data" dispatch={dispatch}>
-      unestimated
-    </Term>
-  )
+  const unestimatedTerm = <Term id="unestimated data">unestimated</Term>
 
   const nibrsFirstYear = initialNibrsYear({ place, since })
 
@@ -66,6 +62,7 @@ const NibrsContainer = ({ crime, nibrs, place, since, until }) => {
             <NibrsCard
               crime={crime}
               place={place}
+              placeType={placeType}
               since={nibrsFirstYear}
               until={until}
               {...d}
@@ -147,17 +144,11 @@ NibrsContainer.propTypes = {
     loading: PropTypes.boolean,
   }).isRequired,
   place: PropTypes.string.isRequired,
+  placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = state => {
-  const { filters, nibrs } = state
-  return {
-    ...filters,
-    nibrs,
-  }
-}
-const mapDispatchToProps = dispatch => ({ dispatch })
+const mapStateToProps = ({ filters, nibrs }) => ({ ...filters, nibrs })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NibrsContainer)
+export default connect(mapStateToProps)(NibrsContainer)

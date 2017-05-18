@@ -28,10 +28,9 @@ class NibrsHistogram extends React.Component {
     const width = size.width - margin.left - margin.right
     const xPadding = 20
 
-    const dataFiltered = data.filter(d => +d.key % 10 === 0)
-    const bins = dataFiltered.map(d => ({
-      x0: +d.key,
-      x1: +d.key + 10,
+    const bins = data.map(d => ({
+      x0: +d.binStart,
+      x1: +d.binEnd + 1,
       ct: +d.count,
     }))
 
