@@ -4,7 +4,7 @@ import React from 'react'
 import Sparkline from './Sparkline'
 import { slugify } from '../util/text'
 
-const SparklineContainer = ({ crime, data, place, since, until }) => {
+const SparklineContainer = ({ crime, data, place, since, until, yMax }) => {
   const isNational = place === 'US'
   const exploreUrl = isNational
     ? `/explorer/${crime}`
@@ -20,7 +20,7 @@ const SparklineContainer = ({ crime, data, place, since, until }) => {
         </a>
       </div>
       <div className="flex-auto center">
-        <Sparkline data={data} />
+        <Sparkline data={data} yMax={yMax} />
       </div>
     </div>
   )

@@ -1,3 +1,4 @@
+import { max } from 'd3-array'
 import snakeCase from 'lodash.snakecase'
 import React from 'react'
 
@@ -18,7 +19,9 @@ const SparklineSection = ({ crime, place, since, summaries, until }) => {
 
   const state = lookupUsa(place.slice(0, 2))
   const stateData = data[slugify(state)].filter(filterYears).map(computeRate)
-  const NationalData = data[nationalKey].filter(filterYears).map(computeRate)
+  const nationalData = data[nationalKey].filter(filterYears).map(computeRate)
+
+  const yMax = max(stateData.concat(nationalData), d => d.rate)
 
   return (
     <div className="mb4">
@@ -31,15 +34,17 @@ const SparklineSection = ({ crime, place, since, summaries, until }) => {
             place={state}
             since={since}
             until={until}
+            yMax={yMax}
           />
         </div>
         <div className="sm-col sm-col-6 mb1 px1">
           <SparklineContainer
             crime={crime}
-            data={NationalData}
+            data={nationalData}
             place="US"
             since={since}
             until={until}
+            yMax={yMax}
           />
         </div>
       </div>
