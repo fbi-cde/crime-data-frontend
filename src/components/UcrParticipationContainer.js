@@ -8,6 +8,7 @@ import Loading from './Loading'
 import PlaceThumbnail from './PlaceThumbnail'
 import Term from './Term'
 import content from '../util/content'
+import { oriToState } from '../util/ori'
 import ucrParticipation from '../util/ucr'
 import lookupUsa, { nationalKey } from '../util/usa'
 
@@ -47,6 +48,7 @@ const UcrParticipationContainer = ({ place, placeType, until, ucr }) => {
   const hybrid = participation.srs && participation.nibrs
   const ucrPlaceInfo = !ucr.loading && ucr.data[place]
   const data = ucrPlaceInfo && { ...ucrPlaceInfo.find(p => p.year === until) }
+  const usState = placeType === 'agency' ? oriToState(place) : place
 
   const reports = (
     <span>
@@ -92,7 +94,7 @@ const UcrParticipationContainer = ({ place, placeType, until, ucr }) => {
           </div>}
       </div>
       <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">
-        <PlaceThumbnail selected={startCase(place)} />
+        <PlaceThumbnail selected={startCase(usState)} />
       </div>
     </div>
   )

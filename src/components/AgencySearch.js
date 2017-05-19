@@ -49,6 +49,7 @@ class AgencySearch extends Component {
   }
 
   render() {
+    const { ori, state } = this.props
     const { data, keyword, search, selected, refine } = this.state
 
     const searchUpper = search.toUpperCase()
