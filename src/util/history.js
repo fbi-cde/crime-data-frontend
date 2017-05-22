@@ -6,9 +6,10 @@ import { nationalKey } from './usa'
 const createNewPathname = ({ change, params }) => {
   const crime = change.crime || params.crime
   const place = change.place || params.place || nationalKey
+  const placeType = change.placeType || params.placeType
 
   if (place === nationalKey) return `/explorer/${crime}`
-  return `/explorer/state/${place}/${crime}`
+  return `/explorer/${placeType}/${place}/${crime}`
 }
 
 const createNewQuery = ({ change, oldQuery }) => {
