@@ -14,7 +14,7 @@ export const fetchAgency = params => dispatch => {
   dispatch(fetchingAgency())
 
   return api.getAgency(params.place).then(data => {
-    dispatch(receivedAgency(data))
+    const agency = data[params.place]
+    dispatch(receivedAgency(agency))
   })
 }
-
