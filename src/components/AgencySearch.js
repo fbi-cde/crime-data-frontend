@@ -1,25 +1,9 @@
-import axios from 'axios'
 import React, { Component } from 'react'
 
-import AgencySearchRefine from './AgencySearchRefine'
 import AgencySearchResults from './AgencySearchResults'
 
 class AgencySearch extends Component {
-  state = {
-    data: [],
-    keyword: '',
-    search: '',
-    selected: null,
-    isFetching: true,
-    refine: false,
-  }
-
-  componentDidMount() {
-    axios
-      .get('/data/agencies.json')
-      .then(response => response.data)
-      .then(data => this.setState({ data, isFetching: false }))
-  }
+  state = { search: '', displaySelection: true }
 
   handleChange = e => {
     this.setState({ search: e.target.value })
@@ -27,48 +11,40 @@ class AgencySearch extends Component {
 
   handleClick = datum => e => {
     e.preventDefault()
-    this.setState({ selected: datum })
-  }
-
-  refineToggle = e => {
-    e.preventDefault()
-    this.setState(prevState => ({ refine: !prevState.refine }))
-  }
-
-  refineSubmit = () => {
-    this.setState({ refine: false })
-  }
-
-  refineInputHandler = e => {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
+    this.setState({ displaySelection: true })
+    this.props.onChange({
+      place: datum.ori,
+      placeType: 'agency',
+    })
   }
 
   removeSelection = () => {
-    this.setState({ selected: null, search: '', keyword: '' })
+    this.setState({ displaySelection: false, search: '' })
   }
 
   render() {
-    const { ori, state } = this.props
-    const { data, keyword, search, selected, refine } = this.state
+    const { agencies, ori, state } = this.props
+    const { displaySelection, search } = this.state
+
+    const data = Object.keys(agencies[state]).map(agencyOri => {
+      const agency = agencies[state][agencyOri]
+      return { ori: agencyOri, ...agency }
+    })
+    const selected = data.find(d => d.ori === ori)
 
     const searchUpper = search.toUpperCase()
-    const dataFiltered = data.filter(d => {
-      const words = `
-        ${d.agency_name} ${d.agency_type}
-        ${d.city_name} ${d.county_name}
-      `.toUpperCase()
+    const dataFiltered = searchUpper === ''
+      ? data
+      : data.filter(d => {
+          const words = `${d.ori} ${d.agency_name}`.toUpperCase()
+          return words.includes(searchUpper)
+        })
 
-      return words.includes(searchUpper)
-    })
-
-    const showRefinement = false
-    const hasSearch = searchUpper.length || keyword
-    const showOris = hasSearch && dataFiltered.length > 0
+    const showOris = !!search.length && dataFiltered.length > 0
 
     return (
       <div className="mt2">
-        {selected
+        {selected && displaySelection
           ? <div className="mb2 relative">
               <input
                 type="text"
@@ -92,30 +68,13 @@ class AgencySearch extends Component {
                   value={search}
                   onChange={this.handleChange}
                 />
-                {showRefinement &&
-                  <button
-                    className="absolute btn p0 line-height-1"
-                    style={{ top: '.5rem', right: '1rem' }}
-                    onClick={this.refineToggle}
-                  >
-                    <img
-                      src="/img/chevron-down-navy.svg"
-                      alt="expand"
-                      width="12"
-                      height="12"
-                    />
-                  </button>}
               </div>
               {showOris &&
                 <AgencySearchResults
-                  data={dataFiltered}
+                  data={dataFiltered.sort(
+                    (a, b) => a.agency_name > b.agency_name,
+                  )}
                   onClick={this.handleClick}
-                />}
-              {refine &&
-                <AgencySearchRefine
-                  keyword={keyword}
-                  onChange={this.refineInputHandler}
-                  onSubmit={this.refineSubmit}
                 />}
             </div>}
       </div>

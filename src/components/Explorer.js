@@ -100,6 +100,7 @@ class Explorer extends React.Component {
           </div>
         </div>
         <Sidebar
+          agencies={agencies}
           dispatch={dispatch}
           filters={filters}
           isOpen={sidebar.isOpen}
@@ -109,7 +110,7 @@ class Explorer extends React.Component {
         <div className="site-content">
           <div className="container-main mx-auto px2 md-py3 lg-px8">
             <ExplorerHeader
-              agency={agencies}
+              agencies={agencies}
               crime={crime}
               place={place}
               placeType={placeType}

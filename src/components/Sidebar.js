@@ -7,7 +7,7 @@ import LocationFilter from './LocationFilter'
 import TimePeriodFilter from './TimePeriodFilter'
 import { hideSidebar } from '../actions/sidebar'
 
-const Sidebar = ({ dispatch, filters, isOpen, onChange }) => {
+const Sidebar = ({ agencies, dispatch, filters, isOpen, onChange }) => {
   const { crime, place, placeType } = filters
   const hide = () => dispatch(hideSidebar())
 
@@ -31,6 +31,7 @@ const Sidebar = ({ dispatch, filters, isOpen, onChange }) => {
       </div>
       <div className="p6 sm-p3 md-p4">
         <LocationFilter
+          agencies={agencies}
           onChange={onChange}
           place={place}
           placeType={placeType}

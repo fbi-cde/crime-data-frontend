@@ -4,10 +4,9 @@ import React from 'react'
 import AgencySearch from './AgencySearch'
 import LocationSelect from './LocationSelect'
 import { oriToState } from '../util/ori'
-import { slugify } from '../util/text'
-import lookupUsa, { nationalKey } from '../util/usa'
+import { nationalKey } from '../util/usa'
 
-const LocationFilter = ({ onChange, place, placeType }) => {
+const LocationFilter = ({ agencies, onChange, place, placeType }) => {
   const isNational = place === nationalKey
   const isAgency = placeType === 'agency'
   const selected = isAgency ? oriToState(place) : place
@@ -18,7 +17,12 @@ const LocationFilter = ({ onChange, place, placeType }) => {
       <LocationSelect onChange={onChange} selected={startCase(selected)} />
       {selected &&
         !isNational &&
-        <AgencySearch state={selected} ori={isAgency && place} />}
+        <AgencySearch
+          agencies={agencies.data}
+          onChange={onChange}
+          ori={isAgency && place}
+          state={selected}
+        />}
     </div>
   )
 }
