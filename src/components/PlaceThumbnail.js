@@ -4,7 +4,7 @@ import React from 'react'
 import { feature, mesh } from 'topojson'
 
 const Container = ({ children }) => (
-  <div className="center bg-white border border-blue">
+  <div className="center bg-white rounded">
     <div className="aspect-ratio aspect-ratio--4x3">{children}</div>
   </div>
 )
@@ -63,8 +63,8 @@ class PlaceThumbnail extends React.Component {
                 d={path(d)}
                 fill={
                   d.properties.name === selected || !active
-                    ? '#95aabc'
-                    : '#eff4f9'
+                    ? '#94aabd'
+                    : '#dfe6ed'
                 }
               />
             ))}
