@@ -31,6 +31,7 @@ const SidebarContainer = ({ dispatch, filters, isOpen, onChange }) => {
       </div>
       <div className="p6 sm-p3 md-p4">
         <LocationFilter
+          agencies={agencies}
           onChange={onChange}
           place={place}
           placeType={placeType}

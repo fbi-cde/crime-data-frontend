@@ -1,12 +1,13 @@
 import startCase from 'lodash.startcase'
 import React from 'react'
 
-const getTitle = ({ agency, crime, place, placeType }) => {
-  const info = agency[place]
+import { getAgency } from '../util/ori'
 
+const getTitle = ({ agencies, crime, place, placeType }) => {
   if (placeType !== 'agency') return `${startCase(place)} | ${startCase(crime)}`
-  if (agency.loading || !info) return 'Agency loading...'
-  return `${info.agency_name} Police Department | ${startCase(crime)}`
+
+  const info = getAgency(agencies, place)
+  return `${info.agency_name} | ${startCase(crime)}`
 }
 
 const ExplorerHeader = params => (
