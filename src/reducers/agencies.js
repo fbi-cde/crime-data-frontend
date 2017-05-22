@@ -1,4 +1,5 @@
 import initialData from '../../data/agencies-by-state.json'
+import { oriToState } from '../util/ori'
 import { slugify } from '../util/text'
 import lookupUsa from '../util/usa'
 
@@ -20,7 +21,20 @@ const agencies = Object.keys(initialData)
   )
 const initialState = {
   loading: false,
-  ...agencies,
+  data: {
+    ...agencies,
+  },
+}
+
+const updateData = ({ agency, data }) => {
+  const agencyUsState = oriToState(agency.ori)
+  return {
+    ...data,
+    [agencyUsState]: {
+      ...data[agencyUsState],
+      [agency.ori]: agency,
+    },
+  }
 }
 
 export default (state = initialState, action) => {
@@ -33,7 +47,7 @@ export default (state = initialState, action) => {
     case AGENCY_RECEIVED:
       return {
         ...state,
-        ...action.agency,
+        data: updateData({ agency: action.agency, data: state.data }),
         loading: false,
       }
     default:
