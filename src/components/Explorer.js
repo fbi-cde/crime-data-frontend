@@ -6,7 +6,7 @@ import ExplorerHeader from './ExplorerHeader'
 import NibrsContainer from './NibrsContainer'
 import NotFound from './NotFound'
 import Sidebar from './Sidebar'
-import Sparklines from './Sparklines'
+import SparklineSection from './SparklineSection'
 import TrendContainer from './TrendContainer'
 import UcrParticipationInformation from './UcrParticipationInformation'
 import { updateApp } from '../actions/composite'
@@ -118,11 +118,18 @@ class Explorer extends React.Component {
               dispatch={dispatch}
               place={place}
               placeType={placeType}
-              until={filters.until}
+              until={until}
               ucr={ucr}
             />
             <hr className="mt0 mb3" />
-            {isAgency && <Sparklines place={place} summaries={summaries} />}
+            {isAgency &&
+              <SparklineSection
+                crime={crime}
+                place={place}
+                since={since}
+                summaries={summaries}
+                until={until}
+              />}
             {isAgency
               ? <AgencyChartContainer
                   crime={crime}

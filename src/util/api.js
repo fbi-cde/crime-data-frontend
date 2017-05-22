@@ -2,6 +2,7 @@ import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
 import { mapToApiOffense } from './offenses'
+import { slugify } from './text'
 import lookupUsa, { nationalKey } from './usa'
 
 const API = '/api'
@@ -99,7 +100,7 @@ const fetchAgencyAggregates = ori => {
 
 const getSummaryRequests = ({ place, placeType }) => {
   if (placeType === 'agency') {
-    const stateName = lookupUsa(place.slice(0, 2))
+    const stateName = slugify(lookupUsa(place.slice(0, 2)))
     return [
       fetchAgencyAggregates(place),
       fetchAggregates(stateName),
