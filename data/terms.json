@@ -108,6 +108,10 @@
     "definition": "The unlawful misappropriation by an offender to their own use or purpose of money, property, or some other thing of value entrusted to their care, custody, or control."
   },
   {
+    "term": "Estimated data",
+    "definition": "The FBI calculates estimates for participating agencies that do not provide 12 months of complete data. For agencies supplying three to 11 months of data, the national UCR Program estimates for the missing data by following a standard estimation process using the data provided by the agency. If an agency has supplied less than three months of data, the FBI computes estimates by using the known crime figures of similar areas within a state and assigning the same proportion of crime volumes to nonreporting agencies. The estimation process considers the following: population size covered by the agency; type of jurisdiction, e.g., police department versus sheriff’s office; and geographic location."
+  },
+  {
     "term": "Extortion and blackmail",
     "definition": "To unlawfully obtain money, property, or any other thing of value, either tangible or intangible, through the use or threat of force, misuse of authority, threat of criminal prosecution, threat of destruction of reputation or social standing, or through other coercive means."
   },
