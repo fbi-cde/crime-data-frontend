@@ -3,21 +3,23 @@
 import { shallow } from 'enzyme'
 import React from 'react'
 
-import NibrsTable from '../../src/components/NibrsTable'
+import NibrsTableWithBars from '../../src/components/NibrsTableWithBars'
 
-describe('NibrsTable', () => {
+describe('NibrsTableWithBars', () => {
   const data = n => [...Array(n)].map((_, i) => ({ key: i, count: 10 }))
 
-  it('NibrsTable has row for each data entry', () => {
+  it('has row for each data entry', () => {
     const entries = 3
-    const table = shallow(<NibrsTable data={data(entries)} />)
+    const table = shallow(<NibrsTableWithBars data={data(entries)} />)
 
     expect(table.find('tbody tr').length).toEqual(entries)
   })
 
-  it('NibrsTable collapses entries above rowLim into 1 row', () => {
+  it('collapses entries above rowLim into 1 row', () => {
     const [entries, rowLim] = [15, 5]
-    const table = shallow(<NibrsTable data={data(entries)} rowLim={rowLim} />)
+    const table = shallow(
+      <NibrsTableWithBars data={data(entries)} rowLim={rowLim} />,
+    )
     const otherCell = table.find('tbody tr td').last()
 
     expect(table.find('tbody tr').length).toEqual(rowLim + 1)

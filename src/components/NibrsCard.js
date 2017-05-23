@@ -8,12 +8,16 @@ import NibrsDonut from './NibrsDonut'
 import NibrsHistogram from './NibrsHistogram'
 import NibrsStackedBar from './NibrsStackedBar'
 import NibrsTable from './NibrsTable'
+import NibrsTableWithBars from './NibrsTableWithBars'
 import { generateCrimeReadme } from '../util/content'
 import { slugify } from '../util/text'
 
-const NibrsCard = ({ crime, data, place, since, title, until }) => {
+const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
   const charts = data.map((d, i) => {
     const props = { key: i, ...d }
+
+    if (placeType === 'agency') return <NibrsTable {...props} />
+
     switch (d.type) {
       case 'donut':
         return <NibrsDonut {...props} />
@@ -22,7 +26,7 @@ const NibrsCard = ({ crime, data, place, since, title, until }) => {
       case 'stacked':
         return <NibrsStackedBar {...props} />
       case 'table':
-        return <NibrsTable {...props} />
+        return <NibrsTableWithBars {...props} />
       default:
         return <p key={i}>{d.type} not supported!</p>
     }

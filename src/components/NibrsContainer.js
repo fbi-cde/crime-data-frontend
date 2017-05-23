@@ -8,14 +8,16 @@ import ErrorCard from './ErrorCard'
 import Loading from './Loading'
 import NibrsCard from './NibrsCard'
 import parseNibrs from '../util/nibrs'
+import { oriToState } from '../util/ori'
 import Term from './Term'
 import ucrParticipation from '../util/ucr'
 
 const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')
 
-const initialNibrsYear = ({ place, since }) => {
-  const participation = ucrParticipation(place)
+const initialNibrsYear = ({ place, placeType, since }) => {
+  const placeNorm = placeType === 'agency' ? oriToState(place) : place
+  const participation = ucrParticipation(placeNorm)
   const initYear = participation && participation.nibrs['initial-year']
 
   if (initYear && initYear > since) return initYear
@@ -24,6 +26,7 @@ const initialNibrsYear = ({ place, since }) => {
 
 const filterNibrsData = (data, { since, until }) => {
   if (!data) return false
+
   const filtered = {}
   Object.keys(data).forEach(key => {
     filtered[key] = data[key].filter(d => {
@@ -35,21 +38,15 @@ const filterNibrsData = (data, { since, until }) => {
   return filtered
 }
 
-const NibrsContainer = ({ crime, nibrs, place, since, until }) => {
+const NibrsContainer = ({ crime, nibrs, place, placeType, since, until }) => {
   const { data, error, loading } = nibrs
 
+  const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
   const nibrsTerm = (
     <Term id="national incident-based reporting system (NIBRS)">
       incident-based (NIBRS)
     </Term>
   )
-  const unestimatedTerm = (
-    <Term id="unestimated data" dispatch={dispatch}>
-      unestimated
-    </Term>
-  )
-
-  const nibrsFirstYear = initialNibrsYear({ place, since })
 
   let [totalCount, content] = [0, <Loading />]
   if (!loading && data) {
@@ -66,6 +63,7 @@ const NibrsContainer = ({ crime, nibrs, place, since, until }) => {
             <NibrsCard
               crime={crime}
               place={place}
+              placeType={placeType}
               since={nibrsFirstYear}
               until={until}
               {...d}
@@ -93,27 +91,11 @@ const NibrsContainer = ({ crime, nibrs, place, since, until }) => {
           data &&
           <p className="m0">
             There were {formatNumber(totalCount)} individual {crime} incidents
-            reported to the FBI in {startCase(place)}
-            {' '}
-            between
-            {' '}
-            {nibrsFirstYear}
-            {' '}
-            and
-            {' '}
-            {until}
-            {' '}
-            by agencies reporting
-            {' '}
-            {nibrsTerm}
-            {' '}
-            data. The charts below feature
-            {' '}
-            {unestimatedTerm}
-            {' '}
-            data.
-            Learn more about the
-            {' '}
+            reported to the FBI in {startCase(place)}{' '}
+            between {nibrsFirstYear} and {until} by agencies reporting{' '}
+            {nibrsTerm} data. The charts below feature{' '}
+            <Term id="unestimated data">unestimated</Term>{' '}
+            data. Learn more about the{' '}
             <a className="underline" href={fbiLink}>FBI’s data collections</a>.
           </p>}
       </div>
@@ -121,19 +103,8 @@ const NibrsContainer = ({ crime, nibrs, place, since, until }) => {
       {!loading &&
         <div className="center italic fs-12 mb8">
           <p>
-            Source: Reported
-            {' '}
-            {nibrsTerm}
-            {' '}
-            data from
-            {' '}
-            {startCase(place)}
-            ,
-            {' '}
-            {nibrsFirstYear}
-            –
-            {until}
-            .
+            Source: Reported {nibrsTerm} data from {startCase(place)},{' '}
+            {nibrsFirstYear}–{until}.
           </p>
         </div>}
     </div>
@@ -147,17 +118,11 @@ NibrsContainer.propTypes = {
     loading: PropTypes.boolean,
   }).isRequired,
   place: PropTypes.string.isRequired,
+  placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = state => {
-  const { filters, nibrs } = state
-  return {
-    ...filters,
-    nibrs,
-  }
-}
-const mapDispatchToProps = dispatch => ({ dispatch })
+const mapStateToProps = ({ filters, nibrs }) => ({ ...filters, nibrs })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NibrsContainer)
+export default connect(mapStateToProps)(NibrsContainer)

@@ -42,14 +42,16 @@ const locationLinks = (place, type) => {
   return links.filter(l => l.text)
 }
 
-const UcrParticipationContainer = ({ place, placeType, until, ucr }) => {
+const UcrParticipationContainer = ({ crime, place, placeType, until, ucr }) => {
   const csvLinks = participationCsvLink(place, placeType)
   const links = locationLinks(place, placeType).concat(csvLinks)
   const participation = ucrParticipation(place)
   const hybrid = participation.srs && participation.nibrs
   const ucrPlaceInfo = !ucr.loading && ucr.data[place]
   const data = ucrPlaceInfo && { ...ucrPlaceInfo.find(p => p.year === until) }
-  const usState = placeType === 'agency' ? oriToState(place) : place
+
+  const isAgency = placeType === 'agency'
+  const usState = isAgency ? oriToState(place) : place
 
   const reports = (
     <span>
@@ -69,8 +71,24 @@ const UcrParticipationContainer = ({ place, placeType, until, ucr }) => {
   return (
     <div className="mb5 clearfix">
       <div className="lg-col lg-col-8 mb2 lg-m0 p0 lg-pr6 fs-18">
-        {ucr.loading && <Loading />}
-        {!ucr.loading &&
+        {isAgency &&
+          <div>
+            <p className="serif">
+              The [Agency Name] is located
+              in [County Name], [State]. This law enforcement
+              agency reports [incident-based data (NIBRS)] to the
+              Uniform Crime Reporting (UCR) program.
+            </p>
+            <h3 className="mt4 mb1 fs-18">UCR resources</h3>
+            <ul className="m0 p0 fs-14 left-bars">
+              <li className="mb1"><a href="#!">About {crime} data</a></li>
+              <li className="mb1"><a href="#!">[State] UCR Program</a></li>
+              <li className="mb1"><a href="#!">FBI UCR Program</a></li>
+            </ul>
+          </div>}
+        {!isAgency && ucr.loading && <Loading />}
+        {!isAgency &&
+          !ucr.loading &&
           data &&
           data.year &&
           <div>
@@ -103,6 +121,7 @@ const UcrParticipationContainer = ({ place, placeType, until, ucr }) => {
 }
 
 UcrParticipationContainer.propTypes = {
+  crime: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
   until: PropTypes.number.isRequired,
@@ -116,6 +135,7 @@ const mapStateToProps = state => {
   const { filters, ucr } = state
   const { until } = filters
   return {
+    ...filters,
     ...getPlaceInfo(filters),
     ucr,
     until,

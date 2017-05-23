@@ -9,14 +9,15 @@ const parse = timeParse('%Y')
 
 const Sparkline = ({ data, yMax }) => {
   const [margin, height, width] = [8, 60, 180]
-  const clean = data.map(d => Object.assign({ date: parse(d.year), ...d }))
 
-  const domain = [min(clean, d => d.rate), yMax || max(clean, d => d.rate)]
+  const clean = data.map(d => Object.assign({ date: parse(d.year), ...d }))
+  const last = clean[clean.length - 1]
 
   const x = scaleTime()
     .domain(extent(clean, d => d.date))
     .range([0, width - margin * 2])
 
+  const domain = [min(clean, d => d.rate), yMax || max(clean, d => d.rate)]
   const y = scaleLinear().domain(domain).range([height - margin * 2, 0]).nice()
 
   const l = line().curve(curveCardinal).x(d => x(d.date)).y(d => y(d.rate))
@@ -25,6 +26,7 @@ const Sparkline = ({ data, yMax }) => {
     <svg width={width} height={height} style={{ maxWidth: '100%' }}>
       <g transform={`translate(${margin}, ${margin})`}>
         <path d={l(clean)} fill="none" stroke="#ff5e50" strokeWidth="3" />
+        <circle cx={x(last.date)} cy={y(last.rate)} fill="#ff5e50" r="4" />
       </g>
     </svg>
   )

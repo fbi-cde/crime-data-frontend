@@ -1,6 +1,7 @@
 import { max } from 'd3-array'
 import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -67,6 +68,17 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
       </div>
     </div>
   )
+}
+
+SparklineContainer.propTypes = {
+  crime: PropTypes.string.isRequired,
+  place: PropTypes.string.isRequired,
+  since: PropTypes.number.isRequired,
+  summaries: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
+  }).isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = ({ filters, summaries }) => ({
