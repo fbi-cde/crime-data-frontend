@@ -6,7 +6,7 @@ import ExplorerHeader from './ExplorerHeader'
 import NibrsContainer from './NibrsContainer'
 import NotFound from './NotFound'
 import Sidebar from './Sidebar'
-import SparklineSection from './SparklineSection'
+import SparklineContainer from './SparklineContainer'
 import TrendContainer from './TrendContainer'
 import UcrParticipationInformation from './UcrParticipationInformation'
 import { updateApp } from '../actions/composite'
@@ -81,6 +81,11 @@ class Explorer extends React.Component {
     const showNibrs = !noNibrs.includes(crime) && participation.nibrs
     const isAgency = placeType === 'agency'
 
+    const childProps = {
+      dispatch,
+      ...filters,
+    }
+
     return (
       <div className="site-wrapper">
         <div className="sticky top-0">
@@ -124,7 +129,7 @@ class Explorer extends React.Component {
             />
             <hr className="mt0 mb3" />
             {isAgency &&
-              <SparklineSection
+              <SparklineContainer
                 crime={crime}
                 place={place}
                 since={since}

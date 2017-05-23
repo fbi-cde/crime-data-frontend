@@ -1,5 +1,6 @@
 import uniqBy from 'lodash.uniqby'
 import React from 'react'
+import startCase from 'lodash.startcase'
 
 import AgencyChart from './AgencyChart'
 import Loading from './Loading'
@@ -23,7 +24,7 @@ const AgencyChartContainer = props => {
     <div>
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb3 fs-24 sm-fs-32 sans-serif">
-          {crime} reported by {place}
+          {startCase(crime)} reported by {place}
         </h2>
         {content}
       </div>
