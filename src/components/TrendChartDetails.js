@@ -26,7 +26,6 @@ const TrendChartDetails = ({
   colors,
   crime,
   data,
-  dispatch,
   keys,
   since,
   updateYear,
@@ -44,7 +43,7 @@ const TrendChartDetails = ({
 
   const isOnlyNational = keys.length === 1
   const term = (
-    <Term dispatch={dispatch} id={mapCrimeToGlossaryTerm(crime)}>
+    <Term id={mapCrimeToGlossaryTerm(crime)}>
       {lowerCase(crime)}
     </Term>
   )

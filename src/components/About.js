@@ -77,22 +77,22 @@ const About = ({ dispatch }) => (
             <h3 className="mt-tiny mb2 fs-18 sm-fs-22">Available datasets</h3>
             <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
               <li className="mb2">
-                <Term dispatch={dispatch} id="Summary Statistics (SRS)">
+                <Term id="Summary Statistics (SRS)">
                   Summary Statistics (SRS)
                 </Term>
               </li>
               <li className="mb2">
-                <Term dispatch={dispatch} id="Incident-based data">
+                <Term id="Incident-based data">
                   Incident-based data
                 </Term>
               </li>
               <li className="mb2">
-                <Term dispatch={dispatch} id="LEOKA">
+                <Term id="LEOKA">
                   Law Enforcement Officers Assaulted and Killed data
                 </Term>
               </li>
               <li className="mb2">
-                <Term dispatch={dispatch} id="Hate Crime">
+                <Term id="Hate Crime">
                   Hate Crime
                 </Term>
               </li>

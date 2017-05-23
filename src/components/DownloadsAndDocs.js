@@ -7,13 +7,13 @@ import otherDatasets from '../../content/datasets.yml'
 
 const border = 'border-bottom border-blue-lighter'
 
-const DownloadsAndDocs = ({ dispatch }) => (
+const DownloadsAndDocs = () => (
   <section className="bg-white">
     <div className="px2 py3 container mx-auto">
       <h1 className={`mt4 mb5 pb1 sm-mt4 fs-28 sm-fs-40 ${border}`}>
         Downloads & Documentation
       </h1>
-      <DownloadBulkNibrs dispatch={dispatch} />
+      <DownloadBulkNibrs />
       <div className="mb8">
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
           Bulk downloads
@@ -51,16 +51,10 @@ const DownloadsAndDocs = ({ dispatch }) => (
                 Crime data API
               </h3>
               <p>
-                Use our <Term
-                  dispatch={dispatch}
-                  id="application programming interface (api)"
-                >
+                Use our <Term id="application programming interface (api)">
                   application programming interface (API)
                 </Term> to search and export the
-                FBI’s <Term
-                  dispatch={dispatch}
-                  id="uniform crime reporting (ucr) program"
-                >
+                FBI’s <Term id="uniform crime reporting (ucr) program">
                   Uniform Crime Reporting (UCR) Program
                 </Term> data.
               </p>
