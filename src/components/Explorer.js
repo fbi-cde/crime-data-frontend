@@ -35,6 +35,7 @@ class Explorer extends React.Component {
       placeType,
       ...this.props.filters,
       ...router.params,
+      ...query,
       since: clean(query.since, since),
       until: clean(query.until, until),
     }

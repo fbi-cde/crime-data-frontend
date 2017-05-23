@@ -41,6 +41,7 @@ const SidebarContainer = ({
           onChange={onChange}
           place={place}
           placeType={placeType}
+          showSearch={filters.agencySearch === 'true'}
         />
         <TimePeriodFilter onChange={onChange} {...filters} />
         <CrimeTypeFilter onChange={onChange} selected={crime} />
