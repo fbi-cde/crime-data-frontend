@@ -1,6 +1,7 @@
 import { max } from 'd3-array'
 import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -27,7 +28,7 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
     },
     {
       data: data ? data[nationalKey] : [],
-      place: 'United States',
+      place: 'US',
       url: `/explorer/${crime}`,
     },
   ]
@@ -37,8 +38,8 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
   )
 
   return (
-    <div className="mb5">
-      <h3 className="mb2 fs-18">State and national {startCase(crime)} trend</h3>
+    <div className="mb4">
+      <h3>State and national crime rates</h3>
       <div className="clearfix mxn1">
         {sparklines.map((s, i) => (
           <div className="sm-col sm-col-6 mb1 px1" key={i}>
@@ -50,9 +51,7 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
                   className="btn btn-sm btn-primary fs-12 regular"
                   href={s.url}
                 >
-                  Explore{' '}
-                  {s.place === 'United States' ? 'national' : 'state'}{' '}
-                  data
+                  Explore {s.place === 'US' ? 'national' : 'state'} data
                 </a>
               </div>
               <div className="flex-auto center">
@@ -67,11 +66,19 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
           </div>
         ))}
       </div>
-      <p className="mt1 mb0 fs-12 serif italic">
-        Trends are only available for state and national-level data.
-      </p>
     </div>
   )
+}
+
+SparklineContainer.propTypes = {
+  crime: PropTypes.string.isRequired,
+  place: PropTypes.string.isRequired,
+  since: PropTypes.number.isRequired,
+  summaries: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
+  }).isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = ({ filters, summaries }) => ({

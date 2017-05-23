@@ -1,5 +1,6 @@
 import startCase from 'lodash.startcase'
 import uniqBy from 'lodash.uniqby'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -40,6 +41,21 @@ const AgencyChartContainer = ({
       </div>
     </div>
   )
+}
+
+AgencyChartContainer.propTypes = {
+  agencies: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
+  }).isRequired,
+  crime: PropTypes.string.isRequired,
+  place: PropTypes.string.isRequired,
+  since: PropTypes.number.isRequired,
+  summary: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
+  }).isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = ({ agencies, filters, summaries }) => ({
