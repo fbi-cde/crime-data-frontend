@@ -3,7 +3,7 @@ import React from 'react'
 
 import Hint from './Hint'
 import stateLookup from '../util/usa'
-import svgData from '../../data/usa-state-svg.json'
+import svgData from '../../public/data/usa-state-svg.json'
 
 class UsaMap extends React.Component {
   constructor(props) {

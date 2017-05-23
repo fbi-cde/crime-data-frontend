@@ -3,7 +3,7 @@ import startCase from 'lodash.startcase'
 import React from 'react'
 
 import Term from './Term'
-import ucrProgram from '../../data/ucr-program-participation.json'
+import ucrProgram from '../../public/data/ucr-program-participation.json'
 
 /* these codes are repeated here (seemingly also in util/api.js) because
    different codes are needed for different parts of the application

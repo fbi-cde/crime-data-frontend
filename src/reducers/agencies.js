@@ -1,4 +1,4 @@
-import initialData from '../../data/agencies-by-state.json'
+import initialData from '../../public/data/agencies-by-state.json'
 import { oriToState } from '../util/ori'
 import { slugify } from '../util/text'
 import lookupUsa from '../util/usa'
