@@ -5,26 +5,17 @@ import AgencyChartContainer from './AgencyChartContainer'
 import ExplorerHeader from './ExplorerHeader'
 import NibrsContainer from './NibrsContainer'
 import NotFound from './NotFound'
-<<<<<<< HEAD
 import SidebarContainer from './SidebarContainer'
-import SparklineSection from './SparklineSection'
-=======
-import Sidebar from './Sidebar'
 import SparklineContainer from './SparklineContainer'
->>>>>>> Refactor sparklines (#773)
 import TrendContainer from './TrendContainer'
 import UcrParticipationContainer from './UcrParticipationContainer'
 import { updateApp } from '../actions/composite'
 import { showTerm } from '../actions/glossary'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offenses from '../util/offenses'
+import { getPlaceInfo } from '../util/place'
 import ucrParticipation from '../util/ucr'
-import lookup, { nationalKey } from '../util/usa'
-
-const getPlaceInfo = ({ place, placeType }) => ({
-  place: place || nationalKey,
-  placeType: placeType || 'national',
-})
+import lookup from '../util/usa'
 
 class Explorer extends React.Component {
   componentDidMount() {
@@ -78,11 +69,6 @@ class Explorer extends React.Component {
     const showNibrs = !noNibrs.includes(crime) && participation.nibrs
     const isAgency = placeType === 'agency'
 
-    const childProps = {
-      dispatch,
-      ...filters,
-    }
-
     return (
       <div className="site-wrapper">
         <div className="sticky top-0">
@@ -112,14 +98,7 @@ class Explorer extends React.Component {
             />
             <UcrParticipationContainer />
             <hr className="mt0 mb3" />
-            {isAgency &&
-              <SparklineContainer
-                crime={crime}
-                place={place}
-                since={filters.since}
-                summaries={summaries}
-                until={filters.until}
-              />}
+            {isAgency && <SparklineContainer />}
             {isAgency ? <AgencyChartContainer /> : <TrendContainer />}
             {showNibrs && <NibrsContainer />}
             <hr className="mt0 mb3" />

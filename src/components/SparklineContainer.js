@@ -2,6 +2,7 @@ import { max } from 'd3-array'
 import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
 import React from 'react'
+import { connect } from 'react-redux'
 
 import Loading from './Loading'
 import Sparkline from './Sparkline'
@@ -68,4 +69,12 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
   )
 }
 
-export default SparklineContainer
+const mapStateToProps = ({ crime, place, since, summaries, until }) => ({
+  crime,
+  place,
+  since,
+  summaries,
+  until,
+})
+
+export default connect(mapStateToProps)(SparklineContainer)

@@ -9,6 +9,7 @@ import PlaceThumbnail from './PlaceThumbnail'
 import Term from './Term'
 import content from '../util/content'
 import { oriToState } from '../util/ori'
+import { getPlaceInfo } from '../util/place'
 import ucrParticipation from '../util/ucr'
 import lookupUsa, { nationalKey } from '../util/usa'
 
@@ -19,7 +20,7 @@ const participationCsvLink = (place, type) => {
 
   const path = place === nationalKey
     ? 'participation/national'
-    : `participation/states/${lookupUsa(place).toUpperCase()}`
+    : `participation/states/${lookupUsa(place)}`
 
   return [
     {
@@ -112,10 +113,9 @@ UcrParticipationContainer.propTypes = {
 
 const mapStateToProps = state => {
   const { filters, ucr } = state
-  const { place, placeType, until } = filters
+  const { until } = filters
   return {
-    place,
-    placeType,
+    ...getPlaceInfo(filters),
     ucr,
     until,
   }

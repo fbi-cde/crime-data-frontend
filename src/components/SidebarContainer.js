@@ -7,7 +7,13 @@ import LocationFilter from './LocationFilter'
 import TimePeriodFilter from './TimePeriodFilter'
 import { hideSidebar } from '../actions/sidebar'
 
-const SidebarContainer = ({ dispatch, filters, isOpen, onChange }) => {
+const SidebarContainer = ({
+  agencies,
+  dispatch,
+  filters,
+  isOpen,
+  onChange,
+}) => {
   const { crime, place, placeType } = filters
   const hide = () => dispatch(hideSidebar())
 
@@ -47,7 +53,8 @@ SidebarContainer.propTypes = {
   onChange: PropTypes.func,
 }
 
-const mapStateToProps = ({ filters, sidebar }) => ({
+const mapStateToProps = ({ agencies, filters, sidebar }) => ({
+  agencies,
   filters,
   isOpen: sidebar.isOpen,
 })
