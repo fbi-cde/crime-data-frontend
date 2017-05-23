@@ -77,18 +77,18 @@ const About = ({ dispatch }) => (
             <h3 className="mt-tiny mb2 fs-18 sm-fs-22">Available datasets</h3>
             <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
               <li className="mb2">
-                <Term id="Summary Statistics (SRS)">
+                <Term id="Summary Reporting System (SRS)">
                   Summary Statistics (SRS)
                 </Term>
               </li>
               <li className="mb2">
-                <Term id="Incident-based data">
+                <Term id="National Incident-Based Reporting System (NIBRS)">
                   Incident-based data
                 </Term>
               </li>
               <li className="mb2">
-                <Term id="LEOKA">
-                  Assaults on Law Enforcement Officers
+                <Term id="Assaults on law enforcement officers">
+                  Assaults on law enforcement officers
                 </Term>
               </li>
               <li className="mb2">
@@ -109,25 +109,27 @@ const About = ({ dispatch }) => (
             </p>
             <div className="bold">Summary (SRS) data</div>
             <p className="mb3">
-              Summary data is made up of counts of each type of crime.
+              Summary data is made up of counts of each type of crime reported.
             </p>
             <div className="bold">Incident-based (NIBRS) data</div>
             <p className="mb3 md-m0">
-              Incident-based (NIBRS) data captures details on each single crime
-              incident, providing context that is left out of the summary data.
+              Incident-based (NIBRS) data captures details of each reported crime
+              incident, providing context that is not provided by the summary data.
             </p>
           </div>
           <div className="md-col md-col-3">
             <h3 className="mt-tiny mb2 fs-18 sm-fs-22">UCR Resources</h3>
             <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
               <li className="mb1">
-                <a href="#!">UCR Home</a>
+                <a href="https://ucr.fbi.gov/">UCR Home</a>
               </li>
               <li className="mb1">
-                <a href="#!">New UCR</a>
+                <a href="https://ucr.fbi.gov/new-ucr-project">New UCR</a>
               </li>
               <li className="mb1">
-                <a href="#!">Publications and reports</a>
+                <a href="https://ucr.fbi.gov/nibrs/nibrs-user-manual">
+                  NIBRS user manual
+                </a>
               </li>
             </ul>
           </div>
