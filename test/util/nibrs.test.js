@@ -1,9 +1,25 @@
 /* eslint no-undef: 0 */
 
 import mockApiData from '../fixtures/nibrsApiResponse.json'
-import parseNibrs, { reshape, rename } from '../../src/util/nibrs'
+import parseNibrs, { binAge, reshape, rename } from '../../src/util/nibrs'
 
 describe('nibrs utility', () => {
+  describe('binAge()', () => {
+    it('should aggregate counts in ten year bins', () => {
+      const data = [
+        { key: 1, count: 10 },
+        { key: 2, count: 15 },
+        { key: 11, count: 20 },
+        { key: 22, count: 25 },
+      ]
+      expect(binAge(data)).toEqual([
+        { binEnd: 9, binStart: 0, count: 25, key: '0-9' },
+        { binEnd: 19, binStart: 10, count: 20, key: '10-19' },
+        { binEnd: 29, binStart: 20, count: 25, key: '20-29' },
+      ])
+    })
+  })
+
   describe('reshape()', () => {
     it('should aggregate counts by key, convert to array', () => {
       const data = [
