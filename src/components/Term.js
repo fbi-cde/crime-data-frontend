@@ -1,6 +1,7 @@
 import lowerCase from 'lodash.lowercase'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { connect } from 'react-redux'
 
 import { showTerm } from '../actions/glossary'
 
@@ -34,4 +35,6 @@ Term.propTypes = {
   id: PropTypes.string.isRequired,
 }
 
-export default Term
+const mapDispatchToProps = dispatch => ({ dispatch })
+
+export default connect(null, mapDispatchToProps)(Term)

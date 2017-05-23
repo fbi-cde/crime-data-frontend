@@ -34,14 +34,11 @@ const filterNibrsData = (data, { since, until }) => {
   return filtered
 }
 
-const NibrsContainer = ({ crime, dispatch, nibrs, place, since, until }) => {
+const NibrsContainer = ({ crime, nibrs, place, since, until }) => {
   const { data, error, loading } = nibrs
 
   const nibrsTerm = (
-    <Term
-      id="national incident-based reporting system (NIBRS)"
-      dispatch={dispatch}
-    >
+    <Term id="national incident-based reporting system (NIBRS)">
       incident-based (NIBRS)
     </Term>
   )
@@ -144,7 +141,6 @@ const NibrsContainer = ({ crime, dispatch, nibrs, place, since, until }) => {
 
 NibrsContainer.propTypes = {
   crime: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired,
   nibrs: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.boolean,

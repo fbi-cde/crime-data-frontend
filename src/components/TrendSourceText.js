@@ -4,10 +4,10 @@ import React from 'react'
 
 import Term from './Term'
 
-const TrendSourceText = ({ dispatch, place, since, until }) => {
+const TrendSourceText = ({ place, since, until }) => {
   const estimated = (
     <span>
-      <Term id="estimated data" dispatch={dispatch}>
+      <Term id="estimated data">
         estimated
       </Term>
     </span>
@@ -23,7 +23,6 @@ const TrendSourceText = ({ dispatch, place, since, until }) => {
 }
 
 TrendSourceText.propTypes = {
-  dispatch: PropTypes.func,
   place: PropTypes.string,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
