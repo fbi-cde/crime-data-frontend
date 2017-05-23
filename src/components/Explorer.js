@@ -22,7 +22,7 @@ class Explorer extends React.Component {
     const { appState, dispatch, router } = this.props
     const { since, until } = appState.filters
     const { query } = router.location
-    const { place } = getPlaceInfo(appState.filters)
+    const { place, placeType } = getPlaceInfo(appState.filters)
 
     const clean = (val, alt) => {
       const yr = +val
@@ -31,6 +31,7 @@ class Explorer extends React.Component {
 
     const filters = {
       place,
+      placeType,
       ...this.props.filters,
       ...router.params,
       since: clean(query.since, since),

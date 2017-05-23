@@ -6,7 +6,7 @@ import { nationalKey } from './usa'
 const createNewPathname = ({ change, params }) => {
   const crime = change.crime || params.crime
   const place = change.place || params.place || nationalKey
-  const placeType = change.placeType || params.placeType
+  const placeType = change.placeType || params.placeType || 'state'
 
   if (place === nationalKey) return `/explorer/${crime}`
   return `/explorer/${placeType}/${place}/${crime}`

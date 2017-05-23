@@ -71,6 +71,7 @@ const UcrParticipationContainer = ({ place, placeType, until, ucr }) => {
       <div className="lg-col lg-col-8 mb2 lg-m0 p0 lg-pr6 fs-18">
         {ucr.loading && <Loading />}
         {!ucr.loading &&
+          data &&
           data.year &&
           <div>
             <p className="serif">
