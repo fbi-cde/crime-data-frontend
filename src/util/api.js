@@ -4,7 +4,7 @@ import { get } from './http'
 import { mapToApiOffense } from './offenses'
 import lookupUsa, { nationalKey } from './usa'
 
-const API = '/api'
+const API = '/api-proxy'
 
 const dimensionEndpoints = {
   ageNum: 'age_num',
