@@ -45,10 +45,7 @@ const Home = ({ appState, dispatch, router }) => {
           </h1>
           <p className="mb1 md-col-10 fs-18 sm-fs-24 serif">
             The FBI collects and publishes{' '}
-            <Term
-              dispatch={dispatch}
-              id="uniform crime reporting (ucr) program"
-            >
+            <Term id="uniform crime reporting (ucr) program">
               Uniform Crime Reporting (UCR)
             </Term> data on an annual basis.
           </p>
@@ -166,10 +163,7 @@ const Home = ({ appState, dispatch, router }) => {
           </h3>
           <p className="mb3 sm-mb6 md-col-10 fs-18 sm-fs-24 serif">
             We recently released the FBI’s first crime data{' '}
-            <Term
-              dispatch={dispatch}
-              id="application programming interface (api)"
-            >
+            <Term id="application programming interface (api)">
               application programming interface (API)
             </Term>
             {' '}

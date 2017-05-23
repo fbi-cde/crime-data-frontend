@@ -39,13 +39,7 @@ const locationLinks = (place, type) => {
   return links.filter(l => l.text)
 }
 
-const UcrParticipationInformation = ({
-  dispatch,
-  place,
-  placeType,
-  until,
-  ucr,
-}) => {
+const UcrParticipationInformation = ({ place, placeType, until, ucr }) => {
   const csvLinks = participationCsvLink(place, placeType)
   const links = locationLinks(place, placeType).concat(csvLinks)
   const participation = ucrParticipation(place)
@@ -57,15 +51,12 @@ const UcrParticipationInformation = ({
     <span>
       {hybrid && 'both '}
       {participation.srs &&
-        <Term dispatch={dispatch} id={'summary reporting system (srs)'}>
+        <Term id={'summary reporting system (srs)'}>
           summary (SRS)
         </Term>}
       {hybrid && ' and '}
       {participation.nibrs &&
-        <Term
-          dispatch={dispatch}
-          id={'national incident-based reporting system (nibrs)'}
-        >
+        <Term id={'national incident-based reporting system (nibrs)'}>
           incident-based (NIBRS)
         </Term>}
     </span>
@@ -87,8 +78,7 @@ const UcrParticipationInformation = ({
               {place !== nationalKey ? startCase(place) : 'the nation'}{' '}
               based on data voluntarily reported by{' '}
               {formatNumber(data.participating_agencies)}{' '}
-              law enforcement agencies. The charts below
-              feature estimated data.
+              law enforcement agencies.
             </p>
             <h3 className="mt4 mb1 fs-18">UCR resources</h3>
             <ul className="m0 p0 fs-14 left-bars">
@@ -108,7 +98,6 @@ const UcrParticipationInformation = ({
 }
 
 UcrParticipationInformation.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
   until: PropTypes.number.isRequired,

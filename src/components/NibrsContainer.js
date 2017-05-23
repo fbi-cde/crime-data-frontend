@@ -34,15 +34,17 @@ const filterNibrsData = (data, { since, until }) => {
   return filtered
 }
 
-const NibrsContainer = ({ crime, dispatch, nibrs, place, since, until }) => {
+const NibrsContainer = ({ crime, nibrs, place, since, until }) => {
   const { data, error, loading } = nibrs
 
   const nibrsTerm = (
-    <Term
-      id="national incident-based reporting system (NIBRS)"
-      dispatch={dispatch}
-    >
+    <Term id="national incident-based reporting system (NIBRS)">
       incident-based (NIBRS)
+    </Term>
+  )
+  const unestimatedTerm = (
+    <Term id="unestimated data" dispatch={dispatch}>
+      unestimated
     </Term>
   )
 
@@ -86,18 +88,33 @@ const NibrsContainer = ({ crime, dispatch, nibrs, place, since, until }) => {
             {startCase(place)} started reporting {nibrsTerm} data
             to the FBI in {nibrsFirstYear}.
           </p>}
-        <p className="m0">
-          {!error &&
-            data &&
-            `
-            There were ${formatNumber(totalCount)} individual ${crime} incidents
-            reported to the FBI in ${startCase(place)} between ${nibrsFirstYear} and
-            ${until}. This number may differ from the totals in the previous chart
-            because of the differences in data sources.
-          `}
-          Learn more about the{' '}
-          <a className="underline" href={fbiLink}>FBI’s data collections</a>.
-        </p>
+        {!error &&
+          data &&
+          <p className="m0">
+            There were {formatNumber(totalCount)} individual {crime} incidents
+            reported to the FBI in {startCase(place)}
+            {' '}
+            between
+            {' '}
+            {nibrsFirstYear}
+            {' '}
+            and
+            {' '}
+            {until}
+            {' '}
+            by agencies reporting
+            {' '}
+            {nibrsTerm}
+            {' '}
+            data. The charts below feature
+            {' '}
+            {unestimatedTerm}
+            {' '}
+            data.
+            Learn more about the
+            {' '}
+            <a className="underline" href={fbiLink}>FBI’s data collections</a>.
+          </p>}
       </div>
       {content}
       {!loading &&
@@ -124,7 +141,6 @@ const NibrsContainer = ({ crime, dispatch, nibrs, place, since, until }) => {
 
 NibrsContainer.propTypes = {
   crime: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired,
   nibrs: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.boolean,
