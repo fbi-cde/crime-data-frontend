@@ -6,27 +6,23 @@ import ExplorerHeader from './ExplorerHeader'
 import NibrsContainer from './NibrsContainer'
 import NotFound from './NotFound'
 import SidebarContainer from './SidebarContainer'
-import SparklineSection from './SparklineSection'
+import SparklineContainer from './SparklineContainer'
 import TrendContainer from './TrendContainer'
 import UcrParticipationContainer from './UcrParticipationContainer'
 import { updateApp } from '../actions/composite'
 import { showTerm } from '../actions/glossary'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offenses from '../util/offenses'
+import { getPlaceInfo } from '../util/place'
 import ucrParticipation from '../util/ucr'
-import lookup, { nationalKey } from '../util/usa'
-
-const getPlaceInfo = ({ place, placeType }) => ({
-  place: place || nationalKey,
-  placeType: placeType || 'national',
-})
+import lookup from '../util/usa'
 
 class Explorer extends React.Component {
   componentDidMount() {
     const { appState, dispatch, router } = this.props
     const { since, until } = appState.filters
     const { query } = router.location
-    const { place } = getPlaceInfo(appState.filters)
+    const { place, placeType } = getPlaceInfo(appState.filters)
 
     const clean = (val, alt) => {
       const yr = +val
@@ -35,6 +31,7 @@ class Explorer extends React.Component {
 
     const filters = {
       place,
+      placeType,
       ...this.props.filters,
       ...router.params,
       since: clean(query.since, since),
@@ -95,21 +92,14 @@ class Explorer extends React.Component {
         <div className="site-content">
           <div className="container-main mx-auto px2 md-py3 lg-px8">
             <ExplorerHeader
-              agency={agencies}
+              agencies={agencies}
               crime={crime}
               place={place}
               placeType={placeType}
             />
             <UcrParticipationContainer />
             <hr className="mt0 mb3" />
-            {isAgency &&
-              <SparklineSection
-                crime={crime}
-                place={place}
-                since={filters.since}
-                summaries={summaries}
-                until={filters.until}
-              />}
+            {isAgency && <SparklineContainer />}
             {isAgency ? <AgencyChartContainer /> : <TrendContainer />}
             {showNibrs && <NibrsContainer />}
             <hr className="mt0 mb3" />

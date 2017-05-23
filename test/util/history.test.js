@@ -12,11 +12,11 @@ describe('history utility', () => {
   describe('createNewLocation()', () => {
     const mockRouter = {
       location: { query: {} },
-      params: { crime: 'murder', place: 'oregon' },
+      params: { crime: 'murder', place: 'oregon', placeType: 'state' },
     }
 
     it('should change the place value in pathname if it is a state', () => {
-      const change = { place: 'california' }
+      const change = { place: 'california', placeType: 'state' }
       const router = Object.assign({}, mockRouter)
       const actual = createNewLocation({ change, router })
       expect(actual.pathname).toEqual('/explorer/state/california/murder')
@@ -30,7 +30,7 @@ describe('history utility', () => {
     })
 
     it('should change the crime value in pathname if it is a state', () => {
-      const change = { crime: 'robbery', place: 'oregon' }
+      const change = { crime: 'robbery', place: 'oregon', placeType: 'state' }
       const router = Object.assign({}, mockRouter)
       const actual = createNewLocation({ change, router })
       expect(actual.pathname).toEqual('/explorer/state/oregon/robbery')

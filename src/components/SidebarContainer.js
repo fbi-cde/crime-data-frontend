@@ -1,4 +1,3 @@
-import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -8,8 +7,14 @@ import LocationFilter from './LocationFilter'
 import TimePeriodFilter from './TimePeriodFilter'
 import { hideSidebar } from '../actions/sidebar'
 
-const SidebarContainer = ({ dispatch, filters, isOpen, onChange }) => {
-  const { crime, place } = filters
+const SidebarContainer = ({
+  agencies,
+  dispatch,
+  filters,
+  isOpen,
+  onChange,
+}) => {
+  const { crime, place, placeType } = filters
   const hide = () => dispatch(hideSidebar())
 
   return (
@@ -31,7 +36,12 @@ const SidebarContainer = ({ dispatch, filters, isOpen, onChange }) => {
         />
       </div>
       <div className="p6 sm-p3 md-p4">
-        <LocationFilter onChange={onChange} selected={startCase(place)} />
+        <LocationFilter
+          agencies={agencies}
+          onChange={onChange}
+          place={place}
+          placeType={placeType}
+        />
         <TimePeriodFilter onChange={onChange} {...filters} />
         <CrimeTypeFilter onChange={onChange} selected={crime} />
       </div>
@@ -43,7 +53,8 @@ SidebarContainer.propTypes = {
   onChange: PropTypes.func,
 }
 
-const mapStateToProps = ({ filters, sidebar }) => ({
+const mapStateToProps = ({ agencies, filters, sidebar }) => ({
+  agencies,
   filters,
   isOpen: sidebar.isOpen,
 })

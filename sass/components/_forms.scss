@@ -36,6 +36,10 @@
 // subset of wtf-forms
 // http://wtfforms.com/
 
+.control {
+  padding-left: 1.5rem;
+}
+
 .checkbox,
 .radio {
   cursor: pointer;
@@ -72,7 +76,7 @@
 
 .checkbox input:checked ~ .indicator,
 .radio input:checked ~ .indicator, {
-  background-color: $blue-gray;
+  background-color: $blue;
   color: $white;
 }
 
@@ -84,8 +88,8 @@
 
 .checkbox .indicator {
   background-color: $white;
-  border: $border-width solid $border-color;
-  border-radius: .25rem;
+  border: $border-width solid $blue;
+  border-radius: 2px;
 }
 
 .checkbox input:checked ~ .indicator {
@@ -94,7 +98,7 @@
 
 .radio .indicator {
   background-color: #f2f9ff;
-  border: $border-width solid $blue-gray;
+  border: $border-width solid $blue;
   border-radius: 50%;
 }
 

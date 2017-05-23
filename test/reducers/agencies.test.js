@@ -20,19 +20,22 @@ describe('agencies reducer', () => {
 
   describe('AGENCY_RECEIVED action type', () => {
     it('should set loading to false', () => {
-      const initialState = reducer(undefined, { type: AGENCY_RECEIVED })
+      const action = { type: AGENCY_RECEIVED, agency: { ori: 'CA123457' } }
+      const initialState = reducer(undefined, action)
       expect(initialState.loading).toEqual(false)
     })
 
-    it('should add any agencies to state', () => {
+    it('should update the received agency', () => {
+      const ori = 'CA1234567'
       const action = {
         type: AGENCY_RECEIVED,
         agency: {
-          FAKEORI: ['testing', 'data'],
+          agency_name: 'Fake California Agency',
+          ori,
         },
       }
       const s = reducer(undefined, action)
-      expect(s.FAKEORI).toEqual(action.agency.FAKEORI)
+      expect(s.data.california[ori]).toEqual(action.agency)
     })
   })
 })

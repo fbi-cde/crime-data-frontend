@@ -1,0 +1,382 @@
+[
+  {
+    "term": "Aggravated assault",
+    "definition": "An unlawful attack by one person upon another wherein the offender uses a weapon or displays it in a threatening manner, or the victim suffers obvious severe or aggravated bodily injury involving apparent broken bones, loss of teeth, possible internal injury, severe laceration, or loss of consciousness. This also includes assault with disease (as in cases when the offender is aware that they're infected with a deadly disease and deliberately attempts to inflict the disease by biting or spitting)."
+  },
+  {
+    "term": "Application programming interface (API)",
+    "definition": "An easy way for developers, computers, and interactive applications to share large amounts of data in meaningful ways."
+  },
+  {
+    "term": "Arson",
+    "definition": "To unlawfully and intentionally damage, or attempt to damage, any real or personal property by fire or incendiary device."
+  },
+  {
+    "term": "Assault",
+    "definition": "An unlawful attack by one person upon another."
+  },
+  {
+    "term": "Assisting or promoting prostitution",
+    "definition": "To solicit customers or transport people for prostitution purposes; to own, manage, or operate a dwelling or other establishment for the purpose of providing a place where prostitution is performed; or to otherwise assist or promote prostitution"
+  },
+  {
+    "term": "Bad checks",
+    "definition": "Knowingly and intentionally writing or negotiating checks drawn against insufficient or nonexistent funds."
+  },
+  {
+    "term": "Betting and wagering",
+    "definition": "To unlawfully stake money or something else of value on the happening of an uncertain event or on the ascertainment of a fact in dispute."
+  },
+  {
+    "term": "Bribery",
+    "definition": "The offering, giving, receiving, or soliciting of anything of value (that is, a bribe, gratuity, or kickback) to sway the judgment or action of a person in a position of trust or influence. Sports bribery is excluded."
+  },
+  {
+    "term": "Bureau of Justice Statistics (BJS)",
+    "definition": "The primary source for criminal justice statistics in the U.S., established under the Justice Systems Improvement Act of 1979."
+  },
+  {
+    "term": "Burglary",
+    "definition": "The unlawful entry into a building or other structure with the intent to commit a felony or a theft."
+  },
+  {
+    "term": "Civilian law enforcement employees",
+    "definition": "Full-time agency personnel such as clerks, radio dispatchers, meter attendants, stenographers, jailers, correctional officers, and mechanics."
+  },
+  {
+    "term": "Commercial sex acts",
+    "definition": "Inducing a person by force, fraud, or coercion to participate in commercial sex acts, or in which the person induced to perform such acts is under 18 years old."
+  },
+  {
+    "term": "Counterfeiting and forgery",
+    "definition": "The altering, copying, or imitation of something, without authority or right, with the intent to deceive or defraud by passing the copy or thing altered or imitated as that which is original or genuine; or the selling, buying, or possession of an altered, copied, or imitated thing with the intent to deceive or defraud."
+  },
+  {
+    "term": "Credit card fraud",
+    "definition": "The unlawful use of a credit (or debit) card or automated teller machine for fraudulent purposes."
+  },
+  {
+    "term": "Crime Statistics Management Unit (CSMU)",
+    "definition": "The team responsible for checking the quality of the data that law enforcement agencies submit to the FBI."
+  },
+  {
+    "term": "Crime rate",
+    "definition": "The number of offenses per 100,000 population, is derived by first dividing a jurisdiction’s population by 100,000 and then dividing the number of offenses by the resulting figure.  Crime or arrest rates are derived from law enforcement agencies for which 12 months of complete offense or arrest data were submitted."
+  },
+  {
+    "term": "Crime trends",
+    "definition": "The percentage change in crime based on data reported in a given period. These statistics play a prominent role for both offense and arrest analyses. Trends can be computed for any time frame, such as months, quarters, or years. The Uniform Crime Reporting Program employs two types of trend statistics: volume trends and rate trends."
+  },
+  {
+    "term": "Criminal Justice Information Services (CJIS)",
+    "definition": "A division of the FBI that provides a range of tools and services to law enforcement, national security and intelligence community partners, and the public."
+  },
+  {
+    "term": "Curfew, loitering, or vagrancy",
+    "definition": "The violation of a court order, regulation, ordinance, or law requiring the withdrawal of people from the streets or other specified areas; prohibiting people from remaining in an area or place in an idle or aimless manner; or prohibiting people from going from place to place without visible means of support."
+  },
+  {
+    "term": "Department of Justice (DOJ)",
+    "definition": "A federal executive department of the federal government, responsible for the enforcement of the law and administration of justice in the U.S."
+  },
+  {
+    "term": "Disorderly conduct",
+    "definition": "Any behavior that tends to disturb the public or decorum, scandalize the community, or shock the public sense of morality."
+  },
+  {
+    "term": "Driving under the influence",
+    "definition": "Driving or operating a motor vehicle or common carrier while mentally or physically impaired as the result of consuming an alcoholic beverage or using a drug or narcotic."
+  },
+  {
+    "term": "Drug and narcotics offenses",
+    "definition": "The violation of laws prohibiting the production, distribution, or use of certain controlled substances and the equipment or devices utilized in their preparation or use. Driving under the influence is excluded."
+  },
+  {
+    "term": "Drug and narcotics violations",
+    "definition": "The unlawful cultivation, manufacture, distribution, sale, purchase, use, possession, transportation, or importation of any controlled drug or narcotic substance."
+  },
+  {
+    "term": "Drug equipment violations",
+    "definition": "The unlawful manufacture, sale, purchase, possession, or transportation of equipment or devices utilized in preparing or using drugs or narcotics."
+  },
+  {
+    "term": "Drunkenness",
+    "definition": "To drink alcoholic beverages to the extent that one’s mental faculties and physical coordination are substantially impaired."
+  },
+  {
+    "term": "Embezzlement",
+    "definition": "The unlawful misappropriation by an offender to their own use or purpose of money, property, or some other thing of value entrusted to their care, custody, or control."
+  },
+  {
+    "term": "Estimated data",
+    "definition": "The FBI calculates estimates for participating agencies that do not provide 12 months of complete data. For agencies supplying three to 11 months of data, the national UCR Program estimates for the missing data by following a standard estimation process using the data provided by the agency. If an agency has supplied less than three months of data, the FBI computes estimates by using the known crime figures of similar areas within a state and assigning the same proportion of crime volumes to nonreporting agencies. The estimation process considers the following: population size covered by the agency; type of jurisdiction, e.g., police department versus sheriff’s office; and geographic location."
+  },
+  {
+    "term": "Extortion and blackmail",
+    "definition": "To unlawfully obtain money, property, or any other thing of value, either tangible or intangible, through the use or threat of force, misuse of authority, threat of criminal prosecution, threat of destruction of reputation or social standing, or through other coercive means."
+  },
+  {
+    "term": "False pretenses and swindling",
+    "definition": "The intentional misrepresentation of existing fact or condition, or the use of some other deceptive scheme or device, to obtain money, goods, or other things of value."
+  },
+  {
+    "term": "Federal Bureau of Investigation (FBI)",
+    "definition": "A domestic law enforcement and intelligence agency that reports to the U.S. attorney general and the director of national intelligence."
+  },
+  {
+    "term": "Fondling",
+    "definition": "The touching of the private body parts of another person for the purpose of sexual gratification without the consent of the victim, including instances where the victim is incapable of giving consent because of their age or because of their temporary or permanent mental or physical incapacity"
+  },
+  {
+    "term": "Fraud",
+    "definition": "The intentional perversion of the truth for the purpose of inducing another person, or other entity, in reliance upon it to part with something of value or to surrender a legal right. Counterfeiting and forgery and bad checks are excluded."
+  },
+  {
+    "term": "Gambling",
+    "definition": "To unlawfully bet or wager money or something else of value; assist, promote, or operate a game of chance for money or some other stake; possess or transmit wagering information; manufacture, sell, purchase, possess, or transport gambling equipment, devices or goods; or tamper with the outcome of a sporting event or contest to gain a gambling advantage."
+  },
+  {
+    "term": "Gambling equipment violations",
+    "definition": "To unlawfully manufacture, sell, buy, possess, or transport equipment, devices, or goods used for gambling purposes."
+  },
+    {
+    "term": "Hierarchy rule",
+    "definition": "With Summary Reporting System (SRS) data, when more than one crime was committed by the same person or group of people and the time and space between the crimes were insignificant, the crime highest in the hierarchy is the only one reported. Justifiable homicide, motor vehicle theft, and arson are exceptions to the rule."
+  },
+  {
+    "term": "Homicide",
+    "definition": "The killing of one human being by another. As a general rule, any death caused by injuries received in a fight, argument, quarrel, assault, or commission of a crime is classified as murder or nonnegligent manslaughter. The FBI counts one offense for each victim of murder or nonnegligent manslaughter. Accidental deaths, traffic fatalities, suicides, negligent manslaughters, justifiable homicides, or attempted murders are not included."
+  },
+  {
+    "term": "Human trafficking",
+    "definition": "The inducement of a person to perform a commercial sex act, or labor, or services, through force, fraud, or coercion."
+  },
+  {
+    "term": "Impersonation",
+    "definition": "Falsely representing one’s identity or position, and acting in the character or position thus unlawfully assumed, to deceive others and thereby gain a profit or advantage, enjoy some right or privilege, or subject another person or entity to an expense, charge, or liability which would not have otherwise been incurred."
+  },
+  {
+    "term": "Incest",
+    "definition": "Nonforcible sexual intercourse between people who are related to each other within the degrees wherein marriage is prohibited by law."
+  },
+  {
+    "term": "Intimidation",
+    "definition": "To unlawfully place another person in reasonable fear of bodily harm through the use of threatening words or other conduct, but without displaying a weapon or subjecting the victim to actual physical attack."
+  },
+  {
+    "term": "Involuntary servitude",
+    "definition": "The obtaining of a person through recruitment, harboring, transportation, or provision, and subjecting such people to force, fraud, or coercion into voluntary servitude, peonage, debt bondage, or slavery. Excludes commercial sex acts."
+  },
+  {
+    "term": "Justifiable homicide",
+    "definition": "The killing of a perpetrator of a serious criminal offense by a peace officer in the line of duty, or the killing, during the commission of a serious criminal offense, of the perpetrator by a private individual. Justifiable homicide is not a crime."
+  },
+  {
+    "term": "Kidnapping and abduction",
+    "definition": "The unlawful seizure, transportation, or detention of a person against their will, or of a minor without the consent of their custodial parent(s) or legal guardian."
+  },
+  {
+    "term": "Larceny",
+    "definition": "The unlawful taking, carrying, leading, or riding away of property from the possession, or constructive possession, of another person."
+  },
+  {
+    "term": "Law enforcement officers",
+    "definition": "Individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid with governmental funds set aside specifically for sworn law enforcement."
+  },
+  {
+    "term": "Law enforcement employee rate",
+    "definition": "The number of employees per 1,000 inhabitants."
+  },
+  {
+    "term": "Liquor law violations",
+    "definition": "The violation of laws or ordinances prohibiting the manufacture, sale, purchase, transportation, possession, or use of alcoholic beverages."
+  },
+  {
+    "term": "Metropolitan statistical area (MSA)",
+    "definition": "A geographical region with a relatively high population density at its core and close economic ties throughout the area."
+  },
+  {
+    "term": "Motor vehicle theft",
+    "definition": "The theft of a motor vehicle."
+  },
+  {
+    "term": "Murder and nonnegligent homicide",
+    "definition": "The willful killing of one human being by another. As a general rule, agencies should count any death due to injuries received in a fight, argument, assault, or commission of a crime in this category."
+  },
+  {
+    "term": "National Incident-Based Reporting System (NIBRS)",
+    "definition": "The FBI’s incident-based reporting system for crimes known to law enforcement.<br /><br />Local, state, and federal law enforcement agencies collect a variety of details about each incident, including the time and location of the crime; the circumstance of the incident; the characteristics of the victim and offender (age, sex, race, and ethnicity); the victim’s relationship to the offender; the involvement of weapons or drugs; property loss; and whether the crime was motivated by bias.<br /><br />Law enforcement agencies are still in the process of adopting NIBRS. During this period of transition, the FBI converts incident-based data to the traditional Summary Reporting System (SRS) format for the purpose of publishing national and state-level crime trends."
+  },
+  {
+    "term": "Negligent manslaughter",
+    "definition": "The killing of another person through negligence. This offense includes deaths resulting from hunting and gun accidents. It does not include accidental traffic fatalities. Negligent manslaughters are not included in the Homicide data on this site."
+  },
+  {
+    "term": "New UCR",
+    "definition": "The new system for storing and collecting Uniform Crime Reporting (UCR) data, which uses a relational database for easier manipulation, querying, and exporting."
+  },
+  {
+    "term": "Nonviolent family offenses",
+    "definition": "Unlawful, nonviolent acts by a family member (or legal guardian) that threaten the physical, mental, or economic well-being or morals of another family member and that are not classifiable as other offenses, such as assault, incest, or statutory rape."
+  },
+  {
+    "term": "Old UCR",
+    "definition": "The mainframe-based system of collecting, separating, and analyzing Uniform Crime Reporting (UCR) data."
+  },
+  {
+    "term": "Operating, promoting, or assisting gambling",
+    "definition": "To unlawfully operate, promote, or assist in the operation of a game of chance, lottery, or other gambling activity."
+  },
+  {
+    "term": "Originating Reference ID (ORI)",
+    "definition": "A law enforcement agency’s unique identification number."
+  },
+  {
+    "term": "Participation",
+    "definition": "Law enforcement agencies participate in the UCR program by submitting data directly to the FBI or a state-level UCR contact. The participation rate is based on the number of state or local agencies that submit data for a full year."
+  },
+  {
+    "term": "Peeping tom",
+    "definition": "To secretly look through a window, doorway, keyhole, or other aperture for the purpose of voyeurism."
+  },
+  {
+    "term": "Pocket-picking",
+    "definition": "The theft of articles from another person’s physical possession by stealth where the victim usually does not become immediately aware of the theft."
+  },
+  {
+    "term": "Pornography",
+    "definition": "The violation of laws or ordinances prohibiting the manufacture, publishing, sale, purchase, or possession of sexually explicit material, including literature, photographs, etc."
+  },
+  {
+    "term": "Property crime",
+    "definition": "In the Uniform Crime Reporting Program, property crime includes the offenses of burglary, larceny theft, motor vehicle theft, and arson. Theft includes taking money or property, but there is no force or threat of force involved. Property crime includes arson because the offense involves the destruction of property; however, arson victims may be subjected to force."
+  },
+  {
+    "term": "Prostitution",
+    "definition": "To engage in commercial sex acts for anything of value."
+  },
+  {
+    "term": "Purchasing prostitution",
+    "definition": "To purchase or trade anything of value for commercial sex acts."
+  },
+  {
+    "term": "Purse-snatching",
+    "definition": "The grabbing or snatching of a purse or handbag from another person."
+  },
+  {
+    "term": "Rape",
+    "definition": "In 2013, the FBI changed its definition of rape. The change broadened the actions that can be considered a rape offense and made the definition inclusive of all genders as potential victims.<br /><br />Old definition: The carnal knowledge of a female forcibly and against her will.<br /><br />New definition: The penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, without the consent of the victim."
+  },
+  {
+    "term": "Return A",
+    "definition": "Monthly summary data submitted by a state or agency to the FBI. Officially called the Monthly Return of Offenses Known to the Police."
+  },
+  {
+    "term": "Robbery",
+    "definition": "The taking, or attempting to take, anything of value under confrontational circumstances from the control, custody, or care of another person by force or threat of force or violence or by putting the victim in fear of immediate harm."
+  },
+  {
+    "term": "Runaway",
+    "definition": "A person under 18 years of age who has left home without permission of their parents or legal guardian."
+  },
+  {
+    "term": "Rural",
+    "definition": "An area is determined rural if it is not within a Metropolitan Statistical Area. Metropolitan Statistical Areas are defined by the Census Bureau."
+  },
+  {
+    "term": "Sex offenses (forcible)",
+    "definition": "Any sexual act directed against another person, without the consent of the victim, including instances where the victim is incapable of giving consent."
+  },
+  {
+    "term": "Sex offenses (nonforcible)",
+    "definition": "Unlawful, nonforcible sexual intercourse."
+  },
+  {
+    "term": "Sexual assault with an object",
+    "definition": "To use an object or instrument to unlawfully penetrate, however slightly, the genital or anal opening of the body of another person, without the consent of the victim, including instances where the victim in incapable of giving consent because of their age or because of their temporary or permanent mental or physical incapacity."
+  },
+  {
+    "term": "Shoplifting",
+    "definition": "The theft, by someone other than an employee of the victim, of goods or merchandise exposed for sale."
+  },
+  {
+    "term": "Simple assault",
+    "definition": "An unlawful physical attack by one person upon another where neither the offender displays a weapon, nor the victim suffers obvious severe or aggravated bodily injury involving apparent broken bones, loss of teeth, possible internal injury, severe laceration, or loss of consciousness."
+  },
+  {
+    "term": "Sodomy",
+    "definition": "Oral or anal sexual intercourse with another person, without the consent of the victim, including instances where the victim is incapable of giving consent because of their age or because of their temporary or permanent mental or physical incapacity."
+  },
+  {
+    "term": "Sports tampering",
+    "definition": "To unlawfully alter, meddle in, or otherwise interfere with a sporting contest or event for the purpose of gaining a gambling advantage."
+  },
+  {
+    "term": "Statuatory rape",
+    "definition": "Nonforcible sexual intercourse with a person who is under the statutory age of consent."
+  },
+  {
+    "term": "Stolen property offenses",
+    "definition": "Receiving, buying, selling, possessing, concealing, or transporting any property with the knowledge that it has been unlawfully taken, as by burglary, embezzlement, fraud, larceny, or robbery, etc."
+  },
+  {
+    "term": "Suburban",
+    "definition": "An area is defined as suburban if it is part of a Metropolitan Statistical Area but not flagged as the core city as determined by the FBI. Metropolitan Statistical Areas are defined by the Census Bureau."
+  },
+  {
+    "term": "Summary Reporting System (SRS)",
+    "definition": "The FBI’s reporting system for summarizing crime trends and arrests known to law enforcement. Data is collected at the aggregate level and lacks incident-based details for crimes other than homicide. Local, state, and federal law enforcement agencies tally the number of Part I offenses along with arrest data for Part I and Part II offenses, and submit the totals in a monthly summary report to the FBI or state Uniform Crime Reporting Program. The Hierarchy Rule governs multiple offenses within this system."
+  },
+  {
+    "term": "Supplementary Homicide Report",
+    "definition": "A detailed report from the FBI on criminal homicides reported to the police, including murders, non-negligent killings, and justifiable homicides."
+  },
+  {
+    "term": "Theft from a building",
+    "definition": "A theft from within a building which is either open to the general public or where the offender has legal access."
+  },
+  {
+    "term": "Theft from a coin-operated machine or device",
+    "definition": "A theft from a machine or device which is operated or activated by the use of coins."
+  },
+  {
+    "term": "Theft from a motor vehicle",
+    "definition": "The theft of articles from a motor vehicle, whether locked or unlocked. Does not include theft of motor vehicle parts or accessories."
+  },
+  {
+    "term": "Theft of motor vehicle parts or accessories",
+    "definition": "The theft of any part or accessory affixed to the interior or exterior of a motor vehicle in a manner which would make the item an attachment of the vehicle, or necessary for its operation."
+  },
+  {
+    "term": "Trespassing",
+    "definition": "To unlawfully enter land, a dwelling, or other real property."
+  },
+  {
+    "term": "Uniform Crime Reporting (UCR) Program",
+    "definition": "The FBI program for collecting, publishing, and archiving crime data in the U.S. <br /><br />The program serves as the national repository for the collection of crime statistics and its primary objective is to generate reliable information for use in law enforcement administration, operation, and management. Participation by law enforcement agencies in the program is voluntary. <br /><br /> The FBI relies on the good faith reporting of its contributing law enforcement agencies. Although the FBI makes every effort through its editing procedures, training practices, and correspondence to ensure the validity of the data it receives, the accuracy of the statistics depends primarily on the adherence of each contributor to the established standards of reporting. It is the responsibility of each state or individual contributing law enforcement agency to submit accurate monthly statistics or correct errors in the data."
+  },
+  {
+    "term": "Urban",
+    "definition": "An area is defined as urban if it is flagged as part of the core city within a Metropolitan Statistical Area as determined by the FBI. Metropolitan Statistical Areas are defined by the Census Bureau."
+  },
+  {
+    "term": "Vandalism",
+    "definition": "To willfully or maliciously destroy, damage, deface, or otherwise injure real or personal property without the consent of the owner or the person having custody or control of it. Arson is excluded."
+  },
+  {
+    "term": "Weapon law violations",
+    "definition": "The violation of laws or ordinances prohibiting the manufacture, sale, purchase, transportation, possession, concealment, or use of firearms, cutting instruments, explosives, incendiary devices, or other deadly weapons."
+  },
+  {
+    "term": "Welfare fraud",
+    "definition": "The use of deceitful statements, practices, or devices to unlawfully obtain welfare benefits."
+  },
+  {
+    "term": "Wire fraud",
+    "definition": "The use of an electric or electronic communications facility to intentionally transmit a false or deceptive message in furtherance of a fraudulent activity."
+  },
+  {
+    "term": "Violent crime",
+    "definition": "In the Uniform Crime Reporting Program, violent crime is composed of four offenses: murder and nonnegligent manslaughter, rape, robbery, and aggravated assault. Violent crimes involve force or threat of force."
+  }
+]
