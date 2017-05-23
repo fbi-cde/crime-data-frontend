@@ -60,13 +60,16 @@ const app = express()
 
 if (isProd) app.use(basicAuth(HTTP_BASIC_USERNAME, HTTP_BASIC_PASSWORD))
 
+const publicDirPath = path.join(__dirname, '..', 'public')
 app.use(gzipStatic(__dirname))
-app.use(gzipStatic(path.join(__dirname, '..', 'public')))
+app.use(gzipStatic(publicDirPath))
 app.use(bodyParser.json())
 
-app.get('/status', (req, res) => res.send(`OK v${packageJson.version}`))
+app.get('/api', (req, res) => {
+  res.sendfile('/swagger/index.html', { root: publicDirPath })
+})
 
-app.get('/api/*', (req, res) => {
+app.get('/api-proxy/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')
   const params = Object.assign({}, req.query, { api_key: apiKey })
 
@@ -99,6 +102,8 @@ app.post('/feedback', (req, res) => {
     .then(issue => res.send(issue.data))
     .catch(e => res.status(e.response.status).end())
 })
+
+app.get('/status', (req, res) => res.send(`OK v${packageJson.version}`))
 
 app.get('/*', (req, res) => {
   match({ history, routes, location: req.url }, (err, redirect, props) => {

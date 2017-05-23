@@ -5,7 +5,7 @@ import { mapToApiOffense } from './offenses'
 import { slugify } from './text'
 import lookupUsa, { nationalKey } from './usa'
 
-const API = '/api'
+const API = '/api-proxy'
 
 const dimensionEndpoints = {
   ageNum: 'age_num',

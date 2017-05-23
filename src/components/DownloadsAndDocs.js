@@ -58,10 +58,7 @@ const DownloadsAndDocs = () => (
                   Uniform Crime Reporting (UCR) Program
                 </Term> data.
               </p>
-              <a
-                className="btn btn-primary btn-sm fs-14"
-                href="https://crime-data-api.fr.cloud.gov/"
-              >
+              <a className="btn btn-primary btn-sm fs-14" href="/api">
                 See API documentation
               </a>
             </div>

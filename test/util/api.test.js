@@ -4,7 +4,6 @@ import sinon from 'sinon'
 
 import api from '../../src/util/api'
 import * as http from '../../src/util/http'
-import { nationalKey } from '../../src/util/usa'
 
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)
@@ -44,7 +43,8 @@ describe('api utility', () => {
       const args = { ...params, type: 'offender', dim: 'sexCode' }
       api.getNibrs(args).then(() => {
         const spyArgs = spy.args[0]
-        const expectedUrl = '/api/offenders/count/states/CA/sex_code/offenses'
+        const expectedUrl =
+          '/api-proxy/offenders/count/states/CA/sex_code/offenses'
         expect(spyArgs[0]).toEqual(expectedUrl)
         expect(spyArgs[1].explorer_offense).toEqual(params.crime)
         done()
