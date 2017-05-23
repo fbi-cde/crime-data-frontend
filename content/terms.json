@@ -16,6 +16,10 @@
     "definition": "An unlawful attack by one person upon another."
   },
   {
+    "term": "Assaults on law enforcement officers",
+    "definition": "The Assaults on Law Enforcement Officers dataset consists of reported assaults against law enforcement officers. The UCR Program defines law enforcement officers as individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically to pay sworn law enforcement."
+  },
+  {
     "term": "Assisting or promoting prostitution",
     "definition": "To solicit customers or transport people for prostitution purposes; to own, manage, or operate a dwelling or other establishment for the purpose of providing a place where prostitution is performed; or to otherwise assist or promote prostitution"
   },
@@ -138,6 +142,10 @@
   {
     "term": "Gambling equipment violations",
     "definition": "To unlawfully manufacture, sell, buy, possess, or transport equipment, devices, or goods used for gambling purposes."
+  },
+  {
+    "term": "Hate crime",
+    "definition": "The Hate Crime Statistics dataset provides annual statistics on the number of incidents, offenses, victims, and offenders in reported crimes that are motivated in whole, or in part, by an offender’s bias against the victim’s perceived race, gender, gender identity, religion, disability, sexual orientation, and ethnicity. Hate crime data is captured by including the element of bias in offenses already being reported to the UCR Program.<br /><br />All law enforcement agencies, whether they submit summary (SRS) or incident-based (NIBRS) reports, can contribute hate crime data to the UCR using forms specified to collect such information.<br /><br />Please see the UCR resources provided by the the FBI <a href=\"https://ucr.fbi.gov/hate-crime/2015/home/resource-pages/abouthatecrime_final\">for more information on hate crime</a></p>"
   },
     {
     "term": "Hierarchy rule",

@@ -70,25 +70,25 @@ const About = ({ dispatch }) => (
               The Crime Data Explorer publishes nation-wide crime data collected
               by the FBI in a digital format. The tool allows you to view
               trends and download bulk data allowing you to get a better
-              understanding of crime across the country.
+              understanding of reported crime across the country.
             </p>
           </div>
           <div className="md-col md-col-3">
             <h3 className="mt-tiny mb2 fs-18 sm-fs-22">Available datasets</h3>
             <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
               <li className="mb2">
-                <Term id="Summary Statistics (SRS)">
+                <Term id="Summary Reporting System (SRS)">
                   Summary Statistics (SRS)
                 </Term>
               </li>
               <li className="mb2">
-                <Term id="Incident-based data">
+                <Term id="National Incident-Based Reporting System (NIBRS)">
                   Incident-based data
                 </Term>
               </li>
               <li className="mb2">
-                <Term id="LEOKA">
-                  Assaults on Law Enforcement Officers
+                <Term id="Assaults on law enforcement officers">
+                  Assaults on law enforcement officers
                 </Term>
               </li>
               <li className="mb2">
@@ -105,29 +105,31 @@ const About = ({ dispatch }) => (
         <div className="clearfix">
           <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-18 serif">
             <p className="mb3">
-              The data available from the FBI’s Uniform Crime Reporting program (UCR) is made up of reports from police agencies across the country. Law enforcement agencies submit data to the FBI in one of two formats: summary statistics (SRS) or incident-based reports (NIBRS). The Crime Data Explorer makes both types of data available through the API and the bulk downloads. SRS data is available for the years 1960 to 2014. Incident-based data began being collected much more recently and is available here from 1991-2014.
+              The data available from the FBI’s Uniform Crime Reporting program (UCR) is made up of reports from police agencies across the country. Law enforcement agencies voluntarily submit data to the FBI in one of two formats: summary statistics (SRS) or incident-based reports (NIBRS). The Crime Data Explorer makes both types of data available through the API and the bulk downloads. SRS data is available for the years 1960 to 2014. Incident-based data began being collected much more recently and is available here from 1991-2014.
             </p>
             <div className="bold">Summary (SRS) data</div>
             <p className="mb3">
-              Summary data is made up of counts of each type of crime.
+              Summary data is made up of counts of each type of crime reported.
             </p>
             <div className="bold">Incident-based (NIBRS) data</div>
             <p className="mb3 md-m0">
-              Incident-based (NIBRS) data captures details on each single crime
-              incident, providing context that is left out of the summary data.
+              Incident-based (NIBRS) data captures details of each reported crime
+              incident, providing context that is not provided by the summary data.
             </p>
           </div>
           <div className="md-col md-col-3">
             <h3 className="mt-tiny mb2 fs-18 sm-fs-22">UCR Resources</h3>
             <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
               <li className="mb1">
-                <a href="#!">UCR Home</a>
+                <a href="https://ucr.fbi.gov/">UCR Home</a>
               </li>
               <li className="mb1">
-                <a href="#!">New UCR</a>
+                <a href="https://ucr.fbi.gov/new-ucr-project">New UCR</a>
               </li>
               <li className="mb1">
-                <a href="#!">Publications and reports</a>
+                <a href="https://ucr.fbi.gov/nibrs/nibrs-user-manual">
+                  NIBRS user manual
+                </a>
               </li>
             </ul>
           </div>
