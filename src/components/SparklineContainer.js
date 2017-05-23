@@ -69,12 +69,9 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
   )
 }
 
-const mapStateToProps = ({ crime, place, since, summaries, until }) => ({
-  crime,
-  place,
-  since,
+const mapStateToProps = ({ filters, summaries }) => ({
+  ...filters,
   summaries,
-  until,
 })
 
 export default connect(mapStateToProps)(SparklineContainer)
