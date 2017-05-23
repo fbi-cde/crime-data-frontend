@@ -45,6 +45,11 @@ const NibrsContainer = ({ crime, dispatch, nibrs, place, since, until }) => {
       incident-based (NIBRS)
     </Term>
   )
+  const unestimatedTerm = (
+    <Term id="unestimated data" dispatch={dispatch}>
+      unestimated
+    </Term>
+  )
 
   const nibrsFirstYear = initialNibrsYear({ place, since })
 
@@ -86,18 +91,33 @@ const NibrsContainer = ({ crime, dispatch, nibrs, place, since, until }) => {
             {startCase(place)} started reporting {nibrsTerm} data
             to the FBI in {nibrsFirstYear}.
           </p>}
-        <p className="m0">
-          {!error &&
-            data &&
-            `
-            There were ${formatNumber(totalCount)} individual ${crime} incidents
-            reported to the FBI in ${startCase(place)} between ${nibrsFirstYear} and
-            ${until}. This number may differ from the totals in the previous chart
-            because of the differences in data sources.
-          `}
-          Learn more about the{' '}
-          <a className="underline" href={fbiLink}>FBI’s data collections</a>.
-        </p>
+        {!error &&
+          data &&
+          <p className="m0">
+            There were {formatNumber(totalCount)} individual {crime} incidents
+            reported to the FBI in {startCase(place)}
+            {' '}
+            between
+            {' '}
+            {nibrsFirstYear}
+            {' '}
+            and
+            {' '}
+            {until}
+            {' '}
+            by agencies reporting
+            {' '}
+            {nibrsTerm}
+            {' '}
+            data. The charts below feature
+            {' '}
+            {unestimatedTerm}
+            {' '}
+            data.
+            Learn more about the
+            {' '}
+            <a className="underline" href={fbiLink}>FBI’s data collections</a>.
+          </p>}
       </div>
       {content}
       {!loading &&

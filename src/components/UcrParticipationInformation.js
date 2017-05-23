@@ -87,8 +87,7 @@ const UcrParticipationInformation = ({
               {place !== nationalKey ? startCase(place) : 'the nation'}{' '}
               based on data voluntarily reported by{' '}
               {formatNumber(data.participating_agencies)}{' '}
-              law enforcement agencies. The charts below
-              feature estimated data.
+              law enforcement agencies.
             </p>
             <h3 className="mt4 mb1 fs-18">UCR resources</h3>
             <ul className="m0 p0 fs-14 left-bars">
