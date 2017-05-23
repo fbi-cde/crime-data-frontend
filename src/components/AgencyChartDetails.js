@@ -2,16 +2,17 @@ import React from 'react'
 
 const highlight = v => <span className="bold blue">{v}</span>
 
-const AgencyChartDetails = ({ colors, data, keys }) => {
+const AgencyChartDetails = ({ colors, crime, data, keys }) => {
   const { year, reported } = data
 
   return (
     <div className="mb3 lg-flex">
-      <div className="mb1 flex-auto">
-        In {highlight(year)}, there were {highlight(reported)} reported
-        homicides in Hoover.
+      <div className="mb1 sm-mr7 flex-auto">
+        In {highlight(year)}, there were {highlight(reported)}{' '}
+        incidents of {crime} reported, which was an [increase] from
+        the previous year.
       </div>
-      <div style={{ width: 210 }}>
+      <div className="flex-none" style={{ width: 210 }}>
         <table className="mb1 lg-m0 p2 bg-blue-white">
           <thead className="fs-12">
             <tr>

@@ -11,6 +11,7 @@ import NoData from './NoData'
 import TrendChart from './TrendChart'
 import TrendSourceText from './TrendSourceText'
 import { generateCrimeReadme } from '../util/content'
+import { getPlaceInfo } from '../util/place'
 import mungeSummaryData from '../util/summary'
 
 const TrendContainer = ({
@@ -103,13 +104,12 @@ TrendContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = state => {
-  const { filters, summaries } = state
-  return {
-    ...filters,
-    summaries,
-  }
-}
+const mapStateToProps = ({ filters, summaries }) => ({
+  ...filters,
+  ...getPlaceInfo(filters),
+  summaries,
+})
+
 const mapDispatchToProps = dispatch => ({ dispatch })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrendContainer)

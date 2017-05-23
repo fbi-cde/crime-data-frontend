@@ -13,6 +13,7 @@ import { updateApp } from '../actions/composite'
 import { showTerm } from '../actions/glossary'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offenses from '../util/offenses'
+import { oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
 import ucrParticipation from '../util/ucr'
 import lookup from '../util/usa'
@@ -64,11 +65,10 @@ class Explorer extends React.Component {
       return <NotFound />
     }
 
-    const { agencies, filters, summaries } = appState
+    const { agencies } = appState
     const noNibrs = ['violent-crime', 'property-crime']
-    const participation = ucrParticipation(
-      placeType === 'agency' ? 'ohio' : place,
-    )
+    const placeNorm = placeType === 'agency' ? oriToState(place) : place
+    const participation = ucrParticipation(placeNorm)
     const showNibrs = !noNibrs.includes(crime) && participation.nibrs
     const isAgency = placeType === 'agency'
 
@@ -100,7 +100,6 @@ class Explorer extends React.Component {
               placeType={placeType}
             />
             <UcrParticipationContainer />
-            <hr className="mt0 mb3" />
             {isAgency && <SparklineContainer />}
             {isAgency ? <AgencyChartContainer /> : <TrendContainer />}
             {showNibrs && <NibrsContainer />}

@@ -2,6 +2,7 @@ import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
 import { mapToApiOffense } from './offenses'
+import { oriToState } from './ori'
 import { slugify } from './text'
 import lookupUsa, { nationalKey } from './usa'
 
@@ -41,7 +42,8 @@ const getNibrs = ({ crime, dim, place, type }) => {
 }
 
 const getNibrsRequests = params => {
-  const { crime, place } = params
+  const { crime, place, placeType } = params
+  const placeNorm = placeType === 'agency' ? oriToState(place) : place
 
   const slices = [
     { type: 'offender', dim: 'sexCode' },
@@ -54,7 +56,7 @@ const getNibrsRequests = params => {
     { type: 'victim', dim: 'relationship' },
   ]
 
-  return slices.map(s => getNibrs({ ...s, crime, place }))
+  return slices.map(s => getNibrs({ ...s, crime, place: placeNorm }))
 }
 
 const fetchResults = (key, path) =>

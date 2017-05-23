@@ -3,28 +3,25 @@ import React, { Component } from 'react'
 import AgencySearchResults from './AgencySearchResults'
 
 class AgencySearch extends Component {
-  state = { search: '', displaySelection: true }
+  state = { search: '', showSelection: true }
 
   handleChange = e => {
     this.setState({ search: e.target.value })
   }
 
-  handleClick = datum => e => {
+  handleClick = d => e => {
     e.preventDefault()
-    this.setState({ displaySelection: true })
-    this.props.onChange({
-      place: datum.ori,
-      placeType: 'agency',
-    })
+    this.setState({ search: '', showSelection: true })
+    this.props.onChange({ place: d.ori, placeType: 'agency' })
   }
 
   removeSelection = () => {
-    this.setState({ displaySelection: false, search: '' })
+    this.setState({ showSelection: false, search: '' })
   }
 
   render() {
     const { agencies, ori, state } = this.props
-    const { displaySelection, search } = this.state
+    const { showSelection, search } = this.state
 
     const data = Object.keys(agencies[state]).map(agencyOri => {
       const agency = agencies[state][agencyOri]
@@ -44,7 +41,7 @@ class AgencySearch extends Component {
 
     return (
       <div className="mt2">
-        {selected && displaySelection
+        {selected && showSelection
           ? <div className="mb2 relative">
               <input
                 type="text"

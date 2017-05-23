@@ -1,4 +1,5 @@
 import offenses from './offenses'
+import { oriToState } from './ori'
 import { slugify } from './text'
 import lookupUsa from './usa'
 
@@ -15,9 +16,11 @@ export const shouldFetchUcr = ({ place }) => !!isValidPlace(place)
 export const shouldFetchSummaries = ({ crime, place, placeType }) =>
   isValidCrime(crime) && isValidPlace(place, placeType)
 
-export const shouldFetchNibrs = ({ crime, place }) => {
-  if (noNibrs.includes(crime) || !isValidPlace(place)) return false
-  const coverage = lookup(place)
+export const shouldFetchNibrs = ({ crime, place, placeType }) => {
+  if (noNibrs.includes(crime) || !isValidPlace(place, placeType)) return false
+
+  const placeNorm = placeType === 'agency' ? oriToState(place) : place
+  const coverage = lookup(placeNorm)
   return coverage && coverage.nibrs
 }
 
