@@ -88,7 +88,7 @@ const About = ({ dispatch }) => (
               </li>
               <li className="mb2">
                 <Term dispatch={dispatch} id="LEOKA">
-                  Law Enforcement Officers Assaulted and Killed data
+                  Assaults on Law Enforcement Officers
                 </Term>
               </li>
               <li className="mb2">
