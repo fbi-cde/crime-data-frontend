@@ -1,5 +1,6 @@
 import uniqBy from 'lodash.uniqby'
 import React from 'react'
+import { connect } from 'react-redux'
 
 import AgencyChart from './AgencyChart'
 import Loading from './Loading'
@@ -15,9 +16,8 @@ const getContent = ({ place, summary }) => {
   return <AgencyChart data={dataClean} />
 }
 
-const AgencyChartContainer = props => {
-  const { crime, place } = props
-  const content = getContent(props)
+const AgencyChartContainer = ({ crime, place, summary }) => {
+  const content = getContent({ place, summary })
 
   return (
     <div>
@@ -31,4 +31,13 @@ const AgencyChartContainer = props => {
   )
 }
 
-export default AgencyChartContainer
+const mapStateToProps = ({ filters, summaries }) => ({
+  crime: filters.crime,
+  place: filters.place,
+  summary: summaries,
+})
+const mapDispatchToProps = dispatch => ({ dispatch })
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  AgencyChartContainer,
+)
