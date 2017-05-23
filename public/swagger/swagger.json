@@ -1420,7 +1420,7 @@
     "http"
   ],
   "host": "",
-  "basePath": "/api/",
+  "basePath": "/api-proxy/",
   "produces": [
     "application/json",
     "text/csv"
