@@ -5,10 +5,10 @@ import AgencyChartContainer from './AgencyChartContainer'
 import ExplorerHeader from './ExplorerHeader'
 import NibrsContainer from './NibrsContainer'
 import NotFound from './NotFound'
-import Sidebar from './Sidebar'
+import SidebarContainer from './SidebarContainer'
 import SparklineSection from './SparklineSection'
 import TrendContainer from './TrendContainer'
-import UcrParticipationInformation from './UcrParticipationInformation'
+import UcrParticipationContainer from './UcrParticipationContainer'
 import { updateApp } from '../actions/composite'
 import { showTerm } from '../actions/glossary'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
@@ -22,13 +22,6 @@ const getPlaceInfo = ({ place, placeType }) => ({
 })
 
 class Explorer extends React.Component {
-  constructor(props) {
-    super(props)
-    this.props = props
-    this.handleSidebarChange = ::this.handleSidebarChange
-    this.toggleSidebar = ::this.toggleSidebar
-  }
-
   componentDidMount() {
     const { appState, dispatch, router } = this.props
     const { since, until } = appState.filters
@@ -51,12 +44,12 @@ class Explorer extends React.Component {
     dispatch(updateApp(filters))
   }
 
-  handleSidebarChange(change) {
+  handleSidebarChange = change => {
     const { router } = this.props
     this.props.dispatch(updateApp(change, router))
   }
 
-  toggleSidebar() {
+  toggleSidebar = () => {
     const { dispatch } = this.props
     const { isOpen } = this.props.appState.sidebar
 
@@ -74,8 +67,7 @@ class Explorer extends React.Component {
       return <NotFound />
     }
 
-    const { agencies, filters, nibrs, sidebar, summaries, ucr } = appState
-    const { since, until } = filters
+    const { agencies, filters, summaries } = appState
     const noNibrs = ['violent-crime', 'property-crime']
     const participation = ucrParticipation(place)
     const showNibrs = !noNibrs.includes(crime) && participation.nibrs
@@ -99,13 +91,7 @@ class Explorer extends React.Component {
             </button>
           </div>
         </div>
-        <Sidebar
-          dispatch={dispatch}
-          filters={filters}
-          isOpen={sidebar.isOpen}
-          onChange={this.handleSidebarChange}
-          router={router}
-        />
+        <SidebarContainer onChange={this.handleSidebarChange} router={router} />
         <div className="site-content">
           <div className="container-main mx-auto px2 md-py3 lg-px8">
             <ExplorerHeader
@@ -114,48 +100,18 @@ class Explorer extends React.Component {
               place={place}
               placeType={placeType}
             />
-            <UcrParticipationInformation
-              dispatch={dispatch}
-              place={place}
-              placeType={placeType}
-              until={until}
-              ucr={ucr}
-            />
+            <UcrParticipationContainer />
             <hr className="mt0 mb3" />
             {isAgency &&
               <SparklineSection
                 crime={crime}
                 place={place}
-                since={since}
+                since={filters.since}
                 summaries={summaries}
-                until={until}
+                until={filters.until}
               />}
-            {isAgency
-              ? <AgencyChartContainer
-                  crime={crime}
-                  place={place}
-                  since={since}
-                  summary={summaries}
-                  until={until}
-                />
-              : <TrendContainer
-                  crime={crime}
-                  dispatch={dispatch}
-                  place={place}
-                  placeType={placeType}
-                  since={since}
-                  summaries={summaries}
-                  until={until}
-                />}
-            {showNibrs &&
-              <NibrsContainer
-                crime={params.crime}
-                dispatch={dispatch}
-                nibrs={nibrs}
-                place={place}
-                since={since}
-                until={until}
-              />}
+            {isAgency ? <AgencyChartContainer /> : <TrendContainer />}
+            {showNibrs && <NibrsContainer />}
             <hr className="mt0 mb3" />
             <AboutTheData
               crime={crime}

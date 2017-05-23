@@ -2,6 +2,7 @@ import { format } from 'd3-format'
 import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { connect } from 'react-redux'
 
 import ErrorCard from './ErrorCard'
 import Loading from './Loading'
@@ -150,4 +151,13 @@ NibrsContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-export default NibrsContainer
+const mapStateToProps = state => {
+  const { filters, nibrs } = state
+  return {
+    ...filters,
+    nibrs,
+  }
+}
+const mapDispatchToProps = dispatch => ({ dispatch })
+
+export default connect(mapStateToProps, mapDispatchToProps)(NibrsContainer)

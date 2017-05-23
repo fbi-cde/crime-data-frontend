@@ -2,6 +2,7 @@ import { format } from 'd3-format'
 import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { connect } from 'react-redux'
 
 import Loading from './Loading'
 import PlaceThumbnail from './PlaceThumbnail'
@@ -39,7 +40,7 @@ const locationLinks = (place, type) => {
   return links.filter(l => l.text)
 }
 
-const UcrParticipationInformation = ({ place, placeType, until, ucr }) => {
+const UcrParticipationContainer = ({ place, placeType, until, ucr }) => {
   const csvLinks = participationCsvLink(place, placeType)
   const links = locationLinks(place, placeType).concat(csvLinks)
   const participation = ucrParticipation(place)
@@ -97,7 +98,7 @@ const UcrParticipationInformation = ({ place, placeType, until, ucr }) => {
   )
 }
 
-UcrParticipationInformation.propTypes = {
+UcrParticipationContainer.propTypes = {
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
   until: PropTypes.number.isRequired,
@@ -107,4 +108,15 @@ UcrParticipationInformation.propTypes = {
   }).isRequired,
 }
 
-export default UcrParticipationInformation
+const mapStateToProps = state => {
+  const { filters, ucr } = state
+  const { place, placeType, until } = filters
+  return {
+    place,
+    placeType,
+    ucr,
+    until,
+  }
+}
+
+export default connect(mapStateToProps)(UcrParticipationContainer)

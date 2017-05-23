@@ -3,6 +3,7 @@ import startCase from 'lodash.startcase'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { connect } from 'react-redux'
 
 import DownloadDataBtn from './DownloadDataBtn'
 import Loading from './Loading'
@@ -102,4 +103,13 @@ TrendContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-export default TrendContainer
+const mapStateToProps = state => {
+  const { filters, summaries } = state
+  return {
+    ...filters,
+    summaries,
+  }
+}
+const mapDispatchToProps = dispatch => ({ dispatch })
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrendContainer)
