@@ -6,7 +6,13 @@ import LocationSelect from './LocationSelect'
 import { oriToState } from '../util/ori'
 import { nationalKey } from '../util/usa'
 
-const LocationFilter = ({ agencies, onChange, place, placeType }) => {
+const LocationFilter = ({
+  agencies,
+  onChange,
+  place,
+  placeType,
+  showSearch,
+}) => {
   const isNational = place === nationalKey
   const isAgency = placeType === 'agency'
   const selected = isAgency ? oriToState(place) : place
@@ -15,7 +21,8 @@ const LocationFilter = ({ agencies, onChange, place, placeType }) => {
     <div id="location" className="mb4">
       <div className="mb3 fs-22 bold border-bottom">Location</div>
       <LocationSelect onChange={onChange} selected={startCase(selected)} />
-      {selected &&
+      {showSearch &&
+        selected &&
         !isNational &&
         <AgencySearch
           agencies={agencies.data}
@@ -29,6 +36,7 @@ const LocationFilter = ({ agencies, onChange, place, placeType }) => {
 
 LocationFilter.defaultProps = {
   selected: '',
+  showSearch: false,
 }
 
 export default LocationFilter
