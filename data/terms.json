@@ -112,10 +112,6 @@
     "definition": "The unlawful misappropriation by an offender to their own use or purpose of money, property, or some other thing of value entrusted to their care, custody, or control."
   },
   {
-    "term": "Estimated data",
-    "definition": "The FBI calculates estimates for participating agencies that do not provide 12 months of complete data. For agencies supplying three to 11 months of data, the national UCR Program estimates for the missing data by following a standard estimation process using the data provided by the agency. If an agency has supplied less than three months of data, the FBI computes estimates by using the known crime figures of similar areas within a state and assigning the same proportion of crime volumes to nonreporting agencies. The estimation process considers the following: population size covered by the agency; type of jurisdiction, e.g., police department versus sheriff’s office; and geographic location."
-  },
-  {
     "term": "Extortion and blackmail",
     "definition": "To unlawfully obtain money, property, or any other thing of value, either tangible or intangible, through the use or threat of force, misuse of authority, threat of criminal prosecution, threat of destruction of reputation or social standing, or through other coercive means."
   },
@@ -145,7 +141,7 @@
   },
   {
     "term": "Hate crime",
-    "definition": "The Hate Crime Statistics dataset provides annual statistics on the number of incidents, offenses, victims, and offenders in reported crimes that are motivated in whole, or in part, by an offender’s bias against the victim’s perceived race, gender, gender identity, religion, disability, sexual orientation, and ethnicity. Hate crime data is captured by including the element of bias in offenses already being reported to the UCR Program.<br /><br />All law enforcement agencies, whether they submit summary (SRS) or incident-based (NIBRS) reports, can contribute hate crime data to the UCR using forms specified to collect such information.<br /><br />Please see the UCR resources provided by the the FBI <a href=\"https://ucr.fbi.gov/hate-crime/2015/home/resource-pages/abouthatecrime_final\">for more information on hate crime</a></p>"
+    "definition": "The Hate Crime Statistics dataset provides annual statistics on the number of incidents, offenses, victims, and offenders in reported crimes that are motivated in whole, or in part, by an offender’s bias against the victim’s perceived race, gender, gender identity, religion, disability, sexual orientation, and ethnicity. Hate crime data is captured by including the element of bias in offenses already being reported to the UCR Program.<br /><br />All law enforcement agencies, whether they submit summary (SRS) or incident-based (NIBRS) reports, can contribute hate crime data to the UCR using forms specified to collect such information.<br /><br />Please see the UCR resources provided by the the FBI <a href="https://ucr.fbi.gov/hate-crime/2015/home/resource-pages/abouthatecrime_final">for more information on hate crime</a></p>"
   },
     {
     "term": "Hierarchy rule",
@@ -273,14 +269,6 @@
   },
   {
     "term": "Rape",
-    "definition": "In 2013, the FBI changed its definition of rape. The change broadened the actions that can be considered a rape offense and made the definition inclusive of all genders as potential victims.<br /><br />Old definition: The carnal knowledge of a female forcibly and against her will.<br /><br />New definition: The penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, without the consent of the victim."
-  },
-  {
-    "term": "Rape (legacy definition)",
-    "definition": "In 2013, the FBI changed its definition of rape. The change broadened the actions that can be considered a rape offense and made the definition inclusive of all genders as potential victims.<br /><br />Old definition: The carnal knowledge of a female forcibly and against her will.<br /><br />New definition: The penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, without the consent of the victim."
-  },
-  {
-    "term": "Rape (revised definition)",
     "definition": "In 2013, the FBI changed its definition of rape. The change broadened the actions that can be considered a rape offense and made the definition inclusive of all genders as potential victims.<br /><br />Old definition: The carnal knowledge of a female forcibly and against her will.<br /><br />New definition: The penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, without the consent of the victim."
   },
   {
