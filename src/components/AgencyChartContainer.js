@@ -5,14 +5,29 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import AgencyChart from './AgencyChart'
+import DownloadDataBtn from './DownloadDataBtn'
 import Loading from './Loading'
 import NoData from './NoData'
 import { getAgency } from '../util/ori'
 
+const mockData = [
+  { cleared: 16, reported: 20, year: 2004 },
+  { cleared: 2, reported: 4, year: 2005 },
+  { cleared: 12, reported: 17, year: 2006 },
+  { cleared: 5, reported: 10, year: 2007 },
+  { cleared: 9, reported: 10, year: 2008 },
+  { cleared: 4, reported: 6, year: 2009 },
+  { cleared: 5, reported: 11, year: 2010 },
+  { cleared: 3, reported: 5, year: 2011 },
+  { cleared: 7, reported: 10, year: 2012 },
+  { cleared: 13, reported: 16, year: 2013 },
+  { cleared: 16, reported: 20, year: 2014 },
+]
+
 const getContent = ({ crime, place, summary }) => {
   if (summary.loading) return <Loading />
 
-  const data = summary.data[place]
+  const data = summary.data[place] || mockData
   if (!data || data.length === 0) return <NoData />
 
   const dataClean = uniqBy(data.filter(d => d.year >= 2004), 'year')
@@ -38,6 +53,15 @@ const AgencyChartContainer = ({
           {info.agency_name} [Agency Type], {since}-{until}
         </h2>
         {content}
+        <DownloadDataBtn
+          data={[
+            {
+              data: mockData,
+              filename: `${place}-${crime}-${since}–${until}.csv`,
+            },
+          ]}
+          filename={`${place}-${crime}-${since}–${until}`}
+        />
       </div>
     </div>
   )
