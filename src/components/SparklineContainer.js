@@ -28,7 +28,7 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
     },
     {
       data: data ? data[nationalKey] : [],
-      place: 'US',
+      place: 'United States',
       url: `/explorer/${crime}`,
     },
   ]
@@ -39,7 +39,7 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
 
   return (
     <div className="mb4">
-      <h3>State and national crime rates</h3>
+      <h3 className="mt0 mb2 fs-18">State and national crime rates</h3>
       <div className="clearfix mxn1">
         {sparklines.map((s, i) => (
           <div className="sm-col sm-col-6 mb1 px1" key={i}>
@@ -51,7 +51,9 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
                   className="btn btn-sm btn-primary fs-12 regular"
                   href={s.url}
                 >
-                  Explore {s.place === 'US' ? 'national' : 'state'} data
+                  Explore{' '}
+                  {s.place === 'United States' ? 'national' : 'state'}{' '}
+                  data
                 </a>
               </div>
               <div className="flex-auto center">
@@ -66,6 +68,9 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
           </div>
         ))}
       </div>
+      <p className="mt1 mb0 fs-12 serif italic">
+        Rates are only available for state and national-level data.
+      </p>
     </div>
   )
 }

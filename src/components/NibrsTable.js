@@ -15,7 +15,7 @@ const NibrsTable = ({ data, title, sortByValue }) => {
       {title && <div className="mb1 fs-16 bold blue">{title}</div>}
       <table className="fs-12 table-striped">
         <tbody>
-          {data.map((d, i) => (
+          {data.filter(d => d.key && d.count > 0).map((d, i) => (
             <tr key={i}>
               <td className="pl1 lh-24">{d.key}</td>
               <td className="pr2 lh-24 right-align">{fmt(d.count)}</td>
