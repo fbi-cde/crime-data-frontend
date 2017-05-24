@@ -8,7 +8,7 @@ import Loading from './Loading'
 import PlaceThumbnail from './PlaceThumbnail'
 import Term from './Term'
 import content from '../util/content'
-import { oriToState } from '../util/ori'
+import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
 import ucrParticipation from '../util/ucr'
 import lookupUsa, { nationalKey } from '../util/usa'
@@ -42,7 +42,14 @@ const locationLinks = (place, type) => {
   return links.filter(l => l.text)
 }
 
-const UcrParticipationContainer = ({ crime, place, placeType, until, ucr }) => {
+const UcrParticipationContainer = ({
+  agencyInfo,
+  crime,
+  place,
+  placeType,
+  until,
+  ucr,
+}) => {
   const csvLinks = participationCsvLink(place, placeType)
   const links = locationLinks(place, placeType).concat(csvLinks)
   const participation = ucrParticipation(place)
@@ -51,7 +58,7 @@ const UcrParticipationContainer = ({ crime, place, placeType, until, ucr }) => {
   const data = ucrPlaceInfo && { ...ucrPlaceInfo.find(p => p.year === until) }
 
   const isAgency = placeType === 'agency'
-  const usState = isAgency ? oriToState(place) : place
+  const usState = startCase(isAgency ? oriToState(place) : place)
 
   const reports = (
     <span>
@@ -74,16 +81,22 @@ const UcrParticipationContainer = ({ crime, place, placeType, until, ucr }) => {
         {isAgency &&
           <div>
             <p className="serif">
-              The [Agency Name] is located
-              in [County Name], [State]. This law enforcement
+              The {agencyInfo.agency_name} [Agency Type] is located
+              in [County Name], {usState}. This law enforcement
               agency reports [incident-based data (NIBRS)] to the
               Uniform Crime Reporting (UCR) program.
             </p>
-            <h3 className="mt4 mb1 fs-18">UCR resources</h3>
+            <h3 className="mt4 mb1 fs-18">Resources</h3>
             <ul className="m0 p0 fs-14 left-bars">
-              <li className="mb1"><a href="#!">About {crime} data</a></li>
-              <li className="mb1"><a href="#!">[State] UCR Program</a></li>
-              <li className="mb1"><a href="#!">FBI UCR Program</a></li>
+              <li className="mb1">
+                <a href="#!">About {crime} data</a>
+              </li>
+              <li className="mb1">
+                <a href="#!">{usState} UCR Program</a>
+              </li>
+              <li className="mb1">
+                <a href="#!">FBI UCR Program</a>
+              </li>
             </ul>
           </div>}
         {!isAgency && ucr.loading && <Loading />}
@@ -114,7 +127,7 @@ const UcrParticipationContainer = ({ crime, place, placeType, until, ucr }) => {
           </div>}
       </div>
       <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">
-        <PlaceThumbnail selected={startCase(usState)} />
+        <PlaceThumbnail selected={usState} />
       </div>
     </div>
   )
@@ -131,14 +144,16 @@ UcrParticipationContainer.propTypes = {
   }).isRequired,
 }
 
-const mapStateToProps = state => {
-  const { filters, ucr } = state
-  const { until } = filters
+const mapStateToProps = ({ agencies, filters, ucr }) => {
+  const { place, placeType } = getPlaceInfo(filters)
+  const agencyInfo = placeType === 'agency' && getAgency(agencies, place)
+
   return {
+    agencyInfo,
     ...filters,
-    ...getPlaceInfo(filters),
+    place,
+    placeType,
     ucr,
-    until,
   }
 }
 

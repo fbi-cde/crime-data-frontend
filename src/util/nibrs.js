@@ -174,6 +174,7 @@ const relationships = data => {
       {
         data: reshape(relationshipData, 'offender_relationship'),
         noun: 'relationship',
+        sortByValue: true,
         type: 'table',
       },
     ],
@@ -195,6 +196,7 @@ const locations = data => {
       {
         data: reshape(locationData, 'location_name'),
         noun: 'location',
+        sortByValue: true,
         type: 'table',
       },
     ],

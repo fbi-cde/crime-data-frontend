@@ -4,29 +4,28 @@ import React from 'react'
 
 const fmt = format(',')
 
-const NibrsTable = ({ data, title }) => {
+const NibrsTable = ({ data, title, sortByValue }) => {
   const agg = (a, b) => a + b.count
   const total = data.reduce(agg, 0)
 
+  if (sortByValue) data.sort((a, b) => +b.count - +a.count)
+
   return (
-    <div>
-      {title &&
-        <div className="px2 py1 bold line-height-1 bg-blue-lighter">
-          {title}
-        </div>}
+    <div className="mb3">
+      {title && <div className="mb1 fs-16 bold blue">{title}</div>}
       <table className="fs-12 table-striped">
         <tbody>
           {data.map((d, i) => (
             <tr key={i}>
-              <td className="pl4 lh-24">{d.key}</td>
-              <td className="pr4 lh-24 right-align">{fmt(d.count)}</td>
+              <td className="pl1 lh-24">{d.key}</td>
+              <td className="pr2 lh-24 right-align">{fmt(d.count)}</td>
             </tr>
           ))}
         </tbody>
         <tfoot>
           <tr>
-            <td className="pl4 lh-32 border-top border-blue-lighter">Total</td>
-            <td className="pr4 lh-32 right-align border-top border-blue-lighter">
+            <td className="pl1 lh-24 border-top border-blue-lighter">Total</td>
+            <td className="pr2 lh-24 right-align border-top border-blue-lighter">
               {fmt(total)}
             </td>
           </tr>
