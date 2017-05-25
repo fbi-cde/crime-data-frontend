@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import Loading from './Loading'
 import PlaceThumbnail from './PlaceThumbnail'
 import Term from './Term'
+import { API } from '../util/api'
 import content from '../util/content'
 import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
@@ -25,7 +26,7 @@ const participationCsvLink = (place, type) => {
   return [
     {
       text: 'Download participation and population data',
-      url: `/api/${path}?output=csv`,
+      url: `${API}/${path}?output=csv`,
     },
   ]
 }

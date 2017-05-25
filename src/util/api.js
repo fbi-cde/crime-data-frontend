@@ -6,7 +6,7 @@ import { oriToState } from './ori'
 import { slugify } from './text'
 import lookupUsa, { nationalKey } from './usa'
 
-const API = '/api-proxy'
+export const API = '/api-proxy'
 
 const dimensionEndpoints = {
   ageNum: 'age_num',
