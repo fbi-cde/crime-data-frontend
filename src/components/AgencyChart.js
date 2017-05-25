@@ -4,7 +4,6 @@ import throttle from 'lodash.throttle'
 import React from 'react'
 
 import AgencyChartDetails from './AgencyChartDetails'
-import DownloadDataBtn from './DownloadDataBtn'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
 
@@ -39,7 +38,7 @@ class AgencyChart extends React.Component {
   }
 
   render() {
-    const { colors, crime, size } = this.props
+    const { colors, crime, data, size } = this.props
     const { hover, svgParentWidth } = this.state
 
     const svgWidth = svgParentWidth || size.width
@@ -48,20 +47,6 @@ class AgencyChart extends React.Component {
     const width = svgWidth - margin.left - margin.right
     const height = svgHeight - margin.top - margin.bottom
     const xPadding = svgWidth < 500 ? 20 : 40
-
-    const data = [
-      { cleared: 16, reported: 20, year: 2004 },
-      { cleared: 2, reported: 4, year: 2005 },
-      { cleared: 12, reported: 17, year: 2006 },
-      { cleared: 5, reported: 10, year: 2007 },
-      { cleared: 9, reported: 10, year: 2008 },
-      { cleared: 4, reported: 6, year: 2009 },
-      { cleared: 5, reported: 11, year: 2010 },
-      { cleared: 3, reported: 5, year: 2011 },
-      { cleared: 7, reported: 10, year: 2012 },
-      { cleared: 13, reported: 16, year: 2013 },
-      { cleared: 16, reported: 20, year: 2014 },
-    ]
 
     const keys = ['reported', 'cleared']
     const yMax = max(data, d => max(keys, k => d[k]))
@@ -120,18 +105,17 @@ class AgencyChart extends React.Component {
             </g>
           </svg>
         </div>
-        <DownloadDataBtn data={[{ data, filename: 'agency-data' }]} />
       </div>
     )
   }
 }
 
 AgencyChart.defaultProps = {
+  colors: ['#6F2925', '#FD5F55'],
   size: {
     width: 720,
     margin: { top: 16, right: 0, bottom: 24, left: 36 },
   },
-  colors: ['#6F2925', '#FD5F55'],
 }
 
 export default AgencyChart
