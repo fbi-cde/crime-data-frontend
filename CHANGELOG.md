@@ -1,6 +1,19 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.5.0] - 2017-05-25
+### Added
+- Labels to trend chart ([#763](https://github.com/18F/crime-data-frontend/pull/763))
+- Agency search functionality, accessible with a `agencySearch=true` as a URL query parameter ([#765](https://github.com/18F/crime-data-frontend/pull/765))
+- State and national spark lines for the agency view ([#773](https://github.com/18F/crime-data-frontend/pull/773))
+- More glossary terms ([#775](https://github.com/18F/crime-data-frontend/pull/775), [#776](https://github.com/18F/crime-data-frontend/pull/776))
+
+### Changed
+- Move place thumbnail from the sidebar to the main content ([#764](https://github.com/18F/crime-data-frontend/pull/764))
+- API passthrough endpoint changed to `/api-docs` so that the API documentation can be available at `/api` ([#766](https://github.com/18F/crime-data-frontend/pull/766))
+- Adjust title of "LEOKA" dataset as an available dataset ([#771](https://github.com/18F/crime-data-frontend/pull/771))
+- Connect `<Term />` component to the redux store so that it does not require `dispatch` as a prop ([#772](https://github.com/18F/crime-data-frontend/pull/772))
+
 ## [2.4.0] - 2017-05-11
 ### Added
 - "Participation" included in glossary terms ([#600](https://github.com/18F/crime-data-frontend/issues/600))
