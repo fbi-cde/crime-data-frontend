@@ -56,7 +56,7 @@ class Glossary extends React.Component {
     return (
       <div>
         <div
-          className="p2 sm-p3 bg-black white glossary"
+          className="p2 sm-p3 bg-black white z1 glossary"
           id="glossary"
           aria-describedby="glossary-result"
           aria-hidden="true"
