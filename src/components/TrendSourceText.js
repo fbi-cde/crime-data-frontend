@@ -8,7 +8,7 @@ const TrendSourceText = ({ place, since, until }) => {
   const estimated = (
     <span>
       <Term id="estimated data">
-        estimated
+        Estimated
       </Term>
     </span>
   )
