@@ -6,10 +6,7 @@ import React from 'react'
 import NibrsDonutDetails from './NibrsDonutDetails'
 
 class NibrsDonut extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { hover: null }
-  }
+  state = { hover: null }
 
   rememberValue = d => () => {
     this.setState({ hover: d })

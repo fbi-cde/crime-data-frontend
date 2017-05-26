@@ -11,7 +11,7 @@ class AgencyChart extends React.Component {
   constructor(props) {
     super(props)
     this.state = { hover: null, svgParentWidth: null }
-    this.getDimensions = throttle(::this.getDimensions, 20)
+    this.getDimensions = throttle(this.getDimensions, 20)
   }
 
   componentDidMount() {
@@ -23,7 +23,7 @@ class AgencyChart extends React.Component {
     window.removeEventListener('resize', this.getDimensions)
   }
 
-  getDimensions() {
+  getDimensions = () => {
     if (this.svgParent) {
       this.setState({ svgParentWidth: this.svgParent.clientWidth })
     }
@@ -52,12 +52,14 @@ class AgencyChart extends React.Component {
     const yMax = max(data, d => max(keys, k => d[k]))
 
     const colorMap = scaleOrdinal().domain(keys).range(colors)
+
     const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()
 
     const x0 = scaleBand()
       .domain(data.map(d => d.year))
       .rangeRound([0 + xPadding, width - xPadding])
       .paddingInner(0.3)
+
     const x1 = scaleBand()
       .domain(keys)
       .rangeRound([0, x0.bandwidth()])

@@ -35,7 +35,7 @@ const getContent = ({ crime, place, summary }) => {
 }
 
 const AgencyChartContainer = ({
-  agencies,
+  agency,
   crime,
   place,
   since,
@@ -43,24 +43,19 @@ const AgencyChartContainer = ({
   until,
 }) => {
   const content = getContent({ crime, place, summary })
-  const info = getAgency(agencies, place)
+  const fname = `${place}-${crime}-${since}–${until}`
 
   return (
     <div>
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb3 fs-24 sm-fs-32 sans-serif">
           {startCase(crime)} incidents reported by the{' '}
-          {info.agency_name} [Agency Type], {since}-{until}
+          {agency.agency_name} [Agency Type], {since}-{until}
         </h2>
         {content}
         <DownloadDataBtn
-          data={[
-            {
-              data: mockData,
-              filename: `${place}-${crime}-${since}–${until}.csv`,
-            },
-          ]}
-          filename={`${place}-${crime}-${since}–${until}`}
+          data={[{ data: mockData, filename: `${fname}.csv` }]}
+          filename={fname}
         />
       </div>
     </div>
@@ -68,10 +63,7 @@ const AgencyChartContainer = ({
 }
 
 AgencyChartContainer.propTypes = {
-  agencies: PropTypes.shape({
-    data: PropTypes.object,
-    loading: PropTypes.boolean,
-  }).isRequired,
+  agency: PropTypes.object.isRequired,
   crime: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
@@ -83,7 +75,7 @@ AgencyChartContainer.propTypes = {
 }
 
 const mapStateToProps = ({ agencies, filters, summaries }) => ({
-  agencies,
+  agency: getAgency(agencies, filters.place),
   ...filters,
   summary: summaries,
 })

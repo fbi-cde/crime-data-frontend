@@ -9,9 +9,7 @@ const Hint = ({ value, position }) => {
 
   return (
     <div
-      className="
-        inline absolute border-box bg-black white
-        p1 h6 bold line-height-1 center rounded"
+      className="inline absolute border-box bg-black white p1 h6 bold line-height-1 center rounded"
       style={style}
     >
       {value}

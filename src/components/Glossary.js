@@ -1,12 +1,12 @@
-/* eslint-disable global-require */
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { hideGlossary, showGlossary } from '../actions/glossary'
 import terms from '../../content/terms.json'
 
 let GlossaryPanel
-if (typeof window !== 'undefined') GlossaryPanel = require('glossary-panel')
+if (typeof window !== 'undefined') {
+  GlossaryPanel = require('glossary-panel') // eslint-disable-line global-require
+}
 
 class Glossary extends React.Component {
   state = { error: null }
@@ -45,9 +45,9 @@ class Glossary extends React.Component {
   }
 
   toggleGlossary = () => {
-    const { dispatch, isOpen } = this.props
-    if (isOpen) dispatch(hideGlossary())
-    else dispatch(showGlossary())
+    const { actions, isOpen } = this.props
+    if (isOpen) actions.hideGlossary()
+    else actions.showGlossary()
   }
 
   render() {
@@ -99,7 +99,7 @@ Glossary.defaultProps = {
 }
 
 Glossary.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
   isOpen: PropTypes.bool,
 }
 

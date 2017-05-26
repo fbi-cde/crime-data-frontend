@@ -1,7 +1,6 @@
-/* eslint react/forbid-prop-types: 0 */
-
 import PropTypes from 'prop-types'
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import BetaBanner from './BetaBanner'
@@ -12,32 +11,32 @@ import Feedback from './Feedback'
 import Footer from './Footer'
 import Glossary from './Glossary'
 import Header from './Header'
-
-import { hideFeedback, showFeedback } from '../actions/feedback'
-import { hideModal } from '../actions/modal'
+import * as feedbackActions from '../actions/feedback'
+import * as glossaryActions from '../actions/glossary'
+import * as modalActions from '../actions/modal'
 
 const isProd = process.env.NODE_ENV === 'production'
 
-const App = ({ appState, children, dispatch, location }) => (
+const App = ({ actions, appState, children, dispatch, location }) => (
   <div className="site">
     <Disclaimer />
-    <BetaBanner onClick={() => dispatch(showFeedback())} />
+    <BetaBanner onFeedbackClick={actions.showFeedback} />
     <Header location={location} />
     <main className="site-main">
       {children && React.cloneElement(children, { appState, dispatch })}
     </main>
-    <Glossary dispatch={dispatch} {...appState.glossary} />
-    <Footer dispatch={dispatch} />
+    <Glossary actions={actions} {...appState.glossary} />
+    <Footer actions={actions} />
     {!isProd && <ClearLocalStorageBtn />}
     {isProd &&
       appState.modal.isShown &&
       <BetaModal
-        onClose={() => dispatch(hideModal())}
-        onFeedbackClick={() => dispatch(showFeedback())}
+        onClose={actions.hideModal}
+        onFeedbackClick={actions.showFeedback}
       />}
     <Feedback
       isOpen={appState.feedback.isOpen}
-      onClose={() => dispatch(hideFeedback())}
+      onClose={actions.hideFeedback}
     />
   </div>
 )
@@ -48,6 +47,12 @@ App.propTypes = {
 }
 
 const mapStateToProps = state => ({ appState: state })
-const mapDispatchToProps = dispatch => ({ dispatch })
+const mapDispatchToProps = dispatch => ({
+  dispatch,
+  actions: bindActionCreators(
+    { ...feedbackActions, ...glossaryActions, ...modalActions },
+    dispatch,
+  ),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -7,10 +7,7 @@ import NibrsHistogramDetails from './NibrsHistogramDetails'
 import XAxis from './XAxis'
 
 class NibrsHistogram extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { hover: null }
-  }
+  state = { hover: null }
 
   rememberValue = d => () => {
     this.setState({ hover: d })

@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 
 const isHome = loc => loc.pathname === '/'
 const isExplorer = loc => loc.pathname.includes('explorer')
+const active = { borderBottom: '3px solid #ff5e50', paddingBottom: '1px' }
 
 class Header extends React.Component {
   state = { isOpen: false }
@@ -15,7 +16,6 @@ class Header extends React.Component {
   render() {
     const { location } = this.props
     const { isOpen } = this.state
-    const active = { borderBottom: '3px solid #ff5e50', paddingBottom: '1px' }
 
     return (
       <header className="pt3 pb2 md-p0 flex items-center bg-blue white">
