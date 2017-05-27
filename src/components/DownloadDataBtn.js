@@ -1,24 +1,10 @@
+import FileSaver from 'file-saver'
 import lowerCase from 'lodash.lowercase'
 import PropTypes from 'prop-types'
 import React from 'react'
 import Zip from 'jszip'
 
 import jsonToCsv from '../util/csv'
-
-const triggerDataDownload = ({ content, filename, type }) => {
-  if (window.navigator.msSaveBlob) {
-    const blob = new Blob([content], { type })
-    window.navigator.msSaveBlob(blob, filename)
-  } else {
-    const a = document.createElement('a')
-    const body = document.querySelector('body')
-    a.download = filename
-    a.href = `data:${type},${encodeURIComponent(content)}`
-    body.appendChild(a)
-    a.click()
-    body.removeChild(a)
-  }
-}
 
 const triggerUrlDownload = url => {
   const a = document.createElement('a')
@@ -47,17 +33,13 @@ const DownloadDataBtn = ({ data, filename, text }) => {
     })
 
     return zip
-      .generateAsync({ type: 'base64' })
+      .generateAsync({ type: 'blob' })
       .then(content => {
-        triggerDataDownload({
-          content,
-          filename: `${dirname}.zip`,
-          type: 'application/zip;base64',
-        })
+        FileSaver.saveAs(content, `${dirname}.zip`)
       })
       .catch(e => {
         /* eslint-disable */
-        console.error('error from b64 zip', {
+        console.error('error from zip generation', {
           err: e,
           args: { data, filename, text },
         })
