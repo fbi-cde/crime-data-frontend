@@ -10,14 +10,7 @@ import Sparkline from './Sparkline'
 import { slugify } from '../util/text'
 import lookupUsa, { nationalKey } from '../util/usa'
 
-const SparklineContainer = ({
-  crime,
-  place,
-  since,
-  summaries,
-  until,
-  usState,
-}) => {
+const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
   const { data, loading } = summaries
 
   const filterYears = d => d.year >= since && d.year <= until
@@ -84,7 +77,6 @@ const SparklineContainer = ({
 
 SparklineContainer.propTypes = {
   crime: PropTypes.string.isRequired,
-  place: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   summaries: PropTypes.shape({
     data: PropTypes.object,

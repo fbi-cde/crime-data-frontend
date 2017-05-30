@@ -1,19 +1,6 @@
 import React from 'react'
 
-const groupKey = 'agency_type_name'
-const groupValues = [
-  'City',
-  'County',
-  'University or College',
-  'Federal',
-  'State Police',
-  'Tribal',
-  'Other',
-  'Other State Agency',
-  'Unknown',
-]
-
-const AgencySearchResults = ({ data, onClick }) => {
+const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
   const dataGrouped = groupValues.map(key => {
     const filtered = data.filter(d => d[groupKey] === key)
     return {

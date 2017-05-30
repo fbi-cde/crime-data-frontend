@@ -19,7 +19,7 @@ const ExplorerHeader = ({ agencies, crime, place, placeType }) => {
   }
 
   const agency = getAgency(agencies, place)
-  return <Header text={title(agency, crime)} />
+  return <Header text={title(agency.agency_name, crime)} />
 }
 
 export default ExplorerHeader

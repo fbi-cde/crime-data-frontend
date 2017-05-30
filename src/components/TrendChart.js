@@ -14,10 +14,9 @@ import YAxis from './YAxis'
 import { slugify } from '../util/text'
 
 class TrendChart extends React.Component {
-  state = { hover: null, svgParentWidth: null, yearSelected: null }
-
   constructor(props) {
     super(props)
+    this.state = { hover: null, svgParentWidth: null, yearSelected: null }
     this.getDimensions = throttle(this.getDimensions, 20)
   }
 

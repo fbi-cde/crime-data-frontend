@@ -32,7 +32,7 @@ const getContent = ({ crime, place, since, summary, until }) => {
 }
 
 const AgencyChartContainer = params => {
-  const { agency, crime, place, since, until } = params
+  const { agency, crime, since, until } = params
   const content = getContent(params)
 
   return (
