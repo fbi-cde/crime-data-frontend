@@ -1,6 +1,6 @@
 import React from 'react'
 
-const highlight = v => <span className="bold blue">{v}</span>
+import Highlight from './Highlight'
 
 const AgencyChartDetails = ({ colors, crime, data, keys }) => {
   const { year, reported } = data
@@ -8,9 +8,9 @@ const AgencyChartDetails = ({ colors, crime, data, keys }) => {
   return (
     <div className="mb3 lg-flex">
       <div className="mb1 sm-mr7 flex-auto">
-        In {highlight(year)}, there were {highlight(reported)}{' '}
-        incidents of {crime} reported, which was an [increase] from
-        the previous year.
+        In {<Highlight text={year} />}, there were{' '}
+        {<Highlight text={reported} />} incidents of {crime} reported,
+        which was an [increase] from the previous year.
       </div>
       <div className="flex-none" style={{ width: 210 }}>
         <table className="mb1 lg-m0 p2 bg-blue-white">

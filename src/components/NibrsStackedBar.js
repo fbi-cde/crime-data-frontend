@@ -6,10 +6,7 @@ import React from 'react'
 import NibrsStackedBarDetails from './NibrsStackedBarDetails'
 
 class NibrsStackedBar extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { hover: null }
-  }
+  state = { hover: null }
 
   rememberValue = d => () => {
     this.setState({ hover: d })

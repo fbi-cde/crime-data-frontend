@@ -7,19 +7,14 @@ const formatPercent = p => (p > 0.01 ? format('.0%')(p) : '<1%')
 const formatSI = n => (Number(n) > 10 ? format('.2s')(n) : formatNumber(n))
 
 class NibrsTableWithBars extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { showCounts: false }
-    this.showCounts = ::this.showCounts
-    this.showPercents = ::this.showPercents
-  }
+  state = { showCounts: false }
 
-  showCounts(e) {
+  showCounts = e => {
     e.preventDefault()
     this.setState({ showCounts: true })
   }
 
-  showPercents(e) {
+  showPercents = e => {
     e.preventDefault()
     this.setState({ showCounts: false })
   }

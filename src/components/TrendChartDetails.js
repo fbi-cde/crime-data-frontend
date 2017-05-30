@@ -3,6 +3,7 @@ import range from 'lodash.range'
 import lowerCase from 'lodash.lowercase'
 import React from 'react'
 
+import Highlight from './Highlight'
 import Term from './Term'
 import mapCrimeToGlossaryTerm from '../util/glossary'
 import { nationalKey } from '../util/usa'
@@ -10,7 +11,6 @@ import { nationalKey } from '../util/usa'
 const formatRate = format(',.1f')
 const formatTotal = format(',.0f')
 
-const highlight = v => <span className="bold blue">{v}</span>
 const getComparison = ({ place, data }) => {
   const threshold = 3
   const placeRate = data[place].rate
@@ -19,7 +19,9 @@ const getComparison = ({ place, data }) => {
 
   return Math.abs(diff) < threshold
     ? <span>about the same (within {threshold}%) as</span>
-    : <span>{highlight(`${diff > 0 ? 'higher' : 'lower'}`)} than</span>
+    : <span>
+        {<Highlight text={`${diff > 0 ? 'higher' : 'lower'}`} />} than
+      </span>
 }
 
 const TrendChartDetails = ({
@@ -43,9 +45,7 @@ const TrendChartDetails = ({
 
   const isOnlyNational = keys.length === 1
   const term = (
-    <Term id={mapCrimeToGlossaryTerm(crime)}>
-      {lowerCase(crime)}
-    </Term>
+    <Term id={mapCrimeToGlossaryTerm(crime)}>{lowerCase(crime)}</Term>
   )
 
   return (
@@ -54,15 +54,16 @@ const TrendChartDetails = ({
         <p className="mb1 lg-m0 lg-pr5 lg-mh-72p fs-14">
           {isOnlyNational &&
             <span>
-              In {highlight(year)}, there were{' '}
-              {highlight(formatRate(rate))}{' '}
+              In {<Highlight text={year} />}, there were{' '}
+              {<Highlight text={formatRate(rate)} />}{' '}
               incidents of {term}{' '}
               per 100,000 people.
             </span>}
           {!isOnlyNational &&
             <span>
-              In {highlight(year)}, {name}’s {term} rate was{' '}
-              {highlight(formatRate(rate))} incidents per 100,000 people.
+              In {<Highlight text={year} />}, {name}’s {term} rate was{' '}
+              {<Highlight text={formatRate(rate)} />}{' '}
+              incidents per 100,000 people.
               The rate for that year was {comparison} that of the United States.
             </span>}
         </p>

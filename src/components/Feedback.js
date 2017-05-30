@@ -45,10 +45,12 @@ class Feedback extends React.Component {
       .map(d => `## ${d.label}\n${d.data}\n\n`)
       .join('\n')
 
-  handleChange = e =>
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value },
-    })
+  handleChange = e => {
+    const { name, value } = e.target
+    this.setState(prevState => ({
+      data: { ...prevState.data, [name]: value },
+    }))
+  }
 
   handleSubmit = e => {
     e.preventDefault()

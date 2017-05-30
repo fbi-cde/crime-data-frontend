@@ -23,10 +23,11 @@ class AgencySearch extends Component {
     const { agencies, ori, state } = this.props
     const { showSelection, search } = this.state
 
-    const data = Object.keys(agencies[state]).map(oriCode => {
-      const info = agencies[state][oriCode]
-      return { ori: oriCode, ...info }
-    })
+    const data = Object.keys(agencies[state]).map(id => ({
+      ori: id,
+      ...agencies[state][id],
+    }))
+
     const selected = data.find(d => d.ori === ori)
 
     const searchUpper = search.toUpperCase()

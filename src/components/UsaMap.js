@@ -6,10 +6,7 @@ import stateLookup from '../util/usa'
 import svgData from '../../public/data/usa-state-svg.json'
 
 class UsaMap extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { hover: null }
-  }
+  state = { hover: null }
 
   rememberValue = id => e => {
     this.setState({

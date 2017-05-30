@@ -9,8 +9,7 @@ const getTickVals = (domain, ticks) => {
 
 const fmt = x => {
   const val = +x
-  const f = format(`,.${val > 10 || val % 1 === 0 ? 0 : 1}f`)
-  return f(val)
+  return format(`,.${val > 10 || val % 1 === 0 ? 0 : 1}f`)(val)
 }
 
 const YAxis = ({ tickCt = 4, scale, width }) => {

@@ -10,7 +10,14 @@ import Sparkline from './Sparkline'
 import { slugify } from '../util/text'
 import lookupUsa, { nationalKey } from '../util/usa'
 
-const SparklineContainer = ({ crime, place, since, summaries, until }) => {
+const SparklineContainer = ({
+  crime,
+  place,
+  since,
+  summaries,
+  until,
+  usState,
+}) => {
   const { data, loading } = summaries
 
   const filterYears = d => d.year >= since && d.year <= until
@@ -19,12 +26,11 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
     year: d.year,
   })
 
-  const state = lookupUsa(place.slice(0, 2))
   const sparklines = [
     {
-      data: data ? data[slugify(state)] : [],
-      place: state,
-      url: `/explorer/state/${slugify(state)}/${crime}`,
+      data: data ? data[slugify(usState)] : [],
+      place: usState,
+      url: `/explorer/state/${slugify(usState)}/${crime}`,
     },
     {
       data: data ? data[nationalKey] : [],
@@ -32,6 +38,7 @@ const SparklineContainer = ({ crime, place, since, summaries, until }) => {
       url: `/explorer/${crime}`,
     },
   ]
+
   const yMax = max(
     sparklines.map(s => s.data).reduce((a, n) => [...a, ...n]),
     d => d.rate,
@@ -84,10 +91,12 @@ SparklineContainer.propTypes = {
     loading: PropTypes.boolean,
   }).isRequired,
   until: PropTypes.number.isRequired,
+  usState: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = ({ filters, summaries }) => ({
   ...filters,
+  usState: lookupUsa(filters.place.slice(0, 2)),
   summaries,
 })
 

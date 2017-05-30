@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const BetaBanner = ({ onClick }) => (
+const BetaBanner = ({ onFeedbackClick }) => (
   <div className="md-absolute top-0 right-0 fs-10 md-fs-16">
     <div className="md-mr2 p1 md-py2 md-pl3 md-pr4 md-inline-block md-rounded-bottom bg-red white">
       <svg
@@ -15,7 +15,7 @@ const BetaBanner = ({ onClick }) => (
       </svg>
       <span className="bold">This site is in beta.</span>{' '}
       Help us make it better:{' '}
-      <button className="btn p0 line-height-1" onClick={onClick}>
+      <button className="btn p0 line-height-1" onClick={onFeedbackClick}>
         Submit feedback
       </button>
     </div>
@@ -23,7 +23,7 @@ const BetaBanner = ({ onClick }) => (
 )
 
 BetaBanner.propTypes = {
-  onClick: PropTypes.func,
+  onFeedbackClick: PropTypes.func,
 }
 
 export default BetaBanner
