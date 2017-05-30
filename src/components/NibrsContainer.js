@@ -7,9 +7,10 @@ import { connect } from 'react-redux'
 import ErrorCard from './ErrorCard'
 import Loading from './Loading'
 import NibrsCard from './NibrsCard'
+import Term from './Term'
 import parseNibrs from '../util/nibrs'
 import { oriToState } from '../util/ori'
-import Term from './Term'
+import { getPlaceInfo } from '../util/place'
 import ucrParticipation from '../util/ucr'
 
 const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
@@ -123,6 +124,10 @@ NibrsContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ filters, nibrs }) => ({ ...filters, nibrs })
+const mapStateToProps = ({ filters, nibrs }) => ({
+  ...filters,
+  ...getPlaceInfo(filters),
+  nibrs,
+})
 
 export default connect(mapStateToProps)(NibrsContainer)
