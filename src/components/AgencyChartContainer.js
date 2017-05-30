@@ -27,7 +27,7 @@ const mockData = [
 const getContent = ({ crime, place, summary }) => {
   if (summary.loading) return <Loading />
 
-  const data = summary.data[place] || mockData
+  const data = mockData || summary.data[place]
   if (!data || data.length === 0) return <NoData />
 
   const dataClean = uniqBy(data.filter(d => d.year >= 2004), 'year')

@@ -44,7 +44,7 @@ describe('api utility', () => {
       api.getNibrs(args).then(() => {
         const spyArgs = spy.args[0]
         const expectedUrl =
-          '/api-proxy/offenders/count/states/CA/sex_code/offenses'
+          '/api-proxy/offenders/count/states/ca/sex_code/offenses'
         expect(spyArgs[0]).toEqual(expectedUrl)
         expect(spyArgs[1].explorer_offense).toEqual(params.crime)
         done()
