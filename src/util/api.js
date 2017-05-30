@@ -1,8 +1,9 @@
+/* eslint-disable no-nested-ternary */
+
 import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
 import { mapToApiOffense } from './offenses'
-import { oriToState } from './ori'
 import { slugify } from './text'
 import lookupUsa, { nationalKey } from './usa'
 
@@ -21,14 +22,17 @@ const getAgency = ori =>
     [ori]: response,
   }))
 
-const getNibrs = ({ crime, dim, place, type }) => {
-  const field = dimensionEndpoints[dim]
-  const fieldPath = `${field}/offenses`
+const getNibrs = ({ crime, dim, place, placeType, type }) => {
   const loc = place === nationalKey
     ? 'national'
-    : `states/${lookupUsa(place).toUpperCase()}`
+    : placeType === 'agency'
+        ? `agencies/${place}`
+        : `states/${lookupUsa(place)}`
 
+  const field = dimensionEndpoints[dim]
+  const fieldPath = `${field}/offenses`
   const url = `${API}/${type}s/count/${loc}/${fieldPath}`
+
   const params = {
     per_page: 50,
     aggregate_many: false,
@@ -43,7 +47,6 @@ const getNibrs = ({ crime, dim, place, type }) => {
 
 const getNibrsRequests = params => {
   const { crime, place, placeType } = params
-  const placeNorm = placeType === 'agency' ? oriToState(place) : place
 
   const slices = [
     { type: 'offender', dim: 'sexCode' },
@@ -56,7 +59,7 @@ const getNibrsRequests = params => {
     { type: 'victim', dim: 'relationship' },
   ]
 
-  return slices.map(s => getNibrs({ ...s, crime, place: placeNorm }))
+  return slices.map(s => getNibrs({ ...s, crime, place, placeType }))
 }
 
 const fetchResults = (key, path) =>

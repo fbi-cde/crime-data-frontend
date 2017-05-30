@@ -64,8 +64,12 @@ const createBulkNibrsUrl = (year, state) => {
 
 const downloadBulkNibrs = (year, state) => {
   const a = document.createElement('a')
+  const body = document.querySelector('body')
   a.href = createBulkNibrsUrl(year, state)
+
+  body.appendChild(a)
   a.click()
+  body.removeChild(a)
 }
 
 class DownloadBulkNibrs extends React.Component {

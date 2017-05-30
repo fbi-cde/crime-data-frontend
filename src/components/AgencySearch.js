@@ -27,6 +27,7 @@ class AgencySearch extends Component {
       ori: id,
       ...agencies[state][id],
     }))
+
     const selected = data.find(d => d.ori === ori)
 
     const searchUpper = search.toUpperCase()

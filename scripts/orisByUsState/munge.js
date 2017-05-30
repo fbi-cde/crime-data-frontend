@@ -3,28 +3,21 @@
 const fs = require('fs')
 const path = require('path')
 
-const jsonFile = require('./agencies.json')
+const agencies = require('./agencies.json')
 
-const agencies = jsonFile.results
+const outFile = path.join(__dirname, '../../public/data/agencies-by-state.json')
 const usStates = {}
 
-agencies.forEach(agency => {
-  const stateAbbr = agency.state_abbr
+agencies.results.forEach(agency => {
+  const { agency_name, agency_type_name, ori, state_abbr } = agency
+  const subset = { agency_name, agency_type_name }
 
-  const smallAgency = {
-    agency_name: agency.agency_name,
-  }
-
-  if (usStates[stateAbbr]) {
-    usStates[stateAbbr][agency.ori] = smallAgency
-  } else {
-    usStates[stateAbbr] = { [agency.ori]: smallAgency }
-  }
+  if (!usStates[state_abbr]) usStates[state_abbr] = {}
+  usStates[state_abbr][ori] = subset
 })
 
 const onWriteDone = err => {
   if (err) throw err
-
   console.log('done!')
 
   Object.keys(usStates).sort((a, b) => a - b).forEach(state => {
@@ -33,6 +26,4 @@ const onWriteDone = err => {
   })
 }
 
-const file = path.join(__dirname, '../../data/agencies-by-state.json')
-
-fs.writeFile(file, JSON.stringify(usStates), onWriteDone)
+fs.writeFile(outFile, JSON.stringify(usStates), onWriteDone)
