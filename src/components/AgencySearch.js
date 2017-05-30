@@ -30,6 +30,10 @@ class AgencySearch extends Component {
 
     const selected = data.find(d => d.ori === ori)
 
+    // get unique set of counties (for result grouping)
+    const counties = {}
+    data.forEach(d => (counties[d.primary_county || 'N/A'] = true))
+
     const searchUpper = search.toUpperCase()
     const dataFiltered = searchUpper === ''
       ? data
@@ -72,6 +76,8 @@ class AgencySearch extends Component {
                   data={dataFiltered.sort(
                     (a, b) => a.agency_name > b.agency_name,
                   )}
+                  groupKey="primary_county"
+                  groupValues={Object.keys(counties).sort()}
                   onClick={this.handleClick}
                 />}
             </div>}
