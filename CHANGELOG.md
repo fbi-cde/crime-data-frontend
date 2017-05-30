@@ -1,6 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.5.1] - 2017-05-30
+
+### Changed
+- Use data from the API for agency bar charts ([#796](https://github.com/18F/crime-data-frontend/pull/796))
+- Show agency search results grouped by county ([#797](https://github.com/18F/crime-data-frontend/pull/797))
+
+### Fixed
+- Downloads on Internet Explorer ([#793](https://github.com/18F/crime-data-frontend/pull/793))
+- Participation download links ([crime-data-explorer#160](https://github.com/18F/crime-data-explorer/issues/160))
+
+
 ## [2.5.0] - 2017-05-25
 ### Added
 - Labels to trend chart ([#763](https://github.com/18F/crime-data-frontend/pull/763))
@@ -14,12 +25,14 @@ All notable changes to this project will be documented in this file.
 - Adjust title of "LEOKA" dataset as an available dataset ([#771](https://github.com/18F/crime-data-frontend/pull/771))
 - Connect `<Term />` component to the redux store so that it does not require `dispatch` as a prop ([#772](https://github.com/18F/crime-data-frontend/pull/772))
 
+
 ## [2.4.0] - 2017-05-11
 ### Added
 - "Participation" included in glossary terms ([#600](https://github.com/18F/crime-data-frontend/issues/600))
 
 ### Fixed
 - Show arson trend line for states and national views ([#759](https://github.com/18F/crime-data-frontend/pull/759))
+
 
 ## [2.3.1] - 2017-05-11
 ### Fixed
@@ -35,6 +48,7 @@ All notable changes to this project will be documented in this file.
 -  Link to API documentation no longer 404s ([#111](https://github.com/18F/crime-data-explorer/issues/111))
 - Changelog link in footer goes to frontend repo instead of explorer repo ([#749](https://github.com/18F/crime-data-frontend/pull/749))
 - Draw trend line for reported larceny theft rates ([#755](https://github.com/18F/crime-data-frontend/pull/755))
+
 
 ## [2.2.0] - 2017-05-10
 ### Added
@@ -53,6 +67,7 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 -  Remove years in NIBRS section title ([#741](https://github.com/18F/crime-data-frontend/pull/741))
+
 
 ## [2.1.0] - 2017-05-05
 ### Added
@@ -98,6 +113,7 @@ All notable changes to this project will be documented in this file.
 ## [1.2.1] - 2017-04-13
 ### Fixed
 - Fixed test failures due to a changed dependency ([#690](https://github.com/18F/crime-data-frontend/pull/690))
+
 
 ## [1.2.0] - 2017-04-12
 ### Added
