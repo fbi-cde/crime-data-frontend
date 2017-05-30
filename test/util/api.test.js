@@ -93,9 +93,9 @@ describe('api utility', () => {
 
     it('should request */agencies/count/* if place is an agency', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      api.fetchAgencyAggregates('NJ123', 'NJ').then(() => {
-        const url = spy.args[0].pop()
-        const pathPartial = '/agencies/count/states/offenses/NJ/NJ123'
+      api.fetchAgencyAggregates('NJ123', 'robbery').then(() => {
+        const url = spy.args[0][0]
+        const pathPartial = '/agencies/count/NJ123'
         expect(url.includes(pathPartial)).toEqual(true)
         done()
       })

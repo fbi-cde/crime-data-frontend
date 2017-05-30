@@ -97,17 +97,17 @@ const fetchAggregates = place => {
   return Promise.all(requests).then(parseAggregates)
 }
 
-const fetchAgencyAggregates = ori => {
-  const state = ori.slice(0, 2)
-  const path = `agencies/count/states/offenses/${state}/${ori}`
-  return fetchResults(ori, path)
+const fetchAgencyAggregates = (ori, crime) => {
+  const url = `${API}/agencies/count/${ori}/offenses`
+  const params = { explorer_offense: crime, per_page: 200 }
+  return get(url, params).then(d => ({ key: ori, results: d.results }))
 }
 
-const getSummaryRequests = ({ place, placeType }) => {
+const getSummaryRequests = ({ crime, place, placeType }) => {
   if (placeType === 'agency') {
     const stateName = slugify(lookupUsa(place.slice(0, 2)))
     return [
-      fetchAgencyAggregates(place),
+      fetchAgencyAggregates(place, crime),
       fetchAggregates(stateName),
       fetchAggregates(),
     ]
