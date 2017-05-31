@@ -39,7 +39,7 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
 
   return (
     <div className="mb4">
-      <h3 className="mt0 mb2 fs-18">State and national crime rates</h3>
+      <h3 className="mt0 mb2 fs-18">State and national {crime} rates</h3>
       <div className="clearfix mxn1">
         {sparklines.map((s, i) => (
           <div className="sm-col sm-col-6 mb1 px1" key={i}>

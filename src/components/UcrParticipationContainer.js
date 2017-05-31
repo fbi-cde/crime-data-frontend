@@ -59,6 +59,7 @@ const UcrParticipationContainer = ({
   const data = ucrPlaceInfo && { ...ucrPlaceInfo.find(p => p.year === until) }
 
   const isAgency = placeType === 'agency'
+  const { display: agencyDisplay, primary_county: county } = agencyInfo
   const usState = startCase(isAgency ? oriToState(place) : place)
 
   const reports = (
@@ -82,9 +83,9 @@ const UcrParticipationContainer = ({
         {isAgency &&
           <div>
             <p className="serif">
-              The {agencyInfo.agency_name} [Agency Type] is located
-              in [County Name], {usState}. This law enforcement
-              agency reports [incident-based data (NIBRS)] to the
+              {agencyDisplay} is located in {county}, {usState}.
+              This law enforcement agency reports
+              [incident-based data (NIBRS)] to the
               Uniform Crime Reporting (UCR) program.
             </p>
             <h3 className="mt4 mb1 fs-18">Resources</h3>

@@ -1,26 +1,50 @@
+import { format } from 'd3-format'
+import range from 'lodash.range'
 import React from 'react'
 
 import Highlight from './Highlight'
 
-const AgencyChartDetails = ({ colors, crime, data, keys }) => {
-  const { year, reported } = data
+const fmt = format(',')
+
+const AgencyChartDetails = ({
+  colors,
+  crime,
+  data,
+  keys,
+  since,
+  until,
+  updateYear,
+}) => {
+  const { cleared, year, reported } = data
+  const yearRange = range(since, until + 1)
+  const handleSelectChange = e => updateYear(Number(e.target.value))
 
   return (
     <div className="mb3 lg-flex">
-      <div className="mb1 sm-mr7 flex-auto">
-        In {<Highlight text={year} />}, there were{' '}
-        {<Highlight text={reported} />} incidents of {crime} reported,
-        which was an [increase] from the previous year.
+      <div className="mb2 sm-mb0 sm-mr7 flex-auto">
+        <p className="m0" style={{ maxWidth: 400 }}>
+          In {<Highlight text={year} />}, there were{' '}
+          {<Highlight text={fmt(reported)} />} incidents of {crime} reported
+          and {<Highlight text={fmt(cleared)} />} cleared.
+        </p>
       </div>
       <div className="flex-none" style={{ width: 210 }}>
         <table className="mb1 lg-m0 p2 bg-blue-white">
           <thead className="fs-12">
             <tr>
-              <th>
-                <select className="field field-sm select select-dark col-10">
-                  <option>{year}</option>
+              <td className="left-align">
+                <label htmlFor="year-selected" className="hide">
+                  Year selected
+                </label>
+                <select
+                  className="field field-sm select select-dark col-10"
+                  id="year-selected"
+                  onChange={handleSelectChange}
+                  value={year}
+                >
+                  {yearRange.map((y, i) => <option key={i}>{y}</option>)}
                 </select>
-              </th>
+              </td>
               <th className="right-align">Incidents</th>
             </tr>
           </thead>
@@ -36,7 +60,7 @@ const AgencyChartDetails = ({ colors, crime, data, keys }) => {
                 </td>
                 <td className="pt1 line-height-4 align-bottom right-align">
                   <span className="inline-block border-bottom border-blue-light col-12">
-                    {data[k]}
+                    {fmt(data[k])}
                   </span>
                 </td>
               </tr>
