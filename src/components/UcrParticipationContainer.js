@@ -85,8 +85,7 @@ const UcrParticipationContainer = ({
             <p className="serif">
               {agencyDisplay} is located in {county}, {usState}.
               This law enforcement agency reports
-              [incident-based data (NIBRS)] to the
-              Uniform Crime Reporting (UCR) program.
+              [summary (SRS) or incident-based data (NIBRS)] to the FBI.
             </p>
             <h3 className="mt4 mb1 fs-18">Resources</h3>
             <ul className="m0 p0 fs-14 left-bars">
@@ -129,7 +128,15 @@ const UcrParticipationContainer = ({
           </div>}
       </div>
       <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">
-        <PlaceThumbnail selected={usState} />
+        <PlaceThumbnail selected={usState} isAgency={isAgency} />
+        {isAgency &&
+          <div className="mt-tiny fs-14">
+            <span
+              className="mr1 inline-block bg-red-bright circle"
+              style={{ width: 8, height: 8 }}
+            />
+            {agencyDisplay}
+          </div>}
       </div>
     </div>
   )
