@@ -9,7 +9,7 @@ import Loading from './Loading'
 import NibrsCard from './NibrsCard'
 import Term from './Term'
 import parseNibrs from '../util/nibrs'
-import { oriToState } from '../util/ori'
+import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
 import ucrParticipation from '../util/ucr'
 
@@ -39,7 +39,15 @@ const filterNibrsData = (data, { since, until }) => {
   return filtered
 }
 
-const NibrsContainer = ({ crime, nibrs, place, placeType, since, until }) => {
+const NibrsContainer = ({
+  agency,
+  crime,
+  nibrs,
+  place,
+  placeType,
+  since,
+  until,
+}) => {
   const { data, error, loading } = nibrs
 
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
@@ -81,7 +89,8 @@ const NibrsContainer = ({ crime, nibrs, place, placeType, since, until }) => {
     <div>
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb1 fs-24 sm-fs-28 sans-serif">
-          {startCase(crime)} incident details in {startCase(place)}
+          {startCase(crime)} incident details in{' '}
+          {placeType === 'agency' ? agency.display : startCase(place)}
         </h2>
         {nibrsFirstYear !== since &&
           <p className="my-tiny">
@@ -124,10 +133,17 @@ NibrsContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ filters, nibrs }) => ({
-  ...filters,
-  ...getPlaceInfo(filters),
-  nibrs,
-})
+const mapStateToProps = ({ agencies, filters, nibrs }) => {
+  const { place, placeType } = getPlaceInfo(filters)
+  const agency = placeType === 'agency' && getAgency(agencies, place)
+
+  return {
+    ...filters,
+    agency,
+    place,
+    placeType,
+    nibrs,
+  }
+}
 
 export default connect(mapStateToProps)(NibrsContainer)

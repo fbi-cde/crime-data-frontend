@@ -10,7 +10,7 @@ import YAxis from './YAxis'
 class AgencyChart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { hover: null, svgParentWidth: null }
+    this.state = { hover: null, svgParentWidth: null, yearSelected: null }
     this.getDimensions = throttle(this.getDimensions, 20)
   }
 
@@ -30,16 +30,16 @@ class AgencyChart extends React.Component {
   }
 
   rememberValue = d => () => {
-    this.setState({ hover: d })
+    this.setState({ hover: d, yearSelected: null })
   }
 
-  forgetValue = () => {
-    this.setState({ hover: null })
+  updateYear = year => {
+    this.setState({ yearSelected: year })
   }
 
   render() {
-    const { colors, crime, data, size } = this.props
-    const { hover, svgParentWidth } = this.state
+    const { colors, crime, data, mutedColors, since, size, until } = this.props
+    const { hover, svgParentWidth, yearSelected } = this.state
 
     const svgWidth = svgParentWidth || size.width
     const svgHeight = svgWidth / 3
@@ -52,6 +52,7 @@ class AgencyChart extends React.Component {
     const yMax = max(data, d => max(keys, k => d[k]))
 
     const colorMap = scaleOrdinal().domain(keys).range(colors)
+    const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
 
     const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()
 
@@ -65,7 +66,9 @@ class AgencyChart extends React.Component {
       .rangeRound([0, x0.bandwidth()])
       .padding(0)
 
-    const active = hover || data[data.length - 1]
+    const active = yearSelected
+      ? data.find(d => d.year === yearSelected)
+      : hover || data[data.length - 1]
 
     return (
       <div>
@@ -74,6 +77,9 @@ class AgencyChart extends React.Component {
           crime={crime}
           data={active}
           keys={keys}
+          since={since}
+          updateYear={this.updateYear}
+          until={until}
         />
         <div className="mb2 h6 bold monospace black">
           Total incidents reported by year
@@ -92,14 +98,12 @@ class AgencyChart extends React.Component {
                       y={y(d[k])}
                       height={Math.max(0, height - y(d[k]))}
                       width={x1.bandwidth()}
-                      fill={colorMap(k)}
-                      fillOpacity={
-                        !hover || hover.year === d.year ? '1' : '.75'
+                      fill={
+                        active.year === d.year ? colorMap(k) : mutedColorMap(k)
                       }
                       className="cursor-pointer"
                       pointerEvents="all"
                       onMouseOver={this.rememberValue(d)}
-                      onMouseOut={this.forgetValue}
                     />
                   ))}
                 </g>
@@ -113,7 +117,8 @@ class AgencyChart extends React.Component {
 }
 
 AgencyChart.defaultProps = {
-  colors: ['#6F2925', '#FD5F55'],
+  colors: ['#702c27', '#ff5e50'],
+  mutedColors: ['#f4e1df', '#faefee'],
   size: {
     width: 720,
     margin: { top: 16, right: 0, bottom: 24, left: 36 },

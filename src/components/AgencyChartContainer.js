@@ -22,7 +22,7 @@ const getContent = ({ crime, place, since, summary, until }) => {
 
   return (
     <div>
-      <AgencyChart crime={crime} data={dataClean} />
+      <AgencyChart crime={crime} data={dataClean} since={since} until={until} />
       <DownloadDataBtn
         data={[{ data: dataClean, filename: `${fname}.csv` }]}
         filename={fname}
@@ -39,8 +39,8 @@ const AgencyChartContainer = params => {
     <div>
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb3 fs-24 sm-fs-32 sans-serif">
-          {startCase(crime)} incidents reported by the{' '}
-          {agency.agency_name}, {since}-{until}
+          {startCase(crime)} incidents reported by{' '}
+          {agency.display}, {since}-{until}
         </h2>
         {content}
       </div>
