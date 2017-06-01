@@ -9,7 +9,14 @@ class AgencySearch extends Component {
 
     const search = props.agency
     const hasSelection = !!search
-    this.state = { search, hasSelection, showResults: false }
+    this.state = { search, hasSelection, showResults: props.initialShowResults }
+  }
+
+  componentWillReceiveProps({ initialShowResults }) {
+    const isSame = initialShowResults === this.props.initialShowResults
+    if (isSame) return
+
+    this.setState({ showResults: initialShowResults })
   }
 
   handleChange = e => {
@@ -92,6 +99,11 @@ class AgencySearch extends Component {
 AgencySearch.propTypes = {
   agency: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  initialShowResults: PropTypes.bool,
+}
+
+AgencySearch.defaultProps = {
+  initialShowResults: false,
 }
 
 export default AgencySearch
