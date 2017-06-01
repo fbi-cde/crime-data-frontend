@@ -18,9 +18,6 @@ const srsTerm = (
   </Term>
 )
 
-// [State] reports [incident-based (NIBRS) or summary (SRS) data to the FBI.
-// In 2014, [###] [state] law enforcement agencies voluntarily reported data to the FBI. The charts below feature unestimated data.
-
 const reportingTerms = ({ nibrs, srs }) => {
   const hybrid = nibrs && srs
 
@@ -38,10 +35,6 @@ const ExplorerUsStateIntroduction = ({ crime, place, ucr, until }) => {
   const isArson = crime === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
   const untilUcr = ucr.find(p => p.year === until)
-
-  //
-
-  // In 2014, [###] [state] law enforcement agencies voluntarily reported data to the FBI. The charts below feature unestimated data.
 
   return (
     <div>

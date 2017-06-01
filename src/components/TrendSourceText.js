@@ -4,25 +4,67 @@ import React from 'react'
 
 import Term from './Term'
 
-const TrendSourceText = ({ place, since, until }) => {
-  const estimated = (
-    <span>
-      <Term id="estimated data">
-        Estimated
-      </Term>
-    </span>
-  )
+import ucrParticipationLookup from '../util/ucr'
+
+const estimatedTerm = (
+  <Term id="estimated data">
+    Estimated
+  </Term>
+)
+const nibrsTerm = (
+  <Term id={'national incident-based reporting system (nibrs)'}>
+    incident-based (NIBRS)
+  </Term>
+)
+const srsTerm = (
+  <Term id={'summary reporting system (srs)'}>
+    summary (SRS)
+  </Term>
+)
+
+const TrendSourceText = ({ crime, place, since, until }) => {
+  const isArson = crime === 'arson'
+  const { nibrs, srs } = ucrParticipationLookup(place)
+  const hybrid = nibrs && srs
 
   return (
     <div className="center italic fs-12 mb8">
-      <p>
-        Source: FBI, {estimated} data for {startCase(place)}, {since}–{until}.
-      </p>
+      {!isArson
+        ? <p>
+            Source: FBI,
+            {' '}
+            {estimatedTerm}
+            {' '}
+            data for
+            {' '}
+            {startCase(place)}
+            ,
+            {' '}
+            {since}
+            –
+            {until}
+            .
+          </p>
+        : <p>
+            Source: Reported
+            {' '}
+            {srs && srsTerm}
+            {hybrid && ' and '}
+            {nibrs && nibrsTerm}
+            {' '} data from {' '}
+            {startCase(place)},
+            {' '}
+            {since}
+            –
+            {until}
+            .
+          </p>}
     </div>
   )
 }
 
 TrendSourceText.propTypes = {
+  crime: PropTypes.string,
   place: PropTypes.string,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
