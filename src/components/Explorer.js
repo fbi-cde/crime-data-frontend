@@ -57,7 +57,7 @@ class Explorer extends React.Component {
   }
 
   render() {
-    const { appState, dispatch, params, router } = this.props
+    const { appState, dispatch, params } = this.props
     const { crime } = params
     const { place, placeType } = getPlaceInfo(params)
 
@@ -91,7 +91,7 @@ class Explorer extends React.Component {
             </button>
           </div>
         </div>
-        <SidebarContainer onChange={this.handleSidebarChange} router={router} />
+        <SidebarContainer onChange={this.handleSidebarChange} />
         <div className="site-content">
           <div className="container-main mx-auto px2 md-py3 lg-px8">
             <ExplorerHeader

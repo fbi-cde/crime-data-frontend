@@ -1,34 +1,42 @@
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import AgencySearchResults from './AgencySearchResults'
 
 class AgencySearch extends Component {
-  state = { search: '', showSelection: true }
+  constructor(props) {
+    super(props)
+
+    const search = props.agency
+    const hasSelection = !!search
+    this.state = { search, hasSelection, showResults: false }
+  }
 
   handleChange = e => {
-    this.setState({ search: e.target.value })
+    this.setState({
+      search: e.target.value,
+      hasSelection: false,
+      showResults: true,
+    })
   }
 
   handleClick = d => e => {
     e.preventDefault()
-    this.setState({ search: '', showSelection: true })
+    this.setState({ search: d.agency_name, hasSelection: true })
     this.props.onChange({ place: d.ori, placeType: 'agency' })
   }
 
-  removeSelection = () => {
-    this.setState({ showSelection: false, search: '' })
+  clearInput = () => {
+    this.setState({ search: '', hasSelection: false })
+  }
+
+  toggleResults = () => {
+    this.setState(prevState => ({ showResults: !prevState.showResults }))
   }
 
   render() {
-    const { agencies, ori, state } = this.props
-    const { showSelection, search } = this.state
-
-    const data = Object.keys(agencies[state]).map(id => ({
-      ori: id,
-      ...agencies[state][id],
-    }))
-
-    const selected = data.find(d => d.ori === ori)
+    const { data } = this.props
+    const { search, hasSelection, showResults } = this.state
 
     // get unique set of counties (for result grouping)
     const counties = {}
@@ -42,48 +50,48 @@ class AgencySearch extends Component {
           return words.includes(searchUpper)
         })
 
-    const showOris = !!search.length && dataFiltered.length > 0
-
     return (
       <div className="mt2">
-        {selected && showSelection
-          ? <div className="mb2 relative">
-              <input
-                type="text"
-                className="col-12 field field-sm bg-white border-blue pr5 truncate"
-                defaultValue={selected.agency_name}
+        <div className="relative">
+          <div className="relative">
+            <input
+              type="text"
+              className="col-12 field field-sm bold bg-white border-blue rounded-none"
+              placeholder="Search for an agency..."
+              value={search}
+              onChange={this.handleChange}
+            />
+            <button
+              className="absolute btn p0 line-height-1"
+              style={{ top: '.5rem', right: '1rem' }}
+              onClick={hasSelection ? this.clearInput : this.toggleResults}
+            >
+              <img
+                src={`/img/${hasSelection ? 'x-navy' : 'chevron-down-navy'}.svg`}
+                alt="close"
+                width="12"
+                height="12"
               />
-              <button
-                className="absolute btn p0 line-height-1"
-                style={{ top: '.5rem', right: '1rem' }}
-                onClick={this.removeSelection}
-              >
-                <img src="/img/x-navy.svg" alt="close" width="12" height="12" />
-              </button>
-            </div>
-          : <div className="relative">
-              <div className="relative">
-                <input
-                  type="text"
-                  className="col-12 field field-sm bg-white border-blue rounded-none"
-                  placeholder="Search for an agency..."
-                  value={search}
-                  onChange={this.handleChange}
-                />
-              </div>
-              {showOris &&
-                <AgencySearchResults
-                  data={dataFiltered.sort(
-                    (a, b) => a.agency_name > b.agency_name,
-                  )}
-                  groupKey="primary_county"
-                  groupValues={Object.keys(counties).sort()}
-                  onClick={this.handleClick}
-                />}
-            </div>}
+            </button>
+          </div>
+          {!hasSelection &&
+            showResults &&
+            dataFiltered.length > 0 &&
+            <AgencySearchResults
+              data={dataFiltered.sort((a, b) => a.agency_name > b.agency_name)}
+              groupKey="primary_county"
+              groupValues={Object.keys(counties).sort()}
+              onClick={this.handleClick}
+            />}
+        </div>
       </div>
     )
   }
+}
+
+AgencySearch.propTypes = {
+  agency: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default AgencySearch
