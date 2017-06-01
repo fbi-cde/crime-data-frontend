@@ -50,3 +50,5 @@
 .hover-blue:hover { color: $blue; }
 .hover-bg-blue:hover { background-color: $blue; }
 .hover-bg-blue-light:hover { background-color: $blue-white; }
+
+.placeholder-blue::placeholder { color: $blue; }
