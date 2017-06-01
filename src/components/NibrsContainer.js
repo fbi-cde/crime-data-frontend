@@ -111,7 +111,7 @@ const NibrsContainer = ({
       </div>
       {content}
       {!loading &&
-        <div className="mt2 fs-12 serif italic">
+        <div className="mt2 center italic fs-12">
           Source: Reported {nibrsTerm} data from {placeDisplay},{' '}
           {nibrsFirstYear}–{until}.
         </div>}
