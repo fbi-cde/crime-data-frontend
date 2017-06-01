@@ -32,18 +32,22 @@ const getContent = ({ crime, place, since, summary, until }) => {
 }
 
 const AgencyChartContainer = params => {
-  const { agency, crime, since, until } = params
+  const { agency, crime, since, summary, until } = params
   const content = getContent(params)
 
   return (
-    <div>
-      <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
+    <div className="mb5">
+      <div className="p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb3 fs-24 sm-fs-32 sans-serif">
           {startCase(crime)} incidents reported by{' '}
           {agency.display}, {since}-{until}
         </h2>
         {content}
       </div>
+      {!summary.loading &&
+        <div className="mt2 fs-12 serif italic">
+          Source: Reported incident-based (NIBRS) data from {agency.display}
+        </div>}
     </div>
   )
 }
