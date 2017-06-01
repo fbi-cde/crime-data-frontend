@@ -19,7 +19,7 @@ class PlaceThumbnail extends React.Component {
   }
 
   render() {
-    const { selected } = this.props
+    const { selected, isAgency } = this.props
     const { usa } = this.state
 
     if (!usa) return <Container />
@@ -73,6 +73,7 @@ class PlaceThumbnail extends React.Component {
               strokeLinejoin="round"
             />
           </g>
+          {isAgency && <circle cx={w / 2} cy={h / 2} r="7" fill="#ff5e50" />}
         </svg>
       </Container>
     )

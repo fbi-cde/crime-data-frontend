@@ -84,6 +84,7 @@ export const binAge = data => {
     const [binStart, binEnd] = [binNum, binNum + 9]
     const binKey = `${binStart}-${binEnd}`
 
+    if (isNaN(binNum)) return
     if (!cts[binKey]) cts[binKey] = { binStart, binEnd, count: d.count }
     else cts[binKey].count += d.count
   })
