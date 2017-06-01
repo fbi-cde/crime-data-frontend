@@ -2,7 +2,7 @@ import { format } from 'd3-format'
 import range from 'lodash.range'
 import React from 'react'
 
-import Highlight from './Highlight'
+import Term from './Term'
 
 const fmt = format(',')
 
@@ -23,9 +23,10 @@ const AgencyChartDetails = ({
     <div className="mb3 lg-flex">
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
         <p className="m0" style={{ maxWidth: 400 }}>
-          In {<Highlight text={year} />}, there were{' '}
-          {<Highlight text={fmt(reported)} />} incidents of {crime} reported
-          and {<Highlight text={fmt(cleared)} />} cleared.
+          In <strong>{year}</strong>, there were{' '}
+          <strong>{fmt(reported)}</strong> reported and{' '}
+          <strong>{fmt(cleared)}</strong> cleared incidents{' '}
+          of {crime}.
         </p>
       </div>
       <div className="flex-none" style={{ width: 210 }}>
@@ -56,7 +57,7 @@ const AgencyChartDetails = ({
                     className="mr1 inline-block"
                     style={{ width: 8, height: 8, backgroundColor: colors(k) }}
                   />
-                  {k}
+                  <Term id={k}>{k}</Term>
                 </td>
                 <td className="pt1 line-height-4 align-bottom right-align">
                   <span className="inline-block border-bottom border-blue-light col-12">
