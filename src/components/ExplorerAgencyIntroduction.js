@@ -10,7 +10,7 @@ const ExplorerAgencyIntroduction = ({
 }) => (
   <p className="serif">
     The {startCase(agencyName)} {agencyType} is located
-    in {agencyCounty}, {startCase(agencyState)}. This law enforcement
+    in {agencyCounty} County, {startCase(agencyState)}. This law enforcement
     agency reports [incident-based data (NIBRS)] to the
     Uniform Crime Reporting (UCR) program.
   </p>

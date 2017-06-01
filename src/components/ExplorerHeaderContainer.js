@@ -30,7 +30,7 @@ const ExplorerHeaderContainer = ({
     introduction = (
       <ExplorerAgencyIntroduction
         agencyName={agency.agency_name}
-        agencyCounty={agency.county}
+        agencyCounty={agency.primary_county}
         agencyState={oriToState(place)}
         agencyType={agency.agency_type}
       />
