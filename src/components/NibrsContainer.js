@@ -85,12 +85,15 @@ const NibrsContainer = ({
     content = <ErrorCard error={error} />
   }
 
+  const placeDisplay = placeType === 'agency'
+    ? agency.display
+    : startCase(place)
+
   return (
-    <div>
+    <div className="mb8">
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb1 fs-24 sm-fs-28 sans-serif">
-          {startCase(crime)} incident details in{' '}
-          {placeType === 'agency' ? agency.display : startCase(place)}
+          {startCase(crime)} incident details reported by {placeDisplay}
         </h2>
         {nibrsFirstYear !== since &&
           <p className="my-tiny">
@@ -99,23 +102,18 @@ const NibrsContainer = ({
           </p>}
         {!error &&
           data &&
-          <p className="m0">
-            There were {formatNumber(totalCount)} individual {crime} incidents
-            reported to the FBI in {startCase(place)}{' '}
-            between {nibrsFirstYear} and {until} by agencies reporting{' '}
-            {nibrsTerm} data. The charts below feature{' '}
-            <Term id="unestimated data">unestimated</Term>{' '}
-            data. Learn more about the{' '}
+          <p className="m0 sm-col-9">
+            There were <strong>{formatNumber(totalCount)}</strong> incidents
+            of {crime} reported to the UCR Program between {nibrsFirstYear}{' '}
+            and {until}. Learn more about the{' '}
             <a className="underline" href={fbiLink}>FBI’s data collections</a>.
           </p>}
       </div>
       {content}
       {!loading &&
-        <div className="center italic fs-12 mb8">
-          <p>
-            Source: Reported {nibrsTerm} data from {startCase(place)},{' '}
-            {nibrsFirstYear}–{until}.
-          </p>
+        <div className="mt2 fs-12 serif italic">
+          Source: Reported {nibrsTerm} data from {placeDisplay},{' '}
+          {nibrsFirstYear}–{until}.
         </div>}
     </div>
   )
