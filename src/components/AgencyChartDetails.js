@@ -1,5 +1,6 @@
 import { format } from 'd3-format'
 import range from 'lodash.range'
+import pluralize from 'pluralize'
 import React from 'react'
 
 import Term from './Term'
@@ -23,9 +24,16 @@ const AgencyChartDetails = ({
     <div className="mb3 lg-flex">
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
         <p className="m0" style={{ maxWidth: 400 }}>
-          In <strong>{year}</strong>, there were{' '}
-          <strong>{fmt(reported)}</strong> reported and{' '}
-          <strong>{fmt(cleared)}</strong> cleared incidents{' '}
+          In <strong>{year}</strong>, there
+          {' '}
+          {pluralize('were', cleared === 1 && reported === 1 ? 1 : 2)}
+          {' '}
+          <strong>{fmt(reported)}</strong> reported and
+          {' '}
+          <strong>{fmt(cleared)}</strong> cleared
+          {' '}
+          {pluralize('incidents', cleared === 1 && reported === 1 ? 1 : 2)}
+          {' '}
           of {crime}.
         </p>
       </div>
