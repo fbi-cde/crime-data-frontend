@@ -2,20 +2,20 @@ import React from 'react'
 
 import AboutTheData from './AboutTheData'
 import AgencyChartContainer from './AgencyChartContainer'
-import ExplorerHeader from './ExplorerHeader'
+import ExplorerHeaderContainer from './ExplorerHeaderContainer'
+
 import NibrsContainer from './NibrsContainer'
 import NotFound from './NotFound'
 import SidebarContainer from './SidebarContainer'
 import SparklineContainer from './SparklineContainer'
 import TrendContainer from './TrendContainer'
-import UcrParticipationContainer from './UcrParticipationContainer'
+
 import { updateApp } from '../actions/composite'
 import { showTerm } from '../actions/glossary'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offenses from '../util/offenses'
-import { oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
-import ucrParticipation from '../util/ucr'
+import { shouldFetchNibrs as shouldShowNibrs } from '../util/ucr'
 import lookup from '../util/usa'
 
 class Explorer extends React.Component {
@@ -57,21 +57,16 @@ class Explorer extends React.Component {
   }
 
   render() {
-    const { appState, dispatch, params } = this.props
+    const { dispatch, params } = this.props
     const { crime } = params
     const { place, placeType } = getPlaceInfo(params)
+    const isAgency = placeType === 'agency'
+    const showNibrs = shouldShowNibrs({ crime, place, placeType })
 
     // show not found page if crime or place unfamiliar
     if (!offenses.includes(crime) || !lookup(place, placeType)) {
       return <NotFound />
     }
-
-    const { agencies } = appState
-    const noNibrs = ['violent-crime', 'property-crime']
-    const placeNorm = placeType === 'agency' ? oriToState(place) : place
-    const participation = ucrParticipation(placeNorm)
-    const showNibrs = !noNibrs.includes(crime) && participation.nibrs
-    const isAgency = placeType === 'agency'
 
     return (
       <div className="site-wrapper">
@@ -94,13 +89,7 @@ class Explorer extends React.Component {
         <SidebarContainer onChange={this.handleSidebarChange} />
         <div className="site-content">
           <div className="container-main mx-auto px2 md-py3 lg-px8">
-            <ExplorerHeader
-              agencies={agencies}
-              crime={crime}
-              place={place}
-              placeType={placeType}
-            />
-            <UcrParticipationContainer />
+            <ExplorerHeaderContainer />
             {isAgency && <SparklineContainer />}
             {isAgency ? <AgencyChartContainer /> : <TrendContainer />}
             {showNibrs && <NibrsContainer />}
