@@ -2,11 +2,15 @@ import startCase from 'lodash.startcase'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import ExplorerHeader from './ExplorerHeader'
+import ExplorerAgencyIntroduction from './ExplorerAgencyIntroduction'
+import ExplorerNationalIntroduction from './ExplorerNationalIntroduction'
+import ExplorerUsStateIntroduction from './ExplorerUsStateIntroduction'
+import Loading from './Loading'
 import PlaceThumbnail from './PlaceThumbnail'
 import UcrResourcesList from './UcrResourcesList'
 import { getPlaceInfo } from '../util/place'
 import { getAgency, oriToState } from '../util/ori'
+import { nationalKey } from '../util/usa'
 
 const ExplorerHeaderContainer = ({
   agency,
@@ -16,28 +20,52 @@ const ExplorerHeaderContainer = ({
   ucr,
   until,
 }) => {
-  const placeName = (agency && agency.agency_name) || place
+  const loading = ucr.loading
   const usState = agency ? oriToState(place) : place
+
+  let introduction
+
+  if (agency) {
+    introduction = (
+      <ExplorerAgencyIntroduction
+        agencyName={agency.agency_name}
+        agencyCounty={agency.county}
+        agencyState={oriToState(place)}
+        agencyType={agency.agency_type}
+      />
+    )
+  } else if (place === nationalKey) {
+    introduction = (
+      <ExplorerNationalIntroduction
+        crime={crime}
+        until={until}
+        ucr={ucr.data[nationalKey]}
+      />
+    )
+  } else {
+    introduction = (
+      <ExplorerUsStateIntroduction
+        crime={crime}
+        place={place}
+        until={until}
+        ucr={ucr.data[place]}
+      />
+    )
+  }
 
   return (
     <div>
       <div className="items-baseline mt2 mb4">
         <h1 className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-lighter">
-          {startCase(placeName)}
+          {startCase((agency && agency.agency_name) || place)}
           {' '} | {' '}
           {startCase(crime)}
         </h1>
       </div>
       <div className="mb5 clearfix">
         <div className="lg-col lg-col-8 mb2 lg-m0 p0 lg-pr6 fs-18">
-          <ExplorerHeader
-            agency={agency}
-            loading={agency ? false : ucr.loading}
-            place={place}
-            placeType={placeType}
-            until={until}
-            ucr={ucr.data}
-          />
+          {loading && <Loading />}
+          {!loading && introduction}
           <UcrResourcesList place={usState} placeType={placeType} />
         </div>
         <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">
