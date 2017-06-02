@@ -9,7 +9,14 @@ class AgencySearch extends Component {
 
     const search = props.agency
     const hasSelection = !!search
-    this.state = { search, hasSelection, showResults: false }
+    this.state = { search, hasSelection, showResults: props.initialShowResults }
+  }
+
+  componentWillReceiveProps({ initialShowResults }) {
+    const isSame = initialShowResults === this.props.initialShowResults
+    if (isSame) return
+
+    this.setState({ showResults: initialShowResults })
   }
 
   handleChange = e => {
@@ -56,8 +63,8 @@ class AgencySearch extends Component {
           <div className="relative">
             <input
               type="text"
-              className="col-12 field field-sm bold bg-white border-blue rounded-none"
-              placeholder="Search for an agency..."
+              className="col-12 field field-sm bg-white bold border-blue rounded-none placeholder-blue placeholder-fw-100 truncate pr4"
+              placeholder="Search for an agency"
               value={search}
               onChange={this.handleChange}
             />
@@ -92,6 +99,11 @@ class AgencySearch extends Component {
 AgencySearch.propTypes = {
   agency: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  initialShowResults: PropTypes.bool,
+}
+
+AgencySearch.defaultProps = {
+  initialShowResults: false,
 }
 
 export default AgencySearch

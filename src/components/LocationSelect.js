@@ -9,7 +9,7 @@ import { data } from '../util/usa'
 
 const places = entries(data).map(d => startCase(d.value))
 
-const LocationSelect = ({ className, onChange, selected }) => {
+const LocationSelect = ({ className, onChange, onFocus, selected }) => {
   const handleChange = e =>
     onChange({
       place: slugify(e.target.value),
@@ -27,6 +27,7 @@ const LocationSelect = ({ className, onChange, selected }) => {
         }
         id="location-select"
         onChange={handleChange}
+        onClick={onFocus}
         value={selected ? startCase(selected) : ''}
       >
         <option value="" disabled>Location</option>
