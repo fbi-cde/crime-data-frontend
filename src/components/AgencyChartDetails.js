@@ -19,21 +19,17 @@ const AgencyChartDetails = ({
   const { cleared, year, reported } = data
   const yearRange = range(since, until + 1)
   const handleSelectChange = e => updateYear(Number(e.target.value))
+  const isSingular = cleared === 1 && reported === 1
 
   return (
     <div className="mb3 lg-flex">
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
         <p className="m0" style={{ maxWidth: 400 }}>
-          In <strong>{year}</strong>, there
-          {' '}
-          {pluralize('were', cleared === 1 && reported === 1 ? 1 : 2)}
-          {' '}
-          <strong>{fmt(reported)}</strong> reported and
-          {' '}
-          <strong>{fmt(cleared)}</strong> cleared
-          {' '}
-          {pluralize('incidents', cleared === 1 && reported === 1 ? 1 : 2)}
-          {' '}
+          In <strong>{year}</strong>, there{' '}
+          {pluralize('were', isSingular ? 1 : 2)}{' '}
+          <strong>{fmt(reported)}</strong> reported and{' '}
+          <strong>{fmt(cleared)}</strong> cleared{' '}
+          {pluralize('incidents', isSingular ? 1 : 2)}{' '}
           of {crime}.
         </p>
       </div>

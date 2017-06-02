@@ -7,8 +7,8 @@ import { connect } from 'react-redux'
 
 import Loading from './Loading'
 import Sparkline from './Sparkline'
-import { slugify } from '../util/text'
-import lookupUsa, { nationalKey } from '../util/usa'
+import { oriToState } from '../util/ori'
+import { nationalKey } from '../util/usa'
 
 const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
   const { data, loading } = summaries
@@ -21,9 +21,9 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
 
   const sparklines = [
     {
-      data: data ? data[slugify(usState)] : [],
+      data: data ? data[usState] : [],
       place: usState,
-      url: `/explorer/state/${slugify(usState)}/${crime}`,
+      url: `/explorer/state/${usState}/${crime}`,
     },
     {
       data: data ? data[nationalKey] : [],
@@ -88,7 +88,7 @@ SparklineContainer.propTypes = {
 
 const mapStateToProps = ({ filters, summaries }) => ({
   ...filters,
-  usState: lookupUsa(filters.place.slice(0, 2)),
+  usState: oriToState(filters.place),
   summaries,
 })
 
