@@ -11,17 +11,18 @@ const isValidPlace = (place, placeType) => lookupUsa(place, placeType)
 const isValidCrime = crime => offenses.includes(crime)
 const noNibrs = ['violent-crime', 'property-crime']
 
-export const shouldFetchUcr = ({ place }) => !!isValidPlace(place)
+export const shouldFetchUcr = ({ place, placeType }) =>
+    placeType !== 'agency' && !!isValidPlace(place, placeType)
 
 export const shouldFetchSummaries = ({ crime, place, placeType }) =>
-  isValidCrime(crime) && isValidPlace(place, placeType)
+    isValidCrime(crime) && isValidPlace(place, placeType)
 
 export const shouldFetchNibrs = ({ crime, place, placeType }) => {
-  if (noNibrs.includes(crime) || !isValidPlace(place, placeType)) return false
+    if (noNibrs.includes(crime) || !isValidPlace(place, placeType)) return false
 
-  const placeNorm = placeType === 'agency' ? oriToState(place) : place
-  const coverage = lookup(placeNorm)
-  return coverage && coverage.nibrs
+    const placeNorm = placeType === 'agency' ? oriToState(place) : place
+    const coverage = lookup(placeNorm)
+    return coverage && coverage.nibrs
 }
 
 export default lookup

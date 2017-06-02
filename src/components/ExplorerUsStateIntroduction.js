@@ -1,6 +1,5 @@
 import { format } from 'd3-format'
 import startCase from 'lodash.startcase'
-import PropTypes from 'prop-types'
 import React from 'react'
 
 import Term from './Term'

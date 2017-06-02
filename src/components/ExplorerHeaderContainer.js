@@ -2,15 +2,12 @@ import startCase from 'lodash.startcase'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import ExplorerAgencyIntroduction from './ExplorerAgencyIntroduction'
-import ExplorerNationalIntroduction from './ExplorerNationalIntroduction'
-import ExplorerUsStateIntroduction from './ExplorerUsStateIntroduction'
+import ExplorerIntroduction from './ExplorerIntroduction'
 import Loading from './Loading'
 import PlaceThumbnail from './PlaceThumbnail'
 import UcrResourcesList from './UcrResourcesList'
 import { getPlaceInfo } from '../util/place'
 import { getAgency, oriToState } from '../util/ori'
-import { nationalKey } from '../util/usa'
 
 const ExplorerHeaderContainer = ({
   agency,
@@ -21,38 +18,8 @@ const ExplorerHeaderContainer = ({
   until,
 }) => {
   const isAgency = placeType === 'agency'
-  const loading = ucr.loading
   const usState = startCase(agency ? oriToState(place) : place)
-
-  let introduction
-
-  if (agency) {
-    introduction = (
-      <ExplorerAgencyIntroduction
-        agencyName={agency.agency_name}
-        agencyCounty={agency.primary_county}
-        agencyState={oriToState(place)}
-        agencyType={agency.agency_type}
-      />
-    )
-  } else if (place === nationalKey) {
-    introduction = (
-      <ExplorerNationalIntroduction
-        crime={crime}
-        until={until}
-        ucr={ucr.data[nationalKey]}
-      />
-    )
-  } else {
-    introduction = (
-      <ExplorerUsStateIntroduction
-        crime={crime}
-        place={place}
-        until={until}
-        ucr={ucr.data[place]}
-      />
-    )
-  }
+  const isLoading = !isAgency && ucr.loading
 
   return (
     <div>
@@ -65,8 +32,15 @@ const ExplorerHeaderContainer = ({
       </div>
       <div className="mb5 clearfix">
         <div className="lg-col lg-col-8 mb2 lg-m0 p0 lg-pr6 fs-18">
-          {loading && <Loading />}
-          {!loading && introduction}
+          {isLoading
+            ? <Loading />
+            : <ExplorerIntroduction
+                agency={agency}
+                crime={crime}
+                place={place}
+                ucr={ucr}
+                until={until}
+              />}
           <UcrResourcesList place={usState} placeType={placeType} />
         </div>
         <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">

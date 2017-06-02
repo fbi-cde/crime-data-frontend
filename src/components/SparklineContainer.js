@@ -21,12 +21,12 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
 
   const sparklines = [
     {
-      data: data && data[usState] ? data[usState] : [],
+      data: data[usState] || [],
       place: usState,
       url: `/explorer/state/${usState}/${crime}`,
     },
     {
-      data: data && data[nationalKey] ? data[nationalKey] : [],
+      data: data[nationalKey] || [],
       place: 'United States',
       url: `/explorer/${crime}`,
     },
