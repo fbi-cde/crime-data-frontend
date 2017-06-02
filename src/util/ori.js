@@ -3,7 +3,16 @@
 import { slugify } from './text'
 import lookupUsa from './usa'
 
-export const oriToState = ori => slugify(lookupUsa(ori.slice(0, 2)))
+const postalMappingExceptions = {
+  NB: 'NE',
+  GM: 'GU',
+}
+
+export const oriToState = ori => {
+  const oriAbbr = ori.slice(0, 2).toUpperCase()
+  const postalAbbr = postalMappingExceptions[oriAbbr] || oriAbbr
+  return slugify(lookupUsa(postalAbbr))
+}
 
 export const agencyDisplay = ({ agency_name, agency_type_name }) => {
   if (!agency_type_name) return agency_name
