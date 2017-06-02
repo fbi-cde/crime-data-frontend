@@ -6,11 +6,12 @@ import {
 } from '../../src/actions/constants'
 import reducer from '../../src/reducers/ucr'
 
-describe('ucr', () => {
+describe('ucr reducer', () => {
   describe('initial state', () => {
-    it('should have loading set to false', () => {
+    it('should have loading set to false and an empty data object', () => {
       const initialState = reducer(undefined, { type: 'fake' })
       expect(initialState.loading).toEqual(false)
+      expect(initialState.data).toEqual({})
     })
   })
 

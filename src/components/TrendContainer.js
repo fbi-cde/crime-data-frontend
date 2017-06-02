@@ -81,7 +81,7 @@ const TrendContainer = ({
       </div>
       {!loading &&
         <TrendSourceText
-          dispatch={dispatch}
+          crime={crime}
           place={place}
           placeType={placeType}
           since={since}

@@ -42,8 +42,8 @@ const API = process.env.CDE_API
 const apiKey = getEnvVar('API_KEY')
 const initState = {
   agency: { loading: true },
-  ucr: { loading: true },
-  summaries: { loading: true },
+  ucr: { loading: true, data: {} },
+  summaries: { loading: true, data: {} },
 }
 const repoOwner = getEnvVar('GITHUB_ISSUE_REPO_OWNER')
 const repoName = getEnvVar('GITHUB_ISSUE_REPO_NAME')
