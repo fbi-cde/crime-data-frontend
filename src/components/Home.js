@@ -7,13 +7,15 @@ import Term from './Term'
 import UsaMap from './UsaMap'
 import { updateApp } from '../actions/composite'
 import { updateFilters } from '../actions/filters'
+import { oriToState } from '../util/ori'
 import { slugify } from '../util/text'
 import stateLookup from '../util/usa'
 import otherDataSets from '../../content/datasets.yml'
 
 const Home = ({ appState, dispatch, router }) => {
-  const { crime, place } = appState.filters
+  const { crime, place, placeType } = appState.filters
   const isValid = !!(crime && place) || false
+  const usState = placeType !== 'agency' ? place : oriToState(place)
 
   const handleMapClick = e => {
     const id = e.target.getAttribute('id')
@@ -25,7 +27,7 @@ const Home = ({ appState, dispatch, router }) => {
   }
 
   const handleSearchClick = () => {
-    const change = { crime, place, placeType: 'state' }
+    const change = { crime, place: usState, placeType: 'state' }
     dispatch(updateApp(change, router))
   }
 
@@ -68,7 +70,7 @@ const Home = ({ appState, dispatch, router }) => {
               <LocationSelect
                 className="col-12 sm-fs-18 field select"
                 onChange={selectLocation}
-                selected={place}
+                selected={usState}
               />
             </div>
             <div className="sm-col sm-col-4 px2 mb2 sm-m0">
@@ -118,7 +120,7 @@ const Home = ({ appState, dispatch, router }) => {
             </div>
           </div>
           <div className="py4 sm-py7 sm-col-9 mx-auto">
-            <UsaMap mapClick={handleMapClick} place={place} />
+            <UsaMap mapClick={handleMapClick} place={usState} />
           </div>
           <div className="mb7 sm-hide md-hide lg-hide">
             <button

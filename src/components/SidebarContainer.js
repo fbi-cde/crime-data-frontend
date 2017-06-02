@@ -55,7 +55,7 @@ SidebarContainer.propTypes = {
 }
 
 const formatAgencyData = (agencies, state) =>
-  Object.keys(agencies[state]).map(id => ({
+  Object.keys(agencies[state] || {}).map(id => ({
     ori: id,
     ...agencies[state][id],
   }))
