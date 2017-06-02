@@ -12,6 +12,13 @@ class AgencySearch extends Component {
     this.state = { search, hasSelection, showResults: false }
   }
 
+  componentWillReceiveProps(nextProps) {
+    // hide agency results if us state changes
+    if (this.props.usState !== nextProps.usState) {
+      this.setState({ showResults: false })
+    }
+  }
+
   handleChange = e => {
     this.setState({
       search: e.target.value,

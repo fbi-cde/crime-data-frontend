@@ -20,6 +20,7 @@ const LocationFilter = ({
       <AgencySearch
         onChange={onChange}
         agency={(agency || {}).agency_name || ''}
+        usState={usState}
         data={agencyData}
       />}
   </div>
