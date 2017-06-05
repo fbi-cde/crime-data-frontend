@@ -38,7 +38,7 @@ const AgencyChartContainer = params => {
   return (
     <div className="mb5">
       <div className="p2 sm-p4 bg-white border-top border-blue border-w8">
-        <h2 className="mt0 mb3 fs-24 sm-fs-32 sans-serif">
+        <h2 className="mt0 mb3 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} incidents reported by{' '}
           {agency.display}, {since}-{until}
         </h2>
