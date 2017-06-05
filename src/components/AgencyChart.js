@@ -89,25 +89,29 @@ class AgencyChart extends React.Component {
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x0} height={height} />
               <YAxis scale={y} width={width} />
-              {data.map(d => (
-                <g key={d.year} transform={`translate(${x0(d.year)}, 0)`}>
-                  {keys.map(k => (
-                    <rect
-                      key={`${d.year}-${k}`}
-                      x={x1(k)}
-                      y={y(d[k])}
-                      height={Math.max(0, height - y(d[k]))}
-                      width={x1.bandwidth()}
-                      fill={
-                        active.year === d.year ? colorMap(k) : mutedColorMap(k)
-                      }
-                      className="cursor-pointer"
-                      pointerEvents="all"
-                      onMouseOver={this.rememberValue(d)}
-                    />
-                  ))}
-                </g>
-              ))}
+              <g transform="translate(0, -0.5)">
+                {data.map(d => (
+                  <g key={d.year} transform={`translate(${x0(d.year)}, 0)`}>
+                    {keys.map(k => (
+                      <rect
+                        key={`${d.year}-${k}`}
+                        x={x1(k)}
+                        y={y(d[k])}
+                        height={Math.max(0, height - y(d[k]))}
+                        width={x1.bandwidth()}
+                        fill={
+                          active.year === d.year
+                            ? colorMap(k)
+                            : mutedColorMap(k)
+                        }
+                        className="cursor-pointer"
+                        pointerEvents="all"
+                        onMouseOver={this.rememberValue(d)}
+                      />
+                    ))}
+                  </g>
+                ))}
+              </g>
             </g>
           </svg>
         </div>
