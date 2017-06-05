@@ -12,10 +12,11 @@ import { nationalKey } from '../util/usa'
 
 const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
   const { data, loading } = summaries
+  const normalizedCrime = crime === 'rape' ? 'rape_legacy' : crime
 
   const filterYears = d => d.year >= since && d.year <= until
   const computeRate = d => ({
-    rate: d[snakeCase(crime)] * 10000 / d.population,
+    rate: d[snakeCase(normalizedCrime)] * 10000 / d.population,
     year: d.year,
   })
 
