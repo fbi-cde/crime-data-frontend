@@ -73,7 +73,15 @@ class PlaceThumbnail extends React.Component {
               strokeLinejoin="round"
             />
           </g>
-          {isAgency && <circle cx={w / 2} cy={h / 2} r="7" fill="#ff5e50" />}
+          {isAgency &&
+            <g transform={`translate(${w / 2}, ${h / 2})`}>
+              <circle r="7" fill="#ff5e50" />
+              <polygon
+                points="0 0, -7 -14, 7 -14"
+                fill="#ff5e50"
+                transform="translate(0, 15)"
+              />
+            </g>}
         </svg>
       </Container>
     )
