@@ -4,34 +4,54 @@ import Link from './Link'
 import packageJson from '../../package.json'
 
 const links = [
-  {
-    text: 'Home',
-    href: '/',
-  },
-  {
-    text: 'Explorer',
-    href: '/explorer/violent-crime',
-  },
-  {
-    text: 'About',
-    href: '/about',
-  },
-  {
-    text: 'Downloads & Documentation',
-    href: '/downloads-and-docs',
-  },
-  {
-    text: 'Glossary',
-    action: 'showGlossary',
-  },
-  {
-    text: 'License',
-    href: 'https://github.com/18F/crime-data-frontend/blob/master/LICENSE.md',
-  },
-  {
-    text: 'Feedback',
-    action: 'showFeedback',
-  },
+  [
+    {
+      text: 'Home',
+      href: '/',
+    },
+    {
+      text: 'Explorer',
+      href: '/explorer/violent-crime',
+    },
+    {
+      text: 'About',
+      href: '/about',
+    },
+    {
+      text: 'Downloads & Documentation',
+      href: '/downloads-and-docs',
+    },
+    {
+      text: 'Glossary',
+      action: 'showGlossary',
+    },
+  ],
+  [
+    {
+      text: 'License',
+      href: 'https://github.com/18F/crime-data-frontend/blob/master/LICENSE.md',
+    },
+    {
+      text: 'Feedback',
+      action: 'showFeedback',
+    },
+    {
+      text: 'Privacy Policy',
+      href: 'https://www.fbi.gov/privacy_policy',
+    },
+    {
+      text: 'FOIA',
+      href: 'https://www.fbi.gov/services/records-management/foipa',
+    },
+    {
+      text: 'USA.GOV',
+      href: 'https://www.usa.gov/',
+    },
+    {
+      text: 'Accessibility',
+      href: 'https://www.fbi.gov/accessibility',
+    },
+  ],
 ]
 
 const handleClick = func => e => {
@@ -60,20 +80,25 @@ const Footer = ({ actions }) => (
         </span>
       </div>
       <div className="clearfix mxn2">
-        <div className="md-col md-col-5 px2 mb3 md-m0">
-          <ul className="m0 p0 fs-14 list-style-none left-bars">
-            {links.map((d, i) => (
-              <li key={i}>
-                <Link
-                  className="cursor-pointer white caps"
-                  to={d.href || '#!'}
-                  onClick={d.action && handleClick(actions[d.action])}
-                >
-                  {d.text}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="md-col md-col-5 px2 mb3 md-m0 clearfix">
+          {links.map((list, i) => (
+            <ul
+              className="col col-12 sm-col-6 m0 p0 fs-14 list-style-none left-bars"
+              key={i}
+            >
+              {list.map((d, ii) => (
+                <li key={ii}>
+                  <Link
+                    className="cursor-pointer white caps"
+                    to={d.href || '#!'}
+                    onClick={d.action && handleClick(actions[d.action])}
+                  >
+                    {d.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ))}
         </div>
         <div className="md-col md-col-5 px2 mb3 md-m0 fs-14 white">
           <div className="mb1 bold fs-18 serif blue-light-508">
