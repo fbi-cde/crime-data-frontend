@@ -57,7 +57,7 @@ class Explorer extends React.Component {
   }
 
   render() {
-    const { appState, dispatch, params } = this.props
+    const { dispatch, params } = this.props
     const { crime } = params
     const { place, placeType } = getPlaceInfo(params)
     const isAgency = placeType === 'agency'
