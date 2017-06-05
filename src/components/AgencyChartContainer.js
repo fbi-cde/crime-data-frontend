@@ -20,13 +20,26 @@ const getContent = ({ crime, place, since, summary, until }) => {
     .filter(d => d.year >= since && d.year <= until)
     .sort((a, b) => a.year - b.year)
 
+  const hasNoValues =
+    dataClean.length ===
+    dataClean.filter(d => d.reported === 0 && d.cleared === 0).length
+
   return (
     <div>
-      <AgencyChart crime={crime} data={dataClean} since={since} until={until} />
-      <DownloadDataBtn
-        data={[{ data: dataClean, filename: `${fname}.csv` }]}
-        filename={fname}
-      />
+      {hasNoValues
+        ? <NoData />
+        : <div>
+            <AgencyChart
+              crime={crime}
+              data={dataClean}
+              since={since}
+              until={until}
+            />
+            <DownloadDataBtn
+              data={[{ data: dataClean, filename: `${fname}.csv` }]}
+              filename={fname}
+            />
+          </div>}
     </div>
   )
 }
