@@ -15,7 +15,7 @@ import { showTerm } from '../actions/glossary'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offenses from '../util/offenses'
 import { getPlaceInfo } from '../util/place'
-import { shouldFetchNibrs as shouldShowNibrs } from '../util/ucr'
+
 import lookup from '../util/usa'
 
 class Explorer extends React.Component {
@@ -57,11 +57,10 @@ class Explorer extends React.Component {
   }
 
   render() {
-    const { dispatch, params } = this.props
+    const { appState, dispatch, params } = this.props
     const { crime } = params
     const { place, placeType } = getPlaceInfo(params)
     const isAgency = placeType === 'agency'
-    const showNibrs = shouldShowNibrs({ crime, place, placeType })
 
     // show not found page if crime or place unfamiliar
     if (!offenses.includes(crime) || !lookup(place, placeType)) {
@@ -92,7 +91,7 @@ class Explorer extends React.Component {
             <ExplorerHeaderContainer />
             {isAgency && <SparklineContainer />}
             {isAgency ? <AgencyChartContainer /> : <TrendContainer />}
-            {showNibrs && <NibrsContainer />}
+            <NibrsContainer />
             <hr className="mt0 mb3" />
             <AboutTheData
               crime={crime}
