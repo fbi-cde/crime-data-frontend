@@ -1,5 +1,5 @@
-import { max } from 'd3-array'
-import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
+import { extent, max } from 'd3-array'
+import { scaleBand, scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
 import throttle from 'lodash.throttle'
 import React from 'react'
 
@@ -56,6 +56,10 @@ class AgencyChart extends React.Component {
 
     const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()
 
+    const x = scaleTime()
+      .domain(extent(data.map(d => d.year)))
+      .range([0 + xPadding, width - xPadding])
+
     const x0 = scaleBand()
       .domain(data.map(d => d.year))
       .rangeRound([0 + xPadding, width - xPadding])
@@ -69,6 +73,14 @@ class AgencyChart extends React.Component {
     const active = yearSelected
       ? data.find(d => d.year === yearSelected)
       : hover || data[data.length - 1]
+
+    const noDataYears = data
+      .filter(d => d.reported === 0 && d.cleared === 0)
+      .map(({ cleared, reported, year }) => ({
+        cleared,
+        reported,
+        year,
+      }))
 
     return (
       <div>
@@ -109,6 +121,17 @@ class AgencyChart extends React.Component {
                         onMouseOver={this.rememberValue(d)}
                       />
                     ))}
+                  </g>
+                ))}
+                {noDataYears.map(d => (
+                  <g
+                    key={`ndy-${d.year}`}
+                    transform={`translate(${x0(d.year) + x1.bandwidth()}, ${height - 20})`}
+                    className="cursor-pointer no-year-data"
+                    onMouseOver={this.rememberValue(d)}
+                  >
+                    <circle r={8} fill="transparent" strokeWidth="1px" />
+                    <text y="4" textAnchor="middle">✕</text>
                   </g>
                 ))}
               </g>
