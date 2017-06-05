@@ -11,7 +11,9 @@ import Term from './Term'
 import parseNibrs from '../util/nibrs'
 import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
-import ucrParticipation from '../util/ucr'
+import ucrParticipation, {
+  shouldFetchNibrs as shouldShowNibrs,
+} from '../util/ucr'
 
 const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')
@@ -49,6 +51,11 @@ const NibrsContainer = ({
   until,
 }) => {
   const { data, error, loading } = nibrs
+  const showNibrs = placeType !== 'agency'
+    ? shouldShowNibrs({ crime, place, placeType })
+    : agency.nibrs_months_reported === 12
+
+  if (!showNibrs) return null
 
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
   const nibrsTerm = (
@@ -57,7 +64,8 @@ const NibrsContainer = ({
     </Term>
   )
 
-  let [totalCount, content] = [0, <Loading />]
+  let totalCount = 0
+  let content = null
   if (!loading && data) {
     const filteredData = filterNibrsData(data, { since, until })
     const dataParsed = parseNibrs(filteredData)
@@ -108,6 +116,7 @@ const NibrsContainer = ({
             and {until}. Learn more about the{' '}
             <a className="underline" href={fbiLink}>FBI’s data collections</a>.
           </p>}
+        {loading && <Loading />}
       </div>
       {content}
       {!loading &&

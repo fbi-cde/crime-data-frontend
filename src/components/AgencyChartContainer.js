@@ -20,13 +20,26 @@ const getContent = ({ crime, place, since, summary, until }) => {
     .filter(d => d.year >= since && d.year <= until)
     .sort((a, b) => a.year - b.year)
 
+  const hasNoValues =
+    dataClean.length ===
+    dataClean.filter(d => d.reported === 0 && d.cleared === 0).length
+
   return (
     <div>
-      <AgencyChart crime={crime} data={dataClean} since={since} until={until} />
-      <DownloadDataBtn
-        data={[{ data: dataClean, filename: `${fname}.csv` }]}
-        filename={fname}
-      />
+      {hasNoValues
+        ? <NoData />
+        : <div>
+            <AgencyChart
+              crime={crime}
+              data={dataClean}
+              since={since}
+              until={until}
+            />
+            <DownloadDataBtn
+              data={[{ data: dataClean, filename: `${fname}.csv` }]}
+              filename={fname}
+            />
+          </div>}
     </div>
   )
 }
@@ -38,7 +51,7 @@ const AgencyChartContainer = params => {
   return (
     <div className="mb5">
       <div className="p2 sm-p4 bg-white border-top border-blue border-w8">
-        <h2 className="mt0 mb3 fs-24 sm-fs-32 sans-serif">
+        <h2 className="mt0 mb3 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} incidents reported by{' '}
           {agency.display}, {since}-{until}
         </h2>

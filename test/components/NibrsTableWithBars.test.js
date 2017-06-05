@@ -6,7 +6,7 @@ import React from 'react'
 import NibrsTableWithBars from '../../src/components/NibrsTableWithBars'
 
 describe('NibrsTableWithBars', () => {
-  const data = n => [...Array(n)].map((_, i) => ({ key: i, count: 10 }))
+  const data = n => [...Array(n)].map((_, i) => ({ key: i + 1, count: 10 }))
 
   it('has row for each data entry', () => {
     const entries = 3

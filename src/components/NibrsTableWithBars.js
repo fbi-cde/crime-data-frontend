@@ -28,7 +28,7 @@ class NibrsTableWithBars extends React.Component {
     const agg = (a, b) => a + b.count
     const total = data.reduce(agg, 0)
 
-    let dataMunged = [...data]
+    let dataMunged = [...data.filter(d => d.key)]
     dataMunged.sort((a, b) => +b.count - +a.count)
 
     if (dataMunged.length > rowLim) {
