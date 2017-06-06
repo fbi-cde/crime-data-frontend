@@ -9,6 +9,12 @@ const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
       count: filtered.length,
     }
   })
+  const noCounty = data.filter(d => d[groupKey] === null)
+  dataGrouped.push({
+    key: 'Unspecified',
+    data: noCounty,
+    count: noCounty.length,
+  })
 
   return (
     <div
@@ -20,18 +26,21 @@ const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
         <div key={g.key}>
           <div className="mt1 fs-10 bold caps blue-light">{g.key}</div>
           <ul className="m0 list-reset fs-12">
-            {g.data.slice(0, 100).map((d, i) => (
-              <li key={i} className="">
-                <a
-                  className="block black truncate"
-                  style={{ lineHeight: '1.75' }}
-                  href="#!"
-                  onClick={onClick(d)}
-                >
-                  {d.agency_name}
-                </a>
-              </li>
-            ))}
+            {g.data
+              .slice(0, 100)
+              .sort((a, b) => a.agency_name < b.agency_name)
+              .map((d, i) => (
+                <li key={i} className="">
+                  <a
+                    className="block black truncate"
+                    style={{ lineHeight: '1.75' }}
+                    href="#!"
+                    onClick={onClick(d)}
+                  >
+                    {d.agency_name}
+                  </a>
+                </li>
+              ))}
           </ul>
         </div>
       ))}
