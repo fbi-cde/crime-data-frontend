@@ -1,3 +1,4 @@
+import lowerCase from 'lodash.lowercase'
 import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -24,10 +25,12 @@ const getContent = ({ crime, place, since, summary, until }) => {
     dataClean.length ===
     dataClean.filter(d => d.reported === 0 && d.cleared === 0).length
 
+  const noDataText = `There were no ${lowerCase(crime)} incidents reported during this time period.`
+
   return (
     <div>
       {hasNoValues
-        ? <NoData />
+        ? <NoData text={noDataText} />
         : <div>
             <AgencyChart
               crime={crime}
