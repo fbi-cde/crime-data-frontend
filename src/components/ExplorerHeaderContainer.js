@@ -18,7 +18,7 @@ const ExplorerHeaderContainer = ({
   until,
 }) => {
   const isAgency = placeType === 'agency'
-  const usState = startCase(agency ? oriToState(place) : place)
+  const usState = agency ? oriToState(place) : place
   const isLoading = !isAgency && ucr.loading
 
   return (
@@ -44,7 +44,7 @@ const ExplorerHeaderContainer = ({
           <UcrResourcesList place={usState} placeType={placeType} />
         </div>
         <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">
-          <PlaceThumbnail selected={usState} isAgency={isAgency} />
+          <PlaceThumbnail selected={startCase(usState)} isAgency={isAgency} />
           {isAgency &&
             <div className="mt-tiny fs-14">
               <span
