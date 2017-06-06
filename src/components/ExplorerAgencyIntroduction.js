@@ -10,7 +10,7 @@ const ExplorerAgencyIntroduction = ({
     {startCase(agencyName)} is located
     in {agencyCounty} County, {startCase(agencyState)}. This law enforcement
     agency reports [incident-based data (NIBRS)] to the
-    Uniform Crime Reporting (UCR) program.
+    FBI.
   </p>
 )
 
