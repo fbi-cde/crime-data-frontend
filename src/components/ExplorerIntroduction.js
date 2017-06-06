@@ -13,6 +13,8 @@ const ExplorerIntroduction = ({ agency, crime, place, ucr, until }) => {
         agencyName={agency.agency_name}
         agencyCounty={agency.primary_county}
         agencyState={oriToState(place)}
+        agencyType={agency.agency_type_name}
+        submitsNibrs={agency.nibrs_months_reported === 12}
       />
     )
   }
