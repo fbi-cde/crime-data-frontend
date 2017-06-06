@@ -52,7 +52,7 @@ const ExplorerUsStateIntroduction = ({ crime, place, ucr, until }) => {
               {until}
               , the FBI estimated crime statistics for
               {' '}
-              {startCase(place)}
+              {startCase(place)} 
               based on data voluntarily reported by
               {' '}
               {formatNumber(untilUcr.participating_agencies)}
