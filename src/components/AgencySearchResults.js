@@ -24,7 +24,7 @@ const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
       <div className="mb1 pb-tiny fs-16 bold line-height-1">Results</div>
       {dataGrouped.filter(g => g.count > 0).map(g => (
         <div key={g.key}>
-          <div className="mt1 fs-10 bold caps blue-light">{g.key}</div>
+          <div className="mt1 fs-10 bold caps blue">{g.key}</div>
           <ul className="m0 list-reset fs-12">
             {g.data
               .slice(0, 100)
