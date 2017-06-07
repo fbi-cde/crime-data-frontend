@@ -41,7 +41,7 @@ class LocationFilter extends React.Component {
 }
 
 LocationFilter.defaultProps = {
-  usState: '',
+  usState: nationalKey,
 }
 
 export default LocationFilter
