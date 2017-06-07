@@ -1,5 +1,5 @@
-import { extent, max } from 'd3-array'
-import { scaleBand, scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
+import { max } from 'd3-array'
+import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
 import throttle from 'lodash.throttle'
 import React from 'react'
 
