@@ -11,6 +11,7 @@ import React from 'react'
 import TrendChartDetails from './TrendChartDetails'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
+import mungeSummaryData from '../util/summary'
 import { slugify } from '../util/text'
 
 class TrendChart extends React.Component {
@@ -59,9 +60,11 @@ class TrendChart extends React.Component {
       colors,
       data,
       dispatch,
+      place,
       showMarkers,
       since,
       size,
+      summaries,
       until,
     } = this.props
     const { hover, svgParentWidth, yearSelected } = this.state
@@ -101,11 +104,39 @@ class TrendChart extends React.Component {
       return { id: k.slug, name: k.name, ends, segments, values }
     })
 
+    let maxValue = max(dataByKey, d => max(d.values, v => v.value.rate))
+    let rapeRevised
+    let rapeRevisedByKey
+
+    if (until >= 2013 && crime === 'rape') {
+      rapeRevised = mungeSummaryData({
+        crime: 'rape_revised',
+        summaries,
+        place,
+        since: 2013,
+        until,
+      })
+
+      rapeRevisedByKey = keysWithSlugs.map(k => {
+        const id = k.slug
+        const values = rapeRevised.map(d => ({
+          year: +d.date,
+          date: parse(d.date),
+          value: d[id],
+        }))
+
+        return { id, values }
+      })
+
+      maxValue = max([
+        maxValue,
+        max(rapeRevisedByKey, d => max(d.values, v => v.value.rate)),
+      ])
+    }
+
     const gapRanges = gaps.map(year =>
       [max([year - 1, since]), year, min([year + 1, until])].map(y => parse(y)),
     )
-
-    const maxValue = max(dataByKey, d => max(d.values, v => v.value.rate))
 
     const { margin } = size
     const svgWidth = svgParentWidth || size.width
@@ -157,6 +188,20 @@ class TrendChart extends React.Component {
             r={active[k.slug].count ? '4.5' : '0'}
           />
         ))}
+        {rapeRevised &&
+          keysWithSlugs.map((k, j) => {
+            const rapeActive = rapeRevised.find(d => +d.date === active.year)
+            if (!rapeActive) return null
+            return (
+              <circle
+                key={j}
+                cx="0"
+                cy={y(rapeActive[k.slug].rate)}
+                fill={color(k.slug)}
+                r={rapeActive[k.slug].count ? '4.5' : '0'}
+              />
+            )
+          })}
       </g>
     )
 
@@ -236,6 +281,18 @@ class TrendChart extends React.Component {
                   ))}
                 </g>
               ))}
+              {rapeRevisedByKey &&
+                rapeRevisedByKey.map((d, i) => (
+                  <g key={i}>
+                    <path
+                      d={l(d.values)}
+                      fill="none"
+                      stroke={color(d.id)}
+                      strokeDasharray="4,2"
+                      strokeWidth="2.5"
+                    />
+                  </g>
+                ))}
               {labels
                 .sort((a, b) => b.value.rate - a.value.rate)
                 .map((d, i) => (

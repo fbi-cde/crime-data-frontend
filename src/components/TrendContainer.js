@@ -59,6 +59,7 @@ const TrendContainer = ({
             keys={Object.keys(summaries.data).map(k => startCase(k))}
             place={place}
             since={since}
+            summaries={summaries.data}
             until={until}
           />
           <DownloadDataBtn
