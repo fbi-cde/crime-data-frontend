@@ -16,7 +16,6 @@ const SidebarContainer = ({
   filters,
   isOpen,
   onChange,
-  showSearch,
   usState,
 }) => (
   <nav className={`site-sidebar bg-white ${isOpen ? 'open' : ''}`}>
@@ -41,7 +40,6 @@ const SidebarContainer = ({
         agency={agency}
         agencyData={agencyData}
         onChange={onChange}
-        showSearch={showSearch}
         usState={usState}
       />
       <TimePeriodFilter onChange={onChange} {...filters} />
@@ -61,7 +59,7 @@ const formatAgencyData = (agencies, state) =>
   }))
 
 const mapStateToProps = ({ agencies, filters, sidebar }) => {
-  const { agencySearch, crime, place, placeType } = filters
+  const { crime, place, placeType } = filters
 
   const isAgency = placeType === 'agency'
   const usState = isAgency ? oriToState(place) : place
@@ -74,7 +72,6 @@ const mapStateToProps = ({ agencies, filters, sidebar }) => {
     crime,
     filters,
     isOpen: sidebar.isOpen,
-    showSearch: agencySearch === 'true',
     usState,
   }
 }
