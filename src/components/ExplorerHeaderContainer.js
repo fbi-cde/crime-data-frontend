@@ -20,12 +20,13 @@ const ExplorerHeaderContainer = ({
   const isAgency = placeType === 'agency'
   const usState = agency ? oriToState(place) : place
   const isLoading = !isAgency && ucr.loading
+  const placeDisplay = isAgency ? `${agency.agency_name} Agency` : usState
 
   return (
     <div>
       <div className="items-baseline mt2 mb4">
         <h1 className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-lighter">
-          {startCase((agency && `${agency.agency_name} Agency`) || place)}
+          {startCase(placeDisplay)}
           {' '} | {' '}
           {startCase(crime)}
         </h1>
@@ -62,7 +63,8 @@ const ExplorerHeaderContainer = ({
 const mapStateToProps = ({ agencies, filters, ucr }) => {
   const { place, placeType } = getPlaceInfo(filters)
   const { crime, until } = filters
-  const agency = placeType === 'agency' && getAgency(agencies, place)
+  const isAgency = placeType === 'agency'
+  const agency = isAgency && getAgency(agencies, place)
 
   return {
     agency,
