@@ -12,11 +12,15 @@ class AgencySearch extends Component {
     this.state = { search, hasSelection, showResults: props.initialShowResults }
   }
 
-  componentWillReceiveProps({ initialShowResults }) {
-    const isSame = initialShowResults === this.props.initialShowResults
-    if (isSame) return
+  componentWillReceiveProps({ agency, initialShowResults }) {
+    const newState = {}
+    if (initialShowResults !== this.props.initialShowResults) {
+      newState.showResults = initialShowResults
+    }
+    if (agency === '') newState.search = ''
+    if (newState === {}) return
 
-    this.setState({ showResults: initialShowResults })
+    this.setState(newState)
   }
 
   handleChange = e => {
