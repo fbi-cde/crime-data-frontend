@@ -177,8 +177,8 @@ const About = ({ dispatch }) => (
         <div className="mb3 md-col-9 md-pr7 border-box serif">
           <p className="mb3 fs-18 sm-fs-24">
             This project is part of an ongoing effort to improve and promote
-            transparency behind the nation’s crime statistics. We’re working
-            to add more datasets to this tool, and we’re continuing to
+            transparency behind the nation’s crime statistics. The data will be updated on a rolling basis. We’re also working
+            to add more datasets to this tool, and we’ll continue to
             develop new features based on your feedback.
           </p>
           <p className="fs-16 sm-fs-18">
