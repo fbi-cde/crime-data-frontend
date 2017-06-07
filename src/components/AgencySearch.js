@@ -12,11 +12,15 @@ class AgencySearch extends Component {
     this.state = { search, hasSelection, showResults: props.initialShowResults }
   }
 
-  componentWillReceiveProps({ initialShowResults }) {
-    const isSame = initialShowResults === this.props.initialShowResults
-    if (isSame) return
+  componentWillReceiveProps({ agency, initialShowResults }) {
+    const newState = {}
+    if (initialShowResults !== this.props.initialShowResults) {
+      newState.showResults = initialShowResults
+    }
+    if (agency === '') newState.search = ''
+    if (newState === {}) return
 
-    this.setState({ showResults: initialShowResults })
+    this.setState(newState)
   }
 
   handleChange = e => {
@@ -31,14 +35,6 @@ class AgencySearch extends Component {
     e.preventDefault()
     this.setState({ search: d.agency_name, hasSelection: true })
     this.props.onChange({ place: d.ori, placeType: 'agency' })
-  }
-
-  handleBlur = () => {
-    this.setState({ showResults: false })
-  }
-
-  handleFocus = () => {
-    this.setState({ showResults: true })
   }
 
   clearInput = () => {
@@ -75,8 +71,6 @@ class AgencySearch extends Component {
               placeholder="Search for an agency"
               value={search}
               onChange={this.handleChange}
-              onBlur={this.handleBlur}
-              onFocus={this.handleFocus}
             />
             <button
               className="absolute btn p0 line-height-1"

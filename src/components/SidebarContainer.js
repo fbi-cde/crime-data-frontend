@@ -7,6 +7,7 @@ import LocationFilter from './LocationFilter'
 import TimePeriodFilter from './TimePeriodFilter'
 import { hideSidebar } from '../actions/sidebar'
 import { getAgency, oriToState } from '../util/ori'
+import { nationalKey } from '../util/usa'
 
 const SidebarContainer = ({
   agency,
@@ -62,9 +63,10 @@ const mapStateToProps = ({ agencies, filters, sidebar }) => {
   const { crime, place, placeType } = filters
 
   const isAgency = placeType === 'agency'
+  const isNational = place === nationalKey
   const usState = isAgency ? oriToState(place) : place
   const agency = isAgency && getAgency(agencies, place)
-  const agencyData = usState && formatAgencyData(agencies.data, usState)
+  const agencyData = isNational ? [] : formatAgencyData(agencies.data, usState)
 
   return {
     agency,
