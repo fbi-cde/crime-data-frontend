@@ -16,7 +16,7 @@ export const oriToState = ori => {
 
 export const agencyDisplay = ({ agency_name, agency_type_name }) => {
   if (!agency_type_name) return agency_name
-  return `${agency_name} ${agency_type_name}`
+  return `${agency_name}`
 }
 
 export const getAgency = (agencies, ori) => {
