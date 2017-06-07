@@ -33,6 +33,14 @@ class AgencySearch extends Component {
     this.props.onChange({ place: d.ori, placeType: 'agency' })
   }
 
+  handleBlur = () => {
+    this.setState({ showResults: false })
+  }
+
+  handleFocus = () => {
+    this.setState({ showResults: true })
+  }
+
   clearInput = () => {
     this.setState({ search: '', hasSelection: false })
   }
@@ -67,6 +75,8 @@ class AgencySearch extends Component {
               placeholder="Search for an agency"
               value={search}
               onChange={this.handleChange}
+              onBlur={this.handleBlur}
+              onFocus={this.handleFocus}
             />
             <button
               className="absolute btn p0 line-height-1"

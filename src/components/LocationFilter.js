@@ -9,7 +9,7 @@ class LocationFilter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showResults: true,
+      showResults: false,
     }
   }
 
@@ -18,7 +18,7 @@ class LocationFilter extends React.Component {
   }
 
   render() {
-    const { agency, agencyData, onChange, showSearch, usState } = this.props
+    const { agency, agencyData, onChange, usState } = this.props
     const { showResults } = this.state
     return (
       <div id="location" className="mb4">
@@ -28,8 +28,7 @@ class LocationFilter extends React.Component {
           onFocus={this.handleLocationFocus}
           selected={startCase(usState)}
         />
-        {showSearch &&
-          usState !== nationalKey &&
+        {usState !== nationalKey &&
           <AgencySearch
             onChange={onChange}
             agency={(agency || {}).agency_name || ''}
@@ -43,7 +42,6 @@ class LocationFilter extends React.Component {
 
 LocationFilter.defaultProps = {
   usState: '',
-  showSearch: false,
 }
 
 export default LocationFilter
