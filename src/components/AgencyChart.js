@@ -56,10 +56,6 @@ class AgencyChart extends React.Component {
 
     const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()
 
-    const x = scaleTime()
-      .domain(extent(data.map(d => d.year)))
-      .range([0 + xPadding, width - xPadding])
-
     const x0 = scaleBand()
       .domain(data.map(d => d.year))
       .rangeRound([0 + xPadding, width - xPadding])
