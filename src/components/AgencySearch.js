@@ -13,14 +13,12 @@ class AgencySearch extends Component {
   }
 
   componentWillReceiveProps({ agency, initialShowResults }) {
-    const newState = {}
     if (initialShowResults !== this.props.initialShowResults) {
-      newState.showResults = initialShowResults
+      this.setState({ showResults: initialShowResults })
     }
-    if (agency === '') newState.search = ''
-    if (newState === {}) return
-
-    this.setState(newState)
+    if (agency === '') {
+      this.setState({ search: '', hasSelection: false })
+    }
   }
 
   handleChange = e => {
