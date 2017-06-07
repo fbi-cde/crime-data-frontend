@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const Loading = ({ slim, text }) => (
@@ -7,14 +8,20 @@ const Loading = ({ slim, text }) => (
       width="30"
       height="30"
       src="/img/loading.svg"
-      alt="loading..."
+      alt="Loading..."
     />
-    {text || 'Loading'}
+    {text}
   </div>
 )
 
 Loading.defaultProps = {
   slim: false,
+  text: 'Loading',
+}
+
+Loading.PropTypes = {
+  slim: PropTypes.boolean,
+  text: PropTypes.string,
 }
 
 export default Loading

@@ -48,6 +48,10 @@
     "definition": "Full-time agency personnel such as clerks, radio dispatchers, meter attendants, stenographers, jailers, correctional officers, and mechanics."
   },
   {
+    "term": "Cleared",
+    "definition": "Offenses are cleared when an arrest is made or when an arrest would be possible but circumstances prevent law enforcement from making an arrest. The latter option is referred to as cleared by exceptional means. "
+  },
+  {
     "term": "Commercial sex acts",
     "definition": "Inducing a person by force, fraud, or coercion to participate in commercial sex acts, or in which the person induced to perform such acts is under 18 years old."
   },
@@ -286,6 +290,10 @@
   {
     "term": "Rate",
     "definition": "Rates are calculated per 100,000 people."
+  },
+  {
+    "term": "Reported",
+    "definition": "Reported offenses include all offenses reported to and known of by law enforcement. "
   },
   {
     "term": "Return A",
