@@ -70,6 +70,14 @@ class AgencyChart extends React.Component {
       ? data.find(d => d.year === yearSelected)
       : hover || data[data.length - 1]
 
+    const noDataYears = data
+      .filter(d => d.reported === 0 && d.cleared === 0)
+      .map(({ cleared, reported, year }) => ({
+        cleared,
+        reported,
+        year,
+      }))
+
     return (
       <div>
         <AgencyChartDetails
@@ -109,6 +117,17 @@ class AgencyChart extends React.Component {
                         onMouseOver={this.rememberValue(d)}
                       />
                     ))}
+                  </g>
+                ))}
+                {noDataYears.map(d => (
+                  <g
+                    key={`ndy-${d.year}`}
+                    transform={`translate(${x0(d.year) + x1.bandwidth()}, ${height - 20})`}
+                    className="cursor-pointer no-year-data"
+                    onMouseOver={this.rememberValue(d)}
+                  >
+                    <circle r={8} fill="transparent" strokeWidth="1px" />
+                    <text y="4" textAnchor="middle">✕</text>
                   </g>
                 ))}
               </g>
