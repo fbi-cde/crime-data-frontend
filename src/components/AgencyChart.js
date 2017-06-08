@@ -49,7 +49,7 @@ class AgencyChart extends React.Component {
     const xPadding = svgWidth < 500 ? 20 : 40
 
     const keys = ['reported', 'cleared']
-    const yMax = max(data, d => max(keys, k => d[k]))
+    const yMax = max([3, max(data, d => max(keys, k => d[k]))])
 
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
