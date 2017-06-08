@@ -7,17 +7,17 @@ import Term from './Term'
 import ucrParticipationLookup from '../util/ucr'
 
 const estimatedTerm = (
-  <Term id="estimated data">
+  <Term id="estimated data" size="sm">
     Estimated
   </Term>
 )
 const nibrsTerm = (
-  <Term id={'national incident-based reporting system (nibrs)'}>
+  <Term id={'national incident-based reporting system (nibrs)'} size="sm">
     incident-based (NIBRS)
   </Term>
 )
 const srsTerm = (
-  <Term id={'summary reporting system (srs)'}>
+  <Term id={'summary reporting system (srs)'} size="sm">
     summary (SRS)
   </Term>
 )
