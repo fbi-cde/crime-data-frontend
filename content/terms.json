@@ -49,7 +49,7 @@
   },
   {
     "term": "Cleared",
-    "definition": "Offenses are cleared when an arrest is made or when an arrest would be possible but circumstances prevent law enforcement from making an arrest. The latter option is referred to as cleared by exceptional means. "
+    "definition": "Offenses are cleared in one of two ways: when an arrest is made or through exceptional means. Exceptional means refers to circumstances that are beyond law enforcement control preventing an arrest being made. Examples of exceptional clearances include, but are not limited to, the death of the offender; the victim’s refusal to cooperate with the prosecution after the offender has been identified; or the denial of extradition because the offender committed a crime in another jurisdiction and is being prosecuted for that offense."
   },
   {
     "term": "Commercial sex acts",
@@ -289,7 +289,7 @@
   },
   {
     "term": "Rate",
-    "definition": "Rates are calculated per 100,000 people."
+    "definition": "A rate is used to indicate the number of offenses per 100,000 people. The rate is calculated by first dividing a jurisdiction’s population by 100,000 and then dividing the number of offenses by the resulting figure.  Crime or arrest rates are derived from law enforcement agencies for which 12 months of complete offense or arrest data were submitted."
   },
   {
     "term": "Reported",

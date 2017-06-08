@@ -70,7 +70,7 @@ const About = ({ dispatch }) => (
               The Crime Data Explorer publishes nation-wide crime data collected
               by the FBI in a digital format. The tool allows you to view
               trends and download bulk data allowing you to get a better
-              understanding of reported crime across the country.
+              understanding of reported crime across the country. Data will be updated periodically.
             </p>
           </div>
           <div className="md-col md-col-3">
@@ -177,7 +177,7 @@ const About = ({ dispatch }) => (
         <div className="mb3 md-col-9 md-pr7 border-box serif">
           <p className="mb3 fs-18 sm-fs-24">
             This project is part of an ongoing effort to improve and promote
-            transparency behind the nation’s crime statistics. The data will be updated on a rolling basis. We’re also working
+            transparency behind the nation’s crime statistics. We’re working
             to add more datasets to this tool, and we’ll continue to
             develop new features based on your feedback.
           </p>
