@@ -43,6 +43,17 @@ class Explorer extends React.Component {
     dispatch(updateApp(filters))
   }
 
+  componentWillReceiveProps({ params: newParams }) {
+    const { appState, dispatch } = this.props
+    const { place } = appState.filters
+    const { crime } = newParams
+    const newPlace = getPlaceInfo(newParams)
+
+    if (place !== newPlace.place) {
+      dispatch(updateApp({ crime, ...newPlace }))
+    }
+  }
+
   handleSidebarChange = change => {
     const { router } = this.props
     this.props.dispatch(updateApp(change, router))
