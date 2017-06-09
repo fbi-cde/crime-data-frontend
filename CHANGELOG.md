@@ -1,6 +1,28 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.6.0] - 2017-06-08
+### Added
+- Arson overview and related chart text ([#803](https://github.com/18F/crime-data-frontend/pull/803))
+- Pin on map component for agencies, dropped in the center ([#805](https://github.com/18F/crime-data-frontend/pull/805))
+- Show indicator for years with zero values ([#833](https://github.com/18F/crime-data-frontend/pull/833))
+- No data text for agency view ([#845](https://github.com/18F/crime-data-frontend/pull/845))
+- "Cleared", "rate", "reported", and "unestimated data" added to glossary terms ([#846](https://github.com/18F/crime-data-frontend/pull/846), [#850](https://github.com/18F/crime-data-frontend/pull/850))
+- Links and logos to site footer ([crime-data-explorer#117](https://github.com/18F/crime-data-explorer/issues/117))
+
+### Changed
+- Improve the agency search view ([#801](https://github.com/18F/crime-data-frontend/pull/801/files), [#802](https://github.com/18F/crime-data-frontend/pull/802), [#804](https://github.com/18F/crime-data-frontend/pull/804), [#819](https://github.com/18F/crime-data-frontend/pull/819))
+- Remove `agencySearch=true` feature flag to expose agency search UI ([#854](https://github.com/18F/crime-data-frontend/pull/854))
+- Mention "updates to the data" as part of "what's coming" ([crime-data-explorer#149](https://github.com/18F/crime-data-explorer/issues/149))
+
+### Fixed
+- Handle Nebraska and Guam ORIs ([#806](https://github.com/18F/crime-data-frontend/issues/806))
+- Do not show NIBRS incidents tables for agencies that do not submit NIBRS data ([#807](https://github.com/18F/crime-data-frontend/issues/807))
+- Top navigation "Explorer" link ([#827](https://github.com/18F/crime-data-frontend/issues/827))
+- UCR participation download ([#844](https://github.com/18F/crime-data-frontend/pull/844))
+- Remove empty rows in incident details charts ([crime-data-explorer#162](https://github.com/18F/crime-data-explorer/issues/162))
+- Sparklines for rape views ([crime-data-explorer#168](https://github.com/18F/crime-data-explorer/issues/168))
+
 ## [2.5.1] - 2017-05-30
 
 ### Changed
