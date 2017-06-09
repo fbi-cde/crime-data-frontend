@@ -100,7 +100,7 @@ const fetchAggregates = place => {
 
 const fetchAgencyAggregates = (ori, crime) => {
   const url = `${API}/agencies/count/${ori}/offenses`
-  const params = { explorer_offense: crime, per_page: 200 }
+  const params = { explorer_offense: mapToApiOffense(crime), per_page: 200 }
   return get(url, params).then(d => ({ key: ori, results: d.results }))
 }
 

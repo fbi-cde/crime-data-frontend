@@ -7,10 +7,10 @@ const offenses = {
   larceny: 'larceny',
   'motor-vehicle-theft': 'motor-vehicle-theft',
   homicide: 'homicide',
-  'property-crime': 'Property',
+  'property-crime': 'property',
   rape: 'rape',
   robbery: 'robbery',
-  'violent-crime': 'Violent',
+  'violent-crime': 'violent',
 }
 const ids = Object.keys(offenses)
 
