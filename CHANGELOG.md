@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.6.1] - 2017-06-09
+### Fixed
+- "Explorer" top navigation link goes to US and violent crime view ([#828](https://github.com/18F/crime-data-frontend/issues/828))
+- Properly map violent and property crimes for agency API requests ([#898](https://github.com/18F/crime-data-frontend/pull/898))
+
+
 ## [2.6.0] - 2017-06-08
 ### Added
 - Arson overview and related chart text ([#803](https://github.com/18F/crime-data-frontend/pull/803))
@@ -23,8 +29,8 @@ All notable changes to this project will be documented in this file.
 - Remove empty rows in incident details charts ([crime-data-explorer#162](https://github.com/18F/crime-data-explorer/issues/162))
 - Sparklines for rape views ([crime-data-explorer#168](https://github.com/18F/crime-data-explorer/issues/168))
 
-## [2.5.1] - 2017-05-30
 
+## [2.5.1] - 2017-05-30
 ### Changed
 - Use data from the API for agency bar charts ([#796](https://github.com/18F/crime-data-frontend/pull/796))
 - Show agency search results grouped by county ([#797](https://github.com/18F/crime-data-frontend/pull/797))
