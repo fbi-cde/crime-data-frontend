@@ -1,6 +1,6 @@
 import { entries } from 'd3-collection'
 import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
-import { stack, stackOrderAscending } from 'd3-shape'
+import { stack, stackOrderReverse } from 'd3-shape'
 import React from 'react'
 
 import NibrsStackedBarDetails from './NibrsStackedBarDetails'
@@ -40,10 +40,10 @@ class NibrsStackedBar extends React.Component {
 
     const stackGen = stack()
       .keys(Object.keys(dataClean))
-      .order(stackOrderAscending)
+      .order(stackOrderReverse)
 
     const dataStacked = stackGen([dataClean])
-    const dataEntries = entries(dataClean).sort((a, b) => b.value - a.value)
+    const dataEntries = entries(dataClean)
 
     return (
       <div className="mb2 pb2 border-bottom border-blue-light">
