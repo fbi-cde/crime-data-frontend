@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import BetaBanner from './BetaBanner'
 import BetaModal from './BetaModal'
-import ClearLocalStorageBtn from './ClearLocalStorageBtn'
+import ClearCacheBtn from './ClearCacheBtn'
 import Disclaimer from './Disclaimer'
 import Feedback from './Feedback'
 import Footer from './Footer'
@@ -27,7 +27,7 @@ const App = ({ actions, appState, children, dispatch, location }) => (
     </main>
     <Glossary actions={actions} {...appState.glossary} />
     <Footer actions={actions} />
-    {!isProd && <ClearLocalStorageBtn />}
+    {!isProd && <ClearCacheBtn />}
     {isProd &&
       appState.modal.isShown &&
       <BetaModal
