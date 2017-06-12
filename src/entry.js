@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 
 import routes from './routes'
 import configureStore from './store'
+import './util/serviceWorker'
 
 import '../sass/app.scss'
 
