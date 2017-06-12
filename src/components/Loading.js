@@ -19,9 +19,9 @@ Loading.defaultProps = {
   text: 'Loading',
 }
 
-Loading.PropTypes = {
-  slim: PropTypes.boolean,
-  text: PropTypes.string,
+Loading.propTypes = {
+  slim: PropTypes.bool.isRequired,
+  text: PropTypes.string.isRequired,
 }
 
 export default Loading

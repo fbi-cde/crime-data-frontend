@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
@@ -46,6 +47,13 @@ const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
       ))}
     </div>
   )
+}
+
+AgencySearchResults.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  groupKey: PropTypes.string.isRequired,
+  groupValues: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClick: PropTypes.func.isRequired,
 }
 
 export default AgencySearchResults

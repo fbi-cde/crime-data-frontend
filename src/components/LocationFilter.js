@@ -1,4 +1,5 @@
 import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import AgencySearch from './AgencySearch'
@@ -6,12 +7,7 @@ import LocationSelect from './LocationSelect'
 import { nationalKey } from '../util/usa'
 
 class LocationFilter extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showResults: false,
-    }
-  }
+  state = { showResults: false }
 
   handleLocationFocus = () => {
     this.setState({ showResults: false })
@@ -20,6 +16,7 @@ class LocationFilter extends React.Component {
   render() {
     const { agency, agencyData, onChange, usState } = this.props
     const { showResults } = this.state
+
     return (
       <div id="location" className="mb4">
         <div className="mb3 fs-22 bold border-bottom">Location</div>
@@ -42,6 +39,13 @@ class LocationFilter extends React.Component {
 
 LocationFilter.defaultProps = {
   usState: nationalKey,
+}
+
+LocationFilter.propTypes = {
+  agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
+  agencyData: PropTypes.arrayOf(PropTypes.object),
+  onChange: PropTypes.func.isRequired,
+  usState: PropTypes.string.isRequired,
 }
 
 export default LocationFilter

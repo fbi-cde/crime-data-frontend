@@ -1,6 +1,7 @@
 import { entries } from 'd3-collection'
 import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
 import { stack, stackOrderReverse } from 'd3-shape'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import NibrsStackedBarDetails from './NibrsStackedBarDetails'
@@ -106,6 +107,17 @@ NibrsStackedBar.defaultProps = {
   margin: { top: 5, right: 10, bottom: 0, left: 10 },
   size: { width: 200, height: 130 },
   colors: ['#FF5E50', '#B84941', '#F48E88'],
+}
+
+NibrsStackedBar.propTypes = {
+  colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  keys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  size: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }).isRequired,
+  title: PropTypes.string.isRequired,
 }
 
 export default NibrsStackedBar

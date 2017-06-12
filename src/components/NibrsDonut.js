@@ -1,6 +1,7 @@
 import { descending } from 'd3-array'
 import { scaleOrdinal } from 'd3-scale'
 import { arc, pie } from 'd3-shape'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import NibrsDonutDetails from './NibrsDonutDetails'
@@ -87,6 +88,17 @@ class NibrsDonut extends React.Component {
 NibrsDonut.defaultProps = {
   size: { width: 175, height: 175 },
   colors: ['#52687d', '#ff5e50', '#97a7b8'],
+}
+
+NibrsDonut.propTypes = {
+  colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  keys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  size: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }).isRequired,
+  title: PropTypes.string.isRequired,
 }
 
 export default NibrsDonut

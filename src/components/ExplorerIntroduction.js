@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import ExplorerAgencyIntroduction from './ExplorerAgencyIntroduction'
@@ -39,6 +40,17 @@ const ExplorerIntroduction = ({ agency, crime, place, ucr, until }) => {
       ucr={ucr.data[place]}
     />
   )
+}
+
+ExplorerIntroduction.propTypes = {
+  agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
+  crime: PropTypes.string.isRequired,
+  place: PropTypes.string.isRequired,
+  ucr: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
+  }).isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 export default ExplorerIntroduction

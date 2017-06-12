@@ -1,4 +1,5 @@
 import { format } from 'd3-format'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const fmt = format(',.0f')
@@ -6,7 +7,6 @@ const fmt = format(',.0f')
 const NibrsDonutDetails = ({
   colorMap,
   data,
-  hover,
   onMouseOver,
   onMouseOut,
   selected,
@@ -19,7 +19,7 @@ const NibrsDonutDetails = ({
         const border = active
           ? 'border-bottom border-w2'
           : 'border-bottom-dashed'
-        const opacity = hover === null || active ? 1 : 0.5
+        const opacity = selected === null || active ? 1 : 0.5
         return (
           <li
             key={i}
@@ -48,5 +48,13 @@ const NibrsDonutDetails = ({
     </ul>
   </div>
 )
+
+NibrsDonutDetails.propTypes = {
+  colorMap: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onMouseOver: PropTypes.func.isRequired,
+  onMouseOut: PropTypes.func.isRequired,
+  selected: PropTypes.object,
+}
 
 export default NibrsDonutDetails

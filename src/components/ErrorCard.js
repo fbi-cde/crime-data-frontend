@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const ErrorCard = ({ error }) => (
@@ -6,5 +7,9 @@ const ErrorCard = ({ error }) => (
     <pre>{JSON.stringify(error, null, 2)}</pre>
   </div>
 )
+
+ErrorCard.propTypes = {
+  error: PropTypes.object.isRequired,
+}
 
 export default ErrorCard

@@ -1,6 +1,7 @@
 import { max } from 'd3-array'
 import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
 import throttle from 'lodash.throttle'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import AgencyChartDetails from './AgencyChartDetails'
@@ -137,6 +138,19 @@ class AgencyChart extends React.Component {
       </div>
     )
   }
+}
+
+AgencyChart.propTypes = {
+  colors: PropTypes.array.isRequired,
+  crime: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  mutedColors: PropTypes.array.isRequired,
+  since: PropTypes.number.isRequired,
+  size: PropTypes.shape({
+    width: PropTypes.number,
+    margin: PropTypes.object,
+  }).isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 AgencyChart.defaultProps = {

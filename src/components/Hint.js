@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const Hint = ({ value, position }) => {
@@ -15,6 +16,14 @@ const Hint = ({ value, position }) => {
       {value}
     </div>
   )
+}
+
+Hint.propTypes = {
+  value: PropTypes.string.isRequired,
+  position: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+  }).isRequired,
 }
 
 export default Hint

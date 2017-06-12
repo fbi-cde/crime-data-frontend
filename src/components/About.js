@@ -257,7 +257,7 @@ const About = ({ dispatch }) => (
 )
 
 About.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func,
 }
 
 export default About

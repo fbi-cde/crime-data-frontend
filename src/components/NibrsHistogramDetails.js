@@ -1,5 +1,6 @@
 import { format } from 'd3-format'
 import pluralize from 'pluralize'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const fmt = format(',.0f')
@@ -25,6 +26,11 @@ const NibrsHistogramDetails = ({ data, noun }) => {
           </span>}
     </div>
   )
+}
+
+NibrsHistogramDetails.propTypes = {
+  data: PropTypes.object.isRequired,
+  noun: PropTypes.string.isRequired,
 }
 
 export default NibrsHistogramDetails

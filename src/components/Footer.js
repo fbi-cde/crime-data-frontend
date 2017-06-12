@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import Link from './Link'
@@ -168,5 +169,9 @@ const Footer = ({ actions }) => (
     </div>
   </footer>
 )
+
+Footer.propTypes = {
+  actions: PropTypes.object.isRequired,
+}
 
 export default Footer

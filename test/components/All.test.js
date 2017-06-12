@@ -6,6 +6,7 @@ const EXCLUDES = [
   'ClearLocalStorageBtn',
   'Disclaimer',
   'DownloadsAndDocs',
+  'DownloadBulkNibrs',
   'NotFound',
 ]
 
@@ -17,17 +18,16 @@ describe('All components', () => {
     const [name, ext] = [file.slice(0, -3), file.slice(-2)]
     if (EXCLUDES.includes(name) || ext !== 'js') return
 
-    it(`${file} has propTypes defined`, () => {
+    let component
+    try {
       const filePath = path.join(dir, file)
-      let component
+      component = require(`../../${filePath}`).default
+    } catch (e) {
+      console.log(`skipping ${file}... (reason: ${e})`)
+      return
+    }
 
-      try {
-        component = require(`../../${filePath}`).default
-      } catch (e) {
-        console.log(`error with ${filePath} (${e})`)
-        return
-      }
-
+    it(`${file} has propTypes defined`, () => {
       expect(component.propTypes).toBeDefined()
     })
   })

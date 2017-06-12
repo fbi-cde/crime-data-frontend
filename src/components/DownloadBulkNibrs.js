@@ -73,19 +73,9 @@ const downloadBulkNibrs = (year, state) => {
 }
 
 class DownloadBulkNibrs extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      place: null,
-      year: null,
-    }
+  state = { place: null, year: null }
 
-    this.getYearRange = ::this.getYearRange
-    this.handleClick = ::this.handleClick
-    this.handleSelectChange = ::this.handleSelectChange
-  }
-
-  getYearRange() {
+  getYearRange = () => {
     if (!this.state.place) return []
     const { nibrs } = ucrProgram[this.state.place]
     const initialYear = nibrs['initial-year']
@@ -93,13 +83,13 @@ class DownloadBulkNibrs extends React.Component {
     return range(2014 + 1 - initialYear).map(y => initialYear + y)
   }
 
-  handleClick(e) {
+  handleClick = e => {
     e.preventDefault()
     const { place, year } = this.state
     downloadBulkNibrs(year, ucrStateCodes[place])
   }
 
-  handleSelectChange(e) {
+  handleSelectChange = e => {
     switch (e.target.id) {
       case 'nibrs-state':
         this.setState({ place: e.target.value })
@@ -139,9 +129,10 @@ class DownloadBulkNibrs extends React.Component {
               <select
                 className="col-12 sm-fs-18 bold field select bg-white"
                 id="nibrs-state"
+                defaultValue="Location"
                 onChange={this.handleSelectChange}
               >
-                <option disabled selected>Location</option>
+                <option value="Location" disabled>Location</option>
                 {nibrsStates.map((s, i) => (
                   <option key={i} value={s}>{startCase(s)}</option>
                 ))}
@@ -152,9 +143,10 @@ class DownloadBulkNibrs extends React.Component {
               <select
                 className="col-12 sm-fs-18 bold field select bg-white"
                 id="nibrs-year"
+                defaultValue="Year"
                 onChange={this.handleSelectChange}
               >
-                <option disabled selected>Year</option>
+                <option value="Year" disabled>Year</option>
                 {nibrsYears.map((y, i) => <option key={i}>{y}</option>)}
               </select>
             </div>

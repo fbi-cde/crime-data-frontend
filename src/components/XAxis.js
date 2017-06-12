@@ -1,13 +1,7 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
-const XAxis = ({
-  active,
-  tickCt = 8,
-  tickSizeOuter = 6,
-  height,
-  scale,
-  showLine = false,
-}) => {
+const XAxis = ({ active, tickCt, tickSizeOuter, height, scale, showLine }) => {
   const range = scale.range()
   const [range0, range1, k] = [range[0] + 0.5, range[range.length - 1] + 0.5, 1]
   const domain = `M${range0},${k * tickSizeOuter}V0.5H${range1}V${k * tickSizeOuter}`
@@ -48,6 +42,21 @@ const XAxis = ({
       {ticks}
     </g>
   )
+}
+
+XAxis.defaultProps = {
+  tickCt: 8,
+  tickSizeOuter: 6,
+  showLine: false,
+}
+
+XAxis.propTypes = {
+  active: PropTypes.object,
+  tickCt: PropTypes.number.isRequired,
+  tickSizeOuter: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  scale: PropTypes.func.isRequired,
+  showLine: PropTypes.bool.isRequired,
 }
 
 export default XAxis

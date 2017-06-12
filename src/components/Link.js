@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import { Link as RouterLink } from 'react-router'
 
@@ -10,6 +11,11 @@ const Link = props => {
   }
 
   return el
+}
+
+Link.propTypes = {
+  children: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
 }
 
 export default Link
