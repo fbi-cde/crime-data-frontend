@@ -5,7 +5,12 @@ import { connect } from 'react-redux'
 
 import { showTerm } from '../actions/glossary'
 
-const Term = ({ children, dispatch, id }) => {
+const imgSize = size => {
+  const options = { sm: 10, md: 14, lg: 18 }
+  return options[size] || options.md
+}
+
+const Term = ({ children, dispatch, id, size = 'md' }) => {
   const handler = e => {
     e.preventDefault()
     dispatch(showTerm(id))
@@ -24,7 +29,7 @@ const Term = ({ children, dispatch, id }) => {
         aria-hidden="true"
         className="ml-tiny"
         src="/img/glossary.svg"
-        width="9"
+        width={imgSize(size)}
       />
     </a>
   )
