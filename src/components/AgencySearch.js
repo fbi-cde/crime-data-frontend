@@ -71,16 +71,26 @@ class AgencySearch extends Component {
               onChange={this.handleChange}
             />
             <button
-              className="absolute btn p0 line-height-1"
-              style={{ top: '.5rem', right: '1rem' }}
+              className="absolute right-0 btn line-height-1 border-none"
+              style={{
+                padding: '.5rem .75rem',
+                borderLeft: '1px solid #284152',
+              }}
               onClick={hasSelection ? this.clearInput : this.toggleResults}
             >
-              <img
-                src={`/img/${hasSelection ? 'x-navy' : 'chevron-down-navy'}.svg`}
-                alt="close"
-                width="12"
-                height="12"
-              />
+              {hasSelection
+                ? <img
+                    src="/img/x-navy.svg"
+                    alt="close"
+                    width="10"
+                    height="10"
+                  />
+                : <img
+                    src="/img/chevron-down-navy.svg"
+                    alt="see results"
+                    width="12"
+                    height="12"
+                  />}
             </button>
           </div>
           {!hasSelection &&
