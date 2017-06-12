@@ -1,2 +1,8 @@
 .flex-row-reverse { flex-direction: row-reverse; }
 .justify-between { justify-content: space-between; }
+
+.flex-basis-50 { flex-basis: 50%; }
+
+@media #{$breakpoint-sm} {
+  .sm-flex-basis-100 { flex-basis: 100%; }
+}
