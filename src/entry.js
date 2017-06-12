@@ -24,9 +24,5 @@ const render = () => {
   )
 }
 
-if (window && window.localStorage && process.env.NODE_ENV === 'production') {
-  window.localStorage.clear()
-}
-
 render()
 store.subscribe(render)
