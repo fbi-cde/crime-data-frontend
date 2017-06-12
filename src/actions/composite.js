@@ -25,7 +25,13 @@ export const updateApp = (change, router) => dispatch => {
   dispatch(updateFilters(change))
 
   if (router) {
-    history.push(createNewLocation({ change, router }))
+    const loc = createNewLocation({ change, router })
+    if (window.caches) {
+      caches
+        .open('crime-data-explorer')
+        .then(cache => cache.addAll([loc.pathname]))
+    }
+    history.push(loc)
   }
 
   return dispatch(fetchData())
