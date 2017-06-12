@@ -1,5 +1,5 @@
 const VERSION = 1
-const CACHE = `crime-data-explorer-${VERSION}`
+const CACHE = 'crime-data-explorer'
 
 self.addEventListener('install', event => {
   event.waitUntil(
