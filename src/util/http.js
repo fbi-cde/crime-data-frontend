@@ -4,7 +4,7 @@ import range from 'lodash.range'
 
 const get = (url, params = {}) => http.get(url, { params }).then(f => f.data)
 
-const getAll = (url, params = {}) => {
+export const getAll = (url, params = {}) => {
   const all = get(url, params)
     .then(first => {
       if (first.pagination.pages === 1) return first.results
@@ -21,5 +21,3 @@ const getAll = (url, params = {}) => {
 
   return all
 }
-
-export { get, getAll }

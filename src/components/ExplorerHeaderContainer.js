@@ -2,7 +2,7 @@ import startCase from 'lodash.startcase'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import ExplorerIntroduction from './ExplorerIntroduction'
+import ExplorerIntro from './ExplorerIntro'
 import Loading from './Loading'
 import PlaceThumbnail from './PlaceThumbnail'
 import UcrResourcesList from './UcrResourcesList'
@@ -35,7 +35,7 @@ const ExplorerHeaderContainer = ({
         <div className="lg-col lg-col-8 mb2 lg-m0 p0 lg-pr6 fs-18">
           {isLoading
             ? <Loading />
-            : <ExplorerIntroduction
+            : <ExplorerIntro
                 agency={agency}
                 crime={crime}
                 place={place}
