@@ -28,6 +28,7 @@
       "skipShapeProps": true
     }],
     "react/prop-types": 0,
+    "react/require-default-props": 0,
     "semi": 0,
     "jsx-quotes": 0
   }

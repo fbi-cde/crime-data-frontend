@@ -1,6 +1,7 @@
 import { format } from 'd3-format'
 import range from 'lodash.range'
 import lowerCase from 'lodash.lowercase'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import Highlight from './Highlight'
@@ -30,8 +31,8 @@ const TrendChartDetails = ({
   data,
   keys,
   since,
-  updateYear,
   until,
+  updateYear,
 }) => {
   const { name, slug } = keys[0]
   const comparison = getComparison({ place: slug, data })
@@ -144,6 +145,16 @@ const TrendChartDetails = ({
       </div>
     </div>
   )
+}
+
+TrendChartDetails.propTypes = {
+  colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  crime: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  keys: PropTypes.arrayOf(PropTypes.object).isRequired,
+  since: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
+  updateYear: PropTypes.func.isRequired,
 }
 
 export default TrendChartDetails

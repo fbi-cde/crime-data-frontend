@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import AboutTheData from './AboutTheData'
@@ -113,6 +114,13 @@ class Explorer extends React.Component {
       </div>
     )
   }
+}
+
+Explorer.propTypes = {
+  appState: PropTypes.object,
+  dispatch: PropTypes.func,
+  params: PropTypes.object,
+  router: PropTypes.object,
 }
 
 export default Explorer

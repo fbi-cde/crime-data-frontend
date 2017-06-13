@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { geoAlbersUsa, geoPath } from 'd3-geo'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { feature, mesh } from 'topojson'
 
@@ -86,6 +87,11 @@ class PlaceThumbnail extends React.Component {
       </Container>
     )
   }
+}
+
+PlaceThumbnail.propTypes = {
+  selected: PropTypes.string.isRequired,
+  isAgency: PropTypes.bool.isRequired,
 }
 
 export default PlaceThumbnail

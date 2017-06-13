@@ -1,4 +1,5 @@
 import { format } from 'd3-format'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const getTickVals = (domain, ticks) => {
@@ -12,7 +13,7 @@ const fmt = x => {
   return format(`,.${val > 10 || val % 1 === 0 ? 0 : 1}f`)(val)
 }
 
-const YAxis = ({ tickCt = 4, scale, width }) => {
+const YAxis = ({ tickCt, scale, width }) => {
   const values = getTickVals(scale.domain(), tickCt)
   const ticks = values.map((v, i) => {
     const pos = scale(v)
@@ -30,6 +31,16 @@ const YAxis = ({ tickCt = 4, scale, width }) => {
       {ticks}
     </g>
   )
+}
+
+YAxis.defaultProps = {
+  tickCt: 4,
+}
+
+YAxis.propTypes = {
+  tickCt: PropTypes.number.isRequired,
+  scale: PropTypes.func.isRequired,
+  width: PropTypes.number.isRequired,
 }
 
 export default YAxis

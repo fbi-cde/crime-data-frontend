@@ -1,4 +1,5 @@
 import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import Hint from './Hint'
@@ -38,16 +39,15 @@ class UsaMap extends React.Component {
           <title>USA</title>
           <g onClick={mapClick}>
             {svgDataWithNames.map(s => {
-              const isSelected = s.id === placeId
-              const defaultClass = isSelected
+              const defaultClass = s.id === placeId
                 ? 'fill-red-bright'
                 : 'fill-blue-light'
-              const suppliedColor = colors[s.id.toLowerCase()]
+
               return (
                 <path
                   key={s.id}
                   id={s.id}
-                  className={suppliedColor || defaultClass}
+                  className={colors[s.id.toLowerCase()] || defaultClass}
                   d={s.d}
                   pointerEvents="all"
                   onMouseOver={this.rememberValue(s.name)}
@@ -67,6 +67,13 @@ class UsaMap extends React.Component {
 UsaMap.defaultProps = {
   colors: {},
   changeColorOnHover: true,
+}
+
+UsaMap.propTypes = {
+  colors: PropTypes.object.isRequired,
+  changeColorOnHover: PropTypes.bool.isRequired,
+  mapClick: PropTypes.func,
+  place: PropTypes.string,
 }
 
 export default UsaMap

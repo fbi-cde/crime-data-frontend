@@ -1,7 +1,6 @@
-/* eslint no-console: 0 */
-
 import { entries } from 'd3-collection'
 import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import { slugify } from '../util/text'
@@ -38,9 +37,15 @@ const LocationSelect = ({ className, onChange, onFocus, selected }) => {
 }
 
 LocationSelect.defaultProps = {
-  className: false,
-  onChange: e => console.error('<LocationSelect /> needs onChange', e),
-  selected: false,
+  className: '',
+  selected: '',
+}
+
+LocationSelect.propTypes = {
+  className: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onFocus: PropTypes.func,
+  selected: PropTypes.string.isRequired,
 }
 
 export default LocationSelect

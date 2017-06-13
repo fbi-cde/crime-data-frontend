@@ -1,4 +1,5 @@
 import { format } from 'd3-format'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const fmt = p => (p > 0.01 ? format('.0%')(p) : '<1%')
@@ -36,5 +37,14 @@ const NibrsStackedBarDetails = ({
     })}
   </ul>
 )
+
+NibrsStackedBarDetails.propTypes = {
+  colorMap: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onMouseOver: PropTypes.func.isRequired,
+  onMouseOut: PropTypes.func.isRequired,
+  selected: PropTypes.string,
+  total: PropTypes.number.isRequired,
+}
 
 export default NibrsStackedBarDetails

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import { slugify } from '../util/text'
@@ -38,6 +39,16 @@ const FilterGroup = ({ name, options, onChange, selected, title }) => (
 FilterGroup.defaultProps = {
   onChange: () => {},
   selected: '',
+}
+
+FilterGroup.propTypes = {
+  name: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  ).isRequired,
+  onChange: PropTypes.func.isRequired,
+  selected: PropTypes.string.isRequired,
+  title: PropTypes.string,
 }
 
 export default FilterGroup

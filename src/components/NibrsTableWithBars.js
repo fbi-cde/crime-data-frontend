@@ -1,5 +1,6 @@
 import { format } from 'd3-format'
 import pluralize from 'pluralize'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 const formatNumber = format(',')
@@ -57,9 +58,10 @@ class NibrsTableWithBars extends React.Component {
     return (
       <div>
         <table className="my2 table-fixed">
-          <caption className="left-align">
-            <div className="blue bold">{title}</div>
-          </caption>
+          {title &&
+            <caption className="left-align">
+              <div className="blue bold">{title}</div>
+            </caption>}
           <thead className="v-hide">
             <tr style={{ lineHeight: '16px' }}>
               <th style={{ width: '15%' }} />
@@ -126,6 +128,13 @@ class NibrsTableWithBars extends React.Component {
 NibrsTableWithBars.defaultProps = {
   noun: 'incident',
   rowLim: 12,
+}
+
+NibrsTableWithBars.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  noun: PropTypes.string.isRequired,
+  rowLim: PropTypes.number.isRequired,
+  title: PropTypes.string,
 }
 
 export default NibrsTableWithBars

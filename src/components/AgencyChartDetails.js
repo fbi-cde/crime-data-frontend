@@ -1,6 +1,7 @@
 import { format } from 'd3-format'
 import range from 'lodash.range'
 import pluralize from 'pluralize'
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import Term from './Term'
@@ -75,6 +76,16 @@ const AgencyChartDetails = ({
       </div>
     </div>
   )
+}
+
+AgencyChartDetails.propTypes = {
+  colors: PropTypes.func.isRequired,
+  crime: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  keys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  since: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
+  updateYear: PropTypes.func.isRequired,
 }
 
 export default AgencyChartDetails
