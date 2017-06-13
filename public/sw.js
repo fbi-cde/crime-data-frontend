@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const VERSION = 1
 const CACHE = 'crime-data-explorer'
 
