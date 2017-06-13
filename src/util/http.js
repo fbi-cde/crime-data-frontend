@@ -2,7 +2,8 @@ import http from 'axios'
 import flatten from 'lodash.flatten'
 import range from 'lodash.range'
 
-const get = (url, params = {}) => http.get(url, { params }).then(f => f.data)
+export const get = (url, params = {}) =>
+  http.get(url, { params }).then(f => f.data)
 
 export const getAll = (url, params = {}) => {
   const all = get(url, params)
