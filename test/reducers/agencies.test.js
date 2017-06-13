@@ -7,13 +7,13 @@ import {
 } from '../../src/actions/constants'
 import reducer from '../../src/reducers/agencies'
 
-const error = {
-  config: { url: '/failed/api/call' },
-  message: 'This could not be found',
-  response: { status: 400 },
-}
-
 describe('agencies reducer', () => {
+  const error = {
+    config: { url: '/failed/api/call' },
+    message: 'This could not be found',
+    response: { status: 400 },
+  }
+
   describe('initial state', () => {
     it('should have loading set to false', () => {
       const initialState = reducer(undefined, { type: 'fake' })

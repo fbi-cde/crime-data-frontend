@@ -1,9 +1,19 @@
 /* eslint no-undef: 0 */
 
-import { SUMMARY_FETCHING, SUMMARY_RECEIVED } from '../../src/actions/constants'
+import {
+  SUMMARY_FAILED,
+  SUMMARY_FETCHING,
+  SUMMARY_RECEIVED,
+} from '../../src/actions/constants'
 import reducer from '../../src/reducers/summary'
 
 describe('summary', () => {
+  const error = {
+    config: { url: '/failed/api/call' },
+    message: 'This could not be found',
+    response: { status: 400 },
+  }
+
   describe('initial state', () => {
     it('should have loading set to false', () => {
       const initialState = reducer(undefined, { type: 'fake' })
@@ -11,10 +21,22 @@ describe('summary', () => {
     })
   })
 
+  describe('SUMMARY_FAILED action type', () => {
+    it('should set error to the value of the error object and loading to false', () => {
+      const action = { type: SUMMARY_FAILED, error }
+      const initialState = reducer(undefined, action)
+      expect(initialState.error.code).toEqual(error.response.status)
+      expect(initialState.error.message).toEqual(error.message)
+      expect(initialState.error.url).toEqual(error.config.url)
+      expect(initialState.loading).toEqual(false)
+    })
+  })
+
   describe('SUMMARY_FETCHING action type', () => {
-    it('should set loading to true', () => {
+    it('should set loading to true and error to null', () => {
       const initialState = reducer(undefined, { type: SUMMARY_FETCHING })
       expect(initialState.loading).toEqual(true)
+      expect(initialState.error).toEqual(null)
     })
   })
 
