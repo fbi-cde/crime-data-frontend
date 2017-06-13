@@ -8,6 +8,7 @@ const EXCLUDES = [
   'DownloadsAndDocs',
   'DownloadBulkNibrs',
   'NotFound',
+  'Terms',
 ]
 
 describe('All components', () => {

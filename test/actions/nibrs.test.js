@@ -35,6 +35,13 @@ describe('nibrs actions', () => {
     sandbox.restore()
   })
 
+  describe('failedNibrs()', () => {
+    it('should return NIBRS_FAILED type', () => {
+      const actual = failedNibrs()
+      expect(actual.type).toEqual(NIBRS_FAILED)
+    })
+  })
+
   describe('fetchingNibrs()', () => {
     it('should return NIBRS_FETCHING type', () => {
       const actual = fetchingNibrs()
@@ -84,6 +91,16 @@ describe('nibrs actions', () => {
           done()
         })
         .catch(e => console.error(e))
+    })
+
+    it('should dispatch NIBRS_FAILED if API call fails', done => {
+      const dispatch = sandbox.spy()
+      sandbox.stub(api, 'getNibrsRequests', () => [Promise.reject(true)])
+      fetchNibrs({ place: 'montana' })(dispatch).then(() => {
+        const dispatched = dispatch.getCall(1)
+        expect(dispatched.args[0].type).toEqual('NIBRS_FAILED')
+        done()
+      })
     })
   })
 })

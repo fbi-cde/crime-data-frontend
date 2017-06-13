@@ -3,10 +3,12 @@
 import sinon from 'sinon'
 
 import {
+  UCR_PARTICIPATION_FAILED,
   UCR_PARTICIPATION_FETCHING,
   UCR_PARTICIPATION_RECEIVED,
 } from '../../src/actions/constants'
 import {
+  failedUcrParticipation,
   fetchingUcrParticipation,
   receivedUcrParticipation,
   fetchUcrParticipation,
@@ -27,6 +29,13 @@ describe('ucr actions', () => {
 
   afterEach(() => {
     sandbox.restore()
+  })
+
+  describe('failedUcrParticipation()', () => {
+    it('should return UCR_PARTICIPATION_FAILED type', () => {
+      const actual = failedUcrParticipation()
+      expect(actual.type).toEqual(UCR_PARTICIPATION_FAILED)
+    })
   })
 
   describe('fetchingUcrParticipation()', () => {
@@ -67,8 +76,21 @@ describe('ucr actions', () => {
       const dispatch = sandbox.spy()
       const fn = () => [createPromise({ place: 'california', results: [] })]
       const spy = sandbox.stub(api, 'getUcrParticipationRequests', fn)
+
       fetchUcrParticipation({ place: 'california' })(dispatch).then(() => {
         expect(spy.callCount).toEqual(1)
+        done()
+      })
+    })
+
+    it('should dispatch UCR_PARTICIPATION_FAILED if API call fails', done => {
+      const dispatch = sandbox.spy()
+      const fn = () => [Promise.reject(true)]
+      sandbox.stub(api, 'getUcrParticipationRequests', fn)
+
+      fetchUcrParticipation({ place: 'california' })(dispatch).then(() => {
+        const dispatched = dispatch.getCall(1)
+        expect(dispatched.args[0].type).toEqual('UCR_PARTICIPATION_FAILED')
         done()
       })
     })

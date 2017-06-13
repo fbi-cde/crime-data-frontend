@@ -6,14 +6,17 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
+import ErrorCard from './ErrorCard'
 import Loading from './Loading'
 import Sparkline from './Sparkline'
 import { oriToState } from '../util/ori'
 import { nationalKey } from '../util/usa'
 
 const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
-  const { data, loading } = summaries
+  const { data, error, loading } = summaries
   const normalizedCrime = crime === 'rape' ? 'rape_legacy' : crime
+
+  if (error) return <ErrorCard error={error} />
 
   const filterYears = d => d.year >= since && d.year <= until
   const computeRate = d => ({

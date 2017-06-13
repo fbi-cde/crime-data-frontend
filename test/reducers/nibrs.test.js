@@ -8,6 +8,12 @@ import {
 import reducer from '../../src/reducers/nibrs'
 
 describe('nibrs', () => {
+  const error = {
+    config: { url: '/failed/api/call' },
+    message: 'This could not be found',
+    response: { status: 400 },
+  }
+
   describe('initial state', () => {
     it('should return loading: false and data: []', () => {
       const expected = { loading: false, data: null, error: null }
@@ -18,22 +24,16 @@ describe('nibrs', () => {
 
   describe('NIBRS_FAILED action type', () => {
     it('should set error to error obj', () => {
-      const actual = reducer(undefined, {
-        type: NIBRS_FAILED,
-        error: {
-          message: 'fail!',
-          config: { url: '/foo' },
-          response: { status: 404 },
-        },
-      })
-      expect(actual.error).toEqual({ message: 'fail!', code: 404, url: '/foo' })
+      const actual = reducer(undefined, { type: NIBRS_FAILED, error })
+      expect(actual.error.code).toEqual(error.response.status)
     })
   })
 
   describe('NIBRS_FETCHING action type', () => {
-    it('should set loading to true', () => {
+    it('should set loading to true and error to null', () => {
       const actual = reducer(undefined, { type: NIBRS_FETCHING })
       expect(actual.loading).toEqual(true)
+      expect(actual.error).toEqual(null)
     })
   })
 

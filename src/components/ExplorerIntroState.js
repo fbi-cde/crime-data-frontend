@@ -1,39 +1,24 @@
-import { format } from 'd3-format'
 import startCase from 'lodash.startcase'
 import React from 'react'
 
-import Term from './Term'
+import { nibrsTerm, srsTerm } from './Terms'
+import { formatNum } from '../util/formats'
 import ucrParticipationLookup from '../util/ucr'
 
-const formatNumber = format(',')
-const nibrsTerm = (
-  <Term id={'national incident-based reporting system (nibrs)'}>
-    incident-based (NIBRS)
-  </Term>
-)
-const srsTerm = (
-  <Term id={'summary reporting system (srs)'}>
-    summary (SRS)
-  </Term>
+const getReportTerms = ({ nibrs, srs, hybrid }) => (
+  <span>
+    {hybrid && 'both '}
+    {srs && srsTerm}
+    {hybrid && ' and '}
+    {nibrs && nibrsTerm}
+  </span>
 )
 
-const reportingTerms = ({ nibrs, srs }) => {
-  const hybrid = nibrs && srs
-
-  return (
-    <span>
-      {hybrid && 'both '}
-      {srs && srsTerm}
-      {hybrid && ' and '}
-      {nibrs && nibrsTerm}
-    </span>
-  )
-}
-
-const ExplorerUsStateIntroduction = ({ crime, place, ucr, until }) => {
+const ExplorerIntroState = ({ crime, place, ucr, until }) => {
   const isArson = crime === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
   const untilUcr = ucr.find(p => p.year === until)
+  const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
 
   return (
     <div>
@@ -42,7 +27,7 @@ const ExplorerUsStateIntroduction = ({ crime, place, ucr, until }) => {
             <p className="serif">
               Crime rates for {startCase(place)} are derived from
               {' '}
-              {reportingTerms({ nibrs, srs })}
+              {reportTerms}
               {' '}
               reports sent to the FBI.
             </p>
@@ -56,29 +41,28 @@ const ExplorerUsStateIntroduction = ({ crime, place, ucr, until }) => {
               {' '}
               based on data voluntarily reported by
               {' '}
-              {formatNumber(untilUcr.participating_agencies)}
+              {formatNum(untilUcr.participating_agencies)}
               {' '}
               law enforcement agencies.
             </p>
           </div>
         : <div>
             <p className="serif">
-              {startCase(place)} reports {reportingTerms({ nibrs, srs })}
-              {' '}
-              data to the FBI.
+              {startCase(place)} reports {reportTerms} data to the FBI.
             </p>
             <p className="serif">
-              In {until}, {formatNumber(untilUcr.participating_agencies)}
+              In {until}, {formatNum(untilUcr.participating_agencies)}
               {' '}
               {startCase(place)}
               {' '}
-              law enforcement agencies voluntarily reported data to the FBI. The charts below feature unestimated data.
+              law enforcement agencies voluntarily reported data to the FBI.
+              The charts below feature unestimated data.
             </p>
           </div>}
     </div>
   )
 }
 
-ExplorerUsStateIntroduction.propTypes = {}
+ExplorerIntroState.propTypes = {}
 
-export default ExplorerUsStateIntroduction
+export default ExplorerIntroState

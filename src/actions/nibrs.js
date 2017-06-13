@@ -1,6 +1,11 @@
 import { NIBRS_FAILED, NIBRS_FETCHING, NIBRS_RECEIVED } from './constants'
 import api from '../util/api'
 
+export const failedNibrs = error => ({
+  type: NIBRS_FAILED,
+  error,
+})
+
 export const fetchingNibrs = () => ({
   type: NIBRS_FETCHING,
 })
@@ -8,11 +13,6 @@ export const fetchingNibrs = () => ({
 export const receivedNibrs = data => ({
   type: NIBRS_RECEIVED,
   data,
-})
-
-export const failedNibrs = error => ({
-  type: NIBRS_FAILED,
-  error,
 })
 
 export const fetchNibrs = params => dispatch => {
