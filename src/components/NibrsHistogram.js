@@ -18,7 +18,7 @@ class NibrsHistogram extends React.Component {
   }
 
   render() {
-    const { data, margin, noun, size, title, xLabel, yLabel } = this.props
+    const { data, margin, noun, size, title, xLabel } = this.props
     const { hover } = this.state
 
     const height = size.height - margin.top - margin.bottom
@@ -42,8 +42,7 @@ class NibrsHistogram extends React.Component {
 
     return (
       <div className="mb2 pb2 border-bottom border-blue-light">
-        <div className="mb1 blue bold">{title}</div>
-        {yLabel && <div className="mb1 fs-12 bold caps red">{yLabel}</div>}
+        <div className="mb2 blue bold">{title}</div>
         <div>
           <svg
             preserveAspectRatio="xMidYMid"
@@ -98,7 +97,6 @@ NibrsHistogram.defaultProps = {
 NibrsHistogram.propTypes = {
   noun: PropTypes.string.isRequired,
   xLabel: PropTypes.string,
-  yLabel: PropTypes.string,
 }
 
 export default NibrsHistogram

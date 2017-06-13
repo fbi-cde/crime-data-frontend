@@ -48,8 +48,7 @@ class NibrsStackedBar extends React.Component {
 
     return (
       <div className="mb2 pb2 border-bottom border-blue-light">
-        <div className="mb1 blue bold">{title}</div>
-        <div className="mb1 fs-12 bold caps red">Incidents</div>
+        <div className="mb2 blue bold">{title}</div>
         <div className="flex flex-wrap items-end mxn1 mb2">
           <div className="col px1" style={{ width: '55%' }}>
             <svg
