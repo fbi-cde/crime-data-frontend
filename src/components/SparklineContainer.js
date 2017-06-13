@@ -47,10 +47,20 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
       <div className="clearfix mxn1">
         {sparklines.map((s, i) => (
           <div className="sm-col sm-col-6 mb1 px1" key={i}>
-            <div className="p2 bg-blue-lighter flex items-center">
+            <div className="p2 bg-blue-lighter flex flex-wrap">
               <div>
-                <h4 className="m0 sans-serif fs-14">{startCase(s.place)}</h4>
+                <h4 className="mb0 sans-serif fs-14">{startCase(s.place)}</h4>
                 <p className="mb2 fs-14">{startCase(crime)}, {since}-{until}</p>
+              </div>
+              <div className="flex-auto flex-basis-50 center">
+                {loading
+                  ? <Loading slim />
+                  : <Sparkline
+                      data={s.data.filter(filterYears).map(computeRate)}
+                      yMax={yMax}
+                    />}
+              </div>
+              <div className="sm-flex-basis-100">
                 <a
                   className="btn btn-sm btn-primary fs-12 regular"
                   href={s.url}
@@ -59,14 +69,6 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
                   {s.place === 'United States' ? 'national' : 'state'}{' '}
                   data
                 </a>
-              </div>
-              <div className="flex-auto center">
-                {loading
-                  ? <Loading slim />
-                  : <Sparkline
-                      data={s.data.filter(filterYears).map(computeRate)}
-                      yMax={yMax}
-                    />}
               </div>
             </div>
           </div>
