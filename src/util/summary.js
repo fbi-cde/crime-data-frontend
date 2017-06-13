@@ -1,3 +1,6 @@
+export const reshapeData = dataIn =>
+  Object.assign(...dataIn.map(d => ({ [d.key]: d.results })))
+
 const mungeSummaryData = ({ crime, summaries, place, since, until }) => {
   if (!summaries || !summaries[place]) return false
 

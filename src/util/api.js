@@ -18,10 +18,7 @@ const dimensionEndpoints = {
   sexCode: 'sex_code',
 }
 
-const getAgency = ori =>
-  get(`${API}/agencies/${ori}`).then(response => ({
-    [ori]: response,
-  }))
+const getAgency = ori => get(`${API}/agencies/${ori}`)
 
 const getNibrs = ({ crime, dim, place, placeType, type }) => {
   const loc = place === nationalKey

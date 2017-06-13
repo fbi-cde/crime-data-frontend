@@ -5,9 +5,9 @@ import {
 } from '../actions/constants'
 
 const initialState = {
-  loading: false,
   data: null,
   error: null,
+  loading: false,
 }
 
 export default (state = initialState, action) => {
@@ -15,25 +15,25 @@ export default (state = initialState, action) => {
     case NIBRS_FAILED:
       return {
         ...state,
-        loading: false,
         error: {
           code: action.error.response.status,
           message: action.error.message,
           url: action.error.config.url,
         },
+        loading: false,
       }
     case NIBRS_FETCHING:
       return {
         ...state,
-        loading: true,
         error: null,
+        loading: true,
       }
     case NIBRS_RECEIVED:
       return {
         ...state,
         data: action.data,
-        loading: false,
         error: null,
+        loading: false,
       }
     default:
       return state

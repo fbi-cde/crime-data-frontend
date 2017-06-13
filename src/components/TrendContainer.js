@@ -6,6 +6,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import DownloadDataBtn from './DownloadDataBtn'
+import ErrorCard from './ErrorCard'
 import Loading from './Loading'
 import NoData from './NoData'
 import TrendChart from './TrendChart'
@@ -24,7 +25,7 @@ const TrendContainer = ({
   until,
 }) => {
   let chart
-  const { loading } = summaries
+  const { error, loading } = summaries
   const download = [
     {
       content: generateCrimeReadme({
@@ -36,6 +37,7 @@ const TrendContainer = ({
   ]
 
   if (loading) chart = <Loading />
+  else if (error) chart = <ErrorCard error={error} />
   else {
     const data = mungeSummaryData({
       crime: snakeCase(crime === 'rape' ? 'rape_legacy' : crime),

@@ -1,5 +1,5 @@
 import {
-  UCR_PARTICIPATION_FAILURE,
+  UCR_PARTICIPATION_FAILED,
   UCR_PARTICIPATION_FETCHING,
   UCR_PARTICIPATION_RECEIVED,
 } from '../actions/constants'
@@ -12,10 +12,14 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case UCR_PARTICIPATION_FAILURE:
+    case UCR_PARTICIPATION_FAILED:
       return {
         ...state,
-        error: action.error,
+        error: {
+          code: action.error.response.status,
+          message: action.error.message,
+          url: action.error.config.url,
+        },
         loading: false,
       }
     case UCR_PARTICIPATION_FETCHING:

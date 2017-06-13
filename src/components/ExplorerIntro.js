@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import ErrorCard from './ErrorCard'
 import ExplorerIntroAgency from './ExplorerIntroAgency'
 import ExplorerIntroNational from './ExplorerIntroNational'
 import ExplorerIntroState from './ExplorerIntroState'
@@ -22,14 +23,7 @@ const ExplorerIntro = ({ agency, crime, place, ucr, until }) => {
 
   if (ucr.loading) return null
 
-  if (ucr.error) {
-    return (
-      <div className="p2 fs-14 white bg-red-bright">
-        <strong>Uh-oh!</strong> We had trouble finding this information.
-        Please try again shortly.
-      </div>
-    )
-  }
+  if (ucr.error) return <ErrorCard error={ucr.error} />
 
   if (place === nationalKey) {
     return (

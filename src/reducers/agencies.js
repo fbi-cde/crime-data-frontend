@@ -3,7 +3,11 @@ import { oriToState } from '../util/ori'
 import { slugify } from '../util/text'
 import lookupUsa from '../util/usa'
 
-import { AGENCY_FETCHING, AGENCY_RECEIVED } from '../actions/constants'
+import {
+  AGENCY_FAILED,
+  AGENCY_FETCHING,
+  AGENCY_RECEIVED,
+} from '../actions/constants'
 
 // hack to load in all the data while we wait for more specific endoints
 const agencies = Object.keys(initialData)
@@ -19,11 +23,11 @@ const agencies = Object.keys(initialData)
     }),
     {},
   )
+
 const initialState = {
+  data: { ...agencies },
+  error: null,
   loading: false,
-  data: {
-    ...agencies,
-  },
 }
 
 const updateData = ({ agency, data }) => {
@@ -39,9 +43,20 @@ const updateData = ({ agency, data }) => {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case AGENCY_FAILED:
+      return {
+        ...state,
+        error: {
+          code: action.error.response.status,
+          message: action.error.message,
+          url: action.error.config.url,
+        },
+        loading: false,
+      }
     case AGENCY_FETCHING:
       return {
         ...state,
+        error: null,
         loading: true,
       }
     case AGENCY_RECEIVED:

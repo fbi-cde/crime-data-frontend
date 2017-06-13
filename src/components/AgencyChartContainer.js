@@ -6,12 +6,16 @@ import { connect } from 'react-redux'
 
 import AgencyChart from './AgencyChart'
 import DownloadDataBtn from './DownloadDataBtn'
+import ErrorCard from './ErrorCard'
 import Loading from './Loading'
 import NoData from './NoData'
 import { getAgency } from '../util/ori'
 
 const getContent = ({ crime, place, since, summary, until }) => {
-  if (summary.loading) return <Loading />
+  const { error, loading } = summary
+
+  if (loading) return <Loading />
+  if (error) return <ErrorCard error={error} />
 
   const data = summary.data[place]
   if (!data || data.length === 0) return <NoData />
