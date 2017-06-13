@@ -144,11 +144,11 @@ const Footer = ({ actions }) => (
           </div>
         </div>
       </div>
-      <div className="sm-col col-12 sm-col-4 px2 fs-14">
+      <div className="sm-col col-12 sm-col-4 px0 sm-px2 fs-14">
         <div className="px2 mb3 md-m0 clearfix">
           {links.map((list, i) => (
             <ul
-              className="col col-12 sm-col-6 m0 p0 fs-14 list-style-none left-bars"
+              className="col col-6 m0 p0 fs-12 list-style-none left-bars"
               key={i}
             >
               {list.map((d, ii) => (
