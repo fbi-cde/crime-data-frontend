@@ -9,6 +9,7 @@ import DownloadDataBtn from './DownloadDataBtn'
 import ErrorCard from './ErrorCard'
 import Loading from './Loading'
 import NoData from './NoData'
+import { nibrsTerm, srsTerm } from './Terms'
 import { getAgency } from '../util/ori'
 
 const getContent = ({ crime, place, since, summary, until }) => {
@@ -53,6 +54,7 @@ const getContent = ({ crime, place, since, summary, until }) => {
 
 const AgencyChartContainer = params => {
   const { agency, crime, since, summary, until } = params
+  const submitsNibrs = agency.nibrs_months_reported === 12
   const content = getContent(params)
 
   return (
@@ -66,7 +68,13 @@ const AgencyChartContainer = params => {
       </div>
       {!summary.loading &&
         <div className="mt2 fs-12 serif italic">
-          Source: Reported incident-based (NIBRS) data from {agency.display}
+          Source: Reported
+          {' '}
+          {submitsNibrs ? nibrsTerm : srsTerm}
+          {' '}
+          data from
+          {' '}
+          {agency.display}
         </div>}
     </div>
   )
