@@ -67,9 +67,6 @@
 .px8 { padding-left: $space-8; padding-right: $space-8; }
 
 @media #{$breakpoint-sm} {
-  .sm-px1 { padding-left: $space-1; padding-right: $space-1; }
-  .sm-px2 { padding-left: $space-2; padding-right: $space-2; }
-
   .sm-m5 { margin: $space-5; }
   .sm-mt5 { margin-top: $space-5; }
   .sm-mr5 { margin-right: $space-5; }
@@ -143,6 +140,7 @@
   .md-ml0 { margin-left: 0; }
   .md-pl0 { padding-left: 0; }
   .md-px6 { padding-left: $space-6; padding-right: $space-6; }
+  .md-py6 { padding-bottom: $space-6; padding-top: $space-6; }
   .md-pr7 { padding-right: $space-7; }
   .md-pl8 { padding-left: $space-8; }
 }

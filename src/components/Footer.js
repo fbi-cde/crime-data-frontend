@@ -61,9 +61,9 @@ const handleClick = func => e => {
 }
 
 const Footer = ({ actions }) => (
-  <footer className="py6 bg-blue white">
-    <div className="px2 md-px6">
-      <div className="sm-col col-12 sm-col-4 mt1 mb4">
+  <footer className="px2 md-px6 py3 md-py6 bg-blue white">
+    <div className="clearfix sm-mxn2">
+      <div className="sm-col col-12 sm-col-4 sm-px2 mt1 mb4">
         <span className="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">
           Federal Bureau of Investigation
         </span>
@@ -93,7 +93,7 @@ const Footer = ({ actions }) => (
           />
         </div>
       </div>
-      <div className="sm-col col-12 sm-col-4 px2 mb3 md-m0 fs-14 white">
+      <div className="sm-col col-12 sm-col-4 sm-px2 mb3 md-m0 fs-14 white">
         <div className="mb1 bold fs-18 serif blue-light-508">
           Contact us
         </div>
@@ -144,8 +144,8 @@ const Footer = ({ actions }) => (
           </div>
         </div>
       </div>
-      <div className="sm-col col-12 sm-col-4 px0 sm-px2 fs-14">
-        <div className="px2 mb3 md-m0 clearfix">
+      <div className="sm-col col-12 sm-col-4 sm-px2 fs-14">
+        <div className="mb3 md-m0 clearfix">
           {links.map((list, i) => (
             <ul
               className="col col-6 m0 p0 fs-12 list-style-none left-bars"
