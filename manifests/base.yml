@@ -1,5 +1,5 @@
 services:
-- crime-data-api-creds
+- crime-data-creds
 env:
   GITHUB_ISSUE_REPO_OWNER: '18f'
   GITHUB_ISSUE_REPO_NAME: 'crime-data-explorer'
