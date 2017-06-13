@@ -2,8 +2,13 @@
 
 import sinon from 'sinon'
 
-import { SUMMARY_FETCHING, SUMMARY_RECEIVED } from '../../src/actions/constants'
 import {
+  SUMMARY_FAILED,
+  SUMMARY_FETCHING,
+  SUMMARY_RECEIVED,
+} from '../../src/actions/constants'
+import {
+  failedSummary,
   fetchSummaries,
   fetchingSummary,
   receivedSummary,
@@ -34,6 +39,13 @@ describe('summary action', () => {
 
   afterEach(() => {
     sandbox.restore()
+  })
+
+  describe('failedSummary()', () => {
+    it('should return SUMMARY_FAILED type', () => {
+      const actual = failedSummary()
+      expect(actual.type).toEqual(SUMMARY_FAILED)
+    })
   })
 
   describe('fetchingSummary()', () => {
@@ -92,6 +104,16 @@ describe('summary action', () => {
         const args = dispatch.args[1][0]
         expect(args.type).toEqual(SUMMARY_RECEIVED)
         expect(args.summaries.montana).toEqual(['fake-one'])
+        done()
+      })
+    })
+
+    it('should dispatch SUMMARY_FAILED if API call fails', done => {
+      const dispatch = sandbox.spy()
+      sandbox.stub(api, 'getSummaryRequests', () => [Promise.reject(true)])
+      fetchSummaries({ place: 'montana' })(dispatch).then(() => {
+        const dispatched = dispatch.getCall(1)
+        expect(dispatched.args[0].type).toEqual('SUMMARY_FAILED')
         done()
       })
     })
