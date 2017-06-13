@@ -2,19 +2,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
-  const dataGrouped = groupValues.map(key => {
-    const filtered = data.filter(d => d[groupKey] === key)
-    return {
-      key,
-      data: filtered,
-      count: filtered.length,
-    }
-  })
-  const noCounty = data.filter(d => d[groupKey] === null)
+  const noFederal = data.filter(d => d.agency_type_name !== 'Federal')
+  const dataGrouped = groupValues.map(key => ({
+    key,
+    data: noFederal.filter(d => d[groupKey] === key),
+  }))
   dataGrouped.push({
     key: 'Unspecified',
-    data: noCounty,
-    count: noCounty.length,
+    data: noFederal.filter(d => d[groupKey] === null),
   })
 
   return (
@@ -23,7 +18,8 @@ const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
       style={{ marginTop: -1, maxHeight: 240 }}
     >
       <div className="mb1 pb-tiny fs-16 bold line-height-1">Results</div>
-      {dataGrouped.filter(g => g.count > 0).map(g => (
+      {noFederal.length === 0 && <div className="fs-12">No results</div>}
+      {dataGrouped.filter(g => g.data.length > 0).map(g => (
         <div key={g.key}>
           <div className="mt1 fs-10 bold caps blue">{g.key}</div>
           <ul className="m0 list-reset fs-12">
