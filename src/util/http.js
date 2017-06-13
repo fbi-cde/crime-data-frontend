@@ -2,20 +2,7 @@ import http from 'axios'
 import flatten from 'lodash.flatten'
 import range from 'lodash.range'
 
-import storage from './localStorage'
-import createUrl from './url'
-
-const get = (url, params = {}) => {
-  const key = createUrl(url, params)
-  return storage.getItem(key).then(item => {
-    if (item !== null) return item
-
-    return http.get(url, { params }).then(f => f.data).then(data => {
-      storage.setItem(key, data)
-      return data
-    })
-  })
-}
+const get = (url, params = {}) => http.get(url, { params }).then(f => f.data)
 
 const getAll = (url, params = {}) => {
   const all = get(url, params)

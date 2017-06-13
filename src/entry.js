@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 
 import routes from './routes'
 import configureStore from './store'
+import './util/serviceWorker'
 
 import '../sass/app.scss'
 
@@ -22,10 +23,6 @@ const render = () => {
     <Provider store={store}>{routes}</Provider>,
     document.getElementById('app'),
   )
-}
-
-if (window && window.localStorage && process.env.NODE_ENV === 'production') {
-  window.localStorage.clear()
 }
 
 render()
