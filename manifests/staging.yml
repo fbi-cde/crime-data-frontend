@@ -9,3 +9,5 @@ applications:
   domain: fr.cloud.gov
 env:
   CDE_API: 'https://crime-data-api.fr.cloud.gov'
+services:
+  - crime-data-api-key-development

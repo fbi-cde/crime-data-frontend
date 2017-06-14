@@ -7,4 +7,6 @@ applications:
   memory: 512M
   domain: fr.cloud.gov
 env:
-  CDE_API: 'https://crime-data-api-demo.fr.cloud.gov'
+  CDE_API: 'https://api.usa.gov/crime/fbi/ucr'
+services:
+  - crime-data-api-key-production
