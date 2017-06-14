@@ -5,9 +5,9 @@ import {
   AGENCY_FETCHING,
   AGENCY_RECEIVED,
 } from '../../src/actions/constants'
-import reducer from '../../src/reducers/agencies'
+import reducer from '../../src/reducers/agency'
 
-describe('agencies reducer', () => {
+describe('agency reducer', () => {
   const error = {
     config: { url: '/failed/api/call' },
     message: 'This could not be found',

@@ -1,7 +1,6 @@
-/* eslint-disable import/no-unresolved */
 import { combineReducers } from 'redux'
 
-import agencies from './agencies'
+import agencies from './agency'
 import feedback from './feedback'
 import filters from './filters'
 import glossary from './glossary'

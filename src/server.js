@@ -38,10 +38,11 @@ const {
   HTTP_BASIC_PASSWORD,
   PORT,
 } = ENV
+
 const initState = {
-  agency: { loading: true },
-  ucr: { loading: true, data: {} },
-  summaries: { loading: true, data: {} },
+  agencies: { data: {}, loading: true },
+  ucr: { data: {}, loading: true },
+  summaries: { data: {}, loading: true },
 }
 
 const acceptHostname = hostname => {

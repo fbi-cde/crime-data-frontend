@@ -8,6 +8,12 @@ const postalMappingExceptions = {
   GM: 'GU',
 }
 
+export const reshapeData = data =>
+  Object.keys(data)
+    .filter(key => lookupUsa(key))
+    .map(key => ({ key: slugify(lookupUsa(key)), value: data[key] }))
+    .reduce((accum, next) => ({ ...accum, [next.key]: next.value }), {})
+
 export const oriToState = ori => {
   const oriAbbr = ori.slice(0, 2).toUpperCase()
   const postalAbbr = postalMappingExceptions[oriAbbr] || oriAbbr
@@ -21,7 +27,7 @@ export const agencyDisplay = ({ agency_name, agency_type_name }) => {
 
 export const getAgency = (agencies, ori) => {
   const usState = oriToState(ori)
-  const agency = agencies.data[usState][ori]
+  const agency = (agencies.data[usState] || {})[ori]
 
   if (!agency) return
   return { ...agency, display: agencyDisplay(agency) }

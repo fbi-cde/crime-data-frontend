@@ -144,6 +144,12 @@ const getUcrParticipationRequests = params => {
   return requests
 }
 
+export const formatError = error => ({
+  code: error.response.status,
+  message: error.message,
+  url: error.config.url,
+})
+
 export default {
   fetchAggregates,
   fetchAgencyAggregates,
