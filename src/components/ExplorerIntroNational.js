@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { nibrsTerm, srsTerm } from './Terms'
+import { estimatedTerm, nibrsTerm, srsTerm } from './Terms'
 import { formatNum } from '../util/formats'
 
 const ExplorerIntroNational = ({ crime, ucr, until }) => {
@@ -24,7 +24,14 @@ const ExplorerIntroNational = ({ crime, ucr, until }) => {
               reports sent to the FBI.
             </p>
             <p className="serif">
-              In {until}, the FBI estimated crime statistics for the nation
+              In
+              {' '}
+              {until}
+              , the FBI
+              {' '}
+              {estimatedTerm}
+              {' '}
+              crime statistics for the nation
               based on data voluntarily reported by{' '}
               {formatNum(untilUcr.participating_agencies)}{' '}
               law enforcement agencies.

@@ -1,7 +1,7 @@
 import startCase from 'lodash.startcase'
 import React from 'react'
 
-import { nibrsTerm, srsTerm } from './Terms'
+import { estimatedTerm, nibrsTerm, srsTerm } from './Terms'
 import { formatNum } from '../util/formats'
 import ucrParticipationLookup from '../util/ucr'
 
@@ -35,7 +35,7 @@ const ExplorerIntroState = ({ crime, place, ucr, until }) => {
               In
               {' '}
               {until}
-              , the FBI estimated crime statistics for
+              , the FBI {estimatedTerm} crime statistics for
               {' '}
               {startCase(place)}
               {' '}
