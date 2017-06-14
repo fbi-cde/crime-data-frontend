@@ -116,7 +116,15 @@ class DownloadBulkNibrs extends React.Component {
         <p className="mb4 fs-18 sm-fs-24 serif">
           See {nibrsTerm} data by offense, location, victim and offender
           demographics, and arrestee. For more information, please see the{' '}
-          <a className="bold" href="/pdf/README.pdf">README</a> and{' '}
+          <a
+            className="bold"
+            href="https://github.com/18F/crime-data-explorer/blob/master/README.md"
+          >
+            README
+          </a>
+          {' '}
+          and
+          {' '}
           <a className="bold" href="/pdf/NIBRS-data-diagram.pdf">
             NIBRS data diagram
           </a>
