@@ -2,6 +2,8 @@ import React from 'react'
 
 import Term from './Term'
 
+export const estimatedTerm = <Term id="estimated data">estimated</Term>
+
 export const nibrsTerm = (
   <Term id={'national incident-based reporting system (nibrs)'}>
     incident-based (NIBRS)
