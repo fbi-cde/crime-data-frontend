@@ -2,7 +2,7 @@
 
 import sinon from 'sinon'
 
-import api from '../../src/util/api'
+import api, { formatError } from '../../src/util/api'
 import * as http from '../../src/util/http'
 
 const createPromise = (res, err) => {
@@ -35,6 +35,20 @@ describe('api utility', () => {
 
   afterEach(() => {
     sandbox.restore()
+  })
+
+  describe('formatError()', () => {
+    it('should reshape the fetch error object', () => {
+      const fakeError = {
+        response: { status: 400 },
+        message: 'fake error',
+        config: { url: 'fake/url' },
+      }
+      const actual = formatError(fakeError)
+      expect(actual.code).toEqual(400)
+      expect(actual.message).toEqual('fake error')
+      expect(actual.url).toEqual('fake/url')
+    })
   })
 
   describe('getNibrs()', () => {
