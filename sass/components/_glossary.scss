@@ -48,3 +48,14 @@
     margin-top: $space-tiny;
   }
 }
+
+.glossary-icon::after {
+  background-image: url('/img/glossary.svg');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  content: '';
+  display: inline-block;
+  height: 10px;
+  padding-left: .5rem;
+  width: 10px;
+}

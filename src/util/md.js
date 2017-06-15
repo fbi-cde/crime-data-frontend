@@ -10,7 +10,12 @@ const defaultLinkRender =
   ((tokens, idx, options, env, self) => self.renderToken(tokens, idx, options))
 
 markdown.renderer.rules.link_open = (tokens, idx, options, env, self) => {
-  tokens[idx].attrPush(['class', 'underline'])
+  const token = tokens[idx]
+  const href = token.attrs.find(a => a[0] === 'href')
+  const isTerm = href[1].match(/#glossary\?term=/)
+  const gi = 'glossary-icon glossary-icon-md'
+
+  token.attrPush(['class', `underline ${isTerm && gi}`])
   return defaultLinkRender(tokens, idx, options, env, self)
 }
 
