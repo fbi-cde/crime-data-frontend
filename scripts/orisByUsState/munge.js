@@ -6,7 +6,7 @@ const path = require('path')
 // data downloaded from:
 //
 // https://crime-data-api.fr.cloud.gov/agencies
-//    ?fields=agency_name,ori,primary_county,agency_type_name,nibrs_months_reported,state_abbr,submitting_name
+//    ?fields=agency_name,ori,primary_county,agency_type_name,months_reported,nibrs_months_reported,state_abbr,submitting_name
 //    &per_page=25000&api_key=API_KEY
 //
 
@@ -19,6 +19,7 @@ agencies.results.forEach(agency => {
   const {
     agency_name,
     agency_type_name,
+    months_reported,
     nibrs_months_reported,
     ori,
     primary_county,
@@ -27,6 +28,7 @@ agencies.results.forEach(agency => {
   const subset = {
     agency_name,
     agency_type_name,
+    months_reported,
     nibrs_months_reported,
     primary_county,
   }
