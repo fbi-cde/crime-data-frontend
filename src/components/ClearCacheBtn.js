@@ -2,7 +2,9 @@ import React from 'react'
 
 const clearCache = () => {
   if (typeof window !== 'undefined' && window.caches) {
-    Promise.all(caches.keys().then(name => caches.delete(name)))
+    caches.keys().then(keys => {
+      keys.map(key => key && caches.delete(key))
+    })
   }
 }
 
