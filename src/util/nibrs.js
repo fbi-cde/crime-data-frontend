@@ -95,7 +95,12 @@ export const binAge = data => {
 // nibrs cards
 
 const offenderDemo = data => {
-  const { offenderAgeNum, offenderRaceCode, offenderSexCode } = data
+  const {
+    offenderAgeNum,
+    offenderEthnicity,
+    offenderRaceCode,
+    offenderSexCode,
+  } = data
 
   return {
     title: 'Offender demographics',
@@ -119,12 +124,18 @@ const offenderDemo = data => {
         title: 'Race of offender',
         type: 'table',
       },
+      {
+        data: reshape(offenderEthnicity, 'ethnicity'),
+        noun: 'offender',
+        title: 'Ethnicity of offender',
+        type: 'table',
+      },
     ],
   }
 }
 
 const victimDemo = data => {
-  const { victimAgeNum, victimRaceCode, victimSexCode } = data
+  const { victimAgeNum, victimEthnicity, victimRaceCode, victimSexCode } = data
 
   return {
     title: 'Victim demographics',
@@ -146,6 +157,12 @@ const victimDemo = data => {
         data: rename(reshape(victimRaceCode, 'race_code'), raceCodes),
         noun: 'victim',
         title: 'Race of victim',
+        type: 'table',
+      },
+      {
+        data: reshape(victimEthnicity, 'ethnicity'),
+        noun: 'victim',
+        title: 'Ethnicity of victim',
         type: 'table',
       },
     ],
