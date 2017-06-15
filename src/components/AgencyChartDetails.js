@@ -1,4 +1,5 @@
 import { format } from 'd3-format'
+import lowerCase from 'lodash.lowercase'
 import range from 'lodash.range'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
@@ -31,7 +32,7 @@ const AgencyChartDetails = ({
           <strong>{fmt(reported)}</strong> reported and{' '}
           <strong>{fmt(cleared)}</strong> cleared{' '}
           {pluralize('incidents', isSingular ? 1 : 2)}{' '}
-          of {crime}.
+          of {lowerCase(crime)}.
         </p>
       </div>
       <div className="flex-none" style={{ width: 210 }}>
