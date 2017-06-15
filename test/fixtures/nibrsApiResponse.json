@@ -7,6 +7,9 @@
     {"count":5,"offense_name":"homicide","race_code":"B","year":"2006"},
     {"count":2,"offense_name":"homicide","race_code":"B","year":"2008"}
   ],
+  "offenderEthnicity": [
+    {"count":1,"ethnicity":"Unknown","offense_name":"homicide","year":"1991"}
+  ],
   "offenderAgeNum":[
     {"age_num":20,"count":4,"offense_name":"homicide","year":"2006"},
     {"age_num":30,"count":1,"offense_name":"homicide","year":"2006"}
@@ -18,6 +21,9 @@
   "victimRaceCode":[
     {"count":5,"offense_name":"homicide","race_code":"B","year":"2006"},
     {"count":2,"offense_name":"homicide","race_code":"B","year":"2008"}
+  ],
+  "victimEthnicity": [
+    {"count":1,"ethnicity":"Unknown","offense_name":"homicide","year":"1991"}
   ],
   "victimAgeNum":[
     {"age_num":20,"count":4,"offense_name":"homicide","year":"2006"},
