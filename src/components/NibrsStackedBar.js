@@ -58,7 +58,7 @@ class NibrsStackedBar extends React.Component {
               style={{ width: '100%', height: '100%' }}
             >
               <g transform={`translate(${margin.left}, ${margin.top})`}>
-                {dataStacked.map(d => (
+                {dataStacked.map(d =>
                   <g
                     key={d.key}
                     className="cursor-pointer"
@@ -73,11 +73,8 @@ class NibrsStackedBar extends React.Component {
                       height={y(d[0][0]) - y(d[0][1])}
                       width={x.bandwidth()}
                     />
-                  </g>
-                ))}
-                <g className="axis">
-                  <line y2={height} strokeWidth="1" strokeDasharray="3,3" />
-                </g>
+                  </g>,
+                )}
                 <g className="axis" transform={`translate(0, ${height})`}>
                   <line x2={width} strokeWidth="1" />
                 </g>

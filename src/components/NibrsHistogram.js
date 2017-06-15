@@ -50,7 +50,7 @@ class NibrsHistogram extends React.Component {
             style={{ width: '100%', height: '100%' }}
           >
             <g transform={`translate(${margin.left}, ${margin.top})`}>
-              {bins.map((d, i) => (
+              {bins.map((d, i) =>
                 <g
                   key={i}
                   className="cursor-pointer"
@@ -69,12 +69,9 @@ class NibrsHistogram extends React.Component {
                     onMouseOver={this.rememberValue(d)}
                     onMouseOut={this.forgetValue}
                   />
-                </g>
-              ))}
+                </g>,
+              )}
               <XAxis height={height} scale={x} />
-              <g className="axis">
-                <line y2={height} strokeWidth="1" strokeDasharray="3,3" />
-              </g>
               <g className="axis" transform={`translate(0, ${height})`}>
                 <line x2={width} strokeWidth="1" />
               </g>
