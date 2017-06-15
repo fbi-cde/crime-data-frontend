@@ -6,9 +6,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import ErrorCard from './ErrorCard'
-import Loading from './Loading'
-import Sparkline from './Sparkline'
+import ErrorCard from '../components/ErrorCard'
+import Loading from '../components/Loading'
+import Sparkline from '../components/Sparkline'
 import { oriToState } from '../util/ori'
 import { nationalKey } from '../util/usa'
 

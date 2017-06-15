@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import AgencyChart from './AgencyChart'
-import DownloadDataBtn from './DownloadDataBtn'
-import ErrorCard from './ErrorCard'
-import Loading from './Loading'
-import NoData from './NoData'
-import { nibrsTerm, srsTerm } from './Terms'
+import AgencyChart from '../components/AgencyChart'
+import DownloadDataBtn from '../components/DownloadDataBtn'
+import ErrorCard from '../components/ErrorCard'
+import Loading from '../components/Loading'
+import NoData from '../components/NoData'
+import { nibrsTerm, srsTerm } from '../components/Terms'
 import { getAgency } from '../util/ori'
 
 const getContent = ({ crime, place, since, summary, until }) => {
