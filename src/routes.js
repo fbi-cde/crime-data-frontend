@@ -2,7 +2,7 @@ import React from 'react'
 import { IndexRoute, Route, Router } from 'react-router'
 
 import About from './components/About'
-import App from './components/App'
+import App from './containers/App'
 import DownloadsAndDocs from './components/DownloadsAndDocs'
 import Explorer from './components/Explorer'
 import Home from './components/Home'
