@@ -7,7 +7,8 @@ import { connect } from 'react-redux'
 import ErrorCard from './ErrorCard'
 import Loading from './Loading'
 import NibrsCard from './NibrsCard'
-import Term from './Term'
+import NoData from './NoData'
+import { nibrsTerm } from './Terms'
 import parseNibrs from '../util/nibrs'
 import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
@@ -41,61 +42,58 @@ const filterNibrsData = (data, { since, until }) => {
   return filtered
 }
 
-const NibrsContainer = ({
-  agency,
+const NibrsContainerText = ({
   crime,
-  nibrs,
+  firstYear,
   place,
-  placeType,
+  showNoData,
   since,
+  totalCount,
   until,
 }) => {
-  const { data, error, loading } = nibrs
-  const showNibrs = placeType !== 'agency'
-    ? shouldShowNibrs({ crime, place, placeType })
-    : agency.nibrs_months_reported === 12
+  const text =
+    'There were no homicide incidents reported during this time period.'
+  return (
+    <div>
+      {firstYear !== since &&
+        <p className="my-tiny">
+          {startCase(place)} started reporting {nibrsTerm} data
+          to the FBI in {firstYear}.
+        </p>}
+      {typeof totalCount === 'number' &&
+        !showNoData &&
+        <p className="m0 sm-col-9">
+          There were <strong>{formatNumber(totalCount)}</strong> incidents
+          of {crime} reported to the UCR Program between {firstYear}{' '}
+          and {until}. Learn more about the{' '}
+          <a className="underline" href={fbiLink}>FBI’s data collections</a>.
+        </p>}
+      {showNoData && <NoData text={text} />}
+    </div>
+  )
+}
 
-  if (!showNibrs) return null
+const NibrsContainer = ({
+  crime,
+  data,
+  error,
+  loading,
+  reportsNibrs,
+  place,
+  placeDisplay,
+  placeType,
+  since,
+  summaryHidden,
+  until,
+}) => {
+  if (!reportsNibrs) return null
+
+  const filteredData = filterNibrsData(data, { since, until })
+  const totalCount = filteredData.offenderRaceCode
+    ? filteredData.offenderRaceCode.reduce((a, b) => a + b.count, 0)
+    : null
 
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
-  const nibrsTerm = (
-    <Term id="national incident-based reporting system (NIBRS)">
-      incident-based (NIBRS)
-    </Term>
-  )
-
-  let totalCount = 0
-  let content = null
-  if (!loading && data) {
-    const filteredData = filterNibrsData(data, { since, until })
-    const dataParsed = parseNibrs(filteredData)
-    totalCount = filteredData.offenderRaceCode.reduce((a, b) => a + b.count, 0)
-    content = (
-      <div className="clearfix mxn1">
-        {dataParsed.map((d, i) => (
-          <div
-            key={i}
-            className={`lg-col lg-col-6 mb2 px1 ${i % 2 === 0 ? 'clear-left' : ''}`}
-          >
-            <NibrsCard
-              crime={crime}
-              place={place}
-              placeType={placeType}
-              since={nibrsFirstYear}
-              until={until}
-              {...d}
-            />
-          </div>
-        ))}
-      </div>
-    )
-  } else if (error) {
-    content = <ErrorCard error={error} />
-  }
-
-  const placeDisplay = placeType === 'agency'
-    ? agency.display
-    : startCase(place)
 
   return (
     <div className="mb8">
@@ -103,22 +101,39 @@ const NibrsContainer = ({
         <h2 className="mt0 mb1 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} incident details reported by {placeDisplay}
         </h2>
-        {nibrsFirstYear !== since &&
-          <p className="my-tiny">
-            {startCase(place)} started reporting {nibrsTerm} data
-            to the FBI in {nibrsFirstYear}.
-          </p>}
-        {!error &&
-          data &&
-          <p className="m0 sm-col-9">
-            There were <strong>{formatNumber(totalCount)}</strong> incidents
-            of {crime} reported to the UCR Program between {nibrsFirstYear}{' '}
-            and {until}. Learn more about the{' '}
-            <a className="underline" href={fbiLink}>FBI’s data collections</a>.
-          </p>}
         {loading && <Loading />}
+        {!loading &&
+          <NibrsContainerText
+            crime={crime}
+            firstYear={nibrsFirstYear}
+            place={place}
+            showNoData={summaryHidden}
+            since={since}
+            totalCount={totalCount}
+            until={until}
+          />}
       </div>
-      {content}
+      {error && <ErrorCard error={error} />}
+      {!loading && !summaryHidden && (!loading && data)
+        ? <div className="clearfix mxn1">
+            {parseNibrs(filteredData).map((d, i) => (
+              <div
+                key={i}
+                className={`lg-col lg-col-6 mb2 px1 ${i % 2 === 0 ? 'clear-left' : ''}`}
+              >
+                <NibrsCard
+                  crime={crime}
+                  place={place}
+                  placeType={placeType}
+                  since={nibrsFirstYear}
+                  until={until}
+                  {...d}
+                />
+              </div>
+            ))}
+          </div>
+        : null}
+      {/* TODO: refactor this into a common source text component */}
       {!loading &&
         <div className="mt2 serif italic fs-12">
           Source: Reported {nibrsTerm} data from {placeDisplay},{' '}
@@ -130,26 +145,42 @@ const NibrsContainer = ({
 
 NibrsContainer.propTypes = {
   crime: PropTypes.string.isRequired,
-  nibrs: PropTypes.shape({
-    data: PropTypes.object,
-    loading: PropTypes.boolean,
-  }).isRequired,
+  data: PropTypes.object,
+  loading: PropTypes.boolean,
   place: PropTypes.string.isRequired,
+  placeDisplay: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
+  summaryHidden: PropTypes.bool,
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, nibrs }) => {
+const mapStateToProps = ({ agencies, filters, nibrs, summaries }) => {
+  const { crime } = filters
   const { place, placeType } = getPlaceInfo(filters)
-  const agency = placeType === 'agency' && getAgency(agencies, place)
+  const isAgency = placeType === 'agency'
+  const agency = isAgency && getAgency(agencies, place)
+  const loading = isAgency ? nibrs.loading || summaries.loading : nibrs.loading
+  const placeDisplay = placeType === 'agency'
+    ? agency.display
+    : startCase(place)
+  const reportsNibrs = placeType !== 'agency'
+    ? shouldShowNibrs({ crime, place, placeType })
+    : agency.nibrs_months_reported === 12
+  const summary = summaries.data[place]
+  const summaryHidden =
+    placeType === 'agency' &&
+    summary &&
+    summary.length ===
+      summary.filter(d => d.reported === 0 && d.cleared === 0).length
 
   return {
     ...filters,
-    agency,
-    place,
-    placeType,
-    nibrs,
+    ...nibrs,
+    loading,
+    reportsNibrs,
+    placeDisplay,
+    summaryHidden,
   }
 }
 
