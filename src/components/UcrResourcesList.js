@@ -24,7 +24,8 @@ const participationCsvLink = (place, type) => {
 const locationLinks = place => {
   const links = []
   if (place !== nationalKey) {
-    links.push(...content.locations.states[startCase(place)])
+    const more = content.locations.states[startCase(place)]
+    if (more) links.push(...more)
   }
   links.push(...content.locations.national)
   return links.filter(l => l.text)
@@ -34,7 +35,7 @@ const UcrResourcesList = ({ place, placeType }) => {
   const links = [
     {
       text: 'About the Data',
-      url: '#',
+      url: '#about-the-data',
     },
     ...participationCsvLink(place, placeType),
     ...locationLinks(place),
@@ -44,11 +45,11 @@ const UcrResourcesList = ({ place, placeType }) => {
     <div>
       <h3 className="mt4 mb1 fs-18">Resources</h3>
       <ul className="m0 p0 fs-14 left-bars">
-        {links.map((l, i) => (
+        {links.map((l, i) =>
           <li className="mb1" key={i}>
             <a href={l.url}>{l.text}</a>
-          </li>
-        ))}
+          </li>,
+        )}
       </ul>
     </div>
   )
