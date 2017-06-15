@@ -35,7 +35,7 @@ const UcrResourcesList = ({ place, placeType }) => {
   const links = [
     {
       text: 'About the Data',
-      url: '#',
+      url: '#about-the-data',
     },
     ...participationCsvLink(place, placeType),
     ...locationLinks(place),

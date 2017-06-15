@@ -32,7 +32,7 @@ class AboutTheData extends React.Component {
     const { caveats, links } = content.crimes[crime]
 
     return (
-      <div className="about-the-data">
+      <div className="about-the-data" id="about-the-data">
         <h3 className="mt0 mb4 fs-22 sm-fs-26">
           About {lowerCase(crime)} data
         </h3>
@@ -45,7 +45,7 @@ class AboutTheData extends React.Component {
               </a>.
             </p>
             <div className="caveats">
-              {caveats.map((c, i) => (
+              {caveats.map((c, i) =>
                 <div key={i}>
                   <div className="bold">{c.heading}</div>
                   {/* eslint react/no-danger: 0 */}
@@ -54,19 +54,19 @@ class AboutTheData extends React.Component {
                       __html: markdown.render(c.text),
                     }}
                   />
-                </div>
-              ))}
+                </div>,
+              )}
             </div>
           </div>
           <div className="flex-none mb2 col-12 lg-block lg-col-4 lg-ml3 lg-mb0">
             <div className="p2 sm-px4 sm-py3 bg-blue white">
               <h4 className="mt0 mb1 fs-18">Further reading</h4>
               <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
-                {links.map((l, i) => (
+                {links.map((l, i) =>
                   <li key={i} className="mb1">
                     <a className="white" href={l.url}>{l.text}</a>
-                  </li>
-                ))}
+                  </li>,
+                )}
               </ul>
             </div>
           </div>
