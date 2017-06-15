@@ -20,15 +20,15 @@ const ExplorerHeaderContainer = ({
   const isAgency = placeType === 'agency'
   const usState = agency ? oriToState(place) : place
   const isLoading = !isAgency && ucr.loading
-  const placeDisplay = isAgency ? `${agency.agency_name} Agency` : usState
+  const placeDisplay = isAgency
+    ? `${agency.agency_name} Agency`
+    : startCase(usState)
 
   return (
     <div>
       <div className="items-baseline mt2 mb4">
         <h1 className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-lighter">
-          {startCase(placeDisplay)}
-          {' '} | {' '}
-          {startCase(crime)}
+          {placeDisplay}
         </h1>
       </div>
       <div className="mb5 clearfix">
@@ -45,15 +45,10 @@ const ExplorerHeaderContainer = ({
           <UcrResourcesList place={usState} placeType={placeType} />
         </div>
         <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">
-          <PlaceThumbnail selected={startCase(usState)} isAgency={isAgency} />
-          {isAgency &&
-            <div className="mt-tiny fs-14">
-              <span
-                className="mr1 inline-block bg-red-bright circle"
-                style={{ width: 8, height: 8 }}
-              />
-              {agency.agency_name}
-            </div>}
+          <PlaceThumbnail selected={startCase(usState)} />
+          <div className="mt-tiny fs-14 center">
+            {placeDisplay}
+          </div>
         </div>
       </div>
     </div>

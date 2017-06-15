@@ -4,11 +4,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { feature, mesh } from 'topojson'
 
-const Container = ({ children }) => (
+const Container = ({ children }) =>
   <div className="center bg-white rounded">
     <div className="aspect-ratio aspect-ratio--4x3">{children}</div>
   </div>
-)
 
 class PlaceThumbnail extends React.Component {
   state = { usa: null }
@@ -20,7 +19,7 @@ class PlaceThumbnail extends React.Component {
   }
 
   render() {
-    const { selected, isAgency } = this.props
+    const { selected } = this.props
     const { usa } = this.state
 
     if (!usa) return <Container />
@@ -55,7 +54,7 @@ class PlaceThumbnail extends React.Component {
           viewBox={`0 0 ${w} ${h}`}
         >
           <g strokeWidth={strokeWidth} transform={transform}>
-            {geoStates.map((d, i) => (
+            {geoStates.map((d, i) =>
               <path
                 key={i}
                 d={path(d)}
@@ -64,8 +63,8 @@ class PlaceThumbnail extends React.Component {
                     ? '#94aabd'
                     : '#dfe6ed'
                 }
-              />
-            ))}
+              />,
+            )}
             <path
               d={path(meshed)}
               fill="none"
@@ -74,15 +73,6 @@ class PlaceThumbnail extends React.Component {
               strokeLinejoin="round"
             />
           </g>
-          {isAgency &&
-            <g transform={`translate(${w / 2}, ${h / 2})`}>
-              <circle r="7" fill="#ff5e50" />
-              <polygon
-                points="0 0, -7 -14, 7 -14"
-                fill="#ff5e50"
-                transform="translate(0, 15)"
-              />
-            </g>}
         </svg>
       </Container>
     )
@@ -91,7 +81,6 @@ class PlaceThumbnail extends React.Component {
 
 PlaceThumbnail.propTypes = {
   selected: PropTypes.string.isRequired,
-  isAgency: PropTypes.bool.isRequired,
 }
 
 export default PlaceThumbnail
