@@ -1,3 +1,7 @@
+- title: Estimated crimes across the country
+  description: |
+    Crimes estimated by the FBI.
+  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/estimated_crimes.csv'
 - title: Hate Crime
   description: |
     See totals by state, year, and bias motivation for hate crimes across the country from 1991–2014.
