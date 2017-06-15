@@ -8,6 +8,7 @@ export default (content, state) =>
     <head>
       <meta charset='utf-8'>
       <meta name='viewport' content='width=device-width, initial-scale=1'>
+      <link rel='icon' type='image/png' sizes='32x32' href='/img/favicon.png'>
       ${sharingMetaTags(state)}
       <title>Crime Data Explorer</title>
       <link href='/app.css' rel='stylesheet'>
