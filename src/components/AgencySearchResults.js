@@ -1,6 +1,26 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+const prevent = e => e.preventDefault()
+
+const AgencySearchResultItem = ({ agency, onClick }) => {
+  const { agency_name: name, months_reported, nibrs_months_reported } = agency
+  const isActive = months_reported !== 0 || nibrs_months_reported !== 0
+  const color = isActive ? 'black' : 'grey cursor-default'
+  return (
+    <li>
+      <a
+        className={`block truncate ${color}`}
+        style={{ lineHeight: '1.75' }}
+        href="#!"
+        onClick={isActive ? onClick(agency) : prevent}
+      >
+        {name}
+      </a>
+    </li>
+  )
+}
+
 const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
   const noFederal = data.filter(d => d.agency_type_name !== 'Federal')
   const dataGrouped = groupValues.map(key => ({
@@ -27,16 +47,7 @@ const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
               .slice(0, 100)
               .sort((a, b) => a.agency_name < b.agency_name)
               .map((d, i) => (
-                <li key={i} className="">
-                  <a
-                    className="block black truncate"
-                    style={{ lineHeight: '1.75' }}
-                    href="#!"
-                    onClick={onClick(d)}
-                  >
-                    {d.agency_name}
-                  </a>
-                </li>
+                <AgencySearchResultItem agency={d} key={i} onClick={onClick} />
               ))}
           </ul>
         </div>
