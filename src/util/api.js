@@ -27,7 +27,7 @@ const getNibrs = ({ crime, dim, place, placeType, type }) => {
         ? `agencies/${place}`
         : `states/${lookupUsa(place)}`
 
-  const field = dimensionEndpoints[dim]
+  const field = dimensionEndpoints[dim] || dim
   const fieldPath = `${field}/offenses`
   const url = `${API}/${type}s/count/${loc}/${fieldPath}`
 
@@ -47,11 +47,13 @@ const getNibrsRequests = params => {
   const { crime, place, placeType } = params
 
   const slices = [
-    { type: 'offender', dim: 'sexCode' },
-    { type: 'offender', dim: 'raceCode' },
     { type: 'offender', dim: 'ageNum' },
+    { type: 'offender', dim: 'ethnicity' },
+    { type: 'offender', dim: 'raceCode' },
+    { type: 'offender', dim: 'sexCode' },
     { type: 'offense', dim: 'locationName' },
     { type: 'victim', dim: 'ageNum' },
+    { type: 'victim', dim: 'ethnicity' },
     { type: 'victim', dim: 'raceCode' },
     { type: 'victim', dim: 'sexCode' },
     { type: 'victim', dim: 'relationship' },
