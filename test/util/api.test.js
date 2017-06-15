@@ -63,10 +63,10 @@ describe('api utility', () => {
   })
 
   describe('getNibrsRequests()', () => {
-    it('should call getNibrs 8 times', done => {
+    it('should call getNibrs 10 times', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
       Promise.all(api.getNibrsRequests(params)).then(() => {
-        expect(spy.callCount).toEqual(8)
+        expect(spy.callCount).toEqual(10)
         done()
       })
     })
