@@ -7,7 +7,7 @@ import otherDatasets from '../../content/datasets.yml'
 
 const border = 'border-bottom border-blue-lighter'
 
-const DownloadsAndDocs = () => (
+const DownloadsAndDocs = () =>
   <section className="bg-white">
     <div className="px2 py3 container mx-auto">
       <h1 className={`mt4 mb5 pb1 sm-mt4 fs-28 sm-fs-40 ${border}`}>
@@ -23,7 +23,7 @@ const DownloadsAndDocs = () => (
           <div className="sm-col sm-col-4">Description</div>
           <div className="sm-col sm-col-4">Type of data</div>
         </div>
-        {otherDatasets.map((d, i) => (
+        {otherDatasets.map((d, i) =>
           <div key={i} className={`clearfix pt2 pb4 ${border}`}>
             <div className="sm-col sm-col-4 mb1 sm-px2 fs-18 sm-fs-22 bold">
               {d.title}
@@ -37,8 +37,8 @@ const DownloadsAndDocs = () => (
                 <DownloadDataBtn data={[{ url: d.download }]} />
               </a>
             </div>
-          </div>
-        ))}
+          </div>,
+        )}
       </div>
       <div className="mb8">
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
@@ -51,12 +51,16 @@ const DownloadsAndDocs = () => (
                 Crime data API
               </h3>
               <p>
-                Use our <Term id="application programming interface (api)">
+                Use our{' '}
+                <Term id="application programming interface (api)">
                   application programming interface (API)
-                </Term> to search and export the
-                FBI’s <Term id="uniform crime reporting (ucr) program">
+                </Term>{' '}
+                to search and export the
+                FBI’s{' '}
+                <Term id="uniform crime reporting (ucr) program">
                   Uniform Crime Reporting (UCR) Program
-                </Term> data.
+                </Term>{' '}
+                data.
               </p>
               <a className="btn btn-primary btn-sm fs-14" href="/api">
                 See API documentation
@@ -84,6 +88,5 @@ const DownloadsAndDocs = () => (
       </div>
     </div>
   </section>
-)
 
 export default DownloadsAndDocs

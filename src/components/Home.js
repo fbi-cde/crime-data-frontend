@@ -49,7 +49,8 @@ const Home = ({ appState, dispatch, router }) => {
             The FBI collects and publishes{' '}
             <Term id="uniform crime reporting (ucr) program" size="lg">
               Uniform Crime Reporting (UCR)
-            </Term> data on an annual basis.
+            </Term>{' '}
+            data on an annual basis.
           </p>
           <p className="m0 md-col-10 fs-16 sm-fs-20 serif">
             Over 18,000 law enforcement agencies across the country voluntarily
@@ -108,7 +109,9 @@ const Home = ({ appState, dispatch, router }) => {
             </div>
             <div className="sm-col sm-col-4 px2 mb2 sm-m0 xs-hide">
               <button
-                className={`col-12 btn btn-primary ${isValid ? '' : 'hint-bottom'}`}
+                className={`col-12 btn btn-primary ${isValid
+                  ? ''
+                  : 'hint-bottom'}`}
                 aria-label={
                   isValid ? '' : 'Please select a location and crime type'
                 }
@@ -133,7 +136,7 @@ const Home = ({ appState, dispatch, router }) => {
           </div>
           <h2 className="mt0 mb3 fs-22 sm-fs-32">Data downloads</h2>
           <div className="flex flex-wrap mxn2">
-            {otherDataSets.slice(0, 3).map((d, i) => (
+            {otherDataSets.slice(0, 3).map((d, i) =>
               <div
                 key={i}
                 className="flex sm-col sm-col-6 md-col-4 px2 mb2 sm-mb4"
@@ -144,8 +147,8 @@ const Home = ({ appState, dispatch, router }) => {
                   </div>
                   <p className="mb2">{d.description}</p>
                 </div>
-              </div>
-            ))}
+              </div>,
+            )}
           </div>
           <div>
             <Link

@@ -99,9 +99,9 @@ class AgencyChart extends React.Component {
               <XAxis scale={x0} height={height} />
               <YAxis scale={y} width={width} />
               <g transform="translate(0, -0.5)">
-                {data.map(d => (
+                {data.map(d =>
                   <g key={d.year} transform={`translate(${x0(d.year)}, 0)`}>
-                    {keys.map(k => (
+                    {keys.map(k =>
                       <rect
                         key={`${d.year}-${k}`}
                         x={x1(k)}
@@ -116,21 +116,22 @@ class AgencyChart extends React.Component {
                         className="cursor-pointer"
                         pointerEvents="all"
                         onMouseOver={this.rememberValue(d)}
-                      />
-                    ))}
-                  </g>
-                ))}
-                {noDataYears.map(d => (
+                      />,
+                    )}
+                  </g>,
+                )}
+                {noDataYears.map(d =>
                   <g
                     key={`ndy-${d.year}`}
-                    transform={`translate(${x0(d.year) + x1.bandwidth()}, ${height - 20})`}
+                    transform={`translate(${x0(d.year) +
+                      x1.bandwidth()}, ${height - 20})`}
                     className="cursor-pointer no-year-data"
                     onMouseOver={this.rememberValue(d)}
                   >
                     <circle r={8} fill="transparent" strokeWidth="1px" />
                     <text y="4" textAnchor="middle">✕</text>
-                  </g>
-                ))}
+                  </g>,
+                )}
               </g>
             </g>
           </svg>

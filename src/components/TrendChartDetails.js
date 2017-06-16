@@ -95,7 +95,7 @@ const TrendChartDetails = ({
             </tr>
           </thead>
           <tbody className="fs-12 bold line-height-4">
-            {keys.map((k, i) => (
+            {keys.map((k, i) =>
               <tr key={i}>
                 <td
                   className="pr2 nowrap truncate align-bottom"
@@ -138,8 +138,8 @@ const TrendChartDetails = ({
                     {formatTotal(data[k.slug].pop)}
                   </span>
                 </td>
-              </tr>
-            ))}
+              </tr>,
+            )}
           </tbody>
         </table>
       </div>

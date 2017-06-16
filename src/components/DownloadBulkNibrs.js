@@ -96,9 +96,9 @@ class DownloadBulkNibrs extends React.Component {
                 onChange={this.handleSelectChange}
               >
                 <option value="Location" disabled>Location</option>
-                {nibrsStates.map((s, i) => (
-                  <option key={i} value={s}>{startCase(s)}</option>
-                ))}
+                {nibrsStates.map((s, i) =>
+                  <option key={i} value={s}>{startCase(s)}</option>,
+                )}
               </select>
             </div>
             <div className="sm-col sm-col-4 px1 mb2 sm-m0">

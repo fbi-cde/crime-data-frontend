@@ -16,7 +16,9 @@ const openGraphTags = state => {
   let title = basicTitle
 
   if (isKnownCrime && isKnownPlace && since && until) {
-    title = `Reported ${pluralize(crime, 2)} in ${startCase(place)} from ${since} until ${until} as reported to the FBI UCR program`
+    title = `Reported ${pluralize(crime, 2)} in ${startCase(
+      place,
+    )} from ${since} until ${until} as reported to the FBI UCR program`
   }
 
   return `<meta property="og:title" content="${title}" />`

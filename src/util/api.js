@@ -24,8 +24,8 @@ const getNibrs = ({ crime, dim, place, placeType, type }) => {
   const loc = place === nationalKey
     ? 'national'
     : placeType === 'agency'
-        ? `agencies/${place}`
-        : `states/${lookupUsa(place)}`
+      ? `agencies/${place}`
+      : `states/${lookupUsa(place)}`
 
   const field = dimensionEndpoints[dim] || dim
   const fieldPath = `${field}/offenses`

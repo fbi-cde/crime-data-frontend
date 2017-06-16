@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import Link from './Link'
 import { showFeedback } from '../actions/feedback'
 
-const NotFound = ({ dispatch }) => (
+const NotFound = ({ dispatch }) =>
   <div className="container mb8 mx-auto px2 pt8">
     <h1 className="mt0 fs-40 col-12 sm-col-7">
       We couldn{"'"}t find the page you are looking for.
@@ -26,7 +26,6 @@ const NotFound = ({ dispatch }) => (
       or contact us.
     </p>
   </div>
-)
 
 NotFound.propTypes = {
   dispatch: PropTypes.func.isRequired,

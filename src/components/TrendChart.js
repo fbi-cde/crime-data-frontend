@@ -121,7 +121,7 @@ class TrendChart extends React.Component {
     const y = scaleLinear().domain([0, maxValue]).range([height, 0]).nice()
 
     const l = line()
-      .curve(curveCardinal)
+      .curve(curveCardinal.tension(0.5))
       .x(d => x(d.date))
       .y(d => y(d.value.rate))
 
@@ -148,15 +148,15 @@ class TrendChart extends React.Component {
           strokeDasharray="2,3"
           strokeWidth="1"
         />
-        {keysWithSlugs.map((k, j) => (
+        {keysWithSlugs.map((k, j) =>
           <circle
             key={j}
             cx="0"
             cy={y(active[k.slug].rate)}
             fill={color(k.slug)}
             r={active[k.slug].count ? '4.5' : '0'}
-          />
-        ))}
+          />,
+        )}
       </g>
     )
 
@@ -187,15 +187,15 @@ class TrendChart extends React.Component {
             </div>}
           <svg width={svgWidth} height={svgHeight} style={{ maxWidth: '100%' }}>
             <g transform={`translate(${margin.left}, ${margin.top})`}>
-              {gapRanges.map((d, i) => (
+              {gapRanges.map((d, i) =>
                 <rect
                   className="fill-blue-white"
                   key={i}
                   x={x(d[0])}
                   width={x(d[2]) - x(d[0])}
                   height={height}
-                />
-              ))}
+                />,
+              )}
               <XAxis
                 active={active && active.date}
                 scale={x}
@@ -203,9 +203,9 @@ class TrendChart extends React.Component {
                 tickCt={svgWidth < 500 ? 4 : 8}
               />
               <YAxis scale={y} width={width} />
-              {dataByKey.map((d, i) => (
+              {dataByKey.map((d, i) =>
                 <g key={i} className={`series series-${d.id}`}>
-                  {d.segments.map((segment, j) => (
+                  {d.segments.map((segment, j) =>
                     <g key={j}>
                       <path
                         d={l(segment)}
@@ -214,47 +214,47 @@ class TrendChart extends React.Component {
                         strokeWidth="2.5"
                       />
                       {showMarkers &&
-                        segment.map((datum, k) => (
+                        segment.map((datum, k) =>
                           <circle
                             key={k}
                             cx={x(datum.date)}
                             cy={y(datum.value.rate)}
                             fill={color(d.id)}
                             r="2.5"
-                          />
-                        ))}
-                    </g>
-                  ))}
-                  {d.ends.map((datum, j) => (
+                          />,
+                        )}
+                    </g>,
+                  )}
+                  {d.ends.map((datum, j) =>
                     <circle
                       key={j}
                       cx={x(datum.date)}
                       cy={y(datum.value.rate)}
                       fill={color(d.id)}
                       r="3.5"
-                    />
-                  ))}
-                </g>
-              ))}
-              {labels
-                .sort((a, b) => b.value.rate - a.value.rate)
-                .map((d, i) => (
-                  <text
-                    dy="0.35em"
-                    key={d.name}
-                    className="fs-10 bold xs-hide"
-                    textAnchor="start"
-                    transform={`translate(${x(d.date)}, ${y(d.value.rate)})`}
-                    x="4"
-                    y={18 * (i === 0 ? -1 : 1)}
-                  >
-                    {d.name}
-                  </text>
-                ))}
+                    />,
+                  )}
+                </g>,
+              )}
+              {labels.sort((a, b) => b.value.rate - a.value.rate).map((d, i) =>
+                <text
+                  dy="0.35em"
+                  key={d.name}
+                  className="fs-10 bold xs-hide"
+                  textAnchor="start"
+                  transform={`translate(${x(d.date)}, ${y(d.value.rate)})`}
+                  x="4"
+                  y={18 * (i === 0 ? -1 : 1)}
+                >
+                  {d.name}
+                </text>,
+              )}
               {until >= 2013 &&
                 crime === 'rape' &&
                 <g
-                  transform={`translate(${x(new Date('2013-01-01'))}, ${height})`}
+                  transform={`translate(${x(
+                    new Date('2013-01-01'),
+                  )}, ${height})`}
                 >
                   <line stroke="#95aabc" strokeWidth="1" y2={-height} />
                   <rect

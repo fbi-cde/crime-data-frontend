@@ -38,13 +38,17 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
 
   const download = data.map(d => ({
     data: d.data,
-    filename: `${place}-${crime}-${slugify(d.title || title)}-${since}-${until}.csv`,
+    filename: `${place}-${crime}-${slugify(
+      d.title || title,
+    )}-${since}-${until}.csv`,
   }))
 
   download.push({
     content: generateCrimeReadme({
       crime,
-      title: `${title} of reported ${pluralize(crime)} in ${startCase(place)}, ${since}-${until}`,
+      title: `${title} of reported ${pluralize(crime)} in ${startCase(
+        place,
+      )}, ${since}-${until}`,
     }),
     filename: 'README.md',
   })

@@ -32,7 +32,8 @@ class UsaMap extends React.Component {
     return (
       <div>
         <svg
-          className={`cursor-pointer usa-map ${!changeColorOnHover && 'no-hover'}`}
+          className={`cursor-pointer usa-map ${!changeColorOnHover &&
+            'no-hover'}`}
           viewBox="0 0 959 593"
           preserveAspectRatio="xMidYMid"
         >

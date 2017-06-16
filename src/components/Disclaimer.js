@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Disclaimer = () => (
+const Disclaimer = () =>
   <div className="clearfix p1 fs-10 sm-fs-12 line-height-1 bg-white">
     <img
       className="mr-tiny align-bottom"
@@ -11,6 +11,5 @@ const Disclaimer = () => (
     />
     An official website of the United States government
   </div>
-)
 
 export default Disclaimer
