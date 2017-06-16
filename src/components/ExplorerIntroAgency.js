@@ -4,7 +4,7 @@ import React from 'react'
 
 import { nibrsTerm, srsTerm } from './Terms'
 
-const ExplorerIntroAgency = ({ county, name, state, type, hasNibrs }) => (
+const ExplorerIntroAgency = ({ county, name, state, type, hasNibrs }) =>
   <p className="serif">
     The {startCase(name)} law enforcement agency is located in
     {' '}
@@ -15,7 +15,6 @@ const ExplorerIntroAgency = ({ county, name, state, type, hasNibrs }) => (
     {' '}
     data to the FBI.
   </p>
-)
 
 ExplorerIntroAgency.defaultProps = {
   hasNibrs: false,

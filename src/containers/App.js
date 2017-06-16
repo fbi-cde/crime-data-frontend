@@ -15,7 +15,7 @@ import * as glossaryActions from '../actions/glossary'
 
 const isProd = process.env.NODE_ENV === 'production'
 
-const App = ({ actions, appState, children, dispatch, location }) => (
+const App = ({ actions, appState, children, dispatch, location }) =>
   <div className="site">
     <Disclaimer />
     <BetaBanner onFeedbackClick={actions.showFeedback} />
@@ -31,7 +31,6 @@ const App = ({ actions, appState, children, dispatch, location }) => (
       onClose={actions.hideFeedback}
     />
   </div>
-)
 
 App.propTypes = {
   appState: PropTypes.object,

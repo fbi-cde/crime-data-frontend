@@ -4,7 +4,8 @@ import React from 'react'
 const XAxis = ({ active, tickCt, tickSizeOuter, height, scale, showLine }) => {
   const range = scale.range()
   const [range0, range1, k] = [range[0] + 0.5, range[range.length - 1] + 0.5, 1]
-  const domain = `M${range0},${k * tickSizeOuter}V0.5H${range1}V${k * tickSizeOuter}`
+  const domain = `M${range0},${k * tickSizeOuter}V0.5H${range1}V${k *
+    tickSizeOuter}`
 
   const format = scale.tickFormat
     ? scale.tickFormat.apply(scale)

@@ -11,7 +11,7 @@ const NibrsStackedBarDetails = ({
   onMouseOut,
   selected,
   total,
-}) => (
+}) =>
   <ul className="list-style-none p0 m0 fs-14">
     {data.map((d, i) => {
       const active = d.key === selected
@@ -20,7 +20,9 @@ const NibrsStackedBarDetails = ({
       return (
         <li
           key={d.key}
-          className={`${notLast ? 'mb1' : ''} flex items-baseline cursor-pointer ${border}`}
+          className={`${notLast
+            ? 'mb1'
+            : ''} flex items-baseline cursor-pointer ${border}`}
           onMouseOver={onMouseOver(d.key)}
           onMouseOut={onMouseOut}
         >
@@ -36,7 +38,6 @@ const NibrsStackedBarDetails = ({
       )
     })}
   </ul>
-)
 
 NibrsStackedBarDetails.propTypes = {
   colorMap: PropTypes.func.isRequired,

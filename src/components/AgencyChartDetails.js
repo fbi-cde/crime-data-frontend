@@ -56,7 +56,7 @@ const AgencyChartDetails = ({
             </tr>
           </thead>
           <tbody className="fs-14 bold">
-            {keys.map((k, i) => (
+            {keys.map((k, i) =>
               <tr key={i}>
                 <td className="pr2 sm-pr3 fs-12 nowrap truncate align-bottom col-8">
                   <span
@@ -70,8 +70,8 @@ const AgencyChartDetails = ({
                     {fmt(data[k])}
                   </span>
                 </td>
-              </tr>
-            ))}
+              </tr>,
+            )}
           </tbody>
         </table>
       </div>

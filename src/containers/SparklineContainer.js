@@ -48,7 +48,7 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
         State and national {lowerCase(crime)} rates
       </h3>
       <div className="clearfix mxn1">
-        {sparklines.map((s, i) => (
+        {sparklines.map((s, i) =>
           <div className="sm-col sm-col-6 mb1 px1" key={i}>
             <div className="p2 bg-blue-lighter flex flex-wrap">
               <div>
@@ -74,8 +74,8 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
                 </a>
               </div>
             </div>
-          </div>
-        ))}
+          </div>,
+        )}
       </div>
       <p className="mt1 mb0 fs-12 serif italic">
         Rates are only available for state and national-level data.

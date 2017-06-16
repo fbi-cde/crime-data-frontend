@@ -10,7 +10,7 @@ const NibrsDonutDetails = ({
   onMouseOver,
   onMouseOut,
   selected,
-}) => (
+}) =>
   <div className="mt2 lg-mt4">
     <span className="mb2 bold caps fs-12 red">Incidents</span>
     <ul className="list-style-none p0 m0 fs-14">
@@ -47,7 +47,6 @@ const NibrsDonutDetails = ({
       })}
     </ul>
   </div>
-)
 
 NibrsDonutDetails.propTypes = {
   colorMap: PropTypes.func.isRequired,

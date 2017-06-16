@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const Loading = ({ slim, text }) => (
+const Loading = ({ slim, text }) =>
   <div className={`${slim ? '' : 'mt3 mb8'} fs-14 caps sans-serif center`}>
     <img
       className="align-middle mr1"
@@ -12,7 +12,6 @@ const Loading = ({ slim, text }) => (
     />
     {text}
   </div>
-)
 
 Loading.defaultProps = {
   slim: false,

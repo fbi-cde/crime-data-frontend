@@ -3,7 +3,7 @@ import React from 'react'
 
 import { slugify } from '../util/text'
 
-const FilterGroup = ({ name, options, onChange, selected, title }) => (
+const FilterGroup = ({ name, options, onChange, selected, title }) =>
   <div className="mb2 rounded overflow-hidden">
     {title && <div className="mb1 sm-m0 px2 sm-lh-30 bold">{title}</div>}
     <div>
@@ -34,7 +34,6 @@ const FilterGroup = ({ name, options, onChange, selected, title }) => (
       })}
     </div>
   </div>
-)
 
 FilterGroup.defaultProps = {
   onChange: () => {},

@@ -110,7 +110,9 @@ class Feedback extends React.Component {
             role="dialog"
           >
             <div
-              className={`fixed p3 bg-blue-dark white md-rounded-top mw30 z3 feedback ${isOpen ? 'show' : ''}`}
+              className={`fixed p3 bg-blue-dark white md-rounded-top mw30 z3 feedback ${isOpen
+                ? 'show'
+                : ''}`}
             >
               <form>
                 <legend className="mb2">
@@ -118,7 +120,9 @@ class Feedback extends React.Component {
                     Help us improve the Crime Data Explorer
                   </h1>
                   <p className="fs-12 italic serif">
-                    This information will be reported on Github, where it will be publically visible. You can review all reported feedback on our
+                    This information will be reported on Github, where it will
+                    be publically visible. You can review all reported feedback
+                    on our
                     {' '}
                     <a
                       className="cursor-pointer underline white"
@@ -129,7 +133,7 @@ class Feedback extends React.Component {
                     .
                   </p>
                 </legend>
-                {fields.map((field, i) => (
+                {fields.map((field, i) =>
                   <div key={i}>
                     <label className="mb-tiny block" htmlFor={field.id}>
                       {field.label}
@@ -143,8 +147,8 @@ class Feedback extends React.Component {
                       }}
                       value={data[field.id]}
                     />
-                  </div>
-                ))}
+                  </div>,
+                )}
                 <div className="flex flex-row-reverse justify-between mt1">
                   <button
                     className="btn btn-primary bg-blue-lighter blue"
@@ -201,7 +205,8 @@ Feedback.defaultProps = {
   fields: [
     {
       id: 'improve',
-      label: 'What brought you to the site and how can we improve your experience here?',
+      label:
+        'What brought you to the site and how can we improve your experience here?',
     },
     {
       id: 'general',

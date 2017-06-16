@@ -7,7 +7,7 @@ import { crimeTypes } from '../util/offenses'
 
 const { violentCrime, propertyCrime } = crimeTypes
 
-const CrimeTypeFilter = ({ onChange, selected }) => (
+const CrimeTypeFilter = ({ onChange, selected }) =>
   <div id="type-of-crime" className="mb4">
     <div className="mb3 fs-22 bold border-bottom">Type of crime</div>
     <FilterGroup
@@ -28,7 +28,6 @@ const CrimeTypeFilter = ({ onChange, selected }) => (
       Additional datasets
     </Link>
   </div>
-)
 
 CrimeTypeFilter.propTypes = {
   onChange: PropTypes.func.isRequired,

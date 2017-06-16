@@ -30,7 +30,9 @@ const TrendContainer = ({
     {
       content: generateCrimeReadme({
         crime,
-        title: `Reported ${pluralize(crime)} in ${startCase(place)}, ${since}-${until}`,
+        title: `Reported ${pluralize(crime)} in ${startCase(
+          place,
+        )}, ${since}-${until}`,
       }),
       filename: 'README.md',
     },

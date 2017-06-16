@@ -39,7 +39,8 @@ const ExplorerIntroNational = ({ crime, ucr, until }) => {
           </div>
         : <div>
             <p className="serif">
-              The number of arson incidents in the United States is derived from both
+              The number of arson incidents in the United States is derived from
+              both
               {' '}
               {srsTerm}
               {' '}
@@ -54,7 +55,8 @@ const ExplorerIntroNational = ({ crime, ucr, until }) => {
               {' '}
               {formatNum(untilUcr.participating_agencies)}
               {' '}
-              law enforcement agencies. The charts below feature unestimated data.
+              law enforcement agencies. The charts below feature unestimated
+              data.
             </p>
           </div>}
     </div>

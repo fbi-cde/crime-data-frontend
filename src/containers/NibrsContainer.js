@@ -11,9 +11,7 @@ import Term from '../components/Term'
 import parseNibrs from '../util/nibrs'
 import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
-import ucrParticipation, {
-  shouldFetchNibrs as shouldShowNibrs,
-} from '../util/ucr'
+import ucrParticipation, { shouldFetchNibrs as shouldShowNibrs } from '../util/ucr'
 
 const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')
@@ -72,10 +70,12 @@ const NibrsContainer = ({
     totalCount = filteredData.offenderRaceCode.reduce((a, b) => a + b.count, 0)
     content = (
       <div className="clearfix mxn1">
-        {dataParsed.map((d, i) => (
+        {dataParsed.map((d, i) =>
           <div
             key={i}
-            className={`lg-col lg-col-6 mb2 px1 ${i % 2 === 0 ? 'clear-left' : ''}`}
+            className={`lg-col lg-col-6 mb2 px1 ${i % 2 === 0
+              ? 'clear-left'
+              : ''}`}
           >
             <NibrsCard
               crime={crime}
@@ -85,8 +85,8 @@ const NibrsContainer = ({
               until={until}
               {...d}
             />
-          </div>
-        ))}
+          </div>,
+        )}
       </div>
     )
   } else if (error) {

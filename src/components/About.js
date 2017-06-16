@@ -58,7 +58,7 @@ const legend = [
   },
 ]
 
-const About = ({ dispatch }) => (
+const About = ({ dispatch }) =>
   <div>
     <section className="bg-white">
       <div className="px2 py7 container mx-auto">
@@ -71,7 +71,8 @@ const About = ({ dispatch }) => (
               The Crime Data Explorer publishes nation-wide crime data collected
               by the FBI in a digital format. The tool allows you to view
               trends and download bulk data allowing you to get a better
-              understanding of reported crime across the country. Data will be updated periodically.
+              understanding of reported crime across the country. Data will be
+              updated periodically.
             </p>
           </div>
           <div className="md-col md-col-3">
@@ -106,7 +107,15 @@ const About = ({ dispatch }) => (
         <div className="clearfix">
           <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-18 serif">
             <p className="mb3">
-              The data available from the FBI’s Uniform Crime Reporting program (UCR) is made up of reports from police agencies across the country. Law enforcement agencies voluntarily submit data to the FBI in one of two formats: summary statistics (SRS) or incident-based reports (NIBRS). The Crime Data Explorer makes both types of data available through the API and the bulk downloads. SRS data is available for the years 1960 to 2014. Incident-based data began being collected much more recently and is available here from 1991-2014.
+              The data available from the FBI’s Uniform Crime Reporting program
+              (UCR) is made up of reports from police agencies across the
+              country. Law enforcement agencies voluntarily submit data to the
+              FBI in one of two formats: summary statistics (SRS) or
+              incident-based reports (NIBRS). The Crime Data Explorer makes both
+              types of data available through the API and the bulk downloads.
+              SRS data is available for the years 1960 to 2014. Incident-based
+              data began being collected much more recently and is available
+              here from 1991-2014.
             </p>
             <div className="bold">Summary (SRS) data</div>
             <p className="mb3">
@@ -114,8 +123,10 @@ const About = ({ dispatch }) => (
             </p>
             <div className="bold">Incident-based (NIBRS) data</div>
             <p className="mb3 md-m0">
-              Incident-based (NIBRS) data captures details of each reported crime
-              incident, providing context that is not provided by the summary data.
+              Incident-based (NIBRS) data captures details of each reported
+              crime
+              incident, providing context that is not provided by the summary
+              data.
             </p>
           </div>
           <div className="md-col md-col-3">
@@ -150,7 +161,7 @@ const About = ({ dispatch }) => (
               <UsaMap colors={stateColors} changeColorOnHover={false} />
             </div>
             <div className="md-col md-col-3 pt1">
-              {legend.map((d, i) => (
+              {legend.map((d, i) =>
                 <div key={i} className="flex mt2 fs-14">
                   <div
                     className="flex-none mt-tiny mr1 circle"
@@ -162,8 +173,8 @@ const About = ({ dispatch }) => (
                     </div>
                     <div>{d.text}</div>
                   </div>
-                </div>
-              ))}
+                </div>,
+              )}
             </div>
           </div>
           <div className="fs-12 serif italic">
@@ -218,7 +229,8 @@ const About = ({ dispatch }) => (
           <div className="md-col md-col-4 px6 mb4 md-mb0">
             <h3 className="mt0 mb2 fs-22 sans-serif red">Technical issues?</h3>
             <p className="m0">
-              Please submit technical questions about the application and the API via
+              Please submit technical questions about the application and the
+              API via
               {' '}
               <a
                 className="bold"
@@ -254,7 +266,6 @@ const About = ({ dispatch }) => (
       </div>
     </section>
   </div>
-)
 
 About.propTypes = {
   dispatch: PropTypes.func,
