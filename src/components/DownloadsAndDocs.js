@@ -4,6 +4,7 @@ import DownloadBulkNibrs from './DownloadBulkNibrs'
 import DownloadDataBtn from './DownloadDataBtn'
 import Term from './Term'
 import otherDatasets from '../../content/datasets.yml'
+import markdown from '../util/md'
 
 const border = 'border-bottom border-blue-lighter'
 
@@ -29,7 +30,12 @@ const DownloadsAndDocs = () => (
               {d.title}
             </div>
             <div className="sm-col sm-col-4 mb1 sm-pr2 md-pr4">
-              {d.description}
+              {/* eslint react/no-danger: 0 */}
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: markdown.render(d.description),
+                }}
+              />
             </div>
             <div className="sm-col sm-col-4 fs-14 bold">
               Summary (SRS) available
