@@ -30,7 +30,7 @@ const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
     data: noFederal.filter(d => d[groupKey] === key),
   }))
   dataGrouped.push({
-    key: 'Unspecified',
+    key: 'No assigned county',
     data: noFederal.filter(d => d[groupKey] === null),
   })
 
