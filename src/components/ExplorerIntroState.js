@@ -1,34 +1,44 @@
+import lowerCase from 'lodash.lowercase'
 import startCase from 'lodash.startcase'
+import upperFirst from 'lodash.upperfirst'
 import React from 'react'
 
+import Term from './Term'
 import { estimatedTerm, nibrsTerm, srsTerm } from './Terms'
 import { formatNum } from '../util/formats'
+import mapCrimeToGlossaryTerm from '../util/glossary'
 import ucrParticipationLookup from '../util/ucr'
 
-const getReportTerms = ({ nibrs, srs, hybrid }) =>
+const getReportTerms = ({ nibrs, srs, hybrid }) => (
   <span>
     {hybrid && 'both '}
     {srs && srsTerm}
     {hybrid && ' and '}
     {nibrs && nibrsTerm}
   </span>
+)
 
 const ExplorerIntroState = ({ crime, place, ucr, until }) => {
   const isArson = crime === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
   const untilUcr = ucr.find(p => p.year === until)
   const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
+  const crimeTerm = (
+    <Term id={mapCrimeToGlossaryTerm(crime)} size="sm">
+      {upperFirst(lowerCase(crime))}
+    </Term>
+  )
 
   return (
     <div>
       {!isArson
         ? <div>
             <p className="serif">
-              Crime rates for {startCase(place)} are derived from
+              {crimeTerm} rates for {startCase(place)} are derived from
               {' '}
               {reportTerms}
               {' '}
-              reports sent to the FBI.
+              reports voluntarily submitted to the FBI.
             </p>
             <p className="serif">
               In
@@ -38,11 +48,15 @@ const ExplorerIntroState = ({ crime, place, ucr, until }) => {
               {' '}
               {startCase(place)}
               {' '}
-              based on data voluntarily reported by
+              based on data received from
               {' '}
               {formatNum(untilUcr.participating_agencies)}
               {' '}
-              law enforcement agencies.
+              law enforcement agencies out of
+              {' '}
+              {formatNum(untilUcr.total_agencies)}
+              {' '}
+              in the state that year.
             </p>
           </div>
         : <div>
