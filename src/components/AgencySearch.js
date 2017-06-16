@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import AgencySearchResults from './AgencySearchResults'
+import OnEscape from './OnEscape'
 
 class AgencySearch extends Component {
   constructor(props) {
@@ -39,9 +40,13 @@ class AgencySearch extends Component {
 
   handleClick = e => {
     if (this.state.showResults && !e.target.closest('.agency-search')) {
-      console.log('yo')
       this.setState({ showResults: false })
     }
+    return e
+  }
+
+  handleEscape = e => {
+    if (this.state.showResults) this.setState({ showResults: false })
     return e
   }
 
@@ -112,12 +117,16 @@ class AgencySearch extends Component {
           {!hasSelection &&
             showResults &&
             dataFiltered.length > 0 &&
-            <AgencySearchResults
-              data={dataFiltered.sort((a, b) => a.agency_name > b.agency_name)}
-              groupKey="primary_county"
-              groupValues={Object.keys(counties).sort()}
-              onClick={this.handleSearchClick}
-            />}
+            <OnEscape handler={this.handleEscape}>
+              <AgencySearchResults
+                data={dataFiltered.sort(
+                  (a, b) => a.agency_name > b.agency_name,
+                )}
+                groupKey="primary_county"
+                groupValues={Object.keys(counties).sort()}
+                onClick={this.handleSearchClick}
+              />
+            </OnEscape>}
         </div>
       </div>
     )
