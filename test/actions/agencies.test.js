@@ -12,7 +12,7 @@ import {
   fetchAgency,
   fetchingAgency,
   receivedAgency,
-} from '../../src/actions/agency'
+} from '../../src/actions/agencies'
 import api from '../../src/util/api'
 
 const createPromise = (res, err) => {
@@ -23,6 +23,12 @@ const createPromise = (res, err) => {
 const success = {
   ori: 'CAFAKEORI',
   name: 'Fake Agency',
+}
+
+const error = {
+  response: { status: 400 },
+  message: 'yo',
+  config: { url: '/fake' },
 }
 
 describe('agency action', () => {
@@ -38,7 +44,7 @@ describe('agency action', () => {
 
   describe('failedAgency()', () => {
     it('should return AGENCY_FAILED type', () => {
-      const actual = failedAgency()
+      const actual = failedAgency(error)
       expect(actual.type).toEqual(AGENCY_FAILED)
     })
   })
@@ -82,7 +88,7 @@ describe('agency action', () => {
 
     it('should dispatch AGENCY_FAILED if API call fails', done => {
       const dispatch = sandbox.spy()
-      sandbox.stub(api, 'getAgency', () => createPromise(undefined, true))
+      sandbox.stub(api, 'getAgency', () => createPromise(undefined, error))
       fetchAgency('CAFAKEORI')(dispatch).then(() => {
         const dispatched = dispatch.getCall(1)
         expect(dispatched.args[0].type).toEqual('AGENCY_FAILED')

@@ -7,11 +7,13 @@ import { connect } from 'react-redux'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import NibrsCard from '../components/NibrsCard'
-import Term from '../components/Term'
+import { nibrsTerm } from '../components/Terms'
 import parseNibrs from '../util/nibrs'
 import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
-import ucrParticipation, { shouldFetchNibrs as shouldShowNibrs } from '../util/ucr'
+import ucrParticipation, {
+  shouldFetchNibrs as shouldShowNibrs,
+} from '../util/ucr'
 
 const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')
@@ -42,40 +44,36 @@ const filterNibrsData = (data, { since, until }) => {
 const NibrsContainer = ({
   agency,
   crime,
+  isAgency,
   nibrs,
   place,
   placeType,
   since,
   until,
 }) => {
-  const { data, error, loading } = nibrs
-  const showNibrs = placeType !== 'agency'
-    ? shouldShowNibrs({ crime, place, placeType })
-    : agency.nibrs_months_reported === 12
+  if (isAgency && !agency) return null
+
+  const showNibrs = isAgency
+    ? agency.nibrs_months_reported === 12
+    : shouldShowNibrs({ crime, place, placeType })
 
   if (!showNibrs) return null
 
+  const placeDisplay = isAgency ? agency.display : startCase(place)
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
-  const nibrsTerm = (
-    <Term id="national incident-based reporting system (NIBRS)">
-      incident-based (NIBRS)
-    </Term>
-  )
+  const { data, error, loading } = nibrs
+  let [totalCount, content] = [0, null]
 
-  let totalCount = 0
-  let content = null
   if (!loading && data) {
     const filteredData = filterNibrsData(data, { since, until })
     const dataParsed = parseNibrs(filteredData)
     totalCount = filteredData.offenderRaceCode.reduce((a, b) => a + b.count, 0)
     content = (
       <div className="clearfix mxn1">
-        {dataParsed.map((d, i) =>
+        {dataParsed.map((d, i) => (
           <div
             key={i}
-            className={`lg-col lg-col-6 mb2 px1 ${i % 2 === 0
-              ? 'clear-left'
-              : ''}`}
+            className={`lg-col lg-col-6 mb2 px1 ${i % 2 === 0 ? 'clear-left' : ''}`}
           >
             <NibrsCard
               crime={crime}
@@ -85,17 +83,13 @@ const NibrsContainer = ({
               until={until}
               {...d}
             />
-          </div>,
-        )}
+          </div>
+        ))}
       </div>
     )
   } else if (error) {
     content = <ErrorCard error={error} />
   }
-
-  const placeDisplay = placeType === 'agency'
-    ? agency.display
-    : startCase(place)
 
   return (
     <div className="mb8">
@@ -142,11 +136,13 @@ NibrsContainer.propTypes = {
 
 const mapStateToProps = ({ agencies, filters, nibrs }) => {
   const { place, placeType } = getPlaceInfo(filters)
-  const agency = placeType === 'agency' && getAgency(agencies, place)
+  const isAgency = placeType === 'agency'
+  const agency = isAgency && !agencies.loading && getAgency(agencies, place)
 
   return {
     ...filters,
     agency,
+    isAgency,
     place,
     placeType,
     nibrs,

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { combineReducers } from 'redux'
 
 import agencies from './agencies'

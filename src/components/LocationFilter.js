@@ -16,6 +16,7 @@ class LocationFilter extends React.Component {
   render() {
     const { agency, agencyData, onChange, usState } = this.props
     const { showResults } = this.state
+    const showAgencySearch = usState !== nationalKey && agencyData.length > 0
 
     return (
       <div id="location" className="mb4">
@@ -25,7 +26,7 @@ class LocationFilter extends React.Component {
           onFocus={this.handleLocationFocus}
           selected={startCase(usState)}
         />
-        {usState !== nationalKey &&
+        {showAgencySearch &&
           <AgencySearch
             onChange={onChange}
             agency={(agency || {}).agency_name || ''}

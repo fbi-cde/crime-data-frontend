@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { updateFilters } from './filters'
 import { fetchNibrs } from './nibrs'
-import { fetchAgency } from '../actions/agency'
 import { fetchSummaries } from '../actions/summary'
 import { fetchUcrParticipation } from '../actions/ucr'
 import history, { createNewLocation } from '../util/history'
@@ -13,9 +12,7 @@ import {
 
 const fetchData = () => (dispatch, getState) => {
   const { filters } = getState()
-  const { placeType } = filters
 
-  if (placeType === 'agency') dispatch(fetchAgency(filters))
   if (shouldFetchUcr(filters)) dispatch(fetchUcrParticipation(filters))
   if (shouldFetchSummaries(filters)) dispatch(fetchSummaries(filters))
   if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))

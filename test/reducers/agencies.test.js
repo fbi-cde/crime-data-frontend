@@ -7,11 +7,11 @@ import {
 } from '../../src/actions/constants'
 import reducer from '../../src/reducers/agencies'
 
-describe('agencies reducer', () => {
+describe('agency reducer', () => {
   const error = {
-    config: { url: '/failed/api/call' },
+    url: '/failed/api/call',
     message: 'This could not be found',
-    response: { status: 400 },
+    code: 400,
   }
 
   describe('initial state', () => {
@@ -25,9 +25,7 @@ describe('agencies reducer', () => {
     it('should set error to the value of the error object and loading to false', () => {
       const action = { type: AGENCY_FAILED, error }
       const initialState = reducer(undefined, action)
-      expect(initialState.error.code).toEqual(error.response.status)
-      expect(initialState.error.message).toEqual(error.message)
-      expect(initialState.error.url).toEqual(error.config.url)
+      expect(initialState.error).toEqual(error)
       expect(initialState.loading).toEqual(false)
     })
   })

@@ -56,6 +56,9 @@ const getContent = ({ crime, place, since, summary, until }) => {
 
 const AgencyChartContainer = params => {
   const { agency, crime, since, summary, until } = params
+
+  if (!agency) return null
+
   const submitsNibrs = agency.nibrs_months_reported === 12
   const content = getContent(params)
 
@@ -83,7 +86,7 @@ const AgencyChartContainer = params => {
 }
 
 AgencyChartContainer.propTypes = {
-  agency: PropTypes.object.isRequired,
+  agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
   crime: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
@@ -95,7 +98,7 @@ AgencyChartContainer.propTypes = {
 }
 
 const mapStateToProps = ({ agencies, filters, summaries }) => ({
-  agency: getAgency(agencies, filters.place),
+  agency: !agencies.loading && getAgency(agencies, filters.place),
   ...filters,
   summary: summaries,
 })

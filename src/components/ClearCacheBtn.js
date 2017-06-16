@@ -1,8 +1,12 @@
+/* eslint-disable no-console */
 import React from 'react'
 
 const clearCache = () => {
-  if (typeof window !== 'undefined' && window.caches) {
-    Promise.all(caches.keys().then(name => caches.delete(name)))
+  if (window && window.caches) {
+    caches
+      .keys()
+      .then(names => Promise.all(names.map(name => caches.delete(name))))
+      .then(() => console.log('caches cleared!'))
   }
 }
 

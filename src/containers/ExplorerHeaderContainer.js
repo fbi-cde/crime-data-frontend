@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import startCase from 'lodash.startcase'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -10,16 +11,17 @@ import { getPlaceInfo } from '../util/place'
 import { getAgency, oriToState } from '../util/ori'
 
 const ExplorerHeaderContainer = ({
+  agencies,
   agency,
   crime,
+  isAgency,
   place,
   placeType,
   ucr,
   until,
 }) => {
-  const isAgency = placeType === 'agency'
-  const usState = agency ? oriToState(place) : place
-  const isLoading = !isAgency && ucr.loading
+  const isLoading = isAgency ? agencies.loading : ucr.loading
+  const usState = isAgency ? oriToState(place) : place
   const placeDisplay = isAgency
     ? `${agency.agency_name} agency`
     : startCase(usState)
@@ -28,7 +30,9 @@ const ExplorerHeaderContainer = ({
     <div>
       <div className="items-baseline mt2 mb4">
         <h1 className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-lighter">
-          {placeDisplay}
+          {isAgency
+            ? isLoading ? 'Loading agency...' : agency.display
+            : startCase(usState)}
         </h1>
       </div>
       <div className="mb5 clearfix">
@@ -51,6 +55,16 @@ const ExplorerHeaderContainer = ({
               ? `${placeDisplay}, ${startCase(usState)}`
               : startCase(usState)}
           </div>
+          <PlaceThumbnail selected={startCase(usState)} isAgency={isAgency} />
+          {isAgency &&
+            !isLoading &&
+            <div className="mt-tiny fs-14">
+              <span
+                className="mr1 inline-block bg-red-bright circle"
+                style={{ width: 8, height: 8 }}
+              />
+              {agency.agency_name}
+            </div>}
         </div>
       </div>
     </div>
@@ -61,11 +75,13 @@ const mapStateToProps = ({ agencies, filters, ucr }) => {
   const { place, placeType } = getPlaceInfo(filters)
   const { crime, until } = filters
   const isAgency = placeType === 'agency'
-  const agency = isAgency && getAgency(agencies, place)
+  const agency = isAgency && !agencies.loading && getAgency(agencies, place)
 
   return {
+    agencies,
     agency,
     crime,
+    isAgency,
     place,
     placeType,
     ucr,

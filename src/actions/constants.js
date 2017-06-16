@@ -3,6 +3,8 @@
   by nouns will show up near each other in an alphabetized list
 */
 
+export const AGENCIES_FETCHING = 'AGENCIES_FETCHING'
+export const AGENCIES_RECEIVED = 'AGENCIES_RECEIVED'
 export const AGENCY_FAILED = 'AGENCY_FAILED'
 export const AGENCY_FETCHING = 'AGENCY_FETCHING'
 export const AGENCY_RECEIVED = 'AGENCY_RECEIVED'
