@@ -5,7 +5,6 @@ import {
   AGENCY_FETCHING,
   AGENCY_RECEIVED,
 } from '../actions/constants'
-import { formatError } from '../util/api'
 import { oriToState } from '../util/ori'
 
 const initialState = {
@@ -42,7 +41,7 @@ export default (state = initialState, action) => {
     case AGENCY_FAILED:
       return {
         ...state,
-        error: formatError(action.error),
+        error: action.error,
         loading: false,
       }
     case AGENCY_FETCHING:

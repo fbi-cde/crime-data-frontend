@@ -7,14 +7,14 @@ import {
   AGENCY_FETCHING,
   AGENCY_RECEIVED,
 } from './constants'
-import api from '../util/api'
+import api, { formatError } from '../util/api'
 import { reshapeData } from '../util/ori'
 
 // fetching individual agency details...
 
 export const failedAgency = error => ({
   type: AGENCY_FAILED,
-  error,
+  error: formatError(error),
 })
 
 export const fetchingAgency = () => ({
