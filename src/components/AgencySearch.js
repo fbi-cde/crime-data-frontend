@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import AgencySearchResults from './AgencySearchResults'
+import OnEscape from './OnEscape'
 
 class AgencySearch extends Component {
   constructor(props) {
@@ -10,6 +11,10 @@ class AgencySearch extends Component {
     const search = props.agency
     const hasSelection = !!search
     this.state = { search, hasSelection, showResults: props.initialShowResults }
+  }
+
+  componentDidMount() {
+    document.addEventListener('click', this.handleClick)
   }
 
   componentWillReceiveProps({ agency, initialShowResults }) {
@@ -21,6 +26,10 @@ class AgencySearch extends Component {
     }
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClick)
+  }
+
   handleChange = e => {
     this.setState({
       search: e.target.value,
@@ -29,7 +38,19 @@ class AgencySearch extends Component {
     })
   }
 
-  handleClick = d => e => {
+  handleClick = e => {
+    if (this.state.showResults && !e.target.closest('.agency-search')) {
+      this.setState({ showResults: false })
+    }
+    return e
+  }
+
+  handleEscape = e => {
+    if (this.state.showResults) this.setState({ showResults: false })
+    return e
+  }
+
+  handleSearchClick = d => e => {
     e.preventDefault()
     this.setState({ search: d.agency_name, hasSelection: true })
     this.props.onChange({ place: d.ori, placeType: 'agency' })
@@ -60,7 +81,7 @@ class AgencySearch extends Component {
         })
 
     return (
-      <div className="mt2">
+      <div className="agency-search mt2">
         <div className="relative">
           <div className="relative">
             <input
@@ -96,12 +117,16 @@ class AgencySearch extends Component {
           {!hasSelection &&
             showResults &&
             dataFiltered.length > 0 &&
-            <AgencySearchResults
-              data={dataFiltered.sort((a, b) => a.agency_name > b.agency_name)}
-              groupKey="primary_county"
-              groupValues={Object.keys(counties).sort()}
-              onClick={this.handleClick}
-            />}
+            <OnEscape handler={this.handleEscape}>
+              <AgencySearchResults
+                data={dataFiltered.sort(
+                  (a, b) => a.agency_name > b.agency_name,
+                )}
+                groupKey="primary_county"
+                groupValues={Object.keys(counties).sort()}
+                onClick={this.handleSearchClick}
+              />
+            </OnEscape>}
         </div>
       </div>
     )
@@ -115,7 +140,7 @@ AgencySearch.propTypes = {
 }
 
 AgencySearch.defaultProps = {
-  initialShowResults: false,
+  initialShowResults: true,
 }
 
 export default AgencySearch
