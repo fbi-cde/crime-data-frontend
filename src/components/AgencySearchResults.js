@@ -41,19 +41,19 @@ const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
     >
       <div className="mb1 pb-tiny fs-16 bold line-height-1">Results</div>
       {noFederal.length === 0 && <div className="fs-12">No results</div>}
-      {dataGrouped.filter(g => g.data.length > 0).map(g => (
+      {dataGrouped.filter(g => g.data.length > 0).map(g =>
         <div key={g.key}>
           <div className="mt1 fs-10 bold caps blue">{g.key}</div>
           <ul className="m0 list-reset fs-12">
             {g.data
               .slice(0, 100)
               .sort((a, b) => a.agency_name < b.agency_name)
-              .map((d, i) => (
-                <AgencySearchResultItem agency={d} key={i} onClick={onClick} />
-              ))}
+              .map((d, i) =>
+                <AgencySearchResultItem agency={d} key={i} onClick={onClick} />,
+              )}
           </ul>
-        </div>
-      ))}
+        </div>,
+      )}
     </div>
   )
 }

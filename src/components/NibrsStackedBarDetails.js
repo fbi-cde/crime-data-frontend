@@ -4,7 +4,7 @@ import React from 'react'
 
 const fmt = p => (p > 0.01 ? format('.0%')(p) : '<1%')
 
-const NibrsStackedBarDetails = ({ colorMap, data, total }) => (
+const NibrsStackedBarDetails = ({ colorMap, data, total }) =>
   <ul className="list-style-none p0 m0 fs-14">
     {data.map((d, i) => {
       const notLast = i + 1 !== data.length ? 'mb1' : ''
@@ -25,7 +25,6 @@ const NibrsStackedBarDetails = ({ colorMap, data, total }) => (
       )
     })}
   </ul>
-)
 
 NibrsStackedBarDetails.propTypes = {
   colorMap: PropTypes.func.isRequired,
