@@ -105,7 +105,7 @@ const NibrsContainer = ({
         </h2>
         {nibrsFirstYear !== since &&
           <p className="my-tiny">
-            {startCase(place)} started reporting {nibrsTerm} data
+            {placeDisplay} started reporting {nibrsTerm} data
             to the FBI in {nibrsFirstYear}.
           </p>}
         {!error &&
