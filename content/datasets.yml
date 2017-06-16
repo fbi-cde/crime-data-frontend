@@ -1,6 +1,6 @@
 - title: Estimated crimes across the country
   description: |
-    Crimes estimated by the FBI.
+    Summary (SRS) data that has been estimated to create trends for crime occurrences on the state and national level. The FBI has traditionally included estimates in their [annual publications](https://ucr.fbi.gov/ucr-publications). Download this dataset to see the FBI's estimated crime totals for the nation and its 50 states from 1994 to 2015.
   download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/estimated_crimes.csv'
 - title: Hate Crime
   description: |
