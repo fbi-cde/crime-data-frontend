@@ -12,7 +12,7 @@ import {
   fetchAgency,
   fetchingAgency,
   receivedAgency,
-} from '../../src/actions/agency'
+} from '../../src/actions/agencies'
 import api from '../../src/util/api'
 
 const createPromise = (res, err) => {

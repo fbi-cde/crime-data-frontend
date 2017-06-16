@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 
 import routes from './routes'
 import configureStore from './store'
-import { fetchAgencies } from './actions/agency'
+import { fetchAgencies } from './actions/agencies'
 import './util/serviceWorker'
 
 import '../sass/app.scss'

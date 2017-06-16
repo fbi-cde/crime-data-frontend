@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import agencies from './agency'
+import agencies from './agencies'
 import feedback from './feedback'
 import filters from './filters'
 import glossary from './glossary'

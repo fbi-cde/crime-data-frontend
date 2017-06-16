@@ -5,7 +5,7 @@ import {
   AGENCY_FETCHING,
   AGENCY_RECEIVED,
 } from '../../src/actions/constants'
-import reducer from '../../src/reducers/agency'
+import reducer from '../../src/reducers/agencies'
 
 describe('agency reducer', () => {
   const error = {
