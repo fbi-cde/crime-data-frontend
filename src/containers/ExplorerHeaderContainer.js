@@ -20,7 +20,6 @@ const ExplorerHeaderContainer = ({
   ucr,
   until,
 }) => {
-  const isAgency = placeType === 'agency'
   const isLoading = isAgency ? agencies.loading : ucr.loading
   const usState = isAgency ? oriToState(place) : place
   const placeDisplay = isAgency
