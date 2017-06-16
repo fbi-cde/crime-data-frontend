@@ -60,7 +60,7 @@ const handleClick = func => e => {
   return func()
 }
 
-const Footer = ({ actions }) =>
+const Footer = ({ actions }) => (
   <footer className="px2 md-px6 py3 md-py6 bg-blue white">
     <div className="clearfix sm-mxn2">
       <div className="sm-col col-12 sm-col-4 sm-px2 mt1 mb4">
@@ -84,12 +84,12 @@ const Footer = ({ actions }) =>
             alt="Crime Data Explorer (CDE) logo"
             className="mr3"
             src="/img/cde-logo.png"
-            style={{ width: '100px' }}
+            style={{ width: '130px' }}
           />
           <img
             alt="Federal Bureau of Investigation (FBI) logo"
             src="/img/fbi-logo.png"
-            style={{ width: '100px' }}
+            style={{ width: '130px' }}
           />
         </div>
       </div>
@@ -146,12 +146,12 @@ const Footer = ({ actions }) =>
       </div>
       <div className="sm-col col-12 sm-col-4 sm-px2 fs-14">
         <div className="mb3 md-m0 clearfix">
-          {links.map((list, i) =>
+          {links.map((list, i) => (
             <ul
               className="col col-6 m0 p0 fs-12 list-style-none left-bars muted-bars"
               key={i}
             >
-              {list.map((d, ii) =>
+              {list.map((d, ii) => (
                 <li key={ii} className="mb1">
                   <Link
                     className="cursor-pointer white caps"
@@ -160,14 +160,15 @@ const Footer = ({ actions }) =>
                   >
                     {d.text}
                   </Link>
-                </li>,
-              )}
-            </ul>,
-          )}
+                </li>
+              ))}
+            </ul>
+          ))}
         </div>
       </div>
     </div>
   </footer>
+)
 
 Footer.propTypes = {
   actions: PropTypes.object.isRequired,
