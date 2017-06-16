@@ -6,12 +6,16 @@
     text-indent: -$space-1;
 
     &::before {
-      border-left: 2px solid $blue-light-508;
+      border-left: 2px solid $red-bright;
       content: '';
       display: inline-block;
       height: 1rem;
       padding-right: $space-1;
       vertical-align: text-top;
     }
+  }
+
+  &.muted-bars li::before {
+    border-color: $blue-light-508;
   }
 }
