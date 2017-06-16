@@ -51,20 +51,10 @@ const ExplorerHeaderContainer = ({
         <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">
           <PlaceThumbnail selected={startCase(usState)} />
           <div className="mt-tiny fs-14 right">
-            {isAgency
+            {isAgency && !isLoading
               ? `${placeDisplay}, ${startCase(usState)}`
               : startCase(usState)}
           </div>
-          <PlaceThumbnail selected={startCase(usState)} isAgency={isAgency} />
-          {isAgency &&
-            !isLoading &&
-            <div className="mt-tiny fs-14">
-              <span
-                className="mr1 inline-block bg-red-bright circle"
-                style={{ width: 8, height: 8 }}
-              />
-              {agency.agency_name}
-            </div>}
         </div>
       </div>
     </div>
