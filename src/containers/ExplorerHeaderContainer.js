@@ -21,7 +21,7 @@ const ExplorerHeaderContainer = ({
   const usState = agency ? oriToState(place) : place
   const isLoading = !isAgency && ucr.loading
   const placeDisplay = isAgency
-    ? `${agency.agency_name} Agency`
+    ? `${agency.agency_name} agency`
     : startCase(usState)
 
   return (
@@ -46,8 +46,10 @@ const ExplorerHeaderContainer = ({
         </div>
         <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">
           <PlaceThumbnail selected={startCase(usState)} />
-          <div className="mt-tiny fs-14 center">
-            {placeDisplay}
+          <div className="mt-tiny fs-14 right">
+            {isAgency
+              ? `${placeDisplay}, ${startCase(usState)}`
+              : startCase(usState)}
           </div>
         </div>
       </div>
