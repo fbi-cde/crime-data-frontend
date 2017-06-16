@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const formatNumber = format(',')
-const formatPercent = p => (p > 0.01 ? format('.0%')(p) : '<1%')
-const formatSI = n => (Number(n) > 10 ? format('.2s')(n) : formatNumber(n))
+const formatPercent = p => (+p > 0.01 ? format('.0%')(p) : '<1%')
+const formatSI = n => (+n > 10000 ? format('.2s')(n) : formatNumber(n))
 
 class NibrsTableWithBars extends React.Component {
   state = { showCounts: false }
@@ -72,7 +72,7 @@ class NibrsTableWithBars extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {dataFormatted.map((d, i) => (
+            {dataFormatted.map((d, i) =>
               <tr key={i} className="fs-14">
                 <td className="border-right border-gray">
                   <div className="progress-bar my1">
@@ -86,8 +86,8 @@ class NibrsTableWithBars extends React.Component {
                   {showCounts ? d.countFmt : d.percentFmt}
                 </td>
                 <td className="px1" title={d.key}>{d.key}</td>
-              </tr>
-            ))}
+              </tr>,
+            )}
           </tbody>
         </table>
         <div className="mt-tiny fs-14 mb3">
@@ -105,14 +105,16 @@ class NibrsTableWithBars extends React.Component {
           <div className="right mt-tiny fs-10 italic serif">
             View by
             <button
-              className={`${btnClass} ${!showCounts && 'bg-white blue border-blue'}`}
+              className={`${btnClass} ${!showCounts &&
+                'bg-white blue border-blue'}`}
               onClick={this.showCounts}
               style={{ width: 18 }}
             >
               #
             </button>
             <button
-              className={`${btnClass} ${showCounts && 'bg-white blue border-blue'}`}
+              className={`${btnClass} ${showCounts &&
+                'bg-white blue border-blue'}`}
               onClick={this.showPercents}
               style={{ width: 18 }}
             >
