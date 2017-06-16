@@ -12,6 +12,10 @@ class AgencySearch extends Component {
     this.state = { search, hasSelection, showResults: props.initialShowResults }
   }
 
+  componentDidMount() {
+    document.addEventListener('click', this.handleClick)
+  }
+
   componentWillReceiveProps({ agency, initialShowResults }) {
     if (initialShowResults !== this.props.initialShowResults) {
       this.setState({ showResults: initialShowResults })
@@ -19,6 +23,10 @@ class AgencySearch extends Component {
     if (agency === '') {
       this.setState({ search: '', hasSelection: false })
     }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClick)
   }
 
   handleChange = e => {
@@ -29,7 +37,15 @@ class AgencySearch extends Component {
     })
   }
 
-  handleClick = d => e => {
+  handleClick = e => {
+    if (this.state.showResults && !e.target.closest('.agency-search')) {
+      console.log('yo')
+      this.setState({ showResults: false })
+    }
+    return e
+  }
+
+  handleSearchClick = d => e => {
     e.preventDefault()
     this.setState({ search: d.agency_name, hasSelection: true })
     this.props.onChange({ place: d.ori, placeType: 'agency' })
@@ -60,7 +76,7 @@ class AgencySearch extends Component {
         })
 
     return (
-      <div className="mt2">
+      <div className="agency-search mt2">
         <div className="relative">
           <div className="relative">
             <input
@@ -100,7 +116,7 @@ class AgencySearch extends Component {
               data={dataFiltered.sort((a, b) => a.agency_name > b.agency_name)}
               groupKey="primary_county"
               groupValues={Object.keys(counties).sort()}
-              onClick={this.handleClick}
+              onClick={this.handleSearchClick}
             />}
         </div>
       </div>
@@ -115,7 +131,7 @@ AgencySearch.propTypes = {
 }
 
 AgencySearch.defaultProps = {
-  initialShowResults: false,
+  initialShowResults: true,
 }
 
 export default AgencySearch
