@@ -27,10 +27,11 @@ class LocationFilter extends React.Component {
         />
         {usState !== nationalKey &&
           <AgencySearch
-            onChange={onChange}
             agency={(agency || {}).agency_name || ''}
             data={agencyData}
             initialShowResults={showResults}
+            onChange={onChange}
+            usState={usState}
           />}
       </div>
     )

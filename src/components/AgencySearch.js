@@ -57,7 +57,9 @@ class AgencySearch extends Component {
   }
 
   clearInput = () => {
+    const { onChange, usState } = this.props
     this.setState({ search: '', hasSelection: false })
+    onChange({ place: usState, placeType: 'state' })
   }
 
   toggleResults = () => {
@@ -97,22 +99,23 @@ class AgencySearch extends Component {
                 padding: '.5rem .75rem',
                 borderLeft: '1px solid #284152',
               }}
-              onClick={hasSelection ? this.clearInput : this.toggleResults}
+              onClick={this.toggleResults}
             >
-              {hasSelection
-                ? <img
-                    src="/img/x-navy.svg"
-                    alt="close"
-                    width="10"
-                    height="10"
-                  />
-                : <img
-                    src="/img/chevron-down-navy.svg"
-                    alt="see results"
-                    width="12"
-                    height="12"
-                  />}
+              <img
+                src="/img/chevron-down-navy.svg"
+                alt="see results"
+                width="12"
+                height="12"
+              />
             </button>
+            {hasSelection &&
+              <button
+                className="absolute btn line-height-1 border-none p-tiny fs-10 blue-gray"
+                style={{ top: 8, right: 42 }}
+                onClick={this.clearInput}
+              >
+                ✕
+              </button>}
           </div>
           {!hasSelection &&
             showResults &&
@@ -137,6 +140,8 @@ AgencySearch.propTypes = {
   agency: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   initialShowResults: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+  usState: PropTypes.string.isRequired,
 }
 
 AgencySearch.defaultProps = {
