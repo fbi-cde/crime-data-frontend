@@ -68,11 +68,11 @@ const About = ({ dispatch }) =>
         <div className="mb7 clearfix">
           <div className="md-col md-col-9 md-pr7 fs-18 sm-fs-24 serif">
             <p className="mb2 md-m0">
-              The Crime Data Explorer publishes nation-wide crime data collected
-              by the FBI in a digital format. The tool allows you to view
-              trends and download bulk data allowing you to get a better
-              understanding of reported crime across the country. Data will be
-              updated periodically.
+              The Crime Data Explorer makes nationwide crime data accessible for
+              a wide range of users, including law enforcement professionals,
+              journalists, and the general public. The tool allows you to view
+              trends and download bulk data, to better understand reported crime
+              at the national, state, and agency level.
             </p>
           </div>
           <div className="md-col md-col-3">
@@ -97,53 +97,6 @@ const About = ({ dispatch }) =>
                 <Term id="Hate Crime">
                   Hate Crime
                 </Term>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
-          Crime data
-        </h2>
-        <div className="clearfix">
-          <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-18 serif">
-            <p className="mb3">
-              The data available from the FBI’s Uniform Crime Reporting program
-              (UCR) is made up of reports from police agencies across the
-              country. Law enforcement agencies voluntarily submit data to the
-              FBI in one of two formats: summary statistics (SRS) or
-              incident-based reports (NIBRS). The Crime Data Explorer makes both
-              types of data available through the API and the bulk downloads.
-              SRS data is available for the years 1960 to 2014. Incident-based
-              data began being collected much more recently and is available
-              here from 1991-2014.
-            </p>
-            <div className="bold">Summary (SRS) data</div>
-            <p className="mb3">
-              Summary data is made up of counts of each type of crime reported.
-            </p>
-            <div className="bold">Incident-based (NIBRS) data</div>
-            <p className="mb3 md-m0">
-              Incident-based (NIBRS) data captures details of each reported
-              crime
-              incident, providing context that is not provided by the summary
-              data.
-            </p>
-          </div>
-          <div className="md-col md-col-3">
-            <h3 className="mt-tiny mb2 fs-18 sm-fs-22">
-              UCR Program Resources
-            </h3>
-            <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
-              <li className="mb1">
-                <a href="https://ucr.fbi.gov/">UCR Home</a>
-              </li>
-              <li className="mb1">
-                <a href="https://ucr.fbi.gov/new-ucr-project">New UCR</a>
-              </li>
-              <li className="mb1">
-                <a href="https://ucr.fbi.gov/nibrs/nibrs-user-manual">
-                  NIBRS user manual
-                </a>
               </li>
             </ul>
           </div>
@@ -183,24 +136,87 @@ const About = ({ dispatch }) =>
         </div>
       </div>
     </section>
+    <section className="bg-white">
+      <div className="px2 py7 container mx-auto">
+        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
+          Crime data
+        </h2>
+        <div className="clearfix">
+          <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-18 serif">
+            <p className="mb3">
+              The FBI’s Uniform Crime Reporting (UCR) Program is made up of two
+              types of reports voluntarily submitted by law enforcement agencies
+              across the country. Agencies participate in the UCR Program by
+              submitting data to the FBI in one of two formats: summary
+              statistics (SRS) or incident-based reports (NIBRS). The Crime Data
+              Explorer makes both types of data available through the API and
+              bulk downloads.
+            </p>
+            <div className="bold">
+              Summary (SRS) data
+              <span className="italic ml-tiny regular">
+                1960-2014 data available
+              </span>
+            </div>
+            <p className="mb3">
+              This data is made up of the number of offenses that occurred. It
+              captures only the most serious offense involved in crime incidents
+              according to the hierarchy rule plus a few supplemental details
+              depending on the offense. For example, victim and offender data
+              are collected only for murder offenses. Summary data allows us to
+              show crime rates as trends and as totals.
+            </p>
+            <div className="bold">
+              Incident-based (NIBRS) data
+              <span className="italic ml-tiny regular">
+                1991-2014 data available
+              </span>
+            </div>
+            <p className="mb3 md-m0">
+              Incident-based (NIBRS) data records all major offenses that were
+              part of an incident and captures details about each incident such
+              as information about the the victim, the offender, the property
+              involved, and the arrestees, providing context that is not
+              provided by the summary data. Incident-based data allow us to
+              visualize how crime breaks down regarding victims, offenders, and
+              other attributes related to a reported crime.{' '}
+            </p>
+          </div>
+          <div className="md-col md-col-3">
+            <h3 className="mt-tiny mb2 fs-18 sm-fs-22">
+              UCR Program Resources
+            </h3>
+            <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
+              <li className="mb1">
+                <a href="https://ucr.fbi.gov/">UCR Home</a>
+              </li>
+              <li className="mb1">
+                <a href="https://ucr.fbi.gov/new-ucr-project">New UCR</a>
+              </li>
+              <li className="mb1">
+                <a href="https://ucr.fbi.gov/nibrs/nibrs-user-manual">
+                  NIBRS user manual
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
     <section className="bg-blue white">
       <div className="px2 py7 container mx-auto">
         <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright">
           More to come
         </h2>
-        <div className="mb3 md-col-9 md-pr7 border-box serif">
+        <div className="mb3 md-pr7 border-box serif">
           <p className="mb3 fs-18 sm-fs-24">
-            This project is part of an ongoing effort to improve and promote
-            transparency behind the nation’s crime statistics. We’re working
-            to add more datasets to this tool, and we’ll continue to
-            develop new features based on your feedback.
-          </p>
-          <p className="fs-16 sm-fs-18">
-            Future versions will include more granular perspectives of the data
-            and more customizable features.
-          </p>
-          <p className="fs-16 sm-fs-18">
-            We’d love to hear what you think about the Crime Data Explorer.
+            This project is part of an ongoing effort to improve and provide
+            access to the nation’s crime statistics. We’re working to add new
+            features and an data based on your feedback.{' '}
+            <a>
+              Tell us what you’d like
+              to see next
+            </a>.
           </p>
         </div>
         <button
