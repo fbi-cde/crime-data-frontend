@@ -56,8 +56,6 @@ const reduceStateColors = (accum, next) => ({
   [next.state]: next.color,
 })
 
-console.log('stateColors', stateColors)
-
 const About = ({ dispatch }) =>
   <div>
     <section className="bg-white">
@@ -234,11 +232,8 @@ const About = ({ dispatch }) =>
           <p className="mb3 fs-18 sm-fs-24">
             This project is part of an ongoing effort to improve and provide
             access to the nation’s crime statistics. We’re working to add new
-            features and an data based on your feedback.{' '}
-            <a>
-              Tell us what you’d like
-              to see next
-            </a>.
+            features and an data based on your feedback. Tell us what you’d like
+            to see next.
           </p>
         </div>
         <button
@@ -265,40 +260,32 @@ const About = ({ dispatch }) =>
             </p>
           </div>
           <div className="md-col md-col-4 px6 mb4 md-mb0">
-            <h3 className="mt0 mb2 fs-22 sans-serif red">Technical issues?</h3>
+            <h3 className="mt0 mb2 fs-22 sans-serif red">
+              UCR Data Submissions
+            </h3>
             <p className="m0">
-              Please submit technical questions about the application and the
-              API via
-              {' '}
-              <a
-                className="bold"
-                href="https://github.com/18F/crime-data-explorer"
-              >
-                GitHub
+              All UCR data submissions must be sent to this e-mail address.
+            </p>
+            <p>
+              E-mail:{' '}
+              <a className="underline" href="mailto:ucrstat@leo.gov">
+                ucrstat@leo.gov
               </a>
-              .
             </p>
           </div>
           <div className="md-col md-col-4 px6 md-pl8 mb4 md-mb0">
-            <h3 className="mt0 mb2 fs-22 sans-serif red">Follow us</h3>
-            <div className="mb2">
-              <img
-                className="mr1 align-middle"
-                width="20"
-                src="/img/twitter.svg"
-                alt="twitter"
-              />
-              <a href="https://twitter.com/fbi">@FBI</a>
-            </div>
-            <div>
-              <img
-                className="mr1 align-middle"
-                width="20"
-                src="/img/github.svg"
-                alt="github"
-              />
-              <a href="https://github.com/18F/crime-data-explorer">GitHub</a>
-            </div>
+            <h3 className="mt0 mb2 fs-22 sans-serif red">
+              UCR Program Contacts
+            </h3>
+            <p className="m0">
+              View additional{' '}
+              <a
+                className="underline"
+                href="https://ucr.fbi.gov/ucr-program-contacts"
+              >
+                contacts
+              </a>.
+            </p>
           </div>
         </div>
       </div>
