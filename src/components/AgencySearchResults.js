@@ -6,8 +6,11 @@ const prevent = e => e.preventDefault()
 /* eslint-disable camelcase */
 const AgencySearchResultItem = ({ agency, onClick }) => {
   const { agency_name: name, months_reported, nibrs_months_reported } = agency
-  const isActive = months_reported !== 0 || nibrs_months_reported !== 0
+  const isActive =
+    (months_reported && months_reported !== 0) ||
+    (nibrs_months_reported && nibrs_months_reported !== 0)
   const color = isActive ? 'black' : 'blue-light cursor-default'
+
   return (
     <li>
       <a
