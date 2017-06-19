@@ -7,63 +7,56 @@ import UsaMap from './UsaMap'
 import DownloadDataBtn from './DownloadDataBtn'
 import { showFeedback } from '../actions/feedback'
 import ucr from '../util/ucr'
-import usa, { data as usaData } from '../util/usa'
-
-const colorFromUcr = info => {
-  if (!info['state-program']) return 'fill-red-bright'
-  else if (info.srs && !info.nibrs) return 'fill-blue-lighter'
-  else if (!info.srs && info.nibrs) return 'fill-blue'
-  else if (info.srs && info.nibrs) return 'fill-blue-light'
-  return 'fill-red-bright'
-}
-
-const stateColors = Object.keys(usaData)
-  .map(k => {
-    const stateName = usa(k)
-    const ucrInfo = ucr(stateName)
-    return {
-      state: k,
-      color: colorFromUcr(ucrInfo),
-    }
-  })
-  .reduce(
-    (accum, next) => ({
-      ...accum,
-      [next.state]: next.color,
-    }),
-    {},
-  )
-
-const colorCounts = Object.keys(stateColors)
-  .map(c => stateColors[c])
-  .reduce((accum, next) => {
-    const count = accum[next]
-    if (count >= 0) return { ...accum, [next]: count + 1 }
-    return { ...accum, [next]: 0 }
-  }, {})
+import { slugify } from '../util/text'
+import usa, { data as usaData, nationalKey } from '../util/usa'
 
 const legend = [
   {
-    count: colorCounts['fill-blue'],
-    color: '#324D5F',
+    check: (stateProgram, nibrs, srs) => stateProgram && !srs && nibrs,
+    css: 'fill-blue',
+    hex: '#324D5F',
     text: 'Incident data only',
   },
   {
-    count: colorCounts['fill-blue-light'],
-    color: '#95AABC',
+    check: (stateProgram, nibrs, srs) => stateProgram && srs && nibrs,
+    css: 'fill-blue-light',
+    hex: '#95AABC',
     text: 'Incident and Summary data',
   },
   {
-    count: colorCounts['fill-blue-lighter'],
-    color: '#DFE6ED',
+    check: (stateProgram, nibrs, srs) => stateProgram && srs && !nibrs,
+    css: 'fill-blue-lighter',
+    hex: '#DFE6ED',
     text: 'Summary data only',
   },
   {
-    count: colorCounts['fill-red-bright'],
-    color: '#ff5e50',
+    check: stateProgram => !stateProgram,
+    css: 'fill-red-bright',
+    hex: '#ff5e50',
     text: 'No state program',
   },
 ]
+
+const stateColors = Object.keys(usaData)
+  .filter(k => slugify(usa(k)) !== nationalKey)
+  .map(k => {
+    const stateName = usa(k)
+    const ucrInfo = ucr(stateName)
+    const { 'state-program': stateProgram, nibrs, srs } = ucrInfo
+    const matches = legend.filter(l => l.check(stateProgram, nibrs, srs))
+
+    return {
+      state: k,
+      color: matches[0].css,
+    }
+  })
+
+const reduceStateColors = (accum, next) => ({
+  ...accum,
+  [next.state]: next.color,
+})
+
+console.log('stateColors', stateColors)
 
 const About = ({ dispatch }) =>
   <div>
@@ -118,28 +111,36 @@ const About = ({ dispatch }) =>
           </h3>
           <div className="mb4 clearfix table">
             <div className="md-col md-col-9 md-pr7">
-              <UsaMap colors={stateColors} changeColorOnHover={false} />
+              <UsaMap
+                colors={stateColors.reduce(reduceStateColors, {})}
+                changeColorOnHover={false}
+              />
             </div>
             <div className="md-col md-col-3 pt1 relative table-cell">
               <div className="">
-                {legend.map((d, i) =>
-                  <div key={i} className="flex mt2 fs-14">
-                    <div
-                      className="flex-none mt-tiny mr1 circle"
-                      style={{
-                        width: 16,
-                        height: 16,
-                        backgroundColor: d.color,
-                      }}
-                    />
-                    <div className="flex-auto">
-                      <div className="bold monospace">
-                        {`${d.count} State${d.count !== 1 ? 's' : ''}`}
+                {legend
+                  .map(d => ({
+                    ...d,
+                    count: stateColors.filter(s => s.color === d.css).length,
+                  }))
+                  .map((d, i) =>
+                    <div key={i} className="flex mt2 fs-14">
+                      <div
+                        className="flex-none mt-tiny mr1 circle"
+                        style={{
+                          width: 16,
+                          height: 16,
+                          backgroundColor: d.hex,
+                        }}
+                      />
+                      <div className="flex-auto">
+                        <div className="bold monospace">
+                          {`${d.count} State${d.count !== 1 ? 's' : ''}`}
+                        </div>
+                        <div>{d.text}</div>
                       </div>
-                      <div>{d.text}</div>
-                    </div>
-                  </div>,
-                )}
+                    </div>,
+                  )}
               </div>
               <div className="border-top bottom-0 fs-14 pt1 mt2">
                 To see which agencies submit NIBRS data to the FBI, download
