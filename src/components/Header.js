@@ -63,20 +63,20 @@ class Header extends React.Component {
               </li>
               <li className="mb1 md-m0">
                 <Link
-                  to="/about"
-                  className="mx1 lg-mx2 fs-14 md-fs-18 white"
-                  activeStyle={active}
-                >
-                  About
-                </Link>
-              </li>
-              <li className="mb1 md-m0">
-                <Link
                   to="/downloads-and-docs"
                   className="mx1 lg-mx2 fs-14 md-fs-18 white"
                   activeStyle={active}
                 >
                   Downloads & Documentation
+                </Link>
+              </li>
+              <li className="mb1 md-m0">
+                <Link
+                  to="/about"
+                  className="mx1 lg-mx2 fs-14 md-fs-18 white"
+                  activeStyle={active}
+                >
+                  About
                 </Link>
               </li>
             </ul>
