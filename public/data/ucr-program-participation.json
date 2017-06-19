@@ -1,288 +1,340 @@
 {
   "united-states": {
     "srs": true,
-    "nibrs": true
+    "nibrs": true,
+    "state-program": false
   },
   "alabama": {
     "srs": true,
     "nibrs": {
       "initial-year": 1991
-    }
+    },
+    "state-program": true
   },
   "alaska": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   },
   "arizona": {
     "srs": true,
     "nibrs": {
       "initial-year": 2004
-    }
+    },
+    "state-program": true
   },
   "arkansas": {
     "srs": false,
     "nibrs": {
       "initial-year": 1999
-    }
+    },
+    "state-program": true
   },
   "california": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   },
   "colorado": {
     "srs": false,
     "nibrs": {
       "initial-year": 1992
-    }
+    },
+    "state-program": true
   },
   "connecticut": {
     "srs": true,
     "nibrs": {
       "initial-year": 1998
-    }
+    },
+    "state-program": true
   },
   "delaware": {
     "srs": false,
     "nibrs": {
       "initial-year": 2001
-    }
+    },
+    "state-program": true
   },
   "district-of-columbia": {
     "srs": false,
     "nibrs": {
       "initial-year": 2000
-    }
+    },
+    "state-program": true
   },
   "florida": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   },
   "georgia": {
     "srs": true,
     "nibrs": {
       "initial-year": 1991
-    }
+    },
+    "state-program": true
   },
   "hawaii": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   },
   "idaho": {
     "srs": false,
     "nibrs": {
       "initial-year": 1992
-    }
+    },
+    "state-program": true
   },
   "illinois": {
     "srs": true,
     "nibrs": {
       "initial-year": 1993
-    }
+    },
+    "state-program": true
   },
   "indiana": {
     "srs": true,
     "nibrs": {
       "initial-year": 2013
-    }
+    },
+    "state-program": true
   },
   "iowa": {
     "srs": false,
     "nibrs": {
       "initial-year": 1991
-    }
+    },
+    "state-program": true
   },
   "kansas": {
     "srs": true,
     "nibrs": {
       "initial-year": 2000
-    }
+    },
+    "state-program": true
   },
   "kentucky": {
     "srs": false,
     "nibrs": {
       "initial-year": 1998
-    }
+    },
+    "state-program": true
   },
   "louisiana": {
     "srs": true,
     "nibrs": {
       "initial-year": 2003
-    }
+    },
+    "state-program": true
   },
   "maine": {
     "srs": true,
     "nibrs": {
       "initial-year": 2003
-    }
+    },
+    "state-program": true
   },
   "maryland": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   },
   "massachusetts": {
     "srs": true,
     "nibrs": {
       "initial-year": 1994
-    }
+    },
+    "state-program": true
   },
   "michigan": {
     "srs": true,
     "nibrs": {
       "initial-year": 1995
-    }
+    },
+    "state-program": true
   },
   "minnesota": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   },
   "mississippi": {
     "srs": true,
     "nibrs": {
       "initial-year": 2009
-    }
+    },
+    "state-program": false
   },
   "missouri": {
     "srs": true,
     "nibrs": {
       "initial-year": 2006
-    }
+    },
+    "state-program": true
   },
   "montana": {
     "srs": false,
     "nibrs": {
       "initial-year": 2005
-    }
+    },
+    "state-program": true
   },
   "nebraska": {
     "srs": false,
     "nibrs": {
       "initial-year": 1998
-    }
+    },
+    "state-program": true
   },
   "nevada": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   },
   "new-hampshire": {
     "srs": false,
     "nibrs": {
       "initial-year": 2002
-    }
+    },
+    "state-program": true
   },
   "new-jersey": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   },
   "new-mexico": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   },
   "new-york": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   },
   "north-carolina": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   },
   "north-dakota": {
     "srs": false,
     "nibrs": {
       "initial-year": 1991
-    }
+    },
+    "state-program": true
   },
   "ohio": {
     "srs": true,
     "nibrs": {
       "initial-year": 1998
-    }
+    },
+    "state-program": true
   },
   "oklahoma": {
     "srs": true,
     "nibrs": {
       "initial-year": 2008
-    }
+    },
+    "state-program": true
   },
   "oregon": {
     "srs": true,
     "nibrs": {
       "initial-year": 2003
-    }
+    },
+    "state-program": true
   },
   "pennsylvania": {
     "srs": true,
     "nibrs": {
       "initial-year": 2012
-    }
+    },
+    "state-program": true
   },
   "rhode-island": {
     "srs": true,
     "nibrs": {
       "initial-year": 2004
-    }
+    },
+    "state-program": true
   },
   "south-carolina": {
     "srs": false,
     "nibrs": {
       "initial-year": 1991
-    }
+    },
+    "state-program": true
   },
   "south-dakota": {
     "srs": false,
     "nibrs": {
       "initial-year": 2000
-    }
+    },
+    "state-program": true
   },
   "tennessee": {
     "srs": false,
     "nibrs": {
       "initial-year": 1997
-    }
+    },
+    "state-program": true
   },
   "texas": {
     "srs": true,
     "nibrs": {
       "initial-year": 1997
-    }
+    },
+    "state-program": true
   },
   "utah": {
     "srs": true,
     "nibrs": {
       "initial-year": 1993
-    }
+    },
+    "state-program": true
   },
   "vermont": {
     "srs": false,
     "nibrs": {
       "initial-year": 1993
-    }
+    },
+    "state-program": true
   },
   "virginia": {
     "srs": false,
     "nibrs": {
       "initial-year": 1994
-    }
+    },
+    "state-program": true
   },
   "washington": {
     "srs": true,
     "nibrs": {
       "initial-year": 2005
-    }
+    },
+    "state-program": true
   },
   "west-virginia": {
     "srs": false,
     "nibrs": {
       "initial-year": 1998
-    }
+    },
+    "state-program": true
   },
   "wisconsin": {
     "srs": true,
     "nibrs": {
       "initial-year": 2004
-    }
+    },
+    "state-program": true
   },
   "wyoming": {
     "srs": true,
-    "nibrs": false
+    "nibrs": false,
+    "state-program": true
   }
 }

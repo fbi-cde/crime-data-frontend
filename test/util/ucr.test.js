@@ -12,7 +12,7 @@ describe('ucr utility', () => {
     const place = 'california'
     const actual = dataSourcesReportedByState(place)
 
-    expect(Object.keys(actual).length).toEqual(2)
+    expect(Object.keys(actual).length).toEqual(3)
   })
 
   it("should return {} for a value that doesn't exist", () => {

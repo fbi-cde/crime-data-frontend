@@ -4,59 +4,57 @@ import React from 'react'
 import Term from './Term'
 import UsaMap from './UsaMap'
 
+import DownloadDataBtn from './DownloadDataBtn'
 import { showFeedback } from '../actions/feedback'
 import ucr from '../util/ucr'
-import usa, { data as usaData } from '../util/usa'
-
-const colorFromUcr = info => {
-  if (info.srs && !info.nibrs) return 'fill-blue-lighter'
-  else if (!info.srs && info.nibrs) return 'fill-blue'
-  else if (info.srs && info.nibrs) return 'fill-blue-light'
-  return 'fill-red-bright'
-}
-
-const stateColors = Object.keys(usaData)
-  .map(k => {
-    const stateName = usa(k)
-    const ucrInfo = ucr(stateName)
-    return {
-      state: k,
-      color: colorFromUcr(ucrInfo),
-    }
-  })
-  .reduce(
-    (accum, next) => ({
-      ...accum,
-      [next.state]: next.color,
-    }),
-    {},
-  )
-
-const colorCounts = Object.keys(stateColors)
-  .map(c => stateColors[c])
-  .reduce((accum, next) => {
-    const count = accum[next]
-    if (count >= 0) return { ...accum, [next]: count + 1 }
-    return { ...accum, [next]: 0 }
-  }, {})
+import { slugify } from '../util/text'
+import usa, { data as usaData, nationalKey } from '../util/usa'
 
 const legend = [
   {
-    count: colorCounts['fill-blue'],
-    color: '#324D5F',
+    check: (stateProgram, nibrs, srs) => stateProgram && !srs && nibrs,
+    css: 'fill-blue',
+    hex: '#324D5F',
     text: 'Incident data only',
   },
   {
-    count: colorCounts['fill-blue-light'],
-    color: '#95AABC',
+    check: (stateProgram, nibrs, srs) => stateProgram && srs && nibrs,
+    css: 'fill-blue-light',
+    hex: '#95AABC',
     text: 'Incident and Summary data',
   },
   {
-    count: colorCounts['fill-blue-lighter'],
-    color: '#DFE6ED',
+    check: (stateProgram, nibrs, srs) => stateProgram && srs && !nibrs,
+    css: 'fill-blue-lighter',
+    hex: '#DFE6ED',
     text: 'Summary data only',
   },
+  {
+    check: stateProgram => !stateProgram,
+    css: 'fill-red-bright',
+    hex: '#ff5e50',
+    text: 'No state program',
+  },
 ]
+
+const stateColors = Object.keys(usaData)
+  .filter(k => slugify(usa(k)) !== nationalKey)
+  .map(k => {
+    const stateName = usa(k)
+    const ucrInfo = ucr(stateName)
+    const { 'state-program': stateProgram, nibrs, srs } = ucrInfo
+    const matches = legend.filter(l => l.check(stateProgram, nibrs, srs))
+
+    return {
+      state: k,
+      color: matches[0].css,
+    }
+  })
+
+const reduceStateColors = (accum, next) => ({
+  ...accum,
+  [next.state]: next.color,
+})
 
 const About = ({ dispatch }) =>
   <div>
@@ -68,11 +66,11 @@ const About = ({ dispatch }) =>
         <div className="mb7 clearfix">
           <div className="md-col md-col-9 md-pr7 fs-18 sm-fs-24 serif">
             <p className="mb2 md-m0">
-              The Crime Data Explorer publishes nation-wide crime data collected
-              by the FBI in a digital format. The tool allows you to view
-              trends and download bulk data allowing you to get a better
-              understanding of reported crime across the country. Data will be
-              updated periodically.
+              The Crime Data Explorer makes nationwide crime data accessible for
+              a wide range of users, including law enforcement professionals,
+              journalists, and the general public. The tool allows you to view
+              trends and download bulk data, to better understand reported crime
+              at the national, state, and agency level.
             </p>
           </div>
           <div className="md-col md-col-3">
@@ -101,32 +99,107 @@ const About = ({ dispatch }) =>
             </ul>
           </div>
         </div>
+      </div>
+    </section>
+    <section className="bg-blue-whiter">
+      <div className="px2 py6 bg-lighten-1">
+        <div className="container mx-auto">
+          <h3 className="mt0 mb3 fs-22 sans-serif">
+            Uniform Crime Reporting Participation, 2014
+          </h3>
+          <div className="mb4 clearfix table">
+            <div className="md-col md-col-9 md-pr7">
+              <UsaMap
+                colors={stateColors.reduce(reduceStateColors, {})}
+                changeColorOnHover={false}
+              />
+            </div>
+            <div className="md-col md-col-3 pt1 relative table-cell">
+              <div className="">
+                {legend
+                  .map(d => ({
+                    ...d,
+                    count: stateColors.filter(s => s.color === d.css).length,
+                  }))
+                  .map((d, i) =>
+                    <div key={i} className="flex mt2 fs-14">
+                      <div
+                        className="flex-none mt-tiny mr1 circle"
+                        style={{
+                          width: 16,
+                          height: 16,
+                          backgroundColor: d.hex,
+                        }}
+                      />
+                      <div className="flex-auto">
+                        <div className="bold monospace">
+                          {`${d.count} State${d.count !== 1 ? 's' : ''}`}
+                        </div>
+                        <div>{d.text}</div>
+                      </div>
+                    </div>,
+                  )}
+              </div>
+              <div className="border-top bottom-0 fs-14 pt1 mt2">
+                To see which agencies submit NIBRS data to the FBI, download
+                <DownloadDataBtn
+                  className="fs-14"
+                  data={[{ foo: 'bar' }]}
+                  text="Agency participation data"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="fs-12 serif italic">
+            U.S. territories are not included in the map
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="bg-white">
+      <div className="px2 py7 container mx-auto">
         <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
           Crime data
         </h2>
         <div className="clearfix">
           <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-18 serif">
             <p className="mb3">
-              The data available from the FBI’s Uniform Crime Reporting program
-              (UCR) is made up of reports from police agencies across the
-              country. Law enforcement agencies voluntarily submit data to the
-              FBI in one of two formats: summary statistics (SRS) or
-              incident-based reports (NIBRS). The Crime Data Explorer makes both
-              types of data available through the API and the bulk downloads.
-              SRS data is available for the years 1960 to 2014. Incident-based
-              data began being collected much more recently and is available
-              here from 1991-2014.
+              The FBI’s Uniform Crime Reporting (UCR) Program is made up of two
+              types of reports voluntarily submitted by law enforcement agencies
+              across the country. Agencies participate in the UCR Program by
+              submitting data to the FBI in one of two formats: summary
+              statistics (SRS) or incident-based reports (NIBRS). The Crime Data
+              Explorer makes both types of data available through the API and
+              bulk downloads.
             </p>
-            <div className="bold">Summary (SRS) data</div>
+            <div className="bold">
+              Summary (SRS) data
+              <span className="italic ml-tiny regular">
+                1960-2014 data available
+              </span>
+            </div>
             <p className="mb3">
-              Summary data is made up of counts of each type of crime reported.
+              This data is made up of the number of offenses that occurred. It
+              captures only the most serious offense involved in crime incidents
+              according to the hierarchy rule plus a few supplemental details
+              depending on the offense. For example, victim and offender data
+              are collected only for murder offenses. Summary data allows us to
+              show crime rates as trends and as totals.
             </p>
-            <div className="bold">Incident-based (NIBRS) data</div>
+            <div className="bold">
+              Incident-based (NIBRS) data
+              <span className="italic ml-tiny regular">
+                1991-2014 data available
+              </span>
+            </div>
             <p className="mb3 md-m0">
-              Incident-based (NIBRS) data captures details of each reported
-              crime
-              incident, providing context that is not provided by the summary
-              data.
+              Incident-based (NIBRS) data records all major offenses that were
+              part of an incident and captures details about each incident such
+              as information about the the victim, the offender, the property
+              involved, and the arrestees, providing context that is not
+              provided by the summary data. Incident-based data allow us to
+              visualize how crime breaks down regarding victims, offenders, and
+              other attributes related to a reported crime.{' '}
             </p>
           </div>
           <div className="md-col md-col-3">
@@ -150,57 +223,17 @@ const About = ({ dispatch }) =>
         </div>
       </div>
     </section>
-    <section className="bg-blue-whiter">
-      <div className="px2 py6 bg-lighten-1">
-        <div className="container mx-auto">
-          <h3 className="mt0 mb3 fs-22 sans-serif">
-            Uniform Crime Reporting Participation, 2014
-          </h3>
-          <div className="mb4 clearfix">
-            <div className="md-col md-col-9 md-pr7">
-              <UsaMap colors={stateColors} changeColorOnHover={false} />
-            </div>
-            <div className="md-col md-col-3 pt1">
-              {legend.map((d, i) =>
-                <div key={i} className="flex mt2 fs-14">
-                  <div
-                    className="flex-none mt-tiny mr1 circle"
-                    style={{ width: 16, height: 16, backgroundColor: d.color }}
-                  />
-                  <div className="flex-auto">
-                    <div className="bold monospace">
-                      {`${d.count} State${d.count !== 1 ? 's' : ''}`}
-                    </div>
-                    <div>{d.text}</div>
-                  </div>
-                </div>,
-              )}
-            </div>
-          </div>
-          <div className="fs-12 serif italic">
-            U.S. territories are not included in the map
-          </div>
-        </div>
-      </div>
-    </section>
     <section className="bg-blue white">
       <div className="px2 py7 container mx-auto">
         <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright">
           More to come
         </h2>
-        <div className="mb3 md-col-9 md-pr7 border-box serif">
+        <div className="mb3 md-pr7 border-box serif">
           <p className="mb3 fs-18 sm-fs-24">
-            This project is part of an ongoing effort to improve and promote
-            transparency behind the nation’s crime statistics. We’re working
-            to add more datasets to this tool, and we’ll continue to
-            develop new features based on your feedback.
-          </p>
-          <p className="fs-16 sm-fs-18">
-            Future versions will include more granular perspectives of the data
-            and more customizable features.
-          </p>
-          <p className="fs-16 sm-fs-18">
-            We’d love to hear what you think about the Crime Data Explorer.
+            This project is part of an ongoing effort to improve and provide
+            access to the nation’s crime statistics. We’re working to add new
+            features and an data based on your feedback. Tell us what you’d like
+            to see next.
           </p>
         </div>
         <button
@@ -227,40 +260,32 @@ const About = ({ dispatch }) =>
             </p>
           </div>
           <div className="md-col md-col-4 px6 mb4 md-mb0">
-            <h3 className="mt0 mb2 fs-22 sans-serif red">Technical issues?</h3>
+            <h3 className="mt0 mb2 fs-22 sans-serif red">
+              UCR Data Submissions
+            </h3>
             <p className="m0">
-              Please submit technical questions about the application and the
-              API via
-              {' '}
-              <a
-                className="bold"
-                href="https://github.com/18F/crime-data-explorer"
-              >
-                GitHub
+              All UCR data submissions must be sent to this e-mail address.
+            </p>
+            <p>
+              E-mail:{' '}
+              <a className="underline" href="mailto:ucrstat@leo.gov">
+                ucrstat@leo.gov
               </a>
-              .
             </p>
           </div>
           <div className="md-col md-col-4 px6 md-pl8 mb4 md-mb0">
-            <h3 className="mt0 mb2 fs-22 sans-serif red">Follow us</h3>
-            <div className="mb2">
-              <img
-                className="mr1 align-middle"
-                width="20"
-                src="/img/twitter.svg"
-                alt="twitter"
-              />
-              <a href="https://twitter.com/fbi">@FBI</a>
-            </div>
-            <div>
-              <img
-                className="mr1 align-middle"
-                width="20"
-                src="/img/github.svg"
-                alt="github"
-              />
-              <a href="https://github.com/18F/crime-data-explorer">GitHub</a>
-            </div>
+            <h3 className="mt0 mb2 fs-22 sans-serif red">
+              UCR Program Contacts
+            </h3>
+            <p className="m0">
+              View additional{' '}
+              <a
+                className="underline"
+                href="https://ucr.fbi.gov/ucr-program-contacts"
+              >
+                contacts
+              </a>.
+            </p>
           </div>
         </div>
       </div>

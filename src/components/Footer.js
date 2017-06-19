@@ -99,16 +99,16 @@ const Footer = ({ actions }) =>
         </div>
         <div className="mb3">
           <div className="bold">
-            Criminal Justice Information Services (CJIS) Division
+            Crime Statistics Management Unit
           </div>
           <a
             className="mr1 pr1 white border-white border-right"
-            href="mailto:cjis_comm@leo.gov"
+            href="mailto:crimestatsinfo@fbi.gov"
           >
-            cjis_comm@leo.gov
+            crimestatsinfo@fbi.gov
           </a>
           <a className="white" href="tel:3046254995">
-            (304) 625-4995
+            (304) 625-4830
           </a>
         </div>
         <div className="bold">FBI Uniform Crime Reporting Program</div>
