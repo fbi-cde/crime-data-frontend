@@ -85,7 +85,9 @@ class NibrsTableWithBars extends React.Component {
                 <td className="pr-tiny bold monospace right-align">
                   {showCounts ? d.countFmt : d.percentFmt}
                 </td>
-                <td className="px1" title={d.key}>{d.key}</td>
+                <td className="px1" title={d.key}>
+                  {d.key.replace(/\//g, ' / ')}
+                </td>
               </tr>,
             )}
           </tbody>
