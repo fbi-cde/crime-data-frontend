@@ -15,7 +15,7 @@ const triggerUrlDownload = url => {
   body.removeChild(a)
 }
 
-const DownloadDataBtn = ({ data, filename, text }) => {
+const DownloadDataBtn = ({ className, data, filename, text }) => {
   if (!data || data.length === 0) return null
 
   const clickHander = () => {
@@ -48,7 +48,7 @@ const DownloadDataBtn = ({ data, filename, text }) => {
   }
 
   return (
-    <button className="btn p0 fs-12 blue nowrap" onClick={clickHander}>
+    <button className={`btn p0 nowrap ${className}`} onClick={clickHander}>
       <img
         className="mr-tiny align-tb"
         width="15"
@@ -62,6 +62,7 @@ const DownloadDataBtn = ({ data, filename, text }) => {
 }
 
 DownloadDataBtn.propTypes = {
+  className: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       content: PropTypes.string,
@@ -74,6 +75,7 @@ DownloadDataBtn.propTypes = {
 }
 
 DownloadDataBtn.defaultProps = {
+  className: 'fs-12 blue',
   text: 'Download data',
 }
 

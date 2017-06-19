@@ -4,12 +4,14 @@ import React from 'react'
 import Term from './Term'
 import UsaMap from './UsaMap'
 
+import DownloadDataBtn from './DownloadDataBtn'
 import { showFeedback } from '../actions/feedback'
 import ucr from '../util/ucr'
 import usa, { data as usaData } from '../util/usa'
 
 const colorFromUcr = info => {
-  if (info.srs && !info.nibrs) return 'fill-blue-lighter'
+  if (!info['state-program']) return 'fill-red-bright'
+  else if (info.srs && !info.nibrs) return 'fill-blue-lighter'
   else if (!info.srs && info.nibrs) return 'fill-blue'
   else if (info.srs && info.nibrs) return 'fill-blue-light'
   return 'fill-red-bright'
@@ -55,6 +57,11 @@ const legend = [
     count: colorCounts['fill-blue-lighter'],
     color: '#DFE6ED',
     text: 'Summary data only',
+  },
+  {
+    count: colorCounts['fill-red-bright'],
+    color: '#ff5e50',
+    text: 'No state program',
   },
 ]
 
@@ -109,25 +116,39 @@ const About = ({ dispatch }) =>
           <h3 className="mt0 mb3 fs-22 sans-serif">
             Uniform Crime Reporting Participation, 2014
           </h3>
-          <div className="mb4 clearfix">
+          <div className="mb4 clearfix table">
             <div className="md-col md-col-9 md-pr7">
               <UsaMap colors={stateColors} changeColorOnHover={false} />
             </div>
-            <div className="md-col md-col-3 pt1">
-              {legend.map((d, i) =>
-                <div key={i} className="flex mt2 fs-14">
-                  <div
-                    className="flex-none mt-tiny mr1 circle"
-                    style={{ width: 16, height: 16, backgroundColor: d.color }}
-                  />
-                  <div className="flex-auto">
-                    <div className="bold monospace">
-                      {`${d.count} State${d.count !== 1 ? 's' : ''}`}
+            <div className="md-col md-col-3 pt1 relative table-cell">
+              <div className="">
+                {legend.map((d, i) =>
+                  <div key={i} className="flex mt2 fs-14">
+                    <div
+                      className="flex-none mt-tiny mr1 circle"
+                      style={{
+                        width: 16,
+                        height: 16,
+                        backgroundColor: d.color,
+                      }}
+                    />
+                    <div className="flex-auto">
+                      <div className="bold monospace">
+                        {`${d.count} State${d.count !== 1 ? 's' : ''}`}
+                      </div>
+                      <div>{d.text}</div>
                     </div>
-                    <div>{d.text}</div>
-                  </div>
-                </div>,
-              )}
+                  </div>,
+                )}
+              </div>
+              <div className="border-top bottom-0 fs-14 pt1 mt2">
+                To see which agencies submit NIBRS data to the FBI, download
+                <DownloadDataBtn
+                  className="fs-14"
+                  data={[{ foo: 'bar' }]}
+                  text="Agency participation data"
+                />
+              </div>
             </div>
           </div>
           <div className="fs-12 serif italic">
