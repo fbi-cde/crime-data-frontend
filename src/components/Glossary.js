@@ -75,7 +75,7 @@ class Glossary extends React.Component {
             className="field col-12 fs-14 js-glossary-search"
             id="glossary-search"
             type="search"
-            placeholder="e.g. Committee"
+            placeholder="e.g. Crime rate"
           />
           {error &&
             <p className="my1 p1 fs-14 bold bg-red-bright white">{error}</p>}
