@@ -15,6 +15,7 @@ const AgencyChartDetails = ({
   crime,
   data,
   keys,
+  noun,
   since,
   until,
   updateYear,
@@ -32,8 +33,7 @@ const AgencyChartDetails = ({
           {pluralize('were', isSingular ? 1 : 2)}{' '}
           <strong>{fmt(reported)}</strong> reported and{' '}
           <strong>{fmt(cleared)}</strong> cleared{' '}
-          {pluralize('incidents', isSingular ? 1 : 2)}{' '}
-          of {lowerCase(crime)}.
+          {pluralize(noun, isSingular ? 1 : 2)} of ${lowerCase(crime)}.
         </p>
       </div>
       <div className="flex-none" style={{ width: 210 }}>
@@ -53,7 +53,7 @@ const AgencyChartDetails = ({
                   {yearRange.map((y, i) => <option key={i}>{y}</option>)}
                 </select>
               </td>
-              <th className="right-align">Incidents</th>
+              <th className="right-align">{startCase(noun)}</th>
             </tr>
           </thead>
           <tbody className="fs-14 bold">
@@ -85,6 +85,7 @@ AgencyChartDetails.propTypes = {
   crime: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   keys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  noun: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
   updateYear: PropTypes.func.isRequired,
