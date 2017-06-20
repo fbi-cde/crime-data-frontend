@@ -247,9 +247,17 @@
     onComplete: function() {
       showApiKeyForm()
       $('#api-key-btn').on('click', handleApiKeyChange)
+      addCssClasses()
       restructureEndpointHeadings()
     },
   })
+
+  function addCssClasses() {
+    $('.info_description.markdown > p').each(function(i, p) {
+      var $p = $(p)
+      $p.addClass('sans-serif')
+    })
+  }
 
   function changeApiKey(apiKey) {
     var auth = new SwaggerClient.ApiKeyAuthorization('api_key', apiKey, 'query')
