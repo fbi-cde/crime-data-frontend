@@ -2,7 +2,6 @@ import range from 'lodash.range'
 import startCase from 'lodash.startcase'
 import React from 'react'
 
-import Term from './Term'
 import lookupUsa from '../util/usa'
 import ucrProgram from '../../public/data/ucr-program-participation.json'
 
@@ -59,31 +58,12 @@ class DownloadBulkNibrs extends React.Component {
 
   render() {
     const isBtnDisabled = !(this.state.place && this.state.year)
-    const nibrsTerm = (
-      <Term id="national incident-based reporting system (nibrs)" size="lg">
-        incident-based (NIBRS)
-      </Term>
-    )
     const nibrsYears = this.getYearRange(this.state.place)
 
     return (
       <div className="mb8">
         <p className="mb4 fs-18 sm-fs-24 serif">
-          See {nibrsTerm} data by offense, location, victim and offender
-          demographics, and arrestee. For more information, please see the{' '}
-          <a
-            className="bold"
-            href="https://github.com/18F/crime-data-explorer/blob/master/README.md"
-          >
-            README
-          </a>
-          {' '}
-          and
-          {' '}
-          <a className="bold" href="/pdf/NIBRS-data-diagram.pdf">
-            NIBRS data diagram
-          </a>
-          .
+          Download NIBRS data by state and year
         </p>
         <form className="p2 sm-p4 bg-blue-white">
           <div className="clearfix mxn1">

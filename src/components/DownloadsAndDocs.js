@@ -7,6 +7,11 @@ import otherDatasets from '../../content/datasets.yml'
 import markdown from '../util/md'
 
 const border = 'border-bottom border-blue-lighter'
+const nibrsTerm = (
+  <Term id="national incident-based reporting system (nibrs)" size="lg">
+    incident-based (NIBRS)
+  </Term>
+)
 
 const DownloadsAndDocs = () =>
   <section className="bg-white">
@@ -14,10 +19,43 @@ const DownloadsAndDocs = () =>
       <h1 className={`mt4 mb5 pb1 sm-mt4 fs-28 sm-fs-40 ${border}`}>
         Downloads & Documentation
       </h1>
-      <DownloadBulkNibrs />
+      <div>
+        <div className="md-col md-col-9 md-pr7 fs-18 sm-fs-24 serif">
+          <p className="mb2 md-m0">
+            Download {nibrsTerm} data by year and location. Estimated data
+            and other crime-related datasets are also available for download.
+            Data is provided as CSV files and can be access via the Crime Data
+            Explorer API.
+          </p>
+        </div>
+        <div className="md-col md-col-3">
+          <h3 className="mt-tiny mb2 fs-18 sm-fs-22">Resources</h3>
+          <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
+            <li className="mb2">
+              <a href="https://github.com/18F/crime-data-explorer/blob/master/README.md">
+                Readme
+              </a>
+            </li>
+            <li className="mb2">
+              <a href="http://localhost:6005/pdf/NIBRS-data-diagram.pdf">
+                Data dictionary
+              </a>
+            </li>
+            <li className="mb2">
+              <a href="#">NIBRS attributes</a>
+            </li>
+          </ul>
+        </div>
+      </div>
       <div className="mb8">
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
-          Bulk downloads
+          Incident-based data by state
+        </h2>
+        <DownloadBulkNibrs />
+      </div>
+      <div className="mb8">
+        <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
+          Additional datasets
         </h2>
         <div className={`clearfix xs-hide pb1 fs-18 bold caps serif ${border}`}>
           <div className="sm-col sm-col-4 sm-pl2">Dataset</div>
