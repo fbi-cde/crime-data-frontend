@@ -31,8 +31,8 @@ const legend = [
   },
   {
     check: stateProgram => !stateProgram,
-    css: 'fill-red-bright',
-    hex: '#ff5e50',
+    css: 'fill-red-dark',
+    hex: '#702c27',
     text: 'No state program',
   },
 ]
@@ -151,7 +151,8 @@ const About = ({ dispatch }) =>
             </div>
           </div>
           <div className="fs-12 serif italic">
-            U.S. territories are not included in the map
+            Other outlying areas include America Samoa, Guam, Puerto Rico, and
+            U.S. Virgin Islands.
           </div>
         </div>
       </div>
