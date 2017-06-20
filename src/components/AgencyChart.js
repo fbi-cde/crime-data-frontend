@@ -105,7 +105,12 @@ class AgencyChart extends React.Component {
           Total {noun} reported by year
         </div>
         <div className="mb3 col-12" ref={ref => (this.svgParent = ref)}>
-          <svg width={svgWidth} height={svgHeight} style={{ maxWidth: '100%' }}>
+          <svg
+            className="bar-chart"
+            width={svgWidth}
+            height={svgHeight}
+            style={{ maxWidth: '100%' }}
+          >
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x0} height={height} />
               <YAxis scale={y} width={width} />
