@@ -61,11 +61,11 @@ class DownloadBulkNibrs extends React.Component {
     const nibrsYears = this.getYearRange(this.state.place)
 
     return (
-      <div className="mb8">
-        <p className="mb4 fs-18 sm-fs-24 serif">
-          Download NIBRS data by state and year
-        </p>
+      <div>
         <form className="p2 sm-p4 bg-blue-white">
+          <p className="fs-18 bold sans-serif">
+            Download NIBRS data by state and year
+          </p>
           <div className="clearfix mxn1">
             <div className="sm-col sm-col-5 px1 mb2 sm-m0">
               <label className="hide" htmlFor="nibrs-state">Location</label>
