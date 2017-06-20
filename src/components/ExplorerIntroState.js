@@ -9,14 +9,15 @@ import { formatNum } from '../util/formats'
 import mapCrimeToGlossaryTerm from '../util/glossary'
 import ucrParticipationLookup from '../util/ucr'
 
-const getReportTerms = ({ nibrs, srs, hybrid }) => (
+const highlight = txt => <strong>{txt}</strong>
+
+const getReportTerms = ({ nibrs, srs, hybrid }) =>
   <span>
     {hybrid && 'both '}
     {srs && srsTerm}
     {hybrid && ' and '}
     {nibrs && nibrsTerm}
   </span>
-)
 
 const ExplorerIntroState = ({ crime, place, ucr, until }) => {
   const isArson = crime === 'arson'
@@ -24,7 +25,7 @@ const ExplorerIntroState = ({ crime, place, ucr, until }) => {
   const untilUcr = ucr.find(p => p.year === until)
   const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
   const crimeTerm = (
-    <Term id={mapCrimeToGlossaryTerm(crime)} size="sm">
+    <Term id={mapCrimeToGlossaryTerm(crime)}>
       {upperFirst(lowerCase(crime))}
     </Term>
   )
@@ -43,20 +44,20 @@ const ExplorerIntroState = ({ crime, place, ucr, until }) => {
             <p className="serif">
               In
               {' '}
-              {until}
+              {highlight(until)}
               , the FBI {estimatedTerm} crime statistics for
               {' '}
               {startCase(place)}
               {' '}
               based on data received from
               {' '}
-              {formatNum(untilUcr.participating_agencies)}
+              {highlight(formatNum(untilUcr.participating_agencies))}
               {' '}
               law enforcement agencies out of
               {' '}
-              {formatNum(untilUcr.total_agencies)}
+              {highlight(formatNum(untilUcr.total_agencies))}
               {' '}
-              in the state that year.
+              agencies in the state that year.
             </p>
           </div>
         : <div>

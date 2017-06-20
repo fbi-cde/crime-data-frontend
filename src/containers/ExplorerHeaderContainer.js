@@ -31,7 +31,7 @@ const ExplorerHeaderContainer = ({
       <div className="items-baseline mt2 mb4">
         <h1 className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-lighter">
           {isAgency
-            ? isLoading ? 'Loading agency...' : agency.display
+            ? isLoading ? 'Loading agency...' : placeDisplay
             : startCase(usState)}
         </h1>
       </div>
@@ -46,11 +46,15 @@ const ExplorerHeaderContainer = ({
                 ucr={ucr}
                 until={until}
               />}
-          <UcrResourcesList place={usState} placeType={placeType} />
+          <UcrResourcesList
+            crime={crime}
+            place={usState}
+            placeType={placeType}
+          />
         </div>
         <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">
           <PlaceThumbnail selected={startCase(usState)} />
-          <div className="mt-tiny fs-14 right">
+          <div className="mt-tiny fs-12 serif italic truncate right">
             {isAgency && !isLoading
               ? `${placeDisplay}, ${startCase(usState)}`
               : startCase(usState)}

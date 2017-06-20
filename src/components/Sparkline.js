@@ -35,7 +35,7 @@ class Sparkline extends React.Component {
     const { svgParentWidth } = this.state
     const { margin } = size
     const width = svgParentWidth || size.width
-    const height = width / 3
+    const height = width / 3.5
 
     const clean = data.map(d => Object.assign({ date: parse(d.year), ...d }))
     const last = clean[clean.length - 1]

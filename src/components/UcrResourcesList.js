@@ -1,3 +1,4 @@
+import lowerCase from 'lodash.lowercase'
 import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -31,10 +32,10 @@ const locationLinks = place => {
   return links.filter(l => l.text)
 }
 
-const UcrResourcesList = ({ place, placeType }) => {
+const UcrResourcesList = ({ crime, place, placeType }) => {
   const links = [
     {
-      text: 'About the Data',
+      text: `About ${lowerCase(crime)} data`,
       url: '#about-the-data',
     },
     ...participationCsvLink(place, placeType),
@@ -56,6 +57,7 @@ const UcrResourcesList = ({ place, placeType }) => {
 }
 
 UcrResourcesList.propTypes = {
+  crime: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
 }
