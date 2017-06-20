@@ -56,6 +56,9 @@ const reduceStateColors = (accum, next) => ({
   [next.state]: next.color,
 })
 
+const agenciesParticiaptionDownloadUrl =
+  'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/agencies.csv'
+
 const About = ({ dispatch }) =>
   <div>
     <section className="bg-white">
@@ -144,7 +147,7 @@ const About = ({ dispatch }) =>
                 To see which agencies submit NIBRS data to the FBI, download
                 <DownloadDataBtn
                   className="fs-14"
-                  data={[{ foo: 'bar' }]}
+                  data={[{ url: agenciesParticiaptionDownloadUrl }]}
                   text="Agency participation data"
                 />
               </div>
