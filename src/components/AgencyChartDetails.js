@@ -1,5 +1,6 @@
 import { format } from 'd3-format'
 import lowerCase from 'lodash.lowercase'
+import startCase from 'lodash.startcase'
 import range from 'lodash.range'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
@@ -63,7 +64,7 @@ const AgencyChartDetails = ({
                     className="mr1 inline-block"
                     style={{ width: 8, height: 8, backgroundColor: colors(k) }}
                   />
-                  <Term id={k} size="sm">{k}</Term>
+                  <Term id={k} size="sm">{startCase(k)}</Term>
                 </td>
                 <td className="pt1 line-height-4 align-bottom right-align">
                   <span className="inline-block border-bottom border-blue-light col-12">
