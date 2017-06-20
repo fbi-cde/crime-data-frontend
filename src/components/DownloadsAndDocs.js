@@ -50,7 +50,7 @@ const DownloadsAndDocs = () =>
           </ul>
         </div>
       </div>
-      <div className="mb4">
+      <div className="mb8">
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
           Incident-based data by state
         </h2>
