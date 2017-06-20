@@ -86,7 +86,7 @@ class NibrsTableWithBars extends React.Component {
                   {showCounts ? d.countFmt : d.percentFmt}
                 </td>
                 <td className="px1" title={d.key}>
-                  {d.key.replace(/\//g, ' / ')}
+                  {d.key.replace && d.key.replace(/\//g, ' / ')}
                 </td>
               </tr>,
             )}
