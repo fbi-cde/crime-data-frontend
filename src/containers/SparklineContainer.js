@@ -66,7 +66,7 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
                   data
                 </a>
               </div>
-              <div className="sm-pl2 flex-auto center">
+              <div className="pl1 sm-pl2 flex-auto center">
                 {loading
                   ? <Loading slim />
                   : <Sparkline
