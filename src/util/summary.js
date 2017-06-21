@@ -17,10 +17,21 @@ const mungeSummaryData = ({ crime, summaries, place, since, until }) => {
         const source = key !== place
           ? summaries[key].find(d => d.year === data.date)
           : year
+        const normalizedCrime = crime === 'rape' ? 'rape_legacy' : crime
+
         data[key] = {
           pop: source.population,
-          count: source[crime],
-          rate: source[crime] / source.population * 100000,
+          [normalizedCrime]: {
+            count: source[normalizedCrime],
+            rate: source[normalizedCrime] / source.population * 100000,
+          },
+        }
+
+        if (crime === 'rape') {
+          data[key].rape_revised = {
+            count: source.rape_revised,
+            rate: source.rape_revised / source.population * 100000,
+          }
         }
       })
       return data

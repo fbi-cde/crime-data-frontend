@@ -1,4 +1,3 @@
-import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
@@ -42,7 +41,7 @@ const TrendContainer = ({
   else if (error) chart = <ErrorCard error={error} />
   else {
     const data = mungeSummaryData({
-      crime: snakeCase(crime === 'rape' ? 'rape_legacy' : crime),
+      crime,
       summaries: summaries.data,
       place,
       since,

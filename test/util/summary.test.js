@@ -66,8 +66,28 @@ describe('summary data munging utility', () => {
     expect(mungeSummaryData({ crime, summaries, place })).toEqual([
       {
         date: 2014,
-        california: { count: 10, pop: 100, rate: 10000 },
-        'united-states': { count: 10, pop: 100, rate: 10000 },
+        california: { [crime]: { count: 10, rate: 10000 }, pop: 100 },
+        'united-states': { [crime]: { count: 10, rate: 10000 }, pop: 100 },
+      },
+    ])
+  })
+
+  it('should return data for both rape definitions', () => {
+    const crime = 'rape'
+    const summaries = {
+      'united-states': [
+        { year: 2014, rape_legacy: 10, rape_revised: 10, population: 100 },
+      ],
+    }
+    const place = 'united-states'
+    expect(mungeSummaryData({ crime, summaries, place })).toEqual([
+      {
+        date: 2014,
+        'united-states': {
+          rape_legacy: { count: 10, rate: 10000 },
+          rape_revised: { count: 10, rate: 10000 },
+          pop: 100,
+        },
       },
     ])
   })
