@@ -1,5 +1,6 @@
 /* eslint jsx-a11y/no-static-element-interactions: 0 */
 import React from 'react'
+import Helmet from 'react-helmet'
 import { Link } from 'react-router'
 
 import LocationSelect from './LocationSelect'
@@ -40,6 +41,7 @@ const Home = ({ appState, dispatch, router }) => {
 
   return (
     <div>
+      <Helmet title="CDE :: Home" />
       <section className="px2 bg-blue-white">
         <div className="py7 container mx-auto relative">
           <h1 className="mt0 pb1 fs-28 sm-fs-40 border-bottom border-red-bright">

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import Helmet from 'react-helmet'
 
 import AboutTheData from './AboutTheData'
 import AgencyChartContainer from '../containers/AgencyChartContainer'
@@ -80,6 +81,7 @@ class Explorer extends React.Component {
 
     return (
       <div className="site-wrapper">
+        <Helmet title="CDE :: Explorer" />
         <div className="sticky top-0">
           <div className="inline-block p1 bg-red-bright rounded-br md-hide lg-hide">
             <button

@@ -1,7 +1,7 @@
 import sharingMetaTags from './util/sharing'
 import analytics from './util/analytics'
 
-export default (content, state) =>
+export default (content, head, state) =>
   `
   <!DOCTYPE html>
   <html lang='en'>
@@ -10,7 +10,7 @@ export default (content, state) =>
       <meta name='viewport' content='width=device-width, initial-scale=1'>
       <link rel='icon' type='image/png' sizes='32x32' href='/img/favicon.png'>
       ${sharingMetaTags(state)}
-      <title>Crime Data Explorer</title>
+      ${head.title.toString()}
       <link href='/app.css' rel='stylesheet'>
     </head>
     <body>

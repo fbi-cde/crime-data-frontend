@@ -9,6 +9,7 @@ import express from 'express'
 import gzipStatic from 'connect-gzip-static'
 import path from 'path'
 import React from 'react'
+import Helmet from 'react-helmet'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
@@ -117,8 +118,9 @@ app.get('/*', (req, res) => {
           <RouterContext {...props} />
         </Provider>,
       )
+      const head = Helmet.rewind()
 
-      res.send(renderHtml(html, store.getState()))
+      res.send(renderHtml(html, head, store.getState()))
     }
   })
 })
