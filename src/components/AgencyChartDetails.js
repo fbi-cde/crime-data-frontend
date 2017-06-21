@@ -33,7 +33,7 @@ const AgencyChartDetails = ({
           {pluralize('were', isSingular ? 1 : 2)}{' '}
           <strong>{fmt(reported)}</strong> reported and{' '}
           <strong>{fmt(cleared)}</strong> cleared{' '}
-          {pluralize(noun, isSingular ? 1 : 2)} of ${lowerCase(crime)}.
+          {pluralize(noun, isSingular ? 1 : 2)} of {lowerCase(crime)}.
         </p>
       </div>
       <div className="flex-none" style={{ width: 210 }}>

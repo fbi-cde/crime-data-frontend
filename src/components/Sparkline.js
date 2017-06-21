@@ -35,10 +35,10 @@ class Sparkline extends React.Component {
     const { svgParentWidth } = this.state
     const { margin } = size
     const width = svgParentWidth || size.width
-    const height = width / 3
+    const height = width / 3.5
 
     const clean = data.map(d => Object.assign({ date: parse(d.year), ...d }))
-    const last = clean[clean.length - 1]
+    const ends = [clean[0], clean[clean.length - 1]]
 
     const x = scaleTime()
       .domain(extent(clean, d => d.date))
@@ -57,7 +57,15 @@ class Sparkline extends React.Component {
         <svg width={width} height={height} style={{ maxWidth: '100%' }}>
           <g transform={`translate(${margin}, ${margin})`}>
             <path d={l(clean)} fill="none" stroke="#ff5e50" strokeWidth="3" />
-            <circle cx={x(last.date)} cy={y(last.rate)} fill="#ff5e50" r="4" />
+            {ends.map((d, i) =>
+              <circle
+                key={i}
+                cx={x(d.date)}
+                cy={y(d.rate)}
+                fill="#ff5e50"
+                r="4"
+              />,
+            )}
           </g>
         </svg>
       </div>

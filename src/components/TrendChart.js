@@ -121,7 +121,7 @@ class TrendChart extends React.Component {
     const y = scaleLinear().domain([0, maxValue]).range([height, 0]).nice()
 
     const l = line()
-      .curve(curveCardinal.tension(0.5))
+      .curve(curveCardinal.tension(0.25))
       .x(d => x(d.date))
       .y(d => y(d.value.rate))
 
@@ -129,7 +129,7 @@ class TrendChart extends React.Component {
       ? dataClean.find(d => d.year === yearSelected)
       : dataClean[dataClean.length - 1]
 
-    if (hover) {
+    if (!yearSelected && hover) {
       const bisectDate = bisector(d => d.date).left
       const x0 = x.invert(hover.x * width)
       const i = bisectDate(dataClean, x0, 1)
@@ -288,7 +288,6 @@ class TrendChart extends React.Component {
                 fill="none"
                 pointerEvents="all"
                 onMouseMove={this.rememberValue}
-                onMouseOut={this.forgetValue}
               />
             </g>
           </svg>
