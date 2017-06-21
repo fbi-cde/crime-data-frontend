@@ -39,7 +39,16 @@ class AgencyChart extends React.Component {
   }
 
   render() {
-    const { colors, crime, data, mutedColors, since, size, until } = this.props
+    const {
+      colors,
+      crime,
+      data,
+      mutedColors,
+      since,
+      size,
+      submitsNibrs,
+      until,
+    } = this.props
     const { hover, svgParentWidth, yearSelected } = this.state
 
     const svgWidth = svgParentWidth || size.width
@@ -54,6 +63,7 @@ class AgencyChart extends React.Component {
 
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
+    const noun = submitsNibrs ? 'incidents' : 'offenses'
 
     const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()
 
@@ -86,15 +96,21 @@ class AgencyChart extends React.Component {
           crime={crime}
           data={active}
           keys={keys}
+          noun={noun}
           since={since}
           updateYear={this.updateYear}
           until={until}
         />
         <div className="mb2 h6 bold monospace black">
-          Total incidents reported by year
+          Total {noun} reported by year
         </div>
         <div className="mb3 col-12" ref={ref => (this.svgParent = ref)}>
-          <svg width={svgWidth} height={svgHeight} style={{ maxWidth: '100%' }}>
+          <svg
+            className="bar-chart"
+            width={svgWidth}
+            height={svgHeight}
+            style={{ maxWidth: '100%' }}
+          >
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x0} height={height} />
               <YAxis scale={y} width={width} />
@@ -151,6 +167,7 @@ AgencyChart.propTypes = {
     width: PropTypes.number,
     margin: PropTypes.object,
   }).isRequired,
+  submitsNibrs: PropTypes.bool.isRequired,
   until: PropTypes.number.isRequired,
 }
 

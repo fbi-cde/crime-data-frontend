@@ -1,5 +1,6 @@
 import { format } from 'd3-format'
 import lowerCase from 'lodash.lowercase'
+import startCase from 'lodash.startcase'
 import range from 'lodash.range'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
@@ -14,6 +15,7 @@ const AgencyChartDetails = ({
   crime,
   data,
   keys,
+  noun,
   since,
   until,
   updateYear,
@@ -31,8 +33,7 @@ const AgencyChartDetails = ({
           {pluralize('were', isSingular ? 1 : 2)}{' '}
           <strong>{fmt(reported)}</strong> reported and{' '}
           <strong>{fmt(cleared)}</strong> cleared{' '}
-          {pluralize('incidents', isSingular ? 1 : 2)}{' '}
-          of {lowerCase(crime)}.
+          {pluralize(noun, isSingular ? 1 : 2)} of ${lowerCase(crime)}.
         </p>
       </div>
       <div className="flex-none" style={{ width: 210 }}>
@@ -52,7 +53,7 @@ const AgencyChartDetails = ({
                   {yearRange.map((y, i) => <option key={i}>{y}</option>)}
                 </select>
               </td>
-              <th className="right-align">Incidents</th>
+              <th className="right-align">{startCase(noun)}</th>
             </tr>
           </thead>
           <tbody className="fs-14 bold">
@@ -63,7 +64,7 @@ const AgencyChartDetails = ({
                     className="mr1 inline-block"
                     style={{ width: 8, height: 8, backgroundColor: colors(k) }}
                   />
-                  <Term id={k} size="sm">{k}</Term>
+                  <Term id={k} size="sm">{startCase(k)}</Term>
                 </td>
                 <td className="pt1 line-height-4 align-bottom right-align">
                   <span className="inline-block border-bottom border-blue-light col-12">
@@ -84,6 +85,7 @@ AgencyChartDetails.propTypes = {
   crime: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   keys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  noun: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
   updateYear: PropTypes.func.isRequired,

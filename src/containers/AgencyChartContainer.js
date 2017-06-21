@@ -12,7 +12,7 @@ import NoData from '../components/NoData'
 import { nibrsTerm, srsTerm } from '../components/Terms'
 import { getAgency } from '../util/ori'
 
-const getContent = ({ crime, place, since, summary, until }) => {
+const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
   const { error, loading } = summary
 
   if (loading) return <Loading />
@@ -30,9 +30,10 @@ const getContent = ({ crime, place, since, summary, until }) => {
     dataClean.length ===
     dataClean.filter(d => d.reported === 0 && d.cleared === 0).length
 
+  const noun = submitsNibrs ? 'incidents' : 'offenses'
   const noDataText = `There were no ${lowerCase(
     crime,
-  )} incidents reported during this time period.`
+  )} ${noun} reported during this time period.`
 
   return (
     <div>
@@ -43,6 +44,7 @@ const getContent = ({ crime, place, since, summary, until }) => {
               crime={crime}
               data={dataClean}
               since={since}
+              submitsNibrs={submitsNibrs}
               until={until}
             />
             <DownloadDataBtn
@@ -60,16 +62,16 @@ const AgencyChartContainer = params => {
   if (!agency) return null
 
   const submitsNibrs = agency.nibrs_months_reported === 12
-  const content = getContent(params)
+  const noun = submitsNibrs ? 'incidents' : 'offenses'
 
   return (
     <div className="mb5">
       <div className="p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb3 fs-24 sm-fs-28 sans-serif">
-          {startCase(crime)} incidents reported by{' '}
+          {startCase(crime)} {noun} reported by{' '}
           {agency.display}, {since}-{until}
         </h2>
-        {content}
+        <Content submitsNibrs={submitsNibrs} {...params} />
       </div>
       {!summary.loading &&
         <div className="mt2 fs-12 serif italic">

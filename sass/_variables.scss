@@ -120,6 +120,7 @@ $breakpoint-md: '(min-width: 54rem)' !default;
 $breakpoint-lg: '(min-width: 64rem)' !default;
 $breakpoint-sm-md: '(min-width: 40rem) and (max-width: 54rem)' !default;
 $breakpoint-md-lg: '(min-width: 54rem) and (max-width: 64rem)' !default;
+$breakpoint-max-sm: '(max-width: 40rem)' !default;
 $breakpoint-max-md: '(max-width: 54rem)' !default;
 
 $container-width: 940px !default;

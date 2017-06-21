@@ -87,7 +87,7 @@ class TrendChart extends React.Component {
       const ends = [values[0], values[values.length - 1]]
       const segments = [[]]
 
-      labels.push({ name: k.name, ...ends[1] })
+      labels.push({ name: k.name, ...ends[0] })
 
       values.forEach(d => {
         if (d.value.count !== 0) {
@@ -116,7 +116,7 @@ class TrendChart extends React.Component {
 
     const x = scaleTime()
       .domain(extent(dataClean, d => d.date))
-      .range([30, width - xPadding])
+      .range([xPadding, width - 30])
 
     const y = scaleLinear().domain([0, maxValue]).range([height, 0]).nice()
 
@@ -241,10 +241,10 @@ class TrendChart extends React.Component {
                   dy="0.35em"
                   key={d.name}
                   className="fs-10 bold xs-hide"
-                  textAnchor="start"
+                  textAnchor="end"
                   transform={`translate(${x(d.date)}, ${y(d.value.rate)})`}
-                  x="4"
-                  y={18 * (i === 0 ? -1 : 1)}
+                  x="-4"
+                  y={14 * (i === 0 ? -1 : 1)}
                 >
                   {d.name}
                 </text>,

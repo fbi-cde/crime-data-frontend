@@ -10,7 +10,6 @@ import mapCrimeToGlossaryTerm from '../util/glossary'
 import ucrParticipationLookup from '../util/ucr'
 
 const highlight = txt => <strong>{txt}</strong>
-
 const getReportTerms = ({ nibrs, srs, hybrid }) =>
   <span>
     {hybrid && 'both '}

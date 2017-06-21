@@ -71,7 +71,7 @@ const NibrsContainer = ({
         {dataParsed.map((d, i) =>
           <div
             key={i}
-            className={`lg-col lg-col-6 mb2 px1 ${i % 2 === 0
+            className={`col col-12 sm-col-6 mb2 px1 ${i % 2 === 0
               ? 'clear-left'
               : ''}`}
           >

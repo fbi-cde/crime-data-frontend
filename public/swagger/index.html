@@ -73,7 +73,6 @@
               Crime Data Explorer
             </a>
             <span class="block fs-10">
-              v2.6.1 -
               <a
                 class="white"
                 href="https://github.com/18F/crime-data-frontend/blob/master/CHANGELOG.md"
@@ -240,16 +239,24 @@
     <script>
     ;(function() {
   window.swaggerUi = new SwaggerUi({
-    url: '/swagger/swagger.json',
+    url: 'https://crime-data-api-demo.fr.cloud.gov/static/swagger.json',
     dom_id: 'swagger-ui',
     operationsSorter: 'alpha',
     docExpansion: 'list',
     onComplete: function() {
       showApiKeyForm()
       $('#api-key-btn').on('click', handleApiKeyChange)
+      addCssClasses()
       restructureEndpointHeadings()
     },
   })
+
+  function addCssClasses() {
+    $('.info_description.markdown > p').each(function(i, p) {
+      var $p = $(p)
+      $p.addClass('sans-serif')
+    })
+  }
 
   function changeApiKey(apiKey) {
     var auth = new SwaggerClient.ApiKeyAuthorization('api_key', apiKey, 'query')

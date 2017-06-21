@@ -31,8 +31,8 @@ const legend = [
   },
   {
     check: stateProgram => !stateProgram,
-    css: 'fill-red-bright',
-    hex: '#ff5e50',
+    css: 'fill-red-dark',
+    hex: '#702c27',
     text: 'No state program',
   },
 ]
@@ -55,6 +55,9 @@ const reduceStateColors = (accum, next) => ({
   ...accum,
   [next.state]: next.color,
 })
+
+const agenciesParticiaptionDownloadUrl =
+  'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/agencies.csv'
 
 const About = ({ dispatch }) =>
   <div>
@@ -144,14 +147,15 @@ const About = ({ dispatch }) =>
                 To see which agencies submit NIBRS data to the FBI, download
                 <DownloadDataBtn
                   className="fs-14"
-                  data={[{ foo: 'bar' }]}
+                  data={[{ url: agenciesParticiaptionDownloadUrl }]}
                   text="Agency participation data"
                 />
               </div>
             </div>
           </div>
           <div className="fs-12 serif italic">
-            U.S. territories are not included in the map
+            Other outlying areas include America Samoa, Guam, Puerto Rico, and
+            U.S. Virgin Islands.
           </div>
         </div>
       </div>
