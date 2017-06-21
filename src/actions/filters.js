@@ -1,15 +1,20 @@
 import { FILTER_RESET, FILTERS_UPDATE } from './constants'
 import offenses from '../util/offenses'
-import lookupUsa from '../util/usa'
-
-const isValidCrime = crime => offenses.includes(crime)
+import { lookupUsa } from '../util/usa2'
 
 export const resetFilter = ({ id }) => ({ type: FILTER_RESET, id })
+
 export const updateFilters = filters => {
-  const f = { ...filters }
+  const { crime, place, placeType } = filters
+  const cleaned = { ...filters }
 
-  if (f.crime && !isValidCrime(f.crime)) delete f.crime
-  if (f.place && !lookupUsa(f.place, f.placeType)) delete f.place
+  if (crime && !offenses.includes(crime)) delete cleaned.crime
 
-  return { type: FILTERS_UPDATE, filters: f }
+  if (place && placeType !== 'agency') {
+    const details = lookupUsa(place)
+    if (!details) delete cleaned.place
+    else cleaned.placeDetails = details
+  }
+
+  return { type: FILTERS_UPDATE, filters: cleaned }
 }

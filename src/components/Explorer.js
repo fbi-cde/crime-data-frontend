@@ -21,9 +21,8 @@ import lookup from '../util/usa'
 class Explorer extends React.Component {
   componentDidMount() {
     const { appState, dispatch, router } = this.props
-    const { since, until } = appState.filters
+    const { place, placeType, since, until } = appState.filters
     const { query } = router.location
-    const { place, placeType } = getPlaceInfo(appState.filters)
 
     const clean = (val, alt) => {
       const yr = +val
@@ -68,9 +67,8 @@ class Explorer extends React.Component {
   }
 
   render() {
-    const { dispatch, params } = this.props
-    const { crime } = params
-    const { place, placeType } = getPlaceInfo(params)
+    const { appState, dispatch } = this.props
+    const { crime, place, placeType } = appState.filters
     const isAgency = placeType === 'agency'
 
     // show not found page if crime or place unfamiliar
