@@ -47,6 +47,11 @@
     margin-bottom: $space-2;
     margin-top: $space-tiny;
   }
+
+  a {
+    color: white;
+    text-decoration: underline;
+  }
 }
 
 .glossary-icon::after {
