@@ -36,7 +36,7 @@ const ExplorerHeaderContainer = ({
         </h1>
       </div>
       <div className="mb5 clearfix">
-        <div className="lg-col lg-col-8 mb2 lg-m0 p0 lg-pr6 fs-18">
+        <div className="sm-col sm-col-8 mb2 lg-m0 p0 sm-pr4 lg-pr6 fs-18">
           {isLoading
             ? <Loading />
             : <ExplorerIntro
@@ -52,7 +52,7 @@ const ExplorerHeaderContainer = ({
             placeType={placeType}
           />
         </div>
-        <div className="lg-col lg-col-4 xs-hide sm-hide md-hide">
+        <div className="sm-col sm-col-4 xs-hide">
           <PlaceThumbnail selected={startCase(usState)} />
           <div className="mt-tiny fs-12 serif italic truncate right">
             {isAgency && !isLoading
