@@ -16,6 +16,7 @@ import ucrParticipation, { shouldFetchNibrs as shouldShowNibrs } from '../util/u
 const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')
 
+const highlight = txt => <strong>{txt}</strong>
 const initialNibrsYear = ({ place, placeType, since }) => {
   const placeNorm = placeType === 'agency' ? oriToState(place) : place
   const participation = ucrParticipation(placeNorm)
@@ -105,9 +106,10 @@ const NibrsContainer = ({
         {!error &&
           data &&
           <p className="m0 sm-col-9">
-            There were <strong>{formatNumber(totalCount)}</strong> incidents
-            of {crime} reported to the UCR Program between {nibrsFirstYear}{' '}
-            and {until}. Learn more about the{' '}
+            There were {highlight(formatNumber(totalCount))} incidents
+            of {crime} reported to the UCR Program between{' '}
+            {highlight(nibrsFirstYear)}{' '}
+            and {highlight(until)}. Learn more about the{' '}
             <a className="underline" href={fbiLink}>FBI’s data collections</a>.
           </p>}
         {loading && <Loading />}
