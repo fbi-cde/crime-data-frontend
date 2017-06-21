@@ -9,14 +9,13 @@ import { formatNum } from '../util/formats'
 import mapCrimeToGlossaryTerm from '../util/glossary'
 import ucrParticipationLookup from '../util/ucr'
 
-const getReportTerms = ({ nibrs, srs, hybrid }) => (
+const getReportTerms = ({ nibrs, srs, hybrid }) =>
   <span>
     {hybrid && 'both '}
     {srs && srsTerm}
     {hybrid && ' and '}
     {nibrs && nibrsTerm}
   </span>
-)
 
 const ExplorerIntroState = ({ crime, place, ucr, until }) => {
   const isArson = crime === 'arson'
