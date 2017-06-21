@@ -7,7 +7,7 @@ export default (content, state) =>
   <html lang='en'>
     <head>
       <meta charset='utf-8'>
-      <meta name='viewport' content='width=device-width, initial-scale=1'>
+      <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
       <link rel='icon' type='image/png' sizes='32x32' href='/img/favicon.png'>
       ${sharingMetaTags(state)}
       <title>Crime Data Explorer</title>
