@@ -141,9 +141,9 @@ const Home = ({ appState, dispatch, router }) => {
             {otherDataSets.slice(0, 3).map((d, i) =>
               <div
                 key={i}
-                className="flex sm-col sm-col-6 md-col-4 px2 mb2 sm-mb4"
+                className="flex col col-12 sm-col-6 md-col-4 px2 mb2 sm-mb4"
               >
-                <div className="px3 py2 bg-blue-white">
+                <div className="col-12 px3 py2 bg-blue-white">
                   <div className="mb1 pb1 fs-ch2 bold border-bottom border-red-bright">
                     {d.title}
                   </div>
