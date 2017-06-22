@@ -26,3 +26,7 @@
   description: |
     See totals by state and offense for commercial sex acts and involuntary servitude from 2013–2014.
   download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/human_trafficking.csv'
+- title: US territory data
+  description: |
+    See totals of reported crime for U.S. territories between 1995 and 2015.
+  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/territories.csv'
