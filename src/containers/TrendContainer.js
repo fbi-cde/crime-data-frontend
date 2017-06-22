@@ -59,7 +59,6 @@ const TrendContainer = ({
             crime={crime}
             data={data}
             dispatch={dispatch}
-            keys={Object.keys(summaries.data).map(k => startCase(k))}
             place={place}
             since={since}
             until={until}
