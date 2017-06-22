@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import PropTypes from 'prop-types'
 import React from 'react'
+import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
 
 import Link from './Link'
@@ -8,6 +9,7 @@ import { showFeedback } from '../actions/feedback'
 
 const NotFound = ({ dispatch }) =>
   <div className="container mb8 mx-auto px2 pt8">
+    <Helmet title="CDE :: 404" />
     <h1 className="mt0 fs-40 col-12 sm-col-7">
       We couldn{"'"}t find the page you are looking for.
     </h1>

@@ -1,4 +1,5 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 
 import DownloadBulkNibrs from './DownloadBulkNibrs'
 import DownloadDataBtn from './DownloadDataBtn'
@@ -15,6 +16,7 @@ const nibrsTerm = (
 
 const DownloadsAndDocs = () =>
   <section className="bg-white">
+    <Helmet title="CDE :: Downloads & Documentation" />
     <div className="px2 py3 container mx-auto">
       <h1 className={`mt4 mb5 pb1 sm-mt4 fs-28 sm-fs-40 ${border}`}>
         Downloads & Documentation

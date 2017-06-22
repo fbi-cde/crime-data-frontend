@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import Helmet from 'react-helmet'
 
 import Term from './Term'
 import UsaMap from './UsaMap'
@@ -61,6 +62,7 @@ const agenciesParticiaptionDownloadUrl =
 
 const About = ({ dispatch }) =>
   <div>
+    <Helmet title="CDE :: About" />
     <section className="bg-white">
       <div className="px2 py7 container mx-auto">
         <h1 className="mt0 mb4 pb1 fs-28 sm-fs-40 border-bottom border-blue-light">
