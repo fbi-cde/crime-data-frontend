@@ -75,8 +75,8 @@ const AgencySearchResults = ({
       <hr className="my2" />
       <div>
         <p className="italic serif fs-12">
-          Agencies that have submitted a full year's worth of data in 2014 are
-          listed in dark blue.
+          Agencies that have submitted a full year{"'"}s worth of data in 2014
+          are listed in dark blue.
         </p>
         <button
           className="btn btn-primary regular py-tiny px1 fs-14"
