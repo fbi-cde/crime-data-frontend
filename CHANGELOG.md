@@ -1,6 +1,47 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.7.0] - 2017-06-22
+### Added
+- Handle errors from API requests in action creators ([#909](https://github.com/18F/crime-data-frontend/pull/909))
+- State and national overview text have "estimated" term component ([#925](https://github.com/18F/crime-data-frontend/pull/925))
+- Include offender and victim ethnicity in NIBRS charts ([#933](https://github.com/18F/crime-data-frontend/pull/933))
+- Favicon ([#936](https://github.com/18F/crime-data-frontend/pull/936))
+- Estimated and US territory datasets to the Downloads page ([#937](https://github.com/18F/crime-data-frontend/pull/937), [#1026](https://github.com/18F/crime-data-frontend/pull/1026))
+- 404 page ([#943](https://github.com/18F/crime-data-frontend/pull/943))
+- FBI and CDE logos in the footer ([crime-data-explorer#117](https://github.com/18F/crime-data-explorer/issues/117))
+
+### Changed
+- Glossary icon can be displayed as multiple sizes based on contextual copy ([#885](https://github.com/18F/crime-data-frontend/pull/885))
+- Refine agency search interface and behavior ([#897](https://github.com/18F/crime-data-frontend/pull/897), [#953](https://github.com/18F/crime-data-frontend/pull/953), [#960](https://github.com/18F/crime-data-frontend/pull/960)
+[#967](https://github.com/18F/crime-data-frontend/pull/967))
+- Use a service worker instead of `localStorage` ([#906](https://github.com/18F/crime-data-frontend/pull/906))
+- Use https://api.data.gov API for `-demo` app ([#908](https://github.com/18F/crime-data-frontend/pull/908))
+- Filter out federal agencies from agency search results ([#917](https://github.com/18F/crime-data-frontend/pull/917))
+- Lazily load agency data into the application ([#928](https://github.com/18F/crime-data-frontend/pull/928))
+- Adjust Explorer introduction text to use crime name ([#961](https://github.com/18F/crime-data-frontend/pull/961))
+- Modify the About page layout, map and content ([#968](https://github.com/18F/crime-data-frontend/pull/968), [#991](https://github.com/18F/crime-data-frontend/pull/991))
+- Glossary placeholder text is relevant to CDE ([#969](https://github.com/18F/crime-data-frontend/pull/969))
+- Use `swagger.json` from API instead of local file ([#998](https://github.com/18F/crime-data-frontend/pull/998))
+- Use data reporting method specific units in agency chart text ([#1000](https://github.com/18F/crime-data-frontend/pull/1000))
+- Update Downloads and Docs page layout and content ([#1001](https://github.com/18F/crime-data-frontend/pull/1001))
+- Use whole numbers for agency chart Y axis ([crime-data-explorer#166](https://github.com/18F/crime-data-explorer/issues/166))
+
+### Fixed
+- About the data text has glossary links ([#723](https://github.com/18F/crime-data-frontend/issues/723))
+- Long NIBRS table strings should wrap to multiple lines on small displays ([985](https://github.com/18F/crime-data-frontend/issues/985))
+- NIBRS attributes add up to the presented total ([crime-data-explorer#74](https://github.com/18F/crime-data-explorer/issues/74))
+- Selecting DC no longer breaks the app ([crime-data-explorer#184](https://github.com/18F/crime-data-explorer/issues/184))
+- Show agency name, not ORI in incident details title ([#185](https://github.com/18F/crime-data-explorer/issues/185))
+- Agency bar chart source reflects submitted data type ([crime-data-explorer#187](https://github.com/18F/crime-data-explorer/issues/187))
+- Sparklines are more responsive to their container size ([crime-data-explorer#199](https://github.com/18F/crime-data-explorer/issues/199))
+- Hide every other year on agency chart X axis on small displays ([crime-data-explorer#203](https://github.com/18F/crime-data-explorer/issues/203))
+
+### Removed
+- "Beta" modal ([#924](https://github.com/18F/crime-data-frontend/pull/924))
+- Pin from agency page map ([#941](https://github.com/18F/crime-data-frontend/pull/941))
+
+
 ## [2.6.1] - 2017-06-09
 ### Fixed
 - "Explorer" top navigation link goes to US and violent crime view ([#828](https://github.com/18F/crime-data-frontend/issues/828))
