@@ -1,7 +1,6 @@
 /* eslint no-undef: 0 */
 
 import { shallow } from 'enzyme'
-import uniq from 'lodash.uniqby'
 import React from 'react'
 
 import TrendChartLineSeries from '../../src/components/TrendChartLineSeries'
