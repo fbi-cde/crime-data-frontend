@@ -1,6 +1,29 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.8.0] - 2017-06-23
+### Added
+- Dynamic page titles ([#1024](https://github.com/18F/crime-data-frontend/pull/1024))
+- Add US state button to bottom of agency search results ([#1028](https://github.com/18F/crime-data-frontend/pull/1028))
+- Show trend lines for both rape definitions ([#1038](https://github.com/18F/crime-data-frontend/pull/1038))
+
+### Changed
+- Alphabetize race and ethnicity of offenders/victims ([#821](https://github.com/18F/crime-data-frontend/issues/821))
+- Update README with instructions about getting api.data.gov API keys ([#1018](https://github.com/18F/crime-data-frontend/pull/1018))
+- Use `/arson` endpoint ([#1025](https://github.com/18F/crime-data-frontend/pull/1025))
+- Include crime glossary term in agency overview text ([#1037](https://github.com/18F/crime-data-frontend/pull/1037))
+- Use bold text in national overview ([#1041](https://github.com/18F/crime-data-frontend/pull/1041))
+- Improve error states for data loading errors ([crime-data-explorer#192](https://github.com/18F/crime-data-explorer/issues/192))
+
+### Fixed
+- Footer no longer covers page on iPad ([#799](https://github.com/18F/crime-data-frontend/issues/799))
+- Page no longer stays zoomed after closing glossary ([#973](https://github.com/18F/crime-data-frontend/issues/973))
+- Data download boxes on homepage are equally sized ([#975](https://github.com/18F/crime-data-frontend/issues/975))
+- Using trend chart year selector no longer zooms in ([#983](https://github.com/18F/crime-data-frontend/issues/983))
+- Show place thumbnail on tablet sized displays ([#992](https://github.com/18F/crime-data-frontend/issues/992))
+- 404 page works for static assets ([crime-data-explorer#209](https://github.com/18F/crime-data-explorer/issues/209))
+
+
 ## [2.7.0] - 2017-06-22
 ### Added
 - Handle errors from API requests in action creators ([#909](https://github.com/18F/crime-data-frontend/pull/909))
