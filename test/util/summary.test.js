@@ -17,11 +17,11 @@ describe('summary data munging utility', () => {
 
   it('should filter data to be inclusive of since and until, if provided', () => {
     const data = [
-      { year: 2014, 'violent-crime': 10, population: 100 },
-      { year: 2013, 'violent-crime': 10, population: 100 },
-      { year: 2012, 'violent-crime': 10, population: 100 },
-      { year: 2011, 'violent-crime': 10, population: 100 },
-      { year: 2010, 'violent-crime': 10, population: 100 },
+      { year: 2014, violent_crime: 10, population: 100 },
+      { year: 2013, violent_crime: 10, population: 100 },
+      { year: 2012, violent_crime: 10, population: 100 },
+      { year: 2011, violent_crime: 10, population: 100 },
+      { year: 2010, violent_crime: 10, population: 100 },
     ]
     const crime = 'violent-crime'
     const summaries = { california: data, 'united-states': data }
@@ -38,9 +38,9 @@ describe('summary data munging utility', () => {
 
   it('should sort the data by date', () => {
     const data = [
-      { year: 2011, 'violent-crime': 10, population: 100 },
-      { year: 2013, 'violent-crime': 10, population: 100 },
-      { year: 2012, 'violent-crime': 10, population: 100 },
+      { year: 2011, violent_crime: 10, population: 100 },
+      { year: 2013, violent_crime: 10, population: 100 },
+      { year: 2012, violent_crime: 10, population: 100 },
     ]
 
     const actual = mungeSummaryData({
@@ -50,7 +50,7 @@ describe('summary data munging utility', () => {
       since: 2011,
       until: 2013,
     })
-    const actualYears = actual.map(a => a.date)
+    const actualYears = actual.map(a => a.year)
 
     expect(actualYears[0]).toEqual(2011)
     expect(actualYears[2]).toEqual(2013)
@@ -59,15 +59,18 @@ describe('summary data munging utility', () => {
   it('should reshape the data', () => {
     const crime = 'violent-crime'
     const summaries = {
-      california: [{ year: 2014, 'violent-crime': 10, population: 100 }],
-      'united-states': [{ year: 2014, 'violent-crime': 10, population: 100 }],
+      california: [{ year: 2014, violent_crime: 10, population: 100 }],
+      'united-states': [{ year: 2014, violent_crime: 10, population: 100 }],
     }
     const place = 'california'
     expect(mungeSummaryData({ crime, summaries, place })).toEqual([
       {
-        date: 2014,
-        california: { [crime]: { count: 10, rate: 10000 }, pop: 100 },
-        'united-states': { [crime]: { count: 10, rate: 10000 }, pop: 100 },
+        year: 2014,
+        california: { [crime]: { count: 10, rate: 10000 }, population: 100 },
+        'united-states': {
+          [crime]: { count: 10, rate: 10000 },
+          population: 100,
+        },
       },
     ])
   })
@@ -82,11 +85,11 @@ describe('summary data munging utility', () => {
     const place = 'united-states'
     expect(mungeSummaryData({ crime, summaries, place })).toEqual([
       {
-        date: 2014,
+        year: 2014,
         'united-states': {
-          rape_legacy: { count: 10, rate: 10000 },
-          rape_revised: { count: 10, rate: 10000 },
-          pop: 100,
+          'rape-legacy': { count: 10, rate: 10000 },
+          'rape-revised': { count: 10, rate: 10000 },
+          population: 100,
         },
       },
     ])

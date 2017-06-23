@@ -2,7 +2,6 @@
 
 import { bisector, extent, max } from 'd3-array'
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
-import { curveCardinal, line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import throttle from 'lodash.throttle'
 import PropTypes from 'prop-types'
@@ -121,11 +120,6 @@ class TrendChart extends React.Component {
     const x = scaleTime().domain(extent(dates)).range([xPadding, width - 30])
     const y = scaleLinear().domain([0, max(rates)]).range([height, 0]).nice()
 
-    const l = line()
-      .curve(curveCardinal.tension(0.25))
-      .x(d => x(d.date))
-      .y(d => y(d.rate))
-
     let active = series.map(d => ({
       crime: d.crime,
       place: d.place,
@@ -179,7 +173,6 @@ class TrendChart extends React.Component {
               <YAxis scale={y} width={width} />
               <TrendChartLineSeries
                 color={color}
-                line={l}
                 series={series}
                 showMarkers={showMarkers}
                 x={x}
