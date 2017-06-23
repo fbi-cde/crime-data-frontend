@@ -12,11 +12,12 @@ const ExplorerIntro = ({ agency, crime, place, ucr, until }) => {
   if (agency) {
     return (
       <ExplorerIntroAgency
-        name={agency.agency_name}
         county={agency.primary_county}
+        crime={crime}
+        hasNibrs={agency.nibrs_months_reported === 12}
+        name={agency.agency_name}
         state={oriToState(place)}
         type={agency.agency_type_name}
-        hasNibrs={agency.nibrs_months_reported === 12}
       />
     )
   }
