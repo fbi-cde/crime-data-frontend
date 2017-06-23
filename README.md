@@ -13,7 +13,11 @@ You will need `node` and `npm` to install and run this project.
 
 ### Running the app locally
 
-Make sure to set the `API_KEY` environment variable with your API key for the [Crime Data API](//github.com/18f/crime-data-api). It should be an environment variable so that it doesn't leak to the client side application.
+The application expects a few environment variables to interact with the API:
+* `CDE_API` - this should be the URL for the API. To use the public API, set this to `https://api.usa.gov/crime/fbi/ucr`
+* `API_KEY` - this should match the key used by the API. If you are using the public API, sign up for an API key at [https://api.data.gov/signup/](https://api.data.gov/signup/)
+
+You can copy the `env.sample` file (`cp env.sample .env`), fill in your own values, and then make sure to `source .env` before running the build process.
 
 Use `npm run watch` to start the continuous `webpack` processes and a webserver.
 
