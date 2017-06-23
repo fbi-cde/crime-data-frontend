@@ -21,7 +21,7 @@ class NibrsTableWithBars extends React.Component {
   }
 
   render() {
-    const { data, noun, rowLim, title } = this.props
+    const { data, noun, rowLim, sortByValue, title } = this.props
     const { showCounts } = this.state
     const btnClass =
       'btn btn-primary p0 ml-tiny line-height-4 sans-serif regular'
@@ -54,6 +54,8 @@ class NibrsTableWithBars extends React.Component {
         percentFmt: formatPercent(p),
       }
     })
+
+    if (!sortByValue) dataFormatted.sort((a, b) => a.key > b.key)
 
     return (
       <div>
