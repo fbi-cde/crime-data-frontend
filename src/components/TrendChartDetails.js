@@ -37,10 +37,10 @@ const TrendChartDetails = ({
 }) => {
   const keys = uniq(data.map(d => d.place))
   const isOnlyNational = keys.length === 1
-
-  const comparison = getComparison({ place: keys[0], data })
-  const rate = data[0].rate
-  const year = data[0].date.getFullYear()
+  const place = isOnlyNational ? nationalKey : keys.find(k => k !== nationalKey)
+  const comparison = getComparison({ place, data })
+  const rate = data.find(d => d.place === place).rate
+  const year = data.find(d => d.place === place).date.getFullYear()
   const yearRange = range(since, until + 1)
   const handleSelectChange = e => updateYear(Number(e.target.value))
 
