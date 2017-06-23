@@ -8,6 +8,8 @@ import { estimatedTerm, nibrsTerm, srsTerm } from './Terms'
 import { formatNum } from '../util/formats'
 import mapCrimeToGlossaryTerm from '../util/glossary'
 
+const highlight = txt => <strong>{txt}</strong>
+
 const ExplorerIntroNational = ({ crime, ucr, until }) => {
   const isArson = crime === 'arson'
   const untilUcr = ucr.find(p => p.year === until)
@@ -35,18 +37,18 @@ const ExplorerIntroNational = ({ crime, ucr, until }) => {
             <p className="serif">
               In
               {' '}
-              {until}
+              {highlight(until)}
               , the FBI
               {' '}
               {estimatedTerm}
               {' '}
               crime statistics for the nation based on data received from
               {' '}
-              {formatNum(untilUcr.participating_agencies)}
+              {highlight(formatNum(untilUcr.participating_agencies))}
               {' '}
               law enforcement agencies out of
               {' '}
-              {formatNum(untilUcr.total_agencies)}
+              {highlight(formatNum(untilUcr.total_agencies))}
               {' '}
               in the country that year.
             </p>
@@ -65,9 +67,10 @@ const ExplorerIntroNational = ({ crime, ucr, until }) => {
               reports sent to the FBI.
             </p>
             <p className="serif">
-              In {until}, the FBI received voluntary reports of arson from
+              In {highlight(until)}, the FBI received voluntary reports of arson
+              from
               {' '}
-              {formatNum(untilUcr.participating_agencies)}
+              {highlight(formatNum(untilUcr.participating_agencies))}
               {' '}
               law enforcement agencies. The charts below feature unestimated
               data.
