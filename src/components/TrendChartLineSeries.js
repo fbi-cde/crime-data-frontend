@@ -11,40 +11,45 @@ const TrendChartLineSeries = ({ color, series, showMarkers, x, y }) => {
 
   return (
     <g>
-      {series.map((d, i) =>
-        <g key={i} className={`series series-${d.place}-${d.crime}`}>
-          {d.segments.map((values, j) =>
-            <g key={j}>
-              <path
-                d={l(values)}
-                fill="none"
-                stroke={color(d.place)}
-                strokeWidth="2.5"
-                strokeDasharray={d.crime === 'rape-revised' && '10,10'}
-              />
-              {showMarkers &&
-                values.map((datum, k) =>
-                  <circle
-                    key={k}
-                    cx={x(datum.date)}
-                    cy={y(datum.rate)}
-                    fill={color(d.place)}
-                    r="2.5"
-                  />,
-                )}
-            </g>,
-          )}
-          {[d.values[0], d.values[d.values.length - 1]].map((datum, j) =>
-            <circle
-              key={j}
-              cx={x(datum.date)}
-              cy={y(datum.rate)}
-              fill={color(d.place)}
-              r="3.5"
-            />,
-          )}
-        </g>,
-      )}
+      {series.map((d, i) => {
+        const ends = [d.values[0], d.values[d.values.length - 1]]
+
+        return (
+          <g key={i} className={`series series-${d.place}-${d.crime}`}>
+            {d.segments.map((values, j) =>
+              <g key={j}>
+                <path
+                  d={l(values)}
+                  fill="none"
+                  stroke={color(d.place)}
+                  strokeWidth="2.5"
+                  strokeDasharray={d.crime === 'rape-revised' && '5,4'}
+                />
+                {showMarkers &&
+                  values.map((datum, k) =>
+                    <circle
+                      key={k}
+                      cx={x(datum.date)}
+                      cy={y(datum.rate)}
+                      fill={color(d.place)}
+                      r="2.5"
+                    />,
+                  )}
+              </g>,
+            )}
+            {d.crime !== 'rape-revised' &&
+              ends.map((pt, j) =>
+                <circle
+                  key={j}
+                  cx={x(pt.date)}
+                  cy={y(pt.rate)}
+                  fill={color(d.place)}
+                  r="3.5"
+                />,
+              )}
+          </g>
+        )
+      })}
       {series
         .filter(s => s.crime !== 'rape-revised')
         .map(s => ({
@@ -80,6 +85,7 @@ TrendChartLineSeries.propTypes = {
 
 TrendChartLineSeries.defaultProps = {
   color: () => 'pink',
+  showMarkers: false,
 }
 
 export default TrendChartLineSeries

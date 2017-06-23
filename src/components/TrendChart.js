@@ -146,6 +146,14 @@ class TrendChart extends React.Component {
         .filter(s => s)
     }
 
+    const dataHover = places
+      .map(p =>
+        active.filter(
+          a => a.place === p && a.crime !== 'rape-revised' && a.rate && a.count,
+        ),
+      )
+      .reduce((a, n) => a.concat(n), [])
+
     return (
       <div>
         <TrendChartDetails
@@ -178,7 +186,7 @@ class TrendChart extends React.Component {
                 x={x}
                 y={y}
               />
-              {until >= 2013 &&
+              {until > 2013 &&
                 crime === 'rape' &&
                 <g
                   transform={`translate(${x(
@@ -212,11 +220,7 @@ class TrendChart extends React.Component {
                 </g>}
               <TrendChartHover
                 color={color}
-                data={places
-                  .map(p =>
-                    active.filter(a => a.place === p && a.rate && a.count),
-                  )
-                  .reduce((a, n) => a.concat(n), [])}
+                data={dataHover}
                 height={height}
                 x={x}
                 y={y}
