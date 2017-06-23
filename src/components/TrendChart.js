@@ -137,16 +137,19 @@ class TrendChart extends React.Component {
     if (!yearSelected && hover) {
       const bisectDate = bisector(d => d.date).left
       const x0 = x.invert(hover.x * width)
-      active = series.map(({ crime: c, place: p, values }) => {
-        const i = bisectDate(values, x0, 1)
-        const [d0, d1] = [values[i - 1], values[i]]
+      active = series
+        .map(({ crime: c, place: p, values }) => {
+          if (x0.getFullYear() < 2013 && c === 'rape-revised') return null
+          const i = bisectDate(values, x0, 1)
+          const [d0, d1] = [values[i - 1], values[i]]
 
-        return {
-          crime: c,
-          place: p,
-          ...(d0 && d1 && x0 - d0.date > d1.date - x0 ? d1 : d0),
-        }
-      })
+          return {
+            crime: c,
+            place: p,
+            ...(d0 && d1 && x0 - d0.date > d1.date - x0 ? d1 : d0),
+          }
+        })
+        .filter(s => s)
     }
 
     return (
