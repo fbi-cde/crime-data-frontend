@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 
-import { bisector, extent, max, min } from 'd3-array'
+import { bisector, extent, max } from 'd3-array'
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
 import { curveCardinal, line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
@@ -93,16 +93,7 @@ class TrendChart extends React.Component {
   }
 
   render() {
-    const {
-      crime,
-      colors,
-      data,
-      dispatch,
-      showMarkers,
-      since,
-      size,
-      until,
-    } = this.props
+    const { crime, colors, data, showMarkers, since, size, until } = this.props
     const { hover, svgParentWidth, yearSelected } = this.state
     const { margin } = size
     const color = scaleOrdinal(colors)
@@ -163,8 +154,7 @@ class TrendChart extends React.Component {
         <TrendChartDetails
           colors={colors}
           crime={crime}
-          data={active}
-          dispatch={dispatch}
+          data={active.filter(d => d.crime !== 'rape-revised')}
           keys={places}
           since={since}
           updateYear={this.updateYear}

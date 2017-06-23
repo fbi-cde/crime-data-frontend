@@ -16,7 +16,6 @@ import mungeSummaryData from '../util/summary'
 
 const TrendContainer = ({
   crime,
-  dispatch,
   place,
   placeType,
   since,
@@ -58,7 +57,6 @@ const TrendContainer = ({
           <TrendChart
             crime={crime}
             data={data}
-            dispatch={dispatch}
             place={place}
             since={since}
             until={until}
@@ -95,7 +93,6 @@ const TrendContainer = ({
 
 TrendContainer.propTypes = {
   crime: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired,
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
