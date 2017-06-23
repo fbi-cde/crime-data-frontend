@@ -21,7 +21,7 @@ const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
   const data = summary.data[place]
   if (!data || data.length === 0) return <NoData />
 
-  const fname = `${place}-${crime}-${since}–${until}`
+  const fname = `${place}-${crime}-${since}-${until}`
   const dataClean = data
     .filter(d => d.year >= since && d.year <= until)
     .sort((a, b) => a.year - b.year)
@@ -69,7 +69,7 @@ const AgencyChartContainer = params => {
       <div className="p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb3 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} {noun} reported by{' '}
-          {agency.display}, {since}-{until}
+          {agency.display}, {since}–{until}
         </h2>
         <Content submitsNibrs={submitsNibrs} {...params} />
       </div>

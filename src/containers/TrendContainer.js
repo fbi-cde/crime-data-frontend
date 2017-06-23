@@ -52,7 +52,7 @@ const TrendContainer = ({
     else {
       download.push({
         data,
-        filename: `${place}-${crime}-${since}–${until}.csv`,
+        filename: `${place}-${crime}-${since}-${until}.csv`,
       })
       chart = (
         <div>
@@ -67,7 +67,7 @@ const TrendContainer = ({
           />
           <DownloadDataBtn
             data={download}
-            filename={`${place}-${crime}-${since}–${until}`}
+            filename={`${place}-${crime}-${since}-${until}`}
           />
         </div>
       )

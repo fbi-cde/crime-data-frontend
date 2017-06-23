@@ -48,7 +48,7 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
       crime,
       title: `${title} of reported ${pluralize(crime)} in ${startCase(
         place,
-      )}, ${since}-${until}`,
+      )}, ${since}–${until}`,
     }),
     filename: 'README.md',
   })
