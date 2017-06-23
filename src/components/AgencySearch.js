@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 
 import AgencySearchResults from './AgencySearchResults'
 import OnEscape from './OnEscape'
+import { oriToState } from '../util/ori'
 
 class AgencySearch extends Component {
   constructor(props) {
@@ -50,14 +51,19 @@ class AgencySearch extends Component {
     return e
   }
 
-  handleSearchClick = d => e => {
+  handleResultsClick = d => e => {
     e.preventDefault()
     this.setState({ search: d.agency_name, hasSelection: true })
     this.props.onChange({ place: d.ori, placeType: 'agency' })
   }
 
+  handleStateClick = usState => {
+    this.setState({ showResults: false })
+    this.props.onChange({ place: usState, placeType: 'state' })
+  }
+
   clearInput = () => {
-    this.setState({ search: '', hasSelection: false })
+    this.setState({ search: '', hasSelection: false, showResults: true })
   }
 
   toggleResults = () => {
@@ -124,7 +130,9 @@ class AgencySearch extends Component {
                 )}
                 groupKey="primary_county"
                 groupValues={Object.keys(counties).sort()}
-                onClick={this.handleSearchClick}
+                onResultsClick={this.handleResultsClick}
+                onStateClick={this.handleStateClick}
+                usState={oriToState(data[0].ori)}
               />
             </OnEscape>}
         </div>

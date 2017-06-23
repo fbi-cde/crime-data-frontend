@@ -1,3 +1,4 @@
+import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -26,7 +27,14 @@ const AgencySearchResultItem = ({ agency, onClick }) => {
 }
 /* eslint-enable camelcase */
 
-const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
+const AgencySearchResults = ({
+  data,
+  groupKey,
+  groupValues,
+  onResultsClick,
+  onStateClick,
+  usState,
+}) => {
   const noFederal = data.filter(d => d.agency_type_name !== 'Federal')
   const dataGrouped = groupValues.map(key => ({
     key,
@@ -52,11 +60,28 @@ const AgencySearchResults = ({ data, groupKey, groupValues, onClick }) => {
               .slice(0, 100)
               .sort((a, b) => a.agency_name < b.agency_name)
               .map((d, i) =>
-                <AgencySearchResultItem agency={d} key={i} onClick={onClick} />,
+                <AgencySearchResultItem
+                  agency={d}
+                  key={i}
+                  onClick={onResultsClick}
+                />,
               )}
           </ul>
         </div>,
       )}
+      <hr className="my2" />
+      <div>
+        <p className="italic serif fs-12">
+          Agencies that have submitted a full year{"'"}s worth of data in 2014
+          are listed in dark blue.
+        </p>
+        <button
+          className="btn btn-primary regular py-tiny px1 fs-14"
+          onClick={() => onStateClick(usState)}
+        >
+          View {startCase(usState)}
+        </button>
+      </div>
     </div>
   )
 }
@@ -65,7 +90,9 @@ AgencySearchResults.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   groupKey: PropTypes.string.isRequired,
   groupValues: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onClick: PropTypes.func.isRequired,
+  onResultsClick: PropTypes.func.isRequired,
+  onStateClick: PropTypes.func.isRequired,
+  usState: PropTypes.string.isRequired,
 }
 
 export default AgencySearchResults
