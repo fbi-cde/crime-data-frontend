@@ -3,6 +3,8 @@ import { FILTER_RESET, FILTERS_UPDATE } from '../actions/constants'
 
 const initialState = {
   crime: 'violent-crime',
+  place: 'united-states',
+  placeType: 'national',
   since: 2004,
   until: 2014,
 }
