@@ -42,7 +42,7 @@ const DownloadsAndDocs = () =>
               </a>
             </li>
             <li className="mb2">
-              <a href="http://localhost:6005/pdf/NIBRS-data-diagram.pdf">
+              <a href="/pdf/NIBRS-data-diagram.pdf">
                 Data dictionary
               </a>
             </li>
