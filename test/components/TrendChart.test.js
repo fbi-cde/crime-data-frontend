@@ -7,23 +7,27 @@ import TrendChart from '../../src/components/TrendChart'
 
 describe('TrendChart', () => {
   const data = [
-    { date: '2016-01-01', foo: 5, bar: 7 },
-    { date: '2016-01-02', foo: 7, bar: 2 },
-    { date: '2016-01-03', foo: 4, bar: 4 },
+    ...[2012, 2013, 2014].map(year => ({
+      'united-states': {
+        population: 100,
+        'violent-crime': { count: 10, rate: 100 },
+      },
+      year,
+    })),
   ]
-  const filters = { since: 1990, until: 2014, crime: 'baz' }
-  const keys = ['foo', 'bar']
+  const filters = {
+    since: 2012,
+    until: 2014,
+    crime: 'violent-crime',
+    place: 'united-states',
+  }
   let chart
 
   beforeEach(() => {
-    chart = shallow(<TrendChart data={data} keys={keys} {...filters} />)
+    chart = shallow(<TrendChart data={data} {...filters} />)
   })
 
   it('TrendChart renders svg', () => {
     expect(chart.find('svg').length).toEqual(1)
-  })
-
-  it('TrendChart has a line (<path>) for each series', () => {
-    expect(chart.find('.series path').length).toEqual(keys.length)
   })
 })

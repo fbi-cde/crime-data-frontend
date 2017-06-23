@@ -1,6 +1,8 @@
 import { format } from 'd3-format'
 import range from 'lodash.range'
 import lowerCase from 'lodash.lowercase'
+import startCase from 'lodash.startcase'
+import uniq from 'lodash.uniqby'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -14,8 +16,8 @@ const formatTotal = format(',.0f')
 
 const getComparison = ({ place, data }) => {
   const threshold = 3
-  const placeRate = data[place].rate
-  const nationalRate = data[nationalKey].rate
+  const placeRate = data.find(d => d.place === place).rate
+  const nationalRate = data.find(d => d.place === nationalKey).rate
   const diff = (placeRate / nationalRate - 1) * 100
 
   return Math.abs(diff) < threshold
@@ -29,22 +31,22 @@ const TrendChartDetails = ({
   colors,
   crime,
   data,
-  keys,
   since,
   until,
   updateYear,
 }) => {
-  const { name, slug } = keys[0]
-  const comparison = getComparison({ place: slug, data })
-  const rate = data[slug].rate
-  const year = data.date.getFullYear()
+  const keys = uniq(data.map(d => d.place))
+  const isOnlyNational = keys.length === 1
+  const place = isOnlyNational ? nationalKey : keys.find(k => k !== nationalKey)
+  const comparison = getComparison({ place, data })
+  const rate = data.find(d => d.place === place).rate
+  const year = data.find(d => d.place === place).date.getFullYear()
   const yearRange = range(since, until + 1)
   const handleSelectChange = e => updateYear(Number(e.target.value))
 
   const borderColor = { borderColor: '#c8d3dd' }
   const cellStyle = { width: 68, ...borderColor }
 
-  const isOnlyNational = keys.length === 1
   const term = (
     <Term id={mapCrimeToGlossaryTerm(crime)} size="sm">{lowerCase(crime)}</Term>
   )
@@ -62,7 +64,8 @@ const TrendChartDetails = ({
             </span>}
           {!isOnlyNational &&
             <span>
-              In {<Highlight text={year} />}, {name}’s {term} rate was{' '}
+              In {<Highlight text={year} />}, {startCase(keys[0])}’s {term} rate
+              was{' '}
               {<Highlight text={formatRate(rate)} />}{' '}
               incidents per 100,000 people.
               The rate for that year was {comparison} that of the United States.
@@ -95,7 +98,7 @@ const TrendChartDetails = ({
             </tr>
           </thead>
           <tbody className="fs-12 bold line-height-4">
-            {keys.map((k, i) =>
+            {data.map((d, i) =>
               <tr key={i}>
                 <td
                   className="pr2 nowrap truncate align-bottom"
@@ -109,14 +112,14 @@ const TrendChartDetails = ({
                       backgroundColor: colors[i] || '#000',
                     }}
                   />
-                  {k.name}
+                  {startCase(d.place)}
                 </td>
                 <td className="pt1 pr2 align-bottom right-align">
                   <span
                     className="inline-block border-bottom"
                     style={cellStyle}
                   >
-                    {formatRate(data[k.slug].rate)}
+                    {formatRate(d.rate)}
                   </span>
                 </td>
                 <td className="pt1 pr2 align-bottom right-align">
@@ -124,7 +127,7 @@ const TrendChartDetails = ({
                     className="inline-block border-bottom"
                     style={cellStyle}
                   >
-                    {formatTotal(data[k.slug].count)}
+                    {formatTotal(d.count)}
                   </span>
                 </td>
                 <td
@@ -135,7 +138,7 @@ const TrendChartDetails = ({
                     className="inline-block border-bottom"
                     style={cellStyle}
                   >
-                    {formatTotal(data[k.slug].pop)}
+                    {formatTotal(d.population)}
                   </span>
                 </td>
               </tr>,
@@ -150,8 +153,7 @@ const TrendChartDetails = ({
 TrendChartDetails.propTypes = {
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
   crime: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired,
-  keys: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
   updateYear: PropTypes.func.isRequired,

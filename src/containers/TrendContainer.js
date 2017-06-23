@@ -1,4 +1,3 @@
-import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
@@ -17,7 +16,6 @@ import mungeSummaryData from '../util/summary'
 
 const TrendContainer = ({
   crime,
-  dispatch,
   place,
   placeType,
   since,
@@ -42,7 +40,7 @@ const TrendContainer = ({
   else if (error) chart = <ErrorCard error={error} />
   else {
     const data = mungeSummaryData({
-      crime: snakeCase(crime === 'rape' ? 'rape_legacy' : crime),
+      crime,
       summaries: summaries.data,
       place,
       since,
@@ -59,8 +57,6 @@ const TrendContainer = ({
           <TrendChart
             crime={crime}
             data={data}
-            dispatch={dispatch}
-            keys={Object.keys(summaries.data).map(k => startCase(k))}
             place={place}
             since={since}
             until={until}
@@ -97,7 +93,6 @@ const TrendContainer = ({
 
 TrendContainer.propTypes = {
   crime: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired,
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,

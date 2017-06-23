@@ -16,7 +16,7 @@ self.addEventListener('install', event => {
       ])
 
       return Promise.all(
-        ['/app.css', '/bundle.js'].map(url => {
+        ['/app.css'].map(url => {
           const busted = `${url}?${Math.random()}`
           return fetch(busted).then(response => {
             if (!response.ok) throw Error('Not ok')
