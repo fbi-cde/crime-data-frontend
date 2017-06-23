@@ -54,7 +54,7 @@ const ExplorerHeaderContainer = ({
         </div>
         <div className="sm-col sm-col-4 xs-hide">
           <PlaceThumbnail selected={startCase(usState)} />
-          <div className="mt-tiny fs-12 serif italic truncate right">
+          <div className="mt-tiny fs-12 serif italic right">
             {isAgency && !isLoading
               ? `${placeDisplay}, ${startCase(usState)}`
               : startCase(usState)}
