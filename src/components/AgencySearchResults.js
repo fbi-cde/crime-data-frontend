@@ -2,8 +2,6 @@ import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { oriToState } from '../util/ori'
-
 const prevent = e => e.preventDefault()
 
 /* eslint-disable camelcase */
@@ -35,6 +33,7 @@ const AgencySearchResults = ({
   groupValues,
   onResultsClick,
   onStateClick,
+  usState,
 }) => {
   const noFederal = data.filter(d => d.agency_type_name !== 'Federal')
   const dataGrouped = groupValues.map(key => ({
@@ -45,8 +44,6 @@ const AgencySearchResults = ({
     key: 'No assigned county',
     data: noFederal.filter(d => d[groupKey] === null),
   })
-
-  const usState = oriToState(noFederal[0].ori)
 
   return (
     <div
@@ -95,6 +92,7 @@ AgencySearchResults.propTypes = {
   groupValues: PropTypes.arrayOf(PropTypes.string).isRequired,
   onResultsClick: PropTypes.func.isRequired,
   onStateClick: PropTypes.func.isRequired,
+  usState: PropTypes.string.isRequired,
 }
 
 export default AgencySearchResults

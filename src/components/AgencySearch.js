@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 
 import AgencySearchResults from './AgencySearchResults'
 import OnEscape from './OnEscape'
+import { oriToState } from '../util/ori'
 
 class AgencySearch extends Component {
   constructor(props) {
@@ -131,6 +132,7 @@ class AgencySearch extends Component {
                 groupValues={Object.keys(counties).sort()}
                 onResultsClick={this.handleResultsClick}
                 onStateClick={this.handleStateClick}
+                usState={oriToState(data[0].ori)}
               />
             </OnEscape>}
         </div>
