@@ -112,7 +112,7 @@ const About = ({ dispatch }) =>
           <h3 className="mt0 mb3 fs-22 sans-serif">
             Uniform Crime Reporting Participation, 2014
           </h3>
-          <div className="mb4 clearfix table">
+          <div className="mb4 clearfix">
             <div className="md-col md-col-9 md-pr7">
               <UsaMap
                 colors={stateColors.reduce(reduceStateColors, {})}
@@ -155,9 +155,10 @@ const About = ({ dispatch }) =>
               </div>
             </div>
           </div>
-          <div className="fs-12 serif italic">
-            Other outlying areas include America Samoa, Guam, Puerto Rico, and
-            U.S. Virgin Islands.
+          <div className="md-col-8 fs-12 serif italic">
+            Territories including American Samoa, Puerto Rico, Guam, and the
+            U.S. Virgin Islands submit summary data to the FBI. Some agencies
+            within states submit data directly to the FBI.
           </div>
         </div>
       </div>
