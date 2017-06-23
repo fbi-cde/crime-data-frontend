@@ -12,7 +12,7 @@ const ExplorerIntroNational = ({ crime, ucr, until }) => {
   const isArson = crime === 'arson'
   const untilUcr = ucr.find(p => p.year === until)
   const crimeTerm = (
-    <Term id={mapCrimeToGlossaryTerm(crime)} size="sm">
+    <Term id={mapCrimeToGlossaryTerm(crime)}>
       {upperFirst(lowerCase(crime))}
     </Term>
   )

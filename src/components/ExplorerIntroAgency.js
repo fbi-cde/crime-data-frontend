@@ -19,7 +19,7 @@ const ExplorerIntroAgency = ({
   const showCounty =
     (county && type === 'City') || type === 'University or College'
   const crimeTerm = (
-    <Term id={mapCrimeToGlossaryTerm(crime)} size="sm">
+    <Term id={mapCrimeToGlossaryTerm(crime)}>
       {upperFirst(lowerCase(crime))}
     </Term>
   )
