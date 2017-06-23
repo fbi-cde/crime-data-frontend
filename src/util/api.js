@@ -69,8 +69,9 @@ const fetchResults = (key, path) =>
   }))
 
 const fetchArson = place => {
-  const placeFilter = place ? `&state=${lookupUsa(place).toUpperCase()}` : ''
-  const url = `${API}/counts?explorer_offense=arson&per_page=100${placeFilter}`
+  const url = place
+    ? `${API}/arson/states/${lookupUsa(place)}?per_page=50`
+    : `${API}/arson/national?per_page=50`
   return get(url).then(({ results }) =>
     results.map(d => ({ year: d.year, arson: d.actual })),
   )
