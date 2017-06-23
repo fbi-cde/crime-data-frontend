@@ -4,12 +4,13 @@ import { bisector, extent, max, min } from 'd3-array'
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
 import { curveCardinal, line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
-import startCase from 'lodash.startcase'
 import throttle from 'lodash.throttle'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import TrendChartDetails from './TrendChartDetails'
+import TrendChartHover from './TrendChartHover'
+import TrendChartLineSeries from './TrendChartLineSeries'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
 
@@ -33,6 +34,45 @@ class TrendChart extends React.Component {
     if (this.svgParent) {
       this.setState({ svgParentWidth: this.svgParent.clientWidth })
     }
+  }
+
+  createSeries = ({ crimes, data, places }) => {
+    const [dates, rates] = [[], []]
+    const series = places
+      .map(p =>
+        crimes.map(c => {
+          const gaps = []
+          const segments = [[]]
+          const values = data.filter(d => d[p][c] && d[p][c].count).map(d => ({
+            date: d.date,
+            year: d.year,
+            population: d[p].population,
+            ...d[p][c],
+          }))
+
+          values.forEach(d => {
+            if (d.count && d.count !== 0) {
+              segments[segments.length - 1].push(d)
+            } else {
+              gaps.push(d.year)
+              segments.push([])
+            }
+            dates.push(d.date)
+            rates.push(d.rate)
+          })
+
+          return {
+            crime: c,
+            gaps,
+            place: p,
+            segments,
+            values,
+          }
+        }),
+      )
+      .reduce((a, n) => a.concat(n), [])
+
+    return { dates, rates, series }
   }
 
   forgetValue = () => {
@@ -76,61 +116,15 @@ class TrendChart extends React.Component {
       k => k !== 'year' && k !== 'date',
     )
 
-    const dataByYear = data.map(d => ({ ...d, date: parse(d.year) }))
     const isRape = crime === 'rape'
     const crimes = [isRape ? 'rape-legacy' : crime]
     if (isRape) crimes.push('rape-revised')
 
-    const series = places
-      .map(p =>
-        crimes.map(c => {
-          const gaps = []
-          const segments = [[]]
-          const values = dataByYear
-            .filter(d => d[p][c] && d[p][c].count)
-            .map(d => ({
-              date: d.date,
-              year: d.year,
-              population: d[p].population,
-              ...d[p][c],
-            }))
-          const ends = [values[0], values[values.length - 1]]
-
-          values.forEach(d => {
-            if (d.count && d.count !== 0) {
-              segments[segments.length - 1].push(d)
-            } else {
-              gaps.push(d.year)
-              segments.push([])
-            }
-          })
-
-          return {
-            crime: c,
-            ends,
-            gaps,
-            label: {
-              date: values[0].date,
-              rate: values[0].rate,
-              text: startCase(p),
-            },
-            place: p,
-            segments,
-            values,
-          }
-        }),
-      )
-      .reduce((a, n) => a.concat(n), [])
-
-    const [dates, rates] = [[], []]
-
-    series.forEach(s => {
-      const { values } = s
-
-      values.forEach(v => {
-        dates.push(v.date)
-        rates.push(v.rate)
-      })
+    const dataByYear = data.map(d => ({ ...d, date: parse(d.year) }))
+    const { dates, rates, series } = this.createSeries({
+      crimes,
+      data: dataByYear,
+      places,
     })
 
     const x = scaleTime().domain(extent(dates)).range([xPadding, width - 30])
@@ -141,73 +135,41 @@ class TrendChart extends React.Component {
       .x(d => x(d.date))
       .y(d => y(d.rate))
 
-    let active
+    let active = series.map(d => ({
+      crime: d.crime,
+      place: d.place,
+      ...(yearSelected
+        ? d.values.find(v => v.year === yearSelected)
+        : d.values[d.values.length - 1]),
+    }))
 
     if (!yearSelected && hover) {
       const bisectDate = bisector(d => d.date).left
       const x0 = x.invert(hover.x * width)
+      active = series.map(({ crime: c, place: p, values }) => {
+        const i = bisectDate(values, x0, 1)
+        const [d0, d1] = [values[i - 1], values[i]]
 
-      const hoverActive = series
-        .map(({ place, values }) => {
-          const i = bisectDate(values, x0, 1)
-          const [d0, d1] = [values[i - 1], values[i]]
-          let out
-
-          if (!d0) {
-            out = d1
-          } else if (d0 && !d1) {
-            out = d0
-          } else if (d0 && d1) {
-            out = x0 - d0.date > d1.date - x0 ? d1 : d0
-          }
-
-          if (out.year !== x0.getFullYear()) return false
-
-          return {
-            ...out,
-            place,
-          }
-        })
-        .filter(s => s)
-
-      if (hoverActive.length > 0) active = hoverActive
-    } else {
-      active = series.map(s => {
-        const match = s.values.find(d => d.year === (yearSelected || 2007))
-        return { ...match, place: s.place }
+        return {
+          crime: c,
+          place: p,
+          ...(d0 && d1 && x0 - d0.date > d1.date - x0 ? d1 : d0),
+        }
       })
     }
 
-    const callout = (
-      <g
-        transform={`translate(${x(active[0].date)}, 0)`}
-        id="trend-chart-callout"
-      >
-        <line
-          y2={height}
-          stroke="#95aabc"
-          strokeDasharray="2,3"
-          strokeWidth="1"
-        />
-        {places.map((p, j) =>
-          active
-            .filter(a => a.place === p && a.rate && a.count)
-            .map((a, jj) =>
-              <circle
-                key={`${j}${jj}`}
-                cx="0"
-                cy={y(a.rate)}
-                fill={color(p)}
-                r="4.5"
-              />,
-            ),
-        )}
-      </g>
-    )
-
     return (
       <div>
-
+        <TrendChartDetails
+          colors={colors}
+          crime={crime}
+          data={active}
+          dispatch={dispatch}
+          keys={places}
+          since={since}
+          updateYear={this.updateYear}
+          until={until}
+        />
         <div className="mb3 fs-10 bold monospace black">
           Rate per 100,000 people, by year
         </div>
@@ -216,63 +178,20 @@ class TrendChart extends React.Component {
           <svg width={svgWidth} height={svgHeight} style={{ maxWidth: '100%' }}>
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis
-                active={active}
+                active={active[0].date}
                 scale={x}
                 height={height}
                 tickCt={svgWidth < 500 ? 4 : 8}
               />
               <YAxis scale={y} width={width} />
-              {series.map((d, i) =>
-                <g key={i} className={`series series-${d.place}-${d.crime}`}>
-                  {d.segments.map((values, j) =>
-                    <g key={j}>
-                      <path
-                        d={l(values)}
-                        fill="none"
-                        stroke={color(d.place)}
-                        strokeWidth="2.5"
-                        strokeDasharray={d.crime === 'rape-revised' && '10,10'}
-                      />
-                      {showMarkers &&
-                        values.map((datum, k) =>
-                          <circle
-                            key={k}
-                            cx={x(datum.date)}
-                            cy={y(datum.rate)}
-                            fill={color(d.place)}
-                            r="2.5"
-                          />,
-                        )}
-                    </g>,
-                  )}
-                  {d.ends.map((datum, j) =>
-                    <circle
-                      key={j}
-                      cx={x(datum.date)}
-                      cy={y(datum.rate)}
-                      fill={color(d.place)}
-                      r="3.5"
-                    />,
-                  )}
-                </g>,
-              )}
-              {series
-                .filter(s => s.crime !== 'rape-revised')
-                .map(s => s.label)
-                .sort((a, b) => b.rate - a.rate)
-                .map((d, i) =>
-                  <text
-                    dy="0.35em"
-                    key={d.text}
-                    className="fs-10 bold xs-hide"
-                    textAnchor="end"
-                    transform={`translate(${x(d.date)}, ${y(d.rate)})`}
-                    x="-4"
-                    y={14 * (i === 0 ? -1 : 1)}
-                  >
-                    {d.text}
-                  </text>,
-                )}
+              <TrendChartLineSeries
+                color={color}
+                line={l}
+                series={series}
+                showMarkers={showMarkers}
+                x={x}
+                y={y}
+              />
               {until >= 2013 &&
                 crime === 'rape' &&
                 <g
@@ -305,7 +224,17 @@ class TrendChart extends React.Component {
                     definition
                   </text>
                 </g>}
-              {callout}
+              <TrendChartHover
+                color={color}
+                data={places
+                  .map(p =>
+                    active.filter(a => a.place === p && a.rate && a.count),
+                  )
+                  .reduce((a, n) => a.concat(n), [])}
+                height={height}
+                x={x}
+                y={y}
+              />
               <rect
                 width={width}
                 height={height}
