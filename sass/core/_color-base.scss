@@ -6,6 +6,7 @@ body {
 a {
   color: $link-color;
   text-decoration: $link-text-decoration;
+  text-decoration-skip: ink;
   &:hover { text-decoration: $link-hover-text-decoration; }
 }
 
