@@ -46,37 +46,38 @@ const AgencySearchResults = ({
   })
 
   return (
-    <div
-      className="mb2 p2 absolute col-12 border-box bg-white border overflow-auto"
-      style={{ marginTop: -1, maxHeight: 240 }}
-    >
-      <div className="mb1 pb-tiny fs-16 bold line-height-1">Results</div>
-      {noFederal.length === 0 && <div className="fs-12">No results</div>}
-      {dataGrouped.filter(g => g.data.length > 0).map(g =>
-        <div key={g.key}>
-          <div className="mt1 fs-10 bold caps blue">{g.key}</div>
-          <ul className="m0 list-reset fs-12">
-            {g.data
-              .slice(0, 100)
-              .sort((a, b) => a.agency_name < b.agency_name)
-              .map((d, i) =>
-                <AgencySearchResultItem
-                  agency={d}
-                  key={i}
-                  onClick={onResultsClick}
-                />,
-              )}
-          </ul>
-        </div>,
-      )}
-      <hr className="my2" />
-      <div>
-        <p className="italic serif fs-12">
-          Agencies that have submitted a full year{"'"}s worth of data in 2014
+    <div className="mb2 absolute bg-white col-12" style={{ maxHeight: 310 }}>
+      <div
+        className="p2 border-box border-top border-left border-right overflow-auto"
+        style={{ maxHeight: 180 }}
+      >
+        {noFederal.length === 0 && <div className="fs-12">No results</div>}
+        {dataGrouped.filter(g => g.data.length > 0).map(g =>
+          <div key={g.key}>
+            <div className="fs-10 bold caps blue">{g.key}</div>
+            <ul className="mt0 mb1 list-reset fs-12">
+              {g.data
+                .slice(0, 100)
+                .sort((a, b) => a.agency_name < b.agency_name)
+                .map((d, i) =>
+                  <AgencySearchResultItem
+                    agency={d}
+                    key={i}
+                    onClick={onResultsClick}
+                  />,
+                )}
+            </ul>
+          </div>,
+        )}
+      </div>
+      <div className="px2 pb2 border-box bg-white border-left border-right border-bottom">
+        <hr className="mt0 mb2" />
+        <p className="mb2 fs-12 italic serif">
+          Agencies that have submitted a full year’s worth of data in 2014
           are listed in dark blue.
         </p>
         <button
-          className="btn btn-primary regular py-tiny px1 fs-14"
+          className="btn btn-primary regular py0 px1 fs-14"
           onClick={() => onStateClick(usState)}
         >
           View {startCase(usState)}
