@@ -230,7 +230,7 @@ const About = ({ dispatch }) =>
         </div>
       </div>
     </section>
-    <section className="bg-blue white">
+    <section className="bg-blue-whiter">
       <div className="px2 py7 container mx-auto">
         <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright">
           More to come
@@ -244,57 +244,12 @@ const About = ({ dispatch }) =>
           </p>
         </div>
         <button
-          className="btn btn-primary bg-white blue"
+          className="btn btn-primary"
           onClick={() => dispatch(showFeedback())}
           type="button"
         >
           Submit feedback
         </button>
-      </div>
-    </section>
-    <section className="bg-white">
-      <div className="px2 py7 container mx-auto">
-        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter">
-          Contact us
-        </h2>
-        <div className="clearfix mxn6 mb3">
-          <div className="md-col md-col-4 px6 mb4 md-mb0">
-            <h3 className="mt0 mb2 fs-22 sans-serif red">Data questions?</h3>
-            <p className="m0">
-              <strong>FBI Uniform Crime<br />Reporting Program</strong><br />
-              1000 Custer Hollow Road<br />
-              Clarksburg, WV 26306
-            </p>
-          </div>
-          <div className="md-col md-col-4 px6 mb4 md-mb0">
-            <h3 className="mt0 mb2 fs-22 sans-serif red">
-              UCR Data Submissions
-            </h3>
-            <p className="m0">
-              All UCR data submissions must be sent to this email address.
-            </p>
-            <p>
-              Email:{' '}
-              <a className="underline" href="mailto:ucrstat@leo.gov">
-                ucrstat@leo.gov
-              </a>
-            </p>
-          </div>
-          <div className="md-col md-col-4 px6 md-pl8 mb4 md-mb0">
-            <h3 className="mt0 mb2 fs-22 sans-serif red">
-              UCR Program Contacts
-            </h3>
-            <p className="m0">
-              View additional{' '}
-              <a
-                className="underline"
-                href="https://ucr.fbi.gov/ucr-program-contacts"
-              >
-                contacts
-              </a>.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   </div>
