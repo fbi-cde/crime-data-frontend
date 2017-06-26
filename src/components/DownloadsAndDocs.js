@@ -41,13 +41,15 @@ const DownloadsAndDocs = () =>
                 Readme
               </a>
             </li>
+            {/*
             <li className="mb2">
               <a href="/pdf/NIBRS-data-diagram.pdf">
                 Data dictionary
               </a>
             </li>
+            */}
             <li className="mb2">
-              <a href="#!">NIBRS attributes</a>
+              <a href="/pdf/NIBRS-attributes-and-map.pdf">NIBRS attributes</a>
             </li>
           </ul>
         </div>
