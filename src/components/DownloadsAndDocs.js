@@ -26,7 +26,7 @@ const DownloadsAndDocs = () =>
           <p className="mb2 md-m0">
             Download {nibrsTerm} data by year and location. Estimated data
             and other crime-related datasets are also available for download.
-            Data is provided as CSV files and can be access via the{' '}
+            Data is provided as CSV files and can be accessed via the{' '}
             <a className="underline" href="/api">
               Crime Data
               Explorer API
