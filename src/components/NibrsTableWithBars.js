@@ -3,28 +3,28 @@ import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import NibrsCountPercentToggle from './NibrsCountPercentToggle'
+
 const formatNumber = format(',')
 const formatPercent = p => (+p > 0.01 ? format('.0%')(p) : '<1%')
-const formatSI = n => (+n > 10000 ? format('.2s')(n) : formatNumber(n))
+const formatSI = n => (+n > 10000 ? format('.3s')(n) : formatNumber(n))
 
 class NibrsTableWithBars extends React.Component {
-  state = { showCounts: false }
+  state = { isCounts: false }
 
   showCounts = e => {
     e.preventDefault()
-    this.setState({ showCounts: true })
+    this.setState({ isCounts: true })
   }
 
   showPercents = e => {
     e.preventDefault()
-    this.setState({ showCounts: false })
+    this.setState({ isCounts: false })
   }
 
   render() {
     const { data, noun, rowLim, sortByValue, title } = this.props
-    const { showCounts } = this.state
-    const btnClass =
-      'btn btn-primary p0 ml-tiny line-height-4 sans-serif regular'
+    const { isCounts } = this.state
 
     const agg = (a, b) => a + b.count
     const total = data.reduce(agg, 0)
@@ -59,16 +59,25 @@ class NibrsTableWithBars extends React.Component {
 
     return (
       <div>
-        <table className="my2 table-fixed">
-          {title &&
-            <caption className="left-align">
-              <div className="blue bold">{title}</div>
-            </caption>}
+        <div className="clearfix">
+          <div className="left">
+            <div className="blue bold">{title}</div>
+          </div>
+          <div className="right">
+            <NibrsCountPercentToggle
+              isCounts={isCounts}
+              showCounts={this.showCounts}
+              showPercents={this.showPercents}
+            />
+          </div>
+        </div>
+        <table className="mt1 mb2 table-fixed">
+          {title && <caption className="hide">{title}</caption>}
           <thead className="v-hide">
             <tr style={{ lineHeight: '16px' }}>
               <th style={{ width: '15%' }} />
               <th style={{ width: '20%' }}>
-                {showCounts ? 'Count' : 'Percent'}
+                {isCounts ? 'Count' : 'Percent'}
               </th>
               <th style={{ width: '65%' }}>{title}</th>
             </tr>
@@ -85,7 +94,7 @@ class NibrsTableWithBars extends React.Component {
                   </div>
                 </td>
                 <td className="pr-tiny bold monospace right-align">
-                  {showCounts ? d.countFmt : d.percentFmt}
+                  {isCounts ? d.countFmt : d.percentFmt}
                 </td>
                 <td className="px1" title={d.key}>
                   {d.key.replace && d.key.replace(/\//g, ' / ')}
@@ -104,27 +113,6 @@ class NibrsTableWithBars extends React.Component {
           {' '}
           {pluralize(noun)}
           .
-        </div>
-        <div className="clearfix">
-          <div className="right mt-tiny fs-10 italic serif">
-            View by
-            <button
-              className={`${btnClass} ${!showCounts &&
-                'bg-white blue border-blue'}`}
-              onClick={this.showCounts}
-              style={{ width: 18 }}
-            >
-              #
-            </button>
-            <button
-              className={`${btnClass} ${showCounts &&
-                'bg-white blue border-blue'}`}
-              onClick={this.showPercents}
-              style={{ width: 18 }}
-            >
-              %
-            </button>
-          </div>
         </div>
       </div>
     )
