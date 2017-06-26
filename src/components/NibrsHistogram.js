@@ -78,7 +78,7 @@ class NibrsHistogram extends React.Component {
             </g>
           </svg>
           {xLabel &&
-            <div className="mb1 fs-12 bold caps red center">{xLabel}</div>}
+            <div className="mb1 fs-10 bold caps red center">{xLabel}</div>}
           <NibrsHistogramDetails data={hover || { ct: total }} noun={noun} />
         </div>
       </div>
