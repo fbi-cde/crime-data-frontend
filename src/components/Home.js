@@ -47,14 +47,14 @@ const Home = ({ appState, dispatch, router }) => {
           <h1 className="mt0 pb1 fs-28 sm-fs-40 border-bottom border-red-bright">
             National, state, and local crime data
           </h1>
-          <p className="mb1 md-col-10 fs-18 sm-fs-24 serif">
+          <p className="mb1 md-col-9 fs-16 sm-fs-20 serif">
             The FBI collects and publishes{' '}
             <Term id="uniform crime reporting (ucr) program" size="lg">
               Uniform Crime Reporting (UCR)
             </Term>{' '}
             data on an annual basis.
           </p>
-          <p className="m0 md-col-10 fs-16 sm-fs-20 serif">
+          <p className="m0 md-col-9 fs-16 sm-fs-20 serif">
             Over 18,000 law enforcement agencies across the country voluntarily
             participate in the program by submitting data through a state
             UCR program or directly to the FBI. This open data project is
@@ -168,7 +168,7 @@ const Home = ({ appState, dispatch, router }) => {
           <h3 className="mt0 mb3 pb1 fs-18 sm-fs-28 border-bottom border-red-bright">
             Use our data in your project
           </h3>
-          <p className="mb3 sm-mb6 md-col-10 fs-18 sm-fs-24 serif">
+          <p className="mb3 sm-mb6 md-col-9 fs-16 sm-fs-20 serif">
             We recently released the FBI’s first crime data{' '}
             <Term id="application programming interface (api)" size="lg">
               application programming interface (API)

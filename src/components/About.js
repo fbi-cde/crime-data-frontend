@@ -65,11 +65,11 @@ const About = ({ dispatch }) =>
     <Helmet title="CDE :: About" />
     <section className="bg-white">
       <div className="px2 py7 container mx-auto">
-        <h1 className="mt0 mb4 pb1 fs-28 sm-fs-40 border-bottom border-blue-light">
+        <h1 className="mt0 mb4 pb1 fs-28 sm-fs-40 border-bottom border-blue-lighter">
           About the Crime Data Explorer
         </h1>
         <div className="mb7 clearfix">
-          <div className="md-col md-col-9 md-pr7 fs-18 sm-fs-24 serif">
+          <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
             <p className="mb2 md-m0">
               The Crime Data Explorer makes nationwide crime data accessible for
               a wide range of users, including law enforcement professionals,
@@ -165,11 +165,11 @@ const About = ({ dispatch }) =>
     </section>
     <section className="bg-white">
       <div className="px2 py7 container mx-auto">
-        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
+        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter">
           Crime data
         </h2>
         <div className="clearfix">
-          <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-18 serif">
+          <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
             <p className="mb3">
               The FBI’s Uniform Crime Reporting (UCR) Program is made up of two
               types of reports voluntarily submitted by law enforcement agencies
@@ -236,7 +236,7 @@ const About = ({ dispatch }) =>
           More to come
         </h2>
         <div className="mb3 md-pr7 border-box serif">
-          <p className="mb3 fs-18 sm-fs-24">
+          <p className="mb3 fs-16 sm-fs-20 md-col-9">
             This project is part of an ongoing effort to improve and provide
             access to the nation’s crime statistics. We’re working to add new
             features and an data based on your feedback. Tell us what you’d like
@@ -254,7 +254,7 @@ const About = ({ dispatch }) =>
     </section>
     <section className="bg-white">
       <div className="px2 py7 container mx-auto">
-        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
+        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter">
           Contact us
         </h2>
         <div className="clearfix mxn6 mb3">
