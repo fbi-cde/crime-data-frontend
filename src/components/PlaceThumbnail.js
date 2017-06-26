@@ -24,12 +24,15 @@ class PlaceThumbnail extends React.Component {
 
     if (!usa) return <Container />
 
+    const placeUpper = selected.toUpperCase()
     const [w, h] = [400, 300]
     const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
     const geoStates = feature(usa, usa.objects.units).features
     const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
-    const active = geoStates.find(s => s.properties.name === selected)
+    const active = geoStates.find(
+      s => s.properties.name.toUpperCase() === placeUpper,
+    )
 
     let strokeWidth
     let transform
@@ -59,7 +62,7 @@ class PlaceThumbnail extends React.Component {
                 key={i}
                 d={path(d)}
                 fill={
-                  d.properties.name === selected || !active
+                  d.properties.name.toUpperCase() === placeUpper || !active
                     ? '#94aabd'
                     : '#dfe6ed'
                 }
