@@ -1,5 +1,6 @@
 import { format } from 'd3-format'
 import startCase from 'lodash.startcase'
+import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -13,7 +14,6 @@ import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
 import ucrParticipation, { shouldFetchNibrs as shouldShowNibrs } from '../util/ucr'
 
-const fbiLink = 'https://ucr.fbi.gov/ucr-program-data-collections'
 const formatNumber = format(',')
 
 const highlight = txt => <strong>{txt}</strong>
@@ -98,20 +98,20 @@ const NibrsContainer = ({
         <h2 className="mt0 mb1 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} incident details reported by {placeDisplay}
         </h2>
-        {nibrsFirstYear !== since &&
-          <p className="my-tiny">
-            {placeDisplay} started reporting {nibrsTerm} data
-            to the FBI in {nibrsFirstYear}.
-          </p>}
         {!error &&
           data &&
-          <p className="m0 sm-col-9">
-            There were {highlight(formatNumber(totalCount))} incidents
-            of {crime} reported to the UCR Program between{' '}
-            {highlight(nibrsFirstYear)}{' '}
-            and {highlight(until)}. Learn more about the{' '}
-            <a className="underline" href={fbiLink}>FBI’s data collections</a>.
-          </p>}
+          (isAgency
+            ? <p className="m0 sm-col-9">
+                This agency reported {highlight(formatNumber(totalCount))}{' '}
+                individual {crime} {pluralize('incident', totalCount)} to the
+                FBI between {highlight(nibrsFirstYear)} and {highlight(until)}.
+              </p>
+            : <p className="m0 sm-col-9">
+                There were {highlight(formatNumber(totalCount))} individual{' '}
+                {crime} incidents reported to the FBI in {placeDisplay}{' '}
+                between {highlight(nibrsFirstYear)} and {highlight(until)}{' '}
+                by law enforcement agencies reporting {nibrsTerm}.
+              </p>)}
         {loading && <Loading />}
       </div>
       {content}
