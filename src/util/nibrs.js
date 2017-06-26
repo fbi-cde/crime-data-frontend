@@ -123,12 +123,14 @@ const offenderDemo = data => {
         noun: 'offender',
         title: 'Race of offender',
         type: 'table',
+        sentenceStart: 'Race',
       },
       {
         data: reshape(offenderEthnicity, 'ethnicity'),
         noun: 'offender',
         title: 'Ethnicity of offender',
         type: 'table',
+        sentenceStart: 'Ethnicity',
       },
     ],
   }
@@ -158,12 +160,14 @@ const victimDemo = data => {
         noun: 'victim',
         title: 'Race of victim',
         type: 'table',
+        sentenceStart: 'Race',
       },
       {
         data: reshape(victimEthnicity, 'ethnicity'),
         noun: 'victim',
         title: 'Ethnicity of victim',
         type: 'table',
+        sentenceStart: 'Ethnicity',
       },
     ],
   }
@@ -189,9 +193,9 @@ const relationships = data => {
     data: [
       {
         data: reshape(relationshipData, 'offender_relationship'),
-        noun: 'relationship',
         sortByValue: true,
         type: 'table',
+        sentenceStart: 'The victim’s relationship to the offender',
       },
     ],
   }
@@ -211,9 +215,9 @@ const locations = data => {
     data: [
       {
         data: reshape(locationData, 'location_name'),
-        noun: 'location',
         sortByValue: true,
         type: 'table',
+        sentenceStart: 'Location type',
       },
     ],
   }

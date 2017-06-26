@@ -10,20 +10,19 @@ const NibrsHistogramDetails = ({ data, noun }) => {
   const noSelection = !x0 && !x1
   const strong = v => <strong className="red">{v}</strong>
 
+  if (noSelection) {
+    return (
+      <div className="mh6 fs-14">
+        Age was reported for {strong(fmt(ct))} {pluralize(noun)}.
+      </div>
+    )
+  }
+
   return (
     <div className="mh6 fs-14">
-      There
-      {' '}
-      {pluralize('were', ct)}
-      {' '}
-      {strong(fmt(ct))}
-      {' '}
-      {pluralize('incidents', ct)}
-      {noSelection
-        ? <span>.</span>
-        : <span>
-            {' '}involving {pluralize(noun)} aged {strong(`${x0}-${x1 - 1}`)}.
-          </span>}
+      There {pluralize('were', ct)} {strong(fmt(ct))}{' '}
+      {pluralize('incidents', ct)} involving {pluralize(noun)}{' '}
+      with a reported age of {strong(`${x0}-${x1 - 1}`)}.
     </div>
   )
 }

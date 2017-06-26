@@ -23,7 +23,7 @@ class NibrsTableWithBars extends React.Component {
   }
 
   render() {
-    const { data, noun, rowLim, sortByValue, title } = this.props
+    const { data, noun, rowLim, sentenceStart, sortByValue, title } = this.props
     const { isCounts } = this.state
 
     const agg = (a, b) => a + b.count
@@ -104,15 +104,9 @@ class NibrsTableWithBars extends React.Component {
           </tbody>
         </table>
         <div className="mt-tiny fs-14 mb3">
-          {/* eslint max-len: 0 */}
-          There were
-          {' '}
-          <span className="bold red">{formatNumber(total)}</span>
-          {' '}
-          reported
-          {' '}
-          {pluralize(noun)}
-          .
+          {sentenceStart} was reported for{' '}
+          <span className="bold red">{formatNumber(total)}</span>{' '}
+          {pluralize(noun)}.
         </div>
       </div>
     )
