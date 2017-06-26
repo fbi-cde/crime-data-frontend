@@ -271,10 +271,10 @@ const About = ({ dispatch }) =>
               UCR Data Submissions
             </h3>
             <p className="m0">
-              All UCR data submissions must be sent to this e-mail address.
+              All UCR data submissions must be sent to this email address.
             </p>
             <p>
-              E-mail:{' '}
+              Email:{' '}
               <a className="underline" href="mailto:ucrstat@leo.gov">
                 ucrstat@leo.gov
               </a>
