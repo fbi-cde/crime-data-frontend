@@ -89,6 +89,11 @@ class AgencyChart extends React.Component {
         year,
       }))
 
+    // no data (nd) element responsive values
+    const [ndHeight, ndCircle, ndTextY, ndTextSize] = svgWidth < 500
+      ? [10, 5, 2.5, 8]
+      : [20, 8, 4, 11]
+
     return (
       <div>
         <AgencyChartDetails
@@ -140,12 +145,18 @@ class AgencyChart extends React.Component {
                   <g
                     key={`ndy-${d.year}`}
                     transform={`translate(${x0(d.year) +
-                      x1.bandwidth()}, ${height - 20})`}
+                      x1.bandwidth()}, ${height - ndHeight})`}
                     className="cursor-pointer no-year-data"
                     onMouseOver={this.rememberValue(d)}
                   >
-                    <circle r={8} fill="transparent" strokeWidth="1px" />
-                    <text y="4" textAnchor="middle">✕</text>
+                    <circle r={ndCircle} fill="transparent" strokeWidth="1px" />
+                    <text
+                      y={ndTextY}
+                      textAnchor="middle"
+                      style={{ fontSize: ndTextSize }}
+                    >
+                      ✕
+                    </text>
                   </g>,
                 )}
               </g>
