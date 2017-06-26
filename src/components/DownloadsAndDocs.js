@@ -17,12 +17,12 @@ const nibrsTerm = (
 const DownloadsAndDocs = () =>
   <section className="bg-white">
     <Helmet title="CDE :: Downloads & Documentation" />
-    <div className="px2 py3 container mx-auto">
-      <h1 className={`mt4 mb5 pb1 sm-mt4 fs-28 sm-fs-40 ${border}`}>
+    <div className="px2 py7 container mx-auto">
+      <h1 className={`mt0 mb4 pb1 fs-28 sm-fs-40 ${border}`}>
         Downloads & Documentation
       </h1>
       <div className="clearfix">
-        <div className="md-col md-col-9 md-pr7 fs-18 sm-fs-24 serif">
+        <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
           <p className="mb2 md-m0">
             Download {nibrsTerm} data by year and location. Estimated data
             and other crime-related datasets are also available for download.
@@ -52,7 +52,7 @@ const DownloadsAndDocs = () =>
           </ul>
         </div>
       </div>
-      <div className="mb8">
+      <div className="py7">
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
           Incident-based data by state
         </h2>
@@ -62,13 +62,13 @@ const DownloadsAndDocs = () =>
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
           Additional datasets
         </h2>
-        <div className={`clearfix xs-hide pb1 fs-18 bold caps serif ${border}`}>
+        <div className={`clearfix xs-hide pb1 fs-14 bold caps serif ${border}`}>
           <div className="sm-col sm-col-4 sm-pl2">Dataset</div>
           <div className="sm-col sm-col-8">Description</div>
         </div>
         {otherDatasets.map((d, i) =>
           <div key={i} className={`clearfix pt2 pb4 ${border}`}>
-            <div className="sm-col sm-col-4 mb1 sm-px2 fs-18 sm-fs-22 bold">
+            <div className="sm-col sm-col-4 mb1 sm-px2 fs-16 sm-fs-20 bold">
               {d.title}
             </div>
             <div className="sm-col sm-col-6 mb1 sm-pr2 md-pr4">

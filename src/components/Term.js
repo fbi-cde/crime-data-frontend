@@ -19,7 +19,7 @@ const Term = ({ children, dispatch, id, size = 'md' }) => {
   return (
     <a
       aria-label={`Show ${lowerCase(id)} in the glossary`}
-      className="inline-block border-bottom-dotted"
+      className="border-bottom-dotted"
       href="#!"
       onClick={handler}
     >
