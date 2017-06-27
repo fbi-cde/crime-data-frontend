@@ -4,7 +4,6 @@ import Helmet from 'react-helmet'
 import { Link } from 'react-router'
 
 import LocationSelect from './LocationSelect'
-import Term from './Term'
 import UsaMap from './UsaMap'
 import { updateApp } from '../actions/composite'
 import { updateFilters } from '../actions/filters'
@@ -172,11 +171,12 @@ const Home = ({ appState, dispatch, router }) => {
             Open data
           </h2>
           <p className="p0 md-col-9 fs-16 sm-fs-20 serif">
-            We recently released the FBI’s first crime data{' '}
-            <Term id="application programming interface (api)" size="lg">
-              application programming interface (API)
-            </Term>{' '}
-            so you can use this data in your own research and investigations.
+            This data comes from more than 18,000 law enforcement agencies
+            across the country that voluntarily participate in the FBI’s{' '}
+            <a href="https://ucr.fbi.gov/" className="underline">
+              Uniform Crime Reporting (UCR) Program
+            </a>. This is an open data project to improve the nation’s crime
+            data and promote transparency in the criminal justice system.
           </p>
         </div>
       </section>
