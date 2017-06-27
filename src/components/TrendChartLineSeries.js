@@ -1,11 +1,10 @@
 import { curveCardinal, line } from 'd3-shape'
 import PropTypes from 'prop-types'
-import startCase from 'lodash.startcase'
 import React from 'react'
 
-const TrendChartLineSeries = ({ color, series, showMarkers, x, y }) => {
+const TrendChartLineSeries = ({ color, series, x, y }) => {
   const l = line()
-    .curve(curveCardinal.tension(0.5))
+    .curve(curveCardinal.tension(0.25))
     .x(d => x(d.date))
     .y(d => y(d.rate))
 
@@ -25,16 +24,6 @@ const TrendChartLineSeries = ({ color, series, showMarkers, x, y }) => {
                   strokeWidth="2.5"
                   strokeDasharray={d.crime === 'rape-revised' && '5,4'}
                 />
-                {showMarkers &&
-                  values.map((datum, k) =>
-                    <circle
-                      key={k}
-                      cx={x(datum.date)}
-                      cy={y(datum.rate)}
-                      fill={color(d.place)}
-                      r="2.5"
-                    />,
-                  )}
               </g>,
             )}
             {d.crime !== 'rape-revised' &&
@@ -50,27 +39,6 @@ const TrendChartLineSeries = ({ color, series, showMarkers, x, y }) => {
           </g>
         )
       })}
-      {series
-        .filter(s => s.crime !== 'rape-revised')
-        .map(s => ({
-          date: s.values[0].date,
-          rate: s.values[0].rate,
-          text: startCase(s.place),
-        }))
-        .sort((a, b) => b.rate - a.rate)
-        .map((d, i) =>
-          <text
-            dy="0.35em"
-            key={d.text}
-            className="fs-10 bold xs-hide"
-            textAnchor="end"
-            transform={`translate(${x(d.date)}, ${y(d.rate)})`}
-            x="-4"
-            y={14 * (i === 0 ? -1 : 1)}
-          >
-            {d.text}
-          </text>,
-        )}
     </g>
   )
 }
@@ -78,14 +46,12 @@ const TrendChartLineSeries = ({ color, series, showMarkers, x, y }) => {
 TrendChartLineSeries.propTypes = {
   color: PropTypes.func.isRequired,
   series: PropTypes.array.isRequired,
-  showMarkers: PropTypes.bool.isRequired,
   x: PropTypes.func.isRequired,
   y: PropTypes.func.isRequired,
 }
 
 TrendChartLineSeries.defaultProps = {
-  color: () => 'pink',
-  showMarkers: false,
+  color: () => 'tomato',
 }
 
 export default TrendChartLineSeries

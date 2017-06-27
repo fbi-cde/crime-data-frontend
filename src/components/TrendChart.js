@@ -100,7 +100,7 @@ class TrendChart extends React.Component {
     const svgHeight = svgWidth / 2.25
     const width = svgWidth - margin.left - margin.right
     const height = svgHeight - margin.top - margin.bottom
-    const xPadding = svgWidth < 500 ? 30 : 80
+    const xPadding = svgWidth < 500 ? 15 : 30
     const parse = timeParse('%Y')
     const places = Object.keys(data[0]).filter(
       k => k !== 'year' && k !== 'date',
@@ -117,7 +117,10 @@ class TrendChart extends React.Component {
       places,
     })
 
-    const x = scaleTime().domain(extent(dates)).range([xPadding, width - 30])
+    const x = scaleTime()
+      .domain(extent(dates))
+      .range([xPadding, width - xPadding])
+
     const y = scaleLinear().domain([0, max(rates)]).range([height, 0]).nice()
 
     let active = series.map(d => ({
