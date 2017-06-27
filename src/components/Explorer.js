@@ -100,12 +100,11 @@ class Explorer extends React.Component {
         </div>
         <SidebarContainer onChange={this.handleSidebarChange} />
         <div className="site-content">
-          <div className="container-main mx-auto px2 md-py3 lg-px8">
+          <div className="container-main mx-auto px2 md-py3 lg-px3">
             <ExplorerHeaderContainer />
             {isAgency && <SparklineContainer />}
             {isAgency ? <AgencyChartContainer /> : <TrendContainer />}
             <NibrsContainer />
-            <hr className="mt0 mb3" />
             <AboutTheData
               crime={crime}
               onTermClick={term => dispatch(showTerm(term))}

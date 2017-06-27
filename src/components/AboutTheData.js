@@ -32,24 +32,28 @@ class AboutTheData extends React.Component {
     const { caveats, links } = content.crimes[crime]
 
     return (
-      <div className="about-the-data" id="about-the-data">
-        <h3 className="mt0 mb4 fs-22 sm-fs-26">
+      <div
+        className="mb4 pt5 border-top border-blue-lighter"
+        id="about-the-data"
+      >
+        <h3 className="mt0 mb3 fs-22 sm-fs-26">
           About {lowerCase(crime)} data
         </h3>
         <div className="lg-flex">
-          <div className="flex-auto mb1 fs-14 sm-fs-16 black">
-            <p>
+          <div className="flex-auto mb1 lg-pr5 fs-14 sm-fs-16 black">
+            <p className="mb3">
               The FBI collects crime data through the&nbsp;
-              <a className="blue underline" href="https://ucr.fbi.gov/">
+              <a className="black underline" href="https://ucr.fbi.gov/">
                 Uniform Crime Reporting (UCR) Program
               </a>.
             </p>
             <div className="caveats">
               {caveats.map((c, i) =>
                 <div key={i}>
-                  <div className="bold">{c.heading}</div>
+                  <div className="mb-tiny bold caps">{c.heading}</div>
                   {/* eslint react/no-danger: 0 */}
                   <div
+                    className="mb3"
                     dangerouslySetInnerHTML={{
                       __html: markdown.render(c.text),
                     }}

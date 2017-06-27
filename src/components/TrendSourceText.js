@@ -28,7 +28,7 @@ const TrendSourceText = ({ crime, place, since, until }) => {
   const hybrid = nibrs && srs
 
   return (
-    <div className="italic serif fs-12 mb8">
+    <div className="fs-12 italic serif">
       {!isArson
         ? <p>
             Source: FBI,
