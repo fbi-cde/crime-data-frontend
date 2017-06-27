@@ -44,7 +44,7 @@ const UcrResourcesList = ({ crime, place, placeType }) => {
 
   return (
     <div>
-      <h3 className="mt4 mb1 fs-18">Resources</h3>
+      <h3 className="mt4 mb1 fs-18 sm-fs-22">Resources</h3>
       <ul className="m0 p0 fs-14 left-bars">
         {links.map((l, i) =>
           <li className="mb1" key={i}>

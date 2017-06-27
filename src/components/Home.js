@@ -11,7 +11,7 @@ import { updateFilters } from '../actions/filters'
 import { oriToState } from '../util/ori'
 import { slugify } from '../util/text'
 import stateLookup from '../util/usa'
-import otherDataSets from '../../content/datasets.yml'
+import dataPreview from '../../content/preview.yml'
 
 const Home = ({ appState, dispatch, router }) => {
   const { crime, place, placeType } = appState.filters
@@ -44,22 +44,24 @@ const Home = ({ appState, dispatch, router }) => {
       <Helmet title="CDE :: Home" />
       <section className="px2 bg-blue-white">
         <div className="py7 container mx-auto relative">
-          <h1 className="mt0 pb1 fs-28 sm-fs-40 border-bottom border-blue-lighter">
-            National, state, and local crime data
+          <h1 className="mt0 mb4 pb1 fs-28 sm-fs-40 border-bottom border-blue-light">
+            Improving access to crime data
           </h1>
           <p className="mb1 md-col-9 fs-16 sm-fs-20 serif">
-            The FBI collects and publishes{' '}
-            <Term id="uniform crime reporting (ucr) program" size="lg">
-              Uniform Crime Reporting (UCR)
-            </Term>{' '}
-            data on an annual basis.
-          </p>
-          <p className="m0 md-col-9 fs-16 sm-fs-20 serif">
-            Over 18,000 law enforcement agencies across the country voluntarily
-            participate in the program by submitting data through a state
-            UCR program or directly to the FBI. This open data project is
-            part of our ongoing efforts to improve the accuracy and timeliness
-            of the nation’s crime statistics.
+            The Crime Data Explorer makes nationwide crime data accessible to a
+            wide range of users.{' '}
+            <Link to="/explorer/violent-crime" className="underline">
+              View trends
+            </Link>,{' '}
+            <Link to="/downloads-and-docs" className="underline">
+              download bulk datasets
+            </Link>, and access
+            the{' '}
+            <a href="/api" className="underline">
+              Crime Data API
+            </a>{' '}
+            for reported crime at the national, state, and
+            agency levels.
           </p>
         </div>
       </section>
@@ -136,15 +138,17 @@ const Home = ({ appState, dispatch, router }) => {
               View results
             </button>
           </div>
-          <h2 className="mt0 mb3 fs-22 sm-fs-32">Data downloads</h2>
+          <h2 className="mt0 mb3 fs-22 sm-fs-32">
+            Use our data in your project
+          </h2>
           <div className="flex flex-wrap mxn2">
-            {otherDataSets.slice(0, 3).map((d, i) =>
+            {dataPreview.map((d, i) =>
               <div
                 key={i}
                 className="flex col col-12 sm-col-6 md-col-4 px2 mb2 sm-mb4"
               >
                 <div className="col-12 px3 py2 bg-blue-white">
-                  <div className="mb1 pb1 fs-ch2 bold border-bottom border-blue-lighter">
+                  <div className="mb1 pb-tiny bold border-bottom border-blue-light">
                     {d.title}
                   </div>
                   <p className="mb2">{d.description}</p>
@@ -164,21 +168,16 @@ const Home = ({ appState, dispatch, router }) => {
       </section>
       <section className="px2 bg-blue-white">
         <div className="py7 container mx-auto">
-          <h2 className="mt0 mb1 fs-28 sm-fs-40">Crime data API</h2>
-          <h3 className="mt0 mb3 pb1 fs-18 sm-fs-28 border-bottom border-blue-lighter">
-            Use our data in your project
-          </h3>
-          <p className="mb3 sm-mb6 md-col-9 fs-16 sm-fs-20 serif">
+          <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
+            Open data
+          </h2>
+          <p className="p0 md-col-9 fs-16 sm-fs-20 serif">
             We recently released the FBI’s first crime data{' '}
             <Term id="application programming interface (api)" size="lg">
               application programming interface (API)
-            </Term>
-            {' '}
+            </Term>{' '}
             so you can use this data in your own research and investigations.
           </p>
-          <a className="btn btn-primary" href="/api">
-            See API documentation
-          </a>
         </div>
       </section>
     </div>
