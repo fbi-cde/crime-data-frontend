@@ -75,9 +75,9 @@ const About = ({ dispatch }) =>
               modernize the reporting of national crime data. It allows you to{
                 ' '
               }
-              <a href="explorer/violent-crime">view trends</a>,{' '}
-              <a href="/downloads-and-docs">download bulk data</a>, and access
-              the <a href="/api">Crime Data API</a> for reported crime at the
+              <a href="explorer/violent-crime" class="underline">view trends</a>,{' '}
+              <a href="/downloads-and-docs" class="underline">download bulk data</a>, and access
+              the <a href="/api" class="underline">Crime Data API</a> for reported crime at the
               national, state, and agency levels.
             </p>
           </div>
@@ -180,7 +180,7 @@ const About = ({ dispatch }) =>
               Since 1930, participating local, county, state, tribal, and
               federal law enforcement agencies have voluntarily provided the
               nation with crime statistics through the{' '}
-              <a href="https://ucr.fbi.gov/">
+              <a href="https://ucr.fbi.gov/" class="underline">
                 Uniform Crime Reporting (UCR) Program
               </a>{' '}
               via:
@@ -220,8 +220,8 @@ const About = ({ dispatch }) =>
             </p>
             <p>
               The Crime Data Explorer makes this data available through the{' '}
-              <a href="/api">API</a> and{' '}
-              <a href="/downloads-and-docs">bulk downloads</a>.
+              <a href="/api" class="underline">API</a> and{' '}
+              <a href="/downloads-and-docs" class="underline">bulk downloads</a>.
             </p>
           </div>
           <div className="md-col md-col-3">
