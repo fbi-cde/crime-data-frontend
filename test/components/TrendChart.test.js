@@ -19,7 +19,7 @@ describe('TrendChart', () => {
     since: 2012,
     until: 2014,
     crime: 'violent-crime',
-    place: 'united-states',
+    places: ['united-states'],
   }
   let chart
 

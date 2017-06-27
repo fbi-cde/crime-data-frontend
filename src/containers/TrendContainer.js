@@ -14,72 +14,66 @@ import { generateCrimeReadme } from '../util/content'
 import { getPlaceInfo } from '../util/place'
 import mungeSummaryData from '../util/summary'
 
-const TrendContainer = ({
-  crime,
-  place,
-  placeType,
-  since,
-  summaries,
-  until,
-}) => {
-  let chart
-  const { error, loading } = summaries
+const getContent = ({ crime, place, since, summaries, until }) => {
+  const { loading, error } = summaries
+
+  if (loading) return <Loading />
+  if (error) return <ErrorCard error={error} />
+
+  const data = mungeSummaryData({
+    crime,
+    summaries: summaries.data,
+    place,
+    since,
+    until,
+  })
+
+  if (!data || data.length === 0) return <NoData />
+
+  const places = Object.keys(summaries.data)
+  const fname = `${place}-${crime}-${since}-${until}`
+  const title =
+    `Reported ${pluralize(crime)} in ` +
+    `${startCase(place)}, ${since}-${until}`
+
+  const readme = generateCrimeReadme({ crime, title })
+  const dlData = data.map(d => {
+    const placeData = places.map(p => ({ [p]: { ...d[p][crime] } }))
+    return { year: d.year, ...Object.assign(...placeData) }
+  })
+
   const download = [
-    {
-      content: generateCrimeReadme({
-        crime,
-        title: `Reported ${pluralize(crime)} in ${startCase(
-          place,
-        )}, ${since}-${until}`,
-      }),
-      filename: 'README.md',
-    },
+    { content: readme, filename: 'README.md' },
+    { data: dlData, filename: `${fname}.csv` },
   ]
 
-  if (loading) chart = <Loading />
-  else if (error) chart = <ErrorCard error={error} />
-  else {
-    const data = mungeSummaryData({
-      crime,
-      summaries: summaries.data,
-      place,
-      since,
-      until,
-    })
-    if (!data || data.length === 0) chart = <NoData />
-    else {
-      download.push({
-        data,
-        filename: `${place}-${crime}-${since}-${until}.csv`,
-      })
-      chart = (
-        <div>
-          <TrendChart
-            crime={crime}
-            data={data}
-            place={place}
-            since={since}
-            until={until}
-          />
-          <DownloadDataBtn
-            data={download}
-            filename={`${place}-${crime}-${since}-${until}`}
-          />
-        </div>
-      )
-    }
-  }
+  return (
+    <div>
+      <TrendChart
+        crime={crime}
+        data={data}
+        places={places}
+        since={since}
+        until={until}
+      />
+      <DownloadDataBtn data={download} filename={fname} />
+    </div>
+  )
+}
+
+const TrendContainer = props => {
+  const { crime, place, placeType, since, summaries, until } = props
+  const isReady = !summaries.loading
 
   return (
     <div>
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb3 sm-mb5 fs-24 sm-fs-28 sans-serif">
-          {startCase(crime)} rate in {startCase(place)},{' '}
-          {since}–{until}
+          {startCase(crime)} rate in {startCase(place)}, {since}-{until}
         </h2>
-        {chart}
+        {getContent(props)}
       </div>
-      {!loading &&
+      {isReady &&
         <TrendSourceText
           crime={crime}
           place={place}
