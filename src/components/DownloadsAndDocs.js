@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React from 'react'
 import Helmet from 'react-helmet'
 
@@ -69,24 +70,20 @@ const DownloadsAndDocs = () =>
         </div>
         {otherDatasets.map((d, i) =>
           <div key={i} className={`clearfix pt2 pb4 ${borderLight}`}>
-            <div className="sm-col sm-col-4 mb1 sm-px2 fs-16 sm-fs-20 bold">
+            <div className="sm-col sm-col-4 mb1 sm-pl2 sm-pr4 fs-16 sm-fs-20 bold">
               {d.title}
             </div>
-            <div className="sm-col sm-col-6 mb1 sm-pr2 md-pr4">
-              {/* eslint react/no-danger: 0 */}
+            <div className="sm-col sm-col-8 mb1 sm-pr2 md-pr4">
               <div
                 dangerouslySetInnerHTML={{
                   __html: markdown.render(d.description),
                 }}
               />
-            </div>
-            <div className="sm-col sm-col-2 fs-14 bold">
-              <a className="block mt1 sm-mt2 fs-12 underline">
-                <DownloadDataBtn
-                  data={[{ url: d.download }]}
-                  text="Download CSV"
-                />
-              </a>
+              <DownloadDataBtn
+                className="block fs-12"
+                data={[{ url: d.download }]}
+                text="Download CSV"
+              />
             </div>
           </div>,
         )}
