@@ -65,8 +65,8 @@ const AgencyChartContainer = params => {
   const noun = submitsNibrs ? 'incidents' : 'offenses'
 
   return (
-    <div className="mb5">
-      <div className="p2 sm-p4 bg-white border-top border-blue border-w8">
+    <div className="mb7">
+      <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb3 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} {noun} reported by{' '}
           {agency.display}, {since}–{until}
@@ -74,13 +74,17 @@ const AgencyChartContainer = params => {
         <Content submitsNibrs={submitsNibrs} {...params} />
       </div>
       {!summary.loading &&
-        <div className="mt2 fs-12 serif italic">
-          Source: Reported
-          {' '}
-          {submitsNibrs ? nibrsTerm : srsTerm}
-          {' '}
-          data from
-          {' '}
+        <div className="fs-12 serif italic">
+          No data or low data may be the result of an agency not
+          participating, reporting no incidents, changes in reporting, or
+          being ”covered by” another agency.{' '}
+          <a
+            className="mr-tiny underline"
+            href="https://ucr.fbi.gov/ucr-publications"
+          >
+            Learn more.
+          </a>
+          Source: Reported {submitsNibrs ? nibrsTerm : srsTerm} data from{' '}
           {agency.display}
         </div>}
     </div>
