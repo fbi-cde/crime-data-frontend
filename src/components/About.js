@@ -72,12 +72,16 @@ const About = ({ dispatch }) =>
           <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
             <p className="mb2 md-m0">
               The Crime Data Explorer is part of the FBI’s broader effort to
-              modernize the reporting of national crime data. It allows you to{
-                ' '
-              }
-              <a href="explorer/violent-crime">view trends</a>,{' '}
-              <a href="/downloads-and-docs">download bulk data</a>, and access
-              the <a href="/api">Crime Data API</a> for reported crime at the
+              modernize the reporting of national crime data.
+              It allows you to{' '}
+              <a href="explorer/violent-crime" className="underline">
+                view trends
+              </a>,{' '}
+              <a href="/downloads-and-docs" className="underline">
+                download bulk data
+              </a>, and access
+              the <a href="/api" className="underline">Crime Data API</a> for
+              reported crime at the
               national, state, and agency levels.
             </p>
           </div>
@@ -100,9 +104,7 @@ const About = ({ dispatch }) =>
                 </Term>
               </li>
               <li className="mb2">
-                <Term id="Hate Crime">
-                  Hate Crime
-                </Term>
+                <Term id="Hate Crime">Hate Crime</Term>
               </li>
             </ul>
           </div>
@@ -180,7 +182,7 @@ const About = ({ dispatch }) =>
               Since 1930, participating local, county, state, tribal, and
               federal law enforcement agencies have voluntarily provided the
               nation with crime statistics through the{' '}
-              <a href="https://ucr.fbi.gov/">
+              <a href="https://ucr.fbi.gov/" className="underline">
                 Uniform Crime Reporting (UCR) Program
               </a>{' '}
               via:
@@ -220,8 +222,10 @@ const About = ({ dispatch }) =>
             </p>
             <p>
               The Crime Data Explorer makes this data available through the{' '}
-              <a href="/api">API</a> and{' '}
-              <a href="/downloads-and-docs">bulk downloads</a>.
+              <a href="/api" className="underline">API</a> and{' '}
+              <a href="/downloads-and-docs" className="underline">
+                bulk downloads
+              </a>.
             </p>
           </div>
           <div className="md-col md-col-3">
