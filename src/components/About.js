@@ -71,11 +71,14 @@ const About = ({ dispatch }) =>
         <div className="mb7 clearfix">
           <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
             <p className="mb2 md-m0">
-              The Crime Data Explorer makes nationwide crime data accessible for
-              a wide range of users, including law enforcement professionals,
-              journalists, and the general public. The tool allows you to view
-              trends and download bulk data, to better understand reported crime
-              at the national, state, and agency level.
+              The Crime Data Explorer is part of the FBI’s broader effort to
+              modernize the reporting of national crime data. It allows you to{
+                ' '
+              }
+              <a href="explorer/violent-crime">view trends</a>,{' '}
+              <a href="/downloads-and-docs">download bulk data</a>, and access
+              the <a href="/api">Crime Data API</a> for reported crime at the
+              national, state, and agency levels.
             </p>
           </div>
           <div className="md-col md-col-3">
@@ -83,7 +86,7 @@ const About = ({ dispatch }) =>
             <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
               <li className="mb2">
                 <Term id="Summary Reporting System (SRS)">
-                  Summary Statistics (SRS)
+                  Summary statistics (SRS)
                 </Term>
               </li>
               <li className="mb2">
@@ -109,6 +112,9 @@ const About = ({ dispatch }) =>
     <section className="bg-blue-whiter">
       <div className="px2 py6 bg-lighten-1">
         <div className="container mx-auto">
+          <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter">
+            How states participate
+          </h2>
           <h3 className="mt0 mb3 fs-22 sans-serif">
             Uniform Crime Reporting Participation, 2014
           </h3>
@@ -158,7 +164,7 @@ const About = ({ dispatch }) =>
           <div className="md-col-8 fs-12 serif italic">
             Territories including American Samoa, Puerto Rico, Guam, and the
             U.S. Virgin Islands submit summary data to the FBI. Some agencies
-            within states submit data directly to the FBI.
+            submit data directly to the FBI.
           </div>
         </div>
       </div>
@@ -171,42 +177,51 @@ const About = ({ dispatch }) =>
         <div className="clearfix">
           <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
             <p className="mb3">
-              The FBI’s Uniform Crime Reporting (UCR) Program is made up of two
-              types of reports voluntarily submitted by law enforcement agencies
-              across the country. Agencies participate in the UCR Program by
-              submitting data to the FBI in one of two formats: summary
-              statistics (SRS) or incident-based reports (NIBRS). The Crime Data
-              Explorer makes both types of data available through the API and
-              bulk downloads.
+              Since 1930, participating local, county, state, tribal, and
+              federal law enforcement agencies have voluntarily provided the
+              nation with crime statistics through the{' '}
+              <a href="https://ucr.fbi.gov/">
+                Uniform Crime Reporting (UCR) Program
+              </a>{' '}
+              via:
             </p>
-            <div className="bold">
+            <div className="mb-tiny bold">
               Summary (SRS) data
               <span className="italic ml-tiny regular">
-                1960-2014 data available
+                1960—2014 data available
               </span>
             </div>
             <p className="mb3">
-              This data is made up of the number of offenses that occurred. It
-              captures only the most serious offense involved in crime incidents
-              according to the hierarchy rule plus a few supplemental details
-              depending on the offense. For example, victim and offender data
-              are collected only for murder offenses. Summary data allows us to
-              show crime rates as trends and as totals.
+              Summary data allows us to show crime rates as trends and totals.
+              This data includes the number of offenses that were reported on a
+              state or agency level. It captures the most serious offense
+              involved in crime incidents according to the{' '}
+              <Term id="hierarchy rule">
+                hierarchy rule
+              </Term>
+              {' '}
+              and supplemental details depending on the offense. For example,
+              victim and offender data are collected only for murder offenses.
             </p>
-            <div className="bold">
+            <div className="mb-tiny bold">
               Incident-based (NIBRS) data
               <span className="italic ml-tiny regular">
-                1991-2014 data available
+                1991—2014 data available
               </span>
             </div>
-            <p className="mb3 md-m0">
-              Incident-based (NIBRS) data records all major offenses that were
-              part of an incident and captures details about each incident such
-              as information about the the victim, the offender, the property
-              involved, and the arrestees, providing context that is not
-              provided by the summary data. Incident-based data allow us to
-              visualize how crime breaks down regarding victims, offenders, and
-              other attributes related to a reported crime.{' '}
+            <p>
+              Incident-based data allow us to visualize how crime breaks down
+              regarding victims, offenders, and other attributes related to a
+              reported crime. NIBRS data records details regarding individual
+              offenses and arrests that were part of an incident, such as
+              information about the victim, offender, property involved, and
+              arrestees, providing context that is not provided by the summary
+              data.
+            </p>
+            <p>
+              The Crime Data Explorer makes this data available through the{' '}
+              <a href="/api">API</a> and{' '}
+              <a href="/downloads-and-docs">bulk downloads</a>.
             </p>
           </div>
           <div className="md-col md-col-3">
@@ -218,11 +233,13 @@ const About = ({ dispatch }) =>
                 <a href="https://ucr.fbi.gov/">UCR Home</a>
               </li>
               <li className="mb1">
-                <a href="https://ucr.fbi.gov/new-ucr-project">New UCR</a>
+                <a href="https://ucr.fbi.gov/new-ucr-project">
+                  New UCR Project
+                </a>
               </li>
               <li className="mb1">
                 <a href="https://ucr.fbi.gov/nibrs/nibrs-user-manual">
-                  NIBRS user manual
+                  NIBRS User Manual
                 </a>
               </li>
             </ul>
@@ -232,15 +249,15 @@ const About = ({ dispatch }) =>
     </section>
     <section className="bg-blue-whiter">
       <div className="px2 py7 container mx-auto">
-        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright">
+        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter">
           More to come
         </h2>
         <div className="mb3 md-pr7 border-box serif">
           <p className="mb3 fs-16 sm-fs-20 md-col-9">
-            This project is part of an ongoing effort to improve and provide
-            access to the nation’s crime statistics. We’re working to add new
-            features and an data based on your feedback. Tell us what you’d like
-            to see next.
+            The Crime Data Explorer is part of an ongoing effort to improve and
+            provide access to the nation’s crime statistics. We’re working to
+            add new features and value your feedback. Tell us what you’d like to
+            see next.
           </p>
         </div>
         <button
