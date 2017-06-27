@@ -65,10 +65,10 @@ const About = ({ dispatch }) =>
     <Helmet title="CDE :: About" />
     <section className="bg-white">
       <div className="px2 py7 container mx-auto">
-        <h1 className="mt0 mb4 pb1 fs-28 sm-fs-40 border-bottom border-blue-lighter">
+        <h1 className="mt0 mb4 pb1 fs-28 sm-fs-40 border-bottom border-blue-light">
           About the Crime Data Explorer
         </h1>
-        <div className="mb7 clearfix">
+        <div className="clearfix">
           <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
             <p className="mb2 md-m0">
               The Crime Data Explorer is part of the FBI’s broader effort to
@@ -114,7 +114,7 @@ const About = ({ dispatch }) =>
     <section className="bg-blue-whiter">
       <div className="px2 py6 bg-lighten-1">
         <div className="container mx-auto">
-          <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter">
+          <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
             How states participate
           </h2>
           <h3 className="mt0 mb3 fs-22 sans-serif">
@@ -153,10 +153,9 @@ const About = ({ dispatch }) =>
                     </div>,
                   )}
               </div>
-              <div className="border-top bottom-0 fs-14 pt1 mt2">
+              <div className="mt6 pt2 fs-14 border-top border-blue-light">
                 To see which agencies submit NIBRS data to the FBI, download
                 <DownloadDataBtn
-                  className="fs-14"
                   data={[{ url: agenciesParticiaptionDownloadUrl }]}
                   text="Agency participation data"
                 />
@@ -173,7 +172,7 @@ const About = ({ dispatch }) =>
     </section>
     <section className="bg-white">
       <div className="px2 py7 container mx-auto">
-        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter">
+        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
           Crime data
         </h2>
         <div className="clearfix">
@@ -253,7 +252,7 @@ const About = ({ dispatch }) =>
     </section>
     <section className="bg-blue-whiter">
       <div className="px2 py7 container mx-auto">
-        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter">
+        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
           More to come
         </h2>
         <div className="mb3 md-pr7 border-box serif">

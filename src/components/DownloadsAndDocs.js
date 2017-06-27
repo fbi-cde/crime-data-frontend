@@ -7,7 +7,8 @@ import Term from './Term'
 import otherDatasets from '../../content/datasets.yml'
 import markdown from '../util/md'
 
-const border = 'border-bottom border-blue-lighter'
+const border = 'border-bottom border-blue-light'
+const borderLight = 'border-bottom border-blue-lighter'
 const nibrsTerm = (
   <Term id="national incident-based reporting system (nibrs)" size="lg">
     incident-based (NIBRS)
@@ -60,12 +61,14 @@ const DownloadsAndDocs = () =>
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
           Additional datasets
         </h2>
-        <div className={`clearfix xs-hide pb1 fs-14 bold caps serif ${border}`}>
+        <div
+          className={`clearfix xs-hide pb1 fs-14 bold caps serif ${borderLight}`}
+        >
           <div className="sm-col sm-col-4 sm-pl2">Dataset</div>
           <div className="sm-col sm-col-8">Description</div>
         </div>
         {otherDatasets.map((d, i) =>
-          <div key={i} className={`clearfix pt2 pb4 ${border}`}>
+          <div key={i} className={`clearfix pt2 pb4 ${borderLight}`}>
             <div className="sm-col sm-col-4 mb1 sm-px2 fs-16 sm-fs-20 bold">
               {d.title}
             </div>

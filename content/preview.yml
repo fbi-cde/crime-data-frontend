@@ -1,0 +1,12 @@
+- title: Estimated crime data
+  description: |
+    Crime trends at the state and national level for violent crime and
+    property crime since 1995.
+- title: NIBRS data
+  description: |
+    Incident-based data for crimes known to law enforcement for states
+    reporting NIBRS.
+- title: Other datasets
+  description: |
+    Hate crime, assaults on law enforcement, police employee data, agency
+    participation, cargo theft, and human trafficking.

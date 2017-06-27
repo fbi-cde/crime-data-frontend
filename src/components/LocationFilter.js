@@ -20,7 +20,9 @@ class LocationFilter extends React.Component {
 
     return (
       <div id="location" className="mb4">
-        <div className="mb3 fs-22 bold border-bottom">Location</div>
+        <div className="mb3 fs-22 bold border-bottom border-blue-light">
+          Location
+        </div>
         <LocationSelect
           onChange={onChange}
           onFocus={this.handleLocationFocus}
