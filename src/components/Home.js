@@ -158,7 +158,7 @@ const Home = ({ appState, dispatch, router }) => {
           </div>
           <div>
             <Link
-              className="mb1 btn btn-primary btn-lg fs-18"
+              className="mb1 btn btn-primary btn-lg"
               to="/downloads-and-docs"
             >
               See all downloads

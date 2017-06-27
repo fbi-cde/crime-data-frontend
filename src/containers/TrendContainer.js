@@ -66,7 +66,7 @@ const TrendContainer = props => {
   const isReady = !summaries.loading
 
   return (
-    <div>
+    <div className="mb7">
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb3 sm-mb5 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} rate in {startCase(place)}, {since}-{until}
