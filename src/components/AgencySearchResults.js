@@ -49,7 +49,7 @@ const AgencySearchResults = ({
     <div className="mb2 absolute bg-white col-12" style={{ maxHeight: 310 }}>
       <div
         className="p2 border-box border-top border-left border-right overflow-auto"
-        style={{ maxHeight: 180 }}
+        style={{ marginTop: -1, maxHeight: 180 }}
       >
         {noFederal.length === 0 && <div className="fs-12">No results</div>}
         {dataGrouped.filter(g => g.data.length > 0).map(g =>
