@@ -3,7 +3,7 @@ import md from 'markdown-it'
 // adopted from examples in markdown-it docs
 // https://github.com/markdown-it/markdown-it/blob/master/docs/architecture.md#renderer
 
-const markdown = md()
+const markdown = md({ html: true, xhtmlOut: true })
 
 const defaultLinkRender =
   markdown.renderer.rules.link_open ||
