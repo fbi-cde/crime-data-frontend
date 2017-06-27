@@ -35,19 +35,21 @@ class TrendChart extends React.Component {
     }
   }
 
-  createSeries = ({ crimes, data, places }) => {
+  createSeries = (crimes, data, places) => {
     const [dates, rates] = [[], []]
     const series = places
-      .map(p =>
-        crimes.map(c => {
+      .map(place =>
+        crimes.map(crime => {
           const gaps = []
           const segments = [[]]
-          const values = data.filter(d => d[p][c] && d[p][c].count).map(d => ({
-            date: d.date,
-            year: d.year,
-            population: d[p].population,
-            ...d[p][c],
-          }))
+          const values = data
+            .filter(d => d[place][crime] && d[place][crime].count)
+            .map(d => ({
+              date: d.date,
+              year: d.year,
+              population: d[place].population,
+              ...d[place][crime],
+            }))
 
           values.forEach(d => {
             if (d.count && d.count !== 0) {
@@ -60,22 +62,12 @@ class TrendChart extends React.Component {
             rates.push(d.rate)
           })
 
-          return {
-            crime: c,
-            gaps,
-            place: p,
-            segments,
-            values,
-          }
+          return { crime, gaps, place, segments, values }
         }),
       )
       .reduce((a, n) => a.concat(n), [])
 
     return { dates, rates, series }
-  }
-
-  forgetValue = () => {
-    this.setState({ hover: null })
   }
 
   updateYear = year => {
@@ -92,67 +84,59 @@ class TrendChart extends React.Component {
   }
 
   render() {
-    const { crime, colors, data, showMarkers, since, size, until } = this.props
+    const { crime, colors, data, places, since, size, until } = this.props
     const { hover, svgParentWidth, yearSelected } = this.state
+
     const { margin } = size
     const color = scaleOrdinal(colors)
     const svgWidth = svgParentWidth || size.width
     const svgHeight = svgWidth / 2.25
     const width = svgWidth - margin.left - margin.right
     const height = svgHeight - margin.top - margin.bottom
-    const xPadding = svgWidth < 500 ? 15 : 30
+    const xPad = svgWidth < 500 ? 15 : 30
     const parse = timeParse('%Y')
-    const places = Object.keys(data[0]).filter(
-      k => k !== 'year' && k !== 'date',
-    )
 
     const isRape = crime === 'rape'
     const crimes = [isRape ? 'rape-legacy' : crime]
     if (isRape) crimes.push('rape-revised')
 
     const dataByYear = data.map(d => ({ ...d, date: parse(d.year) }))
-    const { dates, rates, series } = this.createSeries({
-      crimes,
-      data: dataByYear,
-      places,
-    })
+    const newSeries = this.createSeries(crimes, dataByYear, places)
+    const { dates, rates, series } = newSeries
 
-    const x = scaleTime()
-      .domain(extent(dates))
-      .range([xPadding, width - xPadding])
-
+    const x = scaleTime().domain(extent(dates)).range([xPad, width - xPad])
     const y = scaleLinear().domain([0, max(rates)]).range([height, 0]).nice()
 
-    let active = series.map(d => ({
-      crime: d.crime,
-      place: d.place,
+    let active = series.map(({ crime: c, place, values }) => ({
+      crime: c,
+      place,
       ...(yearSelected
-        ? d.values.find(v => v.year === yearSelected)
-        : d.values[d.values.length - 1]),
+        ? values.find(v => v.year === yearSelected)
+        : values[values.length - 1]),
     }))
 
     if (!yearSelected && hover) {
       const bisectDate = bisector(d => d.date).left
       const x0 = x.invert(hover.x * width)
       active = series
-        .map(({ crime: c, place: p, values }) => {
+        .map(({ crime: c, place, values }) => {
           if (x0.getFullYear() < 2013 && c === 'rape-revised') return null
           const i = bisectDate(values, x0, 1)
           const [d0, d1] = [values[i - 1], values[i]]
-
-          return {
-            crime: c,
-            place: p,
-            ...(d0 && d1 && x0 - d0.date > d1.date - x0 ? d1 : d0),
-          }
+          const pt = d0 && d1 && x0 - d0.date > d1.date - x0 ? d1 : d0
+          return { crime: c, place, ...pt }
         })
         .filter(s => s)
     }
 
     const dataHover = places
-      .map(p =>
+      .map(place =>
         active.filter(
-          a => a.place === p && a.crime !== 'rape-revised' && a.rate && a.count,
+          a =>
+            a.place === place &&
+            a.crime !== 'rape-revised' &&
+            a.rate &&
+            a.count,
         ),
       )
       .reduce((a, n) => a.concat(n), [])
@@ -182,13 +166,7 @@ class TrendChart extends React.Component {
                 tickCt={svgWidth < 500 ? 4 : 8}
               />
               <YAxis scale={y} width={width} />
-              <TrendChartLineSeries
-                color={color}
-                series={series}
-                showMarkers={showMarkers}
-                x={x}
-                y={y}
-              />
+              <TrendChartLineSeries color={color} series={series} x={x} y={y} />
               {until > 2013 &&
                 crime === 'rape' &&
                 <g
@@ -255,7 +233,6 @@ TrendChart.defaultProps = {
     margin: { top: 16, right: 0, bottom: 24, left: 32 },
   },
   colors: ['#ff5e50', '#95aabc', '#52687d'],
-  showMarkers: false,
 }
 
 export default TrendChart
