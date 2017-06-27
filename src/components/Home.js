@@ -44,7 +44,7 @@ const Home = ({ appState, dispatch, router }) => {
       <Helmet title="CDE :: Home" />
       <section className="px2 bg-blue-white">
         <div className="py7 container mx-auto relative">
-          <h1 className="mt0 pb1 fs-28 sm-fs-40 border-bottom border-red-bright">
+          <h1 className="mt0 pb1 fs-28 sm-fs-40 border-bottom border-blue-lighter">
             National, state, and local crime data
           </h1>
           <p className="mb1 md-col-9 fs-16 sm-fs-20 serif">
@@ -144,7 +144,7 @@ const Home = ({ appState, dispatch, router }) => {
                 className="flex col col-12 sm-col-6 md-col-4 px2 mb2 sm-mb4"
               >
                 <div className="col-12 px3 py2 bg-blue-white">
-                  <div className="mb1 pb1 fs-ch2 bold border-bottom border-red-bright">
+                  <div className="mb1 pb1 fs-ch2 bold border-bottom border-blue-lighter">
                     {d.title}
                   </div>
                   <p className="mb2">{d.description}</p>
@@ -165,7 +165,7 @@ const Home = ({ appState, dispatch, router }) => {
       <section className="px2 bg-blue-white">
         <div className="py7 container mx-auto">
           <h2 className="mt0 mb1 fs-28 sm-fs-40">Crime data API</h2>
-          <h3 className="mt0 mb3 pb1 fs-18 sm-fs-28 border-bottom border-red-bright">
+          <h3 className="mt0 mb3 pb1 fs-18 sm-fs-28 border-bottom border-blue-lighter">
             Use our data in your project
           </h3>
           <p className="mb3 sm-mb6 md-col-9 fs-16 sm-fs-20 serif">

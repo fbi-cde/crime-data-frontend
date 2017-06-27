@@ -71,7 +71,14 @@ const About = ({ dispatch }) =>
         <div className="mb7 clearfix">
           <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
             <p className="mb2 md-m0">
-              The Crime Data Explorer is part of the FBI’s broader effort to modernize the reporting of national crime data. It allows you to <a href="explorer/violent-crime">view trends</a>, <a href="/downloads-and-docs">download bulk data</a>, and access the <a href="/api">Crime Data API</a> for reported crime at the national, state, and agency levels.
+              The Crime Data Explorer is part of the FBI’s broader effort to
+              modernize the reporting of national crime data. It allows you to{
+                ' '
+              }
+              <a href="explorer/violent-crime">view trends</a>,{' '}
+              <a href="/downloads-and-docs">download bulk data</a>, and access
+              the <a href="/api">Crime Data API</a> for reported crime at the
+              national, state, and agency levels.
             </p>
           </div>
           <div className="md-col md-col-3">
@@ -105,7 +112,7 @@ const About = ({ dispatch }) =>
     <section className="bg-blue-whiter">
       <div className="px2 py6 bg-lighten-1">
         <div className="container mx-auto">
-          <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
+          <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter">
             How states participate
           </h2>
           <h3 className="mt0 mb3 fs-22 sans-serif">
@@ -155,7 +162,9 @@ const About = ({ dispatch }) =>
             </div>
           </div>
           <div className="md-col-8 fs-12 serif italic">
-            Territories including American Samoa, Puerto Rico, Guam, and the U.S. Virgin Islands submit summary data to the FBI. Some agencies submit data directly to the FBI.
+            Territories including American Samoa, Puerto Rico, Guam, and the
+            U.S. Virgin Islands submit summary data to the FBI. Some agencies
+            submit data directly to the FBI.
           </div>
         </div>
       </div>
@@ -168,33 +177,51 @@ const About = ({ dispatch }) =>
         <div className="clearfix">
           <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
             <p className="mb3">
-              Since 1930, participating local, county, state, tribal, and federal law enforcement agencies have voluntarily provided the nation with crime statistics through the <a href="https://ucr.fbi.gov/">Uniform Crime Reporting (UCR) Program</a> via:
+              Since 1930, participating local, county, state, tribal, and
+              federal law enforcement agencies have voluntarily provided the
+              nation with crime statistics through the{' '}
+              <a href="https://ucr.fbi.gov/">
+                Uniform Crime Reporting (UCR) Program
+              </a>{' '}
+              via:
             </p>
-            <div className="bold">
+            <div className="mb-tiny bold">
               Summary (SRS) data
               <span className="italic ml-tiny regular">
                 1960—2014 data available
               </span>
             </div>
             <p className="mb3">
-              Summary data allows us to show crime rates as trends and totals. This data includes the number of offenses that were reported on a state or agency level. It captures the most serious offense involved in crime incidents according to the{' '}
+              Summary data allows us to show crime rates as trends and totals.
+              This data includes the number of offenses that were reported on a
+              state or agency level. It captures the most serious offense
+              involved in crime incidents according to the{' '}
               <Term id="hierarchy rule">
                 hierarchy rule
               </Term>
               {' '}
-              and supplemental details depending on the offense. For example, victim and offender data are collected only for murder offenses.
+              and supplemental details depending on the offense. For example,
+              victim and offender data are collected only for murder offenses.
             </p>
-            <div className="bold">
+            <div className="mb-tiny bold">
               Incident-based (NIBRS) data
               <span className="italic ml-tiny regular">
                 1991—2014 data available
               </span>
             </div>
-            <p className="mb3 md-m0">
-              Incident-based data allow us to visualize how crime breaks down regarding victims, offenders, and other attributes related to a reported crime. NIBRS data records details regarding individual offenses and arrests that were part of an incident, such as information about the victim, offender, property involved, and arrestees, providing context that is not provided by the summary data.{' '}
+            <p>
+              Incident-based data allow us to visualize how crime breaks down
+              regarding victims, offenders, and other attributes related to a
+              reported crime. NIBRS data records details regarding individual
+              offenses and arrests that were part of an incident, such as
+              information about the victim, offender, property involved, and
+              arrestees, providing context that is not provided by the summary
+              data.
             </p>
             <p>
-              The Crime Data Explorer makes this data available through the <a href="/api">API</a> and <a href="/downloads-and-docs">bulk downloads</a>.
+              The Crime Data Explorer makes this data available through the{' '}
+              <a href="/api">API</a> and{' '}
+              <a href="/downloads-and-docs">bulk downloads</a>.
             </p>
           </div>
           <div className="md-col md-col-3">
@@ -206,7 +233,9 @@ const About = ({ dispatch }) =>
                 <a href="https://ucr.fbi.gov/">UCR Home</a>
               </li>
               <li className="mb1">
-                <a href="https://ucr.fbi.gov/new-ucr-project">New UCR Project</a>
+                <a href="https://ucr.fbi.gov/new-ucr-project">
+                  New UCR Project
+                </a>
               </li>
               <li className="mb1">
                 <a href="https://ucr.fbi.gov/nibrs/nibrs-user-manual">
@@ -220,12 +249,15 @@ const About = ({ dispatch }) =>
     </section>
     <section className="bg-blue-whiter">
       <div className="px2 py7 container mx-auto">
-        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-red-bright">
+        <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-lighter">
           More to come
         </h2>
         <div className="mb3 md-pr7 border-box serif">
           <p className="mb3 fs-16 sm-fs-20 md-col-9">
-The Crime Data Explorer is part of an ongoing effort to improve and provide access to the nation’s crime statistics. We’re working to add new features and value your feedback. Tell us what you’d like to see next.
+            The Crime Data Explorer is part of an ongoing effort to improve and
+            provide access to the nation’s crime statistics. We’re working to
+            add new features and value your feedback. Tell us what you’d like to
+            see next.
           </p>
         </div>
         <button
