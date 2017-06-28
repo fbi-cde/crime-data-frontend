@@ -131,6 +131,7 @@ class Feedback extends React.Component {
                     </label>
                     <textarea
                       className="mb1 col-12 no-resize fs-14 field"
+                      id={field.id}
                       name={field.id}
                       onChange={this.handleChange}
                       ref={el => {
