@@ -17,12 +17,12 @@ const Term = ({ children, dispatch, id, size = 'md' }) => {
   }
 
   return (
-    <a
+    <button
       aria-label={`Show ${lowerCase(id)} in the glossary`}
-      className="border-bottom-dotted"
-      href="#!"
+      className="bg-transparent border-none border-bottom-dotted color-inherit cursor-pointer font-family-inherit font-size-inherit px0"
       onClick={handler}
     >
+
       {children}
       <img
         alt="glossary lookup"
@@ -31,7 +31,7 @@ const Term = ({ children, dispatch, id, size = 'md' }) => {
         src="/img/glossary.svg"
         width={imgSize(size)}
       />
-    </a>
+    </button>
   )
 }
 
