@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
+import { Link } from 'react-router'
 
 import Term from './Term'
 import UsaMap from './UsaMap'
@@ -89,22 +90,10 @@ const About = ({ dispatch }) =>
             <h3 className="mt-tiny mb2 fs-18 sm-fs-22">Available datasets</h3>
             <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
               <li className="mb2">
-                <Term id="Summary Reporting System (SRS)">
-                  Summary statistics (SRS)
-                </Term>
+                <Link to="/downloads-and-docs">Bulk data downloads</Link>
               </li>
               <li className="mb2">
-                <Term id="National Incident-Based Reporting System (NIBRS)">
-                  Incident-based data
-                </Term>
-              </li>
-              <li className="mb2">
-                <Term id="Assaults on law enforcement officers">
-                  Assaults on law enforcement officers
-                </Term>
-              </li>
-              <li className="mb2">
-                <Term id="Hate Crime">Hate Crime</Term>
+                <a href="/api">Crime data API</a>
               </li>
             </ul>
           </div>
@@ -114,12 +103,9 @@ const About = ({ dispatch }) =>
     <section className="bg-blue-whiter">
       <div className="px2 py6 bg-lighten-1">
         <div className="container mx-auto">
-          <h2 className="mt0 mb4 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
+          <h2 className="mt0 mb5 pb1 fs-22 sm-fs-32 border-bottom border-blue-light">
             How states participate
           </h2>
-          <h3 className="mt0 mb3 fs-22 sans-serif">
-            Uniform Crime Reporting Participation, 2014
-          </h3>
           <div className="mb4 clearfix">
             <div className="md-col md-col-9 md-pr7">
               <UsaMap
