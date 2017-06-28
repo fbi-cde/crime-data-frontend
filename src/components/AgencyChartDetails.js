@@ -9,11 +9,13 @@ import React from 'react'
 import Term from './Term'
 
 const fmt = format(',')
+const highlight = txt => <strong>{txt}</strong>
 
 const AgencyChartDetails = ({
   colors,
   crime,
   data,
+  dataPrior,
   keys,
   noun,
   since,
@@ -22,18 +24,28 @@ const AgencyChartDetails = ({
 }) => {
   const { cleared, year, reported } = data
   const yearRange = range(since, until + 1)
+  const crimeDisplay = lowerCase(crime)
   const handleSelectChange = e => updateYear(Number(e.target.value))
-  const isSingular = cleared === 1 && reported === 1
+
+  let compSentence = null
+  const reportedLastYr = dataPrior && dataPrior.reported
+  if (reportedLastYr) {
+    const comp = reported > reportedLastYr ? 'increased' : 'decreased'
+    compSentence = (
+      <span>Reported {noun} {highlight(comp)} from the previous year.</span>
+    )
+  }
 
   return (
     <div className="mb3 lg-flex">
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
         <p className="m0" style={{ maxWidth: 400 }}>
-          In <strong>{year}</strong>, there{' '}
-          {pluralize('were', isSingular ? 1 : 2)}{' '}
-          <strong>{fmt(reported)}</strong> reported and{' '}
-          <strong>{fmt(cleared)}</strong> cleared{' '}
-          {pluralize(noun, isSingular ? 1 : 2)} of {lowerCase(crime)}.
+          In {highlight(year)}, there {pluralize('were', reported)}{' '}
+          {highlight(fmt(reported))} reported{' '}
+          {pluralize(noun, reported)} of {crimeDisplay}. There{' '}
+          {pluralize('were', cleared)} {highlight(fmt(cleared))}{' '}
+          cleared {crimeDisplay} {pluralize(noun, cleared)}. Crimes are
+          not necessarily cleared in the year they occur.{' '}{compSentence}
         </p>
       </div>
       <div className="flex-none" style={{ width: 210 }}>
@@ -84,6 +96,7 @@ AgencyChartDetails.propTypes = {
   colors: PropTypes.func.isRequired,
   crime: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
+  dataPrior: PropTypes.object,
   keys: PropTypes.arrayOf(PropTypes.string).isRequired,
   noun: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,

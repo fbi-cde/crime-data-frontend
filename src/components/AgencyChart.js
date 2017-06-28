@@ -81,6 +81,8 @@ class AgencyChart extends React.Component {
       ? data.find(d => d.year === yearSelected)
       : hover || data[data.length - 1]
 
+    const activePriorYear = data.find(d => d.year === active.year - 1)
+
     const noDataYears = data
       .filter(d => d.reported === 0 && d.cleared === 0)
       .map(({ cleared, reported, year }) => ({
@@ -100,6 +102,7 @@ class AgencyChart extends React.Component {
           colors={colorMap}
           crime={crime}
           data={active}
+          dataPrior={activePriorYear}
           keys={keys}
           noun={noun}
           since={since}
