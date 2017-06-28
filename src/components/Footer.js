@@ -147,13 +147,16 @@ const Footer = ({ actions }) =>
             >
               {list.map((d, ii) =>
                 <li key={ii} className="mb1">
-                  <Link
-                    className="cursor-pointer white caps"
-                    to={d.href || '#!'}
-                    onClick={d.action && handleClick(actions[d.action])}
-                  >
-                    {d.text}
-                  </Link>
+                  {d.href
+                    ? <Link className="cursor-pointer white caps" to={d.href}>
+                        {d.text}
+                      </Link>
+                    : <button
+                        className="bg-transparent border-none cursor-pointer font-family-inherit font-size-inherit px0 white caps"
+                        onClick={d.action && handleClick(actions[d.action])}
+                      >
+                        {d.text}
+                      </button>}
                 </li>,
               )}
             </ul>,
