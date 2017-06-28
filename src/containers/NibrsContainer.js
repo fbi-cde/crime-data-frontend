@@ -1,6 +1,4 @@
-import { format } from 'd3-format'
 import startCase from 'lodash.startcase'
-import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -8,15 +6,13 @@ import { connect } from 'react-redux'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import NibrsCard from '../components/NibrsCard'
+import NibrsIntro from '../components/NibrsIntro'
 import { nibrsTerm } from '../components/Terms'
 import parseNibrs from '../util/nibrs'
 import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
 import ucrParticipation, { shouldFetchNibrs as shouldShowNibrs } from '../util/ucr'
 
-const formatNumber = format(',')
-
-const highlight = txt => <strong>{txt}</strong>
 const initialNibrsYear = ({ place, placeType, since }) => {
   const placeNorm = placeType === 'agency' ? oriToState(place) : place
   const participation = ucrParticipation(placeNorm)
@@ -48,6 +44,7 @@ const NibrsContainer = ({
   place,
   placeType,
   since,
+  ucr,
   until,
 }) => {
   if (isAgency && !agency) return null
@@ -60,36 +57,39 @@ const NibrsContainer = ({
 
   const placeDisplay = isAgency ? agency.display : startCase(place)
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
-  const { data, error, loading } = nibrs
-  let [totalCount, content] = [0, null]
+  const { data, error } = nibrs
 
-  if (!loading && data) {
+  const isLoading = nibrs.loading || ucr.loading
+  const isReady = !isLoading && !error && !!data
+
+  let totalCount = 0
+  let content = null
+
+  if (error) content = <ErrorCard error={error} />
+  else if (isReady) {
     const filteredData = filterNibrsData(data, { since, until })
     const dataParsed = parseNibrs(filteredData)
+
     totalCount = filteredData.offenderRaceCode.reduce((a, b) => a + b.count, 0)
     content = (
       <div className="clearfix mxn1">
-        {dataParsed.map((d, i) =>
-          <div
-            key={i}
-            className={`col col-12 sm-col-6 mb2 px1 ${i % 2 === 0
-              ? 'clear-left'
-              : ''}`}
-          >
-            <NibrsCard
-              crime={crime}
-              place={place}
-              placeType={placeType}
-              since={nibrsFirstYear}
-              until={until}
-              {...d}
-            />
-          </div>,
-        )}
+        {dataParsed.map((d, i) => {
+          const cls = i % 2 === 0 ? 'clear-left' : ''
+          return (
+            <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
+              <NibrsCard
+                crime={crime}
+                place={place}
+                placeType={placeType}
+                since={nibrsFirstYear}
+                until={until}
+                {...d}
+              />
+            </div>
+          )
+        })}
       </div>
     )
-  } else if (error) {
-    content = <ErrorCard error={error} />
   }
 
   return (
@@ -98,24 +98,21 @@ const NibrsContainer = ({
         <h2 className="mt0 mb1 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} incident details reported by {placeDisplay}
         </h2>
-        {!error &&
-          data &&
-          (isAgency
-            ? <p className="m0 sm-col-9">
-                This agency reported {highlight(formatNumber(totalCount))}{' '}
-                individual {crime} {pluralize('incident', totalCount)} to the
-                FBI between {highlight(nibrsFirstYear)} and {highlight(until)}.
-              </p>
-            : <p className="m0 sm-col-9">
-                There were {highlight(formatNumber(totalCount))} individual{' '}
-                {crime} incidents reported to the FBI in {placeDisplay}{' '}
-                between {highlight(nibrsFirstYear)} and {highlight(until)}{' '}
-                by law enforcement agencies reporting {nibrsTerm}.
-              </p>)}
-        {loading && <Loading />}
+        {isLoading && <Loading />}
+        {isReady &&
+          <NibrsIntro
+            crime={crime}
+            isAgency={isAgency}
+            nibrsFirstYear={nibrsFirstYear}
+            place={place}
+            placeDisplay={placeDisplay}
+            totalCount={totalCount}
+            ucr={ucr}
+            until={until}
+          />}
       </div>
       {content}
-      {!loading &&
+      {isReady &&
         <div className="serif italic fs-12">
           Source: Reported {nibrsTerm} data from {placeDisplay},{' '}
           {nibrsFirstYear}–{until}.
@@ -128,15 +125,19 @@ NibrsContainer.propTypes = {
   crime: PropTypes.string.isRequired,
   nibrs: PropTypes.shape({
     data: PropTypes.object,
-    loading: PropTypes.boolean,
+    loading: PropTypes.bool,
   }).isRequired,
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
+  ucr: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.bool,
+  }).isRequired,
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, nibrs }) => {
+const mapStateToProps = ({ agencies, filters, nibrs, ucr }) => {
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
   const agency = isAgency && !agencies.loading && getAgency(agencies, place)
@@ -148,6 +149,7 @@ const mapStateToProps = ({ agencies, filters, nibrs }) => {
     place,
     placeType,
     nibrs,
+    ucr,
   }
 }
 
