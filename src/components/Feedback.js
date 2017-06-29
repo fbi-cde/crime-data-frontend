@@ -119,14 +119,14 @@ class Feedback extends React.Component {
                   <h1 className="fs-14 md-fs-18 bold mt0 sans-serif">
                     Help us improve the Crime Data Explorer
                   </h1>
-                  <p className="fs-14 italic serif">
+                  <p className="fs-14 sans-serif">
                     Don{"'"}t include sensitive information like your name,
                     contact information or Social Security number.
                   </p>
                 </legend>
                 {fields.map((field, i) =>
                   <div key={i}>
-                    <label className="mb-tiny block" htmlFor={field.id}>
+                    <label className="mb-tiny block bold" htmlFor={field.id}>
                       {field.label}
                     </label>
                     <textarea
@@ -140,7 +140,7 @@ class Feedback extends React.Component {
                     />
                   </div>,
                 )}
-                <p className="fs-14 italic serif">
+                <p className="fs-14 sans-serif">
                   This information will be reported on Github, where it will
                   be publically visible. You can review all reported feedback
                   on our
