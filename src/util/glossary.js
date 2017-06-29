@@ -7,6 +7,7 @@ const crimeIds = {
   larceny: 'larceny',
   'property-crime': 'property crime',
   rape: 'rape (legacy definition)',
+  'rape-revised': 'rape (revised definition)',
   robbery: 'robbery',
   'violent-crime': 'violent crime',
 }
