@@ -20,6 +20,11 @@ const ExplorerHeaderContainer = ({
   ucr,
   until,
 }) => {
+  const coordinates = isAgency &&
+  (agency.icpsr_lat && agency.icpsr_lng) && {
+    lat: agency.icpsr_lat,
+    lng: agency.icpsr_lng,
+  }
   const isLoading = isAgency ? agencies.loading : ucr.loading
   const usState = isAgency ? oriToState(place) : place
   const placeDisplay = isAgency ? agency.agency_name : startCase(usState)
@@ -51,7 +56,10 @@ const ExplorerHeaderContainer = ({
           />
         </div>
         <div className="sm-col sm-col-4 xs-hide">
-          <PlaceThumbnail selected={startCase(usState)} />
+          <PlaceThumbnail
+            coordinates={coordinates}
+            selected={startCase(usState)}
+          />
           <div className="mt-tiny fs-12 serif italic right">
             {isAgency && !isLoading
               ? `${placeDisplay}, ${startCase(usState)}`

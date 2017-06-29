@@ -19,7 +19,7 @@ class PlaceThumbnail extends React.Component {
   }
 
   render() {
-    const { selected } = this.props
+    const { coordinates, selected } = this.props
     const { usa } = this.state
 
     if (!usa) return <Container />
@@ -33,6 +33,12 @@ class PlaceThumbnail extends React.Component {
     const active = geoStates.find(
       s => s.properties.name.toUpperCase() === placeUpper,
     )
+
+    let pin
+    if (coordinates.lat && coordinates.lng) {
+      const c = projection([coordinates.lng, coordinates.lat])
+      pin = <circle cx={c[0]} cy={c[1]} r={4} className="fill-red-bright" />
+    }
 
     let strokeWidth
     let transform
@@ -75,14 +81,21 @@ class PlaceThumbnail extends React.Component {
               strokeLinecap="round"
               strokeLinejoin="round"
             />
+            {pin}
           </g>
+
         </svg>
       </Container>
     )
   }
 }
 
+PlaceThumbnail.defaultProps = {
+  coordinates: false,
+}
+
 PlaceThumbnail.propTypes = {
+  coordinates: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   selected: PropTypes.string.isRequired,
 }
 
