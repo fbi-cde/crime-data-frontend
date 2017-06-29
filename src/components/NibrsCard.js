@@ -14,7 +14,11 @@ import { slugify } from '../util/text'
 
 const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
   const charts = data.map((d, i) => {
-    const props = { key: i, ...d }
+    const props = {
+      key: i,
+      id: slugify(d.title || title).replace(/['’]/g, ''),
+      ...d,
+    }
 
     if (placeType === 'agency') return <NibrsTable {...props} />
 
