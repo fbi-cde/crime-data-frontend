@@ -101,14 +101,8 @@ const Footer = ({ actions }) =>
           <div className="bold">
             Crime Statistics Management Unit
           </div>
-          <a
-            className="mr1 pr1 white border-white border-right"
-            href="mailto:crimestatsinfo@fbi.gov"
-          >
+          <a className="mr1 pr1 white" href="mailto:crimestatsinfo@fbi.gov">
             crimestatsinfo@fbi.gov
-          </a>
-          <a className="white" href="tel:3046254995">
-            (304) 625-4830
           </a>
         </div>
         <div className="bold">FBI Uniform Crime Reporting Program</div>
