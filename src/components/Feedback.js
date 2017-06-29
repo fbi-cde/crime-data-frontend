@@ -119,23 +119,14 @@ class Feedback extends React.Component {
                   <h1 className="fs-14 md-fs-18 bold mt0 sans-serif">
                     Help us improve the Crime Data Explorer
                   </h1>
-                  <p className="fs-12 italic serif">
-                    This information will be reported on Github, where it will
-                    be publically visible. You can review all reported feedback
-                    on our
-                    {' '}
-                    <a
-                      className="cursor-pointer underline white"
-                      href="https://github.com/18F/crime-data-explorer/labels/feedback"
-                    >
-                      Github page
-                    </a>
-                    .
+                  <p className="fs-14 sans-serif">
+                    Don{"'"}t include sensitive information like your name,
+                    contact information or Social Security number.
                   </p>
                 </legend>
                 {fields.map((field, i) =>
                   <div key={i}>
-                    <label className="mb-tiny block" htmlFor={field.id}>
+                    <label className="mb-tiny block bold" htmlFor={field.id}>
                       {field.label}
                     </label>
                     <textarea
@@ -149,6 +140,19 @@ class Feedback extends React.Component {
                     />
                   </div>,
                 )}
+                <p className="fs-14 sans-serif">
+                  This information will be reported on Github, where it will
+                  be publically visible. You can review all reported feedback
+                  on our
+                  {' '}
+                  <a
+                    className="cursor-pointer underline white"
+                    href="https://github.com/18f/crime-data-explorer/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20User%20feedback"
+                  >
+                    Github page
+                  </a>
+                  .
+                </p>
                 <div className="flex flex-row-reverse justify-between mt1">
                   <button
                     className="btn btn-primary bg-blue-lighter blue"
