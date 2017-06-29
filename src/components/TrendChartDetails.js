@@ -65,10 +65,12 @@ const TrendChartDetails = ({
         In {highlight(year)}, the rate at which rape was reported using
         the <Term id={crimeTerm('rape')} size="sm">legacy</Term> definition{' '}
         was {highlight(formatRate(rate))} per 100,000.
-        Rape under the{' '}
-        <Term id={crimeTerm('rape-revised')} size="sm">revised</Term>{' '}
-        definition was reported at a rate of{' '}
-        {highlight(formatRate(revised.rate))} per 100,000 people.
+        Rape was reported using the
+        {' '}
+        <Term id={crimeTerm('rape-revised')} size="sm">revised</Term>
+        {' '}
+        definition at a rate of {highlight(formatRate(revised.rate))} per
+        100,000 people.
       </span>
     )
   } else {
