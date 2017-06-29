@@ -144,9 +144,9 @@ class TrendChart extends React.Component {
     return (
       <div>
         <TrendChartDetails
+          active={active}
           colors={colors}
           crime={crime}
-          data={active.filter(d => d.crime !== 'rape-revised')}
           keys={places}
           since={since}
           updateYear={this.updateYear}

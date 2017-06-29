@@ -2,17 +2,19 @@ import { format } from 'd3-format'
 import range from 'lodash.range'
 import lowerCase from 'lodash.lowercase'
 import startCase from 'lodash.startcase'
-import uniq from 'lodash.uniqby'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import Highlight from './Highlight'
 import Term from './Term'
-import mapCrimeToGlossaryTerm from '../util/glossary'
+import crimeTerm from '../util/glossary'
 import { nationalKey } from '../util/usa'
 
 const formatRate = format(',.1f')
 const formatTotal = format(',.0f')
+const highlight = txt => <strong>{txt}</strong>
+const borderColor = { borderColor: '#c8d3dd' }
+const cellStyle = { width: 68, ...borderColor }
 
 const getComparison = ({ place, data }) => {
   const threshold = 3
@@ -28,48 +30,64 @@ const getComparison = ({ place, data }) => {
 }
 
 const TrendChartDetails = ({
+  active,
   colors,
   crime,
-  data,
+  keys,
   since,
   until,
   updateYear,
 }) => {
-  const keys = uniq(data.map(d => d.place))
-  const isOnlyNational = keys.length === 1
-  const place = isOnlyNational ? nationalKey : keys.find(k => k !== nationalKey)
-  const comparison = getComparison({ place, data })
-  const rate = data.find(d => d.place === place).rate
-  const year = data.find(d => d.place === place).date.getFullYear()
-  const yearRange = range(since, until + 1)
   const handleSelectChange = e => updateYear(Number(e.target.value))
+  const yearRange = range(since, until + 1)
+  const term = <Term id={crimeTerm(crime)} size="sm">{lowerCase(crime)}</Term>
 
-  const borderColor = { borderColor: '#c8d3dd' }
-  const cellStyle = { width: 68, ...borderColor }
-
-  const term = (
-    <Term id={mapCrimeToGlossaryTerm(crime)} size="sm">{lowerCase(crime)}</Term>
+  const data = active.filter(d => d.crime !== 'rape-revised')
+  const isNational = keys.length === 1
+  const place = isNational ? nationalKey : keys.find(k => k !== nationalKey)
+  const comparison = getComparison({ place, data })
+  const { rate, year } = data.find(d => d.place === place) || {}
+  const revised = active.find(
+    d => d.crime === 'rape-revised' && d.place === place,
   )
+
+  let sentence
+  if (isNational) {
+    sentence = (
+      <span>
+        In {highlight(year)}, there were {highlight(formatRate(rate))}{' '}
+        incidents of {term} per 100,000 people.
+      </span>
+    )
+  } else if (crime === 'rape' && revised && revised.rate) {
+    sentence = (
+      <span>
+        In {highlight(year)}, the rate at which rape was reported using
+        the <Term id={crimeTerm('rape')} size="sm">legacy</Term> definition{' '}
+        was {highlight(formatRate(rate))} per 100,000.
+        Rape was reported using the
+        {' '}
+        <Term id={crimeTerm('rape-revised')} size="sm">revised</Term>
+        {' '}
+        definition at a rate of {highlight(formatRate(revised.rate))} per
+        100,000 people.
+      </span>
+    )
+  } else {
+    sentence = (
+      <span>
+        In {highlight(year)}, {startCase(place)}’s {term} rate
+        was {highlight(formatRate(rate))} incidents per 100,000 people.
+        The rate for that year was {comparison} that of the United States.
+      </span>
+    )
+  }
 
   return (
     <div className="mb3 sm-mb5 lg-flex">
       <div className="flex-auto">
         <p className="mb1 lg-m0 lg-pr5 lg-mh-72p fs-14">
-          {isOnlyNational &&
-            <span>
-              In {<Highlight text={year} />}, there were{' '}
-              {<Highlight text={formatRate(rate)} />}{' '}
-              incidents of {term}{' '}
-              per 100,000 people.
-            </span>}
-          {!isOnlyNational &&
-            <span>
-              In {<Highlight text={year} />}, {startCase(keys[0])}’s {term} rate
-              was{' '}
-              {<Highlight text={formatRate(rate)} />}{' '}
-              incidents per 100,000 people.
-              The rate for that year was {comparison} that of the United States.
-            </span>}
+          {sentence}
         </p>
       </div>
       <div className="flex-none overflow-auto">
@@ -151,9 +169,9 @@ const TrendChartDetails = ({
 }
 
 TrendChartDetails.propTypes = {
+  active: PropTypes.arrayOf(PropTypes.object).isRequired,
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
   crime: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
   updateYear: PropTypes.func.isRequired,

@@ -87,7 +87,7 @@ const About = ({ dispatch }) =>
             </p>
           </div>
           <div className="md-col md-col-3">
-            <h3 className="mt-tiny mb2 fs-18 sm-fs-22">Available datasets</h3>
+            <h3 className="mt-tiny mb2 fs-18 sm-fs-22">Available data</h3>
             <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
               <li className="mb2">
                 <Link to="/downloads-and-docs">Bulk data downloads</Link>
