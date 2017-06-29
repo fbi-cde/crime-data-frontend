@@ -75,15 +75,7 @@ const AgencyChartContainer = params => {
       </div>
       {!summary.loading &&
         <div className="fs-12 serif italic">
-          No data or low data may be the result of an agency not
-          participating, reporting no incidents, changes in reporting, or
-          being ”covered by” another agency.{' '}
-          <a
-            className="mr-tiny underline"
-            href="https://ucr.fbi.gov/ucr-publications"
-          >
-            Learn more.
-          </a>
+          No data or low data may be the result of an agency not participating, reporting no incidents, changes in reporting, or being “covered by” another agency. In addition, classification, organization, and the hierarchy of agencies can vary by state. To learn more, please see agency-level data in the <a className="mr-tiny underline" href="https://ucr.fbi.gov/crime-in-the-u.s">Crime in the United States publications</a>.{' '}
           Source: Reported {submitsNibrs ? nibrsTerm : srsTerm} data from{' '}
           {agency.display}
         </div>}
