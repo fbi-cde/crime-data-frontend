@@ -26,7 +26,7 @@ const ExplorerIntroAgency = ({
 
   return (
     <p className="serif">
-      The {startCase(name)} law enforcement agency is located in
+      The {startCase(name)} is located in
       {' '}
       {showCounty && `${county} County, `}
       {startCase(state)}.

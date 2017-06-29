@@ -22,9 +22,7 @@ const ExplorerHeaderContainer = ({
 }) => {
   const isLoading = isAgency ? agencies.loading : ucr.loading
   const usState = isAgency ? oriToState(place) : place
-  const placeDisplay = isAgency
-    ? `${agency.agency_name} agency`
-    : startCase(usState)
+  const placeDisplay = isAgency ? agency.agency_name : startCase(usState)
 
   return (
     <div>

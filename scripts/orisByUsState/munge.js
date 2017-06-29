@@ -13,12 +13,11 @@ const exec = cmd => {
   })
 }
 
-// data downloaded from:
-//
-// https://crime-data-api.fr.cloud.gov/agencies
-//    ?fields=agency_name,ori,primary_county,agency_type_name,months_reported,nibrs_months_reported,state_abbr,submitting_name
-//    &per_page=25000&api_key=API_KEY
-//
+/*
+data downloaded from:
+
+https://crime-data-api.fr.cloud.gov/agencies ?fields=agency_name,ori,primary_county,agency_type_name,icpsr_lat,icpsr_lng,months_reported,nibrs_months_reported,past_10_years_reported,state_abbr,submitting_name&per_page=25000&api_key=API_KEY
+*/
 
 const agencies = require('./agencies.json')
 
@@ -29,22 +28,27 @@ agencies.results.forEach(agency => {
   const {
     agency_name,
     agency_type_name,
+    icpsr_lat,
+    icpsr_lng,
     months_reported,
     nibrs_months_reported,
     ori,
+    past_10_years_reported,
     primary_county,
     state_abbr,
   } = agency
-  const subset = {
-    agency_name,
-    agency_type_name,
-    months_reported,
-    nibrs_months_reported,
-    primary_county,
-  }
 
   if (!usStates[state_abbr]) usStates[state_abbr] = {}
-  usStates[state_abbr][ori] = subset
+  usStates[state_abbr][ori] = {
+    agency_name,
+    agency_type_name,
+    icpsr_lat,
+    icpsr_lng,
+    months_reported,
+    nibrs_months_reported,
+    past_10_years_reported,
+    primary_county,
+  }
 })
 
 const onWriteDone = err => {
