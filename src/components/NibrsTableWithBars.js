@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import NibrsCountPercentToggle from './NibrsCountPercentToggle'
-import { slugify } from '../util/text'
 
 const formatNumber = format(',')
 const formatPercent = p => (+p > 0.01 ? format('.0%')(p) : '<1%')
