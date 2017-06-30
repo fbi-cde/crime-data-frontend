@@ -12,6 +12,7 @@ import { nationalKey } from '../util/usa'
 const SidebarContainer = ({
   agency,
   agencyData,
+  ariaControls,
   crime,
   hide,
   filters,
@@ -40,15 +41,25 @@ const SidebarContainer = ({
       <LocationFilter
         agency={agency}
         agencyData={agencyData}
+        ariaControls={ariaControls}
         onChange={onChange}
         usState={usState}
       />
-      <TimePeriodFilter onChange={onChange} {...filters} />
-      <CrimeTypeFilter onChange={onChange} selected={crime} />
+      <TimePeriodFilter
+        ariaControls={ariaControls}
+        onChange={onChange}
+        {...filters}
+      />
+      <CrimeTypeFilter
+        ariaControls={ariaControls}
+        onChange={onChange}
+        selected={crime}
+      />
     </div>
   </nav>
 
 SidebarContainer.propTypes = {
+  ariaControls: PropTypes.string.isRequired,
   onChange: PropTypes.func,
 }
 

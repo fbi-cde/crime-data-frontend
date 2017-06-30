@@ -14,7 +14,11 @@ import { slugify } from '../util/text'
 
 const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
   const charts = data.map((d, i) => {
-    const props = { key: i, ...d }
+    const props = {
+      key: i,
+      id: slugify(d.title || title).replace(/['’]/g, ''),
+      ...d,
+    }
 
     if (placeType === 'agency') return <NibrsTable {...props} />
 
@@ -67,6 +71,7 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
           <span className="bold fs-14 ml1 monospace">0</span>
         </div>}
       <DownloadDataBtn
+        ariaLabel={`Download ${title} data as a CSV`}
         data={download}
         filename={`${place}-${crime}-${slugify(title)}-${since}-${until}`}
         text="Download data"

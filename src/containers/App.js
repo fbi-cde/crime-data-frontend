@@ -10,6 +10,7 @@ import Feedback from '../components/Feedback'
 import Footer from '../components/Footer'
 import Glossary from '../components/Glossary'
 import Header from '../components/Header'
+import SkipContent from '../components/SkipContent'
 import * as feedbackActions from '../actions/feedback'
 import * as glossaryActions from '../actions/glossary'
 
@@ -17,6 +18,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 const App = ({ actions, appState, children, dispatch, location }) =>
   <div className="site">
+    <SkipContent skipTo=".site-main" />
     <Disclaimer />
     <BetaBanner onFeedbackClick={actions.showFeedback} />
     <Header location={location} />

@@ -62,7 +62,7 @@ class Glossary extends React.Component {
           aria-hidden="true"
         >
           <button className="right btn p0" onClick={this.toggleGlossary}>
-            <img src="/img/x.svg" alt="close" width="16" height="16" />
+            <img src="/img/x.svg" alt="Close glossary" width="16" height="16" />
           </button>
           <h3 className="mt1 mb2 fs-26 white">Glossary</h3>
           <label

@@ -17,7 +17,7 @@ class AboutTheData extends React.Component {
   triggerGlossaryTerm = e => {
     const { target } = e
 
-    if (!target.closest('.about-the-data .caveats')) return
+    if (!target.closest('#about-the-data .caveats')) return
     if (!target.href || !target.href.match(/#glossary\?term=/)) return
 
     // only prevent default if the click event is a glossary term link

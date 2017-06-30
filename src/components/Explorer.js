@@ -98,8 +98,11 @@ class Explorer extends React.Component {
             </button>
           </div>
         </div>
-        <SidebarContainer onChange={this.handleSidebarChange} />
-        <div className="site-content">
+        <SidebarContainer
+          ariaControls="explorer"
+          onChange={this.handleSidebarChange}
+        />
+        <div className="site-content" id="explorer">
           <div className="container-main mx-auto px2 md-py3 lg-px3">
             <ExplorerHeaderContainer />
             {isAgency && <SparklineContainer />}

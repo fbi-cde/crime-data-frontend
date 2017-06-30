@@ -10,7 +10,7 @@ describe('NibrsTableWithBars', () => {
 
   it('has row for each data entry', () => {
     const entries = 3
-    const table = shallow(<NibrsTableWithBars data={data(entries)} />)
+    const table = shallow(<NibrsTableWithBars data={data(entries)} id="test" />)
 
     expect(table.find('tbody tr').length).toEqual(entries)
   })
@@ -18,7 +18,7 @@ describe('NibrsTableWithBars', () => {
   it('collapses entries above rowLim into 1 row', () => {
     const [entries, rowLim] = [15, 5]
     const table = shallow(
-      <NibrsTableWithBars data={data(entries)} rowLim={rowLim} />,
+      <NibrsTableWithBars data={data(entries)} id="test" rowLim={rowLim} />,
     )
     const otherCell = table.find('tbody tr td').last()
 

@@ -9,5 +9,9 @@ describe('text utility', () => {
       const expected = 'fake-stuff-goes-here'
       expect(slugify(initial)).toEqual(expected)
     })
+
+    it('should return an empty string if nothing is provided', () => {
+      expect(slugify()).toEqual('')
+    })
   })
 })

@@ -29,7 +29,7 @@ class TimePeriodFilter extends React.Component {
 
   render() {
     const { error } = this.state
-    const { since, until } = this.props
+    const { ariaControls, since, until } = this.props
 
     return (
       <div id="time-period" className="mb5">
@@ -40,6 +40,7 @@ class TimePeriodFilter extends React.Component {
           <div className="col col-5">
             <label htmlFor="since" className="hide">Time from</label>
             <select
+              aria-controls={ariaControls}
               className="col-12 field field-sm select"
               id="since"
               onChange={this.handleChange}
@@ -52,6 +53,7 @@ class TimePeriodFilter extends React.Component {
           <div className="col col-5">
             <label htmlFor="until" className="hide">Time to</label>
             <select
+              aria-controls={ariaControls}
               className="col-12 field field-sm select"
               id="until"
               onChange={this.handleChange}
@@ -68,6 +70,7 @@ class TimePeriodFilter extends React.Component {
 }
 
 TimePeriodFilter.propTypes = {
+  ariaControls: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
 }

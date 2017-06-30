@@ -23,7 +23,15 @@ class NibrsTableWithBars extends React.Component {
   }
 
   render() {
-    const { data, noun, rowLim, sentenceStart, sortByValue, title } = this.props
+    const {
+      data,
+      id,
+      noun,
+      rowLim,
+      sentenceStart,
+      sortByValue,
+      title,
+    } = this.props
     const { isCounts } = this.state
 
     const agg = (a, b) => a + b.count
@@ -58,20 +66,21 @@ class NibrsTableWithBars extends React.Component {
     if (!sortByValue) dataFormatted.sort((a, b) => a.key > b.key)
 
     return (
-      <div>
+      <div id={id}>
         <div className="clearfix">
           <div className="left">
             <div className="blue bold">{title}</div>
           </div>
           <div className="right">
             <NibrsCountPercentToggle
+              ariaControls={id}
               isCounts={isCounts}
               showCounts={this.showCounts}
               showPercents={this.showPercents}
             />
           </div>
         </div>
-        <table className="mt1 mb2 table-fixed">
+        <table className="mt1 mb2 table-fixed" id={id}>
           {title && <caption className="hide">{title}</caption>}
           <thead className="v-hide">
             <tr style={{ lineHeight: '16px' }}>
@@ -120,6 +129,7 @@ NibrsTableWithBars.defaultProps = {
 
 NibrsTableWithBars.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  id: PropTypes.string.isRequired,
   noun: PropTypes.string.isRequired,
   rowLim: PropTypes.number.isRequired,
   title: PropTypes.string,

@@ -8,7 +8,13 @@ import { data } from '../util/usa'
 
 const places = entries(data).map(d => startCase(d.value))
 
-const LocationSelect = ({ className, onChange, onFocus, selected }) => {
+const LocationSelect = ({
+  ariaControls,
+  className,
+  onChange,
+  onFocus,
+  selected,
+}) => {
   const handleChange = e =>
     onChange({
       place: slugify(e.target.value),
@@ -21,6 +27,7 @@ const LocationSelect = ({ className, onChange, onFocus, selected }) => {
         Choose a location in the United States
       </label>
       <select
+        aria-controls={ariaControls}
         className={
           className || 'block col-12 field field-sm select select-dark'
         }
@@ -42,6 +49,7 @@ LocationSelect.defaultProps = {
 }
 
 LocationSelect.propTypes = {
+  ariaControls: PropTypes.string,
   className: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
