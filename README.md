@@ -29,11 +29,11 @@ You can lint the code with `npm run lint` and run tests with `npm run test`.
 
 ### `master` branch
 
-This project is [continuously deployed](circle.yml) to [cloud.gov](https://cloud.gov) with every commit to the `master` branch. Right now, you can use the application at https://crime-data-explorer.fr.cloud.gov.
+This project is [continuously deployed](circle.yml) to [cloud.gov](https://cloud.gov) with every commit to the `master` branch. Right now, you can use the application at https://crime-data-explorer-master.fr.cloud.gov.
 
 ### Stable
 
-Tagged releases are deployed to https://crime-data-explorer-demo.fr.cloud.gov.
+Tagged releases are deployed to https://crime-data-explorer.fr.cloud.gov.
 
 ### Staging
 
