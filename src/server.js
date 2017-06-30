@@ -3,7 +3,6 @@
 import 'babel-polyfill'
 
 import http from 'axios'
-import basicAuth from 'basic-auth-connect'
 import bodyParser from 'body-parser'
 import express from 'express'
 import gzipStatic from 'connect-gzip-static'
@@ -35,8 +34,6 @@ const {
   GITHUB_ISSUE_REPO_OWNER: repoOwner,
   GITHUB_ISSUE_REPO_NAME: repoName,
   GITHUB_ISSUE_BOT_TOKEN: repoToken,
-  HTTP_BASIC_USERNAME,
-  HTTP_BASIC_PASSWORD,
   PORT,
 } = ENV
 
@@ -54,8 +51,6 @@ const acceptHostname = hostname => {
 }
 
 const app = express()
-
-if (isProd) app.use(basicAuth(HTTP_BASIC_USERNAME, HTTP_BASIC_PASSWORD))
 
 const publicDirPath = path.join(__dirname, '..', 'public')
 app.use(gzipStatic(__dirname))
