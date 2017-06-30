@@ -27,4 +27,4 @@ deployment:
       - cf api $CF_API
       - cf auth $CF_USERNAME $CF_PASSWORD && cf target -o $CF_ORGANIZATION -s $CF_SPACE
       - npm run build
-      - cf zero-downtime-push -f manifests/master.yml
+      - cf zero-downtime-push crime-data-explorer-master -f manifests/master.yml

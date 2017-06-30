@@ -8,6 +8,6 @@ applications:
   disk_quota: 256M
   domain: fr.cloud.gov
 env:
-  CDE_API: 'https://crime-data-api.fr.cloud.gov'
+  CDE_API: 'https://crime-data-api-master.fr.cloud.gov'
 services:
   - crime-data-api-key-development
