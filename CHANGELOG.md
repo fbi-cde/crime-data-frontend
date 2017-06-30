@@ -1,6 +1,34 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.9.0] - 2017-06-30
+### Added
+- Map for Washington, DC ([#1050](https://github.com/18F/crime-data-frontend/pull/1050))
+- Caveats for agency chart ([#1053](https://github.com/18F/crime-data-frontend/issues/1053))
+
+### Changed
+- Responsiveness of no data indicators in agency charts ([#1048](https://github.com/18F/crime-data-frontend/pull/1048))
+- Update NIBRS chart designs ([#1055](https://github.com/18F/crime-data-frontend/pull/1055), [#1056](https://github.com/18F/crime-data-frontend/pull/1056),
+[#1057](https://github.com/18F/crime-data-frontend/pull/1057), [crime-data-explorer#198](https://github.com/18F/crime-data-explorer/issues/198))
+- Other dataset descriptions ([#1058](https://github.com/18F/crime-data-frontend/pull/1058))
+- Stick US state button at the bottom of agency search ([#1060](https://github.com/18F/crime-data-frontend/pull/1060))
+- Content for revised rape definition ([#1067](https://github.com/18F/crime-data-frontend/issues/1067))
+- Content on homepage and about page ([#1076](https://github.com/18F/crime-data-frontend/pull/1076))
+- Active development banner text ([#1089](https://github.com/18F/crime-data-frontend/pull/1089))
+- a11y compliance for the form elements ([#1093](https://github.com/18F/crime-data-frontend/pull/1093))
+- Update agency names to include "Police Department" and "Sheriff's Office" ([#1096](https://github.com/18F/crime-data-frontend/pull/1096), [#1111](https://github.com/18F/crime-data-frontend/pull/1111), [#1113](https://github.com/18F/crime-data-frontend/pull/1113))
+- Deploy URLs changed for the different environments ([#1097](https://github.com/18F/crime-data-frontend/pull/1097), [#1110](https://github.com/18F/crime-data-frontend/pull/1110))
+- Include PII warning in feedback tool ([#1107](https://github.com/18F/crime-data-frontend/pull/1107))
+
+### Fixed
+- Trend download CSV ([#1059](https://github.com/18F/crime-data-frontend/pull/1059), [#1075](https://github.com/18F/crime-data-frontend/pull/1075), [#1081](https://github.com/18F/crime-data-frontend/pull/1081))
+
+### Removed
+- Contact us section on the about page ([#1054](https://github.com/18F/crime-data-frontend/pull/1054))
+- Trend series labels for states and the nation ([#1072](https://github.com/18F/crime-data-frontend/pull/1072))
+- Phone number from footer ([#1108](https://github.com/18F/crime-data-frontend/pull/1108))
+
+
 ## [2.8.0] - 2017-06-23
 ### Added
 - Dynamic page titles ([#1024](https://github.com/18F/crime-data-frontend/pull/1024))

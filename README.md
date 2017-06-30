@@ -53,7 +53,7 @@ This app follows [semver](http://semver.org/) and has [tagged releases](https://
 
 Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2340`](https://github.com/18F/crime-data-frontend/commit/cdb2340830b0325dc9a05ba443a1a84c2e835430) it was about 77% of all statements), we run through a few basic user scenarios before tagging a release to check the application.
 
-1. Load homepage from `master` branch. Can be local or https://crime-data-explorer.fr.cloud.gov
+1. Load homepage from `master` branch. Can be local or https://crime-data-explorer-master.fr.cloud.gov
 2. Select "Explorer" from navigation
 3. Ensure that a trend chart renders to show "Violent Crime rate in United States"
 4. Select "Alabama" as the location in the left hand side menu
