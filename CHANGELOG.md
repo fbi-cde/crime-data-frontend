@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
 - Contact us section on the about page ([#1054](https://github.com/18F/crime-data-frontend/pull/1054))
 - Trend series labels for states and the nation ([#1072](https://github.com/18F/crime-data-frontend/pull/1072))
 - Phone number from footer ([#1108](https://github.com/18F/crime-data-frontend/pull/1108))
+- HTTP basic authentication ([#1117](https://github.com/18F/crime-data-frontend/pull/1117))
 
 
 ## [2.8.0] - 2017-06-23
