@@ -49,7 +49,7 @@ LocationSelect.defaultProps = {
 }
 
 LocationSelect.propTypes = {
-  ariaControls: PropTypes.string.isRequired,
+  ariaControls: PropTypes.string,
   className: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
