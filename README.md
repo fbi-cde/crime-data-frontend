@@ -25,6 +25,10 @@ Use `npm run watch` to start the continuous `webpack` processes and a webserver.
 
 You can lint the code with `npm run lint` and run tests with `npm run test`.
 
+### Updating agency data
+
+We load a JSON file, sourced from the API, into the application that has all the agency ORIs and names to make the end user experience better. When we need to update that JSON file with new data from the API, we can just run `npm run agencies` and the data will be downloaded and gzipped properly. This is useful when agency names are updated.
+
 ## Deployment
 
 ### `master` branch
