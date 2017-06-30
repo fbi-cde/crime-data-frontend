@@ -71,6 +71,7 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
           <span className="bold fs-14 ml1 monospace">0</span>
         </div>}
       <DownloadDataBtn
+        ariaLabel={`Download ${title} data as a CSV`}
         data={download}
         filename={`${place}-${crime}-${slugify(title)}-${since}-${until}`}
         text="Download data"

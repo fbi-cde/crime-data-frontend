@@ -56,7 +56,11 @@ const getContent = ({ crime, place, since, summaries, until }) => {
         since={since}
         until={until}
       />
-      <DownloadDataBtn data={download} filename={fname} />
+      <DownloadDataBtn
+        ariaLabel={`Download ${title} data as a CSV`}
+        data={download}
+        filename={fname}
+      />
     </div>
   )
 }

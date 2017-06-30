@@ -80,6 +80,7 @@ const DownloadsAndDocs = () =>
                 }}
               />
               <DownloadDataBtn
+                ariaLabel={`Download ${d.title} data as a CSV`}
                 className="block fs-12"
                 data={[{ url: d.download }]}
                 text="Download CSV"

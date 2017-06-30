@@ -15,7 +15,7 @@ const triggerUrlDownload = url => {
   body.removeChild(a)
 }
 
-const DownloadDataBtn = ({ className, data, filename, text }) => {
+const DownloadDataBtn = ({ ariaLabel, className, data, filename, text }) => {
   if (!data || data.length === 0) return null
 
   const clickHander = () => {
@@ -48,7 +48,11 @@ const DownloadDataBtn = ({ className, data, filename, text }) => {
   }
 
   return (
-    <button className={`btn p0 nowrap ${className}`} onClick={clickHander}>
+    <button
+      aria-label={ariaLabel}
+      className={`btn p0 nowrap ${className}`}
+      onClick={clickHander}
+    >
       <img
         className="mr-tiny align-tb"
         width="15"
@@ -62,6 +66,7 @@ const DownloadDataBtn = ({ className, data, filename, text }) => {
 }
 
 DownloadDataBtn.propTypes = {
+  ariaLabel: PropTypes.string,
   className: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
@@ -75,6 +80,7 @@ DownloadDataBtn.propTypes = {
 }
 
 DownloadDataBtn.defaultProps = {
+  ariaLabel: 'Download data',
   className: 'fs-12 blue',
   text: 'Download data',
 }
