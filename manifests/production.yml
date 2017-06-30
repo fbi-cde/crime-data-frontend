@@ -1,8 +1,8 @@
 ---
 inherit: base.yml
 applications:
-- name: crime-data-explorer-demo
-  host: crime-data-explorer-demo
+- name: crime-data-explorer
+  host: crime-data-explorer
   buildpack: nodejs_buildpack
   memory: 512M
   domain: fr.cloud.gov

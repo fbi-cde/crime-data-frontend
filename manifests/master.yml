@@ -1,13 +1,13 @@
 ---
 inherit: base.yml
 applications:
-- name: crime-data-explorer
-  host: crime-data-explorer
+- name: crime-data-explorer-master
+  host: crime-data-explorer-master
   buildpack: nodejs_buildpack
   memory: 256M
   disk_quota: 256M
   domain: fr.cloud.gov
 env:
-  CDE_API: 'https://crime-data-api.fr.cloud.gov'
+  CDE_API: 'https://crime-data-api-master.fr.cloud.gov'
 services:
   - crime-data-api-key-development
