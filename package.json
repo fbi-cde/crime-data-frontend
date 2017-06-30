@@ -22,7 +22,8 @@
     "test:watch": "jest --env=jsdom --watch",
     "coverage": "npm test -- --coverage",
     "prettier": "prettier --single-quote --trailing-comma all --semi false --write \"{src,test}/**/*.js\"",
-    "swagger": "rm -f node_modules/swagger-ui/dist/*.html && mkdir -p public/swagger/vendor && cp -r node_modules/swagger-ui/dist/* public/swagger/vendor"
+    "swagger": "rm -f node_modules/swagger-ui/dist/*.html && mkdir -p public/swagger/vendor && cp -r node_modules/swagger-ui/dist/* public/swagger/vendor",
+    "agencies": "node scripts/agencies/update.js"
   },
   "dependencies": {
     "autotrack": "^2.3.2",
