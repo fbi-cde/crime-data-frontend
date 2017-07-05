@@ -59,8 +59,8 @@ const NibrsContainer = ({
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
   const { data, error } = nibrs
 
-  const isLoading = nibrs.loading || ucr.loading
-  const isReady = !isLoading && !error && !!data
+  const isLoading = isAgency ? nibrs.loading : nibrs.loading || ucr.loading
+  const isReady = !isLoading && error === null && !!data
 
   let totalCount = 0
   let content = null
