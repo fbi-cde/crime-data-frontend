@@ -86,12 +86,12 @@ const TrendChartDetails = ({
   return (
     <div className="mb3 sm-mb5 lg-flex">
       <div className="flex-auto">
-        <p className="mb1 lg-m0 lg-pr5 lg-mh-72p fs-14">
+        <p className="mb2 lg-m0 lg-pr5 lg-mh-72p fs-14">
           {sentence}
         </p>
       </div>
-      <div className="flex-none overflow-auto">
-        <table className="mb1 lg-m0 p2 col-12 sm-col-5 bg-blue-white rounded">
+      <div className="flex-none inline-block mw-fill overflow-auto bg-blue-white rounded">
+        <table className="p2 sm-col-5">
           <thead className="fs-10 line-height-4 right-align">
             <tr>
               <td className="left-align">
