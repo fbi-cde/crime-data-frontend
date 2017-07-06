@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.9.1] - 2017-06-06
 ### Changed
-- Use <h2> instead of <h3> to preserve the document outline ([#1121](https://github.com/18F/crime-data-frontend/pull/1121))
+- Use `<h2>` instead of `<h3>` to preserve the document outline ([#1121](https://github.com/18F/crime-data-frontend/pull/1121))
 
 ### Fixed
 - Load NIBRS data for agencies ([#1123](https://github.com/18F/crime-data-frontend/pull/1123))
