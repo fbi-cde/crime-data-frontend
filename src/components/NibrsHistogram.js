@@ -13,10 +13,6 @@ class NibrsHistogram extends React.Component {
     this.setState({ hover: d })
   }
 
-  forgetValue = () => {
-    this.setState({ hover: null })
-  }
-
   render() {
     const { data, margin, noun, size, title, xLabel } = this.props
     const { hover } = this.state
@@ -67,7 +63,6 @@ class NibrsHistogram extends React.Component {
                     }
                     pointerEvents="all"
                     onMouseOver={this.rememberValue(d)}
-                    onMouseOut={this.forgetValue}
                   />
                 </g>,
               )}
