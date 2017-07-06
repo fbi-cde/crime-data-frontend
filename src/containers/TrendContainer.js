@@ -37,8 +37,9 @@ const getContent = ({ crime, place, since, summaries, until }) => {
     `${startCase(place)}, ${since}-${until}`
 
   const readme = generateCrimeReadme({ crime, title })
+  const crimeNorm = crime === 'rape' ? 'rape-legacy' : crime
   const dlData = data.map(d => {
-    const placeData = places.map(p => ({ [p]: { ...d[p][crime] } }))
+    const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }))
     return { year: d.year, ...Object.assign(...placeData) }
   })
 
