@@ -58,7 +58,7 @@ const ExplorerHeaderContainer = ({
         <div className="sm-col sm-col-4 xs-hide">
           <PlaceThumbnail
             coordinates={coordinates}
-            selected={startCase(usState)}
+            usState={startCase(usState)}
           />
           <div className="mt-tiny fs-12 serif italic right">
             {isAgency && !isLoading

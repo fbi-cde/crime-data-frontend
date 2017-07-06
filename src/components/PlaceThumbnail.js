@@ -19,12 +19,12 @@ class PlaceThumbnail extends React.Component {
   }
 
   render() {
-    const { coordinates, selected } = this.props
+    const { coordinates, usState } = this.props
     const { usa } = this.state
 
     if (!usa) return <Container />
 
-    const placeUpper = selected.toUpperCase()
+    const placeUpper = usState.toUpperCase()
     const [w, h] = [400, 300]
     const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
@@ -34,16 +34,8 @@ class PlaceThumbnail extends React.Component {
       s => s.properties.name.toUpperCase() === placeUpper,
     )
 
-    let pin
-    if (coordinates.lat && coordinates.lng) {
-      const c = projection([coordinates.lng, coordinates.lat])
-      pin = <circle cx={c[0]} cy={c[1]} r={4} className="fill-red-bright" />
-    }
-
-    let strokeWidth
-    let transform
-    if (active) {
-      const bounds = path.bounds(active)
+    const getActiveTransformValues = a => {
+      const bounds = path.bounds(a)
       const dx = bounds[1][0] - bounds[0][0]
       const dy = bounds[1][1] - bounds[0][1]
       const x = (bounds[0][0] + bounds[1][0]) / 2
@@ -51,8 +43,22 @@ class PlaceThumbnail extends React.Component {
       const scale = 0.8 / Math.max(dx / w, dy / h)
       const translate = [w / 2 - scale * x, h / 2 - scale * y]
 
-      strokeWidth = active ? `${2.5 / scale}px` : 1
-      transform = `translate(${translate})scale(${scale})`
+      return { scale, translate }
+    }
+
+    const { scale, translate } = getActiveTransformValues(active)
+    const strokeWidth = active ? `${2.5 / scale}px` : 1
+    let pin
+    if (coordinates && coordinates.lat && coordinates.lng) {
+      const c = projection([coordinates.lng, coordinates.lat])
+      pin = (
+        <circle
+          cx={c[0]}
+          cy={c[1]}
+          r={`${7 / scale}px`}
+          className="fill-red-bright"
+        />
+      )
     }
 
     return (
@@ -62,28 +68,32 @@ class PlaceThumbnail extends React.Component {
           preserveAspectRatio="xMidYMid"
           viewBox={`0 0 ${w} ${h}`}
         >
-          <g strokeWidth={strokeWidth} transform={transform}>
-            {geoStates.map((d, i) =>
+          <g
+            strokeWidth={strokeWidth}
+            transform={`translate(${translate})scale(${scale})`}
+          >
+            <g>
+              {geoStates.map((d, i) =>
+                <path
+                  key={i}
+                  d={path(d)}
+                  fill={
+                    d.properties.name.toUpperCase() === placeUpper || !active
+                      ? '#94aabd'
+                      : '#dfe6ed'
+                  }
+                />,
+              )}
               <path
-                key={i}
-                d={path(d)}
-                fill={
-                  d.properties.name.toUpperCase() === placeUpper || !active
-                    ? '#94aabd'
-                    : '#dfe6ed'
-                }
-              />,
-            )}
-            <path
-              d={path(meshed)}
-              fill="none"
-              stroke="#fff"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+                d={path(meshed)}
+                fill="none"
+                stroke="#fff"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </g>
             {pin}
           </g>
-
         </svg>
       </Container>
     )
@@ -96,7 +106,7 @@ PlaceThumbnail.defaultProps = {
 
 PlaceThumbnail.propTypes = {
   coordinates: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  selected: PropTypes.string.isRequired,
+  usState: PropTypes.string.isRequired,
 }
 
 export default PlaceThumbnail
