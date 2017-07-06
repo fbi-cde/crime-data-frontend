@@ -2,6 +2,7 @@ import React from 'react'
 import { IndexRoute, Route, Router } from 'react-router'
 
 import About from './components/About'
+import ApiDocs from './components/ApiDocs'
 import App from './containers/App'
 import DownloadsAndDocs from './components/DownloadsAndDocs'
 import Explorer from './components/Explorer'
@@ -19,6 +20,7 @@ const routes = (
       <Route path="/explorer/:crime" component={Explorer} />
       <Route path="/explorer/:placeType/:place/:crime" component={Explorer} />
       <Route path="/about" component={About} />
+      <Route path="/api-new" component={ApiDocs} />
       <Route path="/*" component={NotFound} />
     </Route>
   </Router>
