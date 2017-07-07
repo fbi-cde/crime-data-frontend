@@ -171,8 +171,8 @@ const Home = ({ appState, dispatch, router }) => {
             Open data
           </h2>
           <p className="p0 md-col-9 fs-16 sm-fs-20 serif">
-            This data comes from more than 18,000 law enforcement agencies
-            across the country that voluntarily participate in the FBI’s{' '}
+            The data is voluntarily submitted by as many as 18,000 law enforcement agencies
+            across the country that participate in the FBI’s{' '}
             <a href="https://ucr.fbi.gov/" className="underline">
               Uniform Crime Reporting (UCR) Program
             </a>. This is an open data project to improve the nation’s crime
