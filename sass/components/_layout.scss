@@ -11,13 +11,13 @@
 
 $sidebar-width: 20rem;
 
-html {
-  height: 100%;
-}
+html { height: 100%; }
+body { min-height: 100%; }
 
-body,
 #app {
+  max-width: 85rem;
   min-height: 100%;
+  position: relative;
 }
 
 .site {
