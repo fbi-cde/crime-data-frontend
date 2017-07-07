@@ -5,9 +5,14 @@ import React from 'react'
 
 import NibrsHistogramDetails from './NibrsHistogramDetails'
 import XAxis from './XAxis'
+import { slugify } from '../util/text'
 
 class NibrsHistogram extends React.Component {
   state = { hover: null }
+
+  handleClick = d => () => {
+    this.setState(prevState => ({ hover: prevState.hover ? null : d }))
+  }
 
   rememberValue = d => () => {
     this.setState({ hover: d })
@@ -21,6 +26,7 @@ class NibrsHistogram extends React.Component {
     const { data, margin, noun, size, title, xLabel } = this.props
     const { hover } = this.state
 
+    const id = slugify(`histogram-${title}`)
     const height = size.height - margin.top - margin.bottom
     const width = size.width - margin.left - margin.right
     const xPadding = 20
@@ -41,7 +47,7 @@ class NibrsHistogram extends React.Component {
     const y = scaleLinear().domain([0, maxVal]).range([height, 0])
 
     return (
-      <div className="mb2 pb2 border-bottom border-blue-light">
+      <div className="mb2 pb2 border-bottom border-blue-light" id={id}>
         <div className="mb2 blue bold">{title}</div>
         <div>
           <svg
@@ -66,6 +72,7 @@ class NibrsHistogram extends React.Component {
                         : '#f4dfdd'
                     }
                     pointerEvents="all"
+                    onClick={this.handleClick(d)}
                     onMouseOver={this.rememberValue(d)}
                     onMouseOut={this.forgetValue}
                   />
