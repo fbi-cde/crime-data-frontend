@@ -13,6 +13,7 @@ import { getAgency, oriToState } from '../util/ori'
 const ExplorerHeaderContainer = ({
   agencies,
   agency,
+  coordinates,
   crime,
   isAgency,
   place,
@@ -20,11 +21,6 @@ const ExplorerHeaderContainer = ({
   ucr,
   until,
 }) => {
-  const coordinates = isAgency &&
-  (agency.icpsr_lat && agency.icpsr_lng) && {
-    lat: agency.icpsr_lat,
-    lng: agency.icpsr_lng,
-  }
   const isLoading = isAgency ? agencies.loading : ucr.loading
   const usState = isAgency ? oriToState(place) : place
   const placeDisplay = isAgency ? agency.agency_name : startCase(usState)
@@ -76,10 +72,13 @@ const mapStateToProps = ({ agencies, filters, ucr }) => {
   const { crime, until } = filters
   const isAgency = placeType === 'agency'
   const agency = isAgency && !agencies.loading && getAgency(agencies, place)
+  const { icpsr_lat: lat, icpsr_lng: lng } = agency
+  const coordinates = isAgency && lat && lng && { lat, lng }
 
   return {
     agencies,
     agency,
+    coordinates,
     crime,
     isAgency,
     place,

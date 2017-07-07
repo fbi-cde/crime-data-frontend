@@ -24,41 +24,34 @@ class PlaceThumbnail extends React.Component {
 
     if (!usa) return <Container />
 
-    const placeUpper = usState.toUpperCase()
     const [w, h] = [400, 300]
     const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
     const geoStates = feature(usa, usa.objects.units).features
     const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
+
+    const placeUpper = usState.toUpperCase()
     const active = geoStates.find(
       s => s.properties.name.toUpperCase() === placeUpper,
     )
 
-    const getActiveTransformValues = a => {
-      const bounds = path.bounds(a)
+    const { lat, lng } = coordinates
+    const pin = coordinates && projection([lng, lat])
+
+    let scale = 1
+    let translate = [0, 0]
+    let strokeWidth = 1
+
+    if (active) {
+      const bounds = path.bounds(active)
       const dx = bounds[1][0] - bounds[0][0]
       const dy = bounds[1][1] - bounds[0][1]
       const x = (bounds[0][0] + bounds[1][0]) / 2
       const y = (bounds[0][1] + bounds[1][1]) / 2
-      const scale = 0.8 / Math.max(dx / w, dy / h)
-      const translate = [w / 2 - scale * x, h / 2 - scale * y]
 
-      return { scale, translate }
-    }
-
-    const { scale, translate } = getActiveTransformValues(active)
-    const strokeWidth = active ? `${2.5 / scale}px` : 1
-    let pin
-    if (coordinates && coordinates.lat && coordinates.lng) {
-      const c = projection([coordinates.lng, coordinates.lat])
-      pin = (
-        <circle
-          cx={c[0]}
-          cy={c[1]}
-          r={`${7 / scale}px`}
-          className="fill-red-bright"
-        />
-      )
+      scale = 0.8 / Math.max(dx / w, dy / h)
+      translate = [w / 2 - scale * x, h / 2 - scale * y]
+      strokeWidth = 2.5 / scale
     }
 
     return (
@@ -92,7 +85,13 @@ class PlaceThumbnail extends React.Component {
                 strokeLinejoin="round"
               />
             </g>
-            {pin}
+            {pin &&
+              <circle
+                cx={pin[0]}
+                cy={pin[1]}
+                r={8 / scale}
+                className="fill-red-bright"
+              />}
           </g>
         </svg>
       </Container>
