@@ -22,8 +22,7 @@ const url = `${API}/agencies?fields=agency_name,ori,primary_county,agency_type_n
 // const agencies = require('./agencies.json')
 const outFile = path.join(__dirname, '../../public/data/agencies-by-state.json')
 
-console.log(url)
-
+console.log('updating agencies data from api')
 http
   .get(url)
   .then(res => res.data)

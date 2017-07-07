@@ -13,6 +13,7 @@ import { getAgency, oriToState } from '../util/ori'
 const ExplorerHeaderContainer = ({
   agencies,
   agency,
+  coordinates,
   crime,
   isAgency,
   place,
@@ -51,7 +52,10 @@ const ExplorerHeaderContainer = ({
           />
         </div>
         <div className="sm-col sm-col-4 xs-hide">
-          <PlaceThumbnail selected={startCase(usState)} />
+          <PlaceThumbnail
+            coordinates={coordinates}
+            usState={startCase(usState)}
+          />
           <div className="mt-tiny fs-12 serif italic right">
             {isAgency && !isLoading
               ? `${placeDisplay}, ${startCase(usState)}`
@@ -68,10 +72,13 @@ const mapStateToProps = ({ agencies, filters, ucr }) => {
   const { crime, until } = filters
   const isAgency = placeType === 'agency'
   const agency = isAgency && !agencies.loading && getAgency(agencies, place)
+  const { icpsr_lat: lat, icpsr_lng: lng } = agency
+  const coordinates = isAgency && lat && lng && { lat, lng }
 
   return {
     agencies,
     agency,
+    coordinates,
     crime,
     isAgency,
     place,
