@@ -10,17 +10,8 @@ import { slugify } from '../util/text'
 class NibrsHistogram extends React.Component {
   state = { hover: null }
 
-  componentDidMount() {
-    document.addEventListener('click', this.handleClick)
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('click', this.handleClick)
-  }
-
-  handleClick = e => {
-    const id = slugify(`histogram-${this.props.title}`)
-    if (!e.target.closest(id)) this.forgetValue()
+  handleClick = d => () => {
+    this.setState(prevState => ({ hover: prevState.hover ? null : d }))
   }
 
   rememberValue = d => () => {
@@ -81,7 +72,9 @@ class NibrsHistogram extends React.Component {
                         : '#f4dfdd'
                     }
                     pointerEvents="all"
+                    onClick={this.handleClick(d)}
                     onMouseOver={this.rememberValue(d)}
+                    onMouseOut={this.forgetValue}
                   />
                 </g>,
               )}
