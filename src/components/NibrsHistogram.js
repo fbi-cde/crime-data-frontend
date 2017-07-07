@@ -5,18 +5,37 @@ import React from 'react'
 
 import NibrsHistogramDetails from './NibrsHistogramDetails'
 import XAxis from './XAxis'
+import { slugify } from '../util/text'
 
 class NibrsHistogram extends React.Component {
   state = { hover: null }
 
+  componentDidMount() {
+    document.addEventListener('click', this.handleClick)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClick)
+  }
+
+  handleClick = e => {
+    const id = slugify(`histogram-${this.props.title}`)
+    if (!e.target.closest(id)) this.forgetValue()
+  }
+
   rememberValue = d => () => {
     this.setState({ hover: d })
+  }
+
+  forgetValue = () => {
+    this.setState({ hover: null })
   }
 
   render() {
     const { data, margin, noun, size, title, xLabel } = this.props
     const { hover } = this.state
 
+    const id = slugify(`histogram-${title}`)
     const height = size.height - margin.top - margin.bottom
     const width = size.width - margin.left - margin.right
     const xPadding = 20
@@ -37,7 +56,7 @@ class NibrsHistogram extends React.Component {
     const y = scaleLinear().domain([0, maxVal]).range([height, 0])
 
     return (
-      <div className="mb2 pb2 border-bottom border-blue-light">
+      <div className="mb2 pb2 border-bottom border-blue-light" id={id}>
         <div className="mb2 blue bold">{title}</div>
         <div>
           <svg
