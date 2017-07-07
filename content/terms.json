@@ -5,7 +5,7 @@
   },
   {
     "term": "Application programming interface (API)",
-    "definition": "An easy way for developers, computers, and interactive applications to share large amounts of data in meaningful ways."
+    "definition": "An easy way for developers, computers, and interactive applications to share large amounts of data in meaningful ways.<br /><br /> Application program interface (API) is a set of routines, protocols, and tools for building software applications. An API specifies how software components should interact. Additionally, APIs are used when programming graphical user interface (GUI) components."
   },
   {
     "term": "Arson",
@@ -17,7 +17,7 @@
   },
   {
     "term": "Assaults on law enforcement officers",
-    "definition": "The Assaults on Law Enforcement Officers dataset consists of reported assaults against law enforcement officers. The UCR Program defines law enforcement officers as individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically to pay sworn law enforcement."
+    "definition": "Reported assaults against law enforcement officers. Law enforcement offers are individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically for sworn law enforcement representatives."
   },
   {
     "term": "Assisting or promoting prostitution",
@@ -37,7 +37,7 @@
   },
   {
     "term": "Bureau of Justice Statistics (BJS)",
-    "definition": "The primary source for criminal justice statistics in the U.S., established under the Justice Systems Improvement Act of 1979."
+    "definition": "The United States' primary source for criminal justice statistics. The Bureau of Justice Statistics was first established on December 27, 1979 under the Justice Systems Improvement Act of 1979, Public Law 96-157 (the 1979 Amendment to the Omnibus Crime Control and Safe Streets Act of 1968, Public Law 90-351)."
   },
   {
     "term": "Burglary",
@@ -45,7 +45,7 @@
   },
   {
     "term": "Civilian law enforcement employees",
-    "definition": "Full-time agency personnel such as clerks, radio dispatchers, meter attendants, stenographers, jailers, correctional officers, and mechanics."
+    "definition": "All full-time employees of the agency, e.g., dispatchers, clerks, and meter attendants.  These employees' salaries are paid from law enforcement funds.  Furthermore, correctional officers or jailers that have no police or arrest powers outside the jail, should be counted as civilians as long as their salaries are paid from the funds of the law enforcement agency. "
   },
   {
     "term": "Cleared",
@@ -65,7 +65,7 @@
   },
   {
     "term": "Crime Statistics Management Unit (CSMU)",
-    "definition": "The team responsible for checking the quality of the data that law enforcement agencies submit to the FBI."
+    "definition": "Unit within the FBI that collects, verifies/validates, and publishes the data that is submitted by law enforcement."
   },
   {
     "term": "Crime rate",
@@ -73,7 +73,7 @@
   },
   {
     "term": "Crime trends",
-    "definition": "The percentage change in crime based on data reported in a given period. These statistics play a prominent role for both offense and arrest analyses. Trends can be computed for any time frame, such as months, quarters, or years. The Uniform Crime Reporting Program employs two types of trend statistics: volume trends and rate trends."
+    "definition": "The percentage change in crime based on data reported in a given period. These statistics play a prominent role for both offense and arrest analyses.  In calculating trends, the UCR Program includes only common reported months for individual agencies.  The Uniform Crime Reporting Program employs two types of trend statistics: volume trends and rate trends."
   },
   {
     "term": "Criminal Justice Information Services (CJIS)",
@@ -129,7 +129,7 @@
   },
   {
     "term": "Federal Bureau of Investigation (FBI)",
-    "definition": "A domestic law enforcement and intelligence agency that reports to the U.S. attorney general and the director of national intelligence."
+    "definition": "The FBI is an intelligence-driven and threat-focused national security organization with both intelligence and law enforcement responsibilities. It is the principal investigative arm of the U.S. Department of Justice and a full member of the U.S. Intelligence Community. The FBI has the authority and responsibility to investigate specific crimes assigned to it and to provide other law enforcement agencies with cooperative services, such as fingerprint identification, laboratory examinations, and training. The FBI also gathers, shares, and analyzes intelligence, both to support its own investigations and those of its partners and to better understand and combat the security threats facing the United States."
   },
   {
     "term": "Fondling",
@@ -153,7 +153,7 @@
   },
     {
     "term": "Hierarchy rule",
-    "definition": "With Summary Reporting System (SRS) data, when more than one crime was committed by the same person or group of people and the time and space between the crimes were insignificant, the crime highest in the hierarchy is the only one reported. Justifiable homicide, motor vehicle theft, and arson are exceptions to the rule."
+    "definition": "When more than one Summary Reporting System (SRS) offense is classified, the crime highest in the hierarchy is the only one reported. Justifiable homicide, motor vehicle theft, arson, and human trafficking are exceptions to the rule."
   },
   {
     "term": "Homicide",
@@ -181,7 +181,7 @@
   },
   {
     "term": "Justifiable homicide",
-    "definition": "The killing of a perpetrator of a serious criminal offense by a peace officer in the line of duty, or the killing, during the commission of a serious criminal offense, of the perpetrator by a private individual. Justifiable homicide is not a crime."
+    "definition": "The killing of a perpetrator of a serious criminal offense by a peace officer in the line of duty, or the killing, during the commission of a serious criminal offense, of the perpetrator by a private individual (This is not a crime in the UCR Program.)"
   },
   {
     "term": "Kidnapping and abduction",
@@ -201,7 +201,7 @@
   },
   {
     "term": "Liquor law violations",
-    "definition": "The violation of laws or ordinances prohibiting the manufacture, sale, purchase, transportation, possession, or use of alcoholic beverages."
+    "definition": "(Except Driving Under the Influence and Drunkenness) The violation of laws or ordinances prohibiting the manufacture, sale, purchase, transportation, possession, or use of alcoholic beverages."
   },
   {
     "term": "Metropolitan statistical area (MSA)",
@@ -217,7 +217,7 @@
   },
   {
     "term": "National Incident-Based Reporting System (NIBRS)",
-    "definition": "The FBI’s incident-based reporting system for crimes known to law enforcement.<br /><br />Local, state, and federal law enforcement agencies collect a variety of details about each incident, including the time and location of the crime; the circumstance of the incident; the characteristics of the victim and offender (age, sex, race, and ethnicity); the victim’s relationship to the offender; the involvement of weapons or drugs; property loss; and whether the crime was motivated by bias.<br /><br />Law enforcement agencies are still in the process of adopting NIBRS. During this period of transition, the FBI converts incident-based data to the traditional Summary Reporting System (SRS) format for the purpose of publishing national and state-level crime trends."
+    "definition": "The National Incident-Based Reporting System, or NIBRS, was implemented to improve the overall quantity and quality of crime data collected by law enforcement by capturing more detailed information on each single crime occurrence. It is the FBI’s incident-based reporting system for crimes known to law enforcement.<br /><br />Local, state, and federal law enforcement agencies collect a variety of details about each incident, including the time and location of the crime; the circumstance of the incident; the characteristics of the victim and offender (age, sex, race, and ethnicity); the victim’s relationship to the offender; the involvement of weapons or drugs; property loss; and whether the crime was motivated by bias.<br /><br />Law enforcement agencies are still in the process of adopting NIBRS. During this period of transition, the FBI converts incident-based data to the traditional Summary Reporting System (SRS) format for the purpose of publishing national and state-level crime trends."
   },
   {
     "term": "Negligent manslaughter",
@@ -273,19 +273,19 @@
   },
   {
     "term": "Purse-snatching",
-    "definition": "The grabbing or snatching of a purse or handbag from another person."
+    "definition": "The grabbing or snatching of a purse, handbag, etc., from the physical possession of another person."
   },
   {
     "term": "Rape",
-    "definition": "In 2013, the FBI changed its definition of rape. The change broadened the actions that can be considered a rape offense and made the definition inclusive of all genders as potential victims.<br /><br />Old definition: The carnal knowledge of a female forcibly and against her will.<br /><br />New definition: The penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, without the consent of the victim."
+    "definition": "In 2013, the FBI changed its definition of rape. The change broadened the actions that can be considered a rape offense and made the definition inclusive of all genders as potential victims.<br /><br />Old definition: The carnal knowledge of a female forcibly and against her will.<br /><br />New definition: This definition includes either gender of victim or offender. Sexual penetration means the penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, or by a sex-related object. This definition also includes instances in which the victim is incapable of giving consent because of temporary or permanent mental or physical incapacity (including due to the influence of drugs or alcohol) or because of age. Physical resistance is not required on the part of the victim to demonstrate lack of consent."
   },
   {
     "term": "Rape (legacy definition)",
-    "definition": "In 2013, the FBI changed its definition of rape. The change broadened the actions that can be considered a rape offense and made the definition inclusive of all genders as potential victims.<br /><br />Old definition: The carnal knowledge of a female forcibly and against her will.<br /><br />New definition: The penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, without the consent of the victim."
+    "definition": "In 2013, the FBI changed its definition of rape. The change broadened the actions that can be considered a rape offense and made the definition inclusive of all genders as potential victims.<br /><br />Old definition: The carnal knowledge of a female forcibly and against her will.<br /><br />New definition: This definition includes either gender of victim or offender. Sexual penetration means the penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, or by a sex-related object. This definition also includes instances in which the victim is incapable of giving consent because of temporary or permanent mental or physical incapacity (including due to the influence of drugs or alcohol) or because of age. Physical resistance is not required on the part of the victim to demonstrate lack of consent."
   },
   {
     "term": "Rape (revised definition)",
-    "definition": "In 2013, the FBI changed its definition of rape. The change broadened the actions that can be considered a rape offense and made the definition inclusive of all genders as potential victims.<br /><br />Old definition: The carnal knowledge of a female forcibly and against her will.<br /><br />New definition: The penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, without the consent of the victim."
+    "definition": "In 2013, the FBI changed its definition of rape. The change broadened the actions that can be considered a rape offense and made the definition inclusive of all genders as potential victims.<br /><br />Old definition: The carnal knowledge of a female forcibly and against her will.<br /><br />New definition: This definition includes either gender of victim or offender. Sexual penetration means the penetration, no matter how slight, of the vagina or anus with any body part or object, or oral penetration by a sex organ of another person, or by a sex-related object. This definition also includes instances in which the victim is incapable of giving consent because of temporary or permanent mental or physical incapacity (including due to the influence of drugs or alcohol) or because of age. Physical resistance is not required on the part of the victim to demonstrate lack of consent."
   },
   {
     "term": "Rate",
@@ -305,7 +305,8 @@
   },
   {
     "term": "Runaway",
-    "definition": "A person under 18 years of age who has left home without permission of their parents or legal guardian."
+    "definition": "A person under 18 years of age who has left home without permission of his/her parent(s) or legal guardian (The UCR Program discontinued collecting this information in 2011, and
+it is not considered a crime for UCR purposes.)"
   },
   {
     "term": "Rural",
