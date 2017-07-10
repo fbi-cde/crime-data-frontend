@@ -49,9 +49,9 @@ const NibrsContainer = ({
 }) => {
   if (isAgency && !agency) return null
 
-  const showNibrs = isAgency
-    ? agency.nibrs_months_reported === 12
-    : shouldShowNibrs({ crime, place, placeType })
+  const agencyReportedNibrs = isAgency && agency.nibrs_months_reported === 12
+  const showNibrs =
+    shouldShowNibrs({ crime, place, placeType }) && agencyReportedNibrs
 
   if (!showNibrs) return null
 
