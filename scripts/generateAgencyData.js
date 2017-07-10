@@ -1,28 +1,24 @@
 /* eslint-disable no-console, arrow-body-style */
-const childProcess = require('child_process')
-const fs = require('fs')
-const path = require('path')
+import childProcess from 'child_process'
+import fs from 'fs'
+import path from 'path'
 
-const http = require('axios')
+import http from 'axios'
+
+const API = process.env.CDE_API
+const KEY = process.env.API_KEY
+const url = `${API}/agencies?fields=agency_name,ori,primary_county,agency_type_name,icpsr_lat,icpsr_lng,months_reported,nibrs_months_reported,past_10_years_reported,state_abbr,submitting_name&per_page=25000&api_key=${KEY}`
+const outFile = path.join(__dirname, '../public/data/agencies-by-state.json')
 
 const exec = cmd => {
   return new Promise((resolve, reject) => {
     return childProcess.exec(cmd, (err, stdout, stderr) => {
       if (err) return reject(err)
-
       return resolve(stdout || stderr)
     })
   })
 }
 
-const API = process.env.CDE_API
-const KEY = process.env.API_KEY
-const url = `${API}/agencies?fields=agency_name,ori,primary_county,agency_type_name,icpsr_lat,icpsr_lng,months_reported,nibrs_months_reported,past_10_years_reported,state_abbr,submitting_name&per_page=25000&api_key=${KEY}`
-
-// const agencies = require('./agencies.json')
-const outFile = path.join(__dirname, '../../public/data/agencies-by-state.json')
-
-console.log('updating agencies data from api')
 http
   .get(url)
   .then(res => res.data)
@@ -68,6 +64,4 @@ http
       })
     })
   })
-  .catch(err => {
-    console.log('eek, an error', err)
-  })
+  .catch(err => console.log('eek, an error', err))

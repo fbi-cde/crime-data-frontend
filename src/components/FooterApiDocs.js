@@ -1,25 +1,18 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 
-import Link from './Link'
 import { links } from '../util/footer'
 import packageJson from '../../package.json'
 
-const handleClick = func => e => {
-  e.preventDefault()
-  return func()
-}
-
-const Footer = ({ actions }) =>
+const FooterApiDocs = () =>
   <footer className="px2 md-px6 py3 md-py6 bg-blue white">
     <div className="clearfix sm-mxn2">
       <div className="sm-col col-12 sm-col-4 sm-px2 mt1 mb4">
         <span className="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">
           Federal Bureau of Investigation
         </span>
-        <Link to="/" className="fs-24 md-fs-32 serif line-height-1 white">
+        <a href="/" className="fs-24 md-fs-32 serif line-height-1 white">
           Crime Data Explorer
-        </Link>
+        </a>
         <span className="block fs-10">
           v{packageJson.version} -{' '}
           <a
@@ -90,23 +83,16 @@ const Footer = ({ actions }) =>
       </div>
       <div className="sm-col col-12 sm-col-4 sm-px2 fs-14">
         <div className="mb3 md-m0 clearfix">
-          {links.map((list, i) =>
+          {links.map((li, i) =>
             <ul
               className="col col-6 m0 p0 fs-12 list-style-none left-bars muted-bars"
               key={i}
             >
-              {list.map((d, ii) =>
-                <li key={ii} className="mb1">
-                  {d.href
-                    ? <Link className="cursor-pointer white caps" to={d.href}>
-                        {d.text}
-                      </Link>
-                    : <button
-                        className="bg-transparent border-none cursor-pointer font-family-inherit font-size-inherit px0 white caps"
-                        onClick={d.action && handleClick(actions[d.action])}
-                      >
-                        {d.text}
-                      </button>}
+              {li.filter(d => d.href).map((d, j) =>
+                <li key={j} className="mb1">
+                  <a className="cursor-pointer white caps" href={d.href}>
+                    {d.text}
+                  </a>
                 </li>,
               )}
             </ul>,
@@ -116,8 +102,6 @@ const Footer = ({ actions }) =>
     </div>
   </footer>
 
-Footer.propTypes = {
-  actions: PropTypes.object.isRequired,
-}
+FooterApiDocs.propTypes = {}
 
-export default Footer
+export default FooterApiDocs
