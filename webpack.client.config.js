@@ -14,49 +14,58 @@ var config = {
   entry: './src/entry.js',
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules\/(?!autotrack|dom-utils)/,
-        loader: 'babel',
-      },
-      {
-        test: /\.json$/,
-        loader: 'json',
+        loader: 'babel-loader'
       },
       {
         test: /\.scss$/i,
-        loader: ExtractTextPlugin.extract(['css', 'postcss', 'sass']),
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [autoprefixer('last 2 versions', '> 5%')]
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                outputStyle: 'compressed',
+                includePaths: ['node_modules']
+              }
+            }
+          ]
+        })
       },
       {
         test: /\.ya*ml$/,
-        loaders: ['json', 'yaml'],
-      },
-    ],
+        use: ['json-loader', 'yaml-loader']
+      }
+    ]
   },
-  sassLoader: {
-    outputStyle: 'compressed',
-    includePaths: ['node_modules'],
-  },
-  postcss: [autoprefixer({ browsers: ['last 2 versions', '> 5%'] })],
   plugins: [
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.js$/,
       threshold: 10240,
-      minRatio: 0.8,
+      minRatio: 0.8
     }),
     new ExtractTextPlugin('app.css'),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(env),
-      },
-    }),
-  ],
+        NODE_ENV: JSON.stringify(env)
+      }
+    })
+  ]
 }
 
 if (env === 'production') {

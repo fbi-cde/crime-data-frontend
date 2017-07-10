@@ -6,6 +6,7 @@ var path = require('path')
 var webpack = require('webpack')
 
 var nodeModules = {}
+
 fs
   .readdirSync('node_modules')
   .filter(x => ['.bin'].indexOf(x) === -1)
@@ -18,31 +19,27 @@ var config = {
   entry: './src/server.js',
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'server.js',
+    filename: 'server.js'
   },
   target: 'node',
   node: {
-    __dirname: false,
+    __dirname: false
   },
   externals: nodeModules,
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules\/(?!autotrack|dom-utils)/,
-        loader: 'babel',
-      },
-      {
-        test: /\.json$/,
-        loader: 'json',
+        loader: 'babel-loader'
       },
       {
         test: /\.ya*ml$/,
-        loaders: ['json', 'yaml'],
-      },
-    ],
+        use: ['json-loader', 'yaml-loader']
+      }
+    ]
   },
-  plugins: [new webpack.IgnorePlugin(/\.(css|less)$/)],
+  plugins: [new webpack.IgnorePlugin(/\.(css|less)$/)]
 }
 
 module.exports = config
