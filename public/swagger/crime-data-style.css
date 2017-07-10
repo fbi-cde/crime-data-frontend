@@ -9,6 +9,8 @@
 }
 .site .swagger-ui-wrap .info_title {
   font-family: serif;
+  font-size: 28px;
+  margin-bottom: 16px;
 }
 .site .swagger-ui-wrap .info p,
 .site .swagger-ui-wrap .info ol li,
@@ -73,4 +75,29 @@
 
 .flex-justify {
   justify-content: space-between;
+}
+
+.site .swagger-ui-wrap {
+  min-width: inherit;
+}
+
+#api-key-current, .sandbox {
+  overflow: auto;
+}
+
+.info_description {
+  word-wrap: break-word;
+}
+
+.endpoint .heading h3 {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 40rem) {
+  .heading .options {
+    display: none !important;
+  }
 }
