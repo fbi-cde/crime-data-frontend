@@ -1,5 +1,19 @@
 # Change Log
-All notable changes to this project will be documented in this file.
+All notable changes to this project be documented in this file.
+
+## [2.10.0] - 2017-07-10
+### Added
+- Show agency location on map ([#1116](https://github.com/18F/crime-data-frontend/pull/1116))
+
+### Changed
+- Histogram click and hover behavior work better on tap devices ([#1129](https://github.com/18F/crime-data-frontend/pull/1129))
+- Reference to the number of agencies in the UCR program ([#1132](https://github.com/18F/crime-data-frontend/pull/1132))
+- The newest service worker should control the site ([#1139](https://github.com/18F/crime-data-frontend/pull/1139))
+- Some definitions updated with feedback from the FBI ([crime-data-explorer#238](https://github.com/18F/crime-data-explorer/issues/238))
+
+### Fixed
+- Trend chart legend is scrollable in on mobile ([#980](https://github.com/18F/crime-data-frontend/issues/980))
+
 
 ## [2.9.1] - 2017-06-06
 ### Changed
