@@ -4,7 +4,7 @@ import dataSourcesReportedByState, {
   shouldFetchUcr,
   shouldFetchSummaries,
   shouldFetchNibrs,
-} from '../../src/util/ucr'
+} from '../../src/util/participation'
 import { nationalKey } from '../../src/util/usa'
 
 describe('ucr utility', () => {

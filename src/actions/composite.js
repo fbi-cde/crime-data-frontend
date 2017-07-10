@@ -2,13 +2,13 @@
 import { updateFilters } from './filters'
 import { fetchNibrs } from './nibrs'
 import { fetchSummaries } from '../actions/summary'
-import { fetchUcrParticipation } from '../actions/ucr'
+import { fetchUcrParticipation } from '../actions/participation'
 import history, { createNewLocation } from '../util/history'
 import {
   shouldFetchUcr,
   shouldFetchSummaries,
   shouldFetchNibrs,
-} from '../util/ucr'
+} from '../util/participation'
 
 const fetchData = () => (dispatch, getState) => {
   const { filters } = getState()

@@ -4,7 +4,7 @@ import {
   UCR_PARTICIPATION_RECEIVED,
 } from './constants'
 import api from '../util/api'
-import { reshapeData } from '../util/ucr'
+import { reshapeData } from '../util/participation'
 
 export const failedUcrParticipation = error => ({
   type: UCR_PARTICIPATION_FAILED,

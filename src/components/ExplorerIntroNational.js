@@ -10,9 +10,9 @@ import mapCrimeToGlossaryTerm from '../util/glossary'
 
 const highlight = txt => <strong>{txt}</strong>
 
-const ExplorerIntroNational = ({ crime, ucr, until }) => {
+const ExplorerIntroNational = ({ crime, participation, until }) => {
   const isArson = crime === 'arson'
-  const untilUcr = ucr.find(p => p.year === until)
+  const untilUcr = participation.find(p => p.year === until)
   const crimeTerm = (
     <Term id={mapCrimeToGlossaryTerm(crime)}>
       {upperFirst(lowerCase(crime))}
@@ -82,7 +82,7 @@ const ExplorerIntroNational = ({ crime, ucr, until }) => {
 
 ExplorerIntroNational.propTypes = {
   crime: PropTypes.string,
-  ucr: PropTypes.array,
+  participation: PropTypes.array,
   until: PropTypes.number,
 }
 
