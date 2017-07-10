@@ -1,16 +1,16 @@
-/* eslint-disable no-unused-vars */
-const VERSION = 1
 const CACHE = 'crime-data-explorer'
 
 self.addEventListener('install', event => {
+  self.skipWaiting()
   event.waitUntil(
     caches.open(CACHE).then(cache => {
       cache.addAll([
-        '/cde-logo.png',
-        '/fbi-logo.png',
-        '/github.svg',
-        '/twitter.svg',
-        '/chevron-down-navy.svg',
+        '/img/cde-logo.png',
+        '/img/fbi-logo.png',
+        '/img/loading.svg',
+        '/img/github.svg',
+        '/img/twitter.svg',
+        '/img/chevron-down-navy.svg',
         '/data/geo-usa-state.json',
         '/data/usa-state-svg.json',
       ])
@@ -30,13 +30,16 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      const promises = cacheNames
-        .filter(cacheName => cacheName === CACHE)
-        .map(cacheName => caches.delete(cacheName))
-
-      return Promise.all(promises)
-    }),
+    caches
+      .keys()
+      .then(cacheNames =>
+        Promise.all(
+          cacheNames
+            .filter(cacheName => cacheName === CACHE)
+            .map(cacheName => caches.delete(cacheName)),
+        ),
+      )
+      .then(() => self.clients.claim()),
   )
 })
 
