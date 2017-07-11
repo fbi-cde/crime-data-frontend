@@ -11,7 +11,9 @@ import { nibrsTerm } from '../components/Terms'
 import parseNibrs from '../util/nibrs'
 import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
-import ucrParticipation, { shouldFetchNibrs as shouldShowNibrs } from '../util/participation'
+import ucrParticipation, {
+  shouldFetchNibrs as shouldShowNibrs,
+} from '../util/participation'
 
 const initialNibrsYear = ({ place, placeType, since }) => {
   const placeNorm = placeType === 'agency' ? oriToState(place) : place
@@ -47,13 +49,12 @@ const NibrsContainer = ({
   since,
   until,
 }) => {
-  if (isAgency && !agency) return null
-
-  const agencyReportedNibrs = isAgency && agency.nibrs_months_reported === 12
-  const showNibrs =
-    shouldShowNibrs({ crime, place, placeType }) && agencyReportedNibrs
-
-  if (!showNibrs) return null
+  if (
+    (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
+    !shouldShowNibrs({ crime, place, placeType })
+  ) {
+    return null
+  }
 
   const placeDisplay = isAgency ? agency.display : startCase(place)
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
