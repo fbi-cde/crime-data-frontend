@@ -4,7 +4,7 @@ import React from 'react'
 
 import Term from './Term'
 
-import ucrParticipationLookup from '../util/ucr'
+import ucrParticipationLookup from '../util/participation'
 
 const estimatedTerm = (
   <Term id="estimated data" size="sm">

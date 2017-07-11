@@ -11,7 +11,9 @@ import { nibrsTerm } from '../components/Terms'
 import parseNibrs from '../util/nibrs'
 import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
-import ucrParticipation, { shouldFetchNibrs as shouldShowNibrs } from '../util/ucr'
+import ucrParticipation, {
+  shouldFetchNibrs as shouldShowNibrs,
+} from '../util/participation'
 
 const initialNibrsYear = ({ place, placeType, since }) => {
   const placeNorm = placeType === 'agency' ? oriToState(place) : place
@@ -41,25 +43,26 @@ const NibrsContainer = ({
   crime,
   isAgency,
   nibrs,
+  participation,
   place,
   placeType,
   since,
-  ucr,
   until,
 }) => {
-  if (isAgency && !agency) return null
-
-  const showNibrs = isAgency
-    ? agency.nibrs_months_reported === 12
-    : shouldShowNibrs({ crime, place, placeType })
-
-  if (!showNibrs) return null
+  if (
+    (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
+    !shouldShowNibrs({ crime, place, placeType })
+  ) {
+    return null
+  }
 
   const placeDisplay = isAgency ? agency.display : startCase(place)
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
   const { data, error } = nibrs
 
-  const isLoading = isAgency ? nibrs.loading : nibrs.loading || ucr.loading
+  const isLoading = isAgency
+    ? nibrs.loading
+    : nibrs.loading || participation.loading
   const isReady = !isLoading && error === null && !!data
 
   let totalCount = 0
@@ -107,7 +110,7 @@ const NibrsContainer = ({
             place={place}
             placeDisplay={placeDisplay}
             totalCount={totalCount}
-            ucr={ucr}
+            participation={participation}
             until={until}
           />}
       </div>
@@ -130,14 +133,14 @@ NibrsContainer.propTypes = {
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
-  ucr: PropTypes.shape({
+  participation: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.bool,
   }).isRequired,
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, nibrs, ucr }) => {
+const mapStateToProps = ({ agencies, filters, nibrs, participation }) => {
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
   const agency = isAgency && !agencies.loading && getAgency(agencies, place)
@@ -149,7 +152,7 @@ const mapStateToProps = ({ agencies, filters, nibrs, ucr }) => {
     place,
     placeType,
     nibrs,
-    ucr,
+    participation,
   }
 }
 

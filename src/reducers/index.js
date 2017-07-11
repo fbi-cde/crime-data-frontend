@@ -5,9 +5,9 @@ import feedback from './feedback'
 import filters from './filters'
 import glossary from './glossary'
 import nibrs from './nibrs'
+import participation from './participation'
 import sidebar from './sidebar'
 import summaries from './summary'
-import ucr from './ucr'
 
 export default combineReducers({
   agencies,
@@ -15,7 +15,7 @@ export default combineReducers({
   filters,
   glossary,
   nibrs,
+  participation,
   sidebar,
   summaries,
-  ucr,
 })

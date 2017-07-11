@@ -79,12 +79,13 @@ class AgencySearch extends Component {
     data.forEach(d => (counties[d.primary_county || 'N/A'] = true))
 
     const searchUpper = search.toUpperCase()
-    const dataFiltered = searchUpper === ''
-      ? data
-      : data.filter(d => {
-          const words = `${d.ori} ${d.agency_name}`.toUpperCase()
-          return words.includes(searchUpper)
-        })
+    const dataFiltered =
+      searchUpper === ''
+        ? data
+        : data.filter(d => {
+            const words = `${d.ori} ${d.agency_name}`.toUpperCase()
+            return words.includes(searchUpper)
+          })
 
     return (
       <div className="agency-search mt2">
@@ -92,7 +93,7 @@ class AgencySearch extends Component {
           <div className="relative">
             <input
               type="text"
-              className="col-12 field field-sm fs-14 bold bg-white border-blue rounded-none placeholder-blue placeholder-fw-100 truncate pr4"
+              className="col-12 pr5 field field-sm fs-14 bold bg-white border-blue rounded-none placeholder-blue placeholder-fw-100 truncate"
               placeholder="Search for an agency"
               value={search}
               onChange={this.handleChange}

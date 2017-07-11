@@ -5,7 +5,7 @@ import {
   UCR_PARTICIPATION_FETCHING,
   UCR_PARTICIPATION_RECEIVED,
 } from '../../src/actions/constants'
-import reducer from '../../src/reducers/ucr'
+import reducer from '../../src/reducers/participation'
 
 describe('ucr reducer', () => {
   const error = {

@@ -39,7 +39,7 @@ const {
 
 const initState = {
   agencies: { data: {}, loading: true },
-  ucr: { data: {}, loading: true },
+  participation: { data: {}, loading: true },
   summaries: { data: {}, loading: true },
 }
 

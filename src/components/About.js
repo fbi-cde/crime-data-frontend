@@ -8,7 +8,7 @@ import UsaMap from './UsaMap'
 
 import DownloadDataBtn from './DownloadDataBtn'
 import { showFeedback } from '../actions/feedback'
-import ucr from '../util/ucr'
+import participation from '../util/participation'
 import { slugify } from '../util/text'
 import usa, { data as usaData, nationalKey } from '../util/usa'
 
@@ -43,7 +43,7 @@ const stateColors = Object.keys(usaData)
   .filter(k => slugify(usa(k)) !== nationalKey)
   .map(k => {
     const stateName = usa(k)
-    const ucrInfo = ucr(stateName)
+    const ucrInfo = participation(stateName)
     const { 'state-program': stateProgram, nibrs, srs } = ucrInfo
     const matches = legend.filter(l => l.check(stateProgram, nibrs, srs))
 

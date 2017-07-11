@@ -8,7 +8,7 @@ import ExplorerIntroState from './ExplorerIntroState'
 import { oriToState } from '../util/ori'
 import { nationalKey } from '../util/usa'
 
-const ExplorerIntro = ({ agency, crime, place, ucr, until }) => {
+const ExplorerIntro = ({ agency, crime, participation, place, until }) => {
   if (agency) {
     return (
       <ExplorerIntroAgency
@@ -22,16 +22,16 @@ const ExplorerIntro = ({ agency, crime, place, ucr, until }) => {
     )
   }
 
-  if (ucr.loading) return null
+  if (participation.loading) return null
 
-  if (ucr.error) return <ErrorCard error={ucr.error} />
+  if (participation.error) return <ErrorCard error={participation.error} />
 
   if (place === nationalKey) {
     return (
       <ExplorerIntroNational
         crime={crime}
         until={until}
-        ucr={ucr.data[nationalKey]}
+        participation={participation.data[nationalKey]}
       />
     )
   }
@@ -41,7 +41,7 @@ const ExplorerIntro = ({ agency, crime, place, ucr, until }) => {
       crime={crime}
       place={place}
       until={until}
-      ucr={ucr.data[place]}
+      participation={participation.data[place]}
     />
   )
 }
@@ -50,7 +50,7 @@ ExplorerIntro.propTypes = {
   agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
   crime: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
-  ucr: PropTypes.shape({
+  participation: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.boolean,
   }).isRequired,

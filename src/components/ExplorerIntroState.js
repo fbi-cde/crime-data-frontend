@@ -7,7 +7,7 @@ import Term from './Term'
 import { estimatedTerm, nibrsTerm, srsTerm } from './Terms'
 import { formatNum } from '../util/formats'
 import mapCrimeToGlossaryTerm from '../util/glossary'
-import ucrParticipationLookup from '../util/ucr'
+import ucrParticipationLookup from '../util/participation'
 
 const highlight = txt => <strong>{txt}</strong>
 const getReportTerms = ({ nibrs, srs, hybrid }) =>
@@ -18,10 +18,10 @@ const getReportTerms = ({ nibrs, srs, hybrid }) =>
     {nibrs && nibrsTerm}
   </span>
 
-const ExplorerIntroState = ({ crime, place, ucr, until }) => {
+const ExplorerIntroState = ({ crime, place, participation, until }) => {
   const isArson = crime === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
-  const untilUcr = ucr.find(p => p.year === until)
+  const untilUcr = participation.find(p => p.year === until)
   const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
   const crimeTerm = (
     <Term id={mapCrimeToGlossaryTerm(crime)}>

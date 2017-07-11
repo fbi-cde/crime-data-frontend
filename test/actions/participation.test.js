@@ -12,7 +12,7 @@ import {
   fetchingUcrParticipation,
   receivedUcrParticipation,
   fetchUcrParticipation,
-} from '../../src/actions/ucr'
+} from '../../src/actions/participation'
 import api from '../../src/util/api'
 
 const createPromise = (res, err) => {

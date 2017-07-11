@@ -16,12 +16,12 @@ const ExplorerHeaderContainer = ({
   coordinates,
   crime,
   isAgency,
+  participation,
   place,
   placeType,
-  ucr,
   until,
 }) => {
-  const isLoading = isAgency ? agencies.loading : ucr.loading
+  const isLoading = isAgency ? agencies.loading : participation.loading
   const usState = isAgency ? oriToState(place) : place
   const placeDisplay = isAgency ? agency.agency_name : startCase(usState)
 
@@ -42,7 +42,7 @@ const ExplorerHeaderContainer = ({
                 agency={agency}
                 crime={crime}
                 place={place}
-                ucr={ucr}
+                participation={participation}
                 until={until}
               />}
           <UcrResourcesList
@@ -67,7 +67,7 @@ const ExplorerHeaderContainer = ({
   )
 }
 
-const mapStateToProps = ({ agencies, filters, ucr }) => {
+const mapStateToProps = ({ agencies, filters, participation }) => {
   const { place, placeType } = getPlaceInfo(filters)
   const { crime, until } = filters
   const isAgency = placeType === 'agency'
@@ -81,9 +81,9 @@ const mapStateToProps = ({ agencies, filters, ucr }) => {
     coordinates,
     crime,
     isAgency,
+    participation,
     place,
     placeType,
-    ucr,
     until,
   }
 }

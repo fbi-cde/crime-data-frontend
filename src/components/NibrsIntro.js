@@ -12,10 +12,10 @@ const NibrsIntro = ({
   crime,
   isAgency,
   nibrsFirstYear,
+  participation,
   place,
   placeDisplay,
   totalCount,
-  ucr,
   until,
 }) => {
   if (isAgency) {
@@ -28,7 +28,7 @@ const NibrsIntro = ({
     )
   }
 
-  const ucrData = ucr.data[place]
+  const ucrData = participation.data[place]
   const untilUcr = ucrData.find(p => p.year === until)
   const agencyCt = untilUcr.nibrs_participating_agencies
 
@@ -50,7 +50,7 @@ NibrsIntro.propTypes = {
   place: PropTypes.string.isRequired,
   placeDisplay: PropTypes.string.isRequired,
   totalCount: PropTypes.number.isRequired,
-  ucr: PropTypes.object.isRequired,
+  participation: PropTypes.object.isRequired,
   until: PropTypes.number.isRequired,
 }
 
