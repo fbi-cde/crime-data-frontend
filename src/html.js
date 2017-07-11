@@ -1,5 +1,3 @@
-import analytics from './util/analytics'
-
 export default (content, head, state) =>
   `
   <!DOCTYPE html>
@@ -18,7 +16,6 @@ export default (content, head, state) =>
         window.__STATE__ = ${JSON.stringify(state).replace(/</g, '\\u003c')}
       </script>
       <script src='/bundle.js'></script>
-      ${process.env.NODE_ENV === 'production' ? analytics : ''}
     </body>
   </html>
 `

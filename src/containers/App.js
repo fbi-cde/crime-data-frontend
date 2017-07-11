@@ -3,6 +3,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
+import Analytics from '../components/Analytics'
 import BetaBanner from '../components/BetaBanner'
 import ClearCacheBtn from '../components/ClearCacheBtn'
 import Disclaimer from '../components/Disclaimer'
@@ -33,6 +34,7 @@ const App = ({ actions, appState, children, dispatch, location }) =>
       isOpen={appState.feedback.isOpen}
       onClose={actions.hideFeedback}
     />
+    <Analytics />
     <SharingTags />
   </div>
 
