@@ -27,14 +27,14 @@ const clientConfig = {
   entry: './src/entry.js',
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules\/(?!autotrack|dom-utils)/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.scss$/i,
@@ -45,40 +45,40 @@ const clientConfig = {
             {
               loader: 'postcss-loader',
               options: {
-                plugins: [autoprefixer('last 2 versions', '> 5%')]
-              }
+                plugins: [autoprefixer('last 2 versions', '> 5%')],
+              },
             },
             {
               loader: 'sass-loader',
               options: {
                 outputStyle: 'compressed',
-                includePaths: ['node_modules']
-              }
-            }
-          ]
-        })
+                includePaths: ['node_modules'],
+              },
+            },
+          ],
+        }),
       },
       {
         test: /\.ya*ml$/,
-        use: ['json-loader', 'yaml-loader']
-      }
-    ]
+        use: ['json-loader', 'yaml-loader'],
+      },
+    ],
   },
   plugins: [
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
-      test: /\.js$/,
+      test: /\.(js|css)$/,
       threshold: 10240,
-      minRatio: 0.8
+      minRatio: 0.8,
     }),
     new ExtractTextPlugin('app.css'),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(env)
-      }
-    })
-  ]
+        NODE_ENV: JSON.stringify(env),
+      },
+    }),
+  ],
 }
 
 const serverConfig = {
@@ -86,11 +86,11 @@ const serverConfig = {
   entry: './src/server.js',
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'server.js'
+    filename: 'server.js',
   },
   target: 'node',
   node: {
-    __dirname: false
+    __dirname: false,
   },
   externals: externals(),
   module: {
@@ -98,15 +98,15 @@ const serverConfig = {
       {
         test: /\.js$/,
         exclude: /node_modules\/(?!autotrack|dom-utils)/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.ya*ml$/,
-        use: ['json-loader', 'yaml-loader']
-      }
-    ]
+        use: ['json-loader', 'yaml-loader'],
+      },
+    ],
   },
-  plugins: [new webpack.IgnorePlugin(/\.(css|less)$/)]
+  plugins: [new webpack.IgnorePlugin(/\.(css|less)$/)],
 }
 
 if (env === 'production') {
