@@ -27,9 +27,9 @@ const SharingTags = ({ agency, crime, place, since, until }) => {
 }
 
 SharingTags.propTypes = {
-  agency: PropTypes.oneOf([PropTypes.bool, PropTypes.object]),
-  crime: PropTypes.oneOf([PropTypes.bool, PropTypes.string]),
-  place: PropTypes.oneOf([PropTypes.bool, PropTypes.string]),
+  agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  crime: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  place: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   since: PropTypes.number,
   until: PropTypes.number,
 }
