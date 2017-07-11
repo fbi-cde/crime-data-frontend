@@ -9,6 +9,7 @@ const EXCLUDES = [
   'DownloadBulkNibrs',
   'NotFound',
   'Terms',
+  'TrendChartRapeLegend',
 ]
 
 describe('All components', () => {

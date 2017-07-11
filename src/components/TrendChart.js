@@ -10,6 +10,8 @@ import React from 'react'
 import TrendChartDetails from './TrendChartDetails'
 import TrendChartHover from './TrendChartHover'
 import TrendChartLineSeries from './TrendChartLineSeries'
+import TrendChartRapeAnnotate from './TrendChartRapeAnnotate'
+import TrendChartRapeLegend from './TrendChartRapeLegend'
 import XAxis from './XAxis'
 import YAxis from './YAxis'
 
@@ -152,8 +154,11 @@ class TrendChart extends React.Component {
           updateYear={this.updateYear}
           until={until}
         />
-        <div className="mb3 fs-10 bold monospace black">
-          Rate per 100,000 people, by year
+        <div className="mb2 clearfix">
+          <div className="sm-col mb1 sm-m0 fs-10 bold monospace black">
+            Rate per 100,000 people, by year
+          </div>
+          {crime === 'rape' && <TrendChartRapeLegend />}
         </div>
         {/* eslint-disable no-return-assign */}
         <div className="mb3 col-12" ref={ref => (this.svgParent = ref)}>
@@ -169,36 +174,7 @@ class TrendChart extends React.Component {
               <TrendChartLineSeries color={color} series={series} x={x} y={y} />
               {until > 2013 &&
                 crime === 'rape' &&
-                <g
-                  transform={`translate(${x(
-                    new Date('2013-01-01'),
-                  )}, ${height})`}
-                >
-                  <line stroke="#95aabc" strokeWidth="1" y2={-height} />
-                  <rect
-                    className="fill-blue"
-                    height="8"
-                    transform="rotate(45 4 4)"
-                    width="8"
-                    x={-4 * Math.sqrt(2)}
-                  />
-                  <text
-                    className="fill-blue fs-10 italic serif"
-                    textAnchor="end"
-                    x="-12"
-                    y="-26"
-                  >
-                    Revised rape
-                  </text>
-                  <text
-                    className="fill-blue fs-10 italic serif"
-                    textAnchor="end"
-                    x="-12"
-                    y="-14"
-                  >
-                    definition
-                  </text>
-                </g>}
+                <TrendChartRapeAnnotate height={height} x={x} />}
               <TrendChartHover
                 color={color}
                 data={dataHover}
