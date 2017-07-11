@@ -12,210 +12,72 @@
   <body>
     <div class="site">
       <div class="clearfix p1 fs-10 sm-fs-12 line-height-1 bg-white">
-        <img
-          class="mr-tiny align-bottom"
-          alt="US flag"
-          width="18"
-          height="12"
-          src="/img/usa-flag.png"
-        />
-        An official website of the United States government
+        <img class="mr-tiny align-bottom" alt="US flag" width="18" height="12" src="/img/usa-flag.png" /> An official website of the United States government
       </div>
-      <header class="pt3 pb2 md-p0 flex items-center bg-blue white">
-        <div class="md-flex flex-auto items-baseline px2 md-px6">
-          <div class="flex-auto">
-            <div class="inline-block">
-              <span class="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">
-                Federal Bureau of Investigation
-              </span>
-              <a href="/" class="fs-24 md-fs-32 serif line-height-1 white">
-                Crime Data Explorer
-              </a>
-            </div>
-          </div>
+      <header class="py2 md-p0 flex items-center bg-blue white">
+        <div class="flex-auto items-baseline px2 md-px6">
+          <div class="center"><span class="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">Federal Bureau of Investigation</span><a href="/" class="fs-24 md-fs-32 serif line-height-1 white">Crime Data Explorer</a></div>
         </div>
       </header>
-
-      <main class="site-main swagger-section container mx-auto my3">
-        <form class="bg-white hide p3" id="api-key-container">
-          <div>
-            <label class="block bold mb1 serif" for="api-key">Add your API key</label>
-            <input class="border border-blue col-6 monospace" type="text" id="api-key">
-            <button class="btn btn-primary" id="api-key-btn">Update</button>
-          </div>
-          <p class="mb0 mt1">You can signup for one at <a class="underline" href="https://api.data.gov/signup/">https://api.data.gov/signup/</a>.</p>
-          <div class="hide" id="api-key-current">
-            <span class="bold">Current API key:</span>
-            <span class="monospace mr1" id="current"></span>
-          </div>
-        </form>
-
-        <div class="swagger-ui-wrap" id="swagger-ui">
-          <div class="mt3 mb8 fs-14 caps sans-serif center">
-            <img
-              class="align-middle mr1"
-              width="30"
-              height="30"
-              src="/img/loading.svg"
-              alt="loading..."
-            />
-              Loading
+      <main class="site-main">
+        <div class="swagger-section container mx-auto px1 my6">
+          <form class="bg-white hide p3" id="api-key-container">
+            <div>
+              <label class="block bold mb1 serif" for="api-key">Add your API key</label>
+              <input class="border border-blue col-6 monospace" type="text" id="api-key">
+              <button class="btn btn-primary" id="api-key-btn">Update</button>
+            </div>
+            <p class="mb0 mt1">You can signup for one at <a class="underline" href="https://api.data.gov/signup/">https://api.data.gov/signup/</a>.</p>
+            <div class="hide" id="api-key-current">
+              <span class="bold">Current API key:</span>
+              <span class="monospace mr1" id="current"></span>
+            </div>
+          </form>
+          <div class="swagger-ui-wrap" id="swagger-ui">
+            <div class="mt3 mb8 fs-14 caps sans-serif center">
+              <img
+                class="align-middle mr1"
+                width="30"
+                height="30"
+                src="/img/loading.svg"
+                alt="loading..."
+              />
+                Loading
+            </div>
           </div>
         </div>
       </main>
-      <footer class="py6 bg-blue white">
-        <div class="px2 md-px6">
-          <div class="sm-col col-12 sm-col-4 mt1 mb4">
-            <span class="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">
-              Federal Bureau of Investigation
-            </span>
-            <a class="fs-24 md-fs-32 serif line-height-1 white" href="/">
-              Crime Data Explorer
-            </a>
-            <span class="block fs-10">
-              <a
-                class="white"
-                href="https://github.com/18F/crime-data-frontend/blob/master/CHANGELOG.md"
-              >
-                Changelog
-              </a>
-            </span>
-            <div class="mt3">
-              <img
-                alt="Crime Data Explorer (CDE) logo"
-                class="mr3"
-                src="/img/cde-logo.png"
-                style="width:130px;"
-              />
-              <img
-                alt="Federal Bureau of Investigation (FBI) logo"
-                src="/img/fbi-logo.png"
-                style="width:130px;"
-              />
-            </div>
+      <footer class="px2 md-px6 py3 md-py6 bg-blue white">
+        <div class="clearfix sm-mxn2">
+          <div class="sm-col col-12 sm-col-4 sm-px2 mt1 mb4">
+            <span class="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">Federal Bureau of Investigation</span><a href="/" class="fs-24 md-fs-32 serif line-height-1 white">Crime Data Explorer</a>
+            <div class="mt3"><img alt="Crime Data Explorer (CDE) logo" class="mr3" src="/img/cde-logo.png" style="width:130px;" /><img alt="Federal Bureau of Investigation (FBI) logo" src="/img/fbi-logo.png" style="width:130px;" /></div>
           </div>
-          <div class="sm-col col-12 sm-col-4 px2 mb3 md-m0 fs-14 white">
+          <div class="sm-col col-12 sm-col-4 sm-px2 mb3 md-m0 fs-14 white">
             <div class="mb1 bold fs-18 serif blue-light-508">Contact us</div>
             <div class="mb3">
-              <div class="bold">
-                Criminal Justice Information Services (CJIS) Division
-              </div>
-              <a
-                class="mr1 pr1 white border-white border-right"
-                href="mailto:cjis_comm@leo.gov"
-              >
-                cjis_comm@leo.gov
-              </a>
-              <a class="white" href="tel:3046254995">(304) 625-4995</a>
-            </div>
+              <div class="bold">Crime Statistics Management Unit</div><a class="mr1 pr1 white" href="mailto:crimestatsinfo@fbi.gov">crimestatsinfo@fbi.gov</a></div>
             <div class="bold">FBI Uniform Crime Reporting Program</div>
-            <div>
-              <span class="mr1 pr1 border-right border-white">
-                1000 Custer Hollow Road
-              </span>
-              <span>Clarksburg, WV 26306</span>
-            </div>
+            <div><span class="mr1 pr1 border-right border-white">1000 Custer Hollow Road</span><span>Clarksburg, WV 26306</span></div>
             <div class="mt3">
-              <div class="inline-block">
-                <img
-                  class="mr1 align-middle"
-                  width="20"
-                  src="/img/github.svg"
-                  alt="github"
-                />
-                <a
-                  class="white"
-                  href="https://github.com/18F/crime-data-explorer"
-                >
-                  GitHub
-                </a>
-              </div>
-              <div class="inline-block ml3">
-                <img
-                  class="mr1 align-middle"
-                  width="20"
-                  src="/img/twitter.svg"
-                  alt="twitter"
-                />
-                <a class="white" href="https://twitter.com/fbi">@FBI</a>
-              </div>
+              <div class="inline-block"><img class="mr1 align-middle" width="20" src="/img/github.svg" alt="github" /><a class="white" href="https://github.com/18F/crime-data-explorer">GitHub</a></div>
+              <div class="inline-block ml3"><img class="mr1 align-middle" width="20" src="/img/twitter.svg" alt="twitter" /><a class="white" href="https://twitter.com/fbi">@FBI</a></div>
             </div>
           </div>
-          <div class="sm-col col-12 sm-col-4 px2 fs-14">
-            <div class="px2 mb3 md-m0 clearfix">
-              <ul class="col col-12 sm-col-6 m0 p0 fs-14 list-style-none left-bars">
-                <li class="mb1">
-                  <a class="cursor-pointer white caps" href="/">Home</a>
-                </li>
-                <li class="mb1">
-                  <a
-                    class="cursor-pointer white caps"
-                    href="/explorer/violent-crime"
-                  >
-                    Explorer
-                  </a>
-                </li>
-                <li class="mb1">
-                  <a class="cursor-pointer white caps" href="/about">About</a>
-                </li>
-                <li class="mb1">
-                  <a
-                    class="cursor-pointer white caps"
-                    href="/downloads-and-docs"
-                  >
-                    Downloads & Documentation
-                  </a>
-                </li>
+          <div class="sm-col col-12 sm-col-4 sm-px2 fs-14">
+            <div class="mb3 md-m0 clearfix">
+              <ul class="col col-6 m0 p0 fs-12 list-style-none left-bars muted-bars">
+                <li class="mb1"><a class="cursor-pointer white caps" href="/">Home</a></li>
+                <li class="mb1"><a class="cursor-pointer white caps" href="/explorer/violent-crime">Explorer</a></li>
+                <li class="mb1"><a class="cursor-pointer white caps" href="/about">About</a></li>
+                <li class="mb1"><a class="cursor-pointer white caps" href="/downloads-and-docs">Downloads &amp; Documentation</a></li>
               </ul>
-              <ul class="col col-12 sm-col-6 m0 p0 fs-14 list-style-none left-bars">
-                <li class="mb1">
-                  <a
-                    href="https://github.com/18F/crime-data-frontend/blob/master/LICENSE.md"
-                    class="cursor-pointer white caps"
-                    to="https://github.com/18F/crime-data-frontend/blob/master/LICENSE.md"
-                  >
-                    License
-                  </a>
-                </li>
-                <li class="mb1">
-                  <a class="cursor-pointer white caps" href="#!">Feedback</a>
-                </li>
-                <li class="mb1">
-                  <a
-                    href="https://www.fbi.gov/privacy_policy"
-                    class="cursor-pointer white caps"
-                    to="https://www.fbi.gov/privacy_policy"
-                  >
-                    Privacy Policy
-                  </a>
-                </li>
-                <li class="mb1">
-                  <a
-                    href="https://www.fbi.gov/services/records-management/foipa"
-                    class="cursor-pointer white caps"
-                    to="https://www.fbi.gov/services/records-management/foipa"
-                  >
-                    FOIA
-                  </a>
-                </li>
-                <li class="mb1">
-                  <a
-                    href="https://www.usa.gov/"
-                    class="cursor-pointer white caps"
-                    to="https://www.usa.gov/"
-                  >
-                    USA.GOV
-                  </a>
-                </li>
-                <li class="mb1">
-                  <a
-                    href="https://www.fbi.gov/accessibility"
-                    class="cursor-pointer white caps"
-                    to="https://www.fbi.gov/accessibility"
-                  >
-                    Accessibility
-                  </a>
-                </li>
+              <ul class="col col-6 m0 p0 fs-12 list-style-none left-bars muted-bars">
+                <li class="mb1"><a class="cursor-pointer white caps" href="https://github.com/18F/crime-data-frontend/blob/master/LICENSE.md">License</a></li>
+                <li class="mb1"><a class="cursor-pointer white caps" href="https://www.fbi.gov/privacy_policy">Privacy Policy</a></li>
+                <li class="mb1"><a class="cursor-pointer white caps" href="https://www.fbi.gov/services/records-management/foipa">FOIA</a></li>
+                <li class="mb1"><a class="cursor-pointer white caps" href="https://www.usa.gov/">USA.GOV</a></li>
+                <li class="mb1"><a class="cursor-pointer white caps" href="https://www.fbi.gov/accessibility">Accessibility</a></li>
               </ul>
             </div>
           </div>
@@ -245,18 +107,10 @@
     docExpansion: 'list',
     onComplete: function() {
       showApiKeyForm()
-      $('#api-key-btn').on('click', handleApiKeyChange)
-      addCssClasses()
+      $('#api-key-container').on('submit', handleApiKeyChange)
       restructureEndpointHeadings()
     },
   })
-
-  function addCssClasses() {
-    $('.info_description.markdown > p').each(function(i, p) {
-      var $p = $(p)
-      $p.addClass('sans-serif')
-    })
-  }
 
   function changeApiKey(apiKey) {
     var auth = new SwaggerClient.ApiKeyAuthorization('api_key', apiKey, 'query')
@@ -265,13 +119,9 @@
 
   function handleApiKeyChange(e) {
     e.preventDefault()
-    var $field = $('#api-key')
-    var $btn = $('#api-key-btn')
-
-    changeApiKey($field.val())
-    updateCurrentApiKeyUI($field.val())
-
-    $field.val('')
+    var val = $('#api-key').val()
+    changeApiKey(val)
+    updateCurrentApiKeyUI(val)
   }
 
   function restructureEndpointHeadings() {
@@ -279,19 +129,14 @@
       var $heading = $(heading)
       var $h2 = $heading.children('h2')
       var $options = $heading.children('.options')
-
       var $flex = $('<div class="flex flex-justify"></div>')
       var split = $h2.text().split(' : ')
       var $p = $('<p class="mb0"></p>')
-
       if (split.length === 1) return
-
       $h2.text(split[0])
       $p.text(split[1])
-
       $flex.append($h2)
       $flex.append($options)
-
       $heading.append($flex)
       $heading.append($p)
     })
@@ -319,7 +164,7 @@
 
   window.swaggerUi.load()
 
-  const docsKey = 'iiHnOKfno2Mgkt5AynpvPpUQTEyxE77jo1RU8PIv'
+  var docsKey = 'iiHnOKfno2Mgkt5AynpvPpUQTEyxE77jo1RU8PIv'
   changeApiKey(docsKey)
   updateCurrentApiKeyUI(docsKey)
   $('#api-key').val(docsKey)

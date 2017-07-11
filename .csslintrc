@@ -1,1 +1,1 @@
---exclude-list=./node_modules
+--exclude-list=./node_modules,./public/swagger
