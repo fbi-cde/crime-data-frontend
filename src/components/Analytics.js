@@ -1,4 +1,4 @@
-/* eslint-disable func-names, no-sequence, no-undef */
+/* eslint-disable */
 import React from 'react'
 
 class Analytics extends React.Component {
@@ -12,35 +12,21 @@ class Analytics extends React.Component {
   addDAP = () => {
     const script = document.createElement('script')
     script.src =
-      'https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js'
+      'https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=FBI&pua-ua-33523145-2'
     script.id = '_fed_an_ua_tag'
     document.body.appendChild(script)
   }
 
+  // prettier-ignore
   addGA = () => {
-    !(function(a, b, c, d, e, f, g) {
-      ;(a.GoogleAnalyticsObject = e), (a[e] =
-        a[e] ||
-        function() {
-          ;(a[e].q = a[e].q || []).push(arguments)
-        }), (a[e].l = 1 * new Date()), (f = b.createElement(
-        c,
-      )), (g = b.getElementsByTagName(
-        c,
-      )[0]), (f.async = 1), (f.src = d), g.parentNode.insertBefore(f, g)
-    })(
-      window,
-      document,
-      'script',
-      'https://www.google-analytics.com/analytics.js',
-      'ga',
-    ), ga('create', 'UA-48605964-47', 'auto'), ga(
-      'require',
-      'urlChangeTracker',
-    ), ga('set', 'anonymizeIp', !0), ga('set', 'forceSSL', !0), ga(
-      'send',
-      'pageview',
-    )
+    !function(a,b,c,d,e,f,g){a.GoogleAnalyticsObject=e,a[e]=a[e]||function(){(a[e].q=a[e].q||[]).push(arguments)},a[e].l=1*new Date,f=b.createElement(c),g=b.getElementsByTagName(c)[0],f.async=1,f.src=d,g.parentNode.insertBefore(f,g)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),
+    ga("create","UA-48605964-47","auto"),
+
+    ga("require", "urlChangeTracker"),
+
+    ga("set","anonymizeIp",!0),
+    ga("set","forceSSL",!0),
+    ga("send","pageview");
   }
 
   render() {

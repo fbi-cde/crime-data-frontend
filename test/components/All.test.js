@@ -3,6 +3,7 @@ import path from 'path'
 
 // components with no props need not have proptypes :)
 const EXCLUDES = [
+  'Analytics',
   'ClearCacheBtn',
   'Disclaimer',
   'DownloadsAndDocs',
