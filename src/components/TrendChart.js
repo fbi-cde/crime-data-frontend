@@ -152,8 +152,31 @@ class TrendChart extends React.Component {
           updateYear={this.updateYear}
           until={until}
         />
-        <div className="mb3 fs-10 bold monospace black">
-          Rate per 100,000 people, by year
+        <div className="clearfix">
+          <div className="mb3 col col-6 fs-10 bold monospace black">
+            Rate per 100,000 people, by year
+          </div>
+          {crime === 'rape' &&
+            <div className="col col-6">
+              <ul className="fs-10 list-style-none m0 right">
+                {['Legacy', 'Revised'].map((l, i) =>
+                  <li key={i}>
+                    <svg width="20" height="10" viewBox="0 0 20 10">
+                      <line
+                        x1="0"
+                        y1="7"
+                        x2="20"
+                        y2="7"
+                        strokeWidth="2"
+                        stroke="black"
+                        strokeDasharray={l === 'Revised' && '5,4'}
+                      />
+                    </svg>
+                    <span className="ml1">{l} rape definition</span>
+                  </li>,
+                )}
+              </ul>
+            </div>}
         </div>
         {/* eslint-disable no-return-assign */}
         <div className="mb3 col-12" ref={ref => (this.svgParent = ref)}>
