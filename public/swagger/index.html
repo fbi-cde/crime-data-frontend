@@ -50,7 +50,7 @@
       <footer class="px2 md-px6 py3 md-py6 bg-blue white">
         <div class="clearfix sm-mxn2">
           <div class="sm-col col-12 sm-col-4 sm-px2 mt1 mb4">
-            <span class="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">Federal Bureau of Investigation</span><a href="/" class="fs-24 md-fs-32 serif line-height-1 white">Crime Data Explorer</a><span class="block fs-10">v2.9.1 - <a class="white" href="https://github.com/18F/crime-data-frontend/blob/master/CHANGELOG.md">Changelog</a></span>
+            <span class="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">Federal Bureau of Investigation</span><a href="/" class="fs-24 md-fs-32 serif line-height-1 white">Crime Data Explorer</a>
             <div class="mt3"><img alt="Crime Data Explorer (CDE) logo" class="mr3" src="/img/cde-logo.png" style="width:130px;" /><img alt="Federal Bureau of Investigation (FBI) logo" src="/img/fbi-logo.png" style="width:130px;" /></div>
           </div>
           <div class="sm-col col-12 sm-col-4 sm-px2 mb3 md-m0 fs-14 white">
@@ -100,75 +100,75 @@
     <script src="/swagger/vendor/lib/swagger-oauth.js"></script>
     <script>
     ;(function() {
-      window.swaggerUi = new SwaggerUi({
-        url: 'https://crime-data-api.fr.cloud.gov/static/swagger.json',
-        dom_id: 'swagger-ui',
-        operationsSorter: 'alpha',
-        docExpansion: 'list',
-        onComplete: function() {
-          showApiKeyForm()
-          $('#api-key-container').on('submit', handleApiKeyChange)
-          restructureEndpointHeadings()
-        },
-      })
+  window.swaggerUi = new SwaggerUi({
+    url: 'https://crime-data-api.fr.cloud.gov/static/swagger.json',
+    dom_id: 'swagger-ui',
+    operationsSorter: 'alpha',
+    docExpansion: 'list',
+    onComplete: function() {
+      showApiKeyForm()
+      $('#api-key-container').on('submit', handleApiKeyChange)
+      restructureEndpointHeadings()
+    },
+  })
 
-      function changeApiKey(apiKey) {
-        var auth = new SwaggerClient.ApiKeyAuthorization('api_key', apiKey, 'query')
-        window.swaggerUi.api.clientAuthorizations.add('auth_name', auth)
-      }
+  function changeApiKey(apiKey) {
+    var auth = new SwaggerClient.ApiKeyAuthorization('api_key', apiKey, 'query')
+    window.swaggerUi.api.clientAuthorizations.add('auth_name', auth)
+  }
 
-      function handleApiKeyChange(e) {
-        e.preventDefault()
-        var val = $('#api-key').val()
-        changeApiKey(val)
-        updateCurrentApiKeyUI(val)
-      }
+  function handleApiKeyChange(e) {
+    e.preventDefault()
+    var val = $('#api-key').val()
+    changeApiKey(val)
+    updateCurrentApiKeyUI(val)
+  }
 
-      function restructureEndpointHeadings() {
-        $('.resource > .heading').each(function(i, heading) {
-          var $heading = $(heading)
-          var $h2 = $heading.children('h2')
-          var $options = $heading.children('.options')
-          var $flex = $('<div class="flex flex-justify"></div>')
-          var split = $h2.text().split(' : ')
-          var $p = $('<p class="mb0"></p>')
-          if (split.length === 1) return
-          $h2.text(split[0])
-          $p.text(split[1])
-          $flex.append($h2)
-          $flex.append($options)
-          $heading.append($flex)
-          $heading.append($p)
-        })
-      }
+  function restructureEndpointHeadings() {
+    $('.resource > .heading').each(function(i, heading) {
+      var $heading = $(heading)
+      var $h2 = $heading.children('h2')
+      var $options = $heading.children('.options')
+      var $flex = $('<div class="flex flex-justify"></div>')
+      var split = $h2.text().split(' : ')
+      var $p = $('<p class="mb0"></p>')
+      if (split.length === 1) return
+      $h2.text(split[0])
+      $p.text(split[1])
+      $flex.append($h2)
+      $flex.append($options)
+      $heading.append($flex)
+      $heading.append($p)
+    })
+  }
 
-      function sanitize(str) {
-        var div = document.createElement('div')
-        div.appendChild(document.createTextNode(str))
-        return div.innerHTML
-      }
+  function sanitize(str) {
+    var div = document.createElement('div')
+    div.appendChild(document.createTextNode(str))
+    return div.innerHTML
+  }
 
-      function showApiKeyForm() {
-        var $container = $('#api-key-container')
-        var $target = $('#api_info')
-        $target.append($container)
-        $container.removeClass('hide')
-      }
+  function showApiKeyForm() {
+    var $container = $('#api-key-container')
+    var $target = $('#api_info')
+    $target.append($container)
+    $container.removeClass('hide')
+  }
 
-      function updateCurrentApiKeyUI(newKey) {
-        var cleaned = sanitize(newKey)
-        var $container = $('#api-key-current')
-        $container.removeClass('hide')
-        $container.children('#current').text(cleaned)
-      }
+  function updateCurrentApiKeyUI(newKey) {
+    var cleaned = sanitize(newKey)
+    var $container = $('#api-key-current')
+    $container.removeClass('hide')
+    $container.children('#current').text(cleaned)
+  }
 
-      window.swaggerUi.load()
+  window.swaggerUi.load()
 
-      var docsKey = 'iiHnOKfno2Mgkt5AynpvPpUQTEyxE77jo1RU8PIv'
-      changeApiKey(docsKey)
-      updateCurrentApiKeyUI(docsKey)
-      $('#api-key').val(docsKey)
-    })()
-    </script>
+  var docsKey = 'iiHnOKfno2Mgkt5AynpvPpUQTEyxE77jo1RU8PIv'
+  changeApiKey(docsKey)
+  updateCurrentApiKeyUI(docsKey)
+  $('#api-key').val(docsKey)
+})()
+</script>
   </body>
 </html>
