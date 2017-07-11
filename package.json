@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node build/server.js",
     "postinstall": "npm run swagger",
-    "build": "export NODE_ENV=production && webpack -p --progress --config webpack.config.js && unset NODE_ENV",
+    "build": "export NODE_ENV=production && webpack --progress && unset NODE_ENV",
     "watch": "webpack -w --progress --config webpack.config.js & nodemon build/server.js",
     "lint": "npm run lint:js && npm run lint:yml",
     "lint:js": "eslint src scripts server.js --ignore-path .gitignore || exit 0",
