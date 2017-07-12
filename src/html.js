@@ -1,6 +1,3 @@
-import sharingMetaTags from './util/sharing'
-import analytics from './util/analytics'
-
 export default (content, head, state) =>
   `
   <!DOCTYPE html>
@@ -9,7 +6,7 @@ export default (content, head, state) =>
       <meta charset='utf-8'>
       <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
       <link rel='icon' type='image/png' sizes='32x32' href='/img/favicon.png'>
-      ${sharingMetaTags(state)}
+      ${head.meta.toString()}
       ${head.title.toString()}
       <link href='/app.css' rel='stylesheet'>
     </head>
@@ -19,7 +16,6 @@ export default (content, head, state) =>
         window.__STATE__ = ${JSON.stringify(state).replace(/</g, '\\u003c')}
       </script>
       <script src='/bundle.js'></script>
-      ${process.env.NODE_ENV === 'production' ? analytics : ''}
     </body>
   </html>
 `

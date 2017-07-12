@@ -3,6 +3,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
+import Analytics from '../components/Analytics'
 import BetaBanner from '../components/BetaBanner'
 import ClearCacheBtn from '../components/ClearCacheBtn'
 import Disclaimer from '../components/Disclaimer'
@@ -10,6 +11,7 @@ import Feedback from '../components/Feedback'
 import Footer from '../components/Footer'
 import Glossary from '../components/Glossary'
 import Header from '../components/Header'
+import SharingTags from '../components/SharingTags'
 import SkipContent from '../components/SkipContent'
 import * as feedbackActions from '../actions/feedback'
 import * as glossaryActions from '../actions/glossary'
@@ -32,6 +34,8 @@ const App = ({ actions, appState, children, dispatch, location }) =>
       isOpen={appState.feedback.isOpen}
       onClose={actions.hideFeedback}
     />
+    <Analytics />
+    <SharingTags />
   </div>
 
 App.propTypes = {
