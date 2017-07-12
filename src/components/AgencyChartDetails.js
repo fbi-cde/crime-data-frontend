@@ -29,7 +29,7 @@ const AgencyChartDetails = ({
 
   let compSentence = null
   const reportedLastYr = dataPrior && dataPrior.reported
-  if (reportedLastYr) {
+  if (reportedLastYr && reported > 0) {
     const comp = reported > reportedLastYr ? 'increased' : 'decreased'
     compSentence = (
       <span>Reported {noun} {highlight(comp)} from the previous year.</span>

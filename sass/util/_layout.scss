@@ -8,3 +8,7 @@
 @media #{$breakpoint-md} {
   .md-absolute { position: absolute; }
 }
+
+@media #{$breakpoint-lg} {
+  .lg-absolute { position: absolute; }
+}
