@@ -1,6 +1,20 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.11.0] - 2017-07-12
+### Added
+- Legend to distinguish between the legacy and revised rape definitions in trend chart ([#1150](https://github.com/18F/crime-data-frontend/pull/1150))
+
+### Changed
+- Do not show NIBRS related details for violent/property crime at the agency level ([#1146](https://github.com/18F/crime-data-frontend/pull/1146))
+- Upgrade to webpack 2 and a single configuration file ([#1147](https://github.com/18F/crime-data-frontend/pull/1147))
+- Refactor analytics and sharing utils into components ([#1152](https://github.com/18F/crime-data-frontend/pull/1152))
+
+### Fixed
+- Agency chart year comparison text handles no data years ([#1098](https://github.com/18F/crime-data-frontend/issues/1098)))
+- API footer design ([#1125](https://github.com/18F/crime-data-frontend/issues/1125))
+
+
 ## [2.10.0] - 2017-07-10
 ### Added
 - Show agency location on map ([#1116](https://github.com/18F/crime-data-frontend/pull/1116))
