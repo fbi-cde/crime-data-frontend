@@ -73,7 +73,7 @@ const TrendContainer = props => {
   return (
     <div className="mb7">
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
-        <h2 className="mt0 mb3 sm-mb5 fs-24 sm-fs-28 sans-serif">
+        <h2 className="mt0 mb2 sm-mb4 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} rate in {startCase(place)}, {since}-{until}
         </h2>
         {getContent(props)}
