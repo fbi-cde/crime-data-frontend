@@ -1,8 +1,8 @@
-$feedback-height: 550px;
+$feedback-height: 600px;
 
 .feedback {
   bottom: $feedback-height * -1.5;
-  max-height: $feedback-height;
+  max-height: 100%;
   overflow: scroll;
   right: 0;
 
