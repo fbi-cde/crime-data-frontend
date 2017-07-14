@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.11.1] - 2017-07-14
+### Fixed
+- Bigger NIBRS histogram touch targets ([#524](https://github.com/18F/crime-data-frontend/issues/524))
+- Feedback tool fits better on small displays ([#988](https://github.com/18F/crime-data-frontend/issues/988))
+- Handle agencies that have no associated coordinates ([#1158](https://github.com/18F/crime-data-frontend/pull/1158))
+- Upgrade Node to `6.11.x` ([#1161](https://github.com/18F/crime-data-frontend/pull/1161))
+
+
 ## [2.11.0] - 2017-07-12
 ### Added
 - Legend to distinguish between the legacy and revised rape definitions in trend chart ([#1150](https://github.com/18F/crime-data-frontend/pull/1150))
