@@ -35,7 +35,7 @@ class PlaceThumbnail extends React.Component {
       s => s.properties.name.toUpperCase() === placeUpper,
     )
 
-    const { lat, lng } = coordinates
+    const { lat, lng } = coordinates || {}
     const pin = coordinates && projection([lng, lat])
 
     let scale = 1
