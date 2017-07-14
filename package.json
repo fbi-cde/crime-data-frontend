@@ -3,7 +3,7 @@
   "version": "2.11.0",
   "private": true,
   "engines": {
-    "node": "6.10.x"
+    "node": "6.11.x"
   },
   "scripts": {
     "start": "node build/server.js",
