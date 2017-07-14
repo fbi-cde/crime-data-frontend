@@ -110,23 +110,26 @@ class Feedback extends React.Component {
             role="dialog"
           >
             <div
-              className={`fixed p3 bg-blue-dark white md-rounded-top mw30 z3 feedback ${isOpen
+              className={`fixed p3 bg-blue-dark white md-rounded-top mw30 z3 border-box feedback ${isOpen
                 ? 'show'
                 : ''}`}
             >
               <form>
                 <legend className="mb2">
-                  <h1 className="fs-14 md-fs-18 bold mt0 sans-serif">
+                  <h2 className="fs-16 md-fs-18 bold mt0 sans-serif">
                     Help us improve the Crime Data Explorer
-                  </h1>
+                  </h2>
                   <p className="fs-14 sans-serif">
-                    Don{"'"}t include sensitive information like your name,
+                    Please don’t include sensitive information like your name,
                     contact information or Social Security number.
                   </p>
                 </legend>
                 {fields.map((field, i) =>
-                  <div key={i}>
-                    <label className="mb-tiny block bold" htmlFor={field.id}>
+                  <div key={i} className="mb-tiny">
+                    <label
+                      className="mb1 fs-14 md-fs-16 block bold line-height-3"
+                      htmlFor={field.id}
+                    >
                       {field.label}
                     </label>
                     <textarea
@@ -179,7 +182,7 @@ class Feedback extends React.Component {
               </form>
               <button
                 aria-label="Close feedback form"
-                className="absolute fw-100 right-0 top-0 btn mr3 mt1 sm-mt2 p0"
+                className="absolute fw-100 right-0 top-0 btn mr3 mt1 sm-mt2 px0 py-tiny"
                 onClick={this.close}
                 ref={el => {
                   this.closeButton = el
