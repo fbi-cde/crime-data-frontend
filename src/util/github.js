@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 import http from 'axios'
 
 const API = 'https://api.github.com'

@@ -1,4 +1,3 @@
-import { format } from 'd3-format'
 import range from 'lodash.range'
 import lowerCase from 'lodash.lowercase'
 import startCase from 'lodash.startcase'
@@ -8,10 +7,9 @@ import React from 'react'
 import Highlight from './Highlight'
 import Term from './Term'
 import crimeTerm from '../util/glossary'
+import { formatNum, formatOneDec as formatRate } from '../util/formats'
 import { nationalKey } from '../util/usa'
 
-const formatRate = format(',.1f')
-const formatTotal = format(',.0f')
 const highlight = txt => <strong>{txt}</strong>
 const borderColor = { borderColor: '#c8d3dd' }
 const cellStyle = { width: 68, ...borderColor }
@@ -145,7 +143,7 @@ const TrendChartDetails = ({
                     className="inline-block border-bottom"
                     style={cellStyle}
                   >
-                    {formatTotal(d.count)}
+                    {formatNum(d.count)}
                   </span>
                 </td>
                 <td
@@ -156,7 +154,7 @@ const TrendChartDetails = ({
                     className="inline-block border-bottom"
                     style={cellStyle}
                   >
-                    {formatTotal(d.population)}
+                    {formatNum(d.population)}
                   </span>
                 </td>
               </tr>,

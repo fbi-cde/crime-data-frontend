@@ -1,8 +1,7 @@
-import { format } from 'd3-format'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const fmt = format(',.0f')
+import { formatRound as fmt } from '../util/formats'
 
 const NibrsDonutDetails = ({
   colorMap,
