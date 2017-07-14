@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 
 import DownloadBulkNibrs from './DownloadBulkNibrs'
 import DownloadDataBtn from './DownloadDataBtn'
+import SharingTags from './SharingTags'
 import Term from './Term'
 import otherDatasets from '../../content/datasets.yml'
 import markdown from '../util/md'
@@ -19,6 +20,7 @@ const nibrsTerm = (
 const DownloadsAndDocs = () =>
   <section className="bg-white">
     <Helmet title="CDE :: Downloads & Documentation" />
+    <SharingTags title="Downloads & Documentation" />
     <div className="px2 py7 container mx-auto">
       <h1 className={`mt0 mb4 pb1 fs-28 sm-fs-40 ${border}`}>
         Downloads & Documentation

@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 import { Link } from 'react-router'
 
 import LocationSelect from './LocationSelect'
+import SharingTags from './SharingTags'
 import UsaMap from './UsaMap'
 import { updateApp } from '../actions/composite'
 import { updateFilters } from '../actions/filters'
@@ -42,6 +43,7 @@ const Home = ({ appState, dispatch, router }) => {
   return (
     <div>
       <Helmet title="CDE :: Home" />
+      <SharingTags />
       <section className="px2 bg-blue-white">
         <div className="py7 container mx-auto relative">
           <h1 className="mt0 mb4 pb1 fs-28 sm-fs-40 border-bottom border-blue-light">
