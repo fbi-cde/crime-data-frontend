@@ -1,9 +1,8 @@
-import { format } from 'd3-format'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const fmt = format(',.0f')
+import { formatRound as fmt } from '../util/formats'
 
 const NibrsHistogramDetails = ({ data, noun }) => {
   const { ct, x0, x1 } = data

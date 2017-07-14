@@ -1,8 +1,7 @@
-import { format } from 'd3-format'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const fmt = format(',')
+import { formatNum } from '../util/formats'
 
 const NibrsTable = ({ data, title, sortByValue }) => {
   const agg = (a, b) => a + b.count
@@ -18,7 +17,7 @@ const NibrsTable = ({ data, title, sortByValue }) => {
           {data.filter(d => d.key).map((d, i) =>
             <tr key={i}>
               <td className="pl1 lh-24">{d.key}</td>
-              <td className="pr2 lh-24 right-align">{fmt(d.count)}</td>
+              <td className="pr2 lh-24 right-align">{formatNum(d.count)}</td>
             </tr>,
           )}
         </tbody>
@@ -26,7 +25,7 @@ const NibrsTable = ({ data, title, sortByValue }) => {
           <tr>
             <td className="pl1 lh-24 border-top border-blue-lighter">Total</td>
             <td className="pr2 lh-24 right-align border-top border-blue-lighter">
-              {fmt(total)}
+              {formatNum(total)}
             </td>
           </tr>
         </tfoot>

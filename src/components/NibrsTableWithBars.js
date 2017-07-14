@@ -1,13 +1,9 @@
-import { format } from 'd3-format'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import NibrsCountPercentToggle from './NibrsCountPercentToggle'
-
-const formatNumber = format(',')
-const formatPercent = p => (+p > 0.01 ? format('.0%')(p) : '<1%')
-const formatSI = n => (+n > 10000 ? format('.3s')(n) : formatNumber(n))
+import { formatNum, formatPerc, formatSI } from '../util/formats'
 
 class NibrsTableWithBars extends React.Component {
   state = { isCounts: false }
@@ -59,7 +55,7 @@ class NibrsTableWithBars extends React.Component {
         ...d,
         percent: p,
         countFmt: formatSI(d.count),
-        percentFmt: formatPercent(p),
+        percentFmt: formatPerc(p),
       }
     })
 
@@ -114,7 +110,7 @@ class NibrsTableWithBars extends React.Component {
         </table>
         <div className="mt-tiny fs-14 mb3">
           {sentenceStart} was reported for{' '}
-          <span className="bold red">{formatNumber(total)}</span>{' '}
+          <span className="bold red">{formatNum(total)}</span>{' '}
           {pluralize(noun)}.
         </div>
       </div>

@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { updateFilters } from './filters'
 import { fetchNibrs } from './nibrs'
 import { fetchSummaries } from '../actions/summary'

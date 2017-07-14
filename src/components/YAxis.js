@@ -1,16 +1,12 @@
-import { format } from 'd3-format'
 import PropTypes from 'prop-types'
 import React from 'react'
+
+import { formatAxisNum as fmt } from '../util/formats'
 
 const getTickVals = (domain, ticks) => {
   const [s, e] = domain
   const step = (e - s) * 1.0 / (ticks - 1)
   return [...Array(ticks)].map((_, i) => s + i * step)
-}
-
-const fmt = x => {
-  const val = +x
-  return format(`,.${val > 10 || val % 1 === 0 ? 0 : 1}f`)(val)
 }
 
 const YAxis = ({ tickCt, scale, width }) => {

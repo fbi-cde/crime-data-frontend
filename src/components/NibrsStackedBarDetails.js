@@ -1,8 +1,7 @@
-import { format } from 'd3-format'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const fmt = p => (p > 0.01 ? format('.0%')(p) : '<1%')
+import { formatPerc as fmt } from '../util/formats'
 
 const NibrsStackedBarDetails = ({ colorMap, data, total }) =>
   <ul className="list-style-none p0 m0 fs-14">

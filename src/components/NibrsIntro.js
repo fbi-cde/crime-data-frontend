@@ -1,12 +1,11 @@
-import { format } from 'd3-format'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import { nibrsTerm } from './Terms'
+import { formatNum } from '../util/formats'
 
 const highlight = txt => <strong>{txt}</strong>
-const formatNumber = format(',')
 
 const NibrsIntro = ({
   crime,
@@ -21,7 +20,7 @@ const NibrsIntro = ({
   if (isAgency) {
     return (
       <p className="m0 sm-col-9">
-        This agency reported {highlight(formatNumber(totalCount))}{' '}
+        This agency reported {highlight(formatNum(totalCount))}{' '}
         individual {crime} {pluralize('incident', totalCount)} to the
         FBI between {highlight(nibrsFirstYear)} and {highlight(until)}.
       </p>
@@ -34,7 +33,7 @@ const NibrsIntro = ({
 
   return (
     <p className="m0 sm-col-9">
-      There were {highlight(formatNumber(totalCount))} individual{' '}
+      There were {highlight(formatNum(totalCount))} individual{' '}
       {crime} incidents reported to the FBI in {placeDisplay}{' '}
       between {highlight(nibrsFirstYear)} and {highlight(until)}{' '}
       by {highlight(agencyCt)} law enforcement{' '}

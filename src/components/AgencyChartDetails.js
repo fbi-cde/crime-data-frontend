@@ -1,4 +1,3 @@
-import { format } from 'd3-format'
 import lowerCase from 'lodash.lowercase'
 import startCase from 'lodash.startcase'
 import range from 'lodash.range'
@@ -7,8 +6,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Term from './Term'
+import { formatNum as fmt } from '../util/formats'
 
-const fmt = format(',')
 const highlight = txt => <strong>{txt}</strong>
 
 const AgencyChartDetails = ({
