@@ -56,28 +56,42 @@ class NibrsHistogram extends React.Component {
             style={{ width: '100%', height: '100%' }}
           >
             <g transform={`translate(${margin.left}, ${margin.top})`}>
-              {bins.map((d, i) =>
-                <g
-                  key={i}
-                  className="cursor-pointer"
-                  transform={`translate(${x(d.x0)}, ${y(d.ct)})`}
-                >
-                  <rect
-                    width={x(bins[0].x1) - x(bins[0].x0) - 1}
-                    height={height - y(d.ct)}
-                    x="1"
-                    fill={
-                      hover === null || d.x0 === hover.x0
-                        ? '#ff5e50'
-                        : '#f4dfdd'
-                    }
-                    pointerEvents="all"
-                    onClick={this.handleClick(d)}
-                    onMouseOver={this.rememberValue(d)}
-                    onMouseOut={this.forgetValue}
-                  />
-                </g>,
-              )}
+              {bins.map((d, i) => {
+                const rectWidth = x(bins[0].x1) - x(bins[0].x0) - 1
+                const fill = hover === null || d.x0 === hover.x0
+                  ? '#ff5e50'
+                  : '#f4dfdd'
+
+                return (
+                  <g
+                    key={i}
+                    className="cursor-pointer"
+                    transform={`translate(${x(d.x0)}, 0)`}
+                  >
+                    <rect
+                      width={rectWidth}
+                      height={height}
+                      x="1"
+                      fill="#fff"
+                      pointerEvents="all"
+                      onClick={this.handleClick(d)}
+                      onMouseOver={this.rememberValue(d)}
+                      onMouseOut={this.forgetValue}
+                    />
+                    <rect
+                      width={rectWidth}
+                      height={height - y(d.ct)}
+                      x="1"
+                      y={y(d.ct)}
+                      fill={fill}
+                      pointerEvents="all"
+                      onClick={this.handleClick(d)}
+                      onMouseOver={this.rememberValue(d)}
+                      onMouseOut={this.forgetValue}
+                    />
+                  </g>
+                )
+              })}
               <XAxis height={height} scale={x} />
               <g className="axis" transform={`translate(0, ${height})`}>
                 <line x2={width} strokeWidth="1" />
