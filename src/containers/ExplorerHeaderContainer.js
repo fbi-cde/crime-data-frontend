@@ -56,7 +56,7 @@ const ExplorerHeaderContainer = ({
             coordinates={coordinates}
             usState={startCase(usState)}
           />
-          <div className="mt-tiny fs-12 serif italic right">
+          <div className="mt-tiny fs-12 serif italic left">
             {isAgency && !isLoading
               ? `${placeDisplay}, ${startCase(usState)}`
               : startCase(usState)}
