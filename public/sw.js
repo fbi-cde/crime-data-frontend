@@ -6,11 +6,12 @@ self.addEventListener('install', event => {
     caches.open(CACHE).then(cache => {
       cache.addAll([
         '/img/cde-logo.png',
+        '/img/chevron-down-navy.svg',
         '/img/fbi-logo.png',
         '/img/loading.svg',
         '/img/github.svg',
+        '/img/glossary.svg',
         '/img/twitter.svg',
-        '/img/chevron-down-navy.svg',
         '/data/geo-usa-state.json',
         '/data/usa-state-svg.json',
       ])

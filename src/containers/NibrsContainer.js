@@ -7,7 +7,7 @@ import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import NibrsCard from '../components/NibrsCard'
 import NibrsIntro from '../components/NibrsIntro'
-import { nibrsTerm } from '../components/Terms'
+import { NibrsTerm } from '../components/Terms'
 import parseNibrs from '../util/nibrs'
 import { getAgency, oriToState } from '../util/ori'
 import { getPlaceInfo } from '../util/place'
@@ -98,7 +98,7 @@ const NibrsContainer = ({
   return (
     <div className="mb6">
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
-        <h2 className="mt0 mb1 fs-24 sm-fs-28 sans-serif">
+        <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} incident details reported by {placeDisplay}
         </h2>
         {isLoading && <Loading />}
@@ -117,8 +117,7 @@ const NibrsContainer = ({
       {content}
       {isReady &&
         <div className="serif italic fs-12">
-          Source: Reported {nibrsTerm} data from {placeDisplay},{' '}
-          {nibrsFirstYear}–{until}.
+          Source: Reported <NibrsTerm size="sm" /> data from {placeDisplay}.
         </div>}
     </div>
   )

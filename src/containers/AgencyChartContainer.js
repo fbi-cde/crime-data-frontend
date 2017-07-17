@@ -9,7 +9,7 @@ import DownloadDataBtn from '../components/DownloadDataBtn'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import NoData from '../components/NoData'
-import { nibrsTerm, srsTerm } from '../components/Terms'
+import { NibrsTerm, SrsTerm } from '../components/Terms'
 import { getAgency } from '../util/ori'
 
 const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
@@ -67,9 +67,8 @@ const AgencyChartContainer = params => {
   return (
     <div className="mb7">
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
-        <h2 className="mt0 mb3 fs-24 sm-fs-28 sans-serif">
-          {startCase(crime)} {noun} reported by{' '}
-          {agency.display}, {since}–{until}
+        <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
+          {startCase(crime)} {noun} reported by {agency.display}, {since}–{until}
         </h2>
         <Content submitsNibrs={submitsNibrs} {...params} />
       </div>
@@ -85,9 +84,10 @@ const AgencyChartContainer = params => {
             href="https://ucr.fbi.gov/crime-in-the-u.s"
           >
             Crime in the United States publications
-          </a>.{' '}
-          Source: Reported {submitsNibrs ? nibrsTerm : srsTerm} data from{' '}
-          {agency.display}
+          </a>. Source: Reported {submitsNibrs
+            ? <NibrsTerm />
+            : <SrsTerm />}{' '}
+          data from {agency.display}.
         </div>}
     </div>
   )
