@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
 
 import offenses from '../util/offenses'
-import { getAgency } from '../util/ori'
+import { getAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import usa from '../util/usa'
 

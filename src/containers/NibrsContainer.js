@@ -9,7 +9,7 @@ import NibrsCard from '../components/NibrsCard'
 import NibrsIntro from '../components/NibrsIntro'
 import { NibrsTerm } from '../components/Terms'
 import parseNibrs from '../util/nibrs'
-import { getAgency, oriToState } from '../util/ori'
+import { getAgency, oriToState } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import ucrParticipation, {
   shouldFetchNibrs as shouldShowNibrs,

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 import AgencySearchResults from './AgencySearchResults'
 import OnEscape from './OnEscape'
-import { oriToState } from '../util/ori'
+import { oriToState } from '../util/agencies'
 
 class AgencySearch extends Component {
   constructor(props) {

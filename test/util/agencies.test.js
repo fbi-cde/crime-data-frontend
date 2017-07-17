@@ -1,8 +1,8 @@
 /* eslint no-undef: 0 */
 
-import { oriToState, reshapeData } from '../../src/util/ori'
+import { oriToState, reshapeData } from '../../src/util/agencies'
 
-describe('ori utility', () => {
+describe('agencies utility', () => {
   describe('oriToState()', () => {
     it('should return the state an ORI is in', () => {
       expect(oriToState('FL123456')).toEqual('florida')
