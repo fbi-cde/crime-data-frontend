@@ -297,7 +297,7 @@ states:
     text:
 
   Wyoming:
-  - url: http://ag.wyo.gov/
+  - url: http://wyomingdci.wyo.gov/
     text: Wyoming UCR Program
   - url:
     text:
