@@ -2,25 +2,9 @@ import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Term from './Term'
+import { EstimatedTerm, NibrsTerm, SrsTerm } from './Terms'
 
 import ucrParticipationLookup from '../util/participation'
-
-const estimatedTerm = (
-  <Term id="estimated data" size="sm">
-    Estimated
-  </Term>
-)
-const nibrsTerm = (
-  <Term id={'national incident-based reporting system (nibrs)'} size="sm">
-    incident-based (NIBRS)
-  </Term>
-)
-const srsTerm = (
-  <Term id={'summary reporting system (srs)'} size="sm">
-    summary (SRS)
-  </Term>
-)
 
 const TrendSourceText = ({ crime, place }) => {
   const isArson = crime === 'arson'
@@ -31,12 +15,13 @@ const TrendSourceText = ({ crime, place }) => {
     <div className="fs-12 italic serif">
       {!isArson
         ? <p>
-            Source: FBI, {estimatedTerm} data for {startCase(place)}.
+            Source: FBI, <EstimatedTerm size="sm">Estimated</EstimatedTerm> data
+            for {startCase(place)}.
           </p>
         : <p>
-            Source: Reported {srs && srsTerm}
+            Source: Reported {srs && <SrsTerm size="sm" />}
             {hybrid && ' and '}
-            {nibrs && nibrsTerm} data from {startCase(place)}.
+            {nibrs && <NibrsTerm size="sm" />} data from {startCase(place)}.
           </p>}
     </div>
   )
