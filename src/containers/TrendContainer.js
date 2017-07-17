@@ -79,13 +79,7 @@ const TrendContainer = props => {
         {getContent(props)}
       </div>
       {isReady &&
-        <TrendSourceText
-          crime={crime}
-          place={place}
-          placeType={placeType}
-          since={since}
-          until={until}
-        />}
+        <TrendSourceText crime={crime} place={place} placeType={placeType} />}
     </div>
   )
 }

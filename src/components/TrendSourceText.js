@@ -22,7 +22,7 @@ const srsTerm = (
   </Term>
 )
 
-const TrendSourceText = ({ crime, place, since, until }) => {
+const TrendSourceText = ({ crime, place }) => {
   const isArson = crime === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
   const hybrid = nibrs && srs
@@ -31,33 +31,12 @@ const TrendSourceText = ({ crime, place, since, until }) => {
     <div className="fs-12 italic serif">
       {!isArson
         ? <p>
-            Source: FBI,
-            {' '}
-            {estimatedTerm}
-            {' '}
-            data for
-            {' '}
-            {startCase(place)}
-            ,
-            {' '}
-            {since}
-            –
-            {until}
-            .
+            Source: FBI, {estimatedTerm} data for {startCase(place)}.
           </p>
         : <p>
-            Source: Reported
-            {' '}
-            {srs && srsTerm}
+            Source: Reported {srs && srsTerm}
             {hybrid && ' and '}
-            {nibrs && nibrsTerm}
-            {' '} data from {' '}
-            {startCase(place)},
-            {' '}
-            {since}
-            –
-            {until}
-            .
+            {nibrs && nibrsTerm} data from {startCase(place)}.
           </p>}
     </div>
   )
@@ -66,8 +45,6 @@ const TrendSourceText = ({ crime, place, since, until }) => {
 TrendSourceText.propTypes = {
   crime: PropTypes.string,
   place: PropTypes.string,
-  since: PropTypes.number.isRequired,
-  until: PropTypes.number.isRequired,
 }
 
 export default TrendSourceText
