@@ -31,7 +31,10 @@ export default (state = initialState, action) => {
     case SUMMARY_RECEIVED:
       return {
         ...state,
-        data: { ...action.summaries },
+        data: {
+          ...state.data,
+          ...action.summaries,
+        },
         loading: false,
       }
     default:

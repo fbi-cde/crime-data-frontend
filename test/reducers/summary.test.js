@@ -67,5 +67,15 @@ describe('summary', () => {
       const s = reducer({ fakePlace: ['initial'] }, action)
       expect(s.data.fakePlace).toEqual(action.summaries.fakePlace)
     })
+
+    it('should not remove unrelated summary', () => {
+      const action = {
+        type: SUMMARY_RECEIVED,
+        summaries: { fakeOtherPlace: ['testing'] },
+      }
+      const s = reducer({ data: { fakePlace: ['initial'] } }, action)
+      expect(s.data.fakePlace).toEqual(['initial'])
+      expect(s.data.fakeOtherPlace).toEqual(['testing'])
+    })
   })
 })
