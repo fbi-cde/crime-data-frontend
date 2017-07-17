@@ -1,6 +1,6 @@
 /* eslint no-undef: 0 */
 
-import { hasThreatKeyword } from '../../src/util/feedback'
+import { hasThreatKeyword, notifyOfThreat } from '../../src/util/feedback'
 
 describe('feedback utility', () => {
   describe('hasThreatKeyword', () => {
@@ -14,6 +14,12 @@ describe('feedback utility', () => {
 
     it('should return false if terms argument does not have a .map function', () => {
       expect(hasThreatKeyword('HeRe ARE words', true)).toEqual(false)
+    })
+  })
+
+  describe('notifyOfThreat', () => {
+    it('should do nothing for now', () => {
+      expect(notifyOfThreat({ html_url: '' })).toEqual(undefined)
     })
   })
 })
