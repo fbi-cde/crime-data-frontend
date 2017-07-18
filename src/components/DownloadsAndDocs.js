@@ -26,12 +26,11 @@ const DownloadsAndDocs = () =>
       <div className="clearfix">
         <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
           <p className="mb2 md-m0">
-            Download {nibrsTerm} data by year and location. Estimated data
-            and other crime-related datasets are also available for download.
-            Data is provided as CSV files and can be accessed via the{' '}
+            Download {nibrsTerm} data by year and location. Estimated data and
+            other crime-related datasets are also available for download. Data
+            is provided as CSV files and can be accessed via the{' '}
             <a className="underline" href="/api">
-              Crime Data
-              Explorer API
+              Crime Data Explorer API
             </a>.
           </p>
         </div>
@@ -63,7 +62,7 @@ const DownloadsAndDocs = () =>
           Additional datasets
         </h2>
         <div
-          className={`clearfix xs-hide pb1 fs-14 bold caps serif ${borderLight}`}
+          className={`clearfix xs-hide pb1 fs-14 bold caps blue sans-serif ${borderLight}`}
         >
           <div className="sm-col sm-col-4 sm-pl2">Dataset</div>
           <div className="sm-col sm-col-8">Description</div>
