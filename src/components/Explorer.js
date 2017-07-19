@@ -19,6 +19,7 @@ import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offenses from '../util/offenses'
 import { getAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
+import { sentenceCase } from '../util/text'
 
 import lookup from '../util/usa'
 
@@ -90,7 +91,7 @@ class Explorer extends React.Component {
       <div className="site-wrapper">
         <Helmet title="CDE :: Explorer" />
         <SharingTags
-          title={`${startCase(crime)} reported ${placeType === 'agency'
+          title={`${sentenceCase(crime)} reported ${placeType === 'agency'
             ? 'by the'
             : 'in'} ${placeDisplay}`}
         />
