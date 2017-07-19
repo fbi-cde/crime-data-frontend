@@ -12,4 +12,9 @@ $feedback-height: 600px;
 
   @media #{$breakpoint-md} { right: 5%; }
   &.show { bottom: 0; }
+
+  .btn:focus {
+    box-shadow: 0 0 0 2px rgba($field-focus-color, 1);
+    outline: none;
+  }
 }
