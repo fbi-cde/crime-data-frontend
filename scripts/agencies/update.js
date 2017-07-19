@@ -20,12 +20,31 @@ const KEY = process.env.API_KEY
 const url = `${API}/agencies?fields=agency_name,ori,primary_county,agency_type_name,icpsr_lat,icpsr_lng,months_reported,nibrs_months_reported,past_10_years_reported,state_abbr,submitting_name&per_page=25000&api_key=${KEY}`
 
 // const agencies = require('./agencies.json')
-const outFile = path.join(__dirname, '../../public/data/agencies-by-state.json')
+const outDir = path.join(__dirname, '../../public/data/')
 
 console.log('updating agencies data from api')
 http
   .get(url)
   .then(res => res.data)
+  .then(agencies => {
+    const names = agencies.results
+      .map(agency => ({
+        key: agency.ori,
+        value: agency.agency_name,
+      }))
+      .reduce((accum, next) => {
+        return Object.assign({}, accum, {
+          [next.key]: next.value,
+        })
+      }, {})
+
+    const outFile = path.join(outDir, 'agencies-names-by-state.json')
+    fs.writeFile(outFile, JSON.stringify(names), err => {
+      if (err) throw err
+    })
+
+    return agencies
+  })
   .then(agencies => {
     const usStates = {}
     agencies.results.forEach(agency => {
@@ -55,6 +74,7 @@ http
       }
     })
 
+    const outFile = path.join(outDir, 'agencies-by-state.json')
     fs.writeFile(outFile, JSON.stringify(usStates), err => {
       if (err) throw err
 

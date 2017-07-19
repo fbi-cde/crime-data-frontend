@@ -3,6 +3,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router'
 
+import SharingTags from './SharingTags'
 import Term from './Term'
 import UsaMap from './UsaMap'
 
@@ -64,6 +65,7 @@ const agenciesParticiaptionDownloadUrl =
 const About = ({ dispatch }) =>
   <div>
     <Helmet title="CDE :: About" />
+    <SharingTags title="About" />
     <section className="bg-white">
       <div className="px2 py7 container mx-auto">
         <h1 className="mt0 mb4 pb1 fs-28 sm-fs-40 border-bottom border-blue-light">
@@ -73,17 +75,17 @@ const About = ({ dispatch }) =>
           <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
             <p className="mb2 md-m0">
               The Crime Data Explorer is part of the FBI’s broader effort to
-              modernize the reporting of national crime data.
-              It allows you to{' '}
+              modernize the reporting of national crime data. It allows you to{' '}
               <a href="explorer/violent-crime" className="underline">
                 view trends
               </a>,{' '}
               <a href="/downloads-and-docs" className="underline">
                 download bulk data
-              </a>, and access
-              the <a href="/api" className="underline">Crime Data API</a> for
-              reported crime at the
-              national, state, and agency levels.
+              </a>, and access the{' '}
+              <a href="/api" className="underline">
+                Crime Data API
+              </a>{' '}
+              for reported crime at the national, state, and agency levels.
             </p>
           </div>
           <div className="md-col md-col-3">
@@ -134,7 +136,9 @@ const About = ({ dispatch }) =>
                         <div className="bold monospace">
                           {`${d.count} State${d.count !== 1 ? 's' : ''}`}
                         </div>
-                        <div>{d.text}</div>
+                        <div>
+                          {d.text}
+                        </div>
                       </div>
                     </div>,
                   )}
@@ -183,12 +187,9 @@ const About = ({ dispatch }) =>
               This data includes the number of offenses that were reported on a
               state or agency level. It captures the most serious offense
               involved in crime incidents according to the{' '}
-              <Term id="hierarchy rule">
-                hierarchy rule
-              </Term>
-              {' '}
-              and supplemental details depending on the offense. For example,
-              victim and offender data are collected only for murder offenses.
+              <Term id="hierarchy rule">hierarchy rule</Term> and supplemental
+              details depending on the offense. For example, victim and offender
+              data are collected only for murder offenses.
             </p>
             <div className="mb-tiny bold">
               Incident-based (NIBRS) data
@@ -207,7 +208,10 @@ const About = ({ dispatch }) =>
             </p>
             <p>
               The Crime Data Explorer makes this data available through the{' '}
-              <a href="/api" className="underline">API</a> and{' '}
+              <a href="/api" className="underline">
+                API
+              </a>{' '}
+              and{' '}
               <a href="/downloads-and-docs" className="underline">
                 bulk downloads
               </a>.

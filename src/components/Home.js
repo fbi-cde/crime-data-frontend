@@ -4,10 +4,12 @@ import Helmet from 'react-helmet'
 import { Link } from 'react-router'
 
 import LocationSelect from './LocationSelect'
+import SharingTags from './SharingTags'
 import UsaMap from './UsaMap'
 import { updateApp } from '../actions/composite'
 import { updateFilters } from '../actions/filters'
 import { oriToState } from '../util/agencies'
+import { crimeTypes } from '../util/offenses'
 import { slugify } from '../util/text'
 import stateLookup from '../util/usa'
 import dataPreview from '../../content/preview.yml'
@@ -41,6 +43,7 @@ const Home = ({ appState, dispatch, router }) => {
   return (
     <div>
       <Helmet title="CDE :: Home" />
+      <SharingTags />
       <section className="px2 bg-blue-white">
         <div className="py7 container mx-auto relative">
           <h1 className="mt0 mb4 pb1 fs-28 sm-fs-40 border-bottom border-blue-light">
@@ -54,13 +57,11 @@ const Home = ({ appState, dispatch, router }) => {
             </Link>,{' '}
             <Link to="/downloads-and-docs" className="underline">
               download bulk datasets
-            </Link>, and access
-            the{' '}
+            </Link>, and access the{' '}
             <a href="/api" className="underline">
               Crime Data API
             </a>{' '}
-            for reported crime at the national, state, and
-            agency levels.
+            for reported crime at the national, state, and agency levels.
           </p>
         </div>
       </section>
@@ -87,26 +88,22 @@ const Home = ({ appState, dispatch, router }) => {
                 onChange={selectCrime}
                 defaultValue={crime || ''}
               >
-                <option value="" disabled>Crime Type</option>
+                <option value="" disabled>
+                  Crime Type
+                </option>
                 <optgroup label="Violent Crime">
-                  <option value="violent-crime">
-                    All Violent Crime
-                  </option>
-                  <option value="homicide">Homicide</option>
-                  <option value="rape">Rape</option>
-                  <option value="robbery">Robbery</option>
-                  <option value="aggravated-assault">Aggravated Assault</option>
+                  {crimeTypes.violentCrime.map((o, i) =>
+                    <option key={i} value={o.id || slugify(o)}>
+                      {o.text || o}
+                    </option>,
+                  )}
                 </optgroup>
                 <optgroup label="Property Crime">
-                  <option value="property-crime">
-                    All Property Crime
-                  </option>
-                  <option value="arson">Arson</option>
-                  <option value="burglary">Burglary</option>
-                  <option value="larceny">Larceny Theft</option>
-                  <option value="motor-vehicle-theft">
-                    Motor Vehicle Theft
-                  </option>
+                  {crimeTypes.propertyCrime.map((o, i) =>
+                    <option key={i} value={o.id || slugify(o)}>
+                      {o.text || o}
+                    </option>,
+                  )}
                 </optgroup>
               </select>
             </div>
@@ -150,7 +147,9 @@ const Home = ({ appState, dispatch, router }) => {
                   <div className="mb1 pb-tiny bold border-bottom border-blue-light">
                     {d.title}
                   </div>
-                  <p className="mb2">{d.description}</p>
+                  <p className="mb2">
+                    {d.description}
+                  </p>
                 </div>
               </div>,
             )}
@@ -171,8 +170,9 @@ const Home = ({ appState, dispatch, router }) => {
             Open data
           </h2>
           <p className="p0 md-col-9 fs-16 sm-fs-20 serif">
-            The data is voluntarily submitted by as many as 18,000 law enforcement agencies
-            across the country that participate in the FBI’s{' '}
+            The data is voluntarily submitted by as many as 18,000 law
+            enforcement agencies across the country that participate in the
+            FBI’s{' '}
             <a href="https://ucr.fbi.gov/" className="underline">
               Uniform Crime Reporting (UCR) Program
             </a>. This is an open data project to improve the nation’s crime

@@ -17,26 +17,26 @@ const ids = Object.keys(offenses)
 const violentCrime = [
   {
     id: 'violent-crime',
-    text: 'All Violent Crime',
+    text: 'All violent crime',
   },
   'Homicide',
   'Rape',
   'Robbery',
-  'Aggravated Assault',
+  'Aggravated assault',
 ]
 
 const propertyCrime = [
   {
     id: 'property-crime',
-    text: 'All Property Crime',
+    text: 'All property crime',
   },
   'Arson',
   'Burglary',
   {
     id: 'larceny',
-    text: 'Larceny Theft',
+    text: 'Larceny theft',
   },
-  'Motor Vehicle Theft',
+  'Motor vehicle theft',
 ]
 
 const crimeTypes = { violentCrime, propertyCrime }

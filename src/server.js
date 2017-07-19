@@ -13,10 +13,12 @@ import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { match, RouterContext } from 'react-router'
 
+import agencyNames from '../public/data/agencies-names-by-state.json'
 import packageJson from '../package.json'
 import renderHtml from './html'
 import routes from './routes'
 import configureStore from './store'
+import { fetchingAgency, receivedAgency } from './actions/agencies'
 import { updateFilters } from './actions/filters'
 import createEnv from './util/env'
 import { createIssue } from './util/github'
@@ -38,7 +40,7 @@ const {
 } = ENV
 
 const initState = {
-  agencies: { data: {}, loading: true },
+  agencies: { data: {} },
   participation: { data: {}, loading: true },
   summaries: { data: {}, loading: true },
 }
@@ -106,7 +108,18 @@ app.get('/*', (req, res) => {
       res.redirect(`${pathname}${search}`)
     } else if (props) {
       const store = configureStore(initState)
+      const { place, placeType } = props.router.params
       store.dispatch(updateFilters({ ...props.router.params }))
+
+      if (placeType === 'agency') {
+        store.dispatch(
+          receivedAgency({
+            ori: place,
+            agency_name: agencyNames[place],
+          }),
+        )
+        store.dispatch(fetchingAgency())
+      }
 
       const html = renderToString(
         <Provider store={store}>
