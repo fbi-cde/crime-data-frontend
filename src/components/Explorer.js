@@ -17,7 +17,7 @@ import { updateApp } from '../actions/composite'
 import { showTerm } from '../actions/glossary'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offenses from '../util/offenses'
-import { getAgency } from '../util/ori'
+import { getAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 
 import lookup from '../util/usa'
