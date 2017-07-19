@@ -1,6 +1,8 @@
 /* eslint no-undef: 0 */
 
 import {
+  AGENCIES_FETCHING,
+  AGENCIES_RECEIVED,
   AGENCY_FAILED,
   AGENCY_FETCHING,
   AGENCY_RECEIVED,
@@ -18,6 +20,28 @@ describe('agency reducer', () => {
     it('should have loading set to false', () => {
       const initialState = reducer(undefined, { type: 'fake' })
       expect(initialState.loading).toEqual(false)
+    })
+  })
+
+  describe('AGENCIES_FETCHING', () => {
+    it('should set loading to true', () => {
+      const action = { type: AGENCIES_FETCHING }
+      const initialState = reducer(undefined, action)
+      expect(initialState.loading).toEqual(true)
+    })
+  })
+
+  describe('AGENCIES_RECEIVED', () => {
+    it('should set loading to false', () => {
+      const action = { type: AGENCIES_RECEIVED, agencies: [] }
+      const initialState = reducer(undefined, action)
+      expect(initialState.loading).toEqual(false)
+    })
+
+    it("should set data to the action's agencies", () => {
+      const action = { type: AGENCIES_RECEIVED, agencies: [] }
+      const initialState = reducer(undefined, action)
+      expect(initialState.data).toEqual([])
     })
   })
 

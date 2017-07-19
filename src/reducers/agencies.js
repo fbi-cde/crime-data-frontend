@@ -26,12 +26,6 @@ const updateData = (agency, data) => {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case AGENCIES_FETCHING:
-      return {
-        ...state,
-        error: null,
-        loading: true,
-      }
     case AGENCIES_RECEIVED:
       return {
         ...state,
@@ -45,6 +39,7 @@ export default (state = initialState, action) => {
         loading: false,
       }
     case AGENCY_FETCHING:
+    case AGENCIES_FETCHING:
       return {
         ...state,
         error: null,
