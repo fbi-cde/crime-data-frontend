@@ -18,7 +18,7 @@ import packageJson from '../package.json'
 import renderHtml from './html'
 import routes from './routes'
 import configureStore from './store'
-import { receivedAgency } from './actions/agencies'
+import { fetchingAgency, receivedAgency } from './actions/agencies'
 import { updateFilters } from './actions/filters'
 import createEnv from './util/env'
 import { createIssue } from './util/github'
@@ -40,7 +40,7 @@ const {
 } = ENV
 
 const initState = {
-  agencies: { data: {}, loading: true },
+  agencies: { data: {} },
   participation: { data: {}, loading: true },
   summaries: { data: {}, loading: true },
 }
@@ -118,6 +118,7 @@ app.get('/*', (req, res) => {
             agency_name: agencyNames[place],
           }),
         )
+        store.dispatch(fetchingAgency())
       }
 
       const html = renderToString(
