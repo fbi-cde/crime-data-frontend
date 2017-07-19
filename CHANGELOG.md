@@ -1,6 +1,20 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+
+## [2.12.0] - 2017-07-19
+### Added
+- [Digital Analytics Program (DAP)](https://www.digitalgov.gov/services/dap/) integration ([#1137](https://github.com/18F/crime-data-frontend/issues/1137))
+
+### Changed
+- Gzip generated CSS as well as the JS ([#1152](https://github.com/18F/crime-data-frontend/pull/1152))
+- Make source text more consistent ([#1159](https://github.com/18F/crime-data-frontend/pull/1159))
+- Better meta tags for social network sharing ([#1162](https://github.com/18F/crime-data-frontend/pull/1162))
+
+### Removed
+- Restrictions from `robots.txt` ([#1168](https://github.com/18F/crime-data-frontend/pull/1168))
+
+
 ## [2.11.1] - 2017-07-14
 ### Fixed
 - Bigger NIBRS histogram touch targets ([#524](https://github.com/18F/crime-data-frontend/issues/524))
