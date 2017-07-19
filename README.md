@@ -58,13 +58,13 @@ Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2
 3. Ensure that a trend chart renders to show "Violent Crime rate in United States"
 4. Select "Alabama" as the location in the left hand side menu
 5. Select "Robbery" as the crime in the left hand side menu
-6. Ensure that the URL is now `/explorer/alabama/robbery`
+6. Ensure that the URL is now `/explorer/state/alabama/robbery`
 7. Ensure that a trend chart renders to show "Robbery rate in Alabama, 2004–2014"
 8. Scroll down and ensure donut charts, histograms, and tables render to show "Robbery incident details in Alabama, 2004–2014"
 9. Scroll down and ensure there is a section called "About the data"
 10. Select "Downloads & Documentation" from the navigation at the top of the page or the footer at the bottom
 11. Select "Alabama" as the "Location" and "2000" as the "Year". Click download and ensure that a `.zip` file is downloaded
-12. Click the "Download data" link for "Hate crime" under "Bulk downloads" and ensure a file called `hate_crime.csv` is downloaded
+12. Click the "Download CSV" link in the "Hate Crime" dataset section under the heading "Additional Datasets" and ensure a file called `hate_crime.csv` is downloaded
 
 ### Tagging a release
 
