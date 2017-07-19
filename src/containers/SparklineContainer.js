@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import Sparkline from '../components/Sparkline'
-import { oriToState } from '../util/ori'
+import { oriToState } from '../util/agencies'
 import { nationalKey } from '../util/usa'
 
 const SparklineContainer = ({ crime, since, summaries, until, usState }) => {

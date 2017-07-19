@@ -1,6 +1,12 @@
 import { nationalKey } from './usa'
 
-export const getPlaceInfo = ({ place, placeType }) => ({
-  place: place || nationalKey,
-  placeType: placeType || 'national',
-})
+const national = {
+  place: nationalKey,
+  placeType: 'national',
+}
+
+export const getPlaceInfo = (data = {}) => {
+  const { place, placeType } = data
+  if (!place || !placeType) return national
+  return { place, placeType }
+}

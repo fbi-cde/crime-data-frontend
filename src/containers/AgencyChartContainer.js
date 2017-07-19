@@ -10,7 +10,7 @@ import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import NoData from '../components/NoData'
 import { NibrsTerm, SrsTerm } from '../components/Terms'
-import { getAgency } from '../util/ori'
+import { getAgency } from '../util/agencies'
 
 const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
   const { error, loading } = summary

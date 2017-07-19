@@ -8,7 +8,7 @@ import Loading from '../components/Loading'
 import PlaceThumbnail from '../components/PlaceThumbnail'
 import UcrResourcesList from '../components/UcrResourcesList'
 import { getPlaceInfo } from '../util/place'
-import { getAgency, oriToState } from '../util/ori'
+import { getAgency, oriToState } from '../util/agencies'
 
 const ExplorerHeaderContainer = ({
   agencies,

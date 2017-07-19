@@ -6,7 +6,7 @@ import CrimeTypeFilter from '../components/CrimeTypeFilter'
 import LocationFilter from '../components/LocationFilter'
 import TimePeriodFilter from '../components/TimePeriodFilter'
 import { hideSidebar } from '../actions/sidebar'
-import { getAgency, oriToState } from '../util/ori'
+import { getAgency, oriToState } from '../util/agencies'
 import { nationalKey } from '../util/usa'
 
 const SidebarContainer = ({

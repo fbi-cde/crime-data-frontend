@@ -1,5 +1,5 @@
 import offenses from './offenses'
-import { oriToState } from './ori'
+import { oriToState } from './agencies'
 import { slugify } from './text'
 import lookupUsa from './usa'
 

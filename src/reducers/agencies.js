@@ -5,7 +5,7 @@ import {
   AGENCY_FETCHING,
   AGENCY_RECEIVED,
 } from '../actions/constants'
-import { oriToState } from '../util/ori'
+import { oriToState } from '../util/agencies'
 
 const initialState = {
   data: {},

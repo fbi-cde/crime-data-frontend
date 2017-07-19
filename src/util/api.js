@@ -4,7 +4,7 @@ import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
 import { mapToApiOffense } from './offenses'
-import { oriToState } from './ori'
+import { oriToState } from './agencies'
 import { slugify } from './text'
 import lookupUsa, { nationalKey } from './usa'
 
