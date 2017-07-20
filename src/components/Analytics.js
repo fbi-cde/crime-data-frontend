@@ -12,7 +12,7 @@ class Analytics extends React.Component {
   addDAP = () => {
     const script = document.createElement('script')
     script.src =
-      'https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=FBI&pua-ua-33523145-2'
+      'https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=FBI&pua=ua-33523145-2'
     script.id = '_fed_an_ua_tag'
     document.body.appendChild(script)
   }
