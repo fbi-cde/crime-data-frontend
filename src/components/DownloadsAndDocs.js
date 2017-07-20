@@ -80,12 +80,22 @@ const DownloadsAndDocs = () =>
                   __html: markdown.render(d.description),
                 }}
               />
-              <DownloadDataBtn
-                ariaLabel={`Download ${d.title} data as a CSV`}
-                className="block fs-12"
-                data={[{ url: d.download }]}
-                text="Download CSV"
-              />
+              {d.downloads
+                ? d.downloads.map((dd, ii) =>
+                    <DownloadDataBtn
+                      ariaLabel={`Download ${dd.title} as a CSV`}
+                      className="block fs-12"
+                      data={[{ url: dd.href }]}
+                      key={ii}
+                      text={`Download ${dd.title} as a CSV`}
+                    />,
+                  )
+                : <DownloadDataBtn
+                    ariaLabel={`Download ${d.title} data as a CSV`}
+                    className="block fs-12"
+                    data={[{ url: d.href }]}
+                    text="Download CSV"
+                  />}
             </div>
           </div>,
         )}
