@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.12.1] - 2017-07-20
+### Fixed
+- Use proper snippet for [Digital Analytics Program (DAP)](https://www.digitalgov.gov/services/dap/) ([#1175](https://github.com/18F/crime-data-frontend/issues/1175))
+
 
 ## [2.12.0] - 2017-07-19
 ### Added
