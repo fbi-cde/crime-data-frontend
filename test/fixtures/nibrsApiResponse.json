@@ -36,5 +36,9 @@
   "offenseLocationName":[
     {"count":1,"location_name":"Air/Bus/Train Terminal","year":"2006"},
     {"count":1,"location_name":"Air/Bus/Train Terminal","year":"2011"}
+  ],
+  "offenseOffenseName": [
+    {"count":5,"offense_name":"Murder and Nonnegligent Manslaughter","year":"2006"},
+    {"count":2,"offense_name":"Murder and Nonnegligent Manslaughter","year":"2008"}
   ]
 }

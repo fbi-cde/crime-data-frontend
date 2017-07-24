@@ -53,8 +53,7 @@ describe('nibrs utility', () => {
     // TODO: add more robust tests of this function, as right now it just checks
     // for the titles of the sections and not the shape of the data
     it('should parse the data into an array with the proper titles', () => {
-      const actual = parseNibrs(mockApiData)
-      expect(actual.length).toEqual(4)
+      const actual = parseNibrs(mockApiData, 'homicide')
       expect(actual[0].title.toLowerCase()).toEqual('offender demographics')
       expect(actual[1].title.toLowerCase()).toEqual('victim demographics')
       expect(actual[2].title.toLowerCase()).toEqual(
