@@ -63,6 +63,27 @@ const locationNameMapping = {
   'Tribal Lands': 'Tribal Lands',
 }
 
+export const offenseMapping = {
+  'aggravated-assault': 'Aggravated Assault',
+  burglary: 'Burglary/Breaking & Entering',
+  larceny: [
+    'Not Specified',
+    'Theft of Motor Vehicle Parts or Accessories',
+    'Pocket-picking',
+    'Theft From Motor Vehicle',
+    'Purse-snatching',
+    'Shoplifting',
+    'All Other Larceny',
+    'Theft From Building',
+    'Theft From Coin-Operated Machine or Device',
+  ],
+  'motor-vehicle-theft': 'Motor Vehicle Theft',
+  homicide: 'Murder and Nonnegligent Manslaughter',
+  rape: ['Rape', 'Sexual Assault With An Object', 'Incest'],
+  robbery: 'Robbery',
+  arson: 'Arson',
+}
+
 // data munging functions
 
 export const reshape = (data, key) => {
@@ -223,11 +244,31 @@ const locations = data => {
   }
 }
 
-const parseNibrs = data => [
+const offenses = (data, offense) => {
+  const nibrsOffense = offenseMapping[offense]
+  const offenseData = data.offenseOffenseName.filter(d => {
+    if (nibrsOffense.forEach) {
+      let isSame = false
+      nibrsOffense.forEach(o => {
+        if (d.offense_name === o) isSame = true
+      })
+      return isSame
+    }
+    return d.offense_name === nibrsOffense
+  })
+
+  return {
+    title: 'Offenses',
+    data: reshape(offenseData, 'offense_name'),
+  }
+}
+
+const parseNibrs = (data, offense) => [
   offenderDemo(data),
   victimDemo(data),
   relationships(data),
   locations(data),
+  offenses(data, offense),
 ]
 
 export default parseNibrs

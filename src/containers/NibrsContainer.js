@@ -71,12 +71,15 @@ const NibrsContainer = ({
   if (error) content = <ErrorCard error={error} />
   else if (isReady) {
     const filteredData = filterNibrsData(data, { since, until })
-    const dataParsed = parseNibrs(filteredData)
+    const dataParsed = parseNibrs(filteredData, crime)
 
-    totalCount = filteredData.offenderRaceCode.reduce((a, b) => a + b.count, 0)
+    totalCount = dataParsed
+      .find(d => d.title === 'Offenses')
+      .data.reduce((accum, next) => accum + next.count, 0)
+
     content = (
       <div className="clearfix mxn1">
-        {dataParsed.map((d, i) => {
+        {dataParsed.filter(d => d.title !== 'Offenses').map((d, i) => {
           const cls = i % 2 === 0 ? 'clear-left' : ''
           return (
             <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>

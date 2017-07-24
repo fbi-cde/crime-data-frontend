@@ -13,6 +13,7 @@ export const API = '/api-proxy'
 const dimensionEndpoints = {
   ageNum: 'age_num',
   locationName: 'location_name',
+  offenseName: 'offense_name',
   raceCode: 'race_code',
   relationship: 'offender_relationship',
   sexCode: 'sex_code',
@@ -20,15 +21,16 @@ const dimensionEndpoints = {
 
 const getAgency = ori => get(`${API}/agencies/${ori}`)
 
-const getNibrs = ({ crime, dim, place, placeType, type }) => {
-  const loc = place === nationalKey
-    ? 'national'
-    : placeType === 'agency'
-      ? `agencies/${place}`
-      : `states/${lookupUsa(place)}`
+const fetchNibrs = ({ crime, dim, place, placeType, type }) => {
+  const loc =
+    place === nationalKey
+      ? 'national'
+      : placeType === 'agency'
+        ? `agencies/${place}`
+        : `states/${lookupUsa(place)}`
 
   const field = dimensionEndpoints[dim] || dim
-  const fieldPath = `${field}/offenses`
+  const fieldPath = dim === 'offenseName' ? field : `${field}/offenses`
   const url = `${API}/${type}s/count/${loc}/${fieldPath}`
 
   const params = {
@@ -52,6 +54,7 @@ const getNibrsRequests = params => {
     { type: 'offender', dim: 'raceCode' },
     { type: 'offender', dim: 'sexCode' },
     { type: 'offense', dim: 'locationName' },
+    { type: 'offense', dim: 'offenseName' },
     { type: 'victim', dim: 'ageNum' },
     { type: 'victim', dim: 'ethnicity' },
     { type: 'victim', dim: 'raceCode' },
@@ -59,7 +62,7 @@ const getNibrsRequests = params => {
     { type: 'victim', dim: 'relationship' },
   ]
 
-  return slices.map(s => getNibrs({ ...s, crime, place, placeType }))
+  return slices.map(s => fetchNibrs({ ...s, crime, place, placeType }))
 }
 
 const fetchResults = (key, path) =>
@@ -122,9 +125,10 @@ const getSummaryRequests = ({ crime, place, placeType }) => {
 }
 
 const getUcrParticipation = place => {
-  const path = place === nationalKey
-    ? 'participation/national'
-    : `participation/states/${lookupUsa(place).toUpperCase()}`
+  const path =
+    place === nationalKey
+      ? 'participation/national'
+      : `participation/states/${lookupUsa(place).toUpperCase()}`
 
   return get(`${API}/${path}`).then(response => ({
     place,
@@ -155,7 +159,7 @@ export default {
   fetchAggregates,
   fetchAgencyAggregates,
   getAgency,
-  getNibrs,
+  fetchNibrs,
   getNibrsRequests,
   getSummaryRequests,
   getUcrParticipation,
