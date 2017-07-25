@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Term from './Term'
-import { nibrsTerm, srsTerm } from './Terms'
+import { NibrsTerm, SrsTerm } from './Terms'
 import mapCrimeToGlossaryTerm from '../util/glossary'
 
 const ExplorerIntroAgency = ({
@@ -26,16 +26,9 @@ const ExplorerIntroAgency = ({
 
   return (
     <p className="serif">
-      The {startCase(name)} is located in
-      {' '}
-      {showCounty && `${county} County, `}
-      {startCase(state)}.
-      {' '}
-      {crimeTerm} totals for this agency are voluntarily submitted to the
-      FBI using
-      {' '}
-      {hasNibrs ? nibrsTerm : srsTerm}
-      {' '}
+      The {startCase(name)} is located in {showCounty && `${county} County, `}
+      {startCase(state)}. {crimeTerm} totals for this agency are voluntarily
+      submitted to the FBI using {hasNibrs ? <NibrsTerm /> : <SrsTerm />}{' '}
       reports.
     </p>
   )
