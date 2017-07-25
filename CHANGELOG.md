@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+
+## [2.13.0] - 2017-07-25
+### Added
+- Arrest data and Supplemental Homicide Report (SHR) data descriptions ([#1174](https://github.com/18F/crime-data-frontend/pull/1174))
+
+### Fixed
+- Use number of offenses for NIBRS text ([crime-data-explorer#259](https://github.com/18F/crime-data-explorer/issues/259))
+
+
 ## [2.12.1] - 2017-07-20
 ### Fixed
 - Use proper snippet for [Digital Analytics Program (DAP)](https://www.digitalgov.gov/services/dap/) ([#1175](https://github.com/18F/crime-data-frontend/issues/1175))
