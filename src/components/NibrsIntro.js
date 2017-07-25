@@ -20,11 +20,12 @@ const NibrsIntro = ({
   totalCount,
   until,
 }) => {
+  const noun = 'offense'
   if (isAgency) {
     return (
       <p className="m0 sm-col-9">
         This agency reported {highlight(formatNum(totalCount))} individual{' '}
-        {crime} {pluralize('offense', totalCount)} to the FBI between{' '}
+        {crime} {pluralize(noun, totalCount)} to the FBI between{' '}
         {highlight(nibrsFirstYear)} and {highlight(until)}.
       </p>
     )
@@ -36,10 +37,11 @@ const NibrsIntro = ({
 
   return (
     <p className="m0 sm-col-9">
-      There were {highlight(formatNum(totalCount))} individual {crime} incidents
-      reported to the FBI in {placeDisplay} between {highlight(nibrsFirstYear)}{' '}
-      and {highlight(until)} by {highlight(agencyCt)} law enforcement{' '}
-      {pluralize('agency', agencyCt)} reporting {nibrsTerm} data.
+      There were {highlight(formatNum(totalCount))} individual {crime}{' '}
+      {pluralize(noun, totalCount)} reported to the FBI in {placeDisplay}{' '}
+      between {highlight(nibrsFirstYear)} and {highlight(until)} by{' '}
+      {highlight(agencyCt)} law enforcement {pluralize('agency', agencyCt)}{' '}
+      reporting {nibrsTerm} data.
     </p>
   )
 }
