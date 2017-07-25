@@ -5,7 +5,10 @@ import React from 'react'
 import { nibrsTerm } from './Terms'
 import { formatNum } from '../util/formats'
 
-const highlight = txt => <strong>{txt}</strong>
+const highlight = txt =>
+  <strong>
+    {txt}
+  </strong>
 
 const NibrsIntro = ({
   crime,
@@ -20,9 +23,9 @@ const NibrsIntro = ({
   if (isAgency) {
     return (
       <p className="m0 sm-col-9">
-        This agency reported {highlight(formatNum(totalCount))}{' '}
-        individual {crime} {pluralize('incident', totalCount)} to the
-        FBI between {highlight(nibrsFirstYear)} and {highlight(until)}.
+        This agency reported {highlight(formatNum(totalCount))} individual{' '}
+        {crime} {pluralize('offense', totalCount)} to the FBI between{' '}
+        {highlight(nibrsFirstYear)} and {highlight(until)}.
       </p>
     )
   }
@@ -33,10 +36,9 @@ const NibrsIntro = ({
 
   return (
     <p className="m0 sm-col-9">
-      There were {highlight(formatNum(totalCount))} individual{' '}
-      {crime} incidents reported to the FBI in {placeDisplay}{' '}
-      between {highlight(nibrsFirstYear)} and {highlight(until)}{' '}
-      by {highlight(agencyCt)} law enforcement{' '}
+      There were {highlight(formatNum(totalCount))} individual {crime} incidents
+      reported to the FBI in {placeDisplay} between {highlight(nibrsFirstYear)}{' '}
+      and {highlight(until)} by {highlight(agencyCt)} law enforcement{' '}
       {pluralize('agency', agencyCt)} reporting {nibrsTerm} data.
     </p>
   )
