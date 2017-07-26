@@ -1,11 +1,13 @@
 /* eslint jsx-a11y/no-static-element-interactions: 0 */
+import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
+import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-import LocationSelect from './LocationSelect'
-import SharingTags from './SharingTags'
-import UsaMap from './UsaMap'
+import LocationSelect from '../components/LocationSelect'
+import SharingTags from '../components/SharingTags'
+import UsaMap from '../components/UsaMap'
 import { updateApp } from '../actions/composite'
 import { updateFilters } from '../actions/filters'
 import { oriToState } from '../util/agencies'
@@ -14,8 +16,7 @@ import { slugify } from '../util/text'
 import stateLookup from '../util/usa'
 import dataPreview from '../../content/preview.yml'
 
-const Home = ({ appState, dispatch, router }) => {
-  const { crime, place, placeType } = appState.filters
+const Home = ({ crime, dispatch, place, placeType, router }) => {
   const isValid = !!(crime && place) || false
   const usState = placeType !== 'agency' ? place : oriToState(place)
 
@@ -184,4 +185,14 @@ const Home = ({ appState, dispatch, router }) => {
   )
 }
 
-export default Home
+Home.propTypes = {
+  crime: PropTypes.string,
+  dispatch: PropTypes.func,
+  place: PropTypes.string,
+  placeType: PropTypes.string,
+}
+
+const mapStateToProps = ({ filters }) => ({ ...filters })
+const mapDispatchToProps = dispatch => ({ dispatch })
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

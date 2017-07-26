@@ -5,7 +5,7 @@ import About from './components/About'
 import App from './containers/App'
 import DownloadsAndDocs from './components/DownloadsAndDocs'
 import Explorer from './components/Explorer'
-import Home from './components/Home'
+import Home from './containers/Home'
 import NotFound from './components/NotFound'
 import history from './util/history'
 
