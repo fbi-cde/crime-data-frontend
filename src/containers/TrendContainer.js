@@ -31,7 +31,8 @@ const getContent = ({ crime, place, since, summaries, until }) => {
 
   if (!data || data.length === 0) return <NoData />
 
-  const places = Object.keys(summaries.data)
+  const isNational = place === nationalKey
+  const places = [!isNational ? place : null, nationalKey].filter(x => x)
   const fname = `${place}-${crime}-${since}-${until}`
   const title =
     `Reported ${pluralize(crime)} in ` +
