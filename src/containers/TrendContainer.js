@@ -13,6 +13,7 @@ import TrendSourceText from '../components/TrendSourceText'
 import { generateCrimeReadme } from '../util/content'
 import { getPlaceInfo } from '../util/place'
 import mungeSummaryData from '../util/summary'
+import { nationalKey } from '../util/usa'
 
 const getContent = ({ crime, place, since, summaries, until }) => {
   const { loading, error } = summaries
@@ -96,11 +97,26 @@ TrendContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ filters, summaries }) => ({
-  ...filters,
-  ...getPlaceInfo(filters),
-  summaries,
-})
+export const mapStateToProps = ({ filters, summaries }) => {
+  const { place, placeType } = filters
+
+  const data = {
+    [nationalKey]: summaries.data[nationalKey],
+  }
+
+  if (placeType === 'state') {
+    data[place] = summaries.data[place]
+  }
+
+  return {
+    ...filters,
+    ...getPlaceInfo(filters),
+    summaries: {
+      ...summaries,
+      data,
+    },
+  }
+}
 
 const mapDispatchToProps = dispatch => ({ dispatch })
 
