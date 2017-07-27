@@ -113,4 +113,12 @@ if (env === 'production') {
   clientConfig.plugins.push(new webpack.optimize.UglifyJsPlugin())
 }
 
-module.exports = [serverConfig, clientConfig]
+const swConfig = Object.assign({}, clientConfig, {
+  entry: './src/sw.js',
+  output: {
+    path: path.join(__dirname, 'build'),
+    filename: 'sw.js',
+  },
+})
+
+module.exports = [serverConfig, clientConfig, swConfig]

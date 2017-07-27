@@ -1,4 +1,6 @@
-const CACHE = 'crime-data-explorer'
+import { version } from '../package.json'
+
+const CACHE = `crime-data-explorer-${version}`
 
 self.addEventListener('install', event => {
   self.skipWaiting()
