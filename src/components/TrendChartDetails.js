@@ -1,6 +1,5 @@
 import range from 'lodash.range'
 import lowerCase from 'lodash.lowercase'
-import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -8,9 +7,12 @@ import Highlight from './Highlight'
 import Term from './Term'
 import crimeTerm from '../util/glossary'
 import { formatNum, formatOneDec as formatRate } from '../util/formats'
-import { nationalKey } from '../util/usa'
+import lookupUsa, { nationalKey } from '../util/usa'
 
-const highlight = txt => <strong>{txt}</strong>
+const highlight = txt =>
+  <strong>
+    {txt}
+  </strong>
 const borderColor = { borderColor: '#c8d3dd' }
 const cellStyle = { width: 68, ...borderColor }
 
@@ -21,7 +23,9 @@ const getComparison = ({ place, data }) => {
   const diff = (placeRate / nationalRate - 1) * 100
 
   return Math.abs(diff) < threshold
-    ? <span>about the same (within {threshold}%) as</span>
+    ? <span>
+        about the same (within {threshold}%) as
+      </span>
     : <span>
         {<Highlight text={`${diff > 0 ? 'higher' : 'lower'}`} />} than
       </span>
@@ -38,7 +42,11 @@ const TrendChartDetails = ({
 }) => {
   const handleSelectChange = e => updateYear(Number(e.target.value))
   const yearRange = range(since, until + 1)
-  const term = <Term id={crimeTerm(crime)} size="sm">{lowerCase(crime)}</Term>
+  const term = (
+    <Term id={crimeTerm(crime)} size="sm">
+      {lowerCase(crime)}
+    </Term>
+  )
 
   const data = active.filter(d => d.crime !== 'rape-revised')
   const isNational = keys.length === 1
@@ -53,20 +61,22 @@ const TrendChartDetails = ({
   if (isNational) {
     sentence = (
       <span>
-        In {highlight(year)}, there were {highlight(formatRate(rate))}{' '}
-        incidents of {term} per 100,000 people.
+        In {highlight(year)}, there were {highlight(formatRate(rate))} incidents
+        of {term} per 100,000 people.
       </span>
     )
   } else if (crime === 'rape' && revised && revised.rate) {
     sentence = (
       <span>
-        In {highlight(year)}, the rate at which rape was reported using
-        the <Term id={crimeTerm('rape')} size="sm">legacy</Term> definition{' '}
-        was {highlight(formatRate(rate))} per 100,000.
-        Rape was reported using the
-        {' '}
-        <Term id={crimeTerm('rape-revised')} size="sm">revised</Term>
-        {' '}
+        In {highlight(year)}, the rate at which rape was reported using the{' '}
+        <Term id={crimeTerm('rape')} size="sm">
+          legacy
+        </Term>{' '}
+        definition was {highlight(formatRate(rate))} per 100,000. Rape was
+        reported using the{' '}
+        <Term id={crimeTerm('rape-revised')} size="sm">
+          revised
+        </Term>{' '}
         definition at a rate of {highlight(formatRate(revised.rate))} per
         100,000 people.
       </span>
@@ -74,9 +84,9 @@ const TrendChartDetails = ({
   } else {
     sentence = (
       <span>
-        In {highlight(year)}, {startCase(place)}’s {term} rate
-        was {highlight(formatRate(rate))} incidents per 100,000 people.
-        The rate for that year was {comparison} that of the United States.
+        In {highlight(year)}, {lookupUsa(place).display}’s {term} rate was{' '}
+        {highlight(formatRate(rate))} incidents per 100,000 people. The rate for
+        that year was {comparison} that of the United States.
       </span>
     )
   }
@@ -103,7 +113,11 @@ const TrendChartDetails = ({
                   onChange={handleSelectChange}
                   value={year}
                 >
-                  {yearRange.map((y, i) => <option key={i}>{y}</option>)}
+                  {yearRange.map((y, i) =>
+                    <option key={i}>
+                      {y}
+                    </option>,
+                  )}
                 </select>
               </td>
               <td className="pr2 align-middle">Rate</td>
@@ -128,7 +142,7 @@ const TrendChartDetails = ({
                       backgroundColor: colors[i] || '#000',
                     }}
                   />
-                  {startCase(d.place)}
+                  {lookupUsa(d.place).display}
                 </td>
                 <td className="pt1 pr2 align-bottom right-align">
                   <span

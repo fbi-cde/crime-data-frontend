@@ -16,7 +16,7 @@ const ExplorerIntro = ({ agency, crime, participation, place, until }) => {
         crime={crime}
         hasNibrs={agency.nibrs_months_reported === 12}
         name={agency.agency_name}
-        state={oriToState(place)}
+        usState={oriToState(place)}
         type={agency.agency_type_name}
       />
     )

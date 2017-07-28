@@ -1,6 +1,5 @@
 /* eslint-disable camelcase,consistent-return */
 
-import { slugify } from './text'
 import lookupUsa from './usa'
 
 const postalMappingExceptions = {
@@ -11,13 +10,13 @@ const postalMappingExceptions = {
 export const reshapeData = data =>
   Object.keys(data)
     .filter(key => lookupUsa(key))
-    .map(key => ({ key: slugify(lookupUsa(key)), value: data[key] }))
+    .map(key => ({ key: lookupUsa(key).slug, value: data[key] }))
     .reduce((accum, next) => ({ ...accum, [next.key]: next.value }), {})
 
 export const oriToState = ori => {
   const oriAbbr = ori.slice(0, 2).toUpperCase()
   const postalAbbr = postalMappingExceptions[oriAbbr] || oriAbbr
-  return slugify(lookupUsa(postalAbbr))
+  return lookupUsa(postalAbbr).slug
 }
 
 export const agencyDisplay = ({ agency_name, agency_type_name }) => {

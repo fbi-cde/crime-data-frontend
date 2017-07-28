@@ -10,7 +10,7 @@ import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import Sparkline from '../components/Sparkline'
 import { oriToState } from '../util/agencies'
-import { nationalKey } from '../util/usa'
+import lookupUsa, { nationalKey } from '../util/usa'
 
 const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
   const { data, error, loading } = summaries
@@ -27,7 +27,7 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
   const sparklines = [
     {
       data: data[usState] || [],
-      place: usState,
+      place: lookupUsa(usState).display,
       url: `/explorer/state/${usState}/${crime}`,
     },
     {
@@ -52,17 +52,22 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
           <div className="sm-col sm-col-6 mb1 px1" key={i}>
             <div className="p2 bg-blue-lighter flex items-center">
               <div className="flex-none">
-                <h4 className="m0 sans-serif fs-14">{startCase(s.place)}</h4>
+                <h4 className="m0 sans-serif fs-14">
+                  {s.place}
+                </h4>
                 <p className="mb2 mw8 fs-14">
                   {startCase(crime)},{' '}
-                  <span className="nowrap">{since}-{until}</span>
+                  <span className="nowrap">
+                    {since}-{until}
+                  </span>
                 </p>
                 <a
                   className="block btn btn-sm btn-primary fs-12 regular center"
                   href={s.url}
                 >
-                  Explore{' '}
-                  {s.place === 'United States' ? 'national' : 'state'}{' '}
+                  Explore {s.place === 'United States'
+                    ? 'national'
+                    : 'state'}{' '}
                   data
                 </a>
               </div>

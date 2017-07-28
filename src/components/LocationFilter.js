@@ -1,4 +1,3 @@
-import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -27,7 +26,7 @@ class LocationFilter extends React.Component {
           ariaControls={ariaControls}
           onChange={onChange}
           onFocus={this.handleLocationFocus}
-          selected={startCase(usState)}
+          selected={usState}
         />
         {showAgencySearch &&
           <AgencySearch

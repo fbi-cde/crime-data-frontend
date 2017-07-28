@@ -7,13 +7,14 @@ import React from 'react'
 import Term from './Term'
 import { NibrsTerm, SrsTerm } from './Terms'
 import mapCrimeToGlossaryTerm from '../util/glossary'
+import lookupUsa from '../util/usa'
 
 const ExplorerIntroAgency = ({
   county,
   crime,
   hasNibrs,
   name,
-  state,
+  usState,
   type,
 }) => {
   const showCounty =
@@ -27,9 +28,9 @@ const ExplorerIntroAgency = ({
   return (
     <p className="serif">
       The {startCase(name)} is located in {showCounty && `${county} County, `}
-      {startCase(state)}. {crimeTerm} totals for this agency are voluntarily
-      submitted to the FBI using {hasNibrs ? <NibrsTerm /> : <SrsTerm />}{' '}
-      reports.
+      {lookupUsa(usState).display}. {crimeTerm} totals for this agency are
+      voluntarily submitted to the FBI using{' '}
+      {hasNibrs ? <NibrsTerm /> : <SrsTerm />} reports.
     </p>
   )
 }
@@ -41,7 +42,7 @@ ExplorerIntroAgency.defaultProps = {
 ExplorerIntroAgency.propTypes = {
   county: PropTypes.string,
   name: PropTypes.string.isRequired,
-  state: PropTypes.string.isRequired,
+  usState: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   hasNibrs: PropTypes.bool,
 }

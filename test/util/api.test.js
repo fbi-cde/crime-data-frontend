@@ -100,7 +100,7 @@ describe('api utility', () => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
       api.fetchAggregates('california').then(() => {
         const url = spy.args[0].pop()
-        expect(url.includes('/estimates/states/CA')).toEqual(true)
+        expect(url.includes('/estimates/states/ca')).toEqual(true)
         done()
       })
     })

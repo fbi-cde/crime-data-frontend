@@ -1,4 +1,3 @@
-import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -23,10 +22,10 @@ class UsaMap extends React.Component {
     const { colors, changeColorOnHover, mapClick, place } = this.props
     const { hover } = this.state
 
-    const placeId = place && stateLookup(place).toUpperCase()
+    const placeId = place && stateLookup(place).id
     const svgDataWithNames = svgData.map(s => ({
       ...s,
-      name: startCase(stateLookup(s.id)),
+      name: stateLookup(s.id).display,
     }))
 
     return (
@@ -40,9 +39,8 @@ class UsaMap extends React.Component {
           <title>USA</title>
           <g onClick={mapClick}>
             {svgDataWithNames.map(s => {
-              const defaultClass = s.id === placeId
-                ? 'fill-red-bright'
-                : 'fill-blue-light'
+              const defaultClass =
+                s.id === placeId ? 'fill-red-bright' : 'fill-blue-light'
 
               return (
                 <path
