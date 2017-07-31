@@ -13,13 +13,15 @@ import TrendSourceText from '../components/TrendSourceText'
 import { generateCrimeReadme } from '../util/content'
 import { getPlaceInfo } from '../util/place'
 import mungeSummaryData from '../util/summary'
+import { nationalKey } from '../util/usa'
 
-const getContent = ({ crime, place, since, summaries, until }) => {
+const getContent = ({ crime, places, since, summaries, until }) => {
   const { loading, error } = summaries
 
   if (loading) return <Loading />
   if (error) return <ErrorCard error={error} />
 
+  const place = places[0]
   const data = mungeSummaryData({
     crime,
     summaries: summaries.data,
@@ -30,7 +32,6 @@ const getContent = ({ crime, place, since, summaries, until }) => {
 
   if (!data || data.length === 0) return <NoData />
 
-  const places = Object.keys(summaries.data)
   const fname = `${place}-${crime}-${since}-${until}`
   const title =
     `Reported ${pluralize(crime)} in ` +
@@ -66,8 +67,15 @@ const getContent = ({ crime, place, since, summaries, until }) => {
   )
 }
 
-const TrendContainer = props => {
-  const { crime, place, placeType, since, summaries, until } = props
+const TrendContainer = ({
+  crime,
+  place,
+  places,
+  placeType,
+  since,
+  summaries,
+  until,
+}) => {
   const isReady = !summaries.loading
 
   return (
@@ -76,7 +84,7 @@ const TrendContainer = props => {
         <h2 className="mt0 mb2 sm-mb4 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} rate in {startCase(place)}, {since}-{until}
         </h2>
-        {getContent(props)}
+        {getContent({ crime, places, since, summaries, until })}
       </div>
       {isReady &&
         <TrendSourceText crime={crime} place={place} placeType={placeType} />}
@@ -87,6 +95,7 @@ const TrendContainer = props => {
 TrendContainer.propTypes = {
   crime: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
+  places: PropTypes.arrayOf(PropTypes.string),
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   summaries: PropTypes.shape({
@@ -96,11 +105,19 @@ TrendContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ filters, summaries }) => ({
-  ...filters,
-  ...getPlaceInfo(filters),
-  summaries,
-})
+export const mapStateToProps = ({ filters, summaries }) => {
+  const { place } = filters
+
+  const places = [place]
+  if (place !== nationalKey) places.push(nationalKey)
+
+  return {
+    ...filters,
+    ...getPlaceInfo(filters),
+    places,
+    summaries,
+  }
+}
 
 const mapDispatchToProps = dispatch => ({ dispatch })
 
