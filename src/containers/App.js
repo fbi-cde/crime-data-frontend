@@ -17,8 +17,15 @@ import * as glossaryActions from '../actions/glossary'
 
 const isProd = process.env.NODE_ENV === 'production'
 
-const App = ({ actions, appState, children, dispatch, location }) =>
-  <div className="site">
+const App = ({
+  actions,
+  appState,
+  children,
+  dispatch,
+  location,
+  sidebarOpen,
+}) =>
+  <div className={`site ${sidebarOpen ? 'no-scroll' : ''}`}>
     <SkipContent skipTo=".site-main" />
     <Disclaimer />
     <BetaBanner onFeedbackClick={actions.showFeedback} />
@@ -39,9 +46,14 @@ const App = ({ actions, appState, children, dispatch, location }) =>
 App.propTypes = {
   appState: PropTypes.object,
   dispatch: PropTypes.func,
+  sidebarOpen: PropTypes.bool,
 }
 
-const mapStateToProps = state => ({ appState: state })
+const mapStateToProps = state => {
+  const { isOpen: sidebarOpen } = state.sidebar
+  return { appState: state, sidebarOpen }
+}
+
 const mapDispatchToProps = dispatch => ({
   dispatch,
   actions: bindActionCreators(
