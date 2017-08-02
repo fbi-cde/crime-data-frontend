@@ -8,12 +8,18 @@ import { nationalKey } from '../util/usa'
 class LocationFilter extends React.Component {
   state = { showResults: false }
 
+  getAgencyName = () => {
+    const { agency } = this.props
+
+    return (agency || {}).agency_name || ''
+  }
+
   handleLocationFocus = () => {
     this.setState({ showResults: false })
   }
 
   render() {
-    const { agency, agencyData, ariaControls, onChange, usState } = this.props
+    const { agencyData, ariaControls, onChange, usState } = this.props
     const { showResults } = this.state
     const showAgencySearch = usState !== nationalKey && agencyData.length > 0
 
@@ -31,7 +37,7 @@ class LocationFilter extends React.Component {
         {showAgencySearch &&
           <AgencySearch
             onChange={onChange}
-            agency={(agency || {}).agency_name || ''}
+            agency={this.getAgencyName()}
             data={agencyData}
             initialShowResults={showResults}
           />}
