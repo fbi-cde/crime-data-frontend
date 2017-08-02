@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router'
+import reduceEntries from 'reduce-entries'
 
 import SharingTags from './SharingTags'
 import Term from './Term'
@@ -50,11 +51,6 @@ const stateColors = usaData.filter(k => k.slug !== nationalKey).map(k => {
     key: k.id,
     program: matches[0].text,
   }
-})
-
-const reduceEntries = (valueKey = 'value') => (accum, next) => ({
-  ...accum,
-  [next.key]: next[valueKey],
 })
 
 class About extends React.Component {
