@@ -128,6 +128,8 @@ const offenderDemo = data => {
     data: [
       {
         data: rename(reshape(offenderSexCode, 'sex_code'), sexCodes),
+        noun: 'offender',
+        sentenceStart: 'Sex',
         title: 'Sex of offender',
         type: 'stacked',
         keys: Object.values(sexCodes),
@@ -165,6 +167,8 @@ const victimDemo = data => {
     data: [
       {
         data: rename(reshape(victimSexCode, 'sex_code'), sexCodes),
+        noun: 'victim',
+        sentenceStart: 'Sex',
         title: 'Sex of victim',
         type: 'stacked',
         keys: Object.values(sexCodes),

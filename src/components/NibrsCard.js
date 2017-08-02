@@ -32,7 +32,11 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
       case 'table':
         return <NibrsTableWithBars {...props} />
       default:
-        return <p key={i}>{d.type} not supported!</p>
+        return (
+          <p key={i}>
+            {d.type} not supported!
+          </p>
+        )
     }
   })
 
@@ -59,7 +63,7 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
 
   return (
     <div className="p2 sm-p3 bg-white black">
-      <h2 className="mt0 mb2 pb1 fs-18 sm-fs-20 sans-serif blue border-bottom border-blue-light">
+      <h2 className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
         {title}
       </h2>
       {!dataIsEmpty && charts}
