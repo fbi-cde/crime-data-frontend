@@ -9,10 +9,7 @@ class Feedback extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      data: Object.assign(...props.fields.map(f => ({ [f.id]: '' }))),
-      result: {},
-    }
+    this.state = this.createInitialState()
   }
 
   componentDidMount() {
@@ -35,6 +32,11 @@ class Feedback extends React.Component {
     onClose()
   }
 
+  createInitialState = () => ({
+    data: Object.assign(...this.props.fields.map(f => ({ [f.id]: '' }))),
+    result: {},
+  })
+
   createIssueBody = () =>
     this.props.fields
       .map(f => ({
@@ -44,6 +46,14 @@ class Feedback extends React.Component {
       }))
       .map(d => `## ${d.label}\n${d.data}\n\n`)
       .join('\n')
+
+  validateSubmission = () => {
+    const { fields } = this.props
+    const { data } = this.state
+    const areEmpty = Object.keys(data).filter(key => data[key] === '')
+    if (areEmpty.length === fields.length) return false
+    return true
+  }
 
   handleChange = e => {
     const { name, value } = e.target
@@ -55,7 +65,11 @@ class Feedback extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
 
-    http
+    if (!this.validateSubmission()) {
+      return this.handleValidationError()
+    }
+
+    return http
       .post('/feedback', {
         body: this.createIssueBody(),
         title: 'User feedback',
@@ -69,7 +83,7 @@ class Feedback extends React.Component {
       this.setState({
         result: {
           type: 'error',
-          msg: response.statusText,
+          msg: "Please try again in a bit, we're having problems.",
         },
       })
       throw new Error(
@@ -82,9 +96,18 @@ class Feedback extends React.Component {
     const { html_url } = response.data
     this.setState({ result: { type: 'success', url: html_url } })
     setTimeout(() => {
-      this.setState({ result: {}, data: {} })
+      this.setState(this.createInitialState())
       this.close()
     }, 8000)
+  }
+
+  handleValidationError = () => {
+    this.setState({
+      result: {
+        type: 'error',
+        msg: 'Please provide feedback to at least one question above',
+      },
+    })
   }
 
   handleFirstFocus = () => {
@@ -145,10 +168,9 @@ class Feedback extends React.Component {
                   </div>,
                 )}
                 <p className="fs-14 sans-serif">
-                  This information will be reported on Github, where it will
-                  be publically visible. You can review all reported feedback
-                  on our
-                  {' '}
+                  This information will be reported on Github, where it will be
+                  publically visible. You can review all reported feedback on
+                  our{' '}
                   <a
                     className="cursor-pointer underline white"
                     href="https://github.com/18f/crime-data-explorer/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20User%20feedback"
@@ -175,7 +197,7 @@ class Feedback extends React.Component {
                       </span>}
                     {result.type === 'error' &&
                       <span className="red-bright" role="alert">
-                        There was an error: {result.msg}.
+                        Error: {result.msg}.
                       </span>}
                   </div>
                 </div>
