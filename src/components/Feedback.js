@@ -69,7 +69,7 @@ class Feedback extends React.Component {
       return this.handleValidationError()
     }
 
-    http
+    return http
       .post('/feedback', {
         body: this.createIssueBody(),
         title: 'User feedback',

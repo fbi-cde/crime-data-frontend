@@ -24,6 +24,36 @@ describe('Feedback', () => {
     })
   })
 
+  describe('handleChange()', () => {
+    it('should update the state with the new values', () => {
+      const fields = [{ id: 'foo', label: 'fake label' }]
+      const wrapper = shallow(<Feedback fields={fields} onClose={() => {}} />)
+      wrapper.instance().handleChange({ target: { name: 'foo', value: 'bar' } })
+
+      expect(wrapper.state().data.foo).toEqual('bar')
+    })
+
+    it('should not update the other values', () => {
+      const fields = [
+        { id: 'foo', label: 'fake label' },
+        { id: 'zee', label: 'some text' },
+      ]
+      const wrapper = shallow(<Feedback fields={fields} onClose={() => {}} />)
+      wrapper.instance().handleChange({ target: { name: 'foo', value: 'bar' } })
+
+      expect(wrapper.state().data.zee).toEqual('')
+    })
+  })
+
+  describe('handleValidationError()', () => {
+    it('should set the state with an error object', () => {
+      const wrapper = shallow(<Feedback onClose={() => {}} />)
+      wrapper.instance().handleValidationError()
+
+      expect(wrapper.state().result.type).toEqual('error')
+    })
+  })
+
   describe('validateSubmission()', () => {
     it('returns false if all textareas are empty strings', () => {
       const wrapper = shallow(<Feedback onClose={() => {}} />)
@@ -36,11 +66,9 @@ describe('Feedback', () => {
       const wrapper = shallow(
         <Feedback fields={[{ id: 'foo', label: 'hey' }]} onClose={() => {}} />,
       )
-      const instance = wrapper.instance()
-      const { state } = instance
-      instance.state = { ...state, data: { foo: 'yo' } }
+      wrapper.setState({ ...wrapper.state(), data: { foo: 'yo' } })
 
-      expect(instance.validateSubmission()).toEqual(true)
+      expect(wrapper.instance().validateSubmission()).toEqual(true)
     })
   })
 })
