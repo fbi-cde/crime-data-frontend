@@ -22,9 +22,11 @@ class AgencySearch extends Component {
     if (initialShowResults !== this.props.initialShowResults) {
       this.setState({ showResults: initialShowResults })
     }
-    if (agency === '') {
-      this.setState({ search: '', hasSelection: false })
-    }
+
+    this.setState({
+      search: agency,
+      hasSelection: agency !== '',
+    })
   }
 
   componentWillUnmount() {
