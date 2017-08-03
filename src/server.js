@@ -70,13 +70,12 @@ app.get('/api-proxy/*', (req, res) => {
   if (!apiKey) return res.status(401).end()
 
   return http
-    .get(route, { params})
+    .get(route, { params })
     .then(r => {
       res.set(r.headers)
       res.send(r.data)
     })
     .catch(e => {
-      console.log("Proxy API Error:",e);
       res.status(e.response.status).end()
     })
 })
