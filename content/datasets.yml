@@ -42,7 +42,3 @@
     href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national_juvenile.csv'
   - title: 'national drug arrest data'
     href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national_drug.csv    '
-- title: Supplementary Homicide Report Data
-  description: |
-    Supplemental homicide reports provide additional information about homicides including age, sex, race, the type of weapon used, and the relationship between the victim and offender.  This information is voluntarily submitted by agencies through their state UCR programs.
-  href: ''
