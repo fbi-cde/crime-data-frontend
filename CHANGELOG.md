@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.14.0] - 2017-08-02
+### Added
+- Toggle for count/percent of sex demographic stacked bar chart ([#1182](https://github.com/18F/crime-data-frontend/pull/1182))
+
+### Fixed
+- Prevent scrolling underneath sidebar on mobile ([#984](https://github.com/18F/crime-data-frontend/issues/984))
+- Only show two trend lines in Explorer ([crime-data-explorer#261](https://github.com/18F/crime-data-explorer/issues/261))
+- Prevent empty feedback submissions ([crime-data-explorer#267](https://github.com/18F/crime-data-explorer/issues/267))
+
 
 ## [2.13.0] - 2017-07-25
 ### Added
