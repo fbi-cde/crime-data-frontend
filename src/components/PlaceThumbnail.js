@@ -4,9 +4,13 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { feature, mesh } from 'topojson'
 
+import lookupUsa from '../util/usa'
+
 const Container = ({ children }) =>
   <div className="center bg-white rounded">
-    <div className="aspect-ratio aspect-ratio--4x3">{children}</div>
+    <div className="aspect-ratio aspect-ratio--4x3">
+      {children}
+    </div>
   </div>
 
 class PlaceThumbnail extends React.Component {
@@ -29,10 +33,8 @@ class PlaceThumbnail extends React.Component {
     const path = geoPath().projection(projection)
     const geoStates = feature(usa, usa.objects.units).features
     const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
-
-    const placeUpper = usState.toUpperCase()
     const active = geoStates.find(
-      s => s.properties.name.toUpperCase() === placeUpper,
+      s => s.properties.name === lookupUsa(usState).display,
     )
 
     const { lat, lng } = coordinates || {}
@@ -71,7 +73,7 @@ class PlaceThumbnail extends React.Component {
                   key={i}
                   d={path(d)}
                   fill={
-                    d.properties.name.toUpperCase() === placeUpper || !active
+                    d.properties.name === lookupUsa(usState).display || !active
                       ? '#94aabd'
                       : '#dfe6ed'
                   }

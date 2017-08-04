@@ -13,7 +13,7 @@ import TrendSourceText from '../components/TrendSourceText'
 import { generateCrimeReadme } from '../util/content'
 import { getPlaceInfo } from '../util/place'
 import mungeSummaryData from '../util/summary'
-import { nationalKey } from '../util/usa'
+import lookupUsa, { nationalKey } from '../util/usa'
 
 const getContent = ({ crime, places, since, summaries, until }) => {
   const { loading, error } = summaries
@@ -35,7 +35,7 @@ const getContent = ({ crime, places, since, summaries, until }) => {
   const fname = `${place}-${crime}-${since}-${until}`
   const title =
     `Reported ${pluralize(crime)} in ` +
-    `${startCase(place)}, ${since}-${until}`
+    `${lookupUsa(place).display}, ${since}-${until}`
 
   const readme = generateCrimeReadme({ crime, title })
   const crimeNorm = crime === 'rape' ? 'rape-legacy' : crime
@@ -82,7 +82,7 @@ const TrendContainer = ({
     <div className="mb7">
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb2 sm-mb4 fs-24 sm-fs-28 sans-serif">
-          {startCase(crime)} rate in {startCase(place)}, {since}-{until}
+          {startCase(crime)} rate in {lookupUsa(place).display}, {since}-{until}
         </h2>
         {getContent({ crime, places, since, summaries, until })}
       </div>

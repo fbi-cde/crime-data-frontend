@@ -27,7 +27,7 @@ const fetchNibrs = ({ crime, dim, place, placeType, type }) => {
       ? 'national'
       : placeType === 'agency'
         ? `agencies/${place}`
-        : `states/${lookupUsa(place)}`
+        : `states/${lookupUsa(place).id}`
 
   const field = dimensionEndpoints[dim] || dim
   const fieldPath = dim === 'offenseName' ? field : `${field}/offenses`
@@ -90,7 +90,7 @@ const parseAggregates = ([estimates, arsons]) => ({
 
 const fetchAggregates = place => {
   const estimatesApi = place
-    ? `estimates/states/${lookupUsa(place).toUpperCase()}`
+    ? `estimates/states/${lookupUsa(place).id}`
     : 'estimates/national'
 
   const requests = [
@@ -128,7 +128,7 @@ const getUcrParticipation = place => {
   const path =
     place === nationalKey
       ? 'participation/national'
-      : `participation/states/${lookupUsa(place).toUpperCase()}`
+      : `participation/states/${lookupUsa(place).id}`
 
   return get(`${API}/${path}`).then(response => ({
     place,
