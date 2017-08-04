@@ -63,7 +63,7 @@ const handleClick = func => e => {
 const Footer = ({ actions }) =>
   <footer className="px2 md-px6 py3 md-py6 bg-blue white">
     <div className="clearfix sm-mxn2">
-      <div className="sm-col col-12 sm-col-4 sm-px2 mt1 mb4">
+      <div className="sm-col col-12 md-col-4 sm-px2 mt1 mb4">
         <span className="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">
           Federal Bureau of Investigation
         </span>
@@ -93,14 +93,10 @@ const Footer = ({ actions }) =>
           />
         </div>
       </div>
-      <div className="sm-col col-12 sm-col-4 sm-px2 mb3 md-m0 fs-14 white">
-        <div className="mb1 bold fs-18 serif blue-light-508">
-          Contact us
-        </div>
+      <div className="sm-col col-12 md-col-4 sm-px2 mb3 md-m0 fs-14 white">
+        <div className="mb1 bold fs-18 serif blue-light-508">Contact us</div>
         <div className="mb3">
-          <div className="bold">
-            Crime Statistics Management Unit
-          </div>
+          <div className="bold">Crime Statistics Management Unit</div>
           <a className="mr1 pr1 white" href="mailto:crimestatsinfo@fbi.gov">
             crimestatsinfo@fbi.gov
           </a>
@@ -134,11 +130,13 @@ const Footer = ({ actions }) =>
               src="/img/twitter.svg"
               alt="twitter"
             />
-            <a className="white" href="https://twitter.com/fbi">@FBI</a>
+            <a className="white" href="https://twitter.com/fbi">
+              @FBI
+            </a>
           </div>
         </div>
       </div>
-      <div className="sm-col col-12 sm-col-4 sm-px2 fs-14">
+      <div className="sm-col col-12 md-col-4 sm-px2 fs-14">
         <div className="mb3 md-m0 clearfix">
           {links.map((list, i) =>
             <ul
