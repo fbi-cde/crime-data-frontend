@@ -10,7 +10,7 @@ const getSelectors = skipTo =>
 
 const SkipContent = ({ skipTo }) =>
   <button
-    className="fixed bg-blue-white border-none top-0 left-0 px4 py2 o0 o100-focus"
+    className="fixed bg-blue-white border-none top-0 left-n100 left-0-focus px4 py2"
     onClick={e => {
       if (!skipTo) return
       e.preventDefault()
