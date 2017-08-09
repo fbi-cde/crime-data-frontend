@@ -155,7 +155,7 @@ class TrendChart extends React.Component {
           until={until}
         />
         <div className="mb2 clearfix">
-          <div className="sm-col mb1 sm-m0 fs-14 bold monospace black">
+          <div className="sm-col mb1 sm-m0 fs-12 bold monospace black">
             Rate per 100,000 people, by year
           </div>
           {crime === 'rape' && <TrendChartRapeLegend />}
