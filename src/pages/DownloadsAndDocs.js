@@ -2,10 +2,10 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 
-import DownloadBulkNibrs from './DownloadBulkNibrs'
-import DownloadDataBtn from './DownloadDataBtn'
-import SharingTags from './SharingTags'
-import Term from './Term'
+import DownloadBulkNibrs from '../components/DownloadBulkNibrs'
+import DownloadDataBtn from '../components/DownloadDataBtn'
+import SharingTags from '../components/SharingTags'
+import Term from '../components/Term'
 import otherDatasets from '../../content/datasets.yml'
 import markdown from '../util/md'
 
