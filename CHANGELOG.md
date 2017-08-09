@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.14.1] - 2017-08-03
+### Fixed
+- Agency name is persistent through page refresh ([#1190](https://github.com/18F/crime-data-frontend/issues/1190))
+
+### Removed
+- Remove supplemental homicide report download link & description ([crime-data-explorer#273](https://github.com/18F/crime-data-explorer/issues/273))
+
+
 ## [2.14.0] - 2017-08-02
 ### Added
 - Toggle for count/percent of sex demographic stacked bar chart ([#1182](https://github.com/18F/crime-data-frontend/pull/1182))

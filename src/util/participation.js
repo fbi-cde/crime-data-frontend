@@ -1,11 +1,10 @@
 import offenses from './offenses'
 import { oriToState } from './agencies'
-import { slugify } from './text'
 import lookupUsa from './usa'
 
 import data from '../../public/data/ucr-program-participation.json'
 
-const lookup = state => data[slugify(state)] || {}
+const lookup = state => data[state] || {}
 
 const isValidPlace = (place, placeType) => lookupUsa(place, placeType)
 const isValidCrime = crime => offenses.includes(crime)

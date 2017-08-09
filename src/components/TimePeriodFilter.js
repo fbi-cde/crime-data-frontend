@@ -38,7 +38,9 @@ class TimePeriodFilter extends React.Component {
         </div>
         <div className="clearfix">
           <div className="col col-5">
-            <label htmlFor="since" className="hide">Time from</label>
+            <label htmlFor="since" className="hide">
+              Time from
+            </label>
             <select
               aria-controls={ariaControls}
               className="col-12 field field-sm select"
@@ -46,12 +48,18 @@ class TimePeriodFilter extends React.Component {
               onChange={this.handleChange}
               value={since}
             >
-              {YEAR_RANGE.map((y, i) => <option key={i}>{y}</option>)}
+              {YEAR_RANGE.map((y, i) =>
+                <option key={i}>
+                  {y}
+                </option>,
+              )}
             </select>
           </div>
           <span className="col col-2 fs-18 lh-32 center">to</span>
           <div className="col col-5">
-            <label htmlFor="until" className="hide">Time to</label>
+            <label htmlFor="until" className="hide">
+              Time to
+            </label>
             <select
               aria-controls={ariaControls}
               className="col-12 field field-sm select"
@@ -59,18 +67,30 @@ class TimePeriodFilter extends React.Component {
               onChange={this.handleChange}
               value={until}
             >
-              {YEAR_RANGE.map((y, i) => <option key={i}>{y}</option>)}
+              {YEAR_RANGE.map((y, i) =>
+                <option key={i}>
+                  {y}
+                </option>,
+              )}
             </select>
           </div>
         </div>
-        {error && <p className="my1 fs-10 red-bright">{error}</p>}
+        {error &&
+          <p className="my1 fs-10 red-bright">
+            {error}
+          </p>}
       </div>
     )
   }
 }
 
+TimePeriodFilter.defaultProps = {
+  onChange: () => {},
+}
+
 TimePeriodFilter.propTypes = {
   ariaControls: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
 }

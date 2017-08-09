@@ -1,5 +1,4 @@
 /* eslint-disable no-nested-ternary */
-import startCase from 'lodash.startcase'
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -7,8 +6,9 @@ import ExplorerIntro from '../components/ExplorerIntro'
 import Loading from '../components/Loading'
 import PlaceThumbnail from '../components/PlaceThumbnail'
 import UcrResourcesList from '../components/UcrResourcesList'
-import { getPlaceInfo } from '../util/place'
 import { getAgency, oriToState } from '../util/agencies'
+import { getPlaceInfo } from '../util/place'
+import lookup from '../util/usa'
 
 const ExplorerHeaderContainer = ({
   agencies,
@@ -23,15 +23,13 @@ const ExplorerHeaderContainer = ({
 }) => {
   const isLoading = isAgency ? agencies.loading : participation.loading
   const usState = isAgency ? oriToState(place) : place
-  const placeDisplay = isAgency ? agency.agency_name : startCase(usState)
+  const placeDisplay = isAgency ? agency.agency_name : lookup(place).display
 
   return (
     <div>
       <div className="items-baseline mt2 mb4">
         <h1 className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-light">
-          {isAgency
-            ? isLoading ? 'Loading agency...' : placeDisplay
-            : startCase(usState)}
+          {isAgency && isLoading ? 'Loading agency...' : placeDisplay}
         </h1>
       </div>
       <div className="mb5 clearfix">
@@ -52,14 +50,11 @@ const ExplorerHeaderContainer = ({
           />
         </div>
         <div className="sm-col sm-col-4 xs-hide">
-          <PlaceThumbnail
-            coordinates={coordinates}
-            usState={startCase(usState)}
-          />
+          <PlaceThumbnail coordinates={coordinates} usState={usState} />
           <div className="mt-tiny fs-12 serif italic">
             {isAgency && !isLoading
-              ? `${placeDisplay}, ${startCase(usState)}`
-              : startCase(usState)}
+              ? `${placeDisplay}, ${lookup(usState).display}`
+              : placeDisplay}
           </div>
         </div>
       </div>

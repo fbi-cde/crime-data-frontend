@@ -10,9 +10,10 @@ import lookupUsa, { nationalKey } from '../util/usa'
 const participationCsvLink = (place, type) => {
   if (type === 'agency') return []
 
-  const path = place === nationalKey
-    ? 'participation/national'
-    : `participation/states/${lookupUsa(place).toUpperCase()}`
+  const path =
+    place === nationalKey
+      ? 'participation/national'
+      : `participation/states/${lookupUsa(place).id}`
 
   return [
     {
@@ -48,7 +49,9 @@ const UcrResourcesList = ({ crime, place, placeType }) => {
       <ul className="m0 p0 fs-14 left-bars">
         {links.map((l, i) =>
           <li className="mb1" key={i}>
-            <a href={l.url}>{l.text}</a>
+            <a href={l.url}>
+              {l.text}
+            </a>
           </li>,
         )}
       </ul>

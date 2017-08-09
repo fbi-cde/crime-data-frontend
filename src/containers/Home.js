@@ -13,18 +13,18 @@ import { updateFilters } from '../actions/filters'
 import { oriToState } from '../util/agencies'
 import { crimeTypes } from '../util/offenses'
 import { slugify } from '../util/text'
-import stateLookup from '../util/usa'
+import lookup from '../util/usa'
 import dataPreview from '../../content/preview.yml'
 
 const Home = ({ crime, dispatch, place, placeType, router }) => {
   const isValid = !!(crime && place) || false
-  const usState = placeType !== 'agency' ? place : oriToState(place)
+  const usState = placeType === 'agency' ? oriToState(place) : place
 
   const handleMapClick = e => {
     const id = e.target.getAttribute('id')
     if (!id) return
 
-    const placeNew = { place: slugify(stateLookup(id)), placeType: 'state' }
+    const placeNew = { place: lookup(id).slug, placeType: 'state' }
     dispatch(updateFilters(placeNew))
     dispatch(updateApp({ crime, ...placeNew }, router))
   }
@@ -39,7 +39,9 @@ const Home = ({ crime, dispatch, place, placeType, router }) => {
     dispatch(action)
   }
 
-  const selectLocation = e => dispatch(updateFilters(e))
+  const selectLocation = e => {
+    dispatch(updateFilters(e))
+  }
 
   return (
     <div>

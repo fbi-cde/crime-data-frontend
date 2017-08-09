@@ -1,12 +1,7 @@
-import { entries } from 'd3-collection'
-import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { slugify } from '../util/text'
 import { data } from '../util/usa'
-
-const places = entries(data).map(d => startCase(d.value))
 
 const LocationSelect = ({
   ariaControls,
@@ -15,11 +10,12 @@ const LocationSelect = ({
   onFocus,
   selected,
 }) => {
-  const handleChange = e =>
+  const handleChange = e => {
     onChange({
-      place: slugify(e.target.value),
+      place: e.target.value,
       placeType: 'state',
     })
+  }
 
   return (
     <div>
@@ -34,10 +30,16 @@ const LocationSelect = ({
         id="location-select"
         onChange={handleChange}
         onClick={onFocus}
-        value={selected ? startCase(selected) : ''}
+        value={selected || ''}
       >
-        <option value="" disabled>Location</option>
-        {places.map((p, i) => <option key={i}>{p}</option>)}
+        <option value="" disabled>
+          Location
+        </option>
+        {data.map((p, i) =>
+          <option key={i} value={p.slug}>
+            {p.display}
+          </option>,
+        )}
       </select>
     </div>
   )
