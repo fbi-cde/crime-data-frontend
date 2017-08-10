@@ -21,16 +21,16 @@ describe('filters actions', () => {
       expect(actual.filters.crime).toEqual('robbery')
     })
 
-    it('should not include unknown places in the action', () => {
+    it('should default place to united-states if not set properly', () => {
       const actual = updateFilters({ place: 'fake-place' })
       expect(actual.type).toEqual(FILTERS_UPDATE)
-      expect(actual.filters.place).toEqual(undefined)
+      expect(actual.filters.place).toEqual("united-states")
     })
 
-    it('should not include unknown crimes in the action', () => {
+    it('should default offense to violent-crime if not set properly', () => {
       const actual = updateFilters({ crime: 'fake-crime' })
       expect(actual.type).toEqual(FILTERS_UPDATE)
-      expect(actual.filters.crime).toEqual(undefined)
+      expect(actual.filters.crime).toEqual("violent-crime")
     })
 
     it('should work without any filters passed in', () => {
