@@ -1,12 +1,12 @@
 import React from 'react'
 import { IndexRoute, Route, Router } from 'react-router'
 
-import About from './components/About'
-import App from './containers/App'
-import DownloadsAndDocs from './components/DownloadsAndDocs'
-import Explorer from './components/Explorer'
-import Home from './containers/Home'
-import NotFound from './components/NotFound'
+import About from './pages/About'
+import App from './App'
+import DownloadsAndDocs from './pages/DownloadsAndDocs'
+import Explorer from './pages/Explorer'
+import Home from './pages/Home'
+import NotFound from './pages/NotFound'
 import history from './util/history'
 
 const scrollToTop = () => window.scroll(0, 0)

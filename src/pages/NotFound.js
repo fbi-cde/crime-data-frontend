@@ -4,7 +4,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
 
-import Link from './Link'
+import Link from '../components/Link'
 import { showFeedback } from '../actions/feedback'
 
 const NotFound = ({ dispatch }) =>

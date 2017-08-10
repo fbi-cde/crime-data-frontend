@@ -29,7 +29,7 @@
 - title: US Territory Data
   description: |
     Summary data from United States territories including Puerto Rico, American Samoa, Guam and the U.S. Virgin Islands. Download this dataset to see totals of reported crime for U.S. territories between 1995 and 2015.
-  download: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/territories.csv'
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/territories.csv'
 - title: Arrest Data
   description: |
     National arrest data is estimated by the FBI and dates back to 1995. Arrest data contains monthly counts of arrests for various offenses broken down by age and sex or age and race. Not all agencies report race and ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months are counted for the annual counts that are included in the database.
