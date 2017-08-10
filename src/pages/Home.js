@@ -4,6 +4,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { bindActionCreators } from 'redux'
 
 import LocationSelect from '../components/LocationSelect'
 import SharingTags from '../components/SharingTags'
@@ -16,7 +17,7 @@ import { slugify } from '../util/text'
 import lookup from '../util/usa'
 import dataPreview from '../../content/preview.yml'
 
-const Home = ({ crime, dispatch, place, placeType, router }) => {
+const Home = ({ actions, crime, place, placeType, router }) => {
   const isValid = !!(crime && place) || false
   const usState = placeType === 'agency' ? oriToState(place) : place
 
@@ -25,22 +26,21 @@ const Home = ({ crime, dispatch, place, placeType, router }) => {
     if (!id) return
 
     const placeNew = { place: lookup(id).slug, placeType: 'state' }
-    dispatch(updateFilters(placeNew))
-    dispatch(updateApp({ crime, ...placeNew }, router))
+    actions.updateFilters(placeNew)
+    actions.updateApp({ crime, ...placeNew }, router)
   }
 
   const handleSearchClick = () => {
     const change = { crime, place: usState, placeType: 'state' }
-    dispatch(updateApp(change, router))
+    actions.updateApp(change, router)
   }
 
   const selectCrime = e => {
-    const action = updateFilters({ crime: slugify(e.target.value) })
-    dispatch(action)
+    actions.updateFilters({ crime: slugify(e.target.value) })
   }
 
   const selectLocation = e => {
-    dispatch(updateFilters(e))
+    actions.updateFilters(e)
   }
 
   return (
@@ -188,13 +188,18 @@ const Home = ({ crime, dispatch, place, placeType, router }) => {
 }
 
 Home.propTypes = {
+  actions: PropTypes.shape({
+    updateApp: PropTypes.func,
+    updateFilters: PropTypes.func,
+  }),
   crime: PropTypes.string,
-  dispatch: PropTypes.func,
   place: PropTypes.string,
   placeType: PropTypes.string,
 }
 
 const mapStateToProps = ({ filters }) => ({ ...filters })
-const mapDispatchToProps = dispatch => ({ dispatch })
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ updateApp, updateFilters }, dispatch),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
