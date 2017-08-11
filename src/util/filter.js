@@ -18,6 +18,10 @@ const validateFilter = (filter) => {
   //Validate Place
   if(filter.place && !lookupUsa(filter.place)) filter.place = defaults.place;
 
+  if(filter.since === null && filter.until === null){
+    filter.since = defaults.since;
+    filter.until = defaults.until;
+  }
   //Validate Since and Until
   if(filter.since && filter.until && filter.since>filter.until){
     filter.since = defaults.since;
@@ -25,11 +29,7 @@ const validateFilter = (filter) => {
   }
   //Validate Crime
   if(filter.since && filter.until && ((filter.until-filter.since))<10) filter.since = filter.until-10;
-
-
-  console.log("Request Filters Validated:",filter)
   return filter;
-
 }
 
 export { validateFilter as default}
