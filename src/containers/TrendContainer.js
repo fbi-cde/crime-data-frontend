@@ -1,3 +1,5 @@
+import camelCase from 'lodash.camelcase'
+import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
@@ -11,6 +13,7 @@ import NoData from '../components/NoData'
 import TrendChart from '../components/TrendChart'
 import TrendSourceText from '../components/TrendSourceText'
 import { generateCrimeReadme } from '../util/content'
+import { crimeTypes } from '../util/offenses'
 import { getPlaceInfo } from '../util/place'
 import mungeSummaryData from '../util/summary'
 import lookupUsa, { nationalKey } from '../util/usa'
@@ -67,7 +70,7 @@ const getContent = ({ crime, places, since, summaries, until }) => {
   )
 }
 
-const TrendContainer = ({
+const OtherCharts = ({
   crime,
   place,
   places,
@@ -76,6 +79,19 @@ const TrendContainer = ({
   summaries,
   until,
 }) => {
+  if (!['violent-crime', 'property-crime'].includes(crime)) return null
+  const crimeType = camelCase(crime)
+  const crimeIds = crimeTypes[crimeType].map(t => snakeCase(t.id || t)
+
+  return (
+    <div>
+      {JSON.stringify(crimeIds)}
+    </div>
+  )
+}
+
+const TrendContainer = props => {
+  const { crime, place, places, placeType, since, summaries, until } = props
   const isReady = !summaries.loading
 
   return (
@@ -85,6 +101,7 @@ const TrendContainer = ({
           {startCase(crime)} rate in {lookupUsa(place).display}, {since}-{until}
         </h2>
         {getContent({ crime, places, since, summaries, until })}
+        <OtherCharts {...props} />
       </div>
       {isReady &&
         <TrendSourceText crime={crime} place={place} placeType={placeType} />}
