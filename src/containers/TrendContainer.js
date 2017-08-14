@@ -1,56 +1,61 @@
-import camelCase from 'lodash.camelcase'
-import snakeCase from 'lodash.snakecase'
-import startCase from 'lodash.startcase'
-import pluralize from 'pluralize'
-import PropTypes from 'prop-types'
-import React from 'react'
-import { connect } from 'react-redux'
+import camelCase from "lodash.camelcase";
+import snakeCase from "lodash.snakecase";
+import startCase from "lodash.startcase";
+import pluralize from "pluralize";
+import PropTypes from "prop-types";
+import React from "react";
+import { connect } from "react-redux";
 
-import DownloadDataBtn from '../components/DownloadDataBtn'
-import ErrorCard from '../components/ErrorCard'
-import Loading from '../components/Loading'
-import NoData from '../components/NoData'
-import TrendChart from '../components/TrendChart'
-import TrendSourceText from '../components/TrendSourceText'
-import { generateCrimeReadme } from '../util/content'
-import { crimeTypes } from '../util/offenses'
-import { getPlaceInfo } from '../util/place'
-import mungeSummaryData from '../util/summary'
-import lookupUsa, { nationalKey } from '../util/usa'
+import DownloadDataBtn from "../components/DownloadDataBtn";
+import ErrorCard from "../components/ErrorCard";
+import Loading from "../components/Loading";
+import NoData from "../components/NoData";
+import TrendChart from "../components/TrendChart";
+import TrendSourceText from "../components/TrendSourceText";
+import { generateCrimeReadme } from "../util/content";
+import { crimeTypes } from "../util/offenses";
+import { getPlaceInfo } from "../util/place";
+import mungeSummaryData from "../util/summary";
+import lookupUsa, { nationalKey } from "../util/usa";
 
 const getContent = ({ crime, places, since, summaries, until }) => {
-  const { loading, error } = summaries
+  console.log("TrendContainer Summaries:", summaries);
+  const { loading, error } = summaries;
 
-  if (loading) return <Loading />
-  if (error) return <ErrorCard error={error} />
+  if (loading) return <Loading />;
+  if (error) return <ErrorCard error={error} />;
 
-  const place = places[0]
+  const place = places[0];
+  /*
   const data = mungeSummaryData({
     crime,
     summaries: summaries.data,
     place,
     since,
-    until,
-  })
+    until
+  });
+  */
+  const data = summaries.data.data;
+  console.log("Data:", data);
 
-  if (!data || data.length === 0) return <NoData />
+  if (!data || data.length === 0) return <NoData />;
 
-  const fname = `${place}-${crime}-${since}-${until}`
+  const fname = `${place}-${crime}-${since}-${until}`;
   const title =
     `Reported ${pluralize(crime)} in ` +
-    `${lookupUsa(place).display}, ${since}-${until}`
+    `${lookupUsa(place).display}, ${since}-${until}`;
 
-  const readme = generateCrimeReadme({ crime, title })
-  const crimeNorm = crime === 'rape' ? 'rape-legacy' : crime
+  const readme = generateCrimeReadme({ crime, title });
+  const crimeNorm = crime === "rape" ? "rape-legacy" : crime;
   const dlData = data.map(d => {
-    const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }))
-    return { year: d.year, ...Object.assign(...placeData) }
-  })
+    const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }));
+    return { year: d.year, ...Object.assign(...placeData) };
+  });
 
   const download = [
-    { content: readme, filename: 'README.md' },
-    { data: dlData, filename: `${fname}.csv` },
-  ]
+    { content: readme, filename: "README.md" },
+    { data: dlData, filename: `${fname}.csv` }
+  ];
 
   return (
     <div>
@@ -67,8 +72,8 @@ const getContent = ({ crime, places, since, summaries, until }) => {
         filename={fname}
       />
     </div>
-  )
-}
+  );
+};
 
 const OtherCharts = ({
   crime,
@@ -77,22 +82,22 @@ const OtherCharts = ({
   placeType,
   since,
   summaries,
-  until,
+  until
 }) => {
-  if (!['violent-crime', 'property-crime'].includes(crime)) return null
-  const crimeType = camelCase(crime)
-  const crimeIds = crimeTypes[crimeType].map(t => snakeCase(t.id || t)
+  if (!["violent-crime", "property-crime"].includes(crime)) return null;
+  const crimeType = camelCase(crime);
+  const crimeIds = crimeTypes[crimeType].map(t => snakeCase(t.id || t));
 
   return (
     <div>
       {JSON.stringify(crimeIds)}
     </div>
-  )
-}
+  );
+};
 
 const TrendContainer = props => {
-  const { crime, place, places, placeType, since, summaries, until } = props
-  const isReady = !summaries.loading
+  const { crime, place, places, placeType, since, summaries, until } = props;
+  const isReady = !summaries.loading;
 
   return (
     <div className="mb7">
@@ -106,8 +111,8 @@ const TrendContainer = props => {
       {isReady &&
         <TrendSourceText crime={crime} place={place} placeType={placeType} />}
     </div>
-  )
-}
+  );
+};
 
 TrendContainer.propTypes = {
   crime: PropTypes.string.isRequired,
@@ -117,25 +122,25 @@ TrendContainer.propTypes = {
   since: PropTypes.number.isRequired,
   summaries: PropTypes.shape({
     data: PropTypes.object,
-    loading: PropTypes.boolean,
+    loading: PropTypes.boolean
   }).isRequired,
-  until: PropTypes.number.isRequired,
-}
+  until: PropTypes.number.isRequired
+};
 
 export const mapStateToProps = ({ filters, summaries }) => {
-  const { place } = filters
+  const { place } = filters;
 
-  const places = [place]
-  if (place !== nationalKey) places.push(nationalKey)
+  const places = [place];
+  if (place !== nationalKey) places.push(nationalKey);
 
   return {
     ...filters,
     ...getPlaceInfo(filters),
     places,
-    summaries,
-  }
-}
+    summaries
+  };
+};
 
-const mapDispatchToProps = dispatch => ({ dispatch })
+const mapDispatchToProps = dispatch => ({ dispatch });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrendContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(TrendContainer);
