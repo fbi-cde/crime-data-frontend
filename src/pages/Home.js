@@ -18,9 +18,6 @@ import dataPreview from '../../content/preview.yml'
 
 class Home extends React.Component {
 
-//const Home = ({ crime, dispatch, place, placeType, router }) => {
-
-
    handleMapClick = e => {
     const id = e.target.getAttribute('id')
 
@@ -28,7 +25,7 @@ class Home extends React.Component {
 
     const { router } = this.props
     const crime = this.props.crime;
-    const placeNew = { place: lookup(id).slug, placeType: 'state'}
+    const placeNew = { place: lookup(id).slug, placeType: 'state' }
     this.props.dispatch(updateFilters(placeNew))
     this.props.dispatch(updateApp({ crime, ...placeNew }, router))
   }
@@ -51,7 +48,7 @@ class Home extends React.Component {
   }
 
   componentDidMount(){
-    this.props.dispatch(updateFilters({since: null , until: null}))
+    this.props.dispatch(updateFilters({since: null ,until: null}))
 
   }
 

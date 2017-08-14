@@ -13,23 +13,18 @@ const defaults = {
 
 const validateFilter = (filter) => {
 
-  //Validate Crime
-  if (filter.crime && !isValidCrime(filter.crime)) filter.crime=defaults.crime;
-  //Validate Place
-  if(filter.place && !lookupUsa(filter.place)) filter.place = defaults.place;
-
-  if(filter.since === null && filter.until === null){
+  if ( filter.crime && !isValidCrime(filter.crime) ) filter.crime=defaults.crime;
+  if( filter.place && !lookupUsa(filter.place) ) filter.place = defaults.place;
+  if( filter.since === null && filter.until === null ){
     filter.since = defaults.since;
     filter.until = defaults.until;
   }
-  //Validate Since and Until
-  if(filter.since && filter.until && filter.since>filter.until){
+  if( filter.since && filter.until && filter.since > filter.until ){
     filter.since = defaults.since;
     filter.until = defaults.until;
   }
-  //Validate Crime
-  if(filter.since && filter.until && ((filter.until-filter.since))<10) filter.since = filter.until-10;
+  if( filter.since && filter.until && ((filter.until-filter.since))<10 ) filter.since = filter.until-10;
   return filter;
 }
 
-export { validateFilter as default}
+export { validateFilter as default }
