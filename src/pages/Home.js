@@ -18,6 +18,10 @@ import dataPreview from '../../content/preview.yml'
 
 class Home extends React.Component {
 
+    componentDidMount() {
+      this.props.dispatch(updateFilters({ since: null ,until: null }))
+    }
+
    handleMapClick = e => {
     const id = e.target.getAttribute('id')
 
@@ -47,14 +51,8 @@ class Home extends React.Component {
     this.props.dispatch(updateFilters(e))
   }
 
-  componentDidMount(){
-    this.props.dispatch(updateFilters({since: null ,until: null}))
-
-  }
-
-
-  render(){
-    const { appState, crime, dispatch, place, placeType, router } = this.props
+  render() {
+    const { appState, crime, dispatch, place, placeType } = this.props
     const isValid = !!(crime && place) || false
     const usState = placeType === 'agency' ? oriToState(place) : place
 

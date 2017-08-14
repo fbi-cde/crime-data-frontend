@@ -11,19 +11,19 @@ const defaults = {
 };
 
 
-const validateFilter = (filter) => {
+const validateFilter = filter => {
 
   if ( filter.crime && !isValidCrime(filter.crime) ) filter.crime=defaults.crime;
-  if( filter.place && !lookupUsa(filter.place) ) filter.place = defaults.place;
-  if( filter.since === null && filter.until === null ){
+  if ( filter.place && !lookupUsa(filter.place) ) filter.place = defaults.place;
+  if ( filter.since === null && filter.until === null ){
     filter.since = defaults.since;
     filter.until = defaults.until;
   }
-  if( filter.since && filter.until && filter.since > filter.until ){
+  if ( filter.since && filter.until && filter.since > filter.until ){
     filter.since = defaults.since;
     filter.until = defaults.until;
   }
-  if( filter.since && filter.until && ((filter.until-filter.since))<10 ) filter.since = filter.until-10;
+  if ( filter.since && filter.until && ((filter.until-filter.since))<10 ) filter.since = filter.until-10;
   return filter;
 }
 
