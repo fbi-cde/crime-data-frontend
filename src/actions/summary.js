@@ -2,7 +2,7 @@ import reduceEntries from 'reduce-entries'
 
 import { SUMMARY_FAILED, SUMMARY_FETCHING, SUMMARY_RECEIVED } from './constants'
 import api from '../util/api'
-import mungeSummaryData, { calculateRates, reshapeData } from '../util/summary'
+import { calculateRates, reshapeData } from '../util/summary'
 
 export const failedSummary = error => ({
   type: SUMMARY_FAILED,
