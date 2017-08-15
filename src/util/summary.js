@@ -1,8 +1,5 @@
 import snakeCase from 'lodash.snakecase'
 
-export const reshapeData = dataIn =>
-  Object.assign(...dataIn.map(d => ({ [d.key]: d.results })))
-
 // todo: refactor into action/reducer
 // build all rates and stuff in reducer/action
 
@@ -19,9 +16,8 @@ const mungeSummaryData = ({ crime, summaries, place, since, until }) => {
     .map(year => {
       const data = { year: +year.year }
       keys.forEach(key => {
-        const source = key !== place
-          ? summaries[key].find(d => +d.year === data.year)
-          : year
+        const source =
+          key !== place ? summaries[key].find(d => +d.year === data.year) : year
         const normalizedCrime = crime === 'rape' ? 'rape-legacy' : crime
         const apiCrime = snakeCase(normalizedCrime)
 
