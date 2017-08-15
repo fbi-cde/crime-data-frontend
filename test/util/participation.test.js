@@ -4,6 +4,7 @@ import dataSourcesReportedByState, {
   shouldFetchUcr,
   shouldFetchSummaries,
   shouldFetchNibrs,
+  reshapeData,
 } from '../../src/util/participation'
 import { nationalKey } from '../../src/util/usa'
 
@@ -86,6 +87,15 @@ describe('ucr utility', () => {
       expect(
         Object.prototype.hasOwnProperty.call(result, 'initial-year'),
       ).toEqual(true)
+    })
+  })
+
+  describe('reshapeData()', () => {
+    it('should return a single object from an array of objects', () => {
+      const actual = reshapeData([
+        { place: 'fake-place', results: 'fake-results' },
+      ])
+      expect(actual).toEqual({ 'fake-place': 'fake-results' })
     })
   })
 })

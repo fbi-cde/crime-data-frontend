@@ -12,16 +12,16 @@ import Footer from './components/Footer'
 import Glossary from './components/Glossary'
 import Header from './components/Header'
 import SkipContent from './components/SkipContent'
-import * as feedbackActions from './actions/feedback'
+import { hideFeedback, showFeedback } from './actions/feedback'
 import * as glossaryActions from './actions/glossary'
 
 const isProd = process.env.NODE_ENV === 'production'
 
 const App = ({
   actions,
-  appState,
   children,
-  dispatch,
+  feedbackOpen,
+  glossary,
   location,
   sidebarOpen,
 }) =>
@@ -31,33 +31,34 @@ const App = ({
     <BetaBanner onFeedbackClick={actions.showFeedback} />
     <Header location={location} />
     <main className="site-main">
-      {children && React.cloneElement(children, { appState, dispatch })}
+      {children}
     </main>
-    <Glossary actions={actions} {...appState.glossary} />
+    <Glossary actions={actions} {...glossary} />
     <Footer actions={actions} />
     {!isProd && <ClearCacheBtn />}
-    <Feedback
-      isOpen={appState.feedback.isOpen}
-      onClose={actions.hideFeedback}
-    />
+    <Feedback isOpen={feedbackOpen} onClose={actions.hideFeedback} />
     <Analytics />
   </div>
 
 App.propTypes = {
-  appState: PropTypes.object,
-  dispatch: PropTypes.func,
+  actions: PropTypes.shape({
+    hideFeedback: PropTypes.func,
+    showFeedback: PropTypes.func,
+  }),
+  feedbackOpen: PropTypes.bool,
+  glossary: PropTypes.object,
   sidebarOpen: PropTypes.bool,
 }
 
-const mapStateToProps = state => {
-  const { isOpen: sidebarOpen } = state.sidebar
-  return { appState: state, sidebarOpen }
-}
+const mapStateToProps = ({ feedback, glossary, sidebar }) => ({
+  feedbackOpen: feedback.isOpen,
+  glossary,
+  sidebarOpen: sidebar.isOpen,
+})
 
 const mapDispatchToProps = dispatch => ({
-  dispatch,
   actions: bindActionCreators(
-    { ...feedbackActions, ...glossaryActions },
+    { hideFeedback, showFeedback, ...glossaryActions },
     dispatch,
   ),
 })

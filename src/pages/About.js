@@ -2,7 +2,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
 import reduceEntries from 'reduce-entries'
+import { bindActionCreators } from 'redux'
 
 import SharingTags from '../components/SharingTags'
 import Term from '../components/Term'
@@ -82,7 +84,7 @@ class About extends React.Component {
   }
 
   render() {
-    const { dispatch } = this.props
+    const { actions } = this.props
     const { mapShown } = this.state
     const toggles = [
       { disabled: !mapShown, type: 'table' },
@@ -261,7 +263,7 @@ class About extends React.Component {
             </div>
             <button
               className="btn btn-primary"
-              onClick={() => dispatch(showFeedback())}
+              onClick={() => actions.showFeedback()}
               type="button"
             >
               Submit feedback
@@ -274,7 +276,9 @@ class About extends React.Component {
 }
 
 About.propTypes = {
-  dispatch: PropTypes.func,
+  actions: PropTypes.shape({
+    showFeedback: PropTypes.func,
+  }),
 }
 
 const ParticipationMap = ({ states }) =>
@@ -355,4 +359,8 @@ const ParticipationTable = ({ states }) =>
     </tbody>
   </table>
 
-export default About
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ showFeedback }, dispatch),
+})
+
+export default connect(null, mapDispatchToProps)(About)

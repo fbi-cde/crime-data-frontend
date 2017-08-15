@@ -4,6 +4,7 @@ import React from "react";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
 import { Link } from "react-router";
+import { bindActionCreators } from "redux";
 
 import LocationSelect from "../components/LocationSelect";
 import SharingTags from "../components/SharingTags";
@@ -200,13 +201,18 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
+  actions: PropTypes.shape({
+    updateApp: PropTypes.func,
+    updateFilters: PropTypes.func
+  }),
   crime: PropTypes.string,
-  dispatch: PropTypes.func,
   place: PropTypes.string,
   placeType: PropTypes.string
 };
 
 const mapStateToProps = ({ filters }) => ({ ...filters });
-const mapDispatchToProps = dispatch => ({ dispatch });
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ updateApp, updateFilters }, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
