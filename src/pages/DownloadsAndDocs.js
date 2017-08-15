@@ -5,17 +5,12 @@ import Helmet from 'react-helmet'
 import DownloadBulkNibrs from '../components/DownloadBulkNibrs'
 import DownloadDataBtn from '../components/DownloadDataBtn'
 import SharingTags from '../components/SharingTags'
-import Term from '../components/Term'
+import { NibrsTerm } from '../components/Terms'
 import otherDatasets from '../../content/datasets.yml'
 import markdown from '../util/md'
 
 const border = 'border-bottom border-blue-light'
 const borderLight = 'border-bottom border-blue-lighter'
-const nibrsTerm = (
-  <Term id="national incident-based reporting system (nibrs)" size="lg">
-    incident-based (NIBRS)
-  </Term>
-)
 
 const DownloadsAndDocs = () =>
   <section className="bg-white">
@@ -28,9 +23,10 @@ const DownloadsAndDocs = () =>
       <div className="clearfix">
         <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
           <p className="mb2 md-m0">
-            Download {nibrsTerm} data by year and location. Estimated data and
-            other crime-related datasets are also available for download. Data
-            is provided as CSV files and can be accessed via the{' '}
+            Download <NibrsTerm size="lg" /> data by year and location.
+            Estimated data and other crime-related datasets are also available
+            for download. Data is provided as CSV files and can be accessed via
+            the{' '}
             <a className="underline" href="/api">
               Crime Data Explorer API
             </a>.

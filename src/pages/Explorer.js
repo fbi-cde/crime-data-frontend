@@ -2,6 +2,8 @@ import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import AboutTheData from '../components/AboutTheData'
 import AgencyChartContainer from '../containers/AgencyChartContainer'
@@ -25,8 +27,8 @@ import lookup from '../util/usa'
 
 class Explorer extends React.Component {
   componentDidMount() {
-    const { appState, dispatch, params, router } = this.props
-    const { since, until } = appState.filters
+    const { actions, filters, params, router } = this.props
+    const { since, until } = filters
     const { query } = router.location
     const { place, placeType } = getPlaceInfo(params)
 
@@ -35,45 +37,41 @@ class Explorer extends React.Component {
       return yr >= 1960 && yr <= 2014 ? yr : alt
     }
 
-    const filters = {
+    actions.updateApp({
       ...params,
       place,
       placeType,
       ...query,
       since: clean(query.since, since),
       until: clean(query.until, until),
-    }
-
-    dispatch(updateApp(filters))
+    })
   }
 
   componentWillReceiveProps({ params: newParams }) {
-    const { appState, dispatch } = this.props
-    const { place } = appState.filters
+    const { actions, filters } = this.props
     const { crime } = newParams
     const newPlace = getPlaceInfo(newParams)
 
-    if (place !== newPlace.place) {
-      dispatch(updateApp({ crime, ...newPlace }))
+    if (filters.place !== newPlace.place) {
+      actions.updateApp({ crime, ...newPlace })
     }
   }
 
   handleSidebarChange = change => {
-    const { router } = this.props
-    this.props.dispatch(updateApp(change, router))
+    const { actions, router } = this.props
+    actions.updateApp(change, router)
   }
 
   toggleSidebar = () => {
-    const { dispatch } = this.props
+    const { actions } = this.props
     const { isOpen } = this.props.appState.sidebar
 
-    if (isOpen) return dispatch(hideSidebar())
-    return dispatch(showSidebar())
+    if (isOpen) return actions.hideSidebar()
+    return actions.showSidebar()
   }
 
   render() {
-    const { appState, dispatch, params } = this.props
-    const { agencies, filters } = appState
+    const { actions, agencies, filters, params } = this.props
     const { crime } = params
     const { place, placeType } = getPlaceInfo(params)
     const agency = placeType === 'agency' && getAgency(agencies, place)
@@ -123,7 +121,7 @@ class Explorer extends React.Component {
             <NibrsContainer />
             <AboutTheData
               crime={crime}
-              onTermClick={term => dispatch(showTerm(term))}
+              onTermClick={term => actions.showTerm(term)}
             />
           </div>
         </div>
@@ -133,10 +131,24 @@ class Explorer extends React.Component {
 }
 
 Explorer.propTypes = {
-  appState: PropTypes.object,
-  dispatch: PropTypes.func,
+  actions: PropTypes.shape({
+    hideSidebar: PropTypes.func,
+    showSidebar: PropTypes.func,
+    showTerm: PropTypes.func,
+    updateApp: PropTypes.func,
+  }),
+  agencies: PropTypes.object,
+  filters: PropTypes.object,
   params: PropTypes.object,
   router: PropTypes.object,
 }
 
-export default Explorer
+const mapStateToProps = ({ agencies, filters }) => ({ agencies, filters })
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(
+    { hideSidebar, showSidebar, showTerm, updateApp },
+    dispatch,
+  ),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Explorer)
