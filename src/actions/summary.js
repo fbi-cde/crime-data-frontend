@@ -4,8 +4,8 @@ import {
   SUMMARY_RECEIVED
 } from "./constants";
 import api from "../util/api";
-import { reshapeData } from "../util/summary";
-import mungeSummaryData from "../util/summary";
+import mungeSummaryData, { computeTrend, reshapeData } from "../util/summary";
+import { getPlaceInfo } from "../util/place";
 
 export const failedSummary = error => ({
   type: SUMMARY_FAILED,
@@ -22,6 +22,13 @@ export const receivedSummary = (summaries, filter) => {
   const data = mungeSummaryData(filter, summaries);
   console.log("Munged Data:", data);
   summaries.data = data;
+  const { place, placeType } = getPlaceInfo(filter);
+  console.log("Place:", place);
+  console.log("PlaceType:", placeType);
+  if (placeType === "state") {
+    console.log("State");
+    summaries = computeTrend(place, summaries);
+  }
   return { type: SUMMARY_RECEIVED, summaries: summaries };
 };
 

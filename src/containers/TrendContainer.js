@@ -36,7 +36,6 @@ const getContent = ({ crime, places, since, summaries, until }) => {
   });
   */
   const data = summaries.data.data;
-  console.log("Data:", data);
 
   if (!data || data.length === 0) return <NoData />;
 

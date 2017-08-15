@@ -1,6 +1,9 @@
 import snakeCase from "lodash.snakecase";
+import camelCase from "lodash.camelcase";
 
-export const reshapeData = dataIn =>
+import { internal_offenses } from "../util/offenses";
+
+const reshapeData = dataIn =>
   Object.assign(...dataIn.map(d => ({ [d.key]: d.results })));
 
 // todo: refactor into action/reducer
@@ -45,4 +48,33 @@ const mungeSummaryData = (filter, summaries) => {
     });
 };
 
-export default mungeSummaryData;
+const computeTrend = (place, summaries) => {
+  console.log("Compute Trend for place:" + place + " Data:", summaries);
+  const locData = summaries[place];
+  console.log("Location Data:", locData);
+  const trendData = [];
+  console.log("offnse Data:", internal_offenses);
+  locData.forEach(d => {
+    const yrData = {};
+    yrData.year = d.year;
+    yrData.population = d.population;
+    const keys = Object.keys(d);
+    keys.forEach(key => {
+      console.log(snakeCase(key));
+      if (internal_offenses.hasOwnProperty(snakeCase(key))) {
+        const crimeData = {};
+        const rate = {
+          rate: d[key] * 10000 / d.population
+        };
+        //console.log("Computed Rate:", rate);
+        crimeData.rate = rate;
+        yrData[key] = crimeData;
+        console.log("Year Data Obj:", yrData);
+      }
+    });
+    trendData.push(yrData);
+  });
+  summaries.trendData = trendData;
+  return summaries;
+};
+export { mungeSummaryData as default, computeTrend, reshapeData };
