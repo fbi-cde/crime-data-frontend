@@ -65,7 +65,9 @@ class NibrsTableWithBars extends React.Component {
       <div id={id}>
         <div className="clearfix">
           <div className="left">
-            <div className="blue bold">{title}</div>
+            <div className="blue bold">
+              {title}
+            </div>
           </div>
           <div className="right">
             <NibrsCountPercentToggle
@@ -77,14 +79,19 @@ class NibrsTableWithBars extends React.Component {
           </div>
         </div>
         <table className="mt1 mb2 table-fixed" id={id}>
-          {title && <caption className="hide">{title}</caption>}
+          {title &&
+            <caption className="hide">
+              {title}
+            </caption>}
           <thead className="v-hide">
             <tr style={{ lineHeight: '16px' }}>
               <th style={{ width: '15%' }} />
               <th style={{ width: '20%' }}>
                 {isCounts ? 'Count' : 'Percent'}
               </th>
-              <th style={{ width: '65%' }}>{title}</th>
+              <th style={{ width: '65%' }}>
+                {title}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -110,8 +117,7 @@ class NibrsTableWithBars extends React.Component {
         </table>
         <div className="mt-tiny fs-14 mb3">
           {sentenceStart} was reported for{' '}
-          <span className="bold red">{formatNum(total)}</span>{' '}
-          {pluralize(noun)}.
+          <span className="bold red">{formatNum(total)}</span> {pluralize(noun)}.
         </div>
       </div>
     )

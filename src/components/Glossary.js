@@ -78,7 +78,9 @@ class Glossary extends React.Component {
             placeholder="e.g. Crime rate"
           />
           {error &&
-            <p className="my1 p1 fs-14 bold bg-red-bright white">{error}</p>}
+            <p className="my1 p1 fs-14 bold bg-red-bright white">
+              {error}
+            </p>}
           <div className="glossary__content" id="glossary-result">
             <ul className="js-glossary-list" />
           </div>

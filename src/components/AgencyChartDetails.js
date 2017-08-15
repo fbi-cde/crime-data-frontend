@@ -8,7 +8,10 @@ import React from 'react'
 import Term from './Term'
 import { formatNum as fmt } from '../util/formats'
 
-const highlight = txt => <strong>{txt}</strong>
+const highlight = txt =>
+  <strong>
+    {txt}
+  </strong>
 
 const AgencyChartDetails = ({
   colors,
@@ -31,7 +34,9 @@ const AgencyChartDetails = ({
   if (reportedLastYr && reported > 0) {
     const comp = reported > reportedLastYr ? 'increased' : 'decreased'
     compSentence = (
-      <span>Reported {noun} {highlight(comp)} from the previous year.</span>
+      <span>
+        Reported {noun} {highlight(comp)} from the previous year.
+      </span>
     )
   }
 
@@ -40,11 +45,11 @@ const AgencyChartDetails = ({
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
         <p className="m0" style={{ maxWidth: 400 }}>
           In {highlight(year)}, there {pluralize('were', reported)}{' '}
-          {highlight(fmt(reported))} reported{' '}
-          {pluralize(noun, reported)} of {crimeDisplay}. There{' '}
-          {pluralize('were', cleared)} {highlight(fmt(cleared))}{' '}
-          cleared {crimeDisplay} {pluralize(noun, cleared)}. Crimes are
-          not necessarily cleared in the year they occur.{' '}{compSentence}
+          {highlight(fmt(reported))} reported {pluralize(noun, reported)} of{' '}
+          {crimeDisplay}. There {pluralize('were', cleared)}{' '}
+          {highlight(fmt(cleared))} cleared {crimeDisplay}{' '}
+          {pluralize(noun, cleared)}. Crimes are not necessarily cleared in the
+          year they occur. {compSentence}
         </p>
       </div>
       <div className="flex-none" style={{ width: 210 }}>
@@ -61,10 +66,16 @@ const AgencyChartDetails = ({
                   onChange={handleSelectChange}
                   value={year}
                 >
-                  {yearRange.map((y, i) => <option key={i}>{y}</option>)}
+                  {yearRange.map((y, i) =>
+                    <option key={i}>
+                      {y}
+                    </option>,
+                  )}
                 </select>
               </td>
-              <th className="right-align">{startCase(noun)}</th>
+              <th className="right-align">
+                {startCase(noun)}
+              </th>
             </tr>
           </thead>
           <tbody className="fs-14 bold">
@@ -75,7 +86,9 @@ const AgencyChartDetails = ({
                     className="mr1 inline-block"
                     style={{ width: 8, height: 8, backgroundColor: colors(k) }}
                   />
-                  <Term id={k} size="sm">{startCase(k)}</Term>
+                  <Term id={k} size="sm">
+                    {startCase(k)}
+                  </Term>
                 </td>
                 <td className="pt1 line-height-4 align-bottom right-align">
                   <span className="inline-block border-bottom border-blue-light col-12">

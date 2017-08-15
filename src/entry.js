@@ -22,7 +22,9 @@ store.dispatch(fetchAgencies())
 
 const render = () => {
   ReactDOM.render(
-    <Provider store={store}>{routes}</Provider>,
+    <Provider store={store}>
+      {routes}
+    </Provider>,
     document.getElementById('app'),
   )
 }

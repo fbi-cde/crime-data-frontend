@@ -2,14 +2,13 @@ import {
   SUMMARY_FAILED,
   SUMMARY_FETCHING,
   SUMMARY_RECEIVED,
-  SUMMARY_COMPUTE
-} from "../actions/constants";
+} from '../actions/constants'
 
 const initialState = {
   data: {},
   error: null,
-  loading: false
-};
+  loading: false,
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -19,26 +18,26 @@ export default (state = initialState, action) => {
         error: {
           code: action.error.response.status,
           message: action.error.message,
-          url: action.error.config.url
+          url: action.error.config.url,
         },
-        loading: false
-      };
+        loading: false,
+      }
     case SUMMARY_FETCHING:
       return {
         ...state,
         error: null,
-        loading: true
-      };
+        loading: true,
+      }
     case SUMMARY_RECEIVED:
       return {
         ...state,
         data: {
           ...state.data,
-          ...action.summaries
+          ...action.summaries,
         },
-        loading: false
-      };
+        loading: false,
+      }
     default:
-      return state;
+      return state
   }
-};
+}

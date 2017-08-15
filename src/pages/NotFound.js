@@ -14,17 +14,17 @@ const NotFound = ({ dispatch }) =>
       We couldn{"'"}t find the page you are looking for.
     </h1>
     <p className="m0 mb4 fs-24 serif">Please check the link and try again.</p>
-    <Link to="/" className="btn btn-primary mb2 fs-18">Return home</Link>
+    <Link to="/" className="btn btn-primary mb2 fs-18">
+      Return home
+    </Link>
     <p className="fs-18 serif">
-      If you still can't find what you're looking for, please
-      {' '}
+      If you still can't find what you're looking for, please{' '}
       <button
         className="bg-transparent bold border-none color-inherit underline cursor-pointer serif p0"
         onClick={() => dispatch(showFeedback())}
       >
         submit feedback
-      </button>
-      {' '}
+      </button>{' '}
       or contact us.
     </p>
   </div>

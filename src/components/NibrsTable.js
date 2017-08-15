@@ -11,13 +11,20 @@ const NibrsTable = ({ data, title, sortByValue }) => {
 
   return (
     <div className="mb3">
-      {title && <div className="mb1 fs-16 bold blue">{title}</div>}
+      {title &&
+        <div className="mb1 fs-16 bold blue">
+          {title}
+        </div>}
       <table className="fs-12 table-striped">
         <tbody>
           {data.filter(d => d.key).map((d, i) =>
             <tr key={i}>
-              <td className="pl1 lh-24">{d.key}</td>
-              <td className="pr2 lh-24 right-align">{formatNum(d.count)}</td>
+              <td className="pl1 lh-24">
+                {d.key}
+              </td>
+              <td className="pr2 lh-24 right-align">
+                {formatNum(d.count)}
+              </td>
             </tr>,
           )}
         </tbody>

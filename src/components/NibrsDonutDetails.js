@@ -38,8 +38,12 @@ const NibrsDonutDetails = ({
             <div
               className={`flex flex-auto justify-between ${active && 'bold'}`}
             >
-              <span>{d.key}</span>
-              <span className="monospace">{fmt(d.count)}</span>
+              <span>
+                {d.key}
+              </span>
+              <span className="monospace">
+                {fmt(d.count)}
+              </span>
             </div>
           </li>
         )
