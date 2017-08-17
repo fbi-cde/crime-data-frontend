@@ -12,6 +12,7 @@ import Loading from '../components/Loading';
 import NoData from '../components/NoData';
 import TrendChart from '../components/trend/TrendChart';
 import TrendSourceText from '../components/trend/TrendSourceText';
+import OffenseTrendChart from '../components/trend/OffenseTrendChart';
 import { generateCrimeReadme } from '../util/content';
 import { crimeTypes } from '../util/offenses';
 import { getPlaceInfo } from '../util/place';
@@ -81,26 +82,19 @@ class TrendContainer extends React.Component {
     } = this.props;
     const isReady = !summaries.loading;
 
-    const OtherCharts = ({
-      crime,
+    /*
+    if (!['violent-crime', 'property-crime'].includes(crime)) return null;
+    const crimeType = camelCase(crime);
+    const crimeIds = crimeTypes[crimeType].map(t => snakeCase(t.id || t));
+    const otherTrendMap = crimeIds.map(f => ({
+      id: f,
       place,
-      places,
-      placeType,
       since,
       summaries,
       until,
-    }) => {
-      if (!['violent-crime', 'property-crime'].includes(crime)) return null;
-      const crimeType = camelCase(crime);
-      const crimeIds = crimeTypes[crimeType].map(t => snakeCase(t.id || t));
-
-      return (
-        <div>
-          {JSON.stringify(crimeIds)}
-        </div>
-      );
-    };
-
+    }));
+    console.log('otherTrendMap:', otherTrendMap);
+*/
     return (
       <div className="mb7">
         <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
@@ -108,10 +102,10 @@ class TrendContainer extends React.Component {
             {startCase(crime)} rate in {lookupUsa(place).display}, {since}-{until}
           </h2>
           {this.getContent({ crime, places, since, summaries, until })}
-          <OtherCharts {...this.props} />
         </div>
         {isReady &&
           <TrendSourceText crime={crime} place={place} placeType={placeType} />}
+        {isReady && <OffenseTrendChart {...this.props} />}
       </div>
     );
   }

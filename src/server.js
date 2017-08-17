@@ -66,11 +66,16 @@ app.get('/api', (req, res) => {
 app.get('/api-proxy/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '');
   const params = Object.assign({}, req.query, { api_key: apiKey });
+  const proxy = {
+    host: 'proxy.esvc.cjis',
+    port: '80',
+    auth: { username: 'jpwentz', password: 'JPW5921628!@' },
+  };
 
   if (!apiKey) return res.status(401).end();
 
   return http
-    .get(route, { params })
+    .get(route, { params, proxy })
     .then(r => {
       res.set(r.headers);
       res.send(r.data);
