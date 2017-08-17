@@ -1,39 +1,39 @@
-import startCase from 'lodash.startcase'
-import PropTypes from 'prop-types'
-import React from 'react'
-import Helmet from 'react-helmet'
+import startCase from 'lodash.startcase';
+import PropTypes from 'prop-types';
+import React from 'react';
+import Helmet from 'react-helmet';
 
-import AboutTheData from '../components/AboutTheData'
-import AgencyChartContainer from '../containers/AgencyChartContainer'
-import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer'
-import NibrsContainer from '../containers/NibrsContainer'
-import NotFound from './NotFound'
-import SharingTags from '../components/SharingTags'
-import SidebarContainer from '../containers/SidebarContainer'
-import SparklineContainer from '../containers/SparklineContainer'
-import TrendContainer from '../containers/TrendContainer'
+import AboutTheData from '../components/AboutTheData';
+import AgencyChartContainer from '../containers/AgencyChartContainer';
+import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer';
+import NibrsContainer from '../containers/NibrsContainer';
+import NotFound from './NotFound';
+import SharingTags from '../components/SharingTags';
+import SidebarContainer from '../containers/SidebarContainer';
+import SparklineContainer from '../containers/SparklineContainer';
+import TrendContainer from '../containers/TrendContainer';
 
-import { updateApp } from '../actions/composite'
-import { showTerm } from '../actions/glossary'
-import { hideSidebar, showSidebar } from '../actions/sidebar'
-import offenses from '../util/offenses'
-import { getAgency } from '../util/agencies'
-import { getPlaceInfo } from '../util/place'
-import { sentenceCase } from '../util/text'
+import { updateApp } from '../actions/composite';
+import { showTerm } from '../actions/glossary';
+import { hideSidebar, showSidebar } from '../actions/sidebar';
+import offenses from '../util/offenses';
+import { getAgency } from '../util/agencies';
+import { getPlaceInfo } from '../util/place';
+import { sentenceCase } from '../util/text';
 
-import lookup from '../util/usa'
+import lookup from '../util/usa';
 
 class Explorer extends React.Component {
   componentDidMount() {
-    const { appState, dispatch, params, router } = this.props
-    const { since, until } = appState.filters
-    const { query } = router.location
-    const { place, placeType } = getPlaceInfo(params)
+    const { appState, dispatch, params, router } = this.props;
+    const { since, until } = appState.filters;
+    const { query } = router.location;
+    const { place, placeType } = getPlaceInfo(params);
 
     const clean = (val, alt) => {
-      const yr = +val
-      return yr >= 1960 && yr <= 2014 ? yr : alt
-    }
+      const yr = +val;
+      return yr >= 1960 && yr <= 2014 ? yr : alt;
+    };
 
     const filters = {
       ...params,
@@ -42,49 +42,49 @@ class Explorer extends React.Component {
       ...query,
       since: clean(query.since, since),
       until: clean(query.until, until),
-    }
+    };
 
-    dispatch(updateApp(filters))
+    dispatch(updateApp(filters));
   }
 
   componentWillReceiveProps({ params: newParams }) {
-    const { appState, dispatch } = this.props
-    const { place } = appState.filters
-    const { crime } = newParams
-    const newPlace = getPlaceInfo(newParams)
+    const { appState, dispatch } = this.props;
+    const { place } = appState.filters;
+    const { crime } = newParams;
+    const newPlace = getPlaceInfo(newParams);
 
     if (place !== newPlace.place) {
-      dispatch(updateApp({ crime, ...newPlace }))
+      dispatch(updateApp({ crime, ...newPlace }));
     }
   }
 
   handleSidebarChange = change => {
-    const { router } = this.props
-    this.props.dispatch(updateApp(change, router))
-  }
+    const { router } = this.props;
+    this.props.dispatch(updateApp(change, router));
+  };
 
   toggleSidebar = () => {
-    const { dispatch } = this.props
-    const { isOpen } = this.props.appState.sidebar
+    const { dispatch } = this.props;
+    const { isOpen } = this.props.appState.sidebar;
 
-    if (isOpen) return dispatch(hideSidebar())
-    return dispatch(showSidebar())
-  }
+    if (isOpen) return dispatch(hideSidebar());
+    return dispatch(showSidebar());
+  };
 
   render() {
-    const { appState, dispatch, params } = this.props
-    const { agencies, filters } = appState
-    const { crime } = params
-    const { place, placeType } = getPlaceInfo(params)
-    const agency = placeType === 'agency' && getAgency(agencies, place)
-    const placeDisplay = agency ? agency.agency_name : startCase(place)
+    const { appState, dispatch, params } = this.props;
+    const { agencies, filters } = appState;
+    const { crime } = params;
+    const { place, placeType } = getPlaceInfo(params);
+    const agency = placeType === 'agency' && getAgency(agencies, place);
+    const placeDisplay = agency ? agency.agency_name : startCase(place);
 
     // ensure app state place matches url params place
-    if (filters.place && filters.place !== place) return null
+    if (filters.place && filters.place !== place) return null;
 
     // show not found page if crime or place unfamiliar
     if (!offenses.includes(crime) || !lookup(place, placeType)) {
-      return <NotFound />
+      return <NotFound />;
     }
 
     return (
@@ -128,7 +128,7 @@ class Explorer extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -137,6 +137,6 @@ Explorer.propTypes = {
   dispatch: PropTypes.func,
   params: PropTypes.object,
   router: PropTypes.object,
-}
+};
 
-export default Explorer
+export default Explorer;
