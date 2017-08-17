@@ -1,16 +1,16 @@
-import startCase from 'lodash.startcase'
-import pluralize from 'pluralize'
-import PropTypes from 'prop-types'
-import React from 'react'
+import startCase from 'lodash.startcase';
+import pluralize from 'pluralize';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import DownloadDataBtn from './DownloadDataBtn'
-import NibrsDonut from './NibrsDonut'
-import NibrsHistogram from './NibrsHistogram'
-import NibrsStackedBar from './NibrsStackedBar'
-import NibrsTable from './NibrsTable'
-import NibrsTableWithBars from './NibrsTableWithBars'
-import { generateCrimeReadme } from '../util/content'
-import { slugify } from '../util/text'
+import DownloadDataBtn from '../DownloadDataBtn';
+import NibrsDonut from './NibrsDonut';
+import NibrsHistogram from './NibrsHistogram';
+import NibrsStackedBar from './NibrsStackedBar';
+import NibrsTable from './NibrsTable';
+import NibrsTableWithBars from './NibrsTableWithBars';
+import { generateCrimeReadme } from '../../util/content';
+import { slugify } from '../../util/text';
 
 const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
   const charts = data.map((d, i) => {
@@ -18,38 +18,38 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
       key: i,
       id: slugify(d.title || title).replace(/['’]/g, ''),
       ...d,
-    }
+    };
 
-    if (placeType === 'agency') return <NibrsTable {...props} />
+    if (placeType === 'agency') return <NibrsTable {...props} />;
 
     switch (d.type) {
       case 'donut':
-        return <NibrsDonut {...props} />
+        return <NibrsDonut {...props} />;
       case 'histogram':
-        return <NibrsHistogram {...props} />
+        return <NibrsHistogram {...props} />;
       case 'stacked':
-        return <NibrsStackedBar {...props} />
+        return <NibrsStackedBar {...props} />;
       case 'table':
-        return <NibrsTableWithBars {...props} />
+        return <NibrsTableWithBars {...props} />;
       default:
         return (
           <p key={i}>
             {d.type} not supported!
           </p>
-        )
+        );
     }
-  })
+  });
 
   const dataIsEmpty =
-    data.filter(d => d.data.length === 0).length === data.length
-  const noun = data.map(d => d.noun).pop()
+    data.filter(d => d.data.length === 0).length === data.length;
+  const noun = data.map(d => d.noun).pop();
 
   const download = data.map(d => ({
     data: d.data,
     filename: `${place}-${crime}-${slugify(
       d.title || title,
     )}-${since}-${until}.csv`,
-  }))
+  }));
 
   download.push({
     content: generateCrimeReadme({
@@ -59,7 +59,7 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
       )}, ${since}–${until}`,
     }),
     filename: 'README.md',
-  })
+  });
 
   return (
     <div className="p2 sm-p3 bg-white black">
@@ -81,8 +81,8 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
         text="Download data"
       />
     </div>
-  )
-}
+  );
+};
 
 NibrsCard.propTypes = {
   crime: PropTypes.string,
@@ -91,6 +91,6 @@ NibrsCard.propTypes = {
   since: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   until: PropTypes.number.isRequired,
-}
+};
 
-export default NibrsCard
+export default NibrsCard;

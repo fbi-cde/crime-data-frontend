@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { formatNum, formatPerc } from '../util/formats'
+import { formatNum, formatPerc } from '../../util/formats';
 
 const NibrsStackedBarDetails = ({ colorMap, data, isCounts, total }) =>
   <ul className="list-style-none p0 m0 fs-14">
     {data.map((d, i) => {
-      const notLast = i + 1 !== data.length ? 'mb1' : ''
+      const notLast = i + 1 !== data.length ? 'mb1' : '';
       return (
         <li
           key={d.key}
@@ -25,19 +25,19 @@ const NibrsStackedBarDetails = ({ colorMap, data, isCounts, total }) =>
             </span>
           </div>
         </li>
-      )
+      );
     })}
-  </ul>
+  </ul>;
 
 NibrsStackedBarDetails.propTypes = {
   colorMap: PropTypes.func.isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   isCounts: PropTypes.bool,
   total: PropTypes.number.isRequired,
-}
+};
 
 NibrsStackedBarDetails.defaultProps = {
   isCounts: false,
-}
+};
 
-export default NibrsStackedBarDetails
+export default NibrsStackedBarDetails;

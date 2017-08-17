@@ -1,26 +1,26 @@
-import range from 'lodash.range'
-import lowerCase from 'lodash.lowercase'
-import PropTypes from 'prop-types'
-import React from 'react'
+import range from 'lodash.range';
+import lowerCase from 'lodash.lowercase';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import Highlight from './Highlight'
-import Term from './Term'
-import crimeTerm from '../util/glossary'
-import { formatNum, formatOneDec as formatRate } from '../util/formats'
-import lookupUsa, { nationalKey } from '../util/usa'
+import Highlight from '../Highlight';
+import Term from '../Term';
+import crimeTerm from '../../util/glossary';
+import { formatNum, formatOneDec as formatRate } from '../../util/formats';
+import lookupUsa, { nationalKey } from '../../util/usa';
 
 const highlight = txt =>
   <strong>
     {txt}
-  </strong>
-const borderColor = { borderColor: '#c8d3dd' }
-const cellStyle = { width: 68, ...borderColor }
+  </strong>;
+const borderColor = { borderColor: '#c8d3dd' };
+const cellStyle = { width: 68, ...borderColor };
 
 const getComparison = ({ place, data }) => {
-  const threshold = 3
-  const placeRate = data.find(d => d.place === place).rate
-  const nationalRate = data.find(d => d.place === nationalKey).rate
-  const diff = (placeRate / nationalRate - 1) * 100
+  const threshold = 3;
+  const placeRate = data.find(d => d.place === place).rate;
+  const nationalRate = data.find(d => d.place === nationalKey).rate;
+  const diff = (placeRate / nationalRate - 1) * 100;
 
   return Math.abs(diff) < threshold
     ? <span>
@@ -28,8 +28,8 @@ const getComparison = ({ place, data }) => {
       </span>
     : <span>
         {<Highlight text={`${diff > 0 ? 'higher' : 'lower'}`} />} than
-      </span>
-}
+      </span>;
+};
 
 const TrendChartDetails = ({
   active,
@@ -40,31 +40,31 @@ const TrendChartDetails = ({
   until,
   updateYear,
 }) => {
-  const handleSelectChange = e => updateYear(Number(e.target.value))
-  const yearRange = range(since, until + 1)
+  const handleSelectChange = e => updateYear(Number(e.target.value));
+  const yearRange = range(since, until + 1);
   const term = (
     <Term id={crimeTerm(crime)} size="sm">
       {lowerCase(crime)}
     </Term>
-  )
+  );
 
-  const data = active.filter(d => d.crime !== 'rape-revised')
-  const isNational = keys.length === 1
-  const place = isNational ? nationalKey : keys.find(k => k !== nationalKey)
-  const comparison = getComparison({ place, data })
-  const { rate, year } = data.find(d => d.place === place) || {}
+  const data = active.filter(d => d.crime !== 'rape-revised');
+  const isNational = keys.length === 1;
+  const place = isNational ? nationalKey : keys.find(k => k !== nationalKey);
+  const comparison = getComparison({ place, data });
+  const { rate, year } = data.find(d => d.place === place) || {};
   const revised = active.find(
     d => d.crime === 'rape-revised' && d.place === place,
-  )
+  );
 
-  let sentence
+  let sentence;
   if (isNational) {
     sentence = (
       <span>
         In {highlight(year)}, there were {highlight(formatRate(rate))} incidents
         of {term} per 100,000 people.
       </span>
-    )
+    );
   } else if (crime === 'rape' && revised && revised.rate) {
     sentence = (
       <span>
@@ -80,7 +80,7 @@ const TrendChartDetails = ({
         definition at a rate of {highlight(formatRate(revised.rate))} per
         100,000 people.
       </span>
-    )
+    );
   } else {
     sentence = (
       <span>
@@ -88,7 +88,7 @@ const TrendChartDetails = ({
         {highlight(formatRate(rate))} incidents per 100,000 people. The rate for
         that year was {comparison} that of the United States.
       </span>
-    )
+    );
   }
 
   return (
@@ -177,8 +177,8 @@ const TrendChartDetails = ({
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
 TrendChartDetails.propTypes = {
   active: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -187,6 +187,6 @@ TrendChartDetails.propTypes = {
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
   updateYear: PropTypes.func.isRequired,
-}
+};
 
-export default TrendChartDetails
+export default TrendChartDetails;

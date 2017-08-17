@@ -1,16 +1,16 @@
-import { entries } from 'd3-collection'
-import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
-import { stack, stackOrderReverse } from 'd3-shape'
-import pluralize from 'pluralize'
-import PropTypes from 'prop-types'
-import React from 'react'
+import { entries } from 'd3-collection';
+import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale';
+import { stack, stackOrderReverse } from 'd3-shape';
+import pluralize from 'pluralize';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import NibrsCountPercentToggle from './NibrsCountPercentToggle'
-import NibrsStackedBarDetails from './NibrsStackedBarDetails'
-import { formatNum } from '../util/formats'
+import NibrsCountPercentToggle from './NibrsCountPercentToggle';
+import NibrsStackedBarDetails from './NibrsStackedBarDetails';
+import { formatNum } from '../../util/formats';
 
 class NibrsStackedBar extends React.Component {
-  state = { isCounts: false }
+  state = { isCounts: false };
 
   render() {
     const {
@@ -23,34 +23,34 @@ class NibrsStackedBar extends React.Component {
       sentenceStart,
       size,
       title,
-    } = this.props
-    const { isCounts } = this.state
-    const height = size.height - margin.top - margin.bottom
-    const width = size.width - margin.left - margin.right
-    const totalCt = data.reduce((a, b) => a + +b.count, 0)
-    const x = scaleBand().domain([null]).rangeRound([0, width]).padding(0.4)
-    const y = scaleLinear().domain([0, totalCt]).rangeRound([height, 0]).nice()
+    } = this.props;
+    const { isCounts } = this.state;
+    const height = size.height - margin.top - margin.bottom;
+    const width = size.width - margin.left - margin.right;
+    const totalCt = data.reduce((a, b) => a + +b.count, 0);
+    const x = scaleBand().domain([null]).rangeRound([0, width]).padding(0.4);
+    const y = scaleLinear().domain([0, totalCt]).rangeRound([height, 0]).nice();
 
     const colorMap = scaleOrdinal()
       .domain(keys || data.map(d => d.key).sort())
-      .range(colors)
+      .range(colors);
 
-    const lookup = Object.assign(...data.map(d => ({ [d.key]: +d.count })))
+    const lookup = Object.assign(...data.map(d => ({ [d.key]: +d.count })));
     const dataClean = keys
       ? Object.assign(...keys.map(k => ({ [k]: lookup[k] || 0 })))
-      : { ...lookup }
+      : { ...lookup };
 
     const stackGen = stack()
       .keys(Object.keys(dataClean))
-      .order(stackOrderReverse)
+      .order(stackOrderReverse);
 
-    const dataStacked = stackGen([dataClean])
-    const dataEntries = entries(dataClean)
+    const dataStacked = stackGen([dataClean]);
+    const dataEntries = entries(dataClean);
 
     const totalCount = dataEntries.reduce(
       (total, next) => total + next.value,
       0,
-    )
+    );
 
     return (
       <div className="mb2 pb2 border-bottom border-blue-light">
@@ -65,10 +65,10 @@ class NibrsStackedBar extends React.Component {
               ariaControls={id}
               isCounts={isCounts}
               showCounts={() => {
-                this.setState({ isCounts: true })
+                this.setState({ isCounts: true });
               }}
               showPercents={() => {
-                this.setState({ isCounts: false })
+                this.setState({ isCounts: false });
               }}
             />
           </div>
@@ -114,7 +114,7 @@ class NibrsStackedBar extends React.Component {
           {pluralize(noun, totalCount)}.
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -122,7 +122,7 @@ NibrsStackedBar.defaultProps = {
   margin: { top: 5, right: 10, bottom: 0, left: 10 },
   size: { width: 200, height: 130 },
   colors: ['#FF5E50', '#B84941', '#F48E88'],
-}
+};
 
 NibrsStackedBar.propTypes = {
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -133,6 +133,6 @@ NibrsStackedBar.propTypes = {
     height: PropTypes.number,
   }).isRequired,
   title: PropTypes.string.isRequired,
-}
+};
 
-export default NibrsStackedBar
+export default NibrsStackedBar;

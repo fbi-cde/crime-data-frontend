@@ -1,9 +1,9 @@
 /* eslint no-undef: 0 */
 
-import { shallow } from 'enzyme'
-import React from 'react'
+import { shallow } from 'enzyme';
+import React from 'react';
 
-import TrendChart from '../../src/components/TrendChart'
+import TrendChart from '../../src/components/trend/TrendChart';
 
 describe('TrendChart', () => {
   const data = [
@@ -14,20 +14,20 @@ describe('TrendChart', () => {
       },
       year,
     })),
-  ]
+  ];
   const filters = {
     since: 2012,
     until: 2014,
     crime: 'violent-crime',
     places: ['united-states'],
-  }
-  let chart
+  };
+  let chart;
 
   beforeEach(() => {
-    chart = shallow(<TrendChart data={data} {...filters} />)
-  })
+    chart = shallow(<TrendChart data={data} {...filters} />);
+  });
 
   it('TrendChart renders svg', () => {
-    expect(chart.find('svg').length).toEqual(1)
-  })
-})
+    expect(chart.find('svg').length).toEqual(1);
+  });
+});

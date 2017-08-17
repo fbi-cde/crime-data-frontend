@@ -1,22 +1,22 @@
-import pluralize from 'pluralize'
-import PropTypes from 'prop-types'
-import React from 'react'
+import pluralize from 'pluralize';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import NibrsCountPercentToggle from './NibrsCountPercentToggle'
-import { formatNum, formatPerc, formatSI } from '../util/formats'
+import NibrsCountPercentToggle from './NibrsCountPercentToggle';
+import { formatNum, formatPerc, formatSI } from '../../util/formats';
 
 class NibrsTableWithBars extends React.Component {
-  state = { isCounts: false }
+  state = { isCounts: false };
 
   showCounts = e => {
-    e.preventDefault()
-    this.setState({ isCounts: true })
-  }
+    e.preventDefault();
+    this.setState({ isCounts: true });
+  };
 
   showPercents = e => {
-    e.preventDefault()
-    this.setState({ isCounts: false })
-  }
+    e.preventDefault();
+    this.setState({ isCounts: false });
+  };
 
   render() {
     const {
@@ -27,17 +27,17 @@ class NibrsTableWithBars extends React.Component {
       sentenceStart,
       sortByValue,
       title,
-    } = this.props
-    const { isCounts } = this.state
+    } = this.props;
+    const { isCounts } = this.state;
 
-    const agg = (a, b) => a + b.count
-    const total = data.reduce(agg, 0)
+    const agg = (a, b) => a + b.count;
+    const total = data.reduce(agg, 0);
 
-    let dataMunged = [...data.filter(d => d.key)]
-    dataMunged.sort((a, b) => +b.count - +a.count)
+    let dataMunged = [...data.filter(d => d.key)];
+    dataMunged.sort((a, b) => +b.count - +a.count);
 
     if (dataMunged.length > rowLim) {
-      const other = dataMunged.slice(rowLim)
+      const other = dataMunged.slice(rowLim);
 
       dataMunged = [
         ...dataMunged.slice(0, rowLim),
@@ -46,20 +46,20 @@ class NibrsTableWithBars extends React.Component {
           count: other.reduce(agg, 0),
           children: [...other],
         },
-      ]
+      ];
     }
 
     const dataFormatted = dataMunged.map(d => {
-      const p = d.count / total
+      const p = d.count / total;
       return {
         ...d,
         percent: p,
         countFmt: formatSI(d.count),
         percentFmt: formatPerc(p),
-      }
-    })
+      };
+    });
 
-    if (!sortByValue) dataFormatted.sort((a, b) => a.key > b.key)
+    if (!sortByValue) dataFormatted.sort((a, b) => a.key > b.key);
 
     return (
       <div id={id}>
@@ -120,14 +120,14 @@ class NibrsTableWithBars extends React.Component {
           <span className="bold red">{formatNum(total)}</span> {pluralize(noun)}.
         </div>
       </div>
-    )
+    );
   }
 }
 
 NibrsTableWithBars.defaultProps = {
   noun: 'incident',
   rowLim: 12,
-}
+};
 
 NibrsTableWithBars.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -135,6 +135,6 @@ NibrsTableWithBars.propTypes = {
   noun: PropTypes.string.isRequired,
   rowLim: PropTypes.number.isRequired,
   title: PropTypes.string,
-}
+};
 
-export default NibrsTableWithBars
+export default NibrsTableWithBars;

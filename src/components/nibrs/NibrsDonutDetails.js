@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { formatRound as fmt } from '../util/formats'
+import { formatRound as fmt } from '../../util/formats';
 
 const NibrsDonutDetails = ({
   colorMap,
@@ -14,11 +14,11 @@ const NibrsDonutDetails = ({
     <span className="mb2 bold caps fs-12 red">Incidents</span>
     <ul className="list-style-none p0 m0 fs-14">
       {data.map((d, i) => {
-        const active = d.key === selected
+        const active = d.key === selected;
         const border = active
           ? 'border-bottom border-w2'
-          : 'border-bottom-dashed'
-        const opacity = selected === null || active ? 1 : 0.5
+          : 'border-bottom-dashed';
+        const opacity = selected === null || active ? 1 : 0.5;
         return (
           <li
             key={i}
@@ -46,10 +46,10 @@ const NibrsDonutDetails = ({
               </span>
             </div>
           </li>
-        )
+        );
       })}
     </ul>
-  </div>
+  </div>;
 
 NibrsDonutDetails.propTypes = {
   colorMap: PropTypes.func.isRequired,
@@ -57,6 +57,6 @@ NibrsDonutDetails.propTypes = {
   onMouseOver: PropTypes.func.isRequired,
   onMouseOut: PropTypes.func.isRequired,
   selected: PropTypes.object,
-}
+};
 
-export default NibrsDonutDetails
+export default NibrsDonutDetails;

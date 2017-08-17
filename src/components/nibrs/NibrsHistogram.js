@@ -1,50 +1,50 @@
-import { max } from 'd3-array'
-import { scaleLinear } from 'd3-scale'
-import PropTypes from 'prop-types'
-import React from 'react'
+import { max } from 'd3-array';
+import { scaleLinear } from 'd3-scale';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import NibrsHistogramDetails from './NibrsHistogramDetails'
-import XAxis from './XAxis'
-import { slugify } from '../util/text'
+import NibrsHistogramDetails from './NibrsHistogramDetails';
+import XAxis from '../XAxis';
+import { slugify } from '../../util/text';
 
 class NibrsHistogram extends React.Component {
-  state = { hover: null }
+  state = { hover: null };
 
   handleClick = d => () => {
-    this.setState(prevState => ({ hover: prevState.hover ? null : d }))
-  }
+    this.setState(prevState => ({ hover: prevState.hover ? null : d }));
+  };
 
   rememberValue = d => () => {
-    this.setState({ hover: d })
-  }
+    this.setState({ hover: d });
+  };
 
   forgetValue = () => {
-    this.setState({ hover: null })
-  }
+    this.setState({ hover: null });
+  };
 
   render() {
-    const { data, margin, noun, size, title, xLabel } = this.props
-    const { hover } = this.state
+    const { data, margin, noun, size, title, xLabel } = this.props;
+    const { hover } = this.state;
 
-    const id = slugify(`histogram-${title}`)
-    const height = size.height - margin.top - margin.bottom
-    const width = size.width - margin.left - margin.right
-    const xPadding = 20
+    const id = slugify(`histogram-${title}`);
+    const height = size.height - margin.top - margin.bottom;
+    const width = size.width - margin.left - margin.right;
+    const xPadding = 20;
 
     const bins = data.map(d => ({
       x0: +d.binStart,
       x1: +d.binEnd + 1,
       ct: +d.count,
-    }))
+    }));
 
-    const maxVal = max(bins, d => d.ct)
-    const total = data.map(d => d.count).reduce((a, n) => a + n, 0)
+    const maxVal = max(bins, d => d.ct);
+    const total = data.map(d => d.count).reduce((a, n) => a + n, 0);
 
     const x = scaleLinear()
       .domain([0, 100])
-      .range([0 + xPadding, width - xPadding])
+      .range([0 + xPadding, width - xPadding]);
 
-    const y = scaleLinear().domain([0, maxVal]).range([height, 0])
+    const y = scaleLinear().domain([0, maxVal]).range([height, 0]);
 
     return (
       <div className="mb2 pb2 border-bottom border-blue-light" id={id}>
@@ -59,9 +59,9 @@ class NibrsHistogram extends React.Component {
           >
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               {bins.map((d, i) => {
-                const rectWidth = x(bins[0].x1) - x(bins[0].x0) - 1
+                const rectWidth = x(bins[0].x1) - x(bins[0].x0) - 1;
                 const fill =
-                  hover === null || d.x0 === hover.x0 ? '#ff5e50' : '#f4dfdd'
+                  hover === null || d.x0 === hover.x0 ? '#ff5e50' : '#f4dfdd';
 
                 return (
                   <g
@@ -91,7 +91,7 @@ class NibrsHistogram extends React.Component {
                       onMouseOut={this.forgetValue}
                     />
                   </g>
-                )
+                );
               })}
               <XAxis height={height} scale={x} />
               <g className="axis" transform={`translate(0, ${height})`}>
@@ -106,18 +106,18 @@ class NibrsHistogram extends React.Component {
           <NibrsHistogramDetails data={hover || { ct: total }} noun={noun} />
         </div>
       </div>
-    )
+    );
   }
 }
 
 NibrsHistogram.defaultProps = {
   margin: { top: 5, right: 10, bottom: 24, left: 5 },
   size: { width: 360, height: 160 },
-}
+};
 
 NibrsHistogram.propTypes = {
   noun: PropTypes.string.isRequired,
   xLabel: PropTypes.string,
-}
+};
 
-export default NibrsHistogram
+export default NibrsHistogram;
