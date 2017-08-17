@@ -18,94 +18,104 @@ import { getPlaceInfo } from '../util/place';
 import { combinePlaces, filterByYear } from '../util/summary';
 import lookupUsa, { nationalKey } from '../util/usa';
 
-const getContent = ({ crime, places, since, summaries, until }) => {
-  console.log('TrendContainer Summaries:', summaries);
-  const { loading, error } = summaries;
+class TrendContainer extends React.Component {
+  getContent = ({ crime, places, since, summaries, until }) => {
+    console.log('TrendContainer Summaries:', summaries);
+    const { loading, error } = summaries;
 
-  if (loading) return <Loading />;
-  if (error) return <ErrorCard error={error} />;
+    if (loading) return <Loading />;
+    if (error) return <ErrorCard error={error} />;
 
-  const offenses = crime === 'rape' ? ['rape-legacy', 'rape-revised'] : [crime];
-  const place = places[0];
-  const filteredByYear = filterByYear(summaries.data, { since, until });
-  const data = combinePlaces(filteredByYear, offenses);
+    const offenses =
+      crime === 'rape' ? ['rape-legacy', 'rape-revised'] : [crime];
+    const place = places[0];
+    const filteredByYear = filterByYear(summaries.data, { since, until });
+    const data = combinePlaces(filteredByYear, offenses);
 
-  if (!data || data.length === 0) return <NoData />;
+    if (!data || data.length === 0) return <NoData />;
 
-  const fname = `${place}-${crime}-${since}-${until}`;
-  const title =
-    `Reported ${pluralize(crime)} in ` +
-    `${lookupUsa(place).display}, ${since}-${until}`;
+    const fname = `${place}-${crime}-${since}-${until}`;
+    const title =
+      `Reported ${pluralize(crime)} in ` +
+      `${lookupUsa(place).display}, ${since}-${until}`;
 
-  const readme = generateCrimeReadme({ crime, title });
-  const crimeNorm = crime === 'rape' ? 'rape-legacy' : crime;
-  const dlData = data.map(d => {
-    const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }));
-    return { year: d.year, ...Object.assign(...placeData) };
-  });
+    const readme = generateCrimeReadme({ crime, title });
+    const crimeNorm = crime === 'rape' ? 'rape-legacy' : crime;
+    const dlData = data.map(d => {
+      const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }));
+      return { year: d.year, ...Object.assign(...placeData) };
+    });
 
-  const download = [
-    { content: readme, filename: 'README.md' },
-    { data: dlData, filename: `${fname}.csv` },
-  ];
+    const download = [
+      { content: readme, filename: 'README.md' },
+      { data: dlData, filename: `${fname}.csv` },
+    ];
 
-  return (
-    <div>
-      <TrendChart
-        crime={crime}
-        data={data}
-        places={places}
-        since={since}
-        until={until}
-      />
-      <DownloadDataBtn
-        ariaLabel={`Download ${title} data as a CSV`}
-        data={download}
-        filename={fname}
-      />
-    </div>
-  );
-};
-
-const OtherCharts = ({
-  crime,
-  place,
-  places,
-  placeType,
-  since,
-  summaries,
-  until,
-}) => {
-  if (!['violent-crime', 'property-crime'].includes(crime)) return null;
-  const crimeType = camelCase(crime);
-  const crimeIds = crimeTypes[crimeType].map(t => snakeCase(t.id || t));
-
-  return (
-    <div>
-      {JSON.stringify(crimeIds)}
-    </div>
-  );
-};
-
-const TrendContainer = props => {
-  const { crime, place, places, placeType, since, summaries, until } = props;
-  const isReady = !summaries.loading;
-
-  return (
-    <div className="mb7">
-      <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
-        <h2 className="mt0 mb2 sm-mb4 fs-24 sm-fs-28 sans-serif">
-          {startCase(crime)} rate in {lookupUsa(place).display}, {since}-{until}
-        </h2>
-        {getContent({ crime, places, since, summaries, until })}
-        <OtherCharts {...props} />
+    return (
+      <div>
+        <TrendChart
+          crime={crime}
+          data={data}
+          places={places}
+          since={since}
+          until={until}
+        />
+        <DownloadDataBtn
+          ariaLabel={`Download ${title} data as a CSV`}
+          data={download}
+          filename={fname}
+        />
       </div>
-      {isReady &&
-        <TrendSourceText crime={crime} place={place} placeType={placeType} />}
-    </div>
-  );
-};
+    );
+  };
 
+  render() {
+    const {
+      crime,
+      place,
+      places,
+      placeType,
+      since,
+      summaries,
+      until,
+    } = this.props;
+    const isReady = !summaries.loading;
+
+    const OtherCharts = ({
+      crime,
+      place,
+      places,
+      placeType,
+      since,
+      summaries,
+      until,
+    }) => {
+      if (!['violent-crime', 'property-crime'].includes(crime)) return null;
+      const crimeType = camelCase(crime);
+      const crimeIds = crimeTypes[crimeType].map(t => snakeCase(t.id || t));
+
+      return (
+        <div>
+          {JSON.stringify(crimeIds)}
+        </div>
+      );
+    };
+
+    return (
+      <div className="mb7">
+        <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
+          <h2 className="mt0 mb2 sm-mb4 fs-24 sm-fs-28 sans-serif">
+            {startCase(crime)} rate in {lookupUsa(place).display}, {since}-{until}
+          </h2>
+          {this.getContent({ crime, places, since, summaries, until })}
+          <OtherCharts {...this.props} />
+        </div>
+        {isReady &&
+          <TrendSourceText crime={crime} place={place} placeType={placeType} />}
+      </div>
+    );
+  }
+}
 TrendContainer.propTypes = {
   crime: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
