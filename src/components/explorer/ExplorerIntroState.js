@@ -1,36 +1,36 @@
-import lowerCase from 'lodash.lowercase'
-import upperFirst from 'lodash.upperfirst'
-import React from 'react'
+import lowerCase from 'lodash.lowercase';
+import upperFirst from 'lodash.upperfirst';
+import React from 'react';
 
-import Term from './Term'
-import { EstimatedTerm, NibrsTerm, SrsTerm } from './Terms'
-import { formatNum } from '../util/formats'
-import mapCrimeToGlossaryTerm from '../util/glossary'
-import ucrParticipationLookup from '../util/participation'
-import lookupUsa from '../util/usa'
+import Term from '../Term';
+import { EstimatedTerm, NibrsTerm, SrsTerm } from '../Terms';
+import { formatNum } from '../../util/formats';
+import mapCrimeToGlossaryTerm from '../../util/glossary';
+import ucrParticipationLookup from '../../util/participation';
+import lookupUsa from '../../util/usa';
 
 const highlight = txt =>
   <strong>
     {txt}
-  </strong>
+  </strong>;
 const getReportTerms = ({ nibrs, srs, hybrid }) =>
   <span>
     {hybrid && 'both '}
     {srs && <SrsTerm />}
     {hybrid && ' and '}
     {nibrs && <NibrsTerm />}
-  </span>
+  </span>;
 
 const ExplorerIntroState = ({ crime, place, participation, until }) => {
-  const isArson = crime === 'arson'
-  const { nibrs, srs } = ucrParticipationLookup(place)
-  const untilUcr = participation.find(p => p.year === until)
-  const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
+  const isArson = crime === 'arson';
+  const { nibrs, srs } = ucrParticipationLookup(place);
+  const untilUcr = participation.find(p => p.year === until);
+  const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs });
   const crimeTerm = (
     <Term id={mapCrimeToGlossaryTerm(crime)}>
       {upperFirst(lowerCase(crime))}
     </Term>
-  )
+  );
 
   return (
     <div>
@@ -62,9 +62,9 @@ const ExplorerIntroState = ({ crime, place, participation, until }) => {
             </p>
           </div>}
     </div>
-  )
-}
+  );
+};
 
-ExplorerIntroState.propTypes = {}
+ExplorerIntroState.propTypes = {};
 
-export default ExplorerIntroState
+export default ExplorerIntroState;

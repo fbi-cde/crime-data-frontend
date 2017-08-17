@@ -1,26 +1,26 @@
-import lowerCase from 'lodash.lowercase'
-import upperFirst from 'lodash.upperfirst'
-import PropTypes from 'prop-types'
-import React from 'react'
+import lowerCase from 'lodash.lowercase';
+import upperFirst from 'lodash.upperfirst';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import Term from './Term'
-import { estimatedTerm, nibrsTerm, srsTerm } from './Terms'
-import { formatNum } from '../util/formats'
-import mapCrimeToGlossaryTerm from '../util/glossary'
+import Term from '../Term';
+import { estimatedTerm, nibrsTerm, srsTerm } from '../Terms';
+import { formatNum } from '../../util/formats';
+import mapCrimeToGlossaryTerm from '../../util/glossary';
 
 const highlight = txt =>
   <strong>
     {txt}
-  </strong>
+  </strong>;
 
 const ExplorerIntroNational = ({ crime, participation, until }) => {
-  const isArson = crime === 'arson'
-  const untilUcr = participation.find(p => p.year === until)
+  const isArson = crime === 'arson';
+  const untilUcr = participation.find(p => p.year === until);
   const crimeTerm = (
     <Term id={mapCrimeToGlossaryTerm(crime)}>
       {upperFirst(lowerCase(crime))}
     </Term>
-  )
+  );
 
   return (
     <div>
@@ -52,13 +52,13 @@ const ExplorerIntroNational = ({ crime, participation, until }) => {
             </p>
           </div>}
     </div>
-  )
-}
+  );
+};
 
 ExplorerIntroNational.propTypes = {
   crime: PropTypes.string,
   participation: PropTypes.array,
   until: PropTypes.number,
-}
+};
 
-export default ExplorerIntroNational
+export default ExplorerIntroNational;

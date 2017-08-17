@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import ErrorCard from './ErrorCard'
-import ExplorerIntroAgency from './ExplorerIntroAgency'
-import ExplorerIntroNational from './ExplorerIntroNational'
-import ExplorerIntroState from './ExplorerIntroState'
-import { oriToState } from '../util/agencies'
-import { nationalKey } from '../util/usa'
+import ErrorCard from '../ErrorCard';
+import ExplorerIntroAgency from './ExplorerIntroAgency';
+import ExplorerIntroNational from './ExplorerIntroNational';
+import ExplorerIntroState from './ExplorerIntroState';
+import { oriToState } from '../../util/agencies';
+import { nationalKey } from '../../util/usa';
 
 const ExplorerIntro = ({ agency, crime, participation, place, until }) => {
   if (agency) {
@@ -19,12 +19,12 @@ const ExplorerIntro = ({ agency, crime, participation, place, until }) => {
         usState={oriToState(place)}
         type={agency.agency_type_name}
       />
-    )
+    );
   }
 
-  if (participation.loading) return null
+  if (participation.loading) return null;
 
-  if (participation.error) return <ErrorCard error={participation.error} />
+  if (participation.error) return <ErrorCard error={participation.error} />;
 
   if (place === nationalKey) {
     return (
@@ -33,7 +33,7 @@ const ExplorerIntro = ({ agency, crime, participation, place, until }) => {
         until={until}
         participation={participation.data[nationalKey]}
       />
-    )
+    );
   }
 
   return (
@@ -43,8 +43,8 @@ const ExplorerIntro = ({ agency, crime, participation, place, until }) => {
       until={until}
       participation={participation.data[place]}
     />
-  )
-}
+  );
+};
 
 ExplorerIntro.propTypes = {
   agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
@@ -55,6 +55,6 @@ ExplorerIntro.propTypes = {
     loading: PropTypes.boolean,
   }).isRequired,
   until: PropTypes.number.isRequired,
-}
+};
 
-export default ExplorerIntro
+export default ExplorerIntro;
