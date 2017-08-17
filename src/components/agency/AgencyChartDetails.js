@@ -1,17 +1,17 @@
-import lowerCase from 'lodash.lowercase'
-import startCase from 'lodash.startcase'
-import range from 'lodash.range'
-import pluralize from 'pluralize'
-import PropTypes from 'prop-types'
-import React from 'react'
+import lowerCase from 'lodash.lowercase';
+import startCase from 'lodash.startcase';
+import range from 'lodash.range';
+import pluralize from 'pluralize';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import Term from './Term'
-import { formatNum as fmt } from '../util/formats'
+import Term from '../Term';
+import { formatNum as fmt } from '../../util/formats';
 
 const highlight = txt =>
   <strong>
     {txt}
-  </strong>
+  </strong>;
 
 const AgencyChartDetails = ({
   colors,
@@ -24,20 +24,20 @@ const AgencyChartDetails = ({
   until,
   updateYear,
 }) => {
-  const { cleared, year, reported } = data
-  const yearRange = range(since, until + 1)
-  const crimeDisplay = lowerCase(crime)
-  const handleSelectChange = e => updateYear(Number(e.target.value))
+  const { cleared, year, reported } = data;
+  const yearRange = range(since, until + 1);
+  const crimeDisplay = lowerCase(crime);
+  const handleSelectChange = e => updateYear(Number(e.target.value));
 
-  let compSentence = null
-  const reportedLastYr = dataPrior && dataPrior.reported
+  let compSentence = null;
+  const reportedLastYr = dataPrior && dataPrior.reported;
   if (reportedLastYr && reported > 0) {
-    const comp = reported > reportedLastYr ? 'increased' : 'decreased'
+    const comp = reported > reportedLastYr ? 'increased' : 'decreased';
     compSentence = (
       <span>
         Reported {noun} {highlight(comp)} from the previous year.
       </span>
-    )
+    );
   }
 
   return (
@@ -101,8 +101,8 @@ const AgencyChartDetails = ({
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
 AgencyChartDetails.propTypes = {
   colors: PropTypes.func.isRequired,
@@ -114,6 +114,6 @@ AgencyChartDetails.propTypes = {
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
   updateYear: PropTypes.func.isRequired,
-}
+};
 
-export default AgencyChartDetails
+export default AgencyChartDetails;
