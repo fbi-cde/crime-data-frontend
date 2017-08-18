@@ -12,7 +12,7 @@ import Loading from '../components/Loading';
 import NoData from '../components/NoData';
 import TrendChart from '../components/trend/TrendChart';
 import TrendSourceText from '../components/trend/TrendSourceText';
-import OffenseTrendChart from '../components/trend/OffenseTrendChart';
+import OffenseTrendArea from '../components/trend/OffenseTrendArea';
 import { generateCrimeReadme } from '../util/content';
 import { crimeTypes } from '../util/offenses';
 import { getPlaceInfo } from '../util/place';
@@ -21,7 +21,6 @@ import lookupUsa, { nationalKey } from '../util/usa';
 
 class TrendContainer extends React.Component {
   getContent = ({ crime, places, since, summaries, until }) => {
-    console.log('TrendContainer Summaries:', summaries);
     const { loading, error } = summaries;
 
     if (loading) return <Loading />;
@@ -60,6 +59,7 @@ class TrendContainer extends React.Component {
           places={places}
           since={since}
           until={until}
+          mainChart
         />
         <DownloadDataBtn
           ariaLabel={`Download ${title} data as a CSV`}
@@ -105,7 +105,14 @@ class TrendContainer extends React.Component {
         </div>
         {isReady &&
           <TrendSourceText crime={crime} place={place} placeType={placeType} />}
-        {isReady && <OffenseTrendChart {...this.props} />}
+        {isReady &&
+          <OffenseTrendArea
+            crime={crime}
+            summaries={summaries}
+            places={places}
+            since={since}
+            until={until}
+          />}
       </div>
     );
   }

@@ -13,11 +13,12 @@ import TrendChartHover from './TrendChartHover';
 import TrendChartLineSeries from './TrendChartLineSeries';
 import TrendChartRapeAnnotate from './TrendChartRapeAnnotate';
 import TrendChartRapeLegend from './TrendChartRapeLegend';
+import OffenseTrendCard from './OffenseTrendCard';
 import offenseTrend from '../../util/offenseTrend';
 import XAxis from '../XAxis';
 import YAxis from '../YAxis';
 
-class OffenseTrendChart extends React.Component {
+class OffenseTrendArea extends React.Component {
   render() {
     const {
       crime,
@@ -33,21 +34,40 @@ class OffenseTrendChart extends React.Component {
     const crimeType = camelCase(crime);
     const crimeIds = crimeTypes[crimeType].map(t => snakeCase(t.id || t));
     const parsedData = offenseTrend(crimeIds, summaries.data);
+    console.log('Parsed Data:', parsedData);
     return (
       <div className="clearfix mxn1">
-        {JSON.stringify(crimeIds)}
+        {parsedData.map((d, i) => {
+          // console.log('Data:', d, i);
+          // console.log('places:', places);
+          const cls = i % 2 === 0 ? 'clear-left' : '';
+          return (
+            <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
+              <OffenseTrendCard
+                trendData={d}
+                since={since}
+                until={until}
+                places={places}
+                place={place}
+              />
+            </div>
+          );
+        })}
       </div>
     );
   }
 }
 
-OffenseTrendChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+OffenseTrendArea.propTypes = {
+  summaries: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
+  }).isRequired,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
 };
 
-OffenseTrendChart.defaultProps = {
+OffenseTrendArea.defaultProps = {
   size: {
     width: 250,
     margin: { top: 16, right: 0, bottom: 24, left: 32 },
@@ -55,4 +75,4 @@ OffenseTrendChart.defaultProps = {
   colors: ['#ff5e50', '#95aabc', '#52687d'],
 };
 
-export default OffenseTrendChart;
+export default OffenseTrendArea;
