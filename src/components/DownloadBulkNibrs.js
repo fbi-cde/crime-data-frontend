@@ -3,6 +3,7 @@ import startCase from 'lodash.startcase'
 import React from 'react'
 
 import lookupUsa from '../util/usa'
+import { MAX_YEAR } from '../util/years'
 import ucrProgram from '../../public/data/ucr-program-participation.json'
 
 const nibrsStates = Object.keys(ucrProgram).filter(
@@ -19,7 +20,7 @@ const createBulkNibrsUrl = (year, state) => {
 const downloadBulkNibrs = (year, state) => {
   const a = document.createElement('a')
   const body = document.querySelector('body')
-  a.href = createBulkNibrsUrl(year, state)
+  a.href = createBulkNibrsUrl(year, state.id)
 
   body.appendChild(a)
   a.click()
@@ -34,7 +35,7 @@ class DownloadBulkNibrs extends React.Component {
     const { nibrs } = ucrProgram[this.state.place]
     const initialYear = nibrs['initial-year']
 
-    return range(2014 + 1 - initialYear).map(y => initialYear + y)
+    return range(MAX_YEAR + 1 - initialYear).map(y => initialYear + y)
   }
 
   handleClick = e => {
@@ -68,29 +69,43 @@ class DownloadBulkNibrs extends React.Component {
           </p>
           <div className="clearfix mxn1">
             <div className="sm-col sm-col-5 px1 mb2 sm-m0">
-              <label className="hide" htmlFor="nibrs-state">Location</label>
+              <label className="hide" htmlFor="nibrs-state">
+                Location
+              </label>
               <select
                 className="col-12 sm-fs-18 bold field select bg-white"
                 id="nibrs-state"
                 defaultValue="Location"
                 onChange={this.handleSelectChange}
               >
-                <option value="Location" disabled>Location</option>
+                <option value="Location" disabled>
+                  Location
+                </option>
                 {nibrsStates.map((s, i) =>
-                  <option key={i} value={s}>{startCase(s)}</option>,
+                  <option key={i} value={s}>
+                    {startCase(s)}
+                  </option>,
                 )}
               </select>
             </div>
             <div className="sm-col sm-col-4 px1 mb2 sm-m0">
-              <label className="hide" htmlFor="nibrs-year">Year</label>
+              <label className="hide" htmlFor="nibrs-year">
+                Year
+              </label>
               <select
                 className="col-12 sm-fs-18 bold field select bg-white"
                 id="nibrs-year"
                 defaultValue="Year"
                 onChange={this.handleSelectChange}
               >
-                <option value="Year" disabled>Year</option>
-                {nibrsYears.map((y, i) => <option key={i}>{y}</option>)}
+                <option value="Year" disabled>
+                  Year
+                </option>
+                {nibrsYears.map((y, i) =>
+                  <option key={i}>
+                    {y}
+                  </option>,
+                )}
               </select>
             </div>
             <div className="sm-col sm-col-3 px1 mb2 sm-m0">
