@@ -86,16 +86,7 @@ class TrendChart extends React.Component {
   };
 
   render() {
-    const {
-      crime,
-      colors,
-      data,
-      places,
-      since,
-      size,
-      until,
-      mainChart,
-    } = this.props;
+    const { crime, colors, data, places, since, size, until } = this.props;
     const { hover, svgParentWidth, yearSelected } = this.state;
 
     const { margin } = size;
@@ -109,19 +100,10 @@ class TrendChart extends React.Component {
 
     const isRape = crime === 'rape';
     const crimes = [isRape ? 'rape-legacy' : crime];
-    console.log('TREND CHART DATA:', data);
     if (isRape) crimes.push('rape-revised');
 
-    let dataByYear;
-    if (mainChart) {
-      console.log('Handle Old Data', data);
-      dataByYear = data.map(d => ({ ...d, date: parse(d.year) }));
-      console.log('Handle Old Data By Year', dataByYear);
-    } else {
-      console.log('Handle New Data', data);
-      return null;
-      // const dataByYear = data.map(d => ({ ...d, date: parse(d.year) }));
-    }
+    const dataByYear = data.map(d => ({ ...d, date: parse(d.year) }));
+
     const newSeries = this.createSeries(crimes, dataByYear, places);
     const { dates, rates, series } = newSeries;
 

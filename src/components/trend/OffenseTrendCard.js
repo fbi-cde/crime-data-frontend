@@ -7,15 +7,19 @@ import DownloadDataBtn from '../DownloadDataBtn';
 import ErrorCard from '../ErrorCard';
 import Loading from '../Loading';
 import NoData from '../NoData';
-import TrendChart from './TrendChart';
+import OffenseTrendChart from './OffenseTrendChart';
 import { generateCrimeReadme } from '../../util/content';
 import lookupUsa, { nationalKey } from '../../util/usa';
 
 class OffenseTrendCard extends React.Component {
   render() {
     const { trendData, since, until, places, place } = this.props;
-    const crime = trendData.offense;
-    console.log('TrendData:', trendData);
+    let crime = trendData.offense;
+
+    if (crime === 'rape-legacy' || crime === 'rape-revised') {
+      crime = 'rape';
+    }
+
     const fname = `${place}-${crime}-${since}-${until}`;
     const title =
       `Reported ${pluralize(crime)} in ` +
@@ -28,6 +32,7 @@ class OffenseTrendCard extends React.Component {
       // return { year: d.year, ...Object.assign(...placeData) };
     );
     */
+
     const readme = generateCrimeReadme({ crime, title });
 
     const download = [
@@ -40,14 +45,7 @@ class OffenseTrendCard extends React.Component {
         <h2 className="mt0 mb2 pb1 fs-14 sm-fs-18 sans-serif blue border-bottom border-blue-light">
           {startCase(trendData.offense)} rates, XXXX
         </h2>
-        <TrendChart
-          crime={crime}
-          data={trendData}
-          places={places}
-          since={since}
-          until={until}
-          mainChart={false}
-        />
+        <OffenseTrendChart trendData={trendData} since={since} until={until} />
         <DownloadDataBtn
           ariaLabel={`Download ${title} data as a CSV`}
           data={download}

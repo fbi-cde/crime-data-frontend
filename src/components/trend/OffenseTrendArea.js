@@ -33,13 +33,11 @@ class OffenseTrendArea extends React.Component {
     if (!['violent-crime', 'property-crime'].includes(crime)) return null;
     const crimeType = camelCase(crime);
     const crimeIds = crimeTypes[crimeType].map(t => snakeCase(t.id || t));
-    const parsedData = offenseTrend(crimeIds, summaries.data);
-    console.log('Parsed Data:', parsedData);
+    const parsedData = offenseTrend(crimeIds, summaries.data, since, until);
+
     return (
       <div className="clearfix mxn1">
         {parsedData.map((d, i) => {
-          // console.log('Data:', d, i);
-          // console.log('places:', places);
           const cls = i % 2 === 0 ? 'clear-left' : '';
           return (
             <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
@@ -49,6 +47,8 @@ class OffenseTrendArea extends React.Component {
                 until={until}
                 places={places}
                 place={place}
+                since={since}
+                until={until}
               />
             </div>
           );

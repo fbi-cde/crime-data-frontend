@@ -59,7 +59,6 @@ class TrendContainer extends React.Component {
           places={places}
           since={since}
           until={until}
-          mainChart
         />
         <DownloadDataBtn
           ariaLabel={`Download ${title} data as a CSV`}
@@ -110,6 +109,7 @@ class TrendContainer extends React.Component {
             crime={crime}
             summaries={summaries}
             places={places}
+            place={place}
             since={since}
             until={until}
           />}
