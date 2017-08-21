@@ -54,7 +54,9 @@ const AgencySearchResults = ({
         {noFederal.length === 0 && <div className="fs-12">No results</div>}
         {dataGrouped.filter(g => g.data.length > 0).map(g =>
           <div key={g.key}>
-            <div className="fs-10 bold caps blue">{g.key}</div>
+            <div className="fs-10 bold caps blue">
+              {g.key}
+            </div>
             <ul className="mt0 mb1 list-reset fs-12">
               {g.data
                 .slice(0, 100)
@@ -73,8 +75,8 @@ const AgencySearchResults = ({
       <div className="px2 pb2 border-box bg-white border-left border-right border-bottom">
         <hr className="mt0 mb2" />
         <p className="mb2 fs-12 italic serif">
-          Agencies that have submitted a full year’s worth of data in 2014
-          are listed in dark blue.
+          Agencies that have submitted a full year’s worth of data in 2015 are
+          listed in dark blue.
         </p>
         <button
           className="btn btn-primary regular py0 px1 fs-14"
