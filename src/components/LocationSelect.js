@@ -25,7 +25,8 @@ const LocationSelect = ({
       <select
         aria-controls={ariaControls}
         className={
-          className || 'block col-12 field field-sm select select-dark'
+          className ||
+          'block col-12 field field-sm select select-dark border-blue'
         }
         id="location-select"
         onChange={handleChange}
