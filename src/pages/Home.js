@@ -1,21 +1,21 @@
 /* eslint jsx-a11y/no-static-element-interactions: 0 */
-import PropTypes from "prop-types";
-import React from "react";
-import Helmet from "react-helmet";
-import { connect } from "react-redux";
-import { Link } from "react-router";
-import { bindActionCreators } from "redux";
+import PropTypes from 'prop-types';
+import React from 'react';
+import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import { bindActionCreators } from 'redux';
 
-import LocationSelect from "../components/LocationSelect";
-import SharingTags from "../components/SharingTags";
-import UsaMap from "../components/UsaMap";
-import { updateApp } from "../actions/composite";
-import { updateFilters } from "../actions/filters";
-import { oriToState } from "../util/agencies";
-import { crimeTypes } from "../util/offenses";
-import { slugify } from "../util/text";
-import lookup from "../util/usa";
-import dataPreview from "../../content/preview.yml";
+import LocationSelect from '../components/LocationSelect';
+import SharingTags from '../components/SharingTags';
+import UsaMap from '../components/UsaMap';
+import { updateApp } from '../actions/composite';
+import { updateFilters } from '../actions/filters';
+import { oriToState } from '../util/agencies';
+import { crimeTypes } from '../util/offenses';
+import { slugify } from '../util/text';
+import lookup from '../util/usa';
+import dataPreview from '../../content/preview.yml';
 
 class Home extends React.Component {
   componentDidMount() {
@@ -23,13 +23,13 @@ class Home extends React.Component {
   }
 
   handleMapClick = e => {
-    const id = e.target.getAttribute("id");
+    const id = e.target.getAttribute('id');
 
     if (!id) return;
 
     const { router } = this.props;
     const crime = this.props.crime;
-    const placeNew = { place: lookup(id).slug, placeType: "state" };
+    const placeNew = { place: lookup(id).slug, placeType: 'state' };
     this.props.dispatch(updateFilters(placeNew));
     this.props.dispatch(updateApp({ crime, ...placeNew }, router));
   };
@@ -38,7 +38,7 @@ class Home extends React.Component {
     const crime = this.props.crime;
     const usState = this.props.place;
     const { router } = this.props;
-    const change = { crime, place: usState, placeType: "state" };
+    const change = { crime, place: usState, placeType: 'state' };
     this.props.dispatch(updateApp(change, router));
   };
 
@@ -54,7 +54,7 @@ class Home extends React.Component {
   render() {
     const { appState, crime, dispatch, place, placeType } = this.props;
     const isValid = !!(crime && place) || false;
-    const usState = placeType === "agency" ? oriToState(place) : place;
+    const usState = placeType === 'agency' ? oriToState(place) : place;
 
     return (
       <div>
@@ -67,16 +67,16 @@ class Home extends React.Component {
             </h1>
             <p className="mb1 md-col-9 fs-16 sm-fs-20 serif">
               The Crime Data Explorer makes nationwide crime data accessible to
-              a wide range of users.{" "}
+              a wide range of users.{' '}
               <Link to="/explorer/violent-crime" className="underline">
                 View trends
-              </Link>,{" "}
+              </Link>,{' '}
               <Link to="/downloads-and-docs" className="underline">
                 download bulk datasets
-              </Link>, and access the{" "}
+              </Link>, and access the{' '}
               <a href="/api" className="underline">
                 Crime Data API
-              </a>{" "}
+              </a>{' '}
               for reported crime at the national, state, and agency levels.
             </p>
           </div>
@@ -110,14 +110,14 @@ class Home extends React.Component {
                     {crimeTypes.violentCrime.map((o, i) =>
                       <option key={i} value={o.id || slugify(o)}>
                         {o.text || o}
-                      </option>
+                      </option>,
                     )}
                   </optgroup>
                   <optgroup label="Property Crime">
                     {crimeTypes.propertyCrime.map((o, i) =>
                       <option key={i} value={o.id || slugify(o)}>
                         {o.text || o}
-                      </option>
+                      </option>,
                     )}
                   </optgroup>
                 </select>
@@ -125,10 +125,10 @@ class Home extends React.Component {
               <div className="sm-col sm-col-4 px2 mb2 sm-m0 xs-hide">
                 <button
                   className={`col-12 btn btn-primary ${isValid
-                    ? ""
-                    : "hint-bottom"}`}
+                    ? ''
+                    : 'hint-bottom'}`}
                   aria-label={
-                    isValid ? "" : "Please select a location and crime type"
+                    isValid ? '' : 'Please select a location and crime type'
                   }
                   disabled={!isValid}
                   onClick={this.handleSearchClick}
@@ -166,7 +166,7 @@ class Home extends React.Component {
                       {d.description}
                     </p>
                   </div>
-                </div>
+                </div>,
               )}
             </div>
             <div>
@@ -187,7 +187,7 @@ class Home extends React.Component {
             <p className="p0 md-col-9 fs-16 sm-fs-20 serif">
               The data is voluntarily submitted by as many as 18,000 law
               enforcement agencies across the country that participate in the
-              FBI’s{" "}
+              FBI’s{' '}
               <a href="https://ucr.fbi.gov/" className="underline">
                 Uniform Crime Reporting (UCR) Program
               </a>. This is an open data project to improve the nation’s crime
@@ -203,16 +203,16 @@ class Home extends React.Component {
 Home.propTypes = {
   actions: PropTypes.shape({
     updateApp: PropTypes.func,
-    updateFilters: PropTypes.func
+    updateFilters: PropTypes.func,
   }),
   crime: PropTypes.string,
   place: PropTypes.string,
-  placeType: PropTypes.string
+  placeType: PropTypes.string,
 };
 
 const mapStateToProps = ({ filters }) => ({ ...filters });
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ updateApp, updateFilters }, dispatch)
+  actions: bindActionCreators({ updateApp, updateFilters }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
