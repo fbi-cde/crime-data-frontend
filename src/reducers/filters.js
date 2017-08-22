@@ -1,10 +1,11 @@
 /* eslint no-param-reassign: 0 */
 import { FILTER_RESET, FILTERS_UPDATE } from '../actions/constants'
+import { MAX_YEAR } from '../util/years'
 
 const initialState = {
   crime: 'violent-crime',
-  since: 2004,
-  until: 2014,
+  since: MAX_YEAR - 10,
+  until: MAX_YEAR,
 }
 
 export default (state = initialState, action) => {

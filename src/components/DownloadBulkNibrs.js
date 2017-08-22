@@ -3,6 +3,7 @@ import startCase from 'lodash.startcase'
 import React from 'react'
 
 import lookupUsa from '../util/usa'
+import { MAX_YEAR } from '../util/years'
 import ucrProgram from '../../public/data/ucr-program-participation.json'
 
 const nibrsStates = Object.keys(ucrProgram).filter(
@@ -19,7 +20,7 @@ const createBulkNibrsUrl = (year, state) => {
 const downloadBulkNibrs = (year, state) => {
   const a = document.createElement('a')
   const body = document.querySelector('body')
-  a.href = createBulkNibrsUrl(year, state)
+  a.href = createBulkNibrsUrl(year, state.id)
 
   body.appendChild(a)
   a.click()
@@ -34,7 +35,7 @@ class DownloadBulkNibrs extends React.Component {
     const { nibrs } = ucrProgram[this.state.place]
     const initialYear = nibrs['initial-year']
 
-    return range(2014 + 1 - initialYear).map(y => initialYear + y)
+    return range(MAX_YEAR + 1 - initialYear).map(y => initialYear + y)
   }
 
   handleClick = e => {

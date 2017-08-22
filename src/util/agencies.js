@@ -1,4 +1,5 @@
 /* eslint-disable camelcase,consistent-return */
+import reduceEntries from 'reduce-entries'
 
 import lookupUsa from './usa'
 
@@ -11,7 +12,7 @@ export const reshapeData = data =>
   Object.keys(data)
     .filter(key => lookupUsa(key))
     .map(key => ({ key: lookupUsa(key).slug, value: data[key] }))
-    .reduce((accum, next) => ({ ...accum, [next.key]: next.value }), {})
+    .reduce(reduceEntries())
 
 export const oriToState = ori => {
   const oriAbbr = ori.slice(0, 2).toUpperCase()

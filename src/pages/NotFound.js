@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import Link from '../components/Link'
 import { showFeedback } from '../actions/feedback'
 
-const NotFound = ({ dispatch }) =>
+const NotFound = ({ actions }) =>
   <div className="container mb8 mx-auto px2 pt8">
     <Helmet title="CDE :: 404" />
     <h1 className="mt0 fs-40 col-12 sm-col-7">
@@ -21,7 +22,7 @@ const NotFound = ({ dispatch }) =>
       If you still can't find what you're looking for, please{' '}
       <button
         className="bg-transparent bold border-none color-inherit underline cursor-pointer serif p0"
-        onClick={() => dispatch(showFeedback())}
+        onClick={() => actions.showFeedback()}
       >
         submit feedback
       </button>{' '}
@@ -30,9 +31,13 @@ const NotFound = ({ dispatch }) =>
   </div>
 
 NotFound.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  actions: PropTypes.shape({
+    showFeedback: PropTypes.func,
+  }),
 }
 
-const mapDispatchToProps = dispatch => ({ dispatch })
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ showFeedback }, dispatch),
+})
 
 export default connect(null, mapDispatchToProps)(NotFound)

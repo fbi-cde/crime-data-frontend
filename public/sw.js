@@ -45,8 +45,8 @@ self.addEventListener('activate', event => {
 })
 
 self.addEventListener('fetch', event => {
-  const sameOrigin = event.request.url.startsWith(self.location.origin)
-  if (sameOrigin) {
+  // const sameOrigin = event.request.url.startsWith(self.location.origin)
+  if (event.request.url.includes('api-proxy')) {
     event.respondWith(
       caches.open(CACHE).then(cache =>
         cache.match(event.request).then(cached => {

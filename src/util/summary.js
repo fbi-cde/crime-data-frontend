@@ -111,7 +111,8 @@ goal:
 const combinePlaces = (summaries, offenses = []) => {
   const places = Object.keys(summaries);
   const years = summaries[places[0]].map(y => y.year);
-  const x = years.map(year => Object.assign(
+  const x = years.map(year =>
+    Object.assign(
       { year },
       ...places.map(place => {
         const o = {};
@@ -121,7 +122,8 @@ const combinePlaces = (summaries, offenses = []) => {
         });
         return { [place]: { population: yearData.population, ...o } };
       }),
-    ));
+    ),
+  );
 
   console.log('x!', x);
 
