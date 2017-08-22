@@ -43,7 +43,7 @@ class TimePeriodFilter extends React.Component {
             </label>
             <select
               aria-controls={ariaControls}
-              className="col-12 field field-sm select"
+              className="col-12 field field-sm select border-blue"
               id="since"
               onChange={this.handleChange}
               value={since}
@@ -62,7 +62,7 @@ class TimePeriodFilter extends React.Component {
             </label>
             <select
               aria-controls={ariaControls}
-              className="col-12 field field-sm select"
+              className="col-12 field field-sm select border-blue"
               id="until"
               onChange={this.handleChange}
               value={until}

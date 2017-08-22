@@ -73,7 +73,7 @@ class DownloadBulkNibrs extends React.Component {
                 Location
               </label>
               <select
-                className="col-12 sm-fs-18 bold field select bg-white"
+                className="col-12 sm-fs-18 bold field select bg-white border-blue"
                 id="nibrs-state"
                 defaultValue="Location"
                 onChange={this.handleSelectChange}
@@ -93,7 +93,7 @@ class DownloadBulkNibrs extends React.Component {
                 Year
               </label>
               <select
-                className="col-12 sm-fs-18 bold field select bg-white"
+                className="col-12 sm-fs-18 bold field select bg-white border-blue"
                 id="nibrs-year"
                 defaultValue="Year"
                 onChange={this.handleSelectChange}
