@@ -76,7 +76,7 @@ const Home = ({ actions, crime, place, placeType, router }) => {
           <div className="clearfix mxn2">
             <div className="sm-col sm-col-4 px2 mb2 sm-m0">
               <LocationSelect
-                className="col-12 sm-fs-18 field select"
+                className="col-12 sm-fs-18 field select border-blue"
                 onChange={selectLocation}
                 selected={usState}
               />
@@ -86,7 +86,7 @@ const Home = ({ actions, crime, place, placeType, router }) => {
                 Choose a crime
               </label>
               <select
-                className="col-12 sm-fs-18 field select"
+                className="col-12 sm-fs-18 field select border-blue"
                 id="crime-select"
                 onChange={selectCrime}
                 defaultValue={crime || ''}
