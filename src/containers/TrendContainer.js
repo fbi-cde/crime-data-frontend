@@ -1,55 +1,55 @@
-import camelCase from 'lodash.camelcase';
-import snakeCase from 'lodash.snakecase';
-import startCase from 'lodash.startcase';
-import pluralize from 'pluralize';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { connect } from 'react-redux';
+import camelCase from 'lodash.camelcase'
+import snakeCase from 'lodash.snakecase'
+import startCase from 'lodash.startcase'
+import pluralize from 'pluralize'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { connect } from 'react-redux'
 
-import DownloadDataBtn from '../components/DownloadDataBtn';
-import ErrorCard from '../components/ErrorCard';
-import Loading from '../components/Loading';
-import NoData from '../components/NoData';
-import TrendChart from '../components/trend/TrendChart';
-import TrendSourceText from '../components/trend/TrendSourceText';
-import OffenseTrendArea from '../components/trend/OffenseTrendArea';
-import { generateCrimeReadme } from '../util/content';
-import { crimeTypes } from '../util/offenses';
-import { getPlaceInfo } from '../util/place';
-import { combinePlaces, filterByYear } from '../util/summary';
-import lookupUsa, { nationalKey } from '../util/usa';
+import DownloadDataBtn from '../components/DownloadDataBtn'
+import ErrorCard from '../components/ErrorCard'
+import Loading from '../components/Loading'
+import NoData from '../components/NoData'
+import TrendChart from '../components/trend/TrendChart'
+import TrendSourceText from '../components/trend/TrendSourceText'
+import OffenseTrendArea from '../components/trend/OffenseTrendArea'
+import { generateCrimeReadme } from '../util/content'
+import { crimeTypes } from '../util/offenses'
+import { getPlaceInfo } from '../util/place'
+import { combinePlaces, filterByYear } from '../util/summary'
+import lookupUsa, { nationalKey } from '../util/usa'
 
 class TrendContainer extends React.Component {
   getContent = ({ crime, places, since, summaries, until }) => {
-    const { loading, error } = summaries;
+    const { loading, error } = summaries
 
-    if (loading) return <Loading />;
-    if (error) return <ErrorCard error={error} />;
+    if (loading) return <Loading />
+    if (error) return <ErrorCard error={error} />
 
     const offenses =
-      crime === 'rape' ? ['rape-legacy', 'rape-revised'] : [crime];
-    const place = places[0];
-    const filteredByYear = filterByYear(summaries.data, { since, until });
-    const data = combinePlaces(filteredByYear, offenses);
+      crime === 'rape' ? ['rape-legacy', 'rape-revised'] : [crime]
+    const place = places[0]
+    const filteredByYear = filterByYear(summaries.data, { since, until })
+    const data = combinePlaces(filteredByYear, offenses)
 
-    if (!data || data.length === 0) return <NoData />;
+    if (!data || data.length === 0) return <NoData />
 
-    const fname = `${place}-${crime}-${since}-${until}`;
+    const fname = `${place}-${crime}-${since}-${until}`
     const title =
       `Reported ${pluralize(crime)} in ` +
-      `${lookupUsa(place).display}, ${since}-${until}`;
+      `${lookupUsa(place).display}, ${since}-${until}`
 
-    const readme = generateCrimeReadme({ crime, title });
-    const crimeNorm = crime === 'rape' ? 'rape-legacy' : crime;
+    const readme = generateCrimeReadme({ crime, title })
+    const crimeNorm = crime === 'rape' ? 'rape-legacy' : crime
     const dlData = data.map(d => {
-      const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }));
-      return { year: d.year, ...Object.assign(...placeData) };
-    });
+      const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }))
+      return { year: d.year, ...Object.assign(...placeData) }
+    })
 
     const download = [
       { content: readme, filename: 'README.md' },
       { data: dlData, filename: `${fname}.csv` },
-    ];
+    ]
 
     return (
       <div>
@@ -66,8 +66,8 @@ class TrendContainer extends React.Component {
           filename={fname}
         />
       </div>
-    );
-  };
+    )
+  }
 
   render() {
     const {
@@ -78,8 +78,8 @@ class TrendContainer extends React.Component {
       since,
       summaries,
       until,
-    } = this.props;
-    const isReady = !summaries.loading;
+    } = this.props
+    const isReady = !summaries.loading
 
     /*
     if (!['violent-crime', 'property-crime'].includes(crime)) return null;
@@ -114,7 +114,7 @@ class TrendContainer extends React.Component {
             until={until}
           />}
       </div>
-    );
+    )
   }
 }
 TrendContainer.propTypes = {
@@ -128,22 +128,22 @@ TrendContainer.propTypes = {
     loading: PropTypes.boolean,
   }).isRequired,
   until: PropTypes.number.isRequired,
-};
+}
 
 export const mapStateToProps = ({ filters, summaries }) => {
-  const { place } = filters;
+  const { place } = filters
 
-  const places = [place];
-  if (place !== nationalKey) places.push(nationalKey);
+  const places = [place]
+  if (place !== nationalKey) places.push(nationalKey)
 
   return {
     ...filters,
     ...getPlaceInfo(filters),
     places,
     summaries,
-  };
-};
+  }
+}
 
-const mapDispatchToProps = dispatch => ({ dispatch });
+const mapDispatchToProps = dispatch => ({ dispatch })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrendContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TrendContainer)

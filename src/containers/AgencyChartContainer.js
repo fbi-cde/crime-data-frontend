@@ -1,39 +1,39 @@
-import lowerCase from 'lodash.lowercase';
-import startCase from 'lodash.startcase';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { connect } from 'react-redux';
+import lowerCase from 'lodash.lowercase'
+import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { connect } from 'react-redux'
 
-import AgencyChart from '../components/agency/AgencyChart';
-import DownloadDataBtn from '../components/DownloadDataBtn';
-import ErrorCard from '../components/ErrorCard';
-import Loading from '../components/Loading';
-import NoData from '../components/NoData';
-import { NibrsTerm, SrsTerm } from '../components/Terms';
-import { getAgency } from '../util/agencies';
+import AgencyChart from '../components/agency/AgencyChart'
+import DownloadDataBtn from '../components/DownloadDataBtn'
+import ErrorCard from '../components/ErrorCard'
+import Loading from '../components/Loading'
+import NoData from '../components/NoData'
+import { NibrsTerm, SrsTerm } from '../components/Terms'
+import { getAgency } from '../util/agencies'
 
 const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
-  const { error, loading } = summary;
+  const { error, loading } = summary
 
-  if (loading) return <Loading />;
-  if (error) return <ErrorCard error={error} />;
+  if (loading) return <Loading />
+  if (error) return <ErrorCard error={error} />
 
-  const data = summary.data[place];
-  if (!data || data.length === 0) return <NoData />;
+  const data = summary.data[place]
+  if (!data || data.length === 0) return <NoData />
 
-  const fname = `${place}-${crime}-${since}-${until}`;
+  const fname = `${place}-${crime}-${since}-${until}`
   const dataClean = data
     .filter(d => d.year >= since && d.year <= until)
-    .sort((a, b) => a.year - b.year);
+    .sort((a, b) => a.year - b.year)
 
   const hasNoValues =
     dataClean.length ===
-    dataClean.filter(d => d.reported === 0 && d.cleared === 0).length;
+    dataClean.filter(d => d.reported === 0 && d.cleared === 0).length
 
-  const noun = submitsNibrs ? 'incidents' : 'offenses';
+  const noun = submitsNibrs ? 'incidents' : 'offenses'
   const noDataText = `There were no ${lowerCase(
     crime,
-  )} ${noun} reported during this time period.`;
+  )} ${noun} reported during this time period.`
 
   return (
     <div>
@@ -53,16 +53,16 @@ const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
             />
           </div>}
     </div>
-  );
-};
+  )
+}
 
 const AgencyChartContainer = params => {
-  const { agency, crime, since, summary, until } = params;
+  const { agency, crime, since, summary, until } = params
 
-  if (!agency) return null;
+  if (!agency) return null
 
-  const submitsNibrs = agency.nibrs_months_reported === 12;
-  const noun = submitsNibrs ? 'incidents' : 'offenses';
+  const submitsNibrs = agency.nibrs_months_reported === 12
+  const noun = submitsNibrs ? 'incidents' : 'offenses'
 
   return (
     <div className="mb7">
@@ -90,8 +90,8 @@ const AgencyChartContainer = params => {
           data from {agency.display}.
         </div>}
     </div>
-  );
-};
+  )
+}
 
 AgencyChartContainer.propTypes = {
   agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
@@ -103,15 +103,15 @@ AgencyChartContainer.propTypes = {
     loading: PropTypes.boolean,
   }).isRequired,
   until: PropTypes.number.isRequired,
-};
+}
 
 const mapStateToProps = ({ agencies, filters, summaries }) => ({
   agency: !agencies.loading && getAgency(agencies, filters.place),
   ...filters,
   summary: summaries,
-});
-const mapDispatchToProps = dispatch => ({ dispatch });
+})
+const mapDispatchToProps = dispatch => ({ dispatch })
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   AgencyChartContainer,
-);
+)

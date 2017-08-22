@@ -1,128 +1,128 @@
-import { bisector, extent, max } from 'd3-array';
-import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
-import throttle from 'lodash.throttle';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { timeParse } from 'd3-time-format';
+import { bisector, extent, max } from 'd3-array'
+import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
+import throttle from 'lodash.throttle'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { timeParse } from 'd3-time-format'
 
-import OffenseTrendChartDetails from './OffenseTrendChartDetails';
-import TrendChartRapeLegend from './TrendChartRapeLegend';
-import TrendChartLineSeries from './TrendChartLineSeries';
-import TrendChartRapeAnnotate from './TrendChartRapeAnnotate';
-import XAxis from '../XAxis';
-import YAxis from '../YAxis';
+import OffenseTrendChartDetails from './OffenseTrendChartDetails'
+import TrendChartRapeLegend from './TrendChartRapeLegend'
+import TrendChartLineSeries from './TrendChartLineSeries'
+import TrendChartRapeAnnotate from './TrendChartRapeAnnotate'
+import XAxis from '../XAxis'
+import YAxis from '../YAxis'
 
 class OffenseTrendChart extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { hover: null, svgParentWidth: null, yearSelected: null };
-    this.getDimensions = throttle(this.getDimensions, 20);
+    super(props)
+    this.state = { hover: null, svgParentWidth: null, yearSelected: null }
+    this.getDimensions = throttle(this.getDimensions, 20)
   }
 
   componentDidMount() {
-    this.getDimensions();
-    window.addEventListener('resize', this.getDimensions);
+    this.getDimensions()
+    window.addEventListener('resize', this.getDimensions)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.getDimensions);
+    window.removeEventListener('resize', this.getDimensions)
   }
 
   getDimensions = () => {
     if (this.svgParent) {
-      this.setState({ svgParentWidth: this.svgParent.clientWidth });
+      this.setState({ svgParentWidth: this.svgParent.clientWidth })
     }
-  };
+  }
 
   createOffenseTrendSeries = (trendData, places, since, until) => {
-    const parse = timeParse('%Y');
-    const gridObj = {};
+    const parse = timeParse('%Y')
+    const gridObj = {}
     // Create dates
-    const dates = [];
+    const dates = []
 
     // This is terrible
-    let i = since;
+    let i = since
     while (i < until + 1) {
-      dates.push(parse(i));
-      i++;
+      dates.push(parse(i))
+      i++
     }
-    i = since;
+    i = since
     while (i < until + 1) {
-      dates.push(parse(i));
-      i++;
+      dates.push(parse(i))
+      i++
     }
-    gridObj.dates = dates;
+    gridObj.dates = dates
 
     // Create Series and Rates
-    const series = [];
-    const rates = [];
+    const series = []
+    const rates = []
 
-    const gaps = [];
+    const gaps = []
     for (let j = 0; j < places.length; j++) {
-      const seriesObj = {};
-      seriesObj.crime = trendData.offense;
-      const place = places[j];
-      const placeTrendData = trendData[place];
-      const values = [];
+      const seriesObj = {}
+      seriesObj.crime = trendData.offense
+      const place = places[j]
+      const placeTrendData = trendData[place]
+      const values = []
       // Segements
-      const segments = [];
+      const segments = []
       for (let k = 0; k < placeTrendData.length; k++) {
-        const value = placeTrendData[k];
-        value.date = parse(value.year);
-        values.push(value);
-        segments.push(value);
-        rates.push(value.rate);
+        const value = placeTrendData[k]
+        value.date = parse(value.year)
+        values.push(value)
+        segments.push(value)
+        rates.push(value.rate)
       }
-      seriesObj.values = values;
-      seriesObj.segments = [];
-      seriesObj.segments.push(segments);
-      seriesObj.place = place;
-      seriesObj.gaps = gaps;
-      series.push(seriesObj);
+      seriesObj.values = values
+      seriesObj.segments = []
+      seriesObj.segments.push(segments)
+      seriesObj.place = place
+      seriesObj.gaps = gaps
+      series.push(seriesObj)
     }
-    gridObj.rates = rates;
-    gridObj.series = series;
+    gridObj.rates = rates
+    gridObj.series = series
 
-    return gridObj;
-  };
+    return gridObj
+  }
 
   fetchTrendDataByYear = (series, yearSelected) => {
-    const active = [];
+    const active = []
     for (let j = 0; j < series.series.length > 0; j++) {
       for (let k = 0; k < series.series[j].values.length; k++) {
         if (series.series[j].values[k].year === yearSelected) {
-          const activeObj = series.series[j].values[k];
-          activeObj.place = series.series[j].place;
-          activeObj.crime = series.series[j].crime;
-          active.push(activeObj);
+          const activeObj = series.series[j].values[k]
+          activeObj.place = series.series[j].place
+          activeObj.crime = series.series[j].crime
+          active.push(activeObj)
         }
       }
     }
-    return active;
-  };
+    return active
+  }
 
   updateYear = year => {
-    this.setState({ yearSelected: year });
-  };
+    this.setState({ yearSelected: year })
+  }
 
   render() {
-    const { trendData, since, until, size, colors } = this.props;
-    const { hover, svgParentWidth, yearSelected } = this.state;
-    const { margin } = size;
-    const color = scaleOrdinal(colors);
-    const svgWidth = svgParentWidth || size.width;
-    const svgHeight = svgWidth / 2.25;
-    const width = svgWidth - margin.left - margin.right;
-    const height = svgHeight - margin.top - margin.bottom;
-    const xPad = svgWidth < 500 ? 15 : 30;
-    const parse = timeParse('%Y');
-    const crime = trendData.offense;
-    const places = [];
+    const { trendData, since, until, size, colors } = this.props
+    const { hover, svgParentWidth, yearSelected } = this.state
+    const { margin } = size
+    const color = scaleOrdinal(colors)
+    const svgWidth = svgParentWidth || size.width
+    const svgHeight = svgWidth / 2.25
+    const width = svgWidth - margin.left - margin.right
+    const height = svgHeight - margin.top - margin.bottom
+    const xPad = svgWidth < 500 ? 15 : 30
+    const parse = timeParse('%Y')
+    const crime = trendData.offense
+    const places = []
 
-    const keys = Object.keys(trendData);
+    const keys = Object.keys(trendData)
     for (let i = 0; i < keys.length; i++) {
       if (keys[i] !== 'offense') {
-        places.push(keys[i]);
+        places.push(keys[i])
       }
     }
 
@@ -131,18 +131,18 @@ class OffenseTrendChart extends React.Component {
       places,
       since,
       until,
-    );
-    let active;
+    )
+    let active
     if (yearSelected === null) {
-      active = this.fetchTrendDataByYear(newSeries, until);
+      active = this.fetchTrendDataByYear(newSeries, until)
     } else {
-      active = this.fetchTrendDataByYear(newSeries, yearSelected);
+      active = this.fetchTrendDataByYear(newSeries, yearSelected)
     }
-    const { dates, rates, series } = newSeries;
+    const { dates, rates, series } = newSeries
 
-    const x = scaleTime().domain(extent(dates)).range([xPad, width - xPad]);
-    const y = scaleLinear().domain([0, max(rates)]).range([height, 0]).nice();
-    console.log('OffenseTrendChart Series:', series);
+    const x = scaleTime().domain(extent(dates)).range([xPad, width - xPad])
+    const y = scaleLinear().domain([0, max(rates)]).range([height, 0]).nice()
+    console.log('OffenseTrendChart Series:', series)
 
     return (
       <div>
@@ -185,7 +185,7 @@ class OffenseTrendChart extends React.Component {
           </svg>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -193,7 +193,7 @@ OffenseTrendChart.propTypes = {
   trendData: PropTypes.object,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
-};
+}
 
 OffenseTrendChart.defaultProps = {
   size: {
@@ -201,6 +201,6 @@ OffenseTrendChart.defaultProps = {
     margin: { top: 16, right: 0, bottom: 24, left: 32 },
   },
   colors: ['#ff5e50', '#95aabc', '#52687d'],
-};
+}
 
-export default OffenseTrendChart;
+export default OffenseTrendChart

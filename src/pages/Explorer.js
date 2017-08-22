@@ -1,41 +1,41 @@
-import startCase from 'lodash.startcase';
-import PropTypes from 'prop-types';
-import React from 'react';
-import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Helmet from 'react-helmet'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import AboutTheData from '../components/AboutTheData';
-import AgencyChartContainer from '../containers/AgencyChartContainer';
-import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer';
-import NibrsContainer from '../containers/NibrsContainer';
-import NotFound from './NotFound';
-import SharingTags from '../components/SharingTags';
-import SidebarContainer from '../containers/SidebarContainer';
-import SparklineContainer from '../containers/SparklineContainer';
-import TrendContainer from '../containers/TrendContainer';
+import AboutTheData from '../components/AboutTheData'
+import AgencyChartContainer from '../containers/AgencyChartContainer'
+import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer'
+import NibrsContainer from '../containers/NibrsContainer'
+import NotFound from './NotFound'
+import SharingTags from '../components/SharingTags'
+import SidebarContainer from '../containers/SidebarContainer'
+import SparklineContainer from '../containers/SparklineContainer'
+import TrendContainer from '../containers/TrendContainer'
 
-import { updateApp } from '../actions/composite';
-import { showTerm } from '../actions/glossary';
-import { hideSidebar, showSidebar } from '../actions/sidebar';
-import offenses from '../util/offenses';
-import { getAgency } from '../util/agencies';
-import { getPlaceInfo } from '../util/place';
-import { sentenceCase } from '../util/text';
-import lookup from '../util/usa';
-import { MIN_YEAR, MAX_YEAR } from '../util/years';
+import { updateApp } from '../actions/composite'
+import { showTerm } from '../actions/glossary'
+import { hideSidebar, showSidebar } from '../actions/sidebar'
+import offenses from '../util/offenses'
+import { getAgency } from '../util/agencies'
+import { getPlaceInfo } from '../util/place'
+import { sentenceCase } from '../util/text'
+import lookup from '../util/usa'
+import { MIN_YEAR, MAX_YEAR } from '../util/years'
 
 class Explorer extends React.Component {
   componentDidMount() {
-    const { actions, filters, params, router } = this.props;
-    const { since, until } = filters;
-    const { query } = router.location;
-    const { place, placeType } = getPlaceInfo(params);
+    const { actions, filters, params, router } = this.props
+    const { since, until } = filters
+    const { query } = router.location
+    const { place, placeType } = getPlaceInfo(params)
 
     const clean = (val, alt) => {
-      const yr = +val;
-      return yr >= MIN_YEAR && yr <= MAX_YEAR ? yr : alt;
-    };
+      const yr = +val
+      return yr >= MIN_YEAR && yr <= MAX_YEAR ? yr : alt
+    }
 
     actions.updateApp({
       ...params,
@@ -44,45 +44,45 @@ class Explorer extends React.Component {
       ...query,
       since: clean(query.since, since),
       until: clean(query.until, until),
-    });
+    })
   }
 
   componentWillReceiveProps({ params: newParams }) {
-    const { actions, filters } = this.props;
-    const { crime } = newParams;
-    const newPlace = getPlaceInfo(newParams);
+    const { actions, filters } = this.props
+    const { crime } = newParams
+    const newPlace = getPlaceInfo(newParams)
 
     if (filters.place !== newPlace.place) {
-      actions.updateApp({ crime, ...newPlace });
+      actions.updateApp({ crime, ...newPlace })
     }
   }
 
   handleSidebarChange = change => {
-    const { actions, router } = this.props;
-    actions.updateApp(change, router);
-  };
+    const { actions, router } = this.props
+    actions.updateApp(change, router)
+  }
 
   toggleSidebar = () => {
-    const { actions } = this.props;
-    const { isOpen } = this.props.appState.sidebar;
+    const { actions } = this.props
+    const { isOpen } = this.props.appState.sidebar
 
-    if (isOpen) return actions.hideSidebar();
-    return actions.showSidebar();
-  };
+    if (isOpen) return actions.hideSidebar()
+    return actions.showSidebar()
+  }
 
   render() {
-    const { actions, agencies, filters, params } = this.props;
-    const { crime } = params;
-    const { place, placeType } = getPlaceInfo(params);
-    const agency = placeType === 'agency' && getAgency(agencies, place);
-    const placeDisplay = agency ? agency.agency_name : startCase(place);
+    const { actions, agencies, filters, params } = this.props
+    const { crime } = params
+    const { place, placeType } = getPlaceInfo(params)
+    const agency = placeType === 'agency' && getAgency(agencies, place)
+    const placeDisplay = agency ? agency.agency_name : startCase(place)
 
     // ensure app state place matches url params place
-    if (filters.place && filters.place !== place) return null;
+    if (filters.place && filters.place !== place) return null
 
     // show not found page if crime or place unfamiliar
     if (!offenses.includes(crime) || !lookup(place, placeType)) {
-      return <NotFound />;
+      return <NotFound />
     }
 
     return (
@@ -126,7 +126,7 @@ class Explorer extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -141,14 +141,14 @@ Explorer.propTypes = {
   filters: PropTypes.object,
   params: PropTypes.object,
   router: PropTypes.object,
-};
+}
 
-const mapStateToProps = ({ agencies, filters }) => ({ agencies, filters });
+const mapStateToProps = ({ agencies, filters }) => ({ agencies, filters })
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
     { hideSidebar, showSidebar, showTerm, updateApp },
     dispatch,
   ),
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Explorer);
+export default connect(mapStateToProps, mapDispatchToProps)(Explorer)

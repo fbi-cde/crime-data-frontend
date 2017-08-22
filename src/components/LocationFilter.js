@@ -1,27 +1,27 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from 'prop-types'
+import React from 'react'
 
-import AgencySearch from './agency/AgencySearch';
-import LocationSelect from './LocationSelect';
-import { nationalKey } from '../util/usa';
+import AgencySearch from './agency/AgencySearch'
+import LocationSelect from './LocationSelect'
+import { nationalKey } from '../util/usa'
 
 class LocationFilter extends React.Component {
-  state = { showResults: false };
+  state = { showResults: false }
 
   getAgencyName = () => {
-    const { agency } = this.props;
+    const { agency } = this.props
 
-    return (agency || {}).agency_name || '';
-  };
+    return (agency || {}).agency_name || ''
+  }
 
   handleLocationFocus = () => {
-    this.setState({ showResults: false });
-  };
+    this.setState({ showResults: false })
+  }
 
   render() {
-    const { agencyData, ariaControls, onChange, usState } = this.props;
-    const { showResults } = this.state;
-    const showAgencySearch = usState !== nationalKey && agencyData.length > 0;
+    const { agencyData, ariaControls, onChange, usState } = this.props
+    const { showResults } = this.state
+    const showAgencySearch = usState !== nationalKey && agencyData.length > 0
 
     return (
       <div id="location" className="mb4">
@@ -42,13 +42,13 @@ class LocationFilter extends React.Component {
             initialShowResults={showResults}
           />}
       </div>
-    );
+    )
   }
 }
 
 LocationFilter.defaultProps = {
   usState: nationalKey,
-};
+}
 
 LocationFilter.propTypes = {
   agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
@@ -56,6 +56,6 @@ LocationFilter.propTypes = {
   ariaControls: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   usState: PropTypes.string.isRequired,
-};
+}
 
-export default LocationFilter;
+export default LocationFilter

@@ -1,17 +1,17 @@
-import { curveCardinal, line } from 'd3-shape';
-import PropTypes from 'prop-types';
-import React from 'react';
+import { curveCardinal, line } from 'd3-shape'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const TrendChartLineSeries = ({ color, series, x, y }) => {
   const l = line()
     .curve(curveCardinal.tension(0.25))
     .x(d => x(d.date))
-    .y(d => y(d.rate));
+    .y(d => y(d.rate))
 
   return (
     <g>
       {series.map((d, i) => {
-        const ends = [d.values[0], d.values[d.values.length - 1]];
+        const ends = [d.values[0], d.values[d.values.length - 1]]
 
         return (
           <g key={i} className={`series series-${d.place}-${d.crime}`}>
@@ -37,21 +37,21 @@ const TrendChartLineSeries = ({ color, series, x, y }) => {
                 />,
               )}
           </g>
-        );
+        )
       })}
     </g>
-  );
-};
+  )
+}
 
 TrendChartLineSeries.propTypes = {
   color: PropTypes.func.isRequired,
   series: PropTypes.array.isRequired,
   x: PropTypes.func.isRequired,
   y: PropTypes.func.isRequired,
-};
+}
 
 TrendChartLineSeries.defaultProps = {
   color: () => 'tomato',
-};
+}
 
-export default TrendChartLineSeries;
+export default TrendChartLineSeries

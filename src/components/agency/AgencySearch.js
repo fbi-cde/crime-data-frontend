@@ -1,40 +1,40 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import AgencySearchResults from './AgencySearchResults';
-import OnEscape from '../OnEscape';
-import { oriToState } from '../../util/agencies';
+import AgencySearchResults from './AgencySearchResults'
+import OnEscape from '../OnEscape'
+import { oriToState } from '../../util/agencies'
 
 class AgencySearch extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    const search = props.agency;
-    const hasSelection = !!search;
+    const search = props.agency
+    const hasSelection = !!search
     this.state = {
       search,
       hasSelection,
       showResults: props.initialShowResults,
-    };
+    }
   }
 
   componentDidMount() {
-    document.addEventListener('click', this.handleClick);
+    document.addEventListener('click', this.handleClick)
   }
 
   componentWillReceiveProps({ agency, initialShowResults }) {
     if (initialShowResults !== this.props.initialShowResults) {
-      this.setState({ showResults: initialShowResults });
+      this.setState({ showResults: initialShowResults })
     }
 
     this.setState({
       search: agency,
       hasSelection: agency !== '',
-    });
+    })
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.handleClick);
+    document.removeEventListener('click', this.handleClick)
   }
 
   handleChange = e => {
@@ -42,56 +42,56 @@ class AgencySearch extends Component {
       search: e.target.value,
       hasSelection: false,
       showResults: true,
-    });
-  };
+    })
+  }
 
   handleClick = e => {
     if (this.state.showResults && !e.target.closest('.agency-search')) {
-      this.setState({ showResults: false });
+      this.setState({ showResults: false })
     }
-    return e;
-  };
+    return e
+  }
 
   handleEscape = e => {
-    if (this.state.showResults) this.setState({ showResults: false });
-    return e;
-  };
+    if (this.state.showResults) this.setState({ showResults: false })
+    return e
+  }
 
   handleResultsClick = d => e => {
-    e.preventDefault();
-    this.setState({ search: d.agency_name, hasSelection: true });
-    this.props.onChange({ place: d.ori, placeType: 'agency' });
-  };
+    e.preventDefault()
+    this.setState({ search: d.agency_name, hasSelection: true })
+    this.props.onChange({ place: d.ori, placeType: 'agency' })
+  }
 
   handleStateClick = usState => {
-    this.setState({ showResults: false });
-    this.props.onChange({ place: usState, placeType: 'state' });
-  };
+    this.setState({ showResults: false })
+    this.props.onChange({ place: usState, placeType: 'state' })
+  }
 
   clearInput = () => {
-    this.setState({ search: '', hasSelection: false, showResults: true });
-  };
+    this.setState({ search: '', hasSelection: false, showResults: true })
+  }
 
   toggleResults = () => {
-    this.setState(prevState => ({ showResults: !prevState.showResults }));
-  };
+    this.setState(prevState => ({ showResults: !prevState.showResults }))
+  }
 
   render() {
-    const { data } = this.props;
-    const { search, hasSelection, showResults } = this.state;
+    const { data } = this.props
+    const { search, hasSelection, showResults } = this.state
 
     // get unique set of counties (for result grouping)
-    const counties = {};
-    data.forEach(d => (counties[d.primary_county || 'N/A'] = true));
+    const counties = {}
+    data.forEach(d => (counties[d.primary_county || 'N/A'] = true))
 
-    const searchUpper = search.toUpperCase();
+    const searchUpper = search.toUpperCase()
     const dataFiltered =
       searchUpper === ''
         ? data
         : data.filter(d => {
-            const words = `${d.ori} ${d.agency_name}`.toUpperCase();
-            return words.includes(searchUpper);
-          });
+            const words = `${d.ori} ${d.agency_name}`.toUpperCase()
+            return words.includes(searchUpper)
+          })
 
     return (
       <div className="agency-search mt2">
@@ -144,7 +144,7 @@ class AgencySearch extends Component {
             </OnEscape>}
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -152,10 +152,10 @@ AgencySearch.propTypes = {
   agency: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   initialShowResults: PropTypes.bool,
-};
+}
 
 AgencySearch.defaultProps = {
   initialShowResults: true,
-};
+}
 
-export default AgencySearch;
+export default AgencySearch

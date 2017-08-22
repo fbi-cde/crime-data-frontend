@@ -1,9 +1,9 @@
 /* eslint no-undef: 0 */
 
-import { shallow } from 'enzyme';
-import React from 'react';
+import { shallow } from 'enzyme'
+import React from 'react'
 
-import TrendChartLineSeries from '../../src/components/trend/TrendChartLineSeries';
+import TrendChartLineSeries from '../../src/components/trend/TrendChartLineSeries'
 
 describe('TrendChartLineSeries', () => {
   const data = [
@@ -28,7 +28,7 @@ describe('TrendChartLineSeries', () => {
       count: 1153022,
       rate: 361.5538543114589,
     },
-  ];
+  ]
   const series = [
     {
       crime: 'violent-crime',
@@ -37,24 +37,24 @@ describe('TrendChartLineSeries', () => {
       segments: [data],
       values: data,
     },
-  ];
+  ]
   const filters = {
     since: 2012,
     until: 2014,
     crime: 'violent-crime',
     place: 'united-states',
-  };
-  let chart;
-  const x = () => 0.7;
-  const y = () => 0.6;
+  }
+  let chart
+  const x = () => 0.7
+  const y = () => 0.6
 
   beforeEach(() => {
     chart = shallow(
       <TrendChartLineSeries series={series} x={x} y={y} {...filters} />,
-    );
-  });
+    )
+  })
 
   it('TrendChart has a line (<path>) for each series', () => {
-    expect(chart.find('.series path').length).toEqual(series.length);
-  });
-});
+    expect(chart.find('.series path').length).toEqual(series.length)
+  })
+})

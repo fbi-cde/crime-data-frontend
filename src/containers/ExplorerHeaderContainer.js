@@ -1,14 +1,14 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 
-import ExplorerIntro from '../components/explorer/ExplorerIntro';
-import Loading from '../components/Loading';
-import PlaceThumbnail from '../components/PlaceThumbnail';
-import UcrResourcesList from '../components/UcrResourcesList';
-import { getAgency, oriToState } from '../util/agencies';
-import { getPlaceInfo } from '../util/place';
-import lookup from '../util/usa';
+import ExplorerIntro from '../components/explorer/ExplorerIntro'
+import Loading from '../components/Loading'
+import PlaceThumbnail from '../components/PlaceThumbnail'
+import UcrResourcesList from '../components/UcrResourcesList'
+import { getAgency, oriToState } from '../util/agencies'
+import { getPlaceInfo } from '../util/place'
+import lookup from '../util/usa'
 
 const ExplorerHeaderContainer = ({
   agencies,
@@ -21,9 +21,9 @@ const ExplorerHeaderContainer = ({
   placeType,
   until,
 }) => {
-  const isLoading = isAgency ? agencies.loading : participation.loading;
-  const usState = isAgency ? oriToState(place) : place;
-  const placeDisplay = isAgency ? agency.agency_name : lookup(place).display;
+  const isLoading = isAgency ? agencies.loading : participation.loading
+  const usState = isAgency ? oriToState(place) : place
+  const placeDisplay = isAgency ? agency.agency_name : lookup(place).display
 
   return (
     <div>
@@ -59,16 +59,16 @@ const ExplorerHeaderContainer = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = ({ agencies, filters, participation }) => {
-  const { place, placeType } = getPlaceInfo(filters);
-  const { crime, until } = filters;
-  const isAgency = placeType === 'agency';
-  const agency = isAgency && !agencies.loading && getAgency(agencies, place);
-  const { icpsr_lat: lat, icpsr_lng: lng } = agency;
-  const coordinates = isAgency && lat && lng && { lat, lng };
+  const { place, placeType } = getPlaceInfo(filters)
+  const { crime, until } = filters
+  const isAgency = placeType === 'agency'
+  const agency = isAgency && !agencies.loading && getAgency(agencies, place)
+  const { icpsr_lat: lat, icpsr_lng: lng } = agency
+  const coordinates = isAgency && lat && lng && { lat, lng }
 
   return {
     agencies,
@@ -80,7 +80,7 @@ const mapStateToProps = ({ agencies, filters, participation }) => {
     place,
     placeType,
     until,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps)(ExplorerHeaderContainer);
+export default connect(mapStateToProps)(ExplorerHeaderContainer)

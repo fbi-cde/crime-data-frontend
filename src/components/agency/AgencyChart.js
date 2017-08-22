@@ -1,42 +1,42 @@
-import { max } from 'd3-array';
-import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale';
-import throttle from 'lodash.throttle';
-import PropTypes from 'prop-types';
-import React from 'react';
+import { max } from 'd3-array'
+import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
+import throttle from 'lodash.throttle'
+import PropTypes from 'prop-types'
+import React from 'react'
 
-import AgencyChartDetails from './AgencyChartDetails';
-import XAxis from '../XAxis';
-import YAxis from '../YAxis';
+import AgencyChartDetails from './AgencyChartDetails'
+import XAxis from '../XAxis'
+import YAxis from '../YAxis'
 
 class AgencyChart extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { hover: null, svgParentWidth: null, yearSelected: null };
-    this.getDimensions = throttle(this.getDimensions, 20);
+    super(props)
+    this.state = { hover: null, svgParentWidth: null, yearSelected: null }
+    this.getDimensions = throttle(this.getDimensions, 20)
   }
 
   componentDidMount() {
-    this.getDimensions();
-    window.addEventListener('resize', this.getDimensions);
+    this.getDimensions()
+    window.addEventListener('resize', this.getDimensions)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.getDimensions);
+    window.removeEventListener('resize', this.getDimensions)
   }
 
   getDimensions = () => {
     if (this.svgParent) {
-      this.setState({ svgParentWidth: this.svgParent.clientWidth });
+      this.setState({ svgParentWidth: this.svgParent.clientWidth })
     }
-  };
+  }
 
   rememberValue = d => () => {
-    this.setState({ hover: d, yearSelected: null });
-  };
+    this.setState({ hover: d, yearSelected: null })
+  }
 
   updateYear = year => {
-    this.setState({ yearSelected: year });
-  };
+    this.setState({ yearSelected: year })
+  }
 
   render() {
     const {
@@ -48,40 +48,40 @@ class AgencyChart extends React.Component {
       size,
       submitsNibrs,
       until,
-    } = this.props;
-    const { hover, svgParentWidth, yearSelected } = this.state;
+    } = this.props
+    const { hover, svgParentWidth, yearSelected } = this.state
 
-    const svgWidth = svgParentWidth || size.width;
-    const svgHeight = svgWidth / 3;
-    const { margin } = size;
-    const width = svgWidth - margin.left - margin.right;
-    const height = svgHeight - margin.top - margin.bottom;
-    const xPadding = svgWidth < 500 ? 20 : 40;
+    const svgWidth = svgParentWidth || size.width
+    const svgHeight = svgWidth / 3
+    const { margin } = size
+    const width = svgWidth - margin.left - margin.right
+    const height = svgHeight - margin.top - margin.bottom
+    const xPadding = svgWidth < 500 ? 20 : 40
 
-    const keys = ['reported', 'cleared'];
-    const yMax = max([3, max(data, d => max(keys, k => d[k]))]);
+    const keys = ['reported', 'cleared']
+    const yMax = max([3, max(data, d => max(keys, k => d[k]))])
 
-    const colorMap = scaleOrdinal().domain(keys).range(colors);
-    const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors);
-    const noun = submitsNibrs ? 'incidents' : 'offenses';
+    const colorMap = scaleOrdinal().domain(keys).range(colors)
+    const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
+    const noun = submitsNibrs ? 'incidents' : 'offenses'
 
-    const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice();
+    const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()
 
     const x0 = scaleBand()
       .domain(data.map(d => d.year))
       .rangeRound([0 + xPadding, width - xPadding])
-      .paddingInner(0.3);
+      .paddingInner(0.3)
 
     const x1 = scaleBand()
       .domain(keys)
       .rangeRound([0, x0.bandwidth()])
-      .padding(0);
+      .padding(0)
 
     const active = yearSelected
       ? data.find(d => d.year === yearSelected)
-      : hover || data[data.length - 1];
+      : hover || data[data.length - 1]
 
-    const activePriorYear = data.find(d => d.year === active.year - 1);
+    const activePriorYear = data.find(d => d.year === active.year - 1)
 
     const noDataYears = data
       .filter(d => d.reported === 0 && d.cleared === 0)
@@ -89,11 +89,11 @@ class AgencyChart extends React.Component {
         cleared,
         reported,
         year,
-      }));
+      }))
 
     // no data (nd) element responsive values
     const [ndHeight, ndCircle, ndTextY, ndTextSize] =
-      svgWidth < 500 ? [10, 5, 2.5, 8] : [20, 8, 4, 11];
+      svgWidth < 500 ? [10, 5, 2.5, 8] : [20, 8, 4, 11]
 
     return (
       <div>
@@ -166,7 +166,7 @@ class AgencyChart extends React.Component {
           </svg>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -182,7 +182,7 @@ AgencyChart.propTypes = {
   }).isRequired,
   submitsNibrs: PropTypes.bool.isRequired,
   until: PropTypes.number.isRequired,
-};
+}
 
 AgencyChart.defaultProps = {
   colors: ['#702c27', '#ff5e50'],
@@ -191,6 +191,6 @@ AgencyChart.defaultProps = {
     width: 720,
     margin: { top: 16, right: 0, bottom: 24, left: 36 },
   },
-};
+}
 
-export default AgencyChart;
+export default AgencyChart

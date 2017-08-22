@@ -1,42 +1,42 @@
-import startCase from 'lodash.startcase';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { connect } from 'react-redux';
+import startCase from 'lodash.startcase'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { connect } from 'react-redux'
 
-import ErrorCard from '../components/ErrorCard';
-import Loading from '../components/Loading';
-import NibrsCard from '../components/nibrs/NibrsCard';
-import NibrsIntro from '../components/nibrs/NibrsIntro';
-import { NibrsTerm } from '../components/Terms';
-import parseNibrs from '../util/nibrs';
-import { getAgency, oriToState } from '../util/agencies';
-import { getPlaceInfo } from '../util/place';
+import ErrorCard from '../components/ErrorCard'
+import Loading from '../components/Loading'
+import NibrsCard from '../components/nibrs/NibrsCard'
+import NibrsIntro from '../components/nibrs/NibrsIntro'
+import { NibrsTerm } from '../components/Terms'
+import parseNibrs from '../util/nibrs'
+import { getAgency, oriToState } from '../util/agencies'
+import { getPlaceInfo } from '../util/place'
 import ucrParticipation, {
   shouldFetchNibrs as shouldShowNibrs,
-} from '../util/participation';
+} from '../util/participation'
 
 const initialNibrsYear = ({ place, placeType, since }) => {
-  const placeNorm = placeType === 'agency' ? oriToState(place) : place;
-  const participation = ucrParticipation(placeNorm);
-  const initYear = participation && participation.nibrs['initial-year'];
+  const placeNorm = placeType === 'agency' ? oriToState(place) : place
+  const participation = ucrParticipation(placeNorm)
+  const initYear = participation && participation.nibrs['initial-year']
 
-  if (initYear && initYear > since) return initYear;
-  return since;
-};
+  if (initYear && initYear > since) return initYear
+  return since
+}
 
 const filterNibrsData = (data, { since, until }) => {
-  if (!data) return false;
+  if (!data) return false
 
-  const filtered = {};
+  const filtered = {}
   Object.keys(data).forEach(key => {
     filtered[key] = data[key].filter(d => {
-      const year = parseInt(d.year, 10);
-      return year >= since && year <= until;
-    });
-  });
+      const year = parseInt(d.year, 10)
+      return year >= since && year <= until
+    })
+  })
 
-  return filtered;
-};
+  return filtered
+}
 
 const NibrsContainer = ({
   agency,
@@ -53,34 +53,34 @@ const NibrsContainer = ({
     (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
     !shouldShowNibrs({ crime, place, placeType })
   ) {
-    return null;
+    return null
   }
 
-  const placeDisplay = isAgency ? agency.display : startCase(place);
-  const nibrsFirstYear = initialNibrsYear({ place, placeType, since });
-  const { data, error } = nibrs;
+  const placeDisplay = isAgency ? agency.display : startCase(place)
+  const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
+  const { data, error } = nibrs
 
   const isLoading = isAgency
     ? nibrs.loading
-    : nibrs.loading || participation.loading;
-  const isReady = !isLoading && error === null && !!data;
+    : nibrs.loading || participation.loading
+  const isReady = !isLoading && error === null && !!data
 
-  let totalCount = 0;
-  let content = null;
+  let totalCount = 0
+  let content = null
 
-  if (error) content = <ErrorCard error={error} />;
+  if (error) content = <ErrorCard error={error} />
   else if (isReady) {
-    const filteredData = filterNibrsData(data, { since, until });
-    const dataParsed = parseNibrs(filteredData, crime);
+    const filteredData = filterNibrsData(data, { since, until })
+    const dataParsed = parseNibrs(filteredData, crime)
 
     totalCount = dataParsed
       .find(d => d.title === 'Offenses')
-      .data.reduce((accum, next) => accum + next.count, 0);
+      .data.reduce((accum, next) => accum + next.count, 0)
 
     content = (
       <div className="clearfix mxn1">
         {dataParsed.filter(d => d.title !== 'Offenses').map((d, i) => {
-          const cls = i % 2 === 0 ? 'clear-left' : '';
+          const cls = i % 2 === 0 ? 'clear-left' : ''
           return (
             <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
               <NibrsCard
@@ -92,10 +92,10 @@ const NibrsContainer = ({
                 {...d}
               />
             </div>
-          );
+          )
         })}
       </div>
-    );
+    )
   }
 
   return (
@@ -123,8 +123,8 @@ const NibrsContainer = ({
           Source: Reported <NibrsTerm size="sm" /> data from {placeDisplay}.
         </div>}
     </div>
-  );
-};
+  )
+}
 
 NibrsContainer.propTypes = {
   crime: PropTypes.string.isRequired,
@@ -140,12 +140,12 @@ NibrsContainer.propTypes = {
     loading: PropTypes.bool,
   }).isRequired,
   until: PropTypes.number.isRequired,
-};
+}
 
 const mapStateToProps = ({ agencies, filters, nibrs, participation }) => {
-  const { place, placeType } = getPlaceInfo(filters);
-  const isAgency = placeType === 'agency';
-  const agency = isAgency && !agencies.loading && getAgency(agencies, place);
+  const { place, placeType } = getPlaceInfo(filters)
+  const isAgency = placeType === 'agency'
+  const agency = isAgency && !agencies.loading && getAgency(agencies, place)
 
   return {
     ...filters,
@@ -155,7 +155,7 @@ const mapStateToProps = ({ agencies, filters, nibrs, participation }) => {
     placeType,
     nibrs,
     participation,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps)(NibrsContainer);
+export default connect(mapStateToProps)(NibrsContainer)
