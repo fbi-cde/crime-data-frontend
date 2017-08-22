@@ -22,7 +22,7 @@ export const fetchSummaries = params => dispatch => {
   const requests = api.getSummaryRequests(params)
 
   return Promise.all(requests)
-    .then(data => data.reduce(reduceEntries('results')))
+    .then(data => data.reduce(reduceEntries('results'), {}))
     .then(summaries => dispatch(receivedSummary(summaries)))
     .catch(error => dispatch(failedSummary(error)))
 }

@@ -22,8 +22,8 @@ import offenses from '../util/offenses'
 import { getAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import { sentenceCase } from '../util/text'
-
 import lookup from '../util/usa'
+import { MIN_YEAR, MAX_YEAR } from '../util/years'
 
 class Explorer extends React.Component {
   componentDidMount() {
@@ -34,7 +34,7 @@ class Explorer extends React.Component {
 
     const clean = (val, alt) => {
       const yr = +val
-      return yr >= 1960 && yr <= 2014 ? yr : alt
+      return yr >= MIN_YEAR && yr <= MAX_YEAR ? yr : alt
     }
 
     actions.updateApp({

@@ -73,7 +73,7 @@ const fetchResults = (key, path) =>
 
 const fetchArson = place => {
   const url = place
-    ? `${API}/arson/states/${lookupUsa(place)}?per_page=50`
+    ? `${API}/arson/states/${lookupUsa(place).id}?per_page=50`
     : `${API}/arson/national?per_page=50`
   return get(url).then(({ results }) =>
     results.map(d => ({ year: d.year, arson: d.actual })),

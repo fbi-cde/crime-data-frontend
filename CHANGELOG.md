@@ -1,6 +1,24 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.15.0] - 2017-08-21
+### Added
+- Data for 2015 ([#1208](https://github.com/18F/crime-data-frontend/pull/1208))
+
+### Changed
+- Use "Washington, DC" instead of "District of Columbia" ([#1184](https://github.com/18F/crime-data-frontend/pull/1184))
+- Font size for time series charts ([#1191](https://github.com/18F/crime-data-frontend/pull/1191))
+- Move high level page components into `/src/pages` ([#1200](https://github.com/18F/crime-data-frontend/pull/1200))
+- Refactor out `dispatch` and `appState` props ([#1203](https://github.com/18F/crime-data-frontend/pull/1203))
+- Order of states in location drop downs ([crime-data-explorer#275](https://github.com/18F/crime-data-explorer/issues/275))
+
+### Fixed
+- Different responsive layout for footer links ([#978](https://github.com/18F/crime-data-frontend/issues/978))
+- Participation map on about page should also have a tabular representation ([#1173](https://github.com/18F/crime-data-frontend/issues/1173))
+- US territories CSV download link ([#1201](https://github.com/18F/crime-data-frontend/pull/1201))
+- Position skip content link offscreen until focused ([crime-data-explorer#268)](https://github.com/18F/crime-data-explorer/issues/268))
+
+
 ## [2.14.1] - 2017-08-03
 ### Fixed
 - Agency name is persistent through page refresh ([#1190](https://github.com/18F/crime-data-frontend/issues/1190))
