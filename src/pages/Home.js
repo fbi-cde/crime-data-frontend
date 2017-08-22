@@ -1,60 +1,59 @@
 /* eslint jsx-a11y/no-static-element-interactions: 0 */
-import PropTypes from 'prop-types';
-import React from 'react';
-import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types'
+import React from 'react'
+import Helmet from 'react-helmet'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import { bindActionCreators } from 'redux'
 
-import LocationSelect from '../components/LocationSelect';
-import SharingTags from '../components/SharingTags';
-import UsaMap from '../components/UsaMap';
-import { updateApp } from '../actions/composite';
-import { updateFilters } from '../actions/filters';
-import { oriToState } from '../util/agencies';
-import { crimeTypes } from '../util/offenses';
-import { slugify } from '../util/text';
-import lookup from '../util/usa';
-import dataPreview from '../../content/preview.yml';
+import LocationSelect from '../components/LocationSelect'
+import SharingTags from '../components/SharingTags'
+import UsaMap from '../components/UsaMap'
+import { updateApp } from '../actions/composite'
+import { updateFilters } from '../actions/filters'
+import { oriToState } from '../util/agencies'
+import { crimeTypes } from '../util/offenses'
+import { slugify } from '../util/text'
+import lookup from '../util/usa'
+import dataPreview from '../../content/preview.yml'
 
 class Home extends React.Component {
   componentDidMount() {
-    this.props.dispatch(updateFilters({ since: null, until: null }));
+    const { actions } = this.props
+    actions.updateFilters({ since: null, until: null })
   }
 
   handleMapClick = e => {
-    const id = e.target.getAttribute('id');
+    const id = e.target.getAttribute('id')
 
-    if (!id) return;
+    if (!id) return
 
-    const { router } = this.props;
-    const crime = this.props.crime;
-    const placeNew = { place: lookup(id).slug, placeType: 'state' };
-    this.props.dispatch(updateFilters(placeNew));
-    this.props.dispatch(updateApp({ crime, ...placeNew }, router));
-  };
+    const { actions, crime, router } = this.props
+    const placeNew = { place: lookup(id).slug, placeType: 'state' }
+    actions.updateFilters(placeNew)
+    actions.updateApp({ crime, ...placeNew }, router)
+  }
 
   handleSearchClick = () => {
-    const crime = this.props.crime;
-    const usState = this.props.place;
-    const { router } = this.props;
-    const change = { crime, place: usState, placeType: 'state' };
-    this.props.dispatch(updateApp(change, router));
-  };
+    const { actions, crime, router, usState } = this.props
+    const change = { crime, place: usState, placeType: 'state' }
+    actions.updateApp(change, router)
+  }
 
   selectCrime = e => {
-    const action = updateFilters({ crime: slugify(e.target.value) });
-    this.props.dispatch(action);
-  };
+    const { actions } = this.props
+    actions.updateFilters({ crime: slugify(e.target.value) })
+  }
 
   selectLocation = e => {
-    this.props.dispatch(updateFilters(e));
-  };
+    const { actions } = this.props
+    actions.updateFilters(e)
+  }
 
   render() {
-    const { appState, crime, dispatch, place, placeType } = this.props;
-    const isValid = !!(crime && place) || false;
-    const usState = placeType === 'agency' ? oriToState(place) : place;
+    const { crime, place, placeType } = this.props
+    const isValid = !!(crime && place) || false
+    const usState = placeType === 'agency' ? oriToState(place) : place
 
     return (
       <div>
@@ -196,7 +195,7 @@ class Home extends React.Component {
           </div>
         </section>
       </div>
-    );
+    )
   }
 }
 
@@ -208,11 +207,11 @@ Home.propTypes = {
   crime: PropTypes.string,
   place: PropTypes.string,
   placeType: PropTypes.string,
-};
+}
 
-const mapStateToProps = ({ filters }) => ({ ...filters });
+const mapStateToProps = ({ filters }) => ({ ...filters })
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ updateApp, updateFilters }, dispatch),
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
