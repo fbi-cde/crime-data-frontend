@@ -103,7 +103,6 @@ class TrendChart extends React.Component {
     if (isRape) crimes.push('rape-revised');
 
     const dataByYear = data.map(d => ({ ...d, date: parse(d.year) }));
-
     const newSeries = this.createSeries(crimes, dataByYear, places);
     const { dates, rates, series } = newSeries;
 
@@ -156,7 +155,7 @@ class TrendChart extends React.Component {
           until={until}
         />
         <div className="mb2 clearfix">
-          <div className="sm-col mb1 sm-m0 fs-10 bold monospace black">
+          <div className="sm-col mb1 sm-m0 fs-12 bold monospace black">
             Rate per 100,000 people, by year
           </div>
           {crime === 'rape' && <TrendChartRapeLegend />}

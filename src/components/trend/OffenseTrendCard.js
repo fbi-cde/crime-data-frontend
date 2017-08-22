@@ -40,6 +40,7 @@ class OffenseTrendCard extends React.Component {
       { data: dlData, filename: `${fname}.csv` },
     ];
 
+    console.log('OffenseTrendCard Trend Data:', trendData);
     return (
       <div className="p2 sm-p3 bg-white black">
         <h2 className="mt0 mb2 pb1 fs-14 sm-fs-18 sans-serif blue border-bottom border-blue-light">

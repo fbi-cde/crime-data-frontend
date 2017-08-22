@@ -58,13 +58,11 @@ class OffenseTrendChart extends React.Component {
     const rates = [];
 
     const gaps = [];
-    console.log('OffenseTrendChart: createOffenseTrendSeries Places:', places);
     for (let j = 0; j < places.length; j++) {
       const seriesObj = {};
       seriesObj.crime = trendData.offense;
       const place = places[j];
       const placeTrendData = trendData[place];
-      console.log('OffenseTrendChart: Place Trend Data:', placeTrendData);
       const values = [];
       // Segements
       const segments = [];
@@ -76,7 +74,8 @@ class OffenseTrendChart extends React.Component {
         rates.push(value.rate);
       }
       seriesObj.values = values;
-      seriesObj.segments = segments;
+      seriesObj.segments = [];
+      seriesObj.segments.push(segments);
       seriesObj.place = place;
       seriesObj.gaps = gaps;
       series.push(seriesObj);
@@ -84,19 +83,10 @@ class OffenseTrendChart extends React.Component {
     gridObj.rates = rates;
     gridObj.series = series;
 
-    console.log(
-      'OffenseTrendChart: createOffenseTrendSeries Results:',
-      gridObj,
-    );
     return gridObj;
   };
 
   fetchTrendDataByYear = (series, yearSelected) => {
-    console.log(
-      'OffenseTrendChart: fetchTrendDataByYear:',
-      series,
-      yearSelected,
-    );
     const active = [];
     for (let j = 0; j < series.series.length > 0; j++) {
       for (let k = 0; k < series.series[j].values.length; k++) {
@@ -117,7 +107,6 @@ class OffenseTrendChart extends React.Component {
 
   render() {
     const { trendData, since, until, size, colors } = this.props;
-    console.log('OffenseTrendChart trendData:', trendData);
     const { hover, svgParentWidth, yearSelected } = this.state;
     const { margin } = size;
     const color = scaleOrdinal(colors);
@@ -137,8 +126,6 @@ class OffenseTrendChart extends React.Component {
       }
     }
 
-    console.log('OffenseTrendChart Places:', places);
-
     const newSeries = this.createOffenseTrendSeries(
       trendData,
       places,
@@ -155,8 +142,7 @@ class OffenseTrendChart extends React.Component {
 
     const x = scaleTime().domain(extent(dates)).range([xPad, width - xPad]);
     const y = scaleLinear().domain([0, max(rates)]).range([height, 0]).nice();
-
-    console.log('OffenseTrendChart ACTIVE:', active);
+    console.log('OffenseTrendChart Series:', series);
 
     return (
       <div>
@@ -194,7 +180,6 @@ class OffenseTrendChart extends React.Component {
                 height={height}
                 fill="none"
                 pointerEvents="all"
-                onMouseMove={this.rememberValue}
               />
             </g>
           </svg>

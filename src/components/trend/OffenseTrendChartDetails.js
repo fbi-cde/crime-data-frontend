@@ -17,7 +17,6 @@ const borderColor = { borderColor: '#c8d3dd' };
 const cellStyle = { width: 68, ...borderColor };
 
 const getComparison = ({ place, data }) => {
-  console.log('getComparison:', place, data);
   const threshold = 3;
   let placeRate;
   let nationalRate;
@@ -48,7 +47,7 @@ const OffenseTrendChartDetails = ({
   until,
   updateYear,
 }) => {
-  console.log('TrendChartDetails init');
+  console.log('OffenseTrendChartDetails init');
   const handleSelectChange = e => updateYear(Number(e.target.value));
   const yearRange = range(since, until + 1);
   const term = (
@@ -56,9 +55,9 @@ const OffenseTrendChartDetails = ({
       {lowerCase(crime)}
     </Term>
   );
-  console.log('TrendChartDetails active', active);
+  console.log('OffenseTrendChartDetails active', active);
   const data = active.filter(d => d.crime !== 'rape-revised');
-  console.log('TrendChartDetails data', data);
+  console.log('OffenseTrendChartDetails data', data);
   const isNational = keys.length === 1;
   const place = isNational ? nationalKey : keys.find(k => k !== nationalKey);
   const comparison = getComparison({ place, data });
