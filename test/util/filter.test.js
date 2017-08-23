@@ -3,16 +3,6 @@
 import filterUtil from '../../src/util/filter'
 
 describe('filter util', () => {
-  it('should return sensible defaults', () => {
-    const actual = filterUtil({})
-    expect(actual).toEqual({
-      crime: 'violent-crime',
-      place: 'united-states',
-      since: 2005,
-      until: 2015,
-    })
-  })
-
   describe('crime validation', () => {
     it('should return the passed in crime if it is valid', () => {
       const { crime } = filterUtil({ crime: 'homicide' })
@@ -38,20 +28,19 @@ describe('filter util', () => {
   })
 
   describe('time validation', () => {
-    it('should return defaults for since if not provided', () => {
+    it('should return undefined for since if not provided', () => {
       const { since } = filterUtil({})
-      expect(since).toEqual(2005)
+      expect(since).toEqual(undefined)
     })
 
-    it('should return defaults for until if not provided', () => {
+    it('should return undefined for until if not provided', () => {
       const { until } = filterUtil({})
-      expect(until).toEqual(2015)
+      expect(until).toEqual(undefined)
     })
 
-    it('should return defaults if since is greater than until', () => {
-      const { since, until } = filterUtil({ since: 2020, until: 2000 })
-      expect(since).toEqual(2005)
-      expect(until).toEqual(2015)
+    it('should return since with a value of ten years less than until if since is greater', () => {
+      const { since } = filterUtil({ since: 2020, until: 2000 })
+      expect(since).toEqual(1990)
     })
 
     it('should ensure that the difference between since and until is at least 10 years', () => {
