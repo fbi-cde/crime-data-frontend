@@ -27,7 +27,9 @@ const CrimeTypeFilter = ({ ariaControls, onChange, selected }) =>
     {crimes.map((c, i) =>
       <div className="mb2 rounded overflow-hidden" key={i}>
         {c.title &&
-          <div className="mb1 sm-m0 px2 sm-lh-30 bold">{c.title}</div>}
+          <div className="mb1 sm-m0 px2 sm-lh-30 bold">
+            {c.title}
+          </div>}
         <div>
           {c.options.map((o, ii) => {
             const id = o.id || slugify(o)
@@ -37,7 +39,7 @@ const CrimeTypeFilter = ({ ariaControls, onChange, selected }) =>
               <label
                 key={ii}
                 className={`block cursor-pointer hover-bg-blue-light
-                    ${isActive ? 'bg-blue white bold hover-blue' : ''}
+                    ${isActive ? 'bg-blue white bold hover-blue rounded' : ''}
                     ${single ? 'bold px2' : 'px3 sm-lh-30'}`}
                 htmlFor={id}
               >
