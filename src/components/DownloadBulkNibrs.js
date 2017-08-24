@@ -83,7 +83,7 @@ class DownloadBulkNibrs extends React.Component {
                 </option>
                 {nibrsStates.map((s, i) =>
                   <option key={i} value={s}>
-                    {startCase(s)}
+                    {s !== 'washington-dc' ? startCase(s) : 'Washington, DC'}
                   </option>,
                 )}
               </select>
