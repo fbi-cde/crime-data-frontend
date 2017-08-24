@@ -32,21 +32,15 @@ class PlaceThumbnail extends React.Component {
     const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
     const geoStates = feature(usa, usa.objects.units).features
-    console.log('GeoStates:', geoStates)
     const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
-    console.log('usState', usState)
     let active
     if (usState !== 'washington-dc') {
       active = geoStates.find(
         s => s.properties.name === lookupUsa(usState).display,
       )
     } else {
-      console.log('Find for DC')
       active = geoStates.find(s => s.id === 'US11')
     }
-
-    console.log('GeoState Find Results:', active)
-    console.log('Place Thumbnail:', lookupUsa(usState).display)
     const { lat, lng } = coordinates || {}
     const pin = coordinates && projection([lng, lat])
 
