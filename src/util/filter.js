@@ -15,9 +15,15 @@ const validateFilter = filters => {
   if (filters.crime && !isValidCrime(filters.crime)) {
     newFilters.crime = defaults.crime
   }
-  if (filters.place && !lookupUsa(filters.place)) {
+
+  if (
+    filters.place &&
+    !lookupUsa(filters.place) &&
+    filters.placeType !== 'agency'
+  ) {
     newFilters.place = defaults.place
   }
+
   if (filters.since === null && filters.until === null) {
     newFilters.since = defaults.since
     newFilters.until = defaults.until
