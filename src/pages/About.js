@@ -186,7 +186,7 @@ class About extends React.Component {
                 <div className="mb-tiny bold">
                   Summary (SRS) data
                   <span className="italic ml-tiny regular">
-                    1960—2014 data available
+                    1960—2015 data available
                   </span>
                 </div>
                 <p className="mb3">
@@ -202,7 +202,7 @@ class About extends React.Component {
                 <div className="mb-tiny bold">
                   Incident-based (NIBRS) data
                   <span className="italic ml-tiny regular">
-                    1991—2014 data available
+                    1991—2015 data available
                   </span>
                 </div>
                 <p>
