@@ -67,8 +67,13 @@ class AgencyChart extends React.Component {
 
     const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()
 
+    // Use Range based upon Since and Unitl due to API returning bad data etc:  [  {...year:2005},{...year:2007},{...year:2008}]
+    const timeRange = []
+    for (let y = since; y < until + 1; y++) {
+      timeRange.push(y)
+    }
     const x0 = scaleBand()
-      .domain(data.map(d => d.year))
+      .domain(timeRange)
       .rangeRound([0 + xPadding, width - xPadding])
       .paddingInner(0.3)
 
@@ -83,6 +88,24 @@ class AgencyChart extends React.Component {
 
     const activePriorYear = data.find(d => d.year === active.year - 1)
 
+    // Find Missing Years from API Payload since it is not passing them back as NULL
+    const missingDates = []
+    if (data[0].year != since) {
+      missingDates.push(since)
+    }
+    if (data[data.length - 1].year != until) {
+      missingDates.push(until)
+    }
+    for (let i = 0; i < data.length - 1; i++) {
+      const date1 = data[i].year
+
+      const date2 = data[i + 1].year
+      if (date1 + 1 != date2) {
+        const missingDate = date1 + 1
+        missingDates.push(missingDate)
+      }
+    }
+
     const noDataYears = data
       .filter(d => d.reported === 0 && d.cleared === 0)
       .map(({ cleared, reported, year }) => ({
@@ -91,10 +114,20 @@ class AgencyChart extends React.Component {
         year,
       }))
 
+    // Merge Missing Data Collections
+    if (missingDates.length > 0) {
+      for (let j = 0; j < missingDates.length; j++) {
+        const noDataYearsObj = {}
+        noDataYearsObj.cleared = 0
+        noDataYearsObj.reported = 0
+        noDataYearsObj.year = missingDates[j]
+        noDataYears.push(noDataYearsObj)
+      }
+    }
+
     // no data (nd) element responsive values
-    const [ndHeight, ndCircle, ndTextY, ndTextSize] = svgWidth < 500
-      ? [10, 5, 2.5, 8]
-      : [20, 8, 4, 11]
+    const [ndHeight, ndCircle, ndTextY, ndTextSize] =
+      svgWidth < 500 ? [10, 5, 2.5, 8] : [20, 8, 4, 11]
 
     return (
       <div>
