@@ -30,4 +30,22 @@ describe('TrendChart', () => {
   it('TrendChart renders svg', () => {
     expect(chart.find('svg').length).toEqual(1)
   })
+
+  describe('createSeries()', () => {
+    // it('should return empty arrays if no data is passed in', () => {
+    //   const crimes = []
+    //   const dataByYear = []
+    //   const places = []
+    //   const actual = chart.instance().createSeries(crimes, dataByYear, places)
+    //   expect(actual).toEqual(false)
+    // })
+
+    it('work', () => {
+      const actual = chart.instance().createSeries(data)
+      const { rates, series } = actual
+      expect(rates.length).toEqual(data.length)
+      expect(series.length).toEqual(filters.places.length * crimes.length)
+      expect(series).toEqual(false)
+    })
+  })
 })

@@ -15,17 +15,13 @@ const TrendChartLineSeries = ({ color, series, x, y }) => {
 
         return (
           <g key={i} className={`series series-${d.place}-${d.crime}`}>
-            {d.segments.map((values, j) =>
-              <g key={j}>
-                <path
-                  d={l(values)}
-                  fill="none"
-                  stroke={color(d.place)}
-                  strokeWidth="2.5"
-                  strokeDasharray={d.crime === 'rape-revised' && '5,4'}
-                />
-              </g>,
-            )}
+            <path
+              d={l(d.values)}
+              fill="none"
+              stroke={color(d.place)}
+              strokeWidth="2.5"
+              strokeDasharray={d.crime === 'rape-revised' && '5,4'}
+            />
             {d.crime !== 'rape-revised' &&
               ends.map((pt, j) =>
                 <circle
@@ -44,7 +40,7 @@ const TrendChartLineSeries = ({ color, series, x, y }) => {
 }
 
 TrendChartLineSeries.propTypes = {
-  color: PropTypes.func.isRequired,
+  color: PropTypes.func,
   series: PropTypes.array.isRequired,
   x: PropTypes.func.isRequired,
   y: PropTypes.func.isRequired,

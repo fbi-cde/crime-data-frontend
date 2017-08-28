@@ -2,7 +2,7 @@
 
 import { bisector, extent, max } from 'd3-array'
 import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale'
-import { timeParse } from 'd3-time-format'
+import range from 'lodash.range'
 import throttle from 'lodash.throttle'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -14,6 +14,7 @@ import TrendChartRapeAnnotate from './TrendChartRapeAnnotate'
 import TrendChartRapeLegend from './TrendChartRapeLegend'
 import XAxis from '../XAxis'
 import YAxis from '../YAxis'
+import { formatYear } from '../../util/formats'
 
 class TrendChart extends React.Component {
   constructor(props) {
@@ -37,39 +38,29 @@ class TrendChart extends React.Component {
     }
   }
 
-  createSeries = (crimes, data, places) => {
-    const [dates, rates] = [[], []]
-    const series = places
+  createSeries = () => {
+    const { crime, data, places } = this.props
+    const isRape = crime === 'rape'
+    const crimes = [isRape ? 'rape-legacy' : crime]
+    if (isRape) crimes.push('rape-revised')
+
+    const dataByYear = data.map(d => ({ ...d, date: formatYear(d.year) }))
+    return places
       .map(place =>
-        crimes.map(crime => {
-          const gaps = []
-          const segments = [[]]
-          const values = data
-            .filter(d => d[place][crime] && d[place][crime].count)
+        crimes.map(c => {
+          const values = dataByYear
+            .filter(d => d[place][c] && d[place][c].count)
             .map(d => ({
               date: d.date,
               year: d.year,
               population: d[place].population,
-              ...d[place][crime],
+              ...d[place][c],
             }))
 
-          values.forEach(d => {
-            if (d.count && d.count !== 0) {
-              segments[segments.length - 1].push(d)
-            } else {
-              gaps.push(d.year)
-              segments.push([])
-            }
-            dates.push(d.date)
-            rates.push(d.rate)
-          })
-
-          return { crime, gaps, place, segments, values }
+          return { crime: c, place, values }
         }),
       )
       .reduce((a, n) => a.concat(n), [])
-
-    return { dates, rates, series }
   }
 
   updateYear = year => {
@@ -96,15 +87,14 @@ class TrendChart extends React.Component {
     const width = svgWidth - margin.left - margin.right
     const height = svgHeight - margin.top - margin.bottom
     const xPad = svgWidth < 500 ? 15 : 30
-    const parse = timeParse('%Y')
 
-    const isRape = crime === 'rape'
-    const crimes = [isRape ? 'rape-legacy' : crime]
-    if (isRape) crimes.push('rape-revised')
+    const series = this.createSeries(data)
 
-    const dataByYear = data.map(d => ({ ...d, date: parse(d.year) }))
-    const newSeries = this.createSeries(crimes, dataByYear, places)
-    const { dates, rates, series } = newSeries
+    const dates = range(since, until).map(d => formatYear(d))
+    const rates = series
+      .map(s => s.values)
+      .reduce((accum, next) => accum.concat(next), [])
+      .map(s => s.rate)
 
     const x = scaleTime().domain(extent(dates)).range([xPad, width - xPad])
     const y = scaleLinear().domain([0, max(rates)]).range([height, 0]).nice()
