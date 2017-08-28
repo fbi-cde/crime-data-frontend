@@ -1,5 +1,3 @@
-import camelCase from 'lodash.camelcase'
-import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
@@ -12,16 +10,23 @@ import Loading from '../components/Loading'
 import NoData from '../components/NoData'
 import TrendChart from '../components/trend/TrendChart'
 import TrendSourceText from '../components/trend/TrendSourceText'
-import OffenseTrendArea from '../components/trend/OffenseTrendArea'
 import { generateCrimeReadme } from '../util/content'
 import { crimeTypes } from '../util/offenses'
 import { getPlaceInfo } from '../util/place'
 import { combinePlaces, filterByYear } from '../util/summary'
+import { slugify } from '../util/text'
 import lookupUsa, { nationalKey } from '../util/usa'
 
 class TrendContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    const { until } = props
+    this.state = { yearSelected: until }
+  }
+
   getContent = ({ crime, places, since, summaries, until }) => {
     const { loading, error } = summaries
+    const { yearSelected } = this.state
 
     if (loading) return <Loading />
     if (error) return <ErrorCard error={error} />
@@ -57,8 +62,10 @@ class TrendContainer extends React.Component {
           crime={crime}
           data={data}
           places={places}
+          onChangeYear={this.updateYear}
           since={since}
           until={until}
+          initialYearSelected={yearSelected}
         />
         <DownloadDataBtn
           ariaLabel={`Download ${title} data as a CSV`}
@@ -67,6 +74,10 @@ class TrendContainer extends React.Component {
         />
       </div>
     )
+  }
+
+  updateYear = year => {
+    this.setState({ yearSelected: year })
   }
 
   render() {
@@ -93,26 +104,50 @@ class TrendContainer extends React.Component {
       until,
     }));
     console.log('otherTrendMap:', otherTrendMap);
-*/
+    */
+
+    let otherCrimes = []
+    if (crime === 'violent-crime') {
+      otherCrimes = crimeTypes.violentCrime.map(c => c.id || slugify(c))
+    } else if (crime === 'property-crime') {
+      otherCrimes = crimeTypes.propertyCrime.map(c => c.id || slugify(c))
+    }
+
     return (
       <div className="mb7">
         <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
           <h2 className="mt0 mb2 sm-mb4 fs-24 sm-fs-28 sans-serif">
             {startCase(crime)} rate in {lookupUsa(place).display}, {since}-{until}
           </h2>
-          {this.getContent({ crime, places, since, summaries, until })}
+          <div className="bg-white">
+            {this.getContent({ crime, places, since, summaries, until })}
+          </div>
+        </div>
+        <div>
+          <div className="clearfix mxn1 trend-cards">
+            {otherCrimes.map((other, i) => {
+              const cls = i % 2 === 0 ? 'clear-left' : ''
+              return (
+                <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
+                  <div className="bg-white p2">
+                    <h3 className="mt0 mb2 sm-mb4 fs-18 sans-serif">
+                      {startCase(other)}
+                    </h3>
+                    {this.getContent({
+                      crime: other,
+                      places,
+                      since,
+                      summaries,
+                      until,
+                    })}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
         {isReady &&
           <TrendSourceText crime={crime} place={place} placeType={placeType} />}
-        {isReady &&
-          <OffenseTrendArea
-            crime={crime}
-            summaries={summaries}
-            places={places}
-            place={place}
-            since={since}
-            until={until}
-          />}
       </div>
     )
   }

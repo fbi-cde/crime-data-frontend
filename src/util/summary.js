@@ -87,8 +87,6 @@ const filterByYear = (summaries, { since, until }) => {
     }
   })
 
-  console.log('places', places)
-
   return Object.assign(...places)
 }
 
@@ -124,8 +122,6 @@ const combinePlaces = (summaries, offenses = []) => {
       }),
     ),
   )
-
-  console.log('x!', x)
 
   return x
 }
