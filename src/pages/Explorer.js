@@ -63,11 +63,14 @@ class Explorer extends React.Component {
   }
 
   toggleSidebar = () => {
-    const { actions } = this.props
-    const { isOpen } = this.props.appState.sidebar
-
-    if (isOpen) return actions.hideSidebar()
-    return actions.showSidebar()
+    const { actions, isOpen } = this.props
+    if (isOpen) {
+      actions.hideSidebar()
+      this.setOpen(false)
+    } else {
+      actions.showSidebar()
+      this.setOpen(true)
+    }
   }
 
   render() {
@@ -141,6 +144,10 @@ Explorer.propTypes = {
   filters: PropTypes.object,
   params: PropTypes.object,
   router: PropTypes.object,
+}
+
+Explorer.defaultProps = {
+  isOpen: false,
 }
 
 const mapStateToProps = ({ agencies, filters }) => ({ agencies, filters })
