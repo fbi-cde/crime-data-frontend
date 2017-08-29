@@ -3,14 +3,14 @@ import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import DownloadDataBtn from './DownloadDataBtn'
+import DownloadDataBtn from '../DownloadDataBtn'
 import NibrsDonut from './NibrsDonut'
 import NibrsHistogram from './NibrsHistogram'
 import NibrsStackedBar from './NibrsStackedBar'
 import NibrsTable from './NibrsTable'
 import NibrsTableWithBars from './NibrsTableWithBars'
-import { generateCrimeReadme } from '../util/content'
-import { slugify } from '../util/text'
+import { generateCrimeReadme } from '../../util/content'
+import { slugify } from '../../util/text'
 
 const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
   const charts = data.map((d, i) => {

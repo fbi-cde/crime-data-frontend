@@ -3,7 +3,7 @@
 import { shallow } from 'enzyme'
 import React from 'react'
 
-import TrendChartLineSeries from '../../src/components/TrendChartLineSeries'
+import TrendChartLineSeries from '../../src/components/trend/TrendChartLineSeries'
 
 describe('TrendChartLineSeries', () => {
   const data = [

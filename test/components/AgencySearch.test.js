@@ -3,7 +3,7 @@
 import { shallow } from 'enzyme'
 import React from 'react'
 
-import AgencySearch from '../../src/components/AgencySearch'
+import AgencySearch from '../../src/components/agency/AgencySearch'
 
 describe('AgencySearch', () => {
   describe('componentWillReceiveProps()', () => {

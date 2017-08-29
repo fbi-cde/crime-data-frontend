@@ -1,4 +1,4 @@
-import offenses from './offenses'
+import offensesUtil from './offenses'
 import { oriToState } from './agencies'
 import lookupUsa from './usa'
 
@@ -7,7 +7,7 @@ import data from '../../public/data/ucr-program-participation.json'
 const lookup = state => data[state] || {}
 
 const isValidPlace = (place, placeType) => lookupUsa(place, placeType)
-const isValidCrime = crime => offenses.includes(crime)
+const isValidCrime = crime => offensesUtil.includes(crime)
 const noNibrs = ['violent-crime', 'property-crime']
 
 export const shouldFetchUcr = ({ place, placeType }) =>

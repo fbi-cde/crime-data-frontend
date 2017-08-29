@@ -1,43 +1,67 @@
-import snakeCase from 'lodash.snakecase'
+import { slugify } from '../util/text'
 
-// todo: refactor into action/reducer
-// build all rates and stuff in reducer/action
+export const calculateRates = summaries => {
+  const nonOffenseKeys = ['caveats', 'population', 'state_abbr', 'year']
+  const places = Object.keys(summaries).map(place => {
+    const rates = summaries[place].map(yearly => {
+      const offenses = Object.keys(yearly).filter(
+        k => !nonOffenseKeys.includes(k),
+      )
+      const { population, year } = yearly
+      const withRates = offenses.map(o => ({
+        [slugify(o)]: {
+          count: yearly[o],
+          rate: yearly[o] / population * 100000,
+        },
+      }))
 
-const mungeSummaryData = ({ crime, summaries, place, since, until }) => {
-  if (!summaries || !summaries[place]) return false
-
-  const keys = Object.keys(summaries)
-  return summaries[place]
-    .filter(d => {
-      if (!since || !until) return true
-      return d.year >= since && d.year <= until
+      return Object.assign({ population, year }, ...withRates)
     })
-    .sort((a, b) => a.year - b.year)
-    .map(year => {
-      const data = { year: +year.year }
-      keys.forEach(key => {
-        const source =
-          key !== place ? summaries[key].find(d => +d.year === data.year) : year
-        const normalizedCrime = crime === 'rape' ? 'rape-legacy' : crime
-        const apiCrime = snakeCase(normalizedCrime)
 
-        data[key] = {
-          population: source.population,
-          [normalizedCrime]: {
-            count: source[apiCrime],
-            rate: source[apiCrime] / source.population * 100000,
-          },
-        }
+    return {
+      [place]: rates,
+    }
+  })
 
-        if (crime === 'rape') {
-          data[key]['rape-revised'] = {
-            count: source.rape_revised,
-            rate: source.rape_revised / source.population * 100000,
-          }
-        }
-      })
-      return data
-    })
+  return Object.assign(...places)
 }
 
-export default mungeSummaryData
+export const combinePlaces = (summaries, offenses = []) => {
+  const places = Object.keys(summaries)
+  const years = summaries[places[0]].map(y => y.year)
+
+  return years.map(year =>
+    Object.assign(
+      { year },
+      ...places.map(place => {
+        const o = {}
+        const yearData = summaries[place].find(y => y.year === year)
+        offenses.forEach(offense => {
+          o[offense] = yearData[offense]
+        })
+
+        return { [place]: { population: yearData.population, ...o } }
+      }),
+    ),
+  )
+}
+
+export const filterByYear = (summaries, { since, until }) => {
+  const places = Object.keys(summaries).map(place => {
+    const filtered = summaries[place].filter(y => {
+      const { year } = y
+      if (since && until && +year >= since && +year <= until) return true
+      else if (since && !until && since <= +year) return true
+      else if (!since && until && until >= +year) return true
+      return false
+    })
+    return {
+      [place]: filtered,
+    }
+  })
+
+  return Object.assign(...places)
+}
+
+export const reshapeData = dataIn =>
+  Object.assign(...dataIn.map(d => ({ [d.key]: d.results })))

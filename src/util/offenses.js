@@ -12,6 +12,7 @@ const offenses = {
   robbery: 'robbery',
   'violent-crime': 'violent',
 }
+
 const ids = Object.keys(offenses)
 
 const violentCrime = [
@@ -42,4 +43,4 @@ const propertyCrime = [
 const crimeTypes = { violentCrime, propertyCrime }
 const mapToApiOffense = o => offenses[o] || slugify(o)
 
-export { ids as default, mapToApiOffense, crimeTypes }
+export { ids as default, mapToApiOffense, crimeTypes, offenses }

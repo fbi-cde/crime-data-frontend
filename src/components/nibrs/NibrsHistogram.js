@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import NibrsHistogramDetails from './NibrsHistogramDetails'
-import XAxis from './XAxis'
-import { slugify } from '../util/text'
+import XAxis from '../XAxis'
+import { slugify } from '../../util/text'
 
 class NibrsHistogram extends React.Component {
   state = { hover: null }
@@ -48,7 +48,9 @@ class NibrsHistogram extends React.Component {
 
     return (
       <div className="mb2 pb2 border-bottom border-blue-light" id={id}>
-        <div className="mb2 blue bold">{title}</div>
+        <div className="mb2 blue bold">
+          {title}
+        </div>
         <div>
           <svg
             preserveAspectRatio="xMidYMid"
@@ -58,9 +60,8 @@ class NibrsHistogram extends React.Component {
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               {bins.map((d, i) => {
                 const rectWidth = x(bins[0].x1) - x(bins[0].x0) - 1
-                const fill = hover === null || d.x0 === hover.x0
-                  ? '#ff5e50'
-                  : '#f4dfdd'
+                const fill =
+                  hover === null || d.x0 === hover.x0 ? '#ff5e50' : '#f4dfdd'
 
                 return (
                   <g
@@ -99,7 +100,9 @@ class NibrsHistogram extends React.Component {
             </g>
           </svg>
           {xLabel &&
-            <div className="mb1 fs-10 bold caps red center">{xLabel}</div>}
+            <div className="mb1 fs-10 bold caps red center">
+              {xLabel}
+            </div>}
           <NibrsHistogramDetails data={hover || { ct: total }} noun={noun} />
         </div>
       </div>

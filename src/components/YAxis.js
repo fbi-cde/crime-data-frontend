@@ -17,7 +17,9 @@ const YAxis = ({ tickCt, scale, width }) => {
     return (
       <g key={i} transform={`translate(0, ${pos})`} className="tick">
         <line x2={width} y2="0" strokeOpacity={i === 0 ? '1' : '.25'} />
-        <text fill="#000" x="-32" y="0" dy=".32em">{fmt(v)}</text>
+        <text fill="#000" x="-32" y="0" dy=".32em">
+          {fmt(v)}
+        </text>
       </g>
     )
   })
