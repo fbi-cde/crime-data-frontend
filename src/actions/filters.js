@@ -1,8 +1,8 @@
 import { FILTER_RESET, FILTERS_UPDATE } from './constants'
-import offenses from '../util/offenses'
+import offensesUtil from '../util/offenses'
 import lookupUsa from '../util/usa'
 
-const isValidCrime = crime => offenses.includes(crime)
+const isValidCrime = crime => offensesUtil.includes(crime)
 
 export const resetFilter = ({ id }) => ({ type: FILTER_RESET, id })
 export const updateFilters = filters => {

@@ -1,5 +1,3 @@
-import reduceEntries from 'reduce-entries'
-
 import { SUMMARY_FAILED, SUMMARY_FETCHING, SUMMARY_RECEIVED } from './constants'
 import api from '../util/api'
 import { calculateRates, reshapeData } from '../util/summary'
