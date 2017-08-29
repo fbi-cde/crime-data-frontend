@@ -1,5 +1,4 @@
 import range from 'lodash.range'
-import startCase from 'lodash.startcase'
 import React from 'react'
 
 import lookupUsa from '../util/usa'
@@ -81,9 +80,9 @@ class DownloadBulkNibrs extends React.Component {
                 <option value="Location" disabled>
                   Location
                 </option>
-                {nibrsStates.map((s, i) =>
+                {nibrsStates.sort().map((s, i) =>
                   <option key={i} value={s}>
-                    {s !== 'washington-dc' ? startCase(s) : 'Washington, DC'}
+                    {lookupUsa(s).display}
                   </option>,
                 )}
               </select>
