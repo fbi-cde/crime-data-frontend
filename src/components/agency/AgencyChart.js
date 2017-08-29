@@ -47,7 +47,7 @@ class AgencyChart extends React.Component {
       since,
       size,
       submitsNibrs,
-      until,
+      until
     } = this.props
     const { hover, svgParentWidth, yearSelected } = this.state
 
@@ -69,8 +69,8 @@ class AgencyChart extends React.Component {
 
     // Use Range based upon Since and Unitl due to API returning bad data etc:  [  {...year:2005},{...year:2007},{...year:2008}]
     const timeRange = []
-    for (let y = since; y < until + 1; y++) {
-      timeRange.push(y)
+    for (let s = since; s < until + 1; s++) {
+      timeRange.push(s)
     }
     const x0 = scaleBand()
       .domain(timeRange)
@@ -90,17 +90,17 @@ class AgencyChart extends React.Component {
 
     // Find Missing Years from API Payload since it is not passing them back as NULL
     const missingDates = []
-    if (data[0].year != since) {
+    if (data[0].year !== since) {
       missingDates.push(since)
     }
-    if (data[data.length - 1].year != until) {
+    if (data[data.length - 1].year !== until) {
       missingDates.push(until)
     }
     for (let i = 0; i < data.length - 1; i++) {
       const date1 = data[i].year
 
       const date2 = data[i + 1].year
-      if (date1 + 1 != date2) {
+      if (date1 + 1 !== date2) {
         const missingDate = date1 + 1
         missingDates.push(missingDate)
       }
@@ -111,7 +111,7 @@ class AgencyChart extends React.Component {
       .map(({ cleared, reported, year }) => ({
         cleared,
         reported,
-        year,
+        year
       }))
 
     // Merge Missing Data Collections
@@ -173,9 +173,9 @@ class AgencyChart extends React.Component {
                         className="cursor-pointer"
                         pointerEvents="all"
                         onMouseOver={this.rememberValue(d)}
-                      />,
+                      />
                     )}
-                  </g>,
+                  </g>
                 )}
                 {noDataYears.map(d =>
                   <g
@@ -193,7 +193,7 @@ class AgencyChart extends React.Component {
                     >
                       ✕
                     </text>
-                  </g>,
+                  </g>
                 )}
               </g>
             </g>
@@ -212,10 +212,10 @@ AgencyChart.propTypes = {
   since: PropTypes.number.isRequired,
   size: PropTypes.shape({
     width: PropTypes.number,
-    margin: PropTypes.object,
+    margin: PropTypes.object
   }).isRequired,
   submitsNibrs: PropTypes.bool.isRequired,
-  until: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired
 }
 
 AgencyChart.defaultProps = {
@@ -223,8 +223,8 @@ AgencyChart.defaultProps = {
   mutedColors: ['#f4e1df', '#faefee'],
   size: {
     width: 720,
-    margin: { top: 16, right: 0, bottom: 24, left: 36 },
-  },
+    margin: { top: 16, right: 0, bottom: 24, left: 36 }
+  }
 }
 
 export default AgencyChart
