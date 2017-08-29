@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Term from '../Term'
-import { estimatedTerm, nibrsTerm, srsTerm } from '../Terms'
+import { EstimatedTerm, NibrsTerm, SrsTerm } from '../Terms'
 import { formatNum } from '../../util/formats'
 import mapCrimeToGlossaryTerm from '../../util/glossary'
 
@@ -27,13 +27,13 @@ const ExplorerIntroNational = ({ crime, participation, until }) => {
       {!isArson
         ? <div>
             <p className="serif">
-              {crimeTerm} rates for the nation are derived from both {srsTerm}{' '}
-              and {nibrsTerm} reports voluntarily submitted to the FBI.
+              {crimeTerm} rates for the nation are derived from both <SrsTerm />{' '}
+              and <NibrsTerm /> reports voluntarily submitted to the FBI.
             </p>
             <p className="serif">
               In {highlight(until)}
-              , the FBI {estimatedTerm} crime statistics for the nation based on
-              data received from{' '}
+              , the FBI <EstimatedTerm /> crime statistics for the nation based
+              on data received from{' '}
               {highlight(formatNum(untilUcr.participating_agencies))} law
               enforcement agencies out of{' '}
               {highlight(formatNum(untilUcr.total_agencies))} in the country
@@ -43,7 +43,7 @@ const ExplorerIntroNational = ({ crime, participation, until }) => {
         : <div>
             <p className="serif">
               The number of arson incidents in the United States is derived from
-              both {srsTerm} and {nibrsTerm} reports sent to the FBI.
+              both <SrsTerm /> and <NibrsTerm /> reports sent to the FBI.
             </p>
             <p className="serif">
               In {highlight(until)}, the FBI received voluntary reports of arson
