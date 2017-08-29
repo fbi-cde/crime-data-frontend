@@ -99,7 +99,7 @@ class AgencySearch extends Component {
           <div className="relative">
             <input
               type="text"
-              className="col-12 pr5 field field-sm fs-14 bold bg-white border-blue rounded-none placeholder-blue placeholder-fw-100 truncate"
+              className="col-12 pr5 field field-sm fs-14 bold placeholder-blue placeholder-fw-100 truncate border-blue"
               placeholder="Search for an agency"
               value={search}
               onChange={this.handleChange}

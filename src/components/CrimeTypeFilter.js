@@ -39,7 +39,7 @@ const CrimeTypeFilter = ({ ariaControls, onChange, selected }) =>
               <label
                 key={ii}
                 className={`block cursor-pointer hover-bg-blue-light
-                    ${isActive ? 'bg-blue white bold hover-blue' : ''}
+                    ${isActive ? 'bg-blue white bold hover-blue rounded' : ''}
                     ${single ? 'bold px2' : 'px3 sm-lh-30'}`}
                 htmlFor={id}
               >
