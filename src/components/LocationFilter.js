@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import AgencySearch from './AgencySearch'
+import AgencySearch from './agency/AgencySearch'
 import LocationSelect from './LocationSelect'
 import { nationalKey } from '../util/usa'
 

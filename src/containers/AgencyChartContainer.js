@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import AgencyChart from '../components/AgencyChart'
+import AgencyChart from '../components/agency/AgencyChart'
 import DownloadDataBtn from '../components/DownloadDataBtn'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'

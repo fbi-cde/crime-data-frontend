@@ -28,7 +28,9 @@ const XAxis = ({ active, tickCt, tickSizeOuter, height, scale, showLine }) => {
         className={`tick ${String(v) === String(active) ? 'bold' : ''}`}
       >
         <line stroke="#000" y2="6" />
-        <text fill="#000" x="0" y="12" dy=".71em">{format(v)}</text>
+        <text fill="#000" x="0" y="12" dy=".71em">
+          {format(v)}
+        </text>
       </g>
     )
   })

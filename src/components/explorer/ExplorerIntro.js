@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import ErrorCard from './ErrorCard'
+import ErrorCard from '../ErrorCard'
 import ExplorerIntroAgency from './ExplorerIntroAgency'
 import ExplorerIntroNational from './ExplorerIntroNational'
 import ExplorerIntroState from './ExplorerIntroState'
-import { oriToState } from '../util/agencies'
-import { nationalKey } from '../util/usa'
+import { oriToState } from '../../util/agencies'
+import { nationalKey } from '../../util/usa'
 
 const ExplorerIntro = ({ agency, crime, participation, place, until }) => {
   if (agency) {

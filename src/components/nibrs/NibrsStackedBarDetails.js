@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { formatNum, formatPerc } from '../util/formats'
+import { formatNum, formatPerc } from '../../util/formats'
 
 const NibrsStackedBarDetails = ({ colorMap, data, isCounts, total }) =>
   <ul className="list-style-none p0 m0 fs-14">
