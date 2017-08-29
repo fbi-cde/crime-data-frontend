@@ -76,7 +76,6 @@ app.get('/api-proxy/*', (req, res) => {
       res.send(r.data)
     })
     .catch(e => {
-
       res.status(e.response.status).end()
     })
 })
