@@ -66,10 +66,8 @@ class Explorer extends React.Component {
     const { actions, isOpen } = this.props
     if (isOpen) {
       actions.hideSidebar()
-      this.setOpen(false)
     } else {
       actions.showSidebar()
-      this.setOpen(true)
     }
   }
 
