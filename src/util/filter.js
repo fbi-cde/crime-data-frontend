@@ -1,13 +1,14 @@
 import lookupUsa from '../util/usa'
-import offenses from '../util/offenses'
+import offenseUtil from '../util/offenses'
+import { MAX_YEAR } from '../util/years'
 
-const isValidCrime = crime => offenses.includes(crime)
+const isValidCrime = crime => offenseUtil.includes(crime)
 
 const defaults = {
   crime: 'violent-crime',
   place: 'united-states',
-  since: 2004,
-  until: 2014,
+  since: MAX_YEAR - 10,
+  until: MAX_YEAR,
 }
 
 const validateFilter = filters => {

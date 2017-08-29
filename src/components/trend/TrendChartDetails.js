@@ -3,11 +3,11 @@ import lowerCase from 'lodash.lowercase'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Highlight from './Highlight'
-import Term from './Term'
-import crimeTerm from '../util/glossary'
-import { formatNum, formatOneDec as formatRate } from '../util/formats'
-import lookupUsa, { nationalKey } from '../util/usa'
+import Highlight from '../Highlight'
+import Term from '../Term'
+import crimeTerm from '../../util/glossary'
+import { formatNum, formatOneDec as formatRate } from '../../util/formats'
+import lookupUsa, { nationalKey } from '../../util/usa'
 
 const highlight = txt =>
   <strong>
@@ -38,9 +38,9 @@ const TrendChartDetails = ({
   keys,
   since,
   until,
-  updateYear,
+  onChangeYear,
 }) => {
-  const handleSelectChange = e => updateYear(Number(e.target.value))
+  const handleSelectChange = e => onChangeYear(Number(e.target.value))
   const yearRange = range(since, until + 1)
   const term = (
     <Term id={crimeTerm(crime)} size="sm">
@@ -92,9 +92,9 @@ const TrendChartDetails = ({
   }
 
   return (
-    <div className="mb3 sm-mb5 lg-flex">
+    <div className="mb3 sm-mb5 lg-flex trend-chart-details">
       <div className="flex-auto">
-        <p className="mb2 lg-m0 lg-pr5 lg-mh-72p fs-14">
+        <p className="mb2 lg-m0 lg-pr5 lg-mh-88p fs-14">
           {sentence}
         </p>
       </div>
@@ -186,7 +186,7 @@ TrendChartDetails.propTypes = {
   crime: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
-  updateYear: PropTypes.func.isRequired,
+  onChangeYear: PropTypes.func.isRequired,
 }
 
 export default TrendChartDetails

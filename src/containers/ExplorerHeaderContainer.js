@@ -2,7 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import ExplorerIntro from '../components/ExplorerIntro'
+import ExplorerIntro from '../components/explorer/ExplorerIntro'
 import Loading from '../components/Loading'
 import PlaceThumbnail from '../components/PlaceThumbnail'
 import UcrResourcesList from '../components/UcrResourcesList'

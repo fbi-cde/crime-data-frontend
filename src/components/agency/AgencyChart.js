@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import AgencyChartDetails from './AgencyChartDetails'
-import XAxis from './XAxis'
-import YAxis from './YAxis'
+import XAxis from '../XAxis'
+import YAxis from '../YAxis'
 
 class AgencyChart extends React.Component {
   constructor(props) {

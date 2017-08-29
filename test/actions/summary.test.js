@@ -14,6 +14,7 @@ import {
   receivedSummary,
 } from '../../src/actions/summary'
 import api from '../../src/util/api'
+import * as summaryUtil from '../../src/util/summary'
 import { nationalKey } from '../../src/util/usa'
 
 const createPromise = (res, err) => {
@@ -100,6 +101,7 @@ describe('summary action', () => {
           results: ['fake-two'],
         }),
       ])
+      sandbox.stub(summaryUtil, 'calculateRates', x => x)
       fetchSummaries({ place: 'montana' })(dispatch).then(() => {
         const args = dispatch.args[1][0]
         expect(args.type).toEqual(SUMMARY_RECEIVED)

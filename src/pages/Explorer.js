@@ -18,7 +18,7 @@ import TrendContainer from '../containers/TrendContainer'
 import { updateApp } from '../actions/composite'
 import { showTerm } from '../actions/glossary'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
-import offenses from '../util/offenses'
+import offensesUtil from '../util/offenses'
 import { getAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import { sentenceCase } from '../util/text'
@@ -63,11 +63,14 @@ class Explorer extends React.Component {
   }
 
   toggleSidebar = () => {
-    const { actions } = this.props
-    const { isOpen } = this.props.appState.sidebar
-
-    if (isOpen) return actions.hideSidebar()
-    return actions.showSidebar()
+    const { actions, isOpen } = this.props
+    if (isOpen) {
+      actions.hideSidebar()
+      this.setOpen(false)
+    } else {
+      actions.showSidebar()
+      this.setOpen(true)
+    }
   }
 
   render() {
@@ -81,7 +84,7 @@ class Explorer extends React.Component {
     if (filters.place && filters.place !== place) return null
 
     // show not found page if crime or place unfamiliar
-    if (!offenses.includes(crime) || !lookup(place, placeType)) {
+    if (!offensesUtil.includes(crime) || !lookup(place, placeType)) {
       return <NotFound />
     }
 
@@ -141,6 +144,10 @@ Explorer.propTypes = {
   filters: PropTypes.object,
   params: PropTypes.object,
   router: PropTypes.object,
+}
+
+Explorer.defaultProps = {
+  isOpen: false,
 }
 
 const mapStateToProps = ({ agencies, filters }) => ({ agencies, filters })

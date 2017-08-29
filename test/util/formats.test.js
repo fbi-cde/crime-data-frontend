@@ -1,4 +1,11 @@
-import { formatPerc, formatSI, formatAxisNum } from '../../src/util/formats'
+/* eslint no-undef: 0 */
+
+import {
+  formatPerc,
+  formatSI,
+  formatAxisNum,
+  formatYear,
+} from '../../src/util/formats'
 
 describe('formats utility', () => {
   it('formatPerc()', () => {
