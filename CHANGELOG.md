@@ -1,6 +1,21 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.15.1] - 2017-08-29
+### Added
+- An "All violent crime" and "All property crime view" for national and state level views (https://github.com/18F/crime-data-frontend/pull/1207)
+
+##Changed
+- Refactor data flow between Trend Components (https://github.com/18F/crime-data-frontend/pull/1207)
+- Refactor Summary Data handling and data object (https://github.com/18F/crime-data-frontend/pull/1206)
+##Fixed
+- "Washington, DC" Thumbnail image not being displayed, and changed to display "Washington, DC" in Download Location drop-down (https://github.com/18F/crime-data-frontend/pull/1212)
+- Side Menu Toggle Button working properly on smaller displays (https://github.com/18F/crime-data-frontend/issues/1216)
+- Addressed 508 Compliance (accessibility issue) with buttons and borders (https://github.com/18F/crime-data-frontend/issues?utf8=✓&q=Addres)
+- Location Explorer View now shows correct glossary terms (https://github.com/18F/crime-data-frontend/pull/1215)
+
+
+
 ## [2.15.0] - 2017-08-21
 ### Added
 - Data for 2015 ([#1208](https://github.com/18F/crime-data-frontend/pull/1208))
