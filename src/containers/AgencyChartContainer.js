@@ -16,6 +16,7 @@ const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
   const { error, loading } = summary
 
   if (loading) return <Loading />
+
   if (error) return <ErrorCard error={error} />
 
   const data = summary.data[place]
