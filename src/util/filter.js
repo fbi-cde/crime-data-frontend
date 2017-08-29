@@ -1,7 +1,7 @@
 import lookupUsa from '../util/usa'
-import offenses from '../util/offenses'
+import offenseUtil from '../util/offenses'
 
-const isValidCrime = crime => offenses.includes(crime)
+const isValidCrime = crime => offenseUtil.includes(crime)
 
 const defaults = {
   crime: 'violent-crime',
