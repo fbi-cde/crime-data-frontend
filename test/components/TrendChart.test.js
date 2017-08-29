@@ -40,12 +40,10 @@ describe('TrendChart', () => {
     //   expect(actual).toEqual(false)
     // })
 
-    it('work', () => {
+    it('Values created equals the number of elements passed from Sumamary', () => {
       const actual = chart.instance().createSeries(data)
-      const { rates, series } = actual
-      expect(rates.length).toEqual(data.length)
-      expect(series.length).toEqual(filters.places.length * crimes.length)
-      expect(series).toEqual(false)
+      const { values, place } = actual[0]
+      expect(values.length).toEqual(data.length)
     })
   })
 })
