@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { EstimatedTerm, NibrsTerm, SrsTerm } from './Terms'
+import { EstimatedTerm, NibrsTerm, SrsTerm } from '../Terms'
 
-import ucrParticipationLookup from '../util/participation'
-import lookupUsa from '../util/usa'
+import ucrParticipationLookup from '../../util/participation'
+import lookupUsa from '../../util/usa'
 
 const TrendSourceText = ({ crime, place }) => {
   const isArson = crime === 'arson'

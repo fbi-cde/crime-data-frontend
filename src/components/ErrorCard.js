@@ -16,8 +16,7 @@ class ErrorCard extends React.Component {
       <div className="mb2 p2 white bg-blue fs-14 overflow-auto">
         <p className="m0">
           <strong>Uh-oh!</strong> An error occurred during the request. Please
-          try
-          again soon.
+          try again soon.
         </p>
         <button
           className="bg-transparent border-none cursor-pointer fs-12 px0 mt2 white"

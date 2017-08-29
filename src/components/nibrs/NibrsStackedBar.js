@@ -7,7 +7,7 @@ import React from 'react'
 
 import NibrsCountPercentToggle from './NibrsCountPercentToggle'
 import NibrsStackedBarDetails from './NibrsStackedBarDetails'
-import { formatNum } from '../util/formats'
+import { formatNum } from '../../util/formats'
 
 class NibrsStackedBar extends React.Component {
   state = { isCounts: false }

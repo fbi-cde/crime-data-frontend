@@ -3,7 +3,7 @@
 import { shallow } from 'enzyme'
 import React from 'react'
 
-import TrendChart from '../../src/components/TrendChart'
+import TrendChart from '../../src/components/trend/TrendChart'
 
 describe('TrendChart', () => {
   const data = [
@@ -29,5 +29,21 @@ describe('TrendChart', () => {
 
   it('TrendChart renders svg', () => {
     expect(chart.find('svg').length).toEqual(1)
+  })
+
+  describe('createSeries()', () => {
+    // it('should return empty arrays if no data is passed in', () => {
+    //   const crimes = []
+    //   const dataByYear = []
+    //   const places = []
+    //   const actual = chart.instance().createSeries(crimes, dataByYear, places)
+    //   expect(actual).toEqual(false)
+    // })
+
+    it('Values created equals the number of elements passed from Sumamary', () => {
+      const actual = chart.instance().createSeries(data)
+      const { values, place } = actual[0]
+      expect(values.length).toEqual(data.length)
+    })
   })
 })

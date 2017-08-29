@@ -4,10 +4,10 @@ import upperFirst from 'lodash.upperfirst'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Term from './Term'
-import { NibrsTerm, SrsTerm } from './Terms'
-import mapCrimeToGlossaryTerm from '../util/glossary'
-import lookupUsa from '../util/usa'
+import Term from '../Term'
+import { NibrsTerm, SrsTerm } from '../Terms'
+import mapCrimeToGlossaryTerm from '../../util/glossary'
+import lookupUsa from '../../util/usa'
 
 const ExplorerIntroAgency = ({
   county,

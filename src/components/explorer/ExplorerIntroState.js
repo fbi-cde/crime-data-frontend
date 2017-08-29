@@ -2,12 +2,12 @@ import lowerCase from 'lodash.lowercase'
 import upperFirst from 'lodash.upperfirst'
 import React from 'react'
 
-import Term from './Term'
-import { EstimatedTerm, NibrsTerm, SrsTerm } from './Terms'
-import { formatNum } from '../util/formats'
-import mapCrimeToGlossaryTerm from '../util/glossary'
-import ucrParticipationLookup from '../util/participation'
-import lookupUsa from '../util/usa'
+import Term from '../Term'
+import { EstimatedTerm, NibrsTerm, SrsTerm } from '../Terms'
+import { formatNum } from '../../util/formats'
+import mapCrimeToGlossaryTerm from '../../util/glossary'
+import ucrParticipationLookup from '../../util/participation'
+import lookupUsa from '../../util/usa'
 
 const highlight = txt =>
   <strong>

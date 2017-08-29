@@ -2,8 +2,8 @@ import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { nibrsTerm } from './Terms'
-import { formatNum } from '../util/formats'
+import { nibrsTerm } from '../Terms'
+import { formatNum } from '../../util/formats'
 
 const highlight = txt =>
   <strong>

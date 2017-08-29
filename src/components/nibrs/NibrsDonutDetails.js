@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { formatRound as fmt } from '../util/formats'
+import { formatRound as fmt } from '../../util/formats'
 
 const NibrsDonutDetails = ({
   colorMap,
@@ -38,8 +38,12 @@ const NibrsDonutDetails = ({
             <div
               className={`flex flex-auto justify-between ${active && 'bold'}`}
             >
-              <span>{d.key}</span>
-              <span className="monospace">{fmt(d.count)}</span>
+              <span>
+                {d.key}
+              </span>
+              <span className="monospace">
+                {fmt(d.count)}
+              </span>
             </div>
           </li>
         )

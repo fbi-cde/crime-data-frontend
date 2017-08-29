@@ -50,7 +50,9 @@ class AboutTheData extends React.Component {
             <div className="caveats">
               {caveats.map((c, i) =>
                 <div key={i}>
-                  <div className="mb-tiny bold caps">{c.heading}</div>
+                  <div className="mb-tiny bold caps">
+                    {c.heading}
+                  </div>
                   {/* eslint react/no-danger: 0 */}
                   <div
                     className="mb3"
@@ -68,7 +70,9 @@ class AboutTheData extends React.Component {
               <ul className="m0 p0 fs-14 left-bars">
                 {links.map((l, i) =>
                   <li key={i} className="mb1">
-                    <a className="white" href={l.url}>{l.text}</a>
+                    <a className="white" href={l.url}>
+                      {l.text}
+                    </a>
                   </li>,
                 )}
               </ul>

@@ -2,8 +2,8 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import AgencySearchResults from './AgencySearchResults'
-import OnEscape from './OnEscape'
-import { oriToState } from '../util/agencies'
+import OnEscape from '../OnEscape'
+import { oriToState } from '../../util/agencies'
 
 class AgencySearch extends Component {
   constructor(props) {
@@ -11,7 +11,11 @@ class AgencySearch extends Component {
 
     const search = props.agency
     const hasSelection = !!search
-    this.state = { search, hasSelection, showResults: props.initialShowResults }
+    this.state = {
+      search,
+      hasSelection,
+      showResults: props.initialShowResults,
+    }
   }
 
   componentDidMount() {

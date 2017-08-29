@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import AgencyChartDetails from './AgencyChartDetails'
-import XAxis from './XAxis'
-import YAxis from './YAxis'
+import XAxis from '../XAxis'
+import YAxis from '../YAxis'
 
 class AgencyChart extends React.Component {
   constructor(props) {
@@ -92,9 +92,8 @@ class AgencyChart extends React.Component {
       }))
 
     // no data (nd) element responsive values
-    const [ndHeight, ndCircle, ndTextY, ndTextSize] = svgWidth < 500
-      ? [10, 5, 2.5, 8]
-      : [20, 8, 4, 11]
+    const [ndHeight, ndCircle, ndTextY, ndTextSize] =
+      svgWidth < 500 ? [10, 5, 2.5, 8] : [20, 8, 4, 11]
 
     return (
       <div>

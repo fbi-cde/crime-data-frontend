@@ -3,7 +3,7 @@
 import { shallow } from 'enzyme'
 import React from 'react'
 
-import NibrsTableWithBars from '../../src/components/NibrsTableWithBars'
+import NibrsTableWithBars from '../../src/components/nibrs/NibrsTableWithBars'
 
 describe('NibrsTableWithBars', () => {
   const data = n => [...Array(n)].map((_, i) => ({ key: i + 1, count: 10 }))
