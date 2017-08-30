@@ -28,11 +28,8 @@ const AgencyChartDetails = ({
   const yearRange = range(since, until + 1)
   const crimeDisplay = lowerCase(crime)
   const handleSelectChange = e => updateYear(Number(e.target.value))
-  console.log('cleared,year,reported', cleared, year, reported)
   let compSentence = null
   const reportedLastYr = dataPrior && dataPrior.reported
-  console.log('reportedLastYr:', reportedLastYr)
-  console.log('keys:', keys)
 
   if (reportedLastYr && reported.count > 0) {
     const comp =

@@ -154,7 +154,6 @@ class TrendChart extends React.Component {
         ...activeValue,
       }
     })
-    console.log('TrendChart Series:', series)
     return (
       <div>
         <TrendChartDetails
