@@ -94,12 +94,7 @@ class TrendContainer extends React.Component {
     if (crime === 'violent-crime') {
       otherCrimes = ['homicide', 'rape', 'robbery', 'aggravated-assault']
     } else if (crime === 'property-crime') {
-      otherCrimes = [
-        'arson',
-        'burglary',
-        'larceny-theft',
-        'motor-vehicle-theft',
-      ]
+      otherCrimes = ['arson', 'burglary', 'larceny', 'motor-vehicle-theft']
     }
 
     return (
