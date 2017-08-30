@@ -11,10 +11,8 @@ import NoData from '../components/NoData'
 import TrendChart from '../components/trend/TrendChart'
 import TrendSourceText from '../components/trend/TrendSourceText'
 import { generateCrimeReadme } from '../util/content'
-import { crimeTypes } from '../util/offenses'
 import { getPlaceInfo } from '../util/place'
 import { combinePlaces, filterByYear } from '../util/summary'
-import { slugify } from '../util/text'
 import lookupUsa, { nationalKey } from '../util/usa'
 
 class TrendContainer extends React.Component {
