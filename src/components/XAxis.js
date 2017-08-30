@@ -10,7 +10,14 @@ const XAxis = ({ active, tickCt, tickSizeOuter, height, scale, showLine }) => {
   const format = scale.tickFormat
     ? scale.tickFormat.apply(scale)
     : x => String(x)
-  const values = scale.ticks ? scale.ticks(tickCt) : scale.domain()
+  let values = scale.ticks ? scale.ticks(tickCt) : scale.domain()
+  if (values.length > 10) {
+    const newValues = []
+    for (let j = 0; j < values.length; j += 2) {
+      newValues.push(values[j])
+    }
+    values = newValues
+  }
 
   const ticks = values.map((v, i) => {
     let pos = scale(v)
