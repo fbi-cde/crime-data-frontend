@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.16.1] - 2017-08-30
+## Fixed
+- Addresses issues with Agency View being broken ([#1232](https://github.com/18F/crime-data-frontend/pull/1232))
+
+
 ## [2.16.0] - 2017-08-30
 ### Added
 - An "All violent crime" and "All property crime view" for national and state level views ([#1207](https://github.com/18F/crime-data-frontend/pull/1207))
@@ -16,6 +21,7 @@ All notable changes to this project be documented in this file.
 - "Washington, DC" Thumbnail image not being displayed, and changed to display "Washington, DC" in Download Location drop-down ([#1212](https://github.com/18F/crime-data-frontend/pull/1212))
 - Location Explorer View now shows correct glossary terms ([#1215](https://github.com/18F/crime-data-frontend/pull/1215))
 - Side Menu Toggle Button working properly on smaller displays ([#1216](https://github.com/18F/crime-data-frontend/issues/1216))
+- Show spark lines in agency view ([crime-data-explorer#296](https://github.com/18F/crime-data-explorer/issues/296))
 
 
 ## [2.15.0] - 2017-08-21
