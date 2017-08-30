@@ -1,6 +1,5 @@
 import { max } from 'd3-array'
 import lowerCase from 'lodash.lowercase'
-import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
