@@ -88,7 +88,7 @@ class Home extends React.Component {
             <div className="clearfix mxn2">
               <div className="sm-col sm-col-4 px2 mb2 sm-m0">
                 <LocationSelect
-                  className="col-12 sm-fs-18 field select"
+                  className="col-12 sm-fs-18 field select border-blue"
                   onChange={this.selectLocation}
                   selected={usState}
                 />
@@ -98,7 +98,7 @@ class Home extends React.Component {
                   Choose a crime
                 </label>
                 <select
-                  className="col-12 sm-fs-18 field select"
+                  className="col-12 sm-fs-18 field select border-blue"
                   id="crime-select"
                   onChange={this.selectCrime}
                 >
