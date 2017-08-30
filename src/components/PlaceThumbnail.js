@@ -60,6 +60,8 @@ class PlaceThumbnail extends React.Component {
       strokeWidth = 2.5 / scale
     }
 
+    window.gs = geoStates
+
     return (
       <Container>
         <svg
@@ -76,7 +78,7 @@ class PlaceThumbnail extends React.Component {
                 <path
                   key={i}
                   d={path(d)}
-                  fill={d.id === active.id ? '#94aabd' : '#dfe6ed'}
+                  fill={active && d.id === active.id ? '#94aabd' : '#dfe6ed'}
                 />,
               )}
               <path
