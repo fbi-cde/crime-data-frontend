@@ -11,10 +11,8 @@ import NoData from '../components/NoData'
 import TrendChart from '../components/trend/TrendChart'
 import TrendSourceText from '../components/trend/TrendSourceText'
 import { generateCrimeReadme } from '../util/content'
-import { crimeTypes } from '../util/offenses'
 import { getPlaceInfo } from '../util/place'
 import { combinePlaces, filterByYear } from '../util/summary'
-import { slugify } from '../util/text'
 import lookupUsa, { nationalKey } from '../util/usa'
 
 class TrendContainer extends React.Component {
@@ -92,25 +90,16 @@ class TrendContainer extends React.Component {
     } = this.props
     const isReady = !summaries.loading
 
-    /*
-    if (!['violent-crime', 'property-crime'].includes(crime)) return null;
-    const crimeType = camelCase(crime);
-    const crimeIds = crimeTypes[crimeType].map(t => snakeCase(t.id || t));
-    const otherTrendMap = crimeIds.map(f => ({
-      id: f,
-      place,
-      since,
-      summaries,
-      until,
-    }));
-    console.log('otherTrendMap:', otherTrendMap);
-    */
-
     let otherCrimes = []
     if (crime === 'violent-crime') {
-      otherCrimes = crimeTypes.violentCrime.map(c => c.id || slugify(c))
+      otherCrimes = ['homicide', 'rape', 'robbery', 'aggravated-assault']
     } else if (crime === 'property-crime') {
-      otherCrimes = crimeTypes.propertyCrime.map(c => c.id || slugify(c))
+      otherCrimes = [
+        'arson',
+        'burglary',
+        'larceny-theft',
+        'motor-vehicle-theft',
+      ]
     }
 
     return (
