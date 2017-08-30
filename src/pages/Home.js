@@ -54,7 +54,7 @@ class Home extends React.Component {
     const { crime, place, placeType } = this.props
     const isValid = !!(crime && place) || false
     const usState = placeType === 'agency' ? oriToState(place) : place
-
+    // 508 Check
     return (
       <div>
         <Helmet title="CDE :: Home" />
