@@ -1,5 +1,4 @@
 import range from 'lodash.range'
-import startCase from 'lodash.startcase'
 import React from 'react'
 
 import lookupUsa from '../util/usa'
@@ -73,7 +72,7 @@ class DownloadBulkNibrs extends React.Component {
                 Location
               </label>
               <select
-                className="col-12 sm-fs-18 bold field select bg-white"
+                className="col-12 sm-fs-18 bold field select bg-white border-blue"
                 id="nibrs-state"
                 defaultValue="Location"
                 onChange={this.handleSelectChange}
@@ -81,9 +80,9 @@ class DownloadBulkNibrs extends React.Component {
                 <option value="Location" disabled>
                   Location
                 </option>
-                {nibrsStates.map((s, i) =>
+                {nibrsStates.sort().map((s, i) =>
                   <option key={i} value={s}>
-                    {startCase(s)}
+                    {lookupUsa(s).display}
                   </option>,
                 )}
               </select>
@@ -93,7 +92,7 @@ class DownloadBulkNibrs extends React.Component {
                 Year
               </label>
               <select
-                className="col-12 sm-fs-18 bold field select bg-white"
+                className="col-12 sm-fs-18 bold field select bg-white border-blue"
                 id="nibrs-year"
                 defaultValue="Year"
                 onChange={this.handleSelectChange}

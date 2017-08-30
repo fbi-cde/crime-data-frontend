@@ -51,7 +51,7 @@ class TrendChart extends React.Component {
   getYearFromXPosition = xPosition => {
     const { since, until } = this.props
     const { width, xPad } = this.calculateDimensions()
-    const dates = range(since, until).map(d => formatYear(d))
+    const dates = range(since, until + 1).map(d => formatYear(d))
     const x = scaleTime().domain(extent(dates)).range([xPad, width - xPad])
 
     const x0 = x.invert(xPosition * width)
@@ -133,7 +133,7 @@ class TrendChart extends React.Component {
     } = this.calculateDimensions()
 
     const series = this.createSeries()
-    const dates = range(since, until).map(d => formatYear(d))
+    const dates = range(since, until + 1).map(d => formatYear(d))
     const rates = series
       .map(s => s.values)
       .reduce((accum, next) => accum.concat(next), [])
@@ -154,7 +154,6 @@ class TrendChart extends React.Component {
         ...activeValue,
       }
     })
-
     return (
       <div>
         <TrendChartDetails

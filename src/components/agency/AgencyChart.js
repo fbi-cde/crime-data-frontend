@@ -47,7 +47,7 @@ class AgencyChart extends React.Component {
       since,
       size,
       submitsNibrs,
-      until
+      until,
     } = this.props
     const { hover, svgParentWidth, yearSelected } = this.state
 
@@ -59,8 +59,7 @@ class AgencyChart extends React.Component {
     const xPadding = svgWidth < 500 ? 20 : 40
 
     const keys = ['reported', 'cleared']
-    const yMax = max([3, max(data, d => max(keys, k => d[k]))])
-
+    const yMax = max([3, max(data, d => max(keys, k => d[k].count))])
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
     const noun = submitsNibrs ? 'incidents' : 'offenses'
@@ -111,7 +110,7 @@ class AgencyChart extends React.Component {
       .map(({ cleared, reported, year }) => ({
         cleared,
         reported,
-        year
+        year,
       }))
 
     // Merge Missing Data Collections
@@ -134,6 +133,7 @@ class AgencyChart extends React.Component {
         <AgencyChartDetails
           colors={colorMap}
           crime={crime}
+          f
           data={active}
           dataPrior={activePriorYear}
           keys={keys}
@@ -162,8 +162,8 @@ class AgencyChart extends React.Component {
                       <rect
                         key={`${d.year}-${k}`}
                         x={x1(k)}
-                        y={y(d[k])}
-                        height={Math.max(0, height - y(d[k]))}
+                        y={y(d[k].count)}
+                        height={Math.max(0, height - y(d[k].count))}
                         width={x1.bandwidth()}
                         fill={
                           active.year === d.year
@@ -173,9 +173,9 @@ class AgencyChart extends React.Component {
                         className="cursor-pointer"
                         pointerEvents="all"
                         onMouseOver={this.rememberValue(d)}
-                      />
+                      />,
                     )}
-                  </g>
+                  </g>,
                 )}
                 {noDataYears.map(d =>
                   <g
@@ -193,7 +193,7 @@ class AgencyChart extends React.Component {
                     >
                       ✕
                     </text>
-                  </g>
+                  </g>,
                 )}
               </g>
             </g>
@@ -212,10 +212,10 @@ AgencyChart.propTypes = {
   since: PropTypes.number.isRequired,
   size: PropTypes.shape({
     width: PropTypes.number,
-    margin: PropTypes.object
+    margin: PropTypes.object,
   }).isRequired,
   submitsNibrs: PropTypes.bool.isRequired,
-  until: PropTypes.number.isRequired
+  until: PropTypes.number.isRequired,
 }
 
 AgencyChart.defaultProps = {
@@ -223,8 +223,8 @@ AgencyChart.defaultProps = {
   mutedColors: ['#f4e1df', '#faefee'],
   size: {
     width: 720,
-    margin: { top: 16, right: 0, bottom: 24, left: 36 }
-  }
+    margin: { top: 16, right: 0, bottom: 24, left: 36 },
+  },
 }
 
 export default AgencyChart
