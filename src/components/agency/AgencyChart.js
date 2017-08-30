@@ -60,7 +60,6 @@ class AgencyChart extends React.Component {
 
     const keys = ['reported', 'cleared']
     const yMax = max([3, max(data, d => max(keys, k => d[k].count))])
-    console.log('yMax:', yMax)
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
     const noun = submitsNibrs ? 'incidents' : 'offenses'
@@ -90,7 +89,6 @@ class AgencyChart extends React.Component {
         reported,
         year,
       }))
-    console.log('Agency Data:', data)
     // no data (nd) element responsive values
     const [ndHeight, ndCircle, ndTextY, ndTextSize] =
       svgWidth < 500 ? [10, 5, 2.5, 8] : [20, 8, 4, 11]

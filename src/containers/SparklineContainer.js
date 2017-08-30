@@ -19,8 +19,9 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
   if (error) return <ErrorCard error={error} />
 
   const filterYears = d => d.year >= since && d.year <= until
+
   const computeRate = d => ({
-    rate: d[snakeCase(normalizedCrime)] * 10000 / d.population,
+    rate: d[snakeCase(normalizedCrime)].count * 10000 / d.population,
     year: d.year,
   })
 
