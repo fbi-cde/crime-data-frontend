@@ -37,8 +37,11 @@ class Sparkline extends React.Component {
     const width = svgParentWidth || size.width
     const height = width / 3.5
 
+    console.log('Sparkline Data:', data)
+
     const clean = data.map(d => Object.assign({ date: parse(d.year), ...d }))
     const ends = [clean[0], clean[clean.length - 1]]
+    console.log('Sparkline clean:', clean)
 
     const x = scaleTime()
       .domain(extent(clean, d => d.date))
@@ -51,6 +54,7 @@ class Sparkline extends React.Component {
       .nice()
 
     const l = line().curve(curveCardinal).x(d => x(d.date)).y(d => y(d.rate))
+    console.log('Line Data:', l(clean))
 
     return (
       <div ref={ref => (this.svgParent = ref)}>
