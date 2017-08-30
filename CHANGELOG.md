@@ -1,22 +1,21 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
-## [2.16.0] - 2017-08-29
+## [2.16.0] - 2017-08-30
 ### Added
-- An "All violent crime" and "All property crime view" for national and state level views (https://github.com/18F/crime-data-frontend/pull/1207)
+- An "All violent crime" and "All property crime view" for national and state level views ([#1207](https://github.com/18F/crime-data-frontend/pull/1207))
 
-##Changed
-- Refactor data flow between Trend Components (https://github.com/18F/crime-data-frontend/pull/1207)
-- Refactor Summary Data handling and data object (https://github.com/18F/crime-data-frontend/pull/1206)
+## Changed
+- Refactor data flow between Trend Components ([#1207](https://github.com/18F/crime-data-frontend/pull/1207))
+- Refactor Summary Data handling and data object ([#1206](https://github.com/18F/crime-data-frontend/pull/1206))
 
-##Fixed
-- "Washington, DC" Thumbnail image not being displayed, and changed to display "Washington, DC" in Download Location drop-down (https://github.com/18F/crime-data-frontend/pull/1212)
-- Side Menu Toggle Button working properly on smaller displays (https://github.com/18F/crime-data-frontend/issues/1216)
-- Addressed 508 Compliance (accessibility issue) with buttons and borders (https://github.com/18F/crime-data-frontend/issues?utf8=✓&q=Addres)
-- Location Explorer View now shows correct glossary terms (https://github.com/18F/crime-data-frontend/pull/1215)
-- Navigating back to Explorer view now resets previously selected ranges, and crime type (https://github.com/18F/crime-data-frontend/pull/1205)
-- Adds Validation on URL data ranges(https://github.com/18F/crime-data-frontend/pull/1196)
-
+## Fixed
+- Adds Validation on URL data ranges([#1196](https://github.com/18F/crime-data-frontend/pull/1196))
+- Navigating back to Explorer view now resets previously selected ranges, and crime type ([#1205](https://github.com/18F/crime-data-frontend/pull/1205))
+- Addressed 508 Compliance (accessibility issue) with buttons and borders ([#1210](https://github.com/18F/crime-data-frontend/pull/1210))
+- "Washington, DC" Thumbnail image not being displayed, and changed to display "Washington, DC" in Download Location drop-down ([#1212](https://github.com/18F/crime-data-frontend/pull/1212))
+- Location Explorer View now shows correct glossary terms ([#1215](https://github.com/18F/crime-data-frontend/pull/1215))
+- Side Menu Toggle Button working properly on smaller displays ([#1216](https://github.com/18F/crime-data-frontend/issues/1216))
 
 
 ## [2.15.0] - 2017-08-21
