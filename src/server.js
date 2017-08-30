@@ -81,7 +81,7 @@ app.get('/api-proxy/*', (req, res) => {
 })
 
 app.post('/feedback', (req, res) => {
-  const { body, title } = req.body
+  const { body, title } = req.bodyss
   const allEnvs = repoOwner && repoName && repoToken
 
   if (!allEnvs || !acceptHostname(req.hostname)) return res.status(401).end()
