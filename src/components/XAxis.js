@@ -2,15 +2,26 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const XAxis = ({ active, tickCt, tickSizeOuter, height, scale, showLine }) => {
+  const domain = scale.domain()
   const range = scale.range()
   const [range0, range1, k] = [range[0] + 0.5, range[range.length - 1] + 0.5, 1]
-  const domain = `M${range0},${k * tickSizeOuter}V0.5H${range1}V${k *
-    tickSizeOuter}`
+  const d = `M${range0},${k * tickSizeOuter}V0.5H${range1}V${k * tickSizeOuter}`
 
   const format = scale.tickFormat
     ? scale.tickFormat.apply(scale)
     : x => String(x)
-  const values = scale.ticks ? scale.ticks(tickCt) : scale.domain()
+
+  let values = []
+  if (scale.ticks) {
+    values = scale.ticks(tickCt)
+  } else {
+    // use the ends of the domain as ticks, and fill in
+    // the proper number of ticks between them
+    const every = Math.floor((domain.length - 2) / (tickCt - 2))
+    values[0] = domain[0]
+    values = domain.filter((v, i) => i % every === 0)
+    values[values.length] = domain[domain.length - 1]
+  }
 
   const ticks = values.map((v, i) => {
     let pos = scale(v)
@@ -41,7 +52,7 @@ const XAxis = ({ active, tickCt, tickSizeOuter, height, scale, showLine }) => {
       transform={`translate(0, ${height})`}
       textAnchor="middle"
     >
-      {showLine && <path className="domain" d={domain} stroke="#000" />}
+      {showLine && <path className="domain" d={d} stroke="#000" />}
       {ticks}
     </g>
   )
@@ -55,8 +66,8 @@ XAxis.defaultProps = {
 
 XAxis.propTypes = {
   active: PropTypes.object,
-  tickCt: PropTypes.number.isRequired,
-  tickSizeOuter: PropTypes.number.isRequired,
+  tickCt: PropTypes.number,
+  tickSizeOuter: PropTypes.number,
   height: PropTypes.number.isRequired,
   scale: PropTypes.func.isRequired,
   showLine: PropTypes.bool.isRequired,
