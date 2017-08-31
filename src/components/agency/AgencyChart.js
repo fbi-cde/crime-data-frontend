@@ -98,7 +98,6 @@ class AgencyChart extends React.Component {
         <AgencyChartDetails
           colors={colorMap}
           crime={crime}
-          f
           data={active}
           dataPrior={activePriorYear}
           keys={keys}
