@@ -59,8 +59,7 @@ class AgencyChart extends React.Component {
     const xPadding = svgWidth < 500 ? 20 : 40
 
     const keys = ['reported', 'cleared']
-    const yMax = max([3, max(data, d => max(keys, k => d[k]))])
-
+    const yMax = max([3, max(data, d => max(keys, k => d[k].count))])
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
     const noun = submitsNibrs ? 'incidents' : 'offenses'
@@ -90,7 +89,6 @@ class AgencyChart extends React.Component {
         reported,
         year,
       }))
-
     // no data (nd) element responsive values
     const [ndHeight, ndCircle, ndTextY, ndTextSize] =
       svgWidth < 500 ? [10, 5, 2.5, 8] : [20, 8, 4, 11]
@@ -100,6 +98,7 @@ class AgencyChart extends React.Component {
         <AgencyChartDetails
           colors={colorMap}
           crime={crime}
+          f
           data={active}
           dataPrior={activePriorYear}
           keys={keys}
@@ -128,8 +127,8 @@ class AgencyChart extends React.Component {
                       <rect
                         key={`${d.year}-${k}`}
                         x={x1(k)}
-                        y={y(d[k])}
-                        height={Math.max(0, height - y(d[k]))}
+                        y={y(d[k].count)}
+                        height={Math.max(0, height - y(d[k].count))}
                         width={x1.bandwidth()}
                         fill={
                           active.year === d.year

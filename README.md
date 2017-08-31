@@ -72,7 +72,7 @@ Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2
 2. Determine if the version should be increased by a major, minor, or patch version
 3. Adjust the version number in `package.json` accordingly
 4. Submit a pull request without tagging the commit
-5. Once the pull request is merged, tag the merge commit as `vX.Y.Z` where `X`, `Y`, and `Z` reflect the same version number as the now merged change for `package.json`
+5. Once the pull request is merged, tag the merge commit (on `master`) as `vX.Y.Z` where `X`, `Y`, and `Z` reflect the same version number as the now merged change for `package.json`
 6. Push the tag to Github with `git push origin vX.Y.Z`
 
 ## Browser support

@@ -1,6 +1,6 @@
 {
   "name": "crime-data-explorer",
-  "version": "2.15.0",
+  "version": "2.16.1",
   "private": true,
   "engines": {
     "node": "6.11.x"
@@ -106,11 +106,7 @@
     "yaml-loader": "^0.5.0"
   },
   "babel": {
-    "presets": [
-      "es2015",
-      "stage-0",
-      "react"
-    ]
+    "presets": ["es2015", "stage-0", "react"]
   },
   "jest": {
     "moduleNameMapper": {

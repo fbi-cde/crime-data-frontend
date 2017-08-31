@@ -33,10 +33,14 @@ class PlaceThumbnail extends React.Component {
     const path = geoPath().projection(projection)
     const geoStates = feature(usa, usa.objects.units).features
     const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
-    const active = geoStates.find(
-      s => s.properties.name === lookupUsa(usState).display,
-    )
-
+    let active
+    if (usState !== 'washington-dc') {
+      active = geoStates.find(
+        s => s.properties.name === lookupUsa(usState).display,
+      )
+    } else {
+      active = geoStates.find(s => s.id === 'US11')
+    }
     const { lat, lng } = coordinates || {}
     const pin = coordinates && projection([lng, lat])
 
@@ -56,6 +60,8 @@ class PlaceThumbnail extends React.Component {
       strokeWidth = 2.5 / scale
     }
 
+    window.gs = geoStates
+
     return (
       <Container>
         <svg
@@ -72,11 +78,7 @@ class PlaceThumbnail extends React.Component {
                 <path
                   key={i}
                   d={path(d)}
-                  fill={
-                    d.properties.name === lookupUsa(usState).display || !active
-                      ? '#94aabd'
-                      : '#dfe6ed'
-                  }
+                  fill={active && d.id === active.id ? '#94aabd' : '#dfe6ed'}
                 />,
               )}
               <path
