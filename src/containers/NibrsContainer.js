@@ -14,6 +14,7 @@ import { getPlaceInfo } from '../util/place'
 import ucrParticipation, {
   shouldFetchNibrs as shouldShowNibrs,
 } from '../util/participation'
+import lookupUsa from '../util/usa'
 
 const initialNibrsYear = ({ place, placeType, since }) => {
   const placeNorm = placeType === 'agency' ? oriToState(place) : place
@@ -56,7 +57,7 @@ const NibrsContainer = ({
     return null
   }
 
-  const placeDisplay = isAgency ? agency.display : startCase(place)
+  const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
   const { data, error } = nibrs
 
@@ -110,10 +111,10 @@ const NibrsContainer = ({
             crime={crime}
             isAgency={isAgency}
             nibrsFirstYear={nibrsFirstYear}
+            participation={participation}
             place={place}
             placeDisplay={placeDisplay}
             totalCount={totalCount}
-            participation={participation}
             until={until}
           />}
       </div>
@@ -135,17 +136,22 @@ NibrsContainer.propTypes = {
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
-  participation: PropTypes.shape({
-    data: PropTypes.object,
-    loading: PropTypes.bool,
-  }).isRequired,
+  participation: PropTypes.array.isRequired,
   until: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = ({ agencies, filters, nibrs, participation }) => {
+  const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
   const agency = isAgency && !agencies.loading && getAgency(agencies, place)
+
+  let filteredParticipation = []
+  if (participation.data[place]) {
+    filteredParticipation = participation.data[place].filter(
+      p => p.year >= since && p.year <= until,
+    )
+  }
 
   return {
     ...filters,
@@ -154,7 +160,7 @@ const mapStateToProps = ({ agencies, filters, nibrs, participation }) => {
     place,
     placeType,
     nibrs,
-    participation,
+    participation: filteredParticipation,
   }
 }
 
