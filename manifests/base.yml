@@ -1,5 +1,6 @@
 services:
 - crime-data-creds
+- crime-data-threat-keywords
 env:
   GITHUB_ISSUE_REPO_OWNER: '18f'
   GITHUB_ISSUE_REPO_NAME: 'crime-data-explorer'
