@@ -13,7 +13,7 @@ import lookupUsa, { nationalKey } from '../util/usa'
 
 const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
   const { data, error, loading } = summaries
-  const normalizedCrime = crime === 'rape' ? 'rape_legacy' : crime
+  const normalizedCrime = crime === 'rape' ? 'rape-legacy' : crime
 
   if (error) return <ErrorCard error={error} />
 
