@@ -30,7 +30,6 @@ const NibrsIntro = ({
       </p>
     )
   }
-
   const agencyCts = participation.map(p => p.nibrs_participating_agencies)
   const agencyCt = max(agencyCts)
 
