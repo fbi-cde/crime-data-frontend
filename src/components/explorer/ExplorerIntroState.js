@@ -31,8 +31,8 @@ const ExplorerIntroState = ({ crime, place, participation, until }) => {
   if (nibrs) {
     reportYrStr = (
       <span>
-        {lookupUsa(place).display} began submitting <NibrsTerm /> data reports
-        in {nibrs['initial-year']}
+        {lookupUsa(place).display} State UCR Program began submitting{' '}
+        <NibrsTerm /> data reports in {nibrs['initial-year']}
       </span>
     )
   }
