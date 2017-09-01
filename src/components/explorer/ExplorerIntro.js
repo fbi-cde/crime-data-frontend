@@ -10,7 +10,6 @@ import { nationalKey } from '../../util/usa'
 
 const ExplorerIntro = ({ agency, crime, participation, place, until }) => {
   if (agency) {
-    console.log('ExplorerIntro: ', agency)
     return (
       <ExplorerIntroAgency
         county={agency.primary_county}

@@ -1,7 +1,6 @@
 import lowerCase from 'lodash.lowercase'
 import upperFirst from 'lodash.upperfirst'
 import React from 'react'
-import { min } from 'd3-array'
 
 import Term from '../Term'
 import { EstimatedTerm, NibrsTerm, SrsTerm } from '../Terms'
@@ -36,18 +35,7 @@ const ExplorerIntroState = ({ crime, place, participation, until }) => {
       </span>
     )
   }
-  console.log('reportYrStr:', reportYrStr)
-  /*
-  console.log('participation:', participation)
-  const years = participation
-    .filter(p => p.nibrs_participating_agencies > 0)
-    .map(p => p.year)
-  for (let j = 1; j < years.length; j++) {
-    console.log('j:', years[j])
-  }
-  const minYr = min(years)
-  console.log('Min Yr:', minYr)
-*/
+
   const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
   const crimeTerm = (
     <Term id={mapCrimeToGlossaryTerm(crime)}>
