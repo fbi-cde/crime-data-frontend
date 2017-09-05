@@ -19,7 +19,6 @@ export const receivedSummary = summaries => ({
 export const fetchSummaries = params => dispatch => {
   dispatch(fetchingSummary())
   const requests = api.getSummaryRequests(params)
-
   return Promise.all(requests)
     .then(data => reshapeData(data))
     .then(d => calculateRates(d))
