@@ -106,6 +106,8 @@ class AgencyChart extends React.Component {
           noun={noun}
           updateYear={this.updateYear}
           yrRange={yrRange}
+          until={until}
+          since={since}
         />
         <div className="mb2 h6 bold monospace black">
           Total {noun} reported by year
