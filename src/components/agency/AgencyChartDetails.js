@@ -21,6 +21,8 @@ const AgencyChartDetails = ({
   noun,
   yrRange,
   updateYear,
+  since,
+  until,
 }) => {
   const { cleared, year, reported } = data
   const crimeDisplay = lowerCase(crime)
@@ -111,6 +113,8 @@ AgencyChartDetails.propTypes = {
   yrRange: PropTypes.arrayOf(PropTypes.number).isRequired,
   noun: PropTypes.string.isRequired,
   updateYear: PropTypes.func.isRequired,
+  since: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 export default AgencyChartDetails
