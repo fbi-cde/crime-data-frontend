@@ -10,12 +10,20 @@
   transition: right .2s;
   width: 20rem;
 
-  &[aria-hidden=true] { right: -20rem; }
-  [aria-hidden=true] { display: none !important; }
+  &[aria-hidden=true] {
+    right: -20rem;
+  }
+
+  [aria-hidden=true] {
+    display: none !important;
+  }
 }
 
 .glossary__content {
-  ul { padding: 0; }
+  ul {
+    padding: 0;
+  }
+
   li {
     border-bottom: 1px solid $white;
     border-top: 1px solid $white;
