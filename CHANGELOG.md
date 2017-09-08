@@ -1,5 +1,16 @@
 # Change Log
 All notable changes to this project be documented in this file.
+## [2.17.0] - 2017-09-08
+### Added
+- Adds animated sidebar opening and closing on mobile devices
+- Update document links to utilize 2015 documents
+
+## Changed
+- Per feedback from FBI OPA feedback will temporarily disabled
+
+## Fixed
+- Sparklines issue resolved on Agency Rape
+
 
 ## [2.16.1] - 2017-08-30
 ## Fixed
