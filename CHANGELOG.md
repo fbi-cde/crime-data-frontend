@@ -1,6 +1,20 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.17.0] - 2017-09-11
+### Added
+- Animate sidebar opening and closing on mobile devices ([#1238](https://github.com/18F/crime-data-frontend/pull/1238))
+
+## Changed
+- Update document links to utilize 2015 documents ([#1214](https://github.com/18F/crime-data-frontend/pull/1214))
+
+## Fixed
+- Show accurate agency count for NIBRS participation ([#1235](https://github.com/18F/crime-data-frontend/pull/1235))
+- Show spark lines for rape offense ([#1237](https://github.com/18F/crime-data-frontend/pull/1237))
+
+## Removed
+- Remove feedback component from site at the request of the FBI Office of Public Affairs ([#1239](https://github.com/18F/crime-data-frontend/pull/1239))
+
 ## [2.16.1] - 2017-08-30
 ## Fixed
 - Addresses issues with Agency View being broken ([#1232](https://github.com/18F/crime-data-frontend/pull/1232))

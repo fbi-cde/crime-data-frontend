@@ -49,6 +49,8 @@ Use `cf push -f manifest/staging.yml` to deploy. Remember that `cf` pushes from 
 
 This app follows [semver](http://semver.org/) and has [tagged releases](https://github.com/18F/crime-data-frontend/releases) by version number. You can see all notable changes in [CHANGELOG.md](https://github.com/18F/crime-data-frontend/blob/master/CHANGELOG.md).
 
+We use the following criteria to determine the proper next version number. A major version change is appropriate when the URL structure has changed (breaking any existing URLs) or when there is a major removal of content. A minor version change is appropriate when the changes include more than bug fixes but not breaking changes. A patch version is appropriate when only bugs or security issues are addressed.
+
 ### Manual verification
 
 Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2340`](https://github.com/18F/crime-data-frontend/commit/cdb2340830b0325dc9a05ba443a1a84c2e835430) it was about 77% of all statements), we run through a few basic user scenarios before tagging a release to check the application.
@@ -77,4 +79,4 @@ Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2
 
 ## Browser support
 
-For the MVP launch of this project (Spring 2017), we’ll explicitly support Chrome, Safari, IE 10+, Firefox, and MS Edge.
+We explicitly support Chrome, Safari, IE 10+, Firefox, and MS Edge.
