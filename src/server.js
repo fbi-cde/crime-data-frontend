@@ -1,6 +1,7 @@
 /* eslint-disable global-require, no-console, padded-blocks */
 
 import 'babel-polyfill'
+import 'newrelic'
 
 import http from 'axios'
 import bodyParser from 'body-parser'
@@ -26,8 +27,6 @@ import { createIssue } from './util/github'
 import history from './util/history'
 
 const isProd = process.env.NODE_ENV === 'production'
-
-if (isProd) require('newrelic')
 
 const ENV = createEnv()
 
