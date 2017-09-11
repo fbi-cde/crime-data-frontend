@@ -6,6 +6,7 @@ applications:
   buildpack: nodejs_buildpack
   memory: 512M
   domain: fr.cloud.gov
+  instances: 2
 env:
   CDE_API: 'https://api.usa.gov/crime/fbi/ucr'
 services:
