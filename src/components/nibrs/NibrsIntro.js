@@ -1,3 +1,4 @@
+import { max } from 'd3-array'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -15,7 +16,6 @@ const NibrsIntro = ({
   isAgency,
   nibrsFirstYear,
   participation,
-  place,
   placeDisplay,
   totalCount,
   until,
@@ -31,9 +31,8 @@ const NibrsIntro = ({
     )
   }
 
-  const ucrData = participation.data[place]
-  const untilUcr = ucrData.find(p => p.year === until)
-  const agencyCt = untilUcr.nibrs_participating_agencies
+  const agencyCts = participation.map(p => p.nibrs_participating_agencies)
+  const agencyCt = max(agencyCts)
 
   return (
     <p className="m0 sm-col-9">
@@ -50,10 +49,9 @@ NibrsIntro.propTypes = {
   crime: PropTypes.string.isRequired,
   isAgency: PropTypes.bool.isRequired,
   nibrsFirstYear: PropTypes.number.isRequired,
-  place: PropTypes.string.isRequired,
   placeDisplay: PropTypes.string.isRequired,
   totalCount: PropTypes.number.isRequired,
-  participation: PropTypes.object.isRequired,
+  participation: PropTypes.array.isRequired,
   until: PropTypes.number.isRequired,
 }
 

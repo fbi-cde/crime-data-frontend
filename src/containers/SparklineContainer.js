@@ -1,6 +1,5 @@
 import { max } from 'd3-array'
 import lowerCase from 'lodash.lowercase'
-import snakeCase from 'lodash.snakecase'
 import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -14,14 +13,14 @@ import lookupUsa, { nationalKey } from '../util/usa'
 
 const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
   const { data, error, loading } = summaries
-  const normalizedCrime = crime === 'rape' ? 'rape_legacy' : crime
+  const normalizedCrime = crime === 'rape' ? 'rape-legacy' : crime
 
   if (error) return <ErrorCard error={error} />
 
   const filterYears = d => d.year >= since && d.year <= until
 
   const computeRate = d => ({
-    rate: d[snakeCase(normalizedCrime)].count * 10000 / d.population,
+    rate: d[normalizedCrime].count * 10000 / d.population,
     year: d.year,
   })
 
