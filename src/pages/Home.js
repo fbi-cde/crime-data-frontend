@@ -35,8 +35,8 @@ class Home extends React.Component {
   }
 
   handleSearchClick = () => {
-    const { actions, crime, router, usState } = this.props
-    const change = { crime, place: usState, placeType: 'state' }
+    const { actions, crime, router, place } = this.props
+    const change = { crime, place, placeType: 'state' }
     actions.updateApp(change, router)
   }
 
