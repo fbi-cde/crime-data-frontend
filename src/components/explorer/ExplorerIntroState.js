@@ -9,10 +9,6 @@ import mapCrimeToGlossaryTerm from '../../util/glossary'
 import ucrParticipationLookup from '../../util/participation'
 import lookupUsa from '../../util/usa'
 
-const highlight = txt =>
-  <strong>
-    {txt}
-  </strong>
 const getReportTerms = ({ nibrs, srs, hybrid }) =>
   <span>
     {hybrid && 'both '}
@@ -21,22 +17,53 @@ const getReportTerms = ({ nibrs, srs, hybrid }) =>
     {nibrs && <NibrsTerm />}
   </span>
 
-const ExplorerIntroState = ({ crime, place, participation, until }) => {
-  const isArson = crime === 'arson'
-  const { nibrs, srs } = ucrParticipationLookup(place)
-  const untilUcr = participation.find(p => p.year === until)
+const getStateReportingHistory = ({ nibrs, place, hybrid }) => {
+  if (!nibrs) return false
 
-  let reportYrStr = ''
-  if (nibrs) {
-    reportYrStr = (
+  let text
+  if (hybrid) {
+    text = (
       <span>
-        {lookupUsa(place).display} UCR Program began submitting <NibrsTerm />{' '}
-        data reports in {nibrs['initial-year']}
+        has historically reported <SrsTerm /> data and began including{' '}
+        <NibrsTerm /> data in {nibrs['initial-year']}
+      </span>
+    )
+  } else if (!hybrid && nibrs) {
+    text = (
+      <span>
+        historically reported <SrsTerm /> data but switched to submitting{' '}
+        <NibrsTerm /> data in {nibrs['initial-year']}
       </span>
     )
   }
 
-  const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
+  return (
+    <span>
+      The {lookupUsa(place).display} state UCR Program {text}.
+    </span>
+  )
+}
+
+const highlight = txt =>
+  <strong>
+    {txt}
+  </strong>
+
+const ExplorerIntroState = ({ crime, place, participation, until }) => {
+  const isArson = crime === 'arson'
+  const { nibrs, srs } = ucrParticipationLookup(place)
+  const hybrid = nibrs && srs
+  const placeDisplay = lookupUsa(place).display
+  const untilUcr = participation.find(p => p.year === until)
+  const stateProgram = {
+    nibrs,
+    place,
+    srs,
+    hybrid,
+  }
+
+  const programHistory = getStateReportingHistory(stateProgram)
+  const reportTerms = getReportTerms(stateProgram)
   const crimeTerm = (
     <Term id={mapCrimeToGlossaryTerm(crime)}>
       {upperFirst(lowerCase(crime))}
@@ -48,14 +75,14 @@ const ExplorerIntroState = ({ crime, place, participation, until }) => {
       {!isArson
         ? <div>
             <p className="serif">
-              {crimeTerm} rates for {lookupUsa(place).display} are derived from{' '}
+              {crimeTerm} rates for {placeDisplay} are derived from{' '}
               {reportTerms} reports voluntarily submitted to the FBI.{' '}
-              {reportYrStr} .
+              {programHistory}
             </p>
             <p className="serif">
               In {highlight(until)}
-              , the FBI <EstimatedTerm /> crime statistics for{' '}
-              {lookupUsa(place).display} based on data received from{' '}
+              , the FBI <EstimatedTerm /> crime statistics for {placeDisplay}{' '}
+              based on data received from{' '}
               {highlight(formatNum(untilUcr.participating_agencies))} law
               enforcement agencies out of{' '}
               {highlight(formatNum(untilUcr.total_agencies))} agencies in the
@@ -64,13 +91,12 @@ const ExplorerIntroState = ({ crime, place, participation, until }) => {
           </div>
         : <div>
             <p className="serif">
-              {lookupUsa(place).display} reports {reportTerms} data to the FBI.
+              {placeDisplay} reports {reportTerms} data to the FBI.
             </p>
             <p className="serif">
               In {until}, {formatNum(untilUcr.participating_agencies)}{' '}
-              {lookupUsa(place).display} law enforcement agencies voluntarily
-              reported data to the FBI. The charts below feature unestimated
-              data.
+              {placeDisplay} law enforcement agencies voluntarily reported data
+              to the FBI. The charts below feature unestimated data.
             </p>
           </div>}
     </div>
