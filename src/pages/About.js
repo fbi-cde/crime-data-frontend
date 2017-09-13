@@ -84,7 +84,6 @@ class About extends React.Component {
   }
 
   render() {
-    const { actions } = this.props
     const { mapShown } = this.state
     const toggles = [
       { disabled: !mapShown, type: 'table' },
@@ -261,13 +260,6 @@ class About extends React.Component {
                 what you’d like to see next.
               </p>
             </div>
-            <button
-              className="btn btn-primary"
-              onClick={() => actions.showFeedback()}
-              type="button"
-            >
-              Submit feedback
-            </button>
           </div>
         </section>
       </div>
