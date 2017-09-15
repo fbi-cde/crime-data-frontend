@@ -12,7 +12,7 @@ const credService = env.getService('crime-data-creds') || {
 }
 
 const isProd = process.env.NODE_ENV === 'production'
-const key = credService.credentials.NEW_RELIC_API_KEY
+const key = credService.credentials.NEW_RELIC_LICENSE_KEY
 
 exports.config = {
   app_name: ['crime-data-frontend'],
