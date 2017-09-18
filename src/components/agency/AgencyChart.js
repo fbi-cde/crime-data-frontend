@@ -68,7 +68,7 @@ class AgencyChart extends React.Component {
 
     // Use Range based upon Since and Unitl due to API returning bad data etc:  [  {...year:2005},{...year:2007},{...year:2008}]
     const timeRange = []
-    for (let s = since; s < until + 1; s++) {
+    for (let s = since; s < until + 1; s+=) {
       timeRange.push(s)
     }
     const x0 = scaleBand()
@@ -95,7 +95,7 @@ class AgencyChart extends React.Component {
     if (data[data.length - 1].year !== until) {
       missingDates.push(until)
     }
-    for (let i = 0; i < data.length - 1; i++) {
+    for (let i = 0; i < data.length - 1; i+=) {
       const date1 = data[i].year
 
       const date2 = data[i + 1].year
@@ -115,7 +115,7 @@ class AgencyChart extends React.Component {
 
     // Merge Missing Data Collections
     if (missingDates.length > 0) {
-      for (let j = 0; j < missingDates.length; j++) {
+      for (let j = 0; j < missingDates.length; j+=) {
         const noDataYearsObj = {}
         noDataYearsObj.cleared = 0
         noDataYearsObj.reported = 0
