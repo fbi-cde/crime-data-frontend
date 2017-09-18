@@ -31,7 +31,6 @@
     "react/prop-types": 0,
     "react/require-default-props": 0,
     "semi": 0,
-    "jsx-quotes": 0,
-    "allowForLoopAfterthoughts": 1,
+    "jsx-quotes": 0
   }
 }
