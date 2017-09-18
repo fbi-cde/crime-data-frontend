@@ -47,15 +47,18 @@ class PlaceThumbnail extends React.Component {
     let scale = 1
     let translate = [0, 0]
     let strokeWidth = 1
-
+    console.log('Active:', active)
     if (active) {
       const bounds = path.bounds(active)
       const dx = bounds[1][0] - bounds[0][0]
       const dy = bounds[1][1] - bounds[0][1]
       const x = (bounds[0][0] + bounds[1][0]) / 2
       const y = (bounds[0][1] + bounds[1][1]) / 2
-
       scale = 0.8 / Math.max(dx / w, dy / h)
+      // Increases Scale if Smaller State
+      if (scale > 25) {
+        scale = 0.2 / Math.max(dx / w, dy / h)
+      }
       translate = [w / 2 - scale * x, h / 2 - scale * y]
       strokeWidth = 2.5 / scale
     }
