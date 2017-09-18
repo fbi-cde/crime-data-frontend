@@ -14,6 +14,7 @@ import { generateCrimeReadme } from '../util/content'
 import { getPlaceInfo } from '../util/place'
 import { combinePlaces, filterByYear } from '../util/summary'
 import lookupUsa, { nationalKey } from '../util/usa'
+import timeStampString from '../util/date'
 
 class TrendContainer extends React.Component {
   constructor(props) {
@@ -36,10 +37,7 @@ class TrendContainer extends React.Component {
     const data = combinePlaces(filteredByYear, offenses)
 
     if (!data || data.length === 0) return <NoData />
-    const date = new Date()
-    const dateStr = `${date.getMonth() +
-      1}_${date.getDate()}_${date.getFullYear()}`
-    const fname = `${place}-${crime}-${since}-${until}_${dateStr}`
+    const fname = `${place}-${crime}-${since}-${until}-${timeStampString()}`
     const title =
       `Reported ${pluralize(crime)} in ` +
       `${lookupUsa(place).display}, ${since}-${until}`

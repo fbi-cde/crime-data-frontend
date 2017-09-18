@@ -11,6 +11,7 @@ import NibrsTable from './NibrsTable'
 import NibrsTableWithBars from './NibrsTableWithBars'
 import { generateCrimeReadme } from '../../util/content'
 import { slugify } from '../../util/text'
+import timeStampString from '../../util/date'
 
 const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
   const charts = data.map((d, i) => {
@@ -77,7 +78,9 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
       <DownloadDataBtn
         ariaLabel={`Download ${title} data as a CSV`}
         data={download}
-        filename={`${place}-${crime}-${slugify(title)}-${since}-${until}`}
+        filename={`${place}-${crime}-${slugify(
+          title,
+        )}-${since}-${until}-${timeStampString()}`}
         text="Download data"
       />
     </div>

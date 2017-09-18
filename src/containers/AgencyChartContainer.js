@@ -11,6 +11,7 @@ import Loading from '../components/Loading'
 import NoData from '../components/NoData'
 import { NibrsTerm, SrsTerm } from '../components/Terms'
 import { getAgency } from '../util/agencies'
+import timeStampString from '../util/date'
 
 const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
   const { error, loading } = summary
@@ -21,7 +22,7 @@ const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
   const data = summary.data[place]
   if (!data || data.length === 0) return <NoData />
 
-  const fname = `${place}-${crime}-${since}-${until}`
+  const fname = `${place}-${crime}-${since}-${until}-${timeStampString()}`
   const dataClean = data
     .filter(d => d.year >= since && d.year <= until)
     .sort((a, b) => a.year - b.year)
