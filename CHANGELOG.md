@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.17.1] - 2017-09-14
+### Fixed
+- Update years for some of the CSV downloads ([#1242](https://github.com/18F/crime-data-frontend/pull/1242))
+- Use selected US state on home page for Explorer view ([#1244](https://github.com/18F/crime-data-frontend/issues/1244))
+
+### Removed
+- Feedback button from About page ([#1245](https://github.com/18F/crime-data-frontend/pull/1245))
+
+
 ## [2.17.0] - 2017-09-11
 ### Added
 - Animate sidebar opening and closing on mobile devices ([#1238](https://github.com/18F/crime-data-frontend/pull/1238))
