@@ -47,7 +47,6 @@ class PlaceThumbnail extends React.Component {
     let scale = 1
     let translate = [0, 0]
     let strokeWidth = 1
-    console.log('Active:', active)
     if (active) {
       const bounds = path.bounds(active)
       const dx = bounds[1][0] - bounds[0][0]
