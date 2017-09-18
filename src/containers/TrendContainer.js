@@ -36,8 +36,10 @@ class TrendContainer extends React.Component {
     const data = combinePlaces(filteredByYear, offenses)
 
     if (!data || data.length === 0) return <NoData />
-
-    const fname = `${place}-${crime}-${since}-${until}`
+    const date = new Date()
+    const dateStr = `${date.getMonth() +
+      1}_${date.getDate()}_${date.getFullYear()}`
+    const fname = `${place}-${crime}-${since}-${until}_${dateStr}`
     const title =
       `Reported ${pluralize(crime)} in ` +
       `${lookupUsa(place).display}, ${since}-${until}`
