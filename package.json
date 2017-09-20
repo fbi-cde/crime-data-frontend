@@ -103,7 +103,10 @@
     "style-loader": "^0.18.2",
     "webpack": "^2.6.1",
     "yaml-lint": "0.0.4",
-    "yaml-loader": "^0.5.0"
+    "yaml-loader": "^0.5.0",
+    "webdriverio": "^4.8.0",
+    "selenium-webdriver": "^3.5.0",
+    "geckodriver": "^1.8.1"
   },
   "babel": {
     "presets": ["es2015", "stage-0", "react"]
