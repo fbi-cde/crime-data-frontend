@@ -1,17 +1,19 @@
 import { max } from 'd3-array'
 import { scaleBand, scaleLinear, scaleOrdinal } from 'd3-scale'
 import throttle from 'lodash.throttle'
+import uniqBy from 'lodash.uniqby'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import AgencyChartDetails from './AgencyChartDetails'
 import XAxis from '../XAxis'
 import YAxis from '../YAxis'
+import { rangeYears } from '../../util/years'
 
 class AgencyChart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { hover: null, svgParentWidth: null, yearSelected: null }
+    this.state = { svgParentWidth: null, yearSelected: null }
     this.getDimensions = throttle(this.getDimensions, 20)
   }
 
@@ -30,8 +32,55 @@ class AgencyChart extends React.Component {
     }
   }
 
-  rememberValue = d => () => {
-    this.setState({ hover: d, yearSelected: null })
+  getActive = data => {
+    const { yearSelected } = this.state
+
+    let active
+    const selected = data.find(d => d.year === yearSelected)
+
+    if (yearSelected && selected) {
+      active = selected
+    } else if (yearSelected && !selected) {
+      // year selected but no data reported
+      active = {
+        year: yearSelected,
+        reported: { count: 0 },
+        cleared: { count: 0 },
+      }
+    } else {
+      active = data[data.length - 1]
+    }
+
+    const priorYear = data.find(d => d.year === active.year - 1)
+
+    return {
+      active,
+      priorYear,
+    }
+  }
+
+  getYMax = (data, keys = []) => {
+    const min = 3
+    const counts = data
+      .map(d => keys.map(k => d[k].count))
+      .reduce((accum, next) => [...accum, ...next], [min])
+    return max(counts)
+  }
+
+  getNoDataYears = (data = [], since, until) => {
+    const missingYears = rangeYears(since, until).filter(
+      year => !data.find(d => d.year === year),
+    )
+    const zeroReportedYears = data
+      .filter(d => d.reported === 0 && d.cleared === 0)
+      .map(d => d.year)
+    const noDataYears = missingYears.concat(zeroReportedYears)
+
+    return uniqBy(noDataYears).sort()
+  }
+
+  handleMouseOver = d => () => {
+    this.updateYear(d)
   }
 
   updateYear = year => {
@@ -49,7 +98,7 @@ class AgencyChart extends React.Component {
       submitsNibrs,
       until,
     } = this.props
-    const { hover, svgParentWidth, yearSelected } = this.state
+    const { svgParentWidth } = this.state
 
     const svgWidth = svgParentWidth || size.width
     const svgHeight = svgWidth / 3
@@ -59,18 +108,14 @@ class AgencyChart extends React.Component {
     const xPadding = svgWidth < 500 ? 20 : 40
 
     const keys = ['reported', 'cleared']
-    const yMax = max([3, max(data, d => max(keys, k => d[k].count))])
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
     const noun = submitsNibrs ? 'incidents' : 'offenses'
+    const yMax = this.getYMax(data, keys)
 
     const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()
 
-    // Use Range based upon Since and Unitl due to API returning bad data etc:  [  {...year:2005},{...year:2007},{...year:2008}]
-    const timeRange = []
-    for (let s = since; s < until + 1; s += 1) {
-      timeRange.push(s)
-    }
+    const timeRange = rangeYears(since, until)
     const x0 = scaleBand()
       .domain(timeRange)
       .rangeRound([0 + xPadding, width - xPadding])
@@ -81,48 +126,8 @@ class AgencyChart extends React.Component {
       .rangeRound([0, x0.bandwidth()])
       .padding(0)
 
-    const active = yearSelected
-      ? data.find(d => d.year === yearSelected)
-      : hover || data[data.length - 1]
-
-    const activePriorYear = data.find(d => d.year === active.year - 1)
-
-    // Find Missing Years from API Payload since it is not passing them back as NULL
-    const missingDates = []
-    if (data[0].year !== since) {
-      missingDates.push(since)
-    }
-    if (data[data.length - 1].year !== until) {
-      missingDates.push(until)
-    }
-    for (let i = 0; i < data.length - 1; i += 1) {
-      const date1 = data[i].year
-
-      const date2 = data[i + 1].year
-      if (date1 + 1 !== date2) {
-        const missingDate = date1 + 1
-        missingDates.push(missingDate)
-      }
-    }
-
-    const noDataYears = data
-      .filter(d => d.reported === 0 && d.cleared === 0)
-      .map(({ cleared, reported, year }) => ({
-        cleared,
-        reported,
-        year,
-      }))
-
-    // Merge Missing Data Collections
-    if (missingDates.length > 0) {
-      for (let j = 0; j < missingDates.length; j += 1) {
-        const noDataYearsObj = {}
-        noDataYearsObj.cleared = 0
-        noDataYearsObj.reported = 0
-        noDataYearsObj.year = missingDates[j]
-        noDataYears.push(noDataYearsObj)
-      }
-    }
+    const { active, priorYear: activePriorYear } = this.getActive(data)
+    const noDataYears = this.getNoDataYears(data, since, until)
 
     // no data (nd) element responsive values
     const [ndHeight, ndCircle, ndTextY, ndTextSize] =
@@ -133,7 +138,6 @@ class AgencyChart extends React.Component {
         <AgencyChartDetails
           colors={colorMap}
           crime={crime}
-          f
           data={active}
           dataPrior={activePriorYear}
           keys={keys}
@@ -166,24 +170,24 @@ class AgencyChart extends React.Component {
                         height={Math.max(0, height - y(d[k].count))}
                         width={x1.bandwidth()}
                         fill={
-                          active.year === d.year
+                          this.state.yearSelected === d.year
                             ? colorMap(k)
                             : mutedColorMap(k)
                         }
                         className="cursor-pointer"
                         pointerEvents="all"
-                        onMouseOver={this.rememberValue(d)}
+                        onMouseOver={this.handleMouseOver(d.year)}
                       />,
                     )}
                   </g>,
                 )}
-                {noDataYears.map(d =>
+                {noDataYears.map(year =>
                   <g
-                    key={`ndy-${d.year}`}
-                    transform={`translate(${x0(d.year) +
+                    key={`ndy-${year}`}
+                    transform={`translate(${x0(year) +
                       x1.bandwidth()}, ${height - ndHeight})`}
                     className="cursor-pointer no-year-data"
-                    onMouseOver={this.rememberValue(d)}
+                    onMouseOver={this.handleMouseOver(year)}
                   >
                     <circle r={ndCircle} fill="transparent" strokeWidth="1px" />
                     <text
