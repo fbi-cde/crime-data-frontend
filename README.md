@@ -25,12 +25,11 @@ Use `npm run watch` to start the continuous `webpack` processes and a webserver.
 
 You can lint the code with `npm run lint` and run tests with `npm run test`.
 
-### Running Selenium Mocha Tests
-1. Navigate to /crime-data-frontend/test/mocha
-2. Launch Selenium Stand-alone server: java -jar -Dwebdriver.gecko.driver=./geckodriver seleum-server-standalone-3.5.3.jar [Not if using Mac change the geckodriver to the MAC version in the folder geckodriver-mac]
-3. Ensure CDE is running locally
-4. Configure release_verification.js to use the port you have CDE running on
-5. Execute mocha release_verification.js --timeout=1500 - This will execute the automated test that covers the manual verification process
+### Running Selenium tests
+1. Launch Selenium Stand-alone server with `npm run selenium:start` or `npm run selenium:start:mac` on a Mac. You will want to start this in a different shell or as a background task.
+2. Ensure CDE is running locally
+3. Configure `test/mocha/release_verification.js` to use the port you have CDE running on
+4. Execute `npm run selenium:run` - This will execute the automated test that covers the [manual verification process](#manual-verification)
 
 ### Updating agency data
 
@@ -60,7 +59,7 @@ We use the following criteria to determine the proper next version number. A maj
 
 ### Manual verification
 
-Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2340`](https://github.com/18F/crime-data-frontend/commit/cdb2340830b0325dc9a05ba443a1a84c2e835430) it was about 77% of all statements), we run through a few basic user scenarios before tagging a release to check the application.
+Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2340`](https://github.com/18F/crime-data-frontend/commit/cdb2340830b0325dc9a05ba443a1a84c2e835430) it was about 77% of all statements), we run through a few basic user scenarios before tagging a release to check the application. We are working on getting the [automated browser tests](#running-selenium-tests) to replicate this exact process.
 
 1. Load homepage from `master` branch. Can be local or https://crime-data-explorer-master.fr.cloud.gov
 2. Select "Explorer" from navigation
