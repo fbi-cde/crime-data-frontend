@@ -8,6 +8,7 @@ import Term from '../Term'
 import crimeTerm from '../../util/glossary'
 import { formatNum, formatOneDec as formatRate } from '../../util/formats'
 import lookupUsa, { nationalKey } from '../../util/usa'
+import generateId from '../../util/id'
 
 const highlight = txt =>
   <strong>
@@ -56,6 +57,7 @@ const TrendChartDetails = ({
   const revised = active.find(
     d => d.crime === 'rape-revised' && d.place === place,
   )
+  const crimeId = crime+"-trend-chart-details";
 
   let sentence
   if (isNational) {
@@ -84,7 +86,7 @@ const TrendChartDetails = ({
   } else {
     sentence = (
       <span>
-        In {highlight(year)}, {lookupUsa(place).display}’s {term} rate was{' '}
+        In <span id="selected-year-text">{highlight(year)}</span>, {lookupUsa(place).display}’s {term} rate was{' '}
         {highlight(formatRate(rate))} incidents per 100,000 people. The rate for
         that year was {comparison} that of the United States.
       </span>
@@ -98,7 +100,7 @@ const TrendChartDetails = ({
           {sentence}
         </p>
       </div>
-      <div className="flex-none inline-block mw-fill overflow-auto bg-blue-white rounded">
+      <div id={crimeId} className="flex-none inline-block mw-fill overflow-auto bg-blue-white rounded">
         <table className="p2 sm-col-5">
           <thead className="fs-10 line-height-4 right-align">
             <tr>
@@ -129,7 +131,8 @@ const TrendChartDetails = ({
           </thead>
           <tbody className="fs-12 bold line-height-4">
             {data.map((d, i) =>
-              <tr key={i}>
+
+              <tr key={i} id={generateId(d.place+"-trend-chart-details-row")}>
                 <td
                   className="pr2 nowrap truncate align-bottom"
                   style={{ maxWidth: 125 }}
@@ -145,7 +148,7 @@ const TrendChartDetails = ({
                   {lookupUsa(d.place).display}
                 </td>
                 <td className="pt1 pr2 align-bottom right-align">
-                  <span
+                  <span id={generateId(d.place+"-trend-chart-details-row-rate")}
                     className="inline-block border-bottom"
                     style={cellStyle}
                   >
@@ -153,7 +156,7 @@ const TrendChartDetails = ({
                   </span>
                 </td>
                 <td className="pt1 pr2 align-bottom right-align">
-                  <span
+                  <span id={generateId(d.place+"-trend-chart-details-row-count")}
                     className="inline-block border-bottom"
                     style={cellStyle}
                   >
@@ -164,7 +167,7 @@ const TrendChartDetails = ({
                   className="pt1 pl2 align-bottom right-align border-left"
                   style={borderColor}
                 >
-                  <span
+                  <span id={generateId(d.place+"-trend-chart-details-row-population")}
                     className="inline-block border-bottom"
                     style={cellStyle}
                   >

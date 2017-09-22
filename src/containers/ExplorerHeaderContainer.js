@@ -28,7 +28,10 @@ const ExplorerHeaderContainer = ({
   return (
     <div>
       <div className="items-baseline mt2 mb4">
-        <h1 className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-light">
+        <h1
+          id="explorerHeaderTitle"
+          className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-light"
+        >
           {isAgency && isLoading ? 'Loading agency...' : placeDisplay}
         </h1>
       </div>

@@ -34,7 +34,7 @@ class Header extends React.Component {
               <span className="mb1 fs-10 md-fs-12 caps bold line-height-1 blue-light-508 block">
                 Federal Bureau of Investigation
               </span>
-              <Link to="/" className="fs-24 md-fs-32 serif line-height-1 white">
+              <Link to="/" className="fs-24 md-fs-32 serif line-height-1 white"id="crime-data-explorer-link">
                 Crime Data Explorer
               </Link>
             </div>
@@ -48,6 +48,7 @@ class Header extends React.Component {
                   to="/"
                   className="mx1 lg-mx2 fs-14 md-fs-18 white"
                   style={isHome(location) ? active : {}}
+                  id="home-link-header"
                 >
                   Home
                 </Link>
@@ -57,6 +58,8 @@ class Header extends React.Component {
                   to={'/explorer/violent-crime'}
                   className="mx1 lg-mx2 fs-14 md-fs-18 white"
                   style={isExplorer(location) ? active : {}}
+                  id="explorer-link-header"
+
                 >
                   Explorer
                 </Link>
@@ -66,6 +69,7 @@ class Header extends React.Component {
                   to="/downloads-and-docs"
                   className="mx1 lg-mx2 fs-14 md-fs-18 white"
                   activeStyle={active}
+                  id="downloads-and-docs-link-header"
                 >
                   Downloads & Documentation
                 </Link>
@@ -75,6 +79,7 @@ class Header extends React.Component {
                   to="/about"
                   className="mx1 lg-mx2 fs-14 md-fs-18 white"
                   activeStyle={active}
+                  id="about-link-header"
                 >
                   About
                 </Link>
