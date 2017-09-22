@@ -25,6 +25,13 @@ Use `npm run watch` to start the continuous `webpack` processes and a webserver.
 
 You can lint the code with `npm run lint` and run tests with `npm run test`.
 
+### Running Selenium Mocha Tests
+1. Navigate to /crime-data-frontend/test/mocha
+2. Launch Selenium Stand-alone server: java -jar -Dwebdriver.gecko.driver=./geckodriver seleum-server-standalone-3.5.3.jar [Not if using Mac change the geckodriver to the MAC version in the folder geckodriver-mac]
+3. Ensure CDE is running locally
+4. Configure release_verification.js to use the port you have CDE running on
+5. Execute mocha release_verification.js --timeout=1500 - This will execute the automated test that covers the manual verification process
+
 ### Updating agency data
 
 We load a JSON file, sourced from the API, into the application that has all the agency ORIs and names to make the end user experience better. When we need to update that JSON file with new data from the API, we can just run `npm run agencies` and the data will be downloaded and gzipped properly. This is useful when agency names are updated.
