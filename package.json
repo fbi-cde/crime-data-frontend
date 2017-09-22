@@ -16,9 +16,9 @@
     "test": "jest --env=jsdom --no-cache",
     "test:debug": "node --debug-brk jest -i --env=jsdom",
     "test:watch": "jest --env=jsdom --watch",
-    "selenium:run": "mocha test/mocha/release_verification.js --timeout=15000",
-    "selenium:start": "java -jar -Dwebdriver.gecko.driver=./test/mocha/geckodriver ./test/mocha/selenium-server-standalone-3.5.3.jar",
-    "selenium:start:mac": "java -jar -Dwebdriver.gecko.driver=./test/mocha/geckodriver-mac ./test/mocha/selenium-server-standalone-3.5.3.jar",
+    "selenium:run": "mocha test/browser/release_verification.js --timeout=15000",
+    "selenium:start": "java -jar -Dwebdriver.gecko.driver=./test/browser/geckodriver ./test/browser/selenium-server-standalone-3.5.3.jar",
+    "selenium:start:mac": "java -jar -Dwebdriver.gecko.driver=./test/browser/geckodriver-mac ./test/browser/selenium-server-standalone-3.5.3.jar",
     "coverage": "npm test -- --coverage",
     "prettier": "prettier --single-quote --trailing-comma all --semi false --write \"{src,test}/**/*.js\"",
     "swagger": "rm -f node_modules/swagger-ui/dist/*.html && mkdir -p public/swagger/vendor && cp -r node_modules/swagger-ui/dist/* public/swagger/vendor",
@@ -120,6 +120,7 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|yml|yaml)$": "<rootDir>/test/mocks/fileMock.js"
-    }
+    },
+    "testPathIgnorePatterns": ["/test/browser"]
   }
 }

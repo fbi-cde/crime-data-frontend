@@ -28,7 +28,7 @@ You can lint the code with `npm run lint` and run tests with `npm run test`.
 ### Running Selenium tests
 1. Launch Selenium Stand-alone server with `npm run selenium:start` or `npm run selenium:start:mac` on a Mac. You will want to start this in a different shell or as a background task.
 2. Ensure CDE is running locally
-3. Configure `test/mocha/release_verification.js` to use the port you have CDE running on
+3. Configure `test/browser/release_verification.js` to use the port you have CDE running on
 4. Execute `npm run selenium:run` - This will execute the automated test that covers the [manual verification process](#manual-verification)
 
 ### Updating agency data
