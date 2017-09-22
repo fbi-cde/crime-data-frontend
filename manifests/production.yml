@@ -9,5 +9,6 @@ applications:
   instances: 2
 env:
   CDE_API: 'https://api.usa.gov/crime/fbi/ucr'
+  NEW_RELIC_APP_NAME: 'crime-data-frontend-production'
 services:
   - crime-data-api-key-production
