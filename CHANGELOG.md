@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.18.0] - 2017-09-25
+### Added
+- Show 2016 data by default ([#1253](https://github.com/18F/crime-data-frontend/pull/1253/commits/e27a2ef9c3ad1aa916a3dbb10d5d26fd089504db))
+
+### Fixed
+- Zoom out on some states in the place thumbnail to show more location context and to account for the lower fidelity geometry ([#1250](https://github.com/18F/crime-data-frontend/pull/1250))
+
+
 ## [2.17.1] - 2017-09-14
 ### Fixed
 - Update years for some of the CSV downloads ([#1242](https://github.com/18F/crime-data-frontend/pull/1242))
