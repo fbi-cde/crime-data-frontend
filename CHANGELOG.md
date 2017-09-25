@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.18.1] - 2017-09-25
+### Fixed
+- Use production API key service only to prevent env var collisions ([#1254](https://github.com/18F/crime-data-frontend/pull/1254))
+
+
 ## [2.18.0] - 2017-09-25
 ### Added
 - Show 2016 data by default ([#1253](https://github.com/18F/crime-data-frontend/pull/1253/commits/e27a2ef9c3ad1aa916a3dbb10d5d26fd089504db))
