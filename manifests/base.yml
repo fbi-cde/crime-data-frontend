@@ -1,5 +1,5 @@
 services:
-- crime-data-api-creds
+- crime-data-new-relic-creds
 - crime-data-feedback-creds
 - crime-data-threat-keywords
 env:
