@@ -24,16 +24,16 @@ const AgencyChartDetails = ({
   until,
   updateYear,
 }) => {
-  const { cleared, year, reported } = data
+  const { cleared, year, actual } = data
   const yearRange = range(since, until + 1)
   const crimeDisplay = lowerCase(crime)
   const handleSelectChange = e => updateYear(Number(e.target.value))
   let compSentence = null
-  const reportedLastYr = dataPrior && dataPrior.reported
+  const actualLastYr = dataPrior && dataPrior.actual
 
-  if (reportedLastYr && reported.count > 0) {
+  if (actualLastYr && actual.count > 0) {
     const comp =
-      reported.count > reportedLastYr.count ? 'increased' : 'decreased'
+      actual.count > actualLastYr.count ? 'increased' : 'decreased'
     compSentence = (
       <span>
         Reported {noun} {highlight(comp)} from the previous year.
@@ -45,9 +45,9 @@ const AgencyChartDetails = ({
     <div className="mb3 lg-flex">
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
         <p className="m0" style={{ maxWidth: 400 }}>
-          In {highlight(year)}, there {pluralize('were', reported.count)}{' '}
-          {highlight(fmt(reported.count))} reported{' '}
-          {pluralize(noun, reported.count)} of {crimeDisplay}. There{' '}
+          In {highlight(year)}, there {pluralize('were', actual.count)}{' '}
+          {highlight(fmt(actual.count))} actual{' '}
+          {pluralize(noun, actual.count)} of {crimeDisplay}. There{' '}
           {pluralize('were', cleared.count)} {highlight(fmt(cleared.count))}{' '}
           cleared {crimeDisplay} {pluralize(noun, cleared.count)}. Crimes are
           not necessarily cleared in the year they occur. {compSentence}
