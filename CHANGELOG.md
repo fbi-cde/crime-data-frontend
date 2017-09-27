@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project be documented in this file.
 
+## [2.18.2] - 2017-09-27
+### Changed
+- Agency View now displays Actual instead of Reported Value  ([#1256](https://github.com/18F/crime-data-frontend/pull/1256))
+
+
 ## [2.18.1] - 2017-09-25
 ### Fixed
 - Use production API key service only to prevent env var collisions ([#1254](https://github.com/18F/crime-data-frontend/pull/1254))
