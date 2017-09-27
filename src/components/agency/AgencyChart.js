@@ -107,7 +107,7 @@ class AgencyChart extends React.Component {
     const height = svgHeight - margin.top - margin.bottom
     const xPadding = svgWidth < 500 ? 20 : 40
 
-    const keys = ['reported', 'cleared']
+    const keys = ['actual', 'cleared']
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
     const noun = submitsNibrs ? 'incidents' : 'offenses'
