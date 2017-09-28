@@ -1,4 +1,2 @@
-export const generateId = (str) => {
-  return str;
-}
+const generateId = str => str
 export default generateId
