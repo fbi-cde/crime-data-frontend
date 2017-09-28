@@ -18,6 +18,7 @@ const AgencySearchResultItem = ({ agency, onClick }) => {
         className={`block truncate ${color}`}
         style={{ lineHeight: '1.75' }}
         href="#!"
+        id={agency.ori}
         onClick={isActive ? onClick(agency) : prevent}
       >
         {name}
