@@ -43,10 +43,10 @@ const ExplorerIntroState = ({ crime, place, participation, until }) => {
             <p className="serif">
               In {highlight(until)}
               , the FBI <EstimatedTerm /> crime statistics for{' '}
-              {lookupUsa(place).display} based on data received from{' '}
-              {highlight(formatNum(untilUcr.participating_agencies))} law
+              <span id="explorerIntroState">{lookupUsa(place).display} </span> based on data received from{' '}
+              <span id="explorerIntroStateParticipating">{highlight(formatNum(untilUcr.participating_agencies))} </span> law
               enforcement agencies out of{' '}
-              {highlight(formatNum(untilUcr.total_agencies))} agencies in the
+              <span id="explorerIntroStateTotal">{highlight(formatNum(untilUcr.total_agencies))} </span>agencies in the
               state that year.
             </p>
           </div>
