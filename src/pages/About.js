@@ -224,11 +224,11 @@ class About extends React.Component {
                   </a>.
                 </p>
                 <p>
-                  The Crime Data provided from{' '}
+                  The data provided from{' '}
                   <a href="https://ucr.fbi.gov/" className="underline">
                       Uniform Crime Reporting (UCR) Program
                     </a>{' '}
-                  for 2016 was made available on 9/25/2017.
+                  for 2016 data was made available on 9/25/2017.
                 </p>
               </div>
               <div className="md-col md-col-3">
