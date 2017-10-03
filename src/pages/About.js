@@ -185,7 +185,7 @@ class About extends React.Component {
                 <div className="mb-tiny bold">
                   Summary (SRS) data
                   <span className="italic ml-tiny regular">
-                    1960—2015 data available
+                    1960—2016 data available
                   </span>
                 </div>
                 <p className="mb3">
@@ -201,7 +201,7 @@ class About extends React.Component {
                 <div className="mb-tiny bold">
                   Incident-based (NIBRS) data
                   <span className="italic ml-tiny regular">
-                    1991—2015 data available
+                    1991—2016 data available
                   </span>
                 </div>
                 <p>
@@ -222,6 +222,13 @@ class About extends React.Component {
                   <a href="/downloads-and-docs" className="underline">
                     bulk downloads
                   </a>.
+                </p>
+                <p>
+                  The Crime Data provided from{' '}
+                  <a href="https://ucr.fbi.gov/" className="underline">
+                      Uniform Crime Reporting (UCR) Program
+                    </a>{' '}
+                  for 2016 was made available on 9/25/2017.
                 </p>
               </div>
               <div className="md-col md-col-3">
