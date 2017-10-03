@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { formatNum, formatPerc } from '../../util/formats'
+import generateId from '../../util/id'
 
 const NibrsStackedBarDetails = ({ colorMap, data, isCounts, total }) =>
   <ul className="list-style-none p0 m0 fs-14">
@@ -17,10 +18,10 @@ const NibrsStackedBarDetails = ({ colorMap, data, isCounts, total }) =>
             style={{ width: 10, height: 10, backgroundColor: colorMap(d.key) }}
           />
           <div className="flex flex-auto justify-between">
-            <span>
+            <span id={generateId(d.key)} >
               {d.key}
             </span>
-            <span className="bold monospace">
+            <span className="bold monospace" id={generateId(d.key+'-value')}>
               {isCounts ? formatNum(d.value) : formatPerc(d.value / total)}
             </span>
           </div>

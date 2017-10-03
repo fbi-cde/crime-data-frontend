@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import generateId from '../../util/id'
 
 const btn = 'btn btn-primary p0 ml-tiny line-height-4 sans-serif regular'
 
@@ -8,17 +9,20 @@ const NibrsCountPercentToggle = ({
   isCounts,
   showCounts,
   showPercents,
+  id,
 }) => {
   const btns = [
     {
       handleClick: showCounts,
       selected: isCounts,
       text: '#',
+      id: id,
     },
     {
       handleClick: showPercents,
       selected: !isCounts,
       text: '%',
+      id: id,
     },
   ]
 
@@ -32,6 +36,7 @@ const NibrsCountPercentToggle = ({
           key={i}
           onClick={b.handleClick}
           style={{ width: 18 }}
+          id={generateId(b.id+'-toggle-'+b.text)}
         >
           {b.text}
         </button>,
