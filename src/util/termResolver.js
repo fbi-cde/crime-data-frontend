@@ -1,6 +1,5 @@
-
-export const mapActualToReported = (str ) => {
-  if(str == 'actual'){
+export const mapActualToReported = str  => {
+  if(str === 'actual' ) {
     return 'reported'
   }
   return str;
