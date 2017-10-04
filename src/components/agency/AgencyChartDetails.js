@@ -5,7 +5,7 @@ import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 import generateId from '../../util/id'
-import mapActualToRecorded from '../../util/termResolver'
+import mapActualToReported from '../../util/termResolver'
 
 import Term from '../Term'
 import { formatNum as fmt } from '../../util/formats'
@@ -37,7 +37,7 @@ const AgencyChartDetails = ({
     const comp = actual.count > actualLastYr.count ? 'increased' : 'decreased'
     compSentence = (
       <span>
-        Recorded {noun} {highlight(comp)} from the previous year.
+        Reported {noun} {highlight(comp)} from the previous year.
       </span>
     )
   }
@@ -48,7 +48,7 @@ const AgencyChartDetails = ({
         <p className="m0" style={{ maxWidth: 400 }}>
           In <span id="selected-year-text">{highlight(year)}</span>, there{' '}
           {pluralize('were', actual.count)} {highlight(fmt(actual.count))}{' '}
-          recorded {pluralize(noun, actual.count)} of {crimeDisplay}. There{' '}
+          reported {pluralize(noun, actual.count)} of {crimeDisplay}. There{' '}
           {pluralize('were', cleared.count)} {highlight(fmt(cleared.count))}{' '}
           cleared {crimeDisplay} {pluralize(noun, cleared.count)}. Crimes are
           not necessarily cleared in the year they occur. {compSentence}
@@ -89,7 +89,7 @@ const AgencyChartDetails = ({
                     style={{ width: 8, height: 8, backgroundColor: colors(k) }}
                   />
                   <Term id={k} size="sm">
-                    {startCase(mapActualToRecorded(k))}
+                    {startCase(mapActualToReported(k))}
                   </Term>
                 </td>
                 <td className="pt1 line-height-4 align-bottom right-align">
