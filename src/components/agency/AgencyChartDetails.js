@@ -5,7 +5,7 @@ import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 import generateId from '../../util/id'
-import mapActualToReported from '../../util/termResolver'
+import mapReported from '../../util/termResolver'
 
 import Term from '../Term'
 import { formatNum as fmt } from '../../util/formats'
@@ -89,7 +89,7 @@ const AgencyChartDetails = ({
                     style={{ width: 8, height: 8, backgroundColor: colors(k) }}
                   />
                   <Term id={k} size="sm">
-                    {startCase(mapActualToReported(k))}
+                    {startCase(mapReported(k))}
                   </Term>
                 </td>
                 <td className="pt1 line-height-4 align-bottom right-align">
