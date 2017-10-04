@@ -1,9 +1,9 @@
 
-export const mapActualToRecorded = (str ) => {
+export const mapActualToReported = (str ) => {
   if(str == 'actual'){
-    return 'recorded'
+    return 'reported'
   }
   return str;
 }
 
-export default mapActualToRecorded
+export default mapActualToReported
