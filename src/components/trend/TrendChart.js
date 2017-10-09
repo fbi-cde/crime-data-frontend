@@ -24,7 +24,6 @@ class TrendChart extends React.Component {
       yearSelected: props.until,
     }
     this.getDimensions = throttle(this.getDimensions, 20)
-
   }
 
   componentDidMount() {
