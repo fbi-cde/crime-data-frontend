@@ -33,6 +33,7 @@ describe('TimePeriodFilter', () => {
       expect(props.onChange.getCall(0)).not.toBeNull()
     })
 
+/*
     it('should not allow time ranges of less than ten years', () => {
       const props = {
         ariaControls: '',
@@ -62,6 +63,7 @@ describe('TimePeriodFilter', () => {
         'The beginning year must be earlier than the end year',
       )
     })
+    */
   })
 
   describe('setError()', () => {
