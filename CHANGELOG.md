@@ -1,5 +1,19 @@
 # Change Log
 All notable changes to this project be documented in this file.
+## [2.18.4] - 2017-10-12
+### Added
+- Added information on when the data was last uploaded from UCR ([#1265](https://github.com/18F/crime-data-frontend/pull/1265))
+
+### Fixed
+- Invalid dates being displayed on Documents and Download Page ([#1267](https://github.com/18F/crime-data-frontend/pull/1267))
+- Addressed breakage with Selected Year Change causing Charts to fail to laod ([#1269](https://github.com/18F/crime-data-frontend/pull/1269))
+- Removal of Feedback on Page not Found Page ([#1271](https://github.com/18F/crime-data-frontend/pull/1271))
+- Update Agency Reference Year reference to 2016  ([#1268](https://github.com/18F/crime-data-frontend/pull/1268))
+- Agency View now displays Reported but is actual the "actual" count  ([#1264](https://github.com/18F/crime-data-frontend/pull/1264))
+- Corrects AWS link to LEO CSV ([#1261](https://github.com/18F/crime-data-frontend/pull/1261))
+
+### Changed
+- Rape is not calculated based upon Sodomy not incest ([#1273](https://github.com/18F/crime-data-frontend/pull/1273))
 
 ## [2.18.3] - 2017-09-27
 ### Fixed
