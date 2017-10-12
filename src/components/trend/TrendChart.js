@@ -21,7 +21,7 @@ class TrendChart extends React.Component {
     super(props)
     this.state = {
       svgParentWidth: null,
-      yearSelected: props.initialYearSelected,
+      yearSelected: props.until,
     }
     this.getDimensions = throttle(this.getDimensions, 20)
   }

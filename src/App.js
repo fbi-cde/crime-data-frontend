@@ -30,7 +30,7 @@ const App = ({
     <Disclaimer />
     <BetaBanner onFeedbackClick={actions.showFeedback} />
     <Header location={location} />
-    <main className="site-main">
+    <main id="cde-main" className="site-main">
       {children}
     </main>
     <Glossary actions={actions} {...glossary} />

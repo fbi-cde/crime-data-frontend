@@ -48,5 +48,6 @@ describe('filter util', () => {
       expect(since).toEqual(1998)
       expect(until).toEqual(2008)
     })
+
   })
 })
