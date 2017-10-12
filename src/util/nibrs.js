@@ -79,7 +79,7 @@ export const offenseMapping = {
   ],
   'motor-vehicle-theft': 'Motor Vehicle Theft',
   homicide: 'Murder and Nonnegligent Manslaughter',
-  rape: ['Rape', 'Sexual Assault With An Object', 'Incest'],
+  rape: ['Rape', 'Sexual Assault With An Object', 'Sodomy'],
   robbery: 'Robbery',
   arson: 'Arson',
 }
