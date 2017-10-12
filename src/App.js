@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import Analytics from './components/Analytics'
+import BetaBanner from './components/BetaBanner'
 import ClearCacheBtn from './components/ClearCacheBtn'
 import Disclaimer from './components/Disclaimer'
 import Feedback from './components/Feedback'
@@ -27,6 +28,7 @@ const App = ({
   <div className={`site ${sidebarOpen ? 'no-scroll' : ''}`}>
     <SkipContent skipTo=".site-main" />
     <Disclaimer />
+    <BetaBanner onFeedbackClick={actions.showFeedback} />
     <Header location={location} />
     <main id="cde-main" className="site-main">
       {children}
