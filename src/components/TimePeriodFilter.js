@@ -19,12 +19,10 @@ class TimePeriodFilter extends React.Component {
       return this.setError(
         'The beginning year must be earlier than the end year',
       )
+    } else if (Math.abs(until - since) < 10) {
+        return this.setError('You must select a range of at least 10 years')
     }
-    /*
-        else if (Math.abs(until - since) < 10) {
-          return this.setError('You must select a range of at least 10 years')
-        }
-    */
+
     this.setState({ error: null })
     return this.props.onChange({ since, until })
   }
