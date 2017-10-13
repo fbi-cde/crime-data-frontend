@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import generateId from '../../util/id'
 
 import { formatNum } from '../../util/formats'
 
@@ -19,10 +20,10 @@ const NibrsTable = ({ data, title, sortByValue }) => {
         <tbody>
           {data.filter(d => d.key).map((d, i) =>
             <tr key={i}>
-              <td className="pl1 lh-24">
+              <td className="pl1 lh-24"  id={generateId(d.key)}>
                 {d.key}
               </td>
-              <td className="pr2 lh-24 right-align">
+              <td className="pr2 lh-24 right-align"  id={generateId(d.key+'-value')}>
                 {formatNum(d.count)}
               </td>
             </tr>,
@@ -31,7 +32,7 @@ const NibrsTable = ({ data, title, sortByValue }) => {
         <tfoot>
           <tr>
             <td className="pl1 lh-24 border-top border-blue-lighter">Total</td>
-            <td className="pr2 lh-24 right-align border-top border-blue-lighter">
+            <td className="pr2 lh-24 right-align border-top border-blue-lighter" >
               {formatNum(total)}
             </td>
           </tr>

@@ -4,6 +4,7 @@ import React from 'react'
 
 import NibrsCountPercentToggle from './NibrsCountPercentToggle'
 import { formatNum, formatPerc, formatSI } from '../../util/formats'
+import generateId from '../../util/id'
 
 class NibrsTableWithBars extends React.Component {
   state = { isCounts: false }
@@ -73,6 +74,7 @@ class NibrsTableWithBars extends React.Component {
             <NibrsCountPercentToggle
               ariaControls={id}
               isCounts={isCounts}
+              id={id}
               showCounts={this.showCounts}
               showPercents={this.showPercents}
             />
@@ -105,7 +107,7 @@ class NibrsTableWithBars extends React.Component {
                     />
                   </div>
                 </td>
-                <td className="pr-tiny bold monospace right-align">
+                <td className="pr-tiny bold monospace right-align" id={generateId(d.key)}>>
                   {isCounts ? d.countFmt : d.percentFmt}
                 </td>
                 <td className="px1" title={d.key}>
