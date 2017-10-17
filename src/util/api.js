@@ -149,6 +149,21 @@ const getUcrParticipationRequests = params => {
   return requests
 }
 
+
+const getUcrRegions = () => {
+  const path = 'region'
+
+  return get(`${API}/${path}`).then(response => ({
+    results: response.results,
+  }))
+}
+
+const getUcrRegionRequests = () => {
+  const requests = [getUcrRegions()]
+
+  return requests
+}
+
 export const formatError = error => ({
   code: error.response.status,
   message: error.message,
@@ -164,4 +179,6 @@ export default {
   getSummaryRequests,
   getUcrParticipation,
   getUcrParticipationRequests,
+  getUcrRegions,
+  getUcrRegionRequests,
 }

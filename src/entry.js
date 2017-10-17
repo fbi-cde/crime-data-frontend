@@ -10,6 +10,8 @@ import { Provider } from 'react-redux'
 import routes from './routes'
 import configureStore from './store'
 import { fetchAgencies } from './actions/agencies'
+import { fetchUcrRegion } from './actions/region'
+
 import './util/serviceWorker'
 
 import '../sass/app.scss'
@@ -19,6 +21,7 @@ delete window.__STATE__
 
 const store = configureStore(preloadedState)
 store.dispatch(fetchAgencies())
+store.dispatch(fetchUcrRegion())
 
 const render = () => {
   ReactDOM.render(
