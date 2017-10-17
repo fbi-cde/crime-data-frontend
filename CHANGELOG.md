@@ -11,6 +11,7 @@ All notable changes to this project be documented in this file.
 - Update Agency Reference Year reference to 2016  ([#1268](https://github.com/18F/crime-data-frontend/pull/1268))
 - Agency View now displays Reported but is actual the "actual" count  ([#1264](https://github.com/18F/crime-data-frontend/pull/1264))
 - Corrects AWS link to LEO CSV ([#1261](https://github.com/18F/crime-data-frontend/pull/1261))
+- CDE to display proper agencies participation number ([#1276](https://github.com/18F/crime-data-frontend/pull/1276))
 
 ### Changed
 - Rape is not calculated based upon Sodomy not incest ([#1273](https://github.com/18F/crime-data-frontend/pull/1273))
