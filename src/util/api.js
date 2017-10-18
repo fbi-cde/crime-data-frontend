@@ -159,7 +159,8 @@ const getUcrRegions = () => {
 }
 
 const getUcrRegionRequests = () => {
-  const requests = [getUcrRegions()]
+  const requests = [];
+  requests.push(getUcrRegions())
 
   return requests
 }
