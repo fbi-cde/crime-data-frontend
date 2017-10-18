@@ -19,10 +19,10 @@ class LocationFilter extends React.Component {
   }
 
   render() {
-    const { agencyData, ariaControls, onChange, usState } = this.props
+    const { agencyData, ariaControls, onChange, usState, regionData} = this.props
     const { showResults } = this.state
     const showAgencySearch = usState !== nationalKey && agencyData.length > 0
-
+    console.log("Region Data:", regionData)
     return (
       <div id="location" className="mb4">
         <div className="mb3 fs-22 bold border-bottom border-blue-light">
@@ -33,6 +33,7 @@ class LocationFilter extends React.Component {
           onChange={onChange}
           onFocus={this.handleLocationFocus}
           selected={usState}
+          regionData={regionData}
         />
         {showAgencySearch &&
           <AgencySearch

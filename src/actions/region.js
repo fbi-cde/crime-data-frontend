@@ -4,6 +4,7 @@ import {
   UCR_REGION_RECEIVED,
 } from './constants'
 import api from '../util/api'
+import reshapeData from '../util/region'
 
 export const failedUcrRegion = error => ({
   type: UCR_REGION_FAILED,
@@ -21,10 +22,8 @@ export const receivedUcrRegion = data => ({
 
 export const fetchUcrRegion = () => dispatch => {
   dispatch(fetchingUcrRegion())
-  const requests = api.getUcrRegions()
-
+  const requests = api.getUcrRegionRequests()
   return Promise.all(requests)
-    .then(data => data)
-    .then(results => dispatch(receivedUcrRegion(results)))
+    .then(data => dispatch(receivedUcrRegion(reshapeData(data))))
     .catch(error => dispatch(failedUcrRegion(error)))
 }

@@ -9,11 +9,12 @@ const LocationSelect = ({
   onChange,
   onFocus,
   selected,
+  regionData,
 }) => {
   const handleChange = e => {
     onChange({
       place: e.target.value,
-      placeType: 'state',
+      placeType: e.target.placeType,
     })
   }
 
@@ -33,14 +34,21 @@ const LocationSelect = ({
         onClick={onFocus}
         value={selected || ''}
       >
+
+        <option id='usa' value="united-states" >
+          United States
+        </option>
         <option value="" disabled>
-          Location
+          States
         </option>
         {data.map((p, i) =>
-          <option key={i} value={p.slug}>
+          <option key={i} value={p.slug} name={p.placeType}>
             {p.display}
           </option>,
         )}
+        <option value="" disabled>
+          Regions
+        </option>
       </select>
     </div>
   )
