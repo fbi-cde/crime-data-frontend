@@ -15,10 +15,13 @@ const jsonToCsv = data => {
   const values = data.map(d =>
     cols.map(c => {
       const split = c.split('.')
-      return split.length > 1 ? d[split[0]][split[1]] : d[split]
+      let val = split.length > 1 ? d[split[0]][split[1]] : d[split]
+      if (typeof val === 'string') {
+        val = val.replace('-', ' - ')
+      }
+      return val
     }),
   )
-
   return `${cols.join(',')}\n${values.join('\n')}`
 }
 
