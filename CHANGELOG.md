@@ -1,5 +1,12 @@
 # Change Log
 All notable changes to this project be documented in this file.
+## [2.18.5] - 2017-10-19
+### Added
+- Added information that discusses issues with NIBRS data being displayed ([#1281](https://github.com/18F/crime-data-frontend/pull/1281))
+
+### Fixed
+- Invalid data in year range csv ([#1279](https://github.com/18F/crime-data-frontend/pull/1279))
+
 ## [2.18.4] - 2017-10-12
 ### Added
 - Added information on when the data was last uploaded from UCR ([#1265](https://github.com/18F/crime-data-frontend/pull/1265))
