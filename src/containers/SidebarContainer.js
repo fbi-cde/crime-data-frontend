@@ -71,9 +71,10 @@ const formatAgencyData = (agencies, state) =>
     ...agencies[state][id],
   }))
 
-const mapStateToProps = ({ agencies, filters, sidebar }) => {
+const mapStateToProps = ({ agencies, filters, sidebar, region }) => {
   const { crime, place, placeType } = filters
-
+  const regionData = region.data
+  const loaded = region.loaded
   const isAgency = placeType === 'agency'
   const isNational = place === nationalKey
   const usState = isAgency ? oriToState(place) : place
@@ -87,6 +88,8 @@ const mapStateToProps = ({ agencies, filters, sidebar }) => {
     filters,
     isOpen: sidebar.isOpen,
     usState,
+    regionData,
+    loaded,
   }
 }
 const mapDispatchToProps = dispatch => ({

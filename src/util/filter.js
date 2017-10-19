@@ -20,7 +20,7 @@ const validateFilter = filters => {
   if (
     filters.place &&
     !lookupUsa(filters.place) &&
-    filters.placeType !== 'agency'
+    filters.placeType !== 'agency' && filters.placeType !== 'region'
   ) {
     newFilters.place = defaults.place
   }

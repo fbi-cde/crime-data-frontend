@@ -27,7 +27,7 @@ import { MIN_YEAR, MAX_YEAR } from '../util/years'
 
 class Explorer extends React.Component {
   componentDidMount() {
-    const { actions, filters, params, router, region } = this.props
+    const { actions, filters, params, router} = this.props
     const { since, until } = filters
     const { query } = router.location
     const { place, placeType } = getPlaceInfo(params)
@@ -71,12 +71,11 @@ class Explorer extends React.Component {
   }
 
   render() {
-    const { actions, agencies, filters, params, region } = this.props
+    const { actions, agencies, filters, params } = this.props
     const { crime } = params
     const { place, placeType } = getPlaceInfo(params)
     const agency = placeType === 'agency' && getAgency(agencies, place)
     const placeDisplay = agency ? agency.agency_name : startCase(place)
-    console.log("Explorer:",region)
 
     // ensure app state place matches url params place
     if (filters.place && filters.place !== place) return null

@@ -35,8 +35,8 @@ class Home extends React.Component {
   }
 
   handleSearchClick = () => {
-    const { actions, crime, router, place } = this.props
-    const change = { crime, place, placeType: 'state' }
+    const { actions, crime, router, place, placeType } = this.props
+    const change = { crime, place, placeType }
     actions.updateApp(change, router)
   }
 
@@ -51,10 +51,11 @@ class Home extends React.Component {
   }
 
   render() {
-    const { crime, place, placeType } = this.props
+    const { crime, place, placeType, regionData } = this.props
     const isValid = !!(crime && place) || false
+    console.log('place:',place)
     const usState = placeType === 'agency' ? oriToState(place) : place
-
+    console.log("usState:",usState)
     return (
       <div>
         <Helmet title="CDE :: Home" />
@@ -91,6 +92,7 @@ class Home extends React.Component {
                   className="col-12 sm-fs-18 field select border-blue"
                   onChange={this.selectLocation}
                   selected={usState}
+                  regionData={regionData}
                 />
               </div>
               <div className="sm-col sm-col-4 px2 mb2 sm-m0">
@@ -208,8 +210,15 @@ Home.propTypes = {
   place: PropTypes.string,
   placeType: PropTypes.string,
 }
+const mapStateToProps = ({ filters, region }) => {
+  const regionData = region.data
 
-const mapStateToProps = ({ filters }) => ({ ...filters })
+  return {
+    filters,
+    regionData,
+  }
+}
+
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ updateApp, updateFilters }, dispatch),
 })
