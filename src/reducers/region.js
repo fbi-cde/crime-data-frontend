@@ -1,13 +1,14 @@
 import {
   UCR_REGION_FAILED,
-  UCR_REGION__FETCHING,
-  UCR_REGION__RECEIVED,
+  UCR_REGION_FETCHING,
+  UCR_REGION_RECEIVED,
 } from '../actions/constants'
 
 const initialState = {
   data: {},
   error: null,
   loading: false,
+  loaded: false,
 }
 
 export default (state = initialState, action) => {
@@ -22,20 +23,21 @@ export default (state = initialState, action) => {
         },
         loading: false,
       }
-    case UCR_REGION__FETCHING:
+    case UCR_REGION_FETCHING:
       return {
         ...state,
         error: null,
         loading: true,
       }
-    case UCR_REGION__RECEIVED:
+    case UCR_REGION_RECEIVED:
       return {
         ...state,
         data: {
           ...state.data,
-          ...action.results,
+          ...action.data.results,
         },
         loading: false,
+        loaded: true,
       }
     default:
       return state

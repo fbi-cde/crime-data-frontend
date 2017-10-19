@@ -1,57 +1,71 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { data } from '../util/usa'
+import lookup, { data } from '../util/usa'
 
-const LocationSelect = ({
-  ariaControls,
-  className,
-  onChange,
-  onFocus,
-  selected,
-  regionData,
-}) => {
-  const handleChange = e => {
-    onChange({
+class LocationSelect extends React.Component {
+
+  handleChange = e => {
+    console.log("Location Select Change:",e.target.value)
+    let placeType = 'state'
+    if (!lookup(e.target.value)) {
+      placeType = 'region'
+    }
+    this.props.onChange({
       place: e.target.value,
-      placeType: e.target.placeType,
+      placeType: placeType,
     })
   }
 
-  return (
-    <div>
-      <label htmlFor="location-select" className="hide">
-        Choose a location in the United States
-      </label>
-      <select
-        aria-controls={ariaControls}
-        className={
-          className ||
-          'block col-12 field field-sm select select-dark border-blue'
-        }
-        id="location-select"
-        onChange={handleChange}
-        onClick={onFocus}
-        value={selected || ''}
-      >
+  render(){
+    const{
+      ariaControls,
+      className,
+      onFocus,
+      selected,
+      regionData,
+    } = this.props
 
-        <option id='usa' value="united-states" >
-          United States
-        </option>
-        <option value="" disabled>
-          States
-        </option>
-        {data.map((p, i) =>
-          <option key={i} value={p.slug} name={p.placeType}>
-            {p.display}
-          </option>,
-        )}
-        <option value="" disabled>
-          Regions
-        </option>
-      </select>
-    </div>
-  )
+    const regionOpts = []
+    for (var region in regionData){
+      regionOpts.push(
+        <option value={regionData[region].region_name}>
+          {regionData[region].region_desc} - {regionData[region].region_name}
+        </option>);
+    }
+
+    return (
+        <div>
+          <label htmlFor="location-select" className="hide">
+            Choose a location in the United States
+          </label>
+          <select
+            aria-controls={ariaControls}
+            className={
+              className ||
+              'block col-12 field field-sm select select-dark border-blue'
+            }
+            id="location-select"
+            onChange={this.handleChange}
+            onClick={onFocus}
+            value={selected || ''}
+          >
+            <option value="" disabled>
+              States
+            </option>
+            {data.map((p, i) =>
+              <option key={i} value={p.slug}>
+                {p.display}
+              </option>,
+            )}
+            <option value="" disabled>
+              Regions
+            </option>
+            {regionOpts}
+            </select>
+        </div>
+      )
+    }
 }
 
 LocationSelect.defaultProps = {
@@ -65,6 +79,8 @@ LocationSelect.propTypes = {
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
   selected: PropTypes.string.isRequired,
+  regionData: PropTypes.object.isRequired,
 }
+
 
 export default LocationSelect
