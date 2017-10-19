@@ -23,10 +23,22 @@ const NibrsIntro = ({
   const noun = 'offense'
   if (isAgency) {
     return (
-      <p className="m0 sm-col-9">
-        This agency reported {highlight(formatNum(totalCount))} individual{' '}
-        {crime} {pluralize(noun, totalCount)} to the FBI between{' '}
-        {highlight(nibrsFirstYear)} and {highlight(until)}.
+      <p className="m0 sm-col-10">
+        <p>
+          This agency reported {highlight(formatNum(totalCount))} individual{' '}
+          {crime} {pluralize(noun, totalCount)} to the FBI between{' '}
+          {highlight(nibrsFirstYear)} and {highlight(until)}.
+        </p>
+        <p className="fs-12 serif italic">
+          The complexity of NIBRS data presents unique impediments to interconnecting
+          all facets of the information collected. In instances of multiple
+          offenders, for example, the Crime Data Explorer currently links an offender
+          to only one offense—the first listed. The same is true for incidents
+          involving multiple victims. The Uniform Crime Reporting Program is
+          working hard to improve these specific functions within the Crime Data
+          Explorer so that presentations in the coming months will fully encompass
+          all aspects of the NIBRS data.
+        </p>
       </p>
     )
   }
@@ -35,12 +47,24 @@ const NibrsIntro = ({
   const agencyCt = max(agencyCts)
 
   return (
-    <p className="m0 sm-col-9">
-      There were {highlight(formatNum(totalCount))} individual {crime}{' '}
-      {pluralize(noun, totalCount)} reported to the FBI in {placeDisplay}{' '}
-      between {highlight(nibrsFirstYear)} and {highlight(until)} by{' '}
-      {highlight(agencyCt)} law enforcement {pluralize('agency', agencyCt)}{' '}
-      reporting {nibrsTerm} data.
+    <p className="m0 sm-col-10">
+      <p>
+        There were {highlight(formatNum(totalCount))} individual {crime}{' '}
+        {pluralize(noun, totalCount)} reported to the FBI in {placeDisplay}{' '}
+        between {highlight(nibrsFirstYear)} and {highlight(until)} by{' '}
+        {highlight(agencyCt)} law enforcement {pluralize('agency', agencyCt)}{' '}
+        reporting {nibrsTerm} data.
+      </p>
+      <p className="fs-12 serif italic">
+        The complexity of NIBRS data presents unique impediments to interconnecting
+        all facets of the information collected. In instances of multiple
+        offenders, for example, the Crime Data Explorer currently links an offender
+        to only one offense—the first listed. The same is true for incidents
+        involving multiple victims. The Uniform Crime Reporting Program is
+        working hard to improve these specific functions within the Crime Data
+        Explorer so that presentations in the coming months will fully encompass
+        all aspects of the NIBRS data.
+      </p>
     </p>
   )
 }
