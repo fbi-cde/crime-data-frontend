@@ -120,8 +120,23 @@ const NibrsContainer = ({
       </div>
       {content}
       {isReady &&
-        <div className="serif italic fs-12">
-          Source: Reported <NibrsTerm size="sm" /> data from {placeDisplay}.
+        <div>
+          <div className="serif italic fs-12">
+            Source: Reported <NibrsTerm size="sm" /> data from {placeDisplay}.
+          </div>
+          <div className="serif italic fs-12">
+            Footnotes:
+          </div>
+          <div className="serif italic fs-12">
+            The complexity of NIBRS data presents unique impediments to interconnecting
+            all facets of the information collected. In instances of multiple
+            offenders, for example, the Crime Data Explorer currently links an offender
+            to only one offense—the first listed. The same is true for incidents
+            involving multiple victims. The Uniform Crime Reporting Program is
+            working hard to improve these specific functions within the Crime Data
+            Explorer so that presentations in the coming months will fully encompass
+            all aspects of the NIBRS data.
+          </div>
         </div>}
     </div>
   )
