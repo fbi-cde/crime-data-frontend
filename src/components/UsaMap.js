@@ -21,8 +21,8 @@ class UsaMap extends React.Component {
   render() {
     const { colors, changeColorOnHover, mapClick, place } = this.props
     const { hover } = this.state
-
-    const placeId = place && stateLookup(place).id
+    console.log("Place",place)
+    console.log("Place",place.length)
     const svgDataWithNames = svgData.map(s => ({
       ...s,
       name: stateLookup(s.id).display,
@@ -39,9 +39,14 @@ class UsaMap extends React.Component {
           <title>USA</title>
           <g onClick={mapClick}>
             {svgDataWithNames.map(s => {
-              const defaultClass =
-                s.id === placeId ? 'fill-red-bright' : 'fill-blue-light'
-
+              let defaultClass = 'fill-blue-light'
+              if (place.length > 0) {
+                for ( var p in place ) {
+                  if (s.id === place[p].state_abbr) {
+                    defaultClass = 'fill-red-bright';
+                  }
+                }
+              }
               return (
                 <path
                   key={s.id}
@@ -72,7 +77,7 @@ UsaMap.propTypes = {
   colors: PropTypes.object.isRequired,
   changeColorOnHover: PropTypes.bool.isRequired,
   mapClick: PropTypes.func,
-  place: PropTypes.string,
+  place: PropTypes.object
 }
 
 export default UsaMap

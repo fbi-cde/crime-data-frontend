@@ -11,6 +11,7 @@ import routes from './routes'
 import configureStore from './store'
 import { fetchAgencies } from './actions/agencies'
 import { fetchUcrRegion } from './actions/region'
+import { fetchUcrState } from './actions/states'
 
 import './util/serviceWorker'
 
@@ -22,6 +23,7 @@ delete window.__STATE__
 const store = configureStore(preloadedState)
 store.dispatch(fetchAgencies())
 store.dispatch(fetchUcrRegion())
+store.dispatch(fetchUcrState())
 
 const render = () => {
   ReactDOM.render(

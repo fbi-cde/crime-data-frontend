@@ -89,6 +89,7 @@ const parseAggregates = ([estimates, arsons]) => ({
 })
 
 const fetchAggregates = place => {
+  console.log("fetchAggregates:",place)
   const estimatesApi = place
     ? `estimates/states/${lookupUsa(place).id}`
     : 'estimates/national'
@@ -119,6 +120,8 @@ const getSummaryRequests = ({ crime, place, placeType }) => {
 
   if (placeType === 'state') {
     return [fetchAggregates(place), fetchAggregates()]
+  } else if (placeType === 'region') {
+    console.log("PLACE TYPE REGION")
   }
 
   return [fetchAggregates()]
@@ -151,7 +154,7 @@ const getUcrParticipationRequests = params => {
 
 
 const getUcrRegions = () => {
-  const path = 'region'
+  const path = 'lookup/region'
 
   return get(`${API}/${path}`).then(response => ({
     results: response.results,
@@ -161,6 +164,22 @@ const getUcrRegions = () => {
 const getUcrRegionRequests = () => {
   const requests = [];
   requests.push(getUcrRegions())
+
+  return requests
+}
+
+
+const getUcrStates = () => {
+  const path = 'lookup/state?per_page=100'
+
+  return get(`${API}/${path}`).then(response => ({
+    results: response.results,
+  }))
+}
+
+const getUcrStatesRequests = () => {
+  const requests = [];
+  requests.push(getUcrStates())
 
   return requests
 }
@@ -182,4 +201,6 @@ export default {
   getUcrParticipationRequests,
   getUcrRegions,
   getUcrRegionRequests,
+  getUcrStates,
+  getUcrStatesRequests,
 }

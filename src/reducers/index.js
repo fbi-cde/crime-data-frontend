@@ -9,6 +9,7 @@ import participation from './participation'
 import sidebar from './sidebar'
 import summaries from './summary'
 import region from './region'
+import states from './states'
 
 
 export default combineReducers({
@@ -21,4 +22,5 @@ export default combineReducers({
   sidebar,
   summaries,
   region,
+  states,
 })
