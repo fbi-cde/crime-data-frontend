@@ -73,7 +73,7 @@ const formatAgencyData = (agencies, state) =>
 
 const mapStateToProps = ({ agencies, filters, sidebar, region }) => {
   const { crime, place, placeType } = filters
-  const regionData = region.data
+  const regionData = region.regions
   const loaded = region.loaded
   const isAgency = placeType === 'agency'
   const isNational = place === nationalKey

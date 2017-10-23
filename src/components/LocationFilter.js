@@ -19,7 +19,7 @@ class LocationFilter extends React.Component {
   }
 
   render() {
-    const { agencyData, ariaControls, onChange, usState, regionData} = this.props
+    const { agencyData, ariaControls, onChange, usState, regionData } = this.props
     const { showResults } = this.state
     const showAgencySearch = usState !== nationalKey && agencyData.length > 0
     return (

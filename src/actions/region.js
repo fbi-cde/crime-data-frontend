@@ -15,9 +15,9 @@ export const fetchingUcrRegion = () => ({
   type: UCR_REGION_FETCHING,
 })
 
-export const receivedUcrRegion = data => ({
+export const receivedUcrRegion = regions => ({
   type: UCR_REGION_RECEIVED,
-  data,
+  regions,
 })
 
 export const fetchUcrRegion = () => dispatch => {
