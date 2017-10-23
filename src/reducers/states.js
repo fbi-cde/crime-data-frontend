@@ -1,11 +1,11 @@
 import {
-  UCR_REGION_FAILED,
-  UCR_REGION_FETCHING,
-  UCR_REGION_RECEIVED,
+  UCR_STATE_FAILED,
+  UCR_STATE_FETCHING,
+  UCR_STATE_RECEIVED,
 } from '../actions/constants'
 
 const initialState = {
-  regions: {},
+  states: {},
   error: null,
   loading: false,
   loaded: false,
@@ -13,7 +13,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case UCR_REGION_FAILED:
+    case UCR_STATE_FAILED:
       return {
         ...state,
         error: {
@@ -23,18 +23,18 @@ export default (state = initialState, action) => {
         },
         loading: false,
       }
-    case UCR_REGION_FETCHING:
+    case UCR_STATE_FETCHING:
       return {
         ...state,
         error: null,
         loading: true,
       }
-    case UCR_REGION_RECEIVED:
+    case UCR_STATE_RECEIVED:
       return {
         ...state,
-        regions: {
+        states: {
           ...state.data,
-          ...action.regions.results,
+          ...action.states.results,
         },
         loading: false,
         loaded: true,

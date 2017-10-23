@@ -15,6 +15,8 @@ import { oriToState } from '../util/agencies'
 import { crimeTypes } from '../util/offenses'
 import { slugify } from '../util/text'
 import lookup from '../util/usa'
+import { lookupStatesByRegion, lookupRegionByName, lookupStateByName } from '../util/location'
+
 import dataPreview from '../../content/preview.yml'
 
 class Home extends React.Component {
@@ -29,6 +31,7 @@ class Home extends React.Component {
     if (!id) return
 
     const { actions, crime, router } = this.props
+
     const placeNew = { place: lookup(id).slug, placeType: 'state' }
     actions.updateFilters(placeNew)
     actions.updateApp({ crime, ...placeNew }, router)
@@ -51,11 +54,24 @@ class Home extends React.Component {
   }
 
   render() {
-    const { crime, place, placeType, regionData } = this.props
+    const { regionData, stateData } = this.props
+    const { crime, place, placeType } = this.props.filters
     const isValid = !!(crime && place) || false
-    console.log('place:',place)
     const usState = placeType === 'agency' ? oriToState(place) : place
+    let mapSelected = [];
     console.log("usState:",usState)
+    if(place && placeType){
+      if (placeType === 'region') {
+        const region = lookupRegionByName(regionData, place)
+        console.log("Selected Region:",region)
+        const states = lookupStatesByRegion(stateData, region.region_code)
+        console.log("Region States:",states)
+        mapSelected = states
+      }else{
+        mapSelected.push(lookupStateByName(stateData, usState));
+      }
+    }
+
     return (
       <div>
         <Helmet title="CDE :: Home" />
@@ -93,6 +109,7 @@ class Home extends React.Component {
                   onChange={this.selectLocation}
                   selected={usState}
                   regionData={regionData}
+                  stateData={stateData}
                 />
               </div>
               <div className="sm-col sm-col-4 px2 mb2 sm-m0">
@@ -139,7 +156,7 @@ class Home extends React.Component {
               </div>
             </div>
             <div className="py4 sm-py7 sm-col-9 mx-auto">
-              <UsaMap mapClick={this.handleMapClick} place={usState} />
+              <UsaMap mapClick={this.handleMapClick} place={mapSelected} />
             </div>
             <div className="mb7 sm-hide md-hide lg-hide">
               <button
@@ -206,16 +223,16 @@ Home.propTypes = {
     updateApp: PropTypes.func,
     updateFilters: PropTypes.func,
   }),
-  crime: PropTypes.string,
-  place: PropTypes.string,
-  placeType: PropTypes.string,
-}
-const mapStateToProps = ({ filters, region }) => {
-  const regionData = region.data
+  filters: PropTypes.object,
 
+}
+const mapStateToProps = ({ filters, region, states }) => {
+  const regionData = region.regions
+  const stateData = states.states
   return {
     filters,
     regionData,
+    stateData,
   }
 }
 

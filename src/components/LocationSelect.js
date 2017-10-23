@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import lowerCase from 'lodash.lowercase'
 
 import lookup, { data } from '../util/usa'
 
@@ -12,7 +13,7 @@ class LocationSelect extends React.Component {
       placeType = 'region'
     }
     this.props.onChange({
-      place: e.target.value,
+      place: e.target.value.toLowerCase(),
       placeType: placeType,
     })
   }
@@ -24,14 +25,27 @@ class LocationSelect extends React.Component {
       onFocus,
       selected,
       regionData,
+      stateData,
     } = this.props
 
     const regionOpts = []
-    for (var region in regionData){
-      regionOpts.push(
-        <option value={regionData[region].region_name}>
-          {regionData[region].region_desc} - {regionData[region].region_name}
-        </option>);
+    for (var region in regionData) {
+      if (regionData[region].region_code !== 0 && regionData[region].region_code !== 99) {
+        regionOpts.push(
+          <option value={lowerCase(regionData[region].region_name)}>
+            {regionData[region].region_desc} - {regionData[region].region_name}
+          </option>);
+      }
+    }
+    const stateOpts = []
+
+    for (var state in stateData) {
+      if (stateData[state].region_code !== 0 && stateData[state].region_code !== 99 && stateData[state].state_id !== 43) {
+        stateOpts.push(
+          <option value={lowerCase(stateData[state].state_name)}>
+            {stateData[state].state_name}
+          </option>);
+      }
     }
 
     return (
@@ -50,14 +64,13 @@ class LocationSelect extends React.Component {
             onClick={onFocus}
             value={selected || ''}
           >
+            <option value="usa">
+              United States
+            </option>
             <option value="" disabled>
               States
             </option>
-            {data.map((p, i) =>
-              <option key={i} value={p.slug}>
-                {p.display}
-              </option>,
-            )}
+            {stateOpts}
             <option value="" disabled>
               Regions
             </option>
@@ -80,6 +93,8 @@ LocationSelect.propTypes = {
   onFocus: PropTypes.func,
   selected: PropTypes.string.isRequired,
   regionData: PropTypes.object.isRequired,
+  stateData: PropTypes.object.isRequired,
+
 }
 
 
