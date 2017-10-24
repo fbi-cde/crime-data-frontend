@@ -10,9 +10,9 @@ import {
 } from '../util/participation'
 
 const fetchData = () => (dispatch, getState) => {
-  const { filters } = getState()
+  const { filters, region, states } = getState()
 
-  if (shouldFetchUcr(filters)) dispatch(fetchUcrParticipation(filters))
+  if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
   if (shouldFetchSummaries(filters)) dispatch(fetchSummaries(filters))
   if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
 }

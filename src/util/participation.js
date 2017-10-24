@@ -1,21 +1,26 @@
 import offensesUtil from './offenses'
 import { oriToState } from './agencies'
-import lookupUsa from './usa'
-import { lookupRegion } from './region'
+import { isValidState, isValidRegion } from './location'
 
 import data from '../../public/data/ucr-program-participation.json'
 
 const lookup = state => data[state] || {}
 
-const isValidState = (place, placeType) => lookupUsa(place, placeType)
 const isValidCrime = crime => offensesUtil.includes(crime)
 const noNibrs = ['violent-crime', 'property-crime']
 
-export const shouldFetchUcr = ({ place, placeType }) =>
-  placeType !== 'agency' && !!isValidState(place, placeType)
+export const shouldFetchUcr = (filters, region, states) => {
+  console.log("Should Fetch UCR:",filters, region, states)
+  if (filters.placeType === 'state') {
+     return isValidState(states.states, filters.place)
+  } else if (filters.placeType === 'region') {
+    return isValidRegion(region.regions, filters.place)
+  }
+  return false;
+}
 
 export const shouldFetchSummaries = ({ crime, place, placeType }) =>
-  isValidCrime(crime) && isValidState(place, placeType) && lookupRegion(place, placeType)
+  isValidCrime(crime) && isValidState(place, placeType)
 
 export const shouldFetchNibrs = ({ crime, place, placeType }) => {
   if (noNibrs.includes(crime) || !isValidState(place, placeType)) return false
