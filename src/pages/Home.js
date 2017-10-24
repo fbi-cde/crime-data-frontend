@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { bindActionCreators } from 'redux'
+import lowerCase from 'lodash.lowercase'
 
 import LocationSelect from '../components/LocationSelect'
 import SharingTags from '../components/SharingTags'
@@ -15,31 +16,46 @@ import { oriToState } from '../util/agencies'
 import { crimeTypes } from '../util/offenses'
 import { slugify } from '../util/text'
 import lookup from '../util/usa'
-import { lookupStatesByRegion, lookupRegionByName, lookupStateByName } from '../util/location'
+import { lookupStatesByRegion, lookupRegionByName,lookupRegionByCode, lookupStateByName, lookupStateByAbbr } from '../util/location'
 
 import dataPreview from '../../content/preview.yml'
 
 class Home extends React.Component {
+
+  state = { statesView: true }
+
+
   componentDidMount() {
     const { actions } = this.props
     actions.updateFilters({ since: null, until: null })
   }
 
   handleMapClick = e => {
-    const id = e.target.getAttribute('id')
-
-    if (!id) return
-
-    const { actions, crime, router } = this.props
-
-    const placeNew = { place: lookup(id).slug, placeType: 'state' }
-    actions.updateFilters(placeNew)
-    actions.updateApp({ crime, ...placeNew }, router)
+    if(this.state.statesView){
+      const id = e.target.getAttribute('id')
+      if (!id) return
+      const { actions, filters, router } = this.props
+      const { crime}  = filters
+      const placeNew = { place: lookup(id).slug, placeType: 'state' }
+      actions.updateFilters(placeNew)
+      actions.updateApp({ crime, ...placeNew }, router)
+    }else {
+      //REGION DATA GET PLACES
+      const { regionData, stateData } = this.props
+      const id = e.target.getAttribute('id')
+      if (!id) return
+      const { actions, filters, router } = this.props
+      const { crime}  = filters
+      const placeNew = { place: lowerCase(lookupRegionByCode(regionData,lookupStateByAbbr(stateData,id).region_code).region_name), placeType: 'region' }
+      actions.updateFilters(placeNew)
+      actions.updateApp({ crime, ...placeNew }, router)
+    }
   }
 
   handleSearchClick = () => {
-    const { actions, crime, router, place, placeType } = this.props
-    const change = { crime, place, placeType }
+    const { actions, router, filters } = this.props
+    const change = filters
+    console.log("Change:",change)
     actions.updateApp(change, router)
   }
 
@@ -53,25 +69,35 @@ class Home extends React.Component {
     actions.updateFilters(e)
   }
 
+  handleMapTypeChange = e => {
+    console.log("handleMapTypeChange:")
+    let { statesView } = this.state
+    if (e.target.value === 'states' && statesView === false) {
+      statesView = true;
+      this.setState({ statesView: statesView })
+    } else if (e.target.value === 'regions' && statesView === true){
+      statesView = false;
+      this.setState({ statesView: statesView })
+    }
+  }
+
   render() {
+    const { statesView } = this.state
     const { regionData, stateData } = this.props
     const { crime, place, placeType } = this.props.filters
     const isValid = !!(crime && place) || false
     const usState = placeType === 'agency' ? oriToState(place) : place
     let mapSelected = [];
-    console.log("usState:",usState)
     if(place && placeType){
       if (placeType === 'region') {
         const region = lookupRegionByName(regionData, place)
-        console.log("Selected Region:",region)
         const states = lookupStatesByRegion(stateData, region.region_code)
-        console.log("Region States:",states)
         mapSelected = states
       }else{
         mapSelected.push(lookupStateByName(stateData, usState));
       }
     }
-
+    console.log("HOME")
     return (
       <div>
         <Helmet title="CDE :: Home" />
@@ -156,7 +182,13 @@ class Home extends React.Component {
               </div>
             </div>
             <div className="py4 sm-py7 sm-col-9 mx-auto">
-              <UsaMap mapClick={this.handleMapClick} place={mapSelected} />
+              <UsaMap mapClick={this.handleMapClick} place={mapSelected} stateView={statesView} stateData={stateData} regionData={regionData}/>
+            </div>
+            <div className="clearfix mxn2 mb4 flex">
+                <div className="inline-block clearfix mx-auto">
+                  <button className="left btn btn-outline  x-group-item rounded-left" value='states' onClick={this.handleMapTypeChange} >States</button>
+                  <button className="left btn btn-outline x-group-item rounded-right" value='regions' onClick={this.handleMapTypeChange} >Regions</button>
+                </div>
             </div>
             <div className="mb7 sm-hide md-hide lg-hide">
               <button

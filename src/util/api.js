@@ -89,7 +89,6 @@ const parseAggregates = ([estimates, arsons]) => ({
 })
 
 const fetchAggregates = place => {
-  console.log("fetchAggregates:",place)
   const estimatesApi = place
     ? `estimates/states/${lookupUsa(place).id}`
     : 'estimates/national'
@@ -121,7 +120,6 @@ const getSummaryRequests = ({ crime, place, placeType }) => {
   if (placeType === 'state') {
     return [fetchAggregates(place), fetchAggregates()]
   } else if (placeType === 'region') {
-    console.log("PLACE TYPE REGION")
   }
 
   return [fetchAggregates()]
