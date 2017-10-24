@@ -92,8 +92,8 @@ LocationSelect.propTypes = {
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
   selected: PropTypes.string.isRequired,
-  regionData: PropTypes.object.isRequired,
-  stateData: PropTypes.object.isRequired,
+  regionData: PropTypes.array.isRequired,
+  stateData: PropTypes.array.isRequired,
 
 }
 
