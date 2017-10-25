@@ -20,10 +20,9 @@ export const receivedUcrParticipation = results => ({
   results,
 })
 
-export const fetchUcrParticipation = params => dispatch => {
+export const fetchUcrParticipation = (filters, region, states )=> dispatch => {
   dispatch(fetchingUcrParticipation())
-  const requests = api.getUcrParticipationRequests(params)
-
+  const requests = api.getUcrParticipationRequests(filters, region, states)
   return Promise.all(requests)
     .then(data => reshapeData(data))
     .then(results => dispatch(receivedUcrParticipation(results)))

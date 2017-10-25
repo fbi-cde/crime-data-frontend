@@ -3,6 +3,7 @@ import { geoAlbersUsa, geoPath } from 'd3-geo'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { feature, mesh } from 'topojson'
+import { connect } from 'react-redux'
 
 import lookupUsa from '../util/usa'
 
@@ -23,7 +24,7 @@ class PlaceThumbnail extends React.Component {
   }
 
   render() {
-    const { coordinates, usState } = this.props
+    const { coordinates, place, placeType, region, states} = this.props
     const { usa } = this.state
 
     if (!usa) return <Container />
@@ -34,9 +35,9 @@ class PlaceThumbnail extends React.Component {
     const geoStates = feature(usa, usa.objects.units).features
     const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
     let active
-    if (usState !== 'washington-dc') {
+    if (place !== 'washington-dc') {
       active = geoStates.find(
-        s => s.properties.name === lookupUsa(usState).display,
+        s => s.properties.name === lookupUsa(location).display,
       )
     } else {
       active = geoStates.find(s => s.id === 'US11')
@@ -111,7 +112,21 @@ PlaceThumbnail.defaultProps = {
 
 PlaceThumbnail.propTypes = {
   coordinates: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  usState: PropTypes.string.isRequired,
+  place: PropTypes.string.isRequired,
+  placeType: PropTypes.string.isRequired,
+  states: PropTypes.object.isRequired,
+  region: PropTypes.object.isRequired,
 }
 
-export default PlaceThumbnail
+const mapStateToProps = ({ filters, region, states }) => {
+  const { place, placeType } = filters
+
+  return {
+    place,
+    placeType,
+    region,
+    states,
+  }
+}
+
+export default connect(mapStateToProps)(PlaceThumbnail)

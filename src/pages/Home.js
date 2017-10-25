@@ -41,12 +41,12 @@ class Home extends React.Component {
       actions.updateApp({ crime, ...placeNew }, router)
     }else {
       //REGION DATA GET PLACES
-      const { regionData, stateData } = this.props
+      const { region, states } = this.props
       const id = e.target.getAttribute('id')
       if (!id) return
       const { actions, filters, router } = this.props
       const { crime}  = filters
-      const placeNew = { place: lowerCase(lookupRegionByCode(regionData,lookupStateByAbbr(stateData,id).region_code).region_name), placeType: 'region' }
+      const placeNew = { place: lowerCase(lookupRegionByCode(region.regions,lookupStateByAbbr(states.states,id).region_code).region_name), placeType: 'region' }
       actions.updateFilters(placeNew)
       actions.updateApp({ crime, ...placeNew }, router)
     }
@@ -83,18 +83,18 @@ class Home extends React.Component {
 
   render() {
     const { statesView } = this.state
-    const { regionData, stateData } = this.props
+    const { region, states } = this.props
     const { crime, place, placeType } = this.props.filters
     const isValid = !!(crime && place) || false
     const usState = placeType === 'agency' ? oriToState(place) : place
     let mapSelected = [];
     if(place && placeType){
       if (placeType === 'region') {
-        const region = lookupRegionByName(regionData, place)
-        const states = lookupStatesByRegion(stateData, region.region_code)
+        const r = lookupRegionByName(region.regions, place)
+        const states = lookupStatesByRegion(states.states, r.region_code)
         mapSelected = states
       }else{
-        mapSelected.push(lookupStateByName(stateData, usState));
+        mapSelected.push(lookupStateByName(states, usState));
       }
     }
     console.log("HOME")
@@ -134,8 +134,6 @@ class Home extends React.Component {
                   className="col-12 sm-fs-18 field select border-blue"
                   onChange={this.selectLocation}
                   selected={usState}
-                  regionData={regionData}
-                  stateData={stateData}
                 />
               </div>
               <div className="sm-col sm-col-4 px2 mb2 sm-m0">
@@ -182,7 +180,7 @@ class Home extends React.Component {
               </div>
             </div>
             <div className="py4 sm-py7 sm-col-9 mx-auto">
-              <UsaMap mapClick={this.handleMapClick} place={mapSelected} stateView={statesView} stateData={stateData} regionData={regionData}/>
+              <UsaMap mapClick={this.handleMapClick} place={mapSelected} stateView={statesView} states={states} region={region}/>
             </div>
             <div className="clearfix mxn2 mb4 flex">
                 <div className="inline-block clearfix mx-auto">
@@ -259,12 +257,10 @@ Home.propTypes = {
 
 }
 const mapStateToProps = ({ filters, region, states }) => {
-  const regionData = region.regions
-  const stateData = states.states
   return {
     filters,
-    regionData,
-    stateData,
+    region,
+    states,
   }
 }
 

@@ -48,7 +48,6 @@ const lookupRegionByName = (regionData, name) => {
 }
 
 const lookupRegionByCode = (regionData, code) => {
-  console.log(regionData,code)
   if (!regionData) return null
 
   for (var data in regionData) {
@@ -91,4 +90,35 @@ const isValidState = (stateData, name) => {
   }
   return false;
 }
-export { lookupStateByName, lookupRegionByName, stateFromAbbr, lookupStatesByRegion, stateFromName, isValidState, isValidRegion, lookupStateByAbbr, lookupRegionByCode }
+
+const isValidPlaceType = placeType => {
+  if(placeType === 'region' || placeType ==='agency' || placeType ==='state'){
+    return true;
+  }
+  return false;
+}
+
+const validateFilter = (filters,regionData, stateData) => {
+  if (isValidPlaceType(filters.placeType)){
+    if(filters.placeType === 'state'){
+      return isValidState(stateData,filters.place)
+    } else if(filters.placeType === 'region'){
+        return isValidRegion(regionData,filters.place)
+      }
+  }
+}
+
+const lookupDisplayName = (filters,regionData, stateData) => {
+  console.log("lookupDisplayName:",filters,regionData,stateData)
+  if (isValidPlaceType(filters.placeType)){
+    if(filters.placeType === 'state'){
+      return lookupStateByAbbr(stateData,filters.place).state_name
+    } else if(filters.placeType === 'region'){
+        return lookupRegionByName(regionData,filters.place).region_name
+      }
+  }
+}
+
+export { lookupStateByName, lookupRegionByName, lookupStatesByRegion,
+  stateFromAbbr, stateFromName, isValidState, isValidRegion, lookupStateByAbbr,
+  lookupRegionByCode, validateFilter, lookupDisplayName }
