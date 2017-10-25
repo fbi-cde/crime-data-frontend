@@ -9,6 +9,7 @@ import lookupUsa, { nationalKey } from '../util/usa'
 
 const participationCsvLink = (place, type) => {
   if (type === 'agency') return []
+  if (type === 'region') return []
 
   const path =
     place === nationalKey

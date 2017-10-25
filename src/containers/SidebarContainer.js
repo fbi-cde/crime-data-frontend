@@ -19,7 +19,8 @@ const SidebarContainer = ({
   isOpen,
   onChange,
   usState,
-  regionData,
+  region,
+  states,
 }) =>
   <nav className={`site-sidebar bg-white ${isOpen ? 'open' : ''}`}>
     <div className="p2 bg-red-bright line-height-1 md-hide lg-hide">
@@ -45,7 +46,6 @@ const SidebarContainer = ({
         ariaControls={ariaControls}
         onChange={onChange}
         usState={usState}
-        regionData={regionData}
       />
       <TimePeriodFilter
         ariaControls={ariaControls}
@@ -71,10 +71,8 @@ const formatAgencyData = (agencies, state) =>
     ...agencies[state][id],
   }))
 
-const mapStateToProps = ({ agencies, filters, sidebar, region }) => {
+const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   const { crime, place, placeType } = filters
-  const regionData = region.regions
-  const loaded = region.loaded
   const isAgency = placeType === 'agency'
   const isNational = place === nationalKey
   const usState = isAgency ? oriToState(place) : place
@@ -88,8 +86,8 @@ const mapStateToProps = ({ agencies, filters, sidebar, region }) => {
     filters,
     isOpen: sidebar.isOpen,
     usState,
-    regionData,
-    loaded,
+    region,
+    states,
   }
 }
 const mapDispatchToProps = dispatch => ({

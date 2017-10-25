@@ -14,6 +14,7 @@ import { generateCrimeReadme } from '../util/content'
 import { getPlaceInfo } from '../util/place'
 import { combinePlaces, filterByYear } from '../util/summary'
 import lookupUsa, { nationalKey } from '../util/usa'
+import { lookupDisplayName } from  '../util/location'
 
 class TrendContainer extends React.Component {
   constructor(props) {
@@ -22,16 +23,17 @@ class TrendContainer extends React.Component {
     this.state = { yearSelected: until }
   }
 
-  getContent = ({ crime, places, since, summaries, until }) => {
+  getContent = ({ crime, places, since, summaries, until, placeType, placeName }) => {
     const { loading, error } = summaries
     const { yearSelected } = this.state
-
     if (loading) return <Loading />
     if (error) return <ErrorCard error={error} />
+
 
     const offenses =
       crime === 'rape' ? ['rape-legacy', 'rape-revised'] : [crime]
     const place = places[0]
+
     const filteredByYear = filterByYear(summaries.data, { since, until })
     const data = combinePlaces(filteredByYear, offenses)
 
@@ -40,7 +42,7 @@ class TrendContainer extends React.Component {
     const fname = `${place}-${crime}-${since}-${until}`
     const title =
       `Reported ${pluralize(crime)} in ` +
-      `${lookupUsa(place).display}, ${since}-${until}`
+      `${placeName}, ${since}-${until}`
 
     const readme = generateCrimeReadme({ crime, title })
     const crimeNorm = crime === 'rape' ? 'rape-legacy' : crime
@@ -87,7 +89,12 @@ class TrendContainer extends React.Component {
       since,
       summaries,
       until,
+      region,
+      states,
     } = this.props
+    console.log("TrendContainer")
+    const displayName = lookupDisplayName(place, region, states)
+
     const isReady = !summaries.loading
 
     let otherCrimes = []
@@ -101,10 +108,10 @@ class TrendContainer extends React.Component {
       <div className="mb7">
         <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
           <h2 className="mt0 mb2 sm-mb4 fs-24 sm-fs-28 sans-serif">
-            {startCase(crime)} rate in {lookupUsa(place).display}, {since}-{until}
+            {startCase(crime)} rate in {displayName}, {since}-{until}
           </h2>
           <div className="bg-white">
-            {this.getContent({ crime, places, since, summaries, until })}
+            {this.getContent({ crime, places, since, summaries, until, placeType, displayName })}
           </div>
         </div>
         <div>
@@ -147,9 +154,11 @@ TrendContainer.propTypes = {
     loading: PropTypes.boolean,
   }).isRequired,
   until: PropTypes.number.isRequired,
+  region: PropTypes.object,
+  states: PropTypes.object,
 }
 
-export const mapStateToProps = ({ filters, summaries }) => {
+export const mapStateToProps = ({ filters, summaries, region, states }) => {
   const { place } = filters
 
   const places = [place]
@@ -160,6 +169,8 @@ export const mapStateToProps = ({ filters, summaries }) => {
     ...getPlaceInfo(filters),
     places,
     summaries,
+    region,
+    states
   }
 }
 

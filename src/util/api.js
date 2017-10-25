@@ -7,6 +7,7 @@ import { mapToApiOffense } from './offenses'
 import { oriToState } from './agencies'
 import { slugify } from './text'
 import lookupUsa, { nationalKey } from './usa'
+import {lookupStateByName,lookupRegionByName} from './location'
 
 export const API = '/api-proxy'
 
@@ -125,11 +126,16 @@ const getSummaryRequests = ({ crime, place, placeType }) => {
   return [fetchAggregates()]
 }
 
-const getUcrParticipation = place => {
-  const path =
-    place === nationalKey
-      ? 'participation/national'
-      : `participation/states/${lookupUsa(place).id}`
+const getUcrParticipation = (place, placeType) => {
+  let path
+
+  if(place === nationalKey){
+    path = 'participation/national';
+  } else if (placeType === 'state'){
+    path = `participation/states/${place}`
+  } else if (placeType === 'region'){
+    path = `participation/regions/${place}`
+  }
 
   return get(`${API}/${path}`).then(response => ({
     place,
@@ -137,10 +143,15 @@ const getUcrParticipation = place => {
   }))
 }
 
-const getUcrParticipationRequests = params => {
-  const { place } = params
-
-  const requests = [getUcrParticipation(place)]
+const getUcrParticipationRequests = (filters, region, states) => {
+  const { place, placeType } = filters
+  let requestPlace
+  if (placeType === 'state'){
+    requestPlace = lookupStateByName(states.states,place).state_abbr;
+  } else if (placeType === 'region') {
+    requestPlace = lookupRegionByName(region.regions, place).region_code;
+  }
+  const requests = [getUcrParticipation(requestPlace,placeType)]
 
   // add national request (unless you already did)
   if (place !== nationalKey) {

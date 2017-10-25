@@ -14,6 +14,7 @@ import SharingTags from '../components/SharingTags'
 import SidebarContainer from '../containers/SidebarContainer'
 import SparklineContainer from '../containers/SparklineContainer'
 import TrendContainer from '../containers/TrendContainer'
+import Loading from '../components/Loading'
 
 import { updateApp } from '../actions/composite'
 import { showTerm } from '../actions/glossary'
@@ -22,6 +23,8 @@ import offensesUtil from '../util/offenses'
 import { getAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import { sentenceCase } from '../util/text'
+import { validateFilter } from '../util/location'
+
 import lookup from '../util/usa'
 import { MIN_YEAR, MAX_YEAR } from '../util/years'
 
@@ -71,7 +74,7 @@ class Explorer extends React.Component {
   }
 
   render() {
-    const { actions, agencies, filters, params } = this.props
+    const { actions, agencies, filters, params, region, states } = this.props
     const { crime } = params
     const { place, placeType } = getPlaceInfo(params)
     const agency = placeType === 'agency' && getAgency(agencies, place)
@@ -81,7 +84,12 @@ class Explorer extends React.Component {
     if (filters.place && filters.place !== place) return null
 
     // show not found page if crime or place unfamiliar
-    if (!offensesUtil.includes(crime) || !lookup(place, placeType)) {
+
+    if (!region.loaded || !states.loaded) {
+      return <Loading />
+    }
+
+    if (!offensesUtil.includes(crime) || !validateFilter(filters, region.regions, states.states)) {
       return <NotFound />
     }
 
@@ -139,6 +147,8 @@ Explorer.propTypes = {
   }),
   agencies: PropTypes.object,
   filters: PropTypes.object,
+  region: PropTypes.object,
+  states: PropTypes.object,
   params: PropTypes.object,
   router: PropTypes.object,
 }
@@ -147,7 +157,7 @@ Explorer.defaultProps = {
   isOpen: false,
 }
 
-const mapStateToProps = ({ agencies, filters }) => ({ agencies, filters })
+const mapStateToProps = ({ agencies, filters, region, states }) => ({ agencies, filters, region, states })
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
     { hideSidebar, showSidebar, showTerm, updateApp },

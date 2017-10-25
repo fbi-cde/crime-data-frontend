@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import lowerCase from 'lodash.lowercase'
+import { connect } from 'react-redux'
 
 import lookup, { data } from '../util/usa'
 
@@ -24,26 +25,26 @@ class LocationSelect extends React.Component {
       className,
       onFocus,
       selected,
-      regionData,
-      stateData,
+      region,
+      states,
     } = this.props
 
     const regionOpts = []
-    for (var region in regionData) {
-      if (regionData[region].region_code !== 0 && regionData[region].region_code !== 99) {
+    for (var r in region.regions) {
+      if (region.regions[r].region_code !== 0 && region.regions[r].region_code !== 99) {
         regionOpts.push(
-          <option value={lowerCase(regionData[region].region_name)}>
-            {regionData[region].region_desc} - {regionData[region].region_name}
+          <option value={lowerCase(region.regions[r].region_name)}>
+            {region.regions[r].region_desc} - {region.regions[r].region_name}
           </option>);
       }
     }
     const stateOpts = []
 
-    for (var state in stateData) {
-      if (stateData[state].region_code !== 0 && stateData[state].region_code !== 99 && stateData[state].state_id !== 43) {
+    for (var s in states.states) {
+      if (states.states[s].region_code !== 0 && states.states[s].region_code !== 99 && states.states[s].state_id !== 43) {
         stateOpts.push(
-          <option value={lowerCase(stateData[state].state_name)}>
-            {stateData[state].state_name}
+          <option value={lowerCase(states.states[s].state_name)}>
+            {states.states[s].state_name}
           </option>);
       }
     }
@@ -92,10 +93,15 @@ LocationSelect.propTypes = {
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
   selected: PropTypes.string.isRequired,
-  regionData: PropTypes.array.isRequired,
-  stateData: PropTypes.array.isRequired,
-
+  region: PropTypes.object.isRequired,
+  states: PropTypes.object.isRequired,
 }
 
+const mapStateToProps = ({ region, states }) => {
+  return {
+    region,
+    states,
+  }
+}
 
-export default LocationSelect
+export default connect(mapStateToProps)(LocationSelect)
