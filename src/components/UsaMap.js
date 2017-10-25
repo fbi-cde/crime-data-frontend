@@ -9,15 +9,15 @@ import {lookupStateByAbbr,lookupStateByName,lookupRegionByCode} from '../util/lo
 class UsaMap extends React.Component {
   state = { hover: null }
 
-  rememberValue = (id, stateView, stateData, regionData) => e => {
+  rememberValue = (id, stateView, states, region) => e => {
     if (stateView) {
       this.setState({
         hover: { value: id, position: { x: e.pageX, y: e.pageY } },
       })
     } else {
-      console.log(lookupRegionByCode(regionData, lookupStateByName(stateData, id).region_code).region_name)
+      console.log(lookupRegionByCode(region.regions, lookupStateByName(states.states, id).region_code).region_name)
       this.setState({
-        hover: { value: lookupRegionByCode(regionData,lookupStateByName(stateData, id).region_code).region_name, position: { x: e.pageX, y: e.pageY } },
+        hover: { value: lookupRegionByCode(region.regions,lookupStateByName(states.states, id).region_code).region_name, position: { x: e.pageX, y: e.pageY } },
       })
     }
   }
@@ -27,7 +27,7 @@ class UsaMap extends React.Component {
   }
 
   render() {
-    const { colors, changeColorOnHover, mapClick, place, stateView, stateData, regionData } = this.props
+    const { colors, changeColorOnHover, mapClick, place, stateView, states, region } = this.props
     const { hover } = this.state
     const svgDataWithNames = svgData.map(s => ({
       ...s,
@@ -55,7 +55,7 @@ class UsaMap extends React.Component {
                     }
                   }
                 } else {
-                  const state = lookupStateByAbbr(stateData, s.id);
+                  const state = lookupStateByAbbr(states.states, s.id);
                   if (state.region_code === 1) {
                     defaultClass = 'fill-blue-light1'
                   } else if (state.region_code === 2) {
@@ -65,9 +65,6 @@ class UsaMap extends React.Component {
                   } else if (state.region_code === 4) {
                     defaultClass = 'fill-blue-light4'
                   }
-
-
-
                   if (place.length > 0) {
                     for (var p in place) {
                       if (s.id === place[p].state_abbr) {
@@ -84,8 +81,8 @@ class UsaMap extends React.Component {
                   className={colors[s.id.toLowerCase()] || defaultClass}
                   d={s.d}
                   pointerEvents="all"
-                  onMouseOver={this.rememberValue(s.name, stateView, stateData, regionData)}
-                  onMouseMove={this.rememberValue(s.name, stateView, stateData, regionData)}
+                  onMouseOver={this.rememberValue(s.name, stateView, states, region)}
+                  onMouseMove={this.rememberValue(s.name, stateView, states, region)}
                   onMouseOut={this.forgetValue}
                 />
               )
@@ -109,8 +106,8 @@ UsaMap.propTypes = {
   mapClick: PropTypes.func,
   place: PropTypes.array,
   stateView: PropTypes.bool.isRequired,
-  stateData: PropTypes.array.isRequired,
-  regionData: PropTypes.array.isRequired,
+  states: PropTypes.object.isRequired,
+  region: PropTypes.object.isRequired,
 
 }
 

@@ -7,24 +7,28 @@ import Loading from '../components/Loading'
 import PlaceThumbnail from '../components/PlaceThumbnail'
 import UcrResourcesList from '../components/UcrResourcesList'
 import { getAgency, oriToState } from '../util/agencies'
-import { getPlaceInfo } from '../util/place'
-import lookup from '../util/usa'
+import { lookupDisplayName } from '../util/location'
 
 const ExplorerHeaderContainer = ({
   agencies,
   agency,
   coordinates,
-  crime,
   isAgency,
   participation,
-  place,
-  placeType,
-  until,
+  filters,
+  region,
+  states,
 }) => {
   const isLoading = isAgency ? agencies.loading : participation.loading
-  const usState = isAgency ? oriToState(place) : place
-  const placeDisplay = isAgency ? agency.agency_name : lookup(place).display
-
+  let placeDisplay
+  let location
+  if (filters.placeType === 'agency') {
+    placeDisplay = agency.agency_name
+    location = oriToState(filters.place);
+  } else if (filters.placeType === 'state' || filters.placeType === 'region') {
+    placeDisplay = lookupDisplayName(filters, region.regions, states.states)
+    location = filters.place;
+  }
   return (
     <div>
       <div className="items-baseline mt2 mb4">
@@ -41,22 +45,22 @@ const ExplorerHeaderContainer = ({
             ? <Loading />
             : <ExplorerIntro
                 agency={agency}
-                crime={crime}
-                place={place}
                 participation={participation}
-                until={until}
+                filters={filters}
+                states={states}
+                region={region}
               />}
           <UcrResourcesList
-            crime={crime}
-            place={usState}
-            placeType={placeType}
+            crime={filters.crime}
+            place={filters.place}
+            placeType={filters.placeType}
           />
         </div>
         <div className="sm-col sm-col-4 xs-hide">
-          <PlaceThumbnail coordinates={coordinates} usState={usState} />
+          <PlaceThumbnail coordinates={coordinates} location={location} />
           <div className="mt-tiny fs-12 serif italic">
             {isAgency && !isLoading
-              ? `${placeDisplay}, ${lookup(usState).display}`
+              ? `${location}, ${placeDisplay}`
               : placeDisplay}
           </div>
         </div>
@@ -65,11 +69,9 @@ const ExplorerHeaderContainer = ({
   )
 }
 
-const mapStateToProps = ({ agencies, filters, participation }) => {
-  const { place, placeType } = getPlaceInfo(filters)
-  const { crime, until } = filters
-  const isAgency = placeType === 'agency'
-  const agency = isAgency && !agencies.loading && getAgency(agencies, place)
+const mapStateToProps = ({ agencies, filters, participation, region, states }) => {
+  const isAgency = filters.placeType === 'agency'
+  const agency = isAgency && !agencies.loading && getAgency(agencies, filters.place)
   const { icpsr_lat: lat, icpsr_lng: lng } = agency
   const coordinates = isAgency && lat && lng && { lat, lng }
 
@@ -77,12 +79,11 @@ const mapStateToProps = ({ agencies, filters, participation }) => {
     agencies,
     agency,
     coordinates,
-    crime,
     isAgency,
     participation,
-    place,
-    placeType,
-    until,
+    filters,
+    region,
+    states,
   }
 }
 

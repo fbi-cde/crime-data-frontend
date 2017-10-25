@@ -10,7 +10,6 @@ const isValidCrime = crime => offensesUtil.includes(crime)
 const noNibrs = ['violent-crime', 'property-crime']
 
 export const shouldFetchUcr = (filters, region, states) => {
-  console.log("Should Fetch UCR:",filters, region, states)
   if (filters.placeType === 'state') {
      return isValidState(states.states, filters.place)
   } else if (filters.placeType === 'region') {
@@ -30,7 +29,10 @@ export const shouldFetchNibrs = ({ crime, place, placeType }) => {
   return coverage && coverage.nibrs
 }
 
-export const reshapeData = dataIn =>
-  Object.assign(...dataIn.map(d => ({ [d.place]: d.results })))
+export const reshapeData = dataIn => {
+  console.log("ReshapeData:",dataIn)
+  return Object.assign(...dataIn.map(d => ({ [d.place]: d.results })))
+
+}
 
 export default lookup

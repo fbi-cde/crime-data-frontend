@@ -21,6 +21,9 @@ import routes from './routes'
 import configureStore from './store'
 import { fetchingAgency, receivedAgency } from './actions/agencies'
 import { updateFilters } from './actions/filters'
+import { fetchUcrRegion } from './actions/region'
+import { fetchUcrState } from './actions/states'
+
 import createEnv from './util/env'
 import { hasThreatKeyword, notifyOfThreat } from './util/feedback'
 import { createIssue } from './util/github'
@@ -116,6 +119,8 @@ app.get('/*', (req, res) => {
     } else if (props) {
       const store = configureStore(initState)
       const { place, placeType } = props.router.params
+      store.dispatch(fetchUcrRegion())
+      store.dispatch(fetchUcrState())
       store.dispatch(updateFilters({ ...props.router.params }))
 
       if (placeType === 'agency') {
