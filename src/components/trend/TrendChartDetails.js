@@ -7,7 +7,7 @@ import Highlight from '../Highlight'
 import Term from '../Term'
 import crimeTerm from '../../util/glossary'
 import { formatNum, formatOneDec as formatRate } from '../../util/formats'
-import lookupUsa, { nationalKey } from '../../util/usa'
+import { nationalKey } from '../../util/usa'
 import generateId from '../../util/id'
 
 const highlight = txt =>
@@ -40,6 +40,7 @@ const TrendChartDetails = ({
   since,
   until,
   onChangeYear,
+  placeName,
 }) => {
   const handleSelectChange = e => onChangeYear(Number(e.target.value))
   const yearRange = range(since, until + 1)
@@ -87,7 +88,7 @@ const TrendChartDetails = ({
     sentence = (
       <span>
         In <span id="selected-year-text">{highlight(year)}</span>,{' '}
-        {lookupUsa(place).display}’s {term} rate was{' '}
+        {placeName}’s {term} rate was{' '}
         {highlight(formatRate(rate))} incidents per 100,000 people. The rate for
         that year was {comparison} that of the United States.
       </span>
@@ -148,7 +149,7 @@ const TrendChartDetails = ({
                       backgroundColor: colors[i] || '#000',
                     }}
                   />
-                  {lookupUsa(d.place).display}
+                  {placeName}
                 </td>
                 <td className="pt1 pr2 align-bottom right-align">
                   <span
@@ -198,6 +199,7 @@ TrendChartDetails.propTypes = {
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
   onChangeYear: PropTypes.func.isRequired,
+  placeName: PropTypes.string.isRequired,
 }
 
 export default TrendChartDetails

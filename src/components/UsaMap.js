@@ -4,7 +4,7 @@ import React from 'react'
 import Hint from './Hint'
 import stateLookup from '../util/usa'
 import svgData from '../../public/data/usa-state-svg.json'
-import {lookupStateByAbbr,lookupStateByName,lookupRegionByCode} from '../util/location'
+import { lookupStateByAbbr, lookupStateByName, lookupRegionByCode } from '../util/location'
 
 class UsaMap extends React.Component {
   state = { hover: null }
@@ -17,7 +17,7 @@ class UsaMap extends React.Component {
     } else {
       console.log(lookupRegionByCode(region.regions, lookupStateByName(states.states, id).region_code).region_name)
       this.setState({
-        hover: { value: lookupRegionByCode(region.regions,lookupStateByName(states.states, id).region_code).region_name, position: { x: e.pageX, y: e.pageY } },
+        hover: { value: lookupRegionByCode(region.regions, lookupStateByName(states.states, id).region_code).region_name, position: { x: e.pageX, y: e.pageY } },
       })
     }
   }
@@ -48,7 +48,7 @@ class UsaMap extends React.Component {
               let defaultClass = 'fill-blue-light'
                 if (stateView === true) {
                   if (place.length > 0) {
-                    for ( var p in place ) {
+                    for (var p in place) {
                       if (s.id === place[p].state_abbr) {
                         defaultClass = 'fill-red-bright';
                       }

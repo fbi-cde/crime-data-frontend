@@ -12,8 +12,8 @@ import {
 const fetchData = () => (dispatch, getState) => {
   const { filters, region, states } = getState()
 
-  if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters, region, states))
-  if (shouldFetchSummaries(filters)) dispatch(fetchSummaries(filters))
+  if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
+  if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
   if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
 }
 

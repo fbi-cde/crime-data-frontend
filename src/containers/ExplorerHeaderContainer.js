@@ -28,6 +28,9 @@ const ExplorerHeaderContainer = ({
   } else if (filters.placeType === 'state' || filters.placeType === 'region') {
     placeDisplay = lookupDisplayName(filters, region.regions, states.states)
     location = filters.place;
+    if (filters.placeType === 'region') {
+      placeDisplay += ' Region'
+    }
   }
   return (
     <div>
@@ -36,7 +39,7 @@ const ExplorerHeaderContainer = ({
           id="explorerHeaderTitle"
           className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-light"
         >
-          {isAgency && isLoading ? 'Loading agency...' : placeDisplay}
+          {isAgency && isLoading !== 'region' ? 'Loading agency...' : placeDisplay}
         </h1>
       </div>
       <div className="mb5 clearfix">
@@ -47,8 +50,7 @@ const ExplorerHeaderContainer = ({
                 agency={agency}
                 participation={participation}
                 filters={filters}
-                states={states}
-                region={region}
+                placeName={placeDisplay}
               />}
           <UcrResourcesList
             crime={filters.crime}

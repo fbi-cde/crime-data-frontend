@@ -24,7 +24,7 @@ class PlaceThumbnail extends React.Component {
   }
 
   render() {
-    const { coordinates, place, placeType, region, states} = this.props
+    const { coordinates, place, placeType, region, states } = this.props
     const { usa } = this.state
 
     if (!usa) return <Container />

@@ -7,6 +7,7 @@ const isValidCrime = crime => offenseUtil.includes(crime)
 const defaults = {
   crime: 'violent-crime',
   place: 'united-states',
+  placeid: 'usa',
   since: MAX_YEAR - 10,
   until: MAX_YEAR,
 }
@@ -23,6 +24,7 @@ const validateFilter = filters => {
     filters.placeType !== 'agency' && filters.placeType !== 'region'
   ) {
     newFilters.place = defaults.place
+    newFilters.placeid = defaults.placeid
   }
 
   if (filters.since === null && filters.until === null) {

@@ -1,28 +1,69 @@
 import { slugify } from '../util/text'
+import { MIN_YEAR, MAX_YEAR } from '../util/years'
 
-export const calculateRates = summaries => {
+export const calculateRates = (summaries, placeType) => {
   const nonOffenseKeys = ['caveats', 'population', 'state_abbr', 'year']
-  const places = Object.keys(summaries).map(place => {
-    const rates = summaries[place].map(yearly => {
-      const offenses = Object.keys(yearly).filter(
-        k => !nonOffenseKeys.includes(k),
-      )
-      const { population, year } = yearly
-      const withRates = offenses.map(o => ({
-        [slugify(o)]: {
-          count: yearly[o],
-          rate: yearly[o] / population * 100000,
-        },
-      }))
+  let places
+  if (placeType === 'state') {
+    places = Object.keys(summaries).map(place => {
+      const rates = summaries[place].map(yearly => {
+        const offenses = Object.keys(yearly).filter(
+          k => !nonOffenseKeys.includes(k),
+        )
+        const { population, year } = yearly
+        const withRates = offenses.map(o => ({
+          [slugify(o)]: {
+            count: yearly[o],
+            rate: yearly[o] / population * 100000,
+          },
+        }))
+        return Object.assign({ population, year }, ...withRates)
+      })
 
-      return Object.assign({ population, year }, ...withRates)
+      return {
+        [place]: rates,
+      }
     })
+  } else if (placeType === 'region') {
+    places = Object.keys(summaries).map(place => {
+        const withRegionRates = [];
+        let minYr = MIN_YEAR
 
-    return {
-      [place]: rates,
-    }
-  })
+        const summaryObject = Object()
+        do {
+        const yrData = summaries[place].filter(
+          data => data.year === minYr
+        );
+        if (yrData.length > 0) {
+          const offensesObject = Object()
+          const offenses = Object.keys(yrData[0]).filter(
+            k => !nonOffenseKeys.includes(k),
+          )
+          for (const o in offenses) {
+            let pop = 0
+            let cnt = 0;
+            for (const yr in yrData) {
+              const year = yrData[yr];
+              pop += year.population;
+              cnt += year[offenses[o]];
+            }
+            const offenseObject = ({
+                count: cnt,
+                rate: cnt / pop * 100000,
+            });
+            const offenseString = slugify(offenses[o])
+            offensesObject[offenseString] = offenseObject
+          }
+          offensesObject.year = minYr;
 
+          withRegionRates.push(offensesObject)
+          minYr += 1;
+        }
+      } while (minYr < MAX_YEAR)
+      summaryObject[place] = withRegionRates;
+      return summaryObject;
+   })
+  }
   return Object.assign(...places)
 }
 
@@ -46,7 +87,7 @@ export const combinePlaces = (summaries, offenses = []) => {
   )
 }
 
-export const filterByYear = (summaries, { since, until }) => {
+export const filterByYear = (summaries, since, until) => {
   const places = Object.keys(summaries).map(place => {
     const filtered = summaries[place].filter(y => {
       const { year } = y
