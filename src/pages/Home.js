@@ -16,7 +16,7 @@ import { oriToState } from '../util/agencies'
 import { crimeTypes } from '../util/offenses'
 import { slugify } from '../util/text'
 import lookup from '../util/usa'
-import { lookupStatesByRegion, lookupRegionByName,lookupRegionByCode, lookupStateByName, lookupStateByAbbr } from '../util/location'
+import { lookupStatesByRegion, lookupRegionByName, lookupRegionByCode, lookupStateByName, lookupStateByAbbr } from '../util/location'
 
 import dataPreview from '../../content/preview.yml'
 
@@ -31,22 +31,24 @@ class Home extends React.Component {
   }
 
   handleMapClick = e => {
-    if(this.state.statesView){
+    if (this.state.statesView) {
       const id = e.target.getAttribute('id')
       if (!id) return
       const { actions, filters, router } = this.props
-      const { crime}  = filters
-      const placeNew = { place: lookup(id).slug, placeType: 'state' }
+      const { crime } = filters
+      const placeNew = { place: lookup(id).slug, placeType: 'state', placeId: id }
       actions.updateFilters(placeNew)
       actions.updateApp({ crime, ...placeNew }, router)
-    }else {
-      //REGION DATA GET PLACES
+    } else {
+      // REGION DATA GET PLACES
       const { region, states } = this.props
       const id = e.target.getAttribute('id')
       if (!id) return
       const { actions, filters, router } = this.props
-      const { crime}  = filters
-      const placeNew = { place: lowerCase(lookupRegionByCode(region.regions,lookupStateByAbbr(states.states,id).region_code).region_name), placeType: 'region' }
+      const { crime } = filters
+      const placeNew = { place: lowerCase(lookupRegionByCode(region.regions, lookupStateByAbbr(states.states, id).region_code).region_name),
+       placeType: 'region',
+       placeId: lookupStateByAbbr(states.states, id).region_code }
       actions.updateFilters(placeNew)
       actions.updateApp({ crime, ...placeNew }, router)
     }
@@ -55,7 +57,7 @@ class Home extends React.Component {
   handleSearchClick = () => {
     const { actions, router, filters } = this.props
     const change = filters
-    console.log("Change:",change)
+    console.log('Change:', change)
     actions.updateApp(change, router)
   }
 
@@ -70,14 +72,14 @@ class Home extends React.Component {
   }
 
   handleMapTypeChange = e => {
-    console.log("handleMapTypeChange:")
+    console.log('handleMapTypeChange:')
     let { statesView } = this.state
     if (e.target.value === 'states' && statesView === false) {
       statesView = true;
-      this.setState({ statesView: statesView })
-    } else if (e.target.value === 'regions' && statesView === true){
+      this.setState({ statesView })
+    } else if (e.target.value === 'regions' && statesView === true) {
       statesView = false;
-      this.setState({ statesView: statesView })
+      this.setState({ statesView })
     }
   }
 
@@ -88,16 +90,16 @@ class Home extends React.Component {
     const isValid = !!(crime && place) || false
     const usState = placeType === 'agency' ? oriToState(place) : place
     let mapSelected = [];
-    if(place && placeType){
+    if (place && placeType) {
       if (placeType === 'region') {
         const r = lookupRegionByName(region.regions, place)
         const states = lookupStatesByRegion(states.states, r.region_code)
         mapSelected = states
-      }else{
+      } else {
         mapSelected.push(lookupStateByName(states, usState));
       }
     }
-    console.log("HOME")
+    console.log('HOME')
     return (
       <div>
         <Helmet title="CDE :: Home" />
@@ -180,7 +182,7 @@ class Home extends React.Component {
               </div>
             </div>
             <div className="py4 sm-py7 sm-col-9 mx-auto">
-              <UsaMap mapClick={this.handleMapClick} place={mapSelected} stateView={statesView} states={states} region={region}/>
+              <UsaMap mapClick={this.handleMapClick} place={mapSelected} stateView={statesView} states={states} region={region} />
             </div>
             <div className="clearfix mxn2 mb4 flex">
                 <div className="inline-block clearfix mx-auto">
@@ -256,13 +258,11 @@ Home.propTypes = {
   filters: PropTypes.object,
 
 }
-const mapStateToProps = ({ filters, region, states }) => {
-  return {
+const mapStateToProps = ({ filters, region, states }) => ({
     filters,
     region,
     states,
-  }
-}
+  })
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ updateApp, updateFilters }, dispatch),

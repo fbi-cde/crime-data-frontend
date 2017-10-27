@@ -24,13 +24,11 @@ import { getAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import { sentenceCase } from '../util/text'
 import { validateFilter } from '../util/location'
-
-import lookup from '../util/usa'
 import { MIN_YEAR, MAX_YEAR } from '../util/years'
 
 class Explorer extends React.Component {
   componentDidMount() {
-    const { actions, filters, params, router} = this.props
+    const { actions, filters, params, router } = this.props
     const { since, until } = filters
     const { query } = router.location
     const { place, placeType } = getPlaceInfo(params)

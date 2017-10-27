@@ -20,7 +20,7 @@ export const receivedUcrParticipation = results => ({
   results,
 })
 
-export const fetchUcrParticipation = (filters, region, states )=> dispatch => {
+export const fetchUcrParticipation = (filters, region, states) => dispatch => {
   dispatch(fetchingUcrParticipation())
   const requests = api.getUcrParticipationRequests(filters, region, states)
   return Promise.all(requests)

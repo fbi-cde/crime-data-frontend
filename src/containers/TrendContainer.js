@@ -13,8 +13,8 @@ import TrendSourceText from '../components/trend/TrendSourceText'
 import { generateCrimeReadme } from '../util/content'
 import { getPlaceInfo } from '../util/place'
 import { combinePlaces, filterByYear } from '../util/summary'
-import lookupUsa, { nationalKey } from '../util/usa'
-import { lookupDisplayName } from  '../util/location'
+import { nationalKey } from '../util/usa'
+import { lookupDisplayName } from '../util/location'
 
 class TrendContainer extends React.Component {
   constructor(props) {
@@ -23,29 +23,29 @@ class TrendContainer extends React.Component {
     this.state = { yearSelected: until }
   }
 
-  getContent = ({ crime, places, since, summaries, until, placeType, placeName }) => {
+  getContent = ({ crime, filters, places, summaries, placeName }) => {
     const { loading, error } = summaries
     const { yearSelected } = this.state
+
     if (loading) return <Loading />
     if (error) return <ErrorCard error={error} />
 
 
     const offenses =
-      crime === 'rape' ? ['rape-legacy', 'rape-revised'] : [crime]
-    const place = places[0]
+      filters.crime === 'rape' ? ['rape-legacy', 'rape-revised'] : [crime]
 
-    const filteredByYear = filterByYear(summaries.data, { since, until })
+    const filteredByYear = filterByYear(summaries.data, filters.since, filters.until)
     const data = combinePlaces(filteredByYear, offenses)
 
     if (!data || data.length === 0) return <NoData />
 
-    const fname = `${place}-${crime}-${since}-${until}`
+    const fname = `${filters.place}-${filters.crime}-${filters.since}-${filters.until}`
     const title =
-      `Reported ${pluralize(crime)} in ` +
-      `${placeName}, ${since}-${until}`
+      `Reported ${pluralize(filters.crime)} in ` +
+      `${placeName}, ${filters.since}-${filters.until}`
 
-    const readme = generateCrimeReadme({ crime, title })
-    const crimeNorm = crime === 'rape' ? 'rape-legacy' : crime
+    const readme = generateCrimeReadme(filters.crime, title)
+    const crimeNorm = filters.crime === 'rape' ? 'rape-legacy' : filters.crime
     const dlData = data.map(d => {
       const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }))
       return { year: d.year, ...Object.assign(...placeData) }
@@ -60,12 +60,12 @@ class TrendContainer extends React.Component {
       <div>
         <TrendChart
           crime={crime}
+          filters={filters}
           data={data}
           places={places}
           onChangeYear={this.updateYear}
-          since={since}
-          until={until}
           initialYearSelected={yearSelected}
+          placeName={placeName}
         />
         <DownloadDataBtn
           ariaLabel={`Download ${title} data as a CSV`}
@@ -82,36 +82,30 @@ class TrendContainer extends React.Component {
 
   render() {
     const {
-      crime,
-      place,
       places,
-      placeType,
-      since,
       summaries,
-      until,
       region,
       states,
+      filters,
     } = this.props
-    console.log("TrendContainer")
-    const displayName = lookupDisplayName(place, region, states)
-
+    const placeName = lookupDisplayName(filters, region.regions, states.states)
     const isReady = !summaries.loading
 
     let otherCrimes = []
-    if (crime === 'violent-crime') {
+    if (filters.crime === 'violent-crime') {
       otherCrimes = ['homicide', 'rape', 'robbery', 'aggravated-assault']
-    } else if (crime === 'property-crime') {
+    } else if (filters.crime === 'property-crime') {
       otherCrimes = ['arson', 'burglary', 'larceny', 'motor-vehicle-theft']
     }
-
+    const crime = filters.crime
     return (
       <div className="mb7">
         <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
           <h2 className="mt0 mb2 sm-mb4 fs-24 sm-fs-28 sans-serif">
-            {startCase(crime)} rate in {displayName}, {since}-{until}
+            {startCase(filters.crime)} rate in {placeName}, {filters.since}-{filters.until}
           </h2>
           <div className="bg-white">
-            {this.getContent({ crime, places, since, summaries, until, placeType, displayName })}
+            {this.getContent({ crime, filters, places, summaries, placeName })}
           </div>
         </div>
         <div>
@@ -126,10 +120,10 @@ class TrendContainer extends React.Component {
                     </h3>
                     {this.getContent({
                       crime: other,
+                      filters,
                       places,
-                      since,
                       summaries,
-                      until,
+                      placeName
                     })}
                   </div>
                 </div>
@@ -138,22 +132,17 @@ class TrendContainer extends React.Component {
           </div>
         </div>
         {isReady &&
-          <TrendSourceText crime={crime} place={place} placeType={placeType} />}
+          <TrendSourceText crime={filters.crime} place={filters.place} placeType={filters.placeType} placeName={placeName} />}
       </div>
     )
   }
 }
 TrendContainer.propTypes = {
-  crime: PropTypes.string.isRequired,
-  place: PropTypes.string.isRequired,
   places: PropTypes.arrayOf(PropTypes.string),
-  placeType: PropTypes.string.isRequired,
-  since: PropTypes.number.isRequired,
   summaries: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.boolean,
   }).isRequired,
-  until: PropTypes.number.isRequired,
   region: PropTypes.object,
   states: PropTypes.object,
 }
@@ -165,12 +154,11 @@ export const mapStateToProps = ({ filters, summaries, region, states }) => {
   if (place !== nationalKey) places.push(nationalKey)
 
   return {
-    ...filters,
-    ...getPlaceInfo(filters),
     places,
     summaries,
     region,
-    states
+    states,
+    filters,
   }
 }
 
