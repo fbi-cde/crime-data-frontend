@@ -9,7 +9,7 @@ import ExplorerIntroRegion from './ExplorerIntroRegion'
 import { oriToState } from '../../util/agencies'
 import { nationalKey } from '../../util/usa'
 
-const ExplorerIntro = ({ agency, filters, participation, region, states  }) => {
+const ExplorerIntro = ({ agency, filters, participation, placeName }) => {
   if (agency) {
     return (
       <ExplorerIntroAgency
@@ -37,23 +37,25 @@ const ExplorerIntro = ({ agency, filters, participation, region, states  }) => {
     )
   }
 
-  if(filters.placeType === 'region'){
-    return <ExplorerIntroRegion
+  if (filters.placeType === 'region') {
+    console.log('here:', participation.data)
+    console.log('Region participation:', participation.data[filters.placeId])
+    return (<ExplorerIntroRegion
       crime={filters.crime}
-      place={filters.place}
       until={filters.until}
-      region={region}
-      states={states}
-      participation={participation.data[filters.place]}
-    />
+      placeName={placeName}
+      participation={participation.data[filters.placeId]}
+    />)
   }
+  console.log('here:', participation.data)
 
   return (
     <ExplorerIntroState
       crime={filters.crime}
       place={filters.place}
       until={filters.until}
-      participation={participation.data[filters.place]}
+      participation={participation.data[filters.place_id]}
+      placeName={placeName}
     />
   )
 }
@@ -65,8 +67,7 @@ ExplorerIntro.propTypes = {
     loading: PropTypes.boolean,
   }).isRequired,
   filters: PropTypes.object.isRequired,
-  region: PropTypes.object.isRequired,
-  states: PropTypes.object.isRequired,
+  placeName: PropTypes.string.isRequired,
 }
 
 export default ExplorerIntro

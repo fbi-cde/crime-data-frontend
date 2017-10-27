@@ -6,13 +6,13 @@ const nationalKey = 'united-states'
 const lookupStateByName = (stateData, name) => {
   if (!stateData) return null
 
-  for (var data in stateData) {
+  for (const data in stateData) {
     if (stateData[data].state_name === startCase(name)) {
         return stateData[data]
     }
   }
 
-  if(stateData === 'usa') {
+  if (stateData === 'usa') {
     return nationalKey;
   }
 
@@ -22,13 +22,13 @@ const lookupStateByName = (stateData, name) => {
 const lookupStateByAbbr = (stateData, abbr) => {
   if (!stateData) return null
 
-  for (var data in stateData) {
+  for (const data in stateData) {
     if (stateData[data].state_abbr === abbr) {
         return stateData[data]
     }
   }
 
-  if(stateData === 'usa') {
+  if (stateData === 'usa') {
     return nationalKey;
   }
 
@@ -38,7 +38,7 @@ const lookupStateByAbbr = (stateData, abbr) => {
 const lookupRegionByName = (regionData, name) => {
   if (!regionData) return null
 
-  for (var data in regionData) {
+  for (const data in regionData) {
     if (lowerCase(regionData[data].region_name) === name) {
         return regionData[data]
     }
@@ -50,7 +50,7 @@ const lookupRegionByName = (regionData, name) => {
 const lookupRegionByCode = (regionData, code) => {
   if (!regionData) return null
 
-  for (var data in regionData) {
+  for (const data in regionData) {
     if (regionData[data].region_code === code) {
         return regionData[data]
     }
@@ -59,17 +59,13 @@ const lookupRegionByCode = (regionData, code) => {
   return null;
 }
 
-const stateFromAbbr = (stateData, abbr) => {
-  return stateData.find(d => d.state_abbr === abbr.toLowerCase());
-}
+const stateFromAbbr = (stateData, abbr) => stateData.find(d => d.state_abbr === abbr.toLowerCase())
 
-const stateFromName = (stateData, name) => {
-  return stateData.find(d => d.state_name === name.toLowerCase());
-}
+const stateFromName = (stateData, name) => stateData.find(d => d.state_name === name.toLowerCase())
 
 const lookupStatesByRegion = (stateData, regioncode) => {
-  let states = [];
-  for (var data in stateData) {
+  const states = [];
+  for (const data in stateData) {
     if (stateData[data].region_code === regioncode) {
         states.push(stateData[data]);
     }
@@ -92,29 +88,29 @@ const isValidState = (stateData, name) => {
 }
 
 const isValidPlaceType = placeType => {
-  if(placeType === 'region' || placeType ==='agency' || placeType ==='state'){
+  if (placeType === 'region' || placeType === 'agency' || placeType === 'state') {
     return true;
   }
   return false;
 }
 
-const validateFilter = (filters,regionData, stateData) => {
-  if (isValidPlaceType(filters.placeType)){
-    if(filters.placeType === 'state'){
-      return isValidState(stateData,filters.place)
-    } else if(filters.placeType === 'region'){
-        return isValidRegion(regionData,filters.place)
+const validateFilter = (filters, regionData, stateData) => {
+  if (isValidPlaceType(filters.placeType)) {
+    if (filters.placeType === 'state') {
+      return isValidState(stateData, filters.place)
+    } else if (filters.placeType === 'region') {
+        return isValidRegion(regionData, filters.place)
       }
   }
+  return false;
 }
 
-const lookupDisplayName = (filters,regionData, stateData) => {
-  console.log("lookupDisplayName:",filters,regionData,stateData)
-  if (isValidPlaceType(filters.placeType)){
-    if(filters.placeType === 'state'){
-      return lookupStateByAbbr(stateData,filters.place).state_name
-    } else if(filters.placeType === 'region'){
-        return lookupRegionByName(regionData,filters.place).region_name
+const lookupDisplayName = (filters, regionData, stateData) => {
+  if (isValidPlaceType(filters.placeType)) {
+    if (filters.placeType === 'state') {
+      return lookupStateByName(stateData, filters.place).state_name
+    } else if (filters.placeType === 'region') {
+        return lookupRegionByName(regionData, filters.place).region_name
       }
   }
 }
