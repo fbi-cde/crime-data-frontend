@@ -215,7 +215,6 @@ TrendChart.propTypes = {
   initialYearSelected: PropTypes.number,
   filters: PropTypes.object.isRequired,
   placeName: PropTypes.string.isRequired,
-  placeType: PropTypes.string.isRequired,
   crime: PropTypes.string.isRequired,
 }
 
