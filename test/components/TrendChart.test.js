@@ -21,10 +21,12 @@ describe('TrendChart', () => {
     crime: 'violent-crime',
     places: ['united-states'],
   }
+
+  const placeName = 'United States'
   let chart
 
   beforeEach(() => {
-    chart = shallow(<TrendChart data={data} {...filters} />)
+    chart = shallow(<TrendChart data={data} placeName={placeName} filters={filters} crime={filters.crime} places={filters.places}/>)
   })
 
   it('TrendChart renders svg', () => {
