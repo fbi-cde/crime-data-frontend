@@ -4,17 +4,19 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { API } from '../util/api'
+import { lookupStateByName } from '../util/location'
+
 import content from '../util/content'
 import lookupUsa, { nationalKey } from '../util/usa'
 
-const participationCsvLink = (place, type) => {
+const participationCsvLink = (place, type, states) => {
   if (type === 'agency') return []
   if (type === 'region') return []
 
   const path =
     place === nationalKey
       ? 'participation/national'
-      : `participation/states/${lookupUsa(place).id}`
+      : `participation/states/${lookupStateByName(states.states, place).state_abbr}`
 
   return [
     {
@@ -34,13 +36,13 @@ const locationLinks = place => {
   return links.filter(l => l.text)
 }
 
-const UcrResourcesList = ({ crime, place, placeType }) => {
+const UcrResourcesList = ({ crime, place, placeType, states }) => {
   const links = [
     {
       text: `About ${lowerCase(crime)} data`,
       url: '#about-the-data',
     },
-    ...participationCsvLink(place, placeType),
+    ...participationCsvLink(place, placeType, states),
     ...locationLinks(place),
   ]
 
@@ -64,6 +66,8 @@ UcrResourcesList.propTypes = {
   crime: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
+  states: PropTypes.object.isRequired,
+
 }
 
 export default UcrResourcesList

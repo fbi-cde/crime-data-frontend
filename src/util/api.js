@@ -6,7 +6,6 @@ import { get } from './http'
 import { mapToApiOffense } from './offenses'
 import { oriToState } from './agencies'
 import { slugify } from './text'
-import { lookupStateByName, lookupRegionByName } from './location'
 
 export const API = '/api-proxy'
 export const nationalKey = 'united-states'
@@ -77,7 +76,7 @@ const fetchArson = (place, placeId, placeType) => {
   if (placeType === 'state') {
     url = `${API}/arson/states/${placeId}?per_page=50`
   } else if (placeType === 'region') {
-    url = `${API}/arson/region/${placeId}?per_page=50`
+    url = `${API}/arson/regions/${placeId}?per_page=50`
   } else {
     url = `${API}/arson/national?per_page=50`
   }
@@ -125,7 +124,7 @@ const getSummaryRequests = ({ crime, place, placeType, placeId }) => {
     const stateName = slugify(oriToState(place))
     return [
       fetchAgencyAggregates(place, crime),
-      fetchAggregates(stateName, placeType),
+      fetchAggregates(stateName, placeType, placeId),
       fetchAggregates(),
     ]
   }
@@ -135,15 +134,15 @@ const getSummaryRequests = ({ crime, place, placeType, placeId }) => {
   return [fetchAggregates()]
 }
 
-const getUcrParticipation = (place, placeType) => {
+const getUcrParticipation = (place, placeId, placeType) => {
   let path
 
   if (place === nationalKey) {
     path = 'participation/national';
   } else if (placeType === 'state') {
-    path = `participation/states/${place}`
+    path = `participation/states/${placeId}`
   } else if (placeType === 'region') {
-    path = `participation/regions/${place}`
+    path = `participation/regions/${placeId}`
   }
 
   return get(`${API}/${path}`).then(response => ({
@@ -155,7 +154,7 @@ const getUcrParticipation = (place, placeType) => {
 const getUcrParticipationRequests = filters => {
   const { place, placeType, placeId } = filters
 
-  const requests = [getUcrParticipation(placeId, placeType)]
+  const requests = [getUcrParticipation(place, placeId, placeType)]
 
   // add national request (unless you already did)
   if (place !== nationalKey) {

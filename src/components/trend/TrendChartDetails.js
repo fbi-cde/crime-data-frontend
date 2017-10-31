@@ -9,6 +9,7 @@ import crimeTerm from '../../util/glossary'
 import { formatNum, formatOneDec as formatRate } from '../../util/formats'
 import { nationalKey } from '../../util/usa'
 import generateId from '../../util/id'
+import { generateDisplayName } from '../../util/location'
 
 const highlight = txt =>
   <strong>
@@ -41,6 +42,7 @@ const TrendChartDetails = ({
   until,
   onChangeYear,
   placeName,
+  placeType,
 }) => {
   const handleSelectChange = e => onChangeYear(Number(e.target.value))
   const yearRange = range(since, until + 1)
@@ -149,7 +151,7 @@ const TrendChartDetails = ({
                       backgroundColor: colors[i] || '#000',
                     }}
                   />
-                  {placeName}
+                  {generateDisplayName(d.place, placeType)}
                 </td>
                 <td className="pt1 pr2 align-bottom right-align">
                   <span

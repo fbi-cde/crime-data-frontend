@@ -66,6 +66,7 @@ class TrendContainer extends React.Component {
           onChangeYear={this.updateYear}
           initialYearSelected={yearSelected}
           placeName={placeName}
+          placeType={filters.placeType}
         />
         <DownloadDataBtn
           ariaLabel={`Download ${title} data as a CSV`}
@@ -88,6 +89,7 @@ class TrendContainer extends React.Component {
       states,
       filters,
     } = this.props
+    console.log('Places:', places)
     const placeName = lookupDisplayName(filters, region.regions, states.states)
     const isReady = !summaries.loading
 
