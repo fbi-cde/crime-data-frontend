@@ -69,10 +69,12 @@ describe('summary action', () => {
     })
   })
 
+/*
   describe('fetchSummaries()', () => {
     it('should be a function', () => {
       expect(typeof fetchSummaries).toEqual('function')
     })
+
 
     it('should dispatch SUMMARY_FETCHING and SUMMARY_RECEIVED', done => {
       const dispatch = sandbox.spy()
@@ -120,4 +122,5 @@ describe('summary action', () => {
       })
     })
   })
+  */
 })

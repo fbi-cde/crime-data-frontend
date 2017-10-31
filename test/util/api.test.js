@@ -14,6 +14,7 @@ const params = {
   crime: 'homicide',
   place: 'california',
   placeType: 'state',
+  placeId: 'ca',
   since: 2004,
   until: 2014,
 }
