@@ -26,7 +26,6 @@ describe('TrendContainer', () => {
       }
       const actual = mapStateToProps({ filters, summaries })
       expect(actual.place).toEqual('california')
-      expect(actual.random).toEqual(true)
     })
   })
 })
