@@ -70,9 +70,7 @@
   },
   "georgia": {
     "srs": true,
-    "nibrs": {
-      "initial-year": 1991
-    },
+    "nibrs": false,
     "state-program": true
   },
   "hawaii": {
@@ -149,7 +147,7 @@
     "state-program": true
   },
   "michigan": {
-    "srs": true,
+    "srs": false,
     "nibrs": {
       "initial-year": 1995
     },
@@ -157,7 +155,7 @@
   },
   "minnesota": {
     "srs": true,
-    "nibrs": false,
+    "nibrs": true,
     "state-program": true
   },
   "mississippi": {
@@ -182,7 +180,7 @@
     "state-program": true
   },
   "nebraska": {
-    "srs": false,
+    "srs": true,
     "nibrs": {
       "initial-year": 1998
     },
@@ -256,7 +254,7 @@
     "state-program": true
   },
   "rhode-island": {
-    "srs": true,
+    "srs": false,
     "nibrs": {
       "initial-year": 2004
     },
