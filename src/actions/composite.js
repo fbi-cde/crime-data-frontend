@@ -3,6 +3,8 @@ import { fetchNibrs } from './nibrs'
 import { fetchSummaries } from '../actions/summary'
 import { fetchUcrParticipation } from '../actions/participation'
 import history, { createNewLocation } from '../util/history'
+import { getPlaceId } from '../util/location'
+
 import {
   shouldFetchUcr,
   shouldFetchSummaries,
@@ -11,10 +13,18 @@ import {
 
 const fetchData = () => (dispatch, getState) => {
   const { filters, region, states } = getState()
-
-  if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
-  if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
-  if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
+  if(region.loaded && states.loaded){
+    console.log('fetchData')
+    console.log('shouldFetchUcr:', shouldFetchUcr(filters, region, states));
+    console.log('shouldFetchSummaries:', shouldFetchSummaries(filters, region, states));
+    console.log('shouldFetchNibrs:', shouldFetchNibrs(filters, region, states));
+    if(!filters.placeId){
+      filters.placeId = getPlaceId(filters,region.region,states.states);
+    }
+    if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
+    if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
+    if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
+  }
 }
 
 export const updateApp = (change, router) => dispatch => {

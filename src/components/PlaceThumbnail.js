@@ -5,8 +5,6 @@ import React from 'react'
 import { feature, mesh } from 'topojson'
 import { connect } from 'react-redux'
 
-import lookupUsa from '../util/usa'
-
 const Container = ({ children }) =>
   <div className="center bg-white rounded">
     <div className="aspect-ratio aspect-ratio--4x3">
@@ -24,7 +22,7 @@ class PlaceThumbnail extends React.Component {
   }
 
   render() {
-    const { coordinates, place, placeType, region, states } = this.props
+    const { coordinates, place, placeType, region, states, placeName } = this.props
     const { usa } = this.state
 
     if (!usa) return <Container />
@@ -32,16 +30,20 @@ class PlaceThumbnail extends React.Component {
     const [w, h] = [400, 300]
     const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
+    console.log('Path:', path, usa)
     const geoStates = feature(usa, usa.objects.units).features
+    console.log('GeoState:', geoStates)
     const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
     let active
+
     if (place !== 'washington-dc') {
       active = geoStates.find(
-        s => s.properties.name === lookupUsa(location).display,
+        s => s.properties.name === placeName,
       )
     } else {
       active = geoStates.find(s => s.id === 'US11')
     }
+
     const { lat, lng } = coordinates || {}
     const pin = coordinates && projection([lng, lat])
 
@@ -114,6 +116,7 @@ PlaceThumbnail.propTypes = {
   coordinates: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
+  placeName: PropTypes.string.isRequired,
   states: PropTypes.object.isRequired,
   region: PropTypes.object.isRequired,
 }

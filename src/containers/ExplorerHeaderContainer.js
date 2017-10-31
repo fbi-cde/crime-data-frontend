@@ -28,9 +28,9 @@ const ExplorerHeaderContainer = ({
   } else if (filters.placeType === 'state' || filters.placeType === 'region') {
     placeDisplay = lookupDisplayName(filters, region.regions, states.states)
     location = filters.place;
-    if (filters.placeType === 'region') {
-      placeDisplay += ' Region'
-    }
+  } else {
+    placeDisplay = 'United States'
+    location = filters.place;
   }
   return (
     <div>
@@ -56,10 +56,11 @@ const ExplorerHeaderContainer = ({
             crime={filters.crime}
             place={filters.place}
             placeType={filters.placeType}
+            states={states}
           />
         </div>
         <div className="sm-col sm-col-4 xs-hide">
-          <PlaceThumbnail coordinates={coordinates} location={location} />
+          <PlaceThumbnail placeName={placeDisplay} coordinates={coordinates} />
           <div className="mt-tiny fs-12 serif italic">
             {isAgency && !isLoading
               ? `${location}, ${placeDisplay}`

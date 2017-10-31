@@ -17,7 +17,6 @@ export const receivedSummary = summaries => ({
 })
 
 export const fetchSummaries = params => dispatch => {
-  console.log('fetchSummaries')
   dispatch(fetchingSummary())
   const requests = api.getSummaryRequests(params)
   return Promise.all(requests)

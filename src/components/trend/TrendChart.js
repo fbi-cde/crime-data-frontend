@@ -49,7 +49,7 @@ class TrendChart extends React.Component {
   }
 
   getYearFromXPosition = xPosition => {
-    const { since, until } = this.props
+    const { since, until } = this.props.filters
     const { width, xPad } = this.calculateDimensions()
     const dates = range(since, until + 1).map(d => formatYear(d))
     const x = scaleTime().domain(extent(dates)).range([xPad, width - xPad])
@@ -119,6 +119,7 @@ class TrendChart extends React.Component {
       placeName,
       filters,
     } = this.props
+
     const { yearSelected } = this.state
     const { margin } = size
     const color = scaleOrdinal(colors)
@@ -163,6 +164,7 @@ class TrendChart extends React.Component {
           onChangeYear={handleChangeYear}
           until={filters.until}
           placeName={placeName}
+          placeType={filters.placeType}
         />
         <div className="mb2 clearfix">
           <div className="sm-col mb1 sm-m0 fs-12 bold monospace black">
@@ -213,6 +215,7 @@ TrendChart.propTypes = {
   initialYearSelected: PropTypes.number,
   filters: PropTypes.object.isRequired,
   placeName: PropTypes.string.isRequired,
+  placeType: PropTypes.string.isRequired,
   crime: PropTypes.string.isRequired,
 }
 

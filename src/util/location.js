@@ -1,6 +1,8 @@
 import lowerCase from 'lodash.lowercase'
 import startCase from 'lodash.startcase'
 
+import { slugify } from '../util/text'
+
 const nationalKey = 'united-states'
 
 const lookupStateByName = (stateData, name) => {
@@ -39,7 +41,7 @@ const lookupRegionByName = (regionData, name) => {
   if (!regionData) return null
 
   for (const data in regionData) {
-    if (lowerCase(regionData[data].region_name) === name) {
+    if (lowerCase(regionData[data].region_name) === lowerCase(name) || slugify(lowerCase(regionData[data].region_name)) === lowerCase(name)) {
         return regionData[data]
     }
   }
@@ -88,7 +90,7 @@ const isValidState = (stateData, name) => {
 }
 
 const isValidPlaceType = placeType => {
-  if (placeType === 'region' || placeType === 'agency' || placeType === 'state') {
+  if (placeType === 'region' || placeType === 'agency' || placeType === 'state' || placeType === 'national') {
     return true;
   }
   return false;
@@ -100,7 +102,11 @@ const validateFilter = (filters, regionData, stateData) => {
       return isValidState(stateData, filters.place)
     } else if (filters.placeType === 'region') {
         return isValidRegion(regionData, filters.place)
-      }
+    } else if (filters.placeType === 'agency') {
+      return true;
+    } else if (filters.placeType === 'national') {
+      return true;
+    }
   }
   return false;
 }
@@ -110,11 +116,32 @@ const lookupDisplayName = (filters, regionData, stateData) => {
     if (filters.placeType === 'state') {
       return lookupStateByName(stateData, filters.place).state_name
     } else if (filters.placeType === 'region') {
-        return lookupRegionByName(regionData, filters.place).region_name
+        return `${lookupRegionByName(regionData, filters.place).region_name} Region`
       }
+  }
+}
+
+const generateDisplayName = (place, placeType) => {
+  if (placeType === 'state') {
+    const state = place.replace('-', ' ');
+    return startCase(state)
+  } else if (placeType === 'region') {
+      return `${startCase(place)} Region`;
+  }
+    return 'United States'
+}
+
+const getPlaceId =  (filters,regionData, stateData)=>{
+  if (isValidPlaceType(filters.placeType)) {
+    if (filters.placeType === 'state') {
+      return lookupStateByName(stateData, filters.place).state_abbr;
+    } else if (filters.placeType === 'region') {
+        return lookupRegionByName(regionData, filters.place).region_code
+    }
   }
 }
 
 export { lookupStateByName, lookupRegionByName, lookupStatesByRegion,
   stateFromAbbr, stateFromName, isValidState, isValidRegion, lookupStateByAbbr,
-  lookupRegionByCode, validateFilter, lookupDisplayName }
+  lookupRegionByCode, validateFilter, lookupDisplayName, generateDisplayName,
+  getPlaceId }
