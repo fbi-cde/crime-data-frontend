@@ -157,7 +157,9 @@
   },
   "minnesota": {
     "srs": true,
-    "nibrs": false,
+    "nibrs":  {
+      "initial-year": 2016
+    },
     "state-program": true
   },
   "mississippi": {
