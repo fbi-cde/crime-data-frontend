@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { bindActionCreators } from 'redux'
 import lowerCase from 'lodash.lowercase'
+import snakeCase from 'lodash.snakecase'
 
 import LocationSelect from '../components/LocationSelect'
 import SharingTags from '../components/SharingTags'
@@ -15,7 +16,6 @@ import { updateFilters } from '../actions/filters'
 import { oriToState } from '../util/agencies'
 import { crimeTypes } from '../util/offenses'
 import { slugify } from '../util/text'
-import lookup from '../util/usa'
 import { lookupStatesByRegion, lookupRegionByName, lookupRegionByCode, lookupStateByName, lookupStateByAbbr } from '../util/location'
 
 import dataPreview from '../../content/preview.yml'
@@ -32,11 +32,12 @@ class Home extends React.Component {
 
   handleMapClick = e => {
     if (this.state.statesView) {
+      const { region, states } = this.props
       const id = e.target.getAttribute('id')
       if (!id) return
       const { actions, filters, router } = this.props
       const { crime } = filters
-      const placeNew = { place: lookup(id).slug, placeType: 'state', placeId: id }
+      const placeNew = { place: slugify(lookupStateByAbbr(states.states, id).state_name), placeType: 'state', placeId: id }
       actions.updateFilters(placeNew)
       actions.updateApp({ crime, ...placeNew }, router)
     } else {
@@ -57,7 +58,6 @@ class Home extends React.Component {
   handleSearchClick = () => {
     const { actions, router, filters } = this.props
     const change = filters
-    console.log('Change:', change)
     actions.updateApp(change, router)
   }
 
@@ -72,7 +72,8 @@ class Home extends React.Component {
   }
 
   handleMapTypeChange = e => {
-    console.log('handleMapTypeChange:')
+    const { actions } = this.props
+
     let { statesView } = this.state
     if (e.target.value === 'states' && statesView === false) {
       statesView = true;
@@ -81,6 +82,9 @@ class Home extends React.Component {
       statesView = false;
       this.setState({ statesView })
     }
+    const placeNew = { place: 'united-states',
+     placeType: 'national', }
+    actions.updateFilters(placeNew)
   }
 
   render() {
@@ -93,13 +97,11 @@ class Home extends React.Component {
     if (place && placeType) {
       if (placeType === 'region') {
         const r = lookupRegionByName(region.regions, place)
-        const states = lookupStatesByRegion(states.states, r.region_code)
-        mapSelected = states
-      } else {
-        mapSelected.push(lookupStateByName(states, usState));
+        mapSelected = lookupStatesByRegion(states.states, r.region_code)
+      } else if (placeType === 'state') {
+        mapSelected.push(lookupStateByName(states.states, usState));
       }
     }
-    console.log('HOME')
     return (
       <div>
         <Helmet title="CDE :: Home" />

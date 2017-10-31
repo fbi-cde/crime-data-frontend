@@ -10,6 +10,7 @@ import { oriToState } from '../../util/agencies'
 import { nationalKey } from '../../util/usa'
 
 const ExplorerIntro = ({ agency, filters, participation, placeName }) => {
+  console.log('ExplorerIntro:', participation)
   if (agency) {
     return (
       <ExplorerIntroAgency
@@ -38,8 +39,6 @@ const ExplorerIntro = ({ agency, filters, participation, placeName }) => {
   }
 
   if (filters.placeType === 'region') {
-    console.log('here:', participation.data)
-    console.log('Region participation:', participation.data[filters.placeId])
     return (<ExplorerIntroRegion
       crime={filters.crime}
       until={filters.until}
@@ -47,14 +46,13 @@ const ExplorerIntro = ({ agency, filters, participation, placeName }) => {
       participation={participation.data[filters.placeId]}
     />)
   }
-  console.log('here:', participation.data)
 
   return (
     <ExplorerIntroState
       crime={filters.crime}
       place={filters.place}
       until={filters.until}
-      participation={participation.data[filters.place_id]}
+      participation={participation.data[filters.place]}
       placeName={placeName}
     />
   )

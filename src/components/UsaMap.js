@@ -15,7 +15,6 @@ class UsaMap extends React.Component {
         hover: { value: id, position: { x: e.pageX, y: e.pageY } },
       })
     } else {
-      console.log(lookupRegionByCode(region.regions, lookupStateByName(states.states, id).region_code).region_name)
       this.setState({
         hover: { value: lookupRegionByCode(region.regions, lookupStateByName(states.states, id).region_code).region_name, position: { x: e.pageX, y: e.pageY } },
       })
@@ -49,8 +48,10 @@ class UsaMap extends React.Component {
                 if (stateView === true) {
                   if (place.length > 0) {
                     for (var p in place) {
-                      if (s.id === place[p].state_abbr) {
-                        defaultClass = 'fill-red-bright';
+                      if (place[p]) {
+                        if (s.id === place[p].state_abbr) {
+                          defaultClass = 'fill-red-bright';
+                        }
                       }
                     }
                   }

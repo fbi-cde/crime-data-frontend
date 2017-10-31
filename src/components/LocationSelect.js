@@ -2,20 +2,28 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import lowerCase from 'lodash.lowercase'
 import { connect } from 'react-redux'
+import { slugify } from '../util/text'
 
-import lookup from '../util/usa'
+import { isValidState, lookupStateByName, lookupRegionByName } from '../util/location'
 
 class LocationSelect extends React.Component {
-
   handleChange = e => {
-    console.log('Location Select Change:', e.target.value)
+    const { states } = this.props
     let placeType = 'state'
-    if (!lookup(e.target.value)) {
+    let placeId
+    if (e.target.value === 'united-states') {
+       placeType = 'national'
+       placeId = 'national'
+    } else if (!isValidState(states.states, e.target.value)) {
       placeType = 'region'
+      placeId = lookupRegionByName(states.states, e.target.value).region_code
+    } else {
+      placeId = lookupStateByName(states.states, e.target.value).state_abbr
     }
     this.props.onChange({
-      place: e.target.value.toLowerCase(),
+      place: slugify(e.target.value.toLowerCase()),
       placeType,
+      placeId,
     })
   }
 
@@ -33,7 +41,7 @@ class LocationSelect extends React.Component {
     for (const r in region.regions) {
       if (region.regions[r].region_code !== 0 && region.regions[r].region_code !== 99) {
         regionOpts.push(
-          <option value={lowerCase(region.regions[r].region_name)}>
+          <option key={lowerCase(region.regions[r].region_name)} value={lowerCase(region.regions[r].region_name)}>
             {region.regions[r].region_desc} - {region.regions[r].region_name}
           </option>);
       }
@@ -43,7 +51,7 @@ class LocationSelect extends React.Component {
     for (const s in states.states) {
       if (states.states[s].region_code !== 0 && states.states[s].region_code !== 99 && states.states[s].state_id !== 43) {
         stateOpts.push(
-          <option value={lowerCase(states.states[s].state_name)}>
+          <option key={slugify(lowerCase(states.states[s].state_name))} value={slugify(lowerCase(states.states[s].state_name))}>
             {states.states[s].state_name}
           </option>);
       }
@@ -65,7 +73,7 @@ class LocationSelect extends React.Component {
             onClick={onFocus}
             value={selected || ''}
           >
-            <option value="usa">
+            <option value="united-states">
               United States
             </option>
             <option value="" disabled>

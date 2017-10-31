@@ -19,8 +19,6 @@ const SidebarContainer = ({
   isOpen,
   onChange,
   usState,
-  region,
-  states,
 }) =>
   <nav className={`site-sidebar bg-white ${isOpen ? 'open' : ''}`}>
     <div className="p2 bg-red-bright line-height-1 md-hide lg-hide">

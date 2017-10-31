@@ -47,13 +47,18 @@ class Explorer extends React.Component {
     })
   }
 
-  componentWillReceiveProps({ params: newParams }) {
-    const { actions, filters } = this.props
-    const { crime } = newParams
-    const newPlace = getPlaceInfo(newParams)
+  componentWillReceiveProps(nextProps) {
+    console.log('Explorer: componentWillReceiveProps', this.props.loaded,nextProps.loaded)
 
-    if (filters.place !== newPlace.place) {
-      actions.updateApp({ crime, ...newPlace })
+    const { crime } = nextProps.filters
+
+    if (this.props.filters.place !== nextProps.filters.place) {
+      this.props.actions.updateApp({ crime, ...nextProps.filters.place })
+    }
+    if(!this.props.loaded && nextProps.loaded){
+      console.log("States and Regions Loaded")
+      this.props.actions.updateApp(nextProps.filters, this.props.router)
+
     }
   }
 
@@ -73,6 +78,8 @@ class Explorer extends React.Component {
 
   render() {
     const { actions, agencies, filters, params, region, states } = this.props
+    console.log('Explorer Render:',this.props)
+
     const { crime } = params
     const { place, placeType } = getPlaceInfo(params)
     const agency = placeType === 'agency' && getAgency(agencies, place)
@@ -149,18 +156,18 @@ Explorer.propTypes = {
   states: PropTypes.object,
   params: PropTypes.object,
   router: PropTypes.object,
+  loaded: PropTypes.boolean,
 }
 
 Explorer.defaultProps = {
   isOpen: false,
 }
 
-const mapStateToProps = ({ agencies, filters, region, states }) => ({ agencies, filters, region, states })
+const mapStateToProps = ({ agencies, filters, region, states }) => ({ agencies, filters, region, states, loaded:region.loaded && states.loaded})
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
     { hideSidebar, showSidebar, showTerm, updateApp },
     dispatch,
-  ),
-})
+  )})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Explorer)
