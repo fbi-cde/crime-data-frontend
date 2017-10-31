@@ -66,7 +66,6 @@ class TrendContainer extends React.Component {
           onChangeYear={this.updateYear}
           initialYearSelected={yearSelected}
           placeName={placeName}
-          placeType={filters.placeType}
         />
         <DownloadDataBtn
           ariaLabel={`Download ${title} data as a CSV`}
@@ -158,6 +157,7 @@ export const mapStateToProps = ({ filters, summaries, region, states }) => {
   return {
     places,
     summaries,
+    ...getPlaceInfo(filters),
     region,
     states,
     filters,
