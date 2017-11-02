@@ -12,7 +12,6 @@ const TrendChartLineSeries = ({ color, series, x, y }) => {
     <g>
       {series.map((d, i) => {
         const ends = [d.values[0], d.values[d.values.length - 1]]
-
         return (
           <g key={i} className={`series series-${d.place}-${d.crime}`}>
             <path
