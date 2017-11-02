@@ -70,17 +70,12 @@ app.get('/api', (req, res) => {
 app.get('/api-proxy/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')
   const params = Object.assign({}, req.query, { api_key: apiKey })
-  const proxy = {
-    host: 'proxy.esvc.cjis',
-    port: '80',
-    auth: { username: 'jpwentz', password: 'JPW7964685!@' },
-  }
 
   if (!apiKey) return res.status(401).end()
 
 
   return http
-    .get(route, { params, proxy })
+    .get(route, { params })
     .then(r => {
       res.set(r.headers)
       res.send(r.data)
@@ -124,7 +119,6 @@ app.get('/*', (req, res) => {
     } else if (props) {
       const store = configureStore(initState)
       const { place, placeType } = props.router.params
-      console.log('props.router:',props.router)
       store.dispatch(fetchUcrRegion())
       store.dispatch(fetchUcrState())
       store.dispatch(updateFilters({ ...props.router.params }))
