@@ -78,7 +78,6 @@ class Explorer extends React.Component {
 
   render() {
     const { actions, agencies, filters, params, region, states } = this.props
-    console.log('Explorer Render:',this.props)
 
     const { crime } = params
     const { place, placeType } = getPlaceInfo(params)
