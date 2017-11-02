@@ -28,7 +28,6 @@ export const calculateRates = (summaries, placeType) => {
     places = Object.keys(summaries).map(place => {
         const withRegionRates = [];
         let minYr = MIN_YEAR
-
         const summaryObject = Object()
         do {
         const yrData = summaries[place].filter(
@@ -39,6 +38,7 @@ export const calculateRates = (summaries, placeType) => {
           const offenses = Object.keys(yrData[0]).filter(
             k => !nonOffenseKeys.includes(k),
           )
+          let population =0;
           for (const o in offenses) {
             let pop = 0
             let cnt = 0;
@@ -46,6 +46,7 @@ export const calculateRates = (summaries, placeType) => {
               const year = yrData[yr];
               pop += year.population;
               cnt += year[offenses[o]];
+              population = pop
             }
             const offenseObject = ({
                 count: cnt,
@@ -55,11 +56,11 @@ export const calculateRates = (summaries, placeType) => {
             offensesObject[offenseString] = offenseObject
           }
           offensesObject.year = minYr;
-
+          offensesObject.population=population
           withRegionRates.push(offensesObject)
           minYr += 1;
         }
-      } while (minYr < MAX_YEAR)
+      } while (minYr <= MAX_YEAR)
       summaryObject[place] = withRegionRates;
       return summaryObject;
    })

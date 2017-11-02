@@ -9,7 +9,7 @@ const lookupStateByName = (stateData, name) => {
   if (!stateData) return null
 
   for (const data in stateData) {
-    if (stateData[data].state_name === startCase(name)) {
+    if (slugify(lowerCase(stateData[data].state_name)) === slugify(lowerCase(name))) {
         return stateData[data]
     }
   }
@@ -113,6 +113,9 @@ const validateFilter = (filters, regionData, stateData) => {
 
 const lookupDisplayName = (filters, regionData, stateData) => {
   if (isValidPlaceType(filters.placeType)) {
+    if(filters.place === 'united-states'){
+      return 'United States'
+    }
     if (filters.placeType === 'state') {
       return lookupStateByName(stateData, filters.place).state_name
     } else if (filters.placeType === 'region') {

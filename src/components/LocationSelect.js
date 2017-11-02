@@ -8,7 +8,7 @@ import { isValidState, lookupStateByName, lookupRegionByName } from '../util/loc
 
 class LocationSelect extends React.Component {
   handleChange = e => {
-    const { states } = this.props
+    const { states,region } = this.props
     let placeType = 'state'
     let placeId
     if (e.target.value === 'united-states') {
@@ -16,7 +16,7 @@ class LocationSelect extends React.Component {
        placeId = 'national'
     } else if (!isValidState(states.states, e.target.value)) {
       placeType = 'region'
-      placeId = lookupRegionByName(states.states, e.target.value).region_code
+      placeId = lookupRegionByName(region.regions, e.target.value).region_code
     } else {
       placeId = lookupStateByName(states.states, e.target.value).state_abbr
     }

@@ -67,7 +67,6 @@ class TrendChart extends React.Component {
     const isRape = crime === 'rape'
     const crimes = [isRape ? 'rape-legacy' : crime]
     if (isRape) crimes.push('rape-revised')
-
     const dataByYear = data.map(d => ({ ...d, date: formatYear(d.year) }))
     return places
       .map(place =>

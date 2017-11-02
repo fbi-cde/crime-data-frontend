@@ -32,11 +32,10 @@ class TrendContainer extends React.Component {
 
 
     const offenses =
-      filters.crime === 'rape' ? ['rape-legacy', 'rape-revised'] : [crime]
+      crime === 'rape' ? ['rape-legacy', 'rape-revised'] : [crime]
 
     const filteredByYear = filterByYear(summaries.data, filters.since, filters.until)
     const data = combinePlaces(filteredByYear, offenses)
-
     if (!data || data.length === 0) return <NoData />
 
     const fname = `${filters.place}-${filters.crime}-${filters.since}-${filters.until}`
@@ -88,7 +87,6 @@ class TrendContainer extends React.Component {
       states,
       filters,
     } = this.props
-    console.log('Places:', places)
     const placeName = lookupDisplayName(filters, region.regions, states.states)
     const isReady = !summaries.loading
 
