@@ -4,25 +4,39 @@ import React from 'react'
 import Hint from './Hint'
 import stateLookup from '../util/usa'
 import svgData from '../../public/data/usa-state-svg.json'
-import { lookupStateByAbbr, lookupStateByName, lookupRegionByCode } from '../util/location'
+import { lookupStateByAbbr, lookupStateByName, lookupRegionByCode, lookupStatesByRegion } from '../util/location'
 
 class UsaMap extends React.Component {
   state = { hover: null }
 
-  rememberValue = (id, stateView, states, region) => e => {
+  rememberValue = (name, id, stateView, states, region) => e => {
     if (stateView) {
       this.setState({
-        hover: { value: id, position: { x: e.pageX, y: e.pageY } },
+        hover: { value: name, position: { x: e.pageX, y: e.pageY }, id },
       })
+      document.getElementById(id).style.fill = '#f48e88';
     } else {
+      const value = lookupRegionByCode(region.regions, lookupStateByName(states.states, name).region_code).region_name
       this.setState({
-        hover: { value: lookupRegionByCode(region.regions, lookupStateByName(states.states, id).region_code).region_name, position: { x: e.pageX, y: e.pageY } },
+        hover: { value, position: { x: e.pageX, y: e.pageY }, id },
       })
-    }
+      const statesData = lookupStatesByRegion(states.states, lookupStateByName(states.states, name).region_code)
+      for (const st in statesData) {
+        if (document.getElementById(statesData[st].state_abbr)) document.getElementById(statesData[st].state_abbr).style.fill = '#f48e88';
+      }
+     }
   }
 
-  forgetValue = () => {
+  forgetValue = (id, stateView, states) => e => {
     this.setState({ hover: null })
+    if (stateView) {
+      document.getElementById(id).style.fill = '';
+    } else {
+      const statesData = lookupStatesByRegion(states.states, lookupStateByAbbr(states.states, id).region_code)
+      for (const st in statesData) {
+        if (document.getElementById(statesData[st].state_abbr)) { document.getElementById(statesData[st].state_abbr).style.fill = ''; }
+      }
+    }
   }
 
   render() {
@@ -40,7 +54,6 @@ class UsaMap extends React.Component {
           viewBox="0 0 959 593"
           preserveAspectRatio="xMidYMid"
         >
-          <title>USA</title>
           <g onClick={mapClick}>
             {
               svgDataWithNames.map(s => {
@@ -82,9 +95,9 @@ class UsaMap extends React.Component {
                   className={colors[s.id.toLowerCase()] || defaultClass}
                   d={s.d}
                   pointerEvents="all"
-                  onMouseOver={this.rememberValue(s.name, stateView, states, region)}
-                  onMouseMove={this.rememberValue(s.name, stateView, states, region)}
-                  onMouseOut={this.forgetValue}
+                  onMouseOver={this.rememberValue(s.name, s.id, stateView, states, region)}
+                  onMouseMove={this.rememberValue(s.name, s.id, stateView, states, region)}
+                  onMouseOut={this.forgetValue(s.id, stateView, states)}
                 />
               )
             })}
