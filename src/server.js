@@ -67,6 +67,7 @@ app.get('/api', (req, res) => {
   res.sendfile('/swagger/index.html', { root: publicDirPath })
 })
 
+
 app.get('/api-proxy/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')
   const params = Object.assign({}, req.query, { api_key: apiKey })
