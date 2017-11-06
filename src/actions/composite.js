@@ -13,13 +13,9 @@ import {
 
 const fetchData = () => (dispatch, getState) => {
   const { filters, region, states } = getState()
-  if(region.loaded && states.loaded){
-    console.log('fetchData')
-    console.log('shouldFetchUcr:', shouldFetchUcr(filters, region, states));
-    console.log('shouldFetchSummaries:', shouldFetchSummaries(filters, region, states));
-    console.log('shouldFetchNibrs:', shouldFetchNibrs(filters, region, states));
-    if(!filters.placeId){
-      filters.placeId = getPlaceId(filters,region.region,states.states);
+  if (region.loaded && states.loaded) {
+    if (!filters.placeId) {
+      filters.placeId = getPlaceId(filters, region.region, states.states);
     }
     if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
     if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
@@ -28,6 +24,7 @@ const fetchData = () => (dispatch, getState) => {
 }
 
 export const updateApp = (change, router) => dispatch => {
+  console.log('updateApp:', change)
   dispatch(updateFilters(change))
 
   if (router) {
