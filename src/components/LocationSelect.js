@@ -8,7 +8,7 @@ import { isValidState, lookupStateByName, lookupRegionByName } from '../util/loc
 
 class LocationSelect extends React.Component {
   handleChange = e => {
-    const { states,region } = this.props
+    const { states, region } = this.props
     let placeType = 'state'
     let placeId
     if (e.target.value === 'united-states') {
@@ -20,6 +20,7 @@ class LocationSelect extends React.Component {
     } else {
       placeId = lookupStateByName(states.states, e.target.value).state_abbr
     }
+    console.log('slugify(e.target.value.toLowerCase():', slugify(e.target.value.toLowerCase()))
     this.props.onChange({
       place: slugify(e.target.value.toLowerCase()),
       placeType,
