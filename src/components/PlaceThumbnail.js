@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { feature, mesh } from 'topojson'
 import { connect } from 'react-redux'
+import lowerCase from 'lodash.lowercase'
+
+
 import { lookupStatesByRegion, lookupRegionByName } from '../util/location'
 import { slugify } from '../util/text'
 
@@ -32,23 +35,20 @@ class PlaceThumbnail extends React.Component {
     const [w, h] = [400, 300]
     const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
-    console.log('Path:', path, usa)
     const geoStates = feature(usa, usa.objects.units).features
-    console.log('GeoState:', geoStates)
     const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
-    let actives = []
+    const actives = []
 
-    if(placeType == 'region'){
-      let regionStates = lookupStatesByRegion(states.states,lookupRegionByName(region.regions,place).region_code)
-      for(let sr in regionStates){
-
+    if (placeType === 'region') {
+      const regionStates = lookupStatesByRegion(states.states, lookupRegionByName(region.regions, place).region_code)
+      for (const sr in regionStates) {
         actives.push(geoStates.find(
           s => s.properties.name === regionStates[sr].state_name,
         ))
       }
-    }else if (place !== 'washington-dc') {
+    } else if (place !== 'washington-dc') {
       actives.push(geoStates.find(
-        s => s.properties.name === placeName,
+        s => lowerCase(s.properties.name) === lowerCase(place),
       ))
     } else {
       actives.push(geoStates.find(s => s.id === 'US11'))
@@ -76,17 +76,18 @@ class PlaceThumbnail extends React.Component {
 
     window.gs = geoStates
 
-    let geoHtml =[]
-    for(let geo in geoStates){
+    const geoHtml = []
+    for (const geo in geoStates) {
       let activeColor = '#dfe6ed'
-      for(let active in actives){
-        if(geoStates[geo].properties.name == actives[active].properties.name){
-          activeColor = '#94aabd'
+      for (const active in actives) {
+        if (actives[active]) {
+          if (geoStates[geo].properties.name == actives[active].properties.name) {
+            activeColor = '#94aabd'
+          }
         }
       }
-      geoHtml.push( <path  key={geoStates[geo].id} d={path(geoStates[geo])} fill={activeColor} />)
+      geoHtml.push(<path key={geoStates[geo].id} d={path(geoStates[geo])} fill={activeColor} />)
     }
-    console.log("GeoHtml:",geoHtml)
     return (
       <Container>
         <svg

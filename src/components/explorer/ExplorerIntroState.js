@@ -21,7 +21,6 @@ const getReportTerms = ({ nibrs, srs, hybrid }) =>
   </span>
 
 const ExplorerIntroState = ({ crime, place, participation, until, placeName }) => {
-  console.log('ExplorerIntroState:', participation)
   const isArson = crime === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
   const untilUcr = participation.find(p => p.year === until)

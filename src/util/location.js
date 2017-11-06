@@ -113,7 +113,7 @@ const validateFilter = (filters, regionData, stateData) => {
 
 const lookupDisplayName = (filters, regionData, stateData) => {
   if (isValidPlaceType(filters.placeType)) {
-    if(filters.place === 'united-states'){
+    if (filters.place === 'united-states') {
       return 'United States'
     }
     if (filters.placeType === 'state') {
@@ -134,7 +134,7 @@ const generateDisplayName = (place, placeType) => {
     return 'United States'
 }
 
-const getPlaceId =  (filters,regionData, stateData)=>{
+const getPlaceId = (filters, regionData, stateData) => {
   if (isValidPlaceType(filters.placeType)) {
     if (filters.placeType === 'state') {
       return lookupStateByName(stateData, filters.place).state_abbr;

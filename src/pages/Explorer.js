@@ -48,17 +48,13 @@ class Explorer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('Explorer: componentWillReceiveProps', this.props.loaded,nextProps.loaded)
-
     const { crime } = nextProps.filters
 
     if (this.props.filters.place !== nextProps.filters.place) {
       this.props.actions.updateApp({ crime, ...nextProps.filters.place })
     }
-    if(!this.props.loaded && nextProps.loaded){
-      console.log("States and Regions Loaded")
+    if (!this.props.loaded && nextProps.loaded) {
       this.props.actions.updateApp(nextProps.filters, this.props.router)
-
     }
   }
 
@@ -162,11 +158,11 @@ Explorer.defaultProps = {
   isOpen: false,
 }
 
-const mapStateToProps = ({ agencies, filters, region, states }) => ({ agencies, filters, region, states, loaded:region.loaded && states.loaded})
+const mapStateToProps = ({ agencies, filters, region, states }) => ({ agencies, filters, region, states, loaded: region.loaded && states.loaded })
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
     { hideSidebar, showSidebar, showTerm, updateApp },
     dispatch,
-  )})
+  ) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Explorer)
