@@ -22,11 +22,11 @@
   stroke-width: 2px;
   @media #{$breakpoint-sm} { stroke-width: 1px; }
 }
-
+/*
 .usa-map:not(.no-hover) path:hover {
   fill: $red-light;
 }
-
+*/
 @media #{$breakpoint-max-sm} {
   .bar-chart .axis--x .tick:nth-child(even) { display: none; }
 }
