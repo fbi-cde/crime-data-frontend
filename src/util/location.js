@@ -96,19 +96,26 @@ const isValidPlaceType = placeType => {
   return false;
 }
 
-const validateFilter = (filters, regionData, stateData) => {
-  if (isValidPlaceType(filters.placeType)) {
+const generatePlaceId = (filters, regionData, stateData) => {
     if (filters.placeType === 'state') {
-      return isValidState(stateData, filters.place)
+      return lookupStateByName(stateData, filters.place).state_abbr
     } else if (filters.placeType === 'region') {
-        return isValidRegion(regionData, filters.place)
-    } else if (filters.placeType === 'agency') {
-      return true;
+        return lookupRegionByName(regionData, filters.place).region_code
     } else if (filters.placeType === 'national') {
-      return true;
+      return 'national';
     }
+}
+
+const validateFilter = (filters, regionData, stateData) => {
+  if (filters.placeType === 'state') {
+    return isValidState(stateData, filters.place)
+  } else if (filters.placeType === 'region') {
+      return isValidRegion(regionData, filters.place)
+  } else if (filters.placeType === 'agency') {
+    return true;
+  } else if (filters.placeType === 'national') {
+    return true;
   }
-  return false;
 }
 
 const lookupDisplayName = (filters, regionData, stateData) => {
@@ -147,4 +154,4 @@ const getPlaceId = (filters, regionData, stateData) => {
 export { lookupStateByName, lookupRegionByName, lookupStatesByRegion,
   stateFromAbbr, stateFromName, isValidState, isValidRegion, lookupStateByAbbr,
   lookupRegionByCode, validateFilter, lookupDisplayName, generateDisplayName,
-  getPlaceId }
+  getPlaceId, generatePlaceId }

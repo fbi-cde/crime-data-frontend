@@ -23,7 +23,7 @@ import offensesUtil from '../util/offenses'
 import { getAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import { sentenceCase } from '../util/text'
-import { validateFilter } from '../util/location'
+import { validateFilter, generatePlaceId } from '../util/location'
 import { MIN_YEAR, MAX_YEAR } from '../util/years'
 
 class Explorer extends React.Component {
@@ -51,9 +51,16 @@ class Explorer extends React.Component {
     const { crime } = nextProps.filters
 
     if (this.props.filters.place !== nextProps.filters.place) {
-      this.props.actions.updateApp({ crime, ...nextProps.filters.place })
+      const filter = {};
+      filter.crime = crime;
+      filter.place = nextProps.filters.place
+      filter.placeId = generatePlaceId(nextProps.filters, this.props.region.regions, this.props.states.states);
+      this.props.actions.updateApp(filter)
     }
     if (!this.props.loaded && nextProps.loaded) {
+      if (!nextProps.filters.placeId) {
+        nextProps.filters.placeId = generatePlaceId(nextProps.filters, this.props.region.regions, this.props.states.states);
+      }
       this.props.actions.updateApp(nextProps.filters, this.props.router)
     }
   }
@@ -151,7 +158,7 @@ Explorer.propTypes = {
   states: PropTypes.object,
   params: PropTypes.object,
   router: PropTypes.object,
-  loaded: PropTypes.boolean,
+  loaded: PropTypes.bool,
 }
 
 Explorer.defaultProps = {

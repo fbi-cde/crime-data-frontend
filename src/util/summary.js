@@ -4,7 +4,7 @@ import { MIN_YEAR, MAX_YEAR } from '../util/years'
 export const calculateRates = (summaries, placeType) => {
   const nonOffenseKeys = ['caveats', 'population', 'state_abbr', 'year']
   let places
-  if (placeType === 'state') {
+  if (placeType !== 'region') {
     places = Object.keys(summaries).map(place => {
       const rates = summaries[place].map(yearly => {
         const offenses = Object.keys(yearly).filter(
@@ -24,7 +24,7 @@ export const calculateRates = (summaries, placeType) => {
         [place]: rates,
       }
     })
-  } else if (placeType === 'region') {
+  } else {
     places = Object.keys(summaries).map(place => {
         const withRegionRates = [];
         let minYr = MIN_YEAR
@@ -38,7 +38,7 @@ export const calculateRates = (summaries, placeType) => {
           const offenses = Object.keys(yrData[0]).filter(
             k => !nonOffenseKeys.includes(k),
           )
-          let population =0;
+          let population = 0;
           for (const o in offenses) {
             let pop = 0
             let cnt = 0;
@@ -56,7 +56,7 @@ export const calculateRates = (summaries, placeType) => {
             offensesObject[offenseString] = offenseObject
           }
           offensesObject.year = minYr;
-          offensesObject.population=population
+          offensesObject.population = population
           withRegionRates.push(offensesObject)
           minYr += 1;
         }
