@@ -128,10 +128,7 @@ const getSummaryRequests = ({ crime, place, placeType, placeId }) => {
       fetchAggregates(),
     ]
   }
-    return [fetchAggregates(place, placeType, placeId), fetchAggregates()]
-
-
-  return [fetchAggregates()]
+  return [fetchAggregates(place, placeType, placeId), fetchAggregates()]
 }
 
 const getUcrParticipation = (place, placeId, placeType) => {
