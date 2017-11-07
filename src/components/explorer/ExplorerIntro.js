@@ -9,7 +9,7 @@ import ExplorerIntroRegion from './ExplorerIntroRegion'
 import { oriToState } from '../../util/agencies'
 import { nationalKey } from '../../util/usa'
 
-const ExplorerIntro = ({ agency, filters, participation, placeName }) => {
+const ExplorerIntro = ({ agency, filters, participation, placeName, place, region, states }) => {
   if (agency) {
     return (
       <ExplorerIntroAgency
@@ -42,7 +42,10 @@ const ExplorerIntro = ({ agency, filters, participation, placeName }) => {
       crime={filters.crime}
       until={filters.until}
       placeName={placeName}
-      participation={participation.data[filters.placeId]}
+      participation={participation.data[filters.place]}
+      states={states}
+      region={region}
+      place={filters.place}
     />)
   }
 
@@ -65,6 +68,9 @@ ExplorerIntro.propTypes = {
   }).isRequired,
   filters: PropTypes.object.isRequired,
   placeName: PropTypes.string.isRequired,
+  states: PropTypes.object,
+  region: PropTypes.object,
+  place: PropTypes.string,
 }
 
 export default ExplorerIntro

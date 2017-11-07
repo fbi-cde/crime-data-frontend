@@ -51,6 +51,8 @@ const ExplorerHeaderContainer = ({
                 participation={participation}
                 filters={filters}
                 placeName={placeDisplay}
+                states={states}
+                region={region}
               />}
           <UcrResourcesList
             crime={filters.crime}
