@@ -21,20 +21,22 @@ const ExplorerIntroRegion = ({ crime, participation, until, placeName, states, r
   regionTotalObj.total_agencies = 0;
 
 
-  for (const part in participation) {
-    if (participation[part].year === until) {
-      regionTotalObj.total_agencies += participation[part].total_agencies
-      regionTotalObj.participating_agencies += participation[part].participating_agencies
+  participation.forEach(item => {
+    if (item.year === until) {
+      regionTotalObj.total_agencies += item.total_agencies
+      regionTotalObj.participating_agencies += item.participating_agencies
     }
-  }
+  });
 
   const stateNames = []
   const regionCode = lookupRegionByName(region.regions, place).region_code
-  for (const s in states.states) {
-    if (states.states[s].region_code === regionCode) {
-      stateNames.push(` ${states.states[s].state_name}, `)
+
+  Object.keys(states.states).forEach(key => {
+    if (states.states[key].region_code === regionCode) {
+      stateNames.push(` ${states.states[key].state_name}, `)
     }
-  }
+  });
+
 
   const crimeTerm = (
     <Term id={mapCrimeToGlossaryTerm(crime)}>

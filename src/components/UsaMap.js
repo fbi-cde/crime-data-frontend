@@ -21,9 +21,9 @@ class UsaMap extends React.Component {
         hover: { value, position: { x: e.pageX, y: e.pageY }, id },
       })
       const statesData = lookupStatesByRegion(states.states, lookupStateByName(states.states, name).region_code)
-      for (const st in statesData) {
+      Object.keys(statesData).forEach(st => {
         if (document.getElementById(statesData[st].state_abbr)) document.getElementById(statesData[st].state_abbr).style.fill = '#f48e88';
-      }
+      });
      }
   }
 
@@ -33,9 +33,9 @@ class UsaMap extends React.Component {
       document.getElementById(id).style.fill = '';
     } else {
       const statesData = lookupStatesByRegion(states.states, lookupStateByAbbr(states.states, id).region_code)
-      for (const st in statesData) {
+      Object.keys(statesData).forEach(st => {
         if (document.getElementById(statesData[st].state_abbr)) { document.getElementById(statesData[st].state_abbr).style.fill = ''; }
-      }
+      });
     }
   }
 
@@ -60,13 +60,13 @@ class UsaMap extends React.Component {
               let defaultClass = 'fill-blue-light'
                 if (stateView === true) {
                   if (place.length > 0) {
-                    for (var p in place) {
+                    Object.keys(place).forEach(p => {
                       if (place[p]) {
                         if (s.id === place[p].state_abbr) {
                           defaultClass = 'fill-red-bright';
                         }
                       }
-                    }
+                    })
                   }
                 } else {
                   const state = lookupStateByAbbr(states.states, s.id);
@@ -80,11 +80,11 @@ class UsaMap extends React.Component {
                     defaultClass = 'fill-blue-light4'
                   }
                   if (place.length > 0) {
-                    for (var p in place) {
+                    Object.keys(place).forEach(p => {
                       if (s.id === place[p].state_abbr) {
                         defaultClass = 'fill-red-bright';
                       }
-                  }
+                    })
                 }
               }
 

@@ -8,7 +8,6 @@ import lowerCase from 'lodash.lowercase'
 
 
 import { lookupStatesByRegion, lookupRegionByName } from '../util/location'
-import { slugify } from '../util/text'
 
 const Container = ({ children }) =>
   <div className="center bg-white rounded">
@@ -27,7 +26,7 @@ class PlaceThumbnail extends React.Component {
   }
 
   render() {
-    const { coordinates, place, placeType, region, states, placeName } = this.props
+    const { coordinates, place, placeType, region, states } = this.props
     const { usa } = this.state
 
     if (!usa) return <Container />
@@ -41,11 +40,11 @@ class PlaceThumbnail extends React.Component {
 
     if (placeType === 'region') {
       const regionStates = lookupStatesByRegion(states.states, lookupRegionByName(region.regions, place).region_code)
-      for (const sr in regionStates) {
+      Object.keys(region.regions).forEach(sr => {
         actives.push(geoStates.find(
           s => s.properties.name === regionStates[sr].state_name,
         ))
-      }
+      });
     } else if (place !== 'washington-dc') {
       actives.push(geoStates.find(
         s => lowerCase(s.properties.name) === lowerCase(place),
@@ -77,17 +76,19 @@ class PlaceThumbnail extends React.Component {
     window.gs = geoStates
 
     const geoHtml = []
-    for (const geo in geoStates) {
+    Object.keys(geoStates).forEach(geo => {
       let activeColor = '#dfe6ed'
-      for (const active in actives) {
+
+      Object.keys(actives).forEach(active => {
         if (actives[active]) {
-          if (geoStates[geo].properties.name == actives[active].properties.name) {
+          if (geoStates[geo].properties.name === actives[active].properties.name) {
             activeColor = '#94aabd'
           }
         }
-      }
+        });
       geoHtml.push(<path key={geoStates[geo].id} d={path(geoStates[geo])} fill={activeColor} />)
-    }
+    });
+
     return (
       <Container>
         <svg
@@ -131,7 +132,6 @@ PlaceThumbnail.propTypes = {
   coordinates: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
-  placeName: PropTypes.string.isRequired,
   states: PropTypes.object.isRequired,
   region: PropTypes.object.isRequired,
 }
