@@ -7,7 +7,7 @@ import { API } from '../util/api'
 import { lookupStateByName } from '../util/location'
 
 import content from '../util/content'
-import lookupUsa, { nationalKey } from '../util/usa'
+import { nationalKey } from '../util/usa'
 
 const participationCsvLink = (place, type, states) => {
   if (type === 'agency') return []

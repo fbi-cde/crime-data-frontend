@@ -127,16 +127,18 @@ const validateFilter = (filters, regionData, stateData) => {
 }
 
 const lookupDisplayName = (filters, regionData, stateData) => {
+  let n = null;
   if (isValidPlaceType(filters.placeType)) {
     if (filters.place === 'united-states') {
-      return 'United States'
+      n = 'United States'
     }
     if (filters.placeType === 'state') {
-      return lookupStateByName(stateData, filters.place).state_name
+      n = lookupStateByName(stateData, filters.place).state_name
     } else if (filters.placeType === 'region') {
-        return `${lookupRegionByName(regionData, filters.place).region_name} Region`
+        n = `${lookupRegionByName(regionData, filters.place).region_name} Region`
       }
   }
+  return n;
 }
 
 const generateDisplayName = (place, placeType) => {
