@@ -28,6 +28,7 @@ class UsaMap extends React.Component {
   }
 
   forgetValue = (id, stateView, states) => e => {
+     const ed = e;
     this.setState({ hover: null })
     if (stateView) {
       document.getElementById(id).style.fill = '';
