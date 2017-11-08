@@ -20,7 +20,6 @@ class LocationSelect extends React.Component {
     } else {
       placeId = lookupStateByName(states.states, e.target.value).state_abbr
     }
-    console.log('slugify(e.target.value.toLowerCase():', slugify(e.target.value.toLowerCase()))
     this.props.onChange({
       place: slugify(e.target.value.toLowerCase()),
       placeType,
@@ -39,24 +38,28 @@ class LocationSelect extends React.Component {
     } = this.props
 
     const regionOpts = []
-    for (const r in region.regions) {
+
+    Object.keys(region.regions).forEach(r => {
       if (region.regions[r].region_code !== 0 && region.regions[r].region_code !== 99) {
         regionOpts.push(
           <option key={lowerCase(region.regions[r].region_name)} value={lowerCase(region.regions[r].region_name)}>
             {region.regions[r].region_desc} - {region.regions[r].region_name}
           </option>);
-      }
-    }
+        }
+    });
+
+
     const stateOpts = []
 
-    for (const s in states.states) {
+
+    Object.keys(states.states).forEach(s => {
       if (states.states[s].region_code !== 0 && states.states[s].region_code !== 99 && states.states[s].state_id !== 43) {
         stateOpts.push(
           <option key={slugify(lowerCase(states.states[s].state_name))} value={slugify(lowerCase(states.states[s].state_name))}>
             {states.states[s].state_name}
           </option>);
       }
-    }
+    });
 
     return (
         <div>

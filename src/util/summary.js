@@ -39,22 +39,22 @@ export const calculateRates = (summaries, placeType) => {
             k => !nonOffenseKeys.includes(k),
           )
           let population = 0;
-          for (const o in offenses) {
+          Object.keys(offenses).forEach(o => {
             let pop = 0
             let cnt = 0;
-            for (const yr in yrData) {
+            Object.keys(yrData).forEach(yr => {
               const year = yrData[yr];
               pop += year.population;
               cnt += year[offenses[o]];
               population = pop
-            }
+            });
             const offenseObject = ({
                 count: cnt,
                 rate: cnt / pop * 100000,
             });
             const offenseString = slugify(offenses[o])
             offensesObject[offenseString] = offenseObject
-          }
+          });
           offensesObject.year = minYr;
           offensesObject.population = population
           withRegionRates.push(offensesObject)

@@ -6,59 +6,65 @@ import { slugify } from '../util/text'
 const nationalKey = 'united-states'
 
 const lookupStateByName = (stateData, name) => {
-  if (!stateData) return null
+  let n = null;
 
-  for (const data in stateData) {
+  if (!stateData) return n
+
+  Object.keys(stateData).forEach(data => {
     if (slugify(lowerCase(stateData[data].state_name)) === slugify(lowerCase(name))) {
-        return stateData[data]
+        n = stateData[data]
     }
-  }
+  })
 
   if (stateData === 'usa') {
-    return nationalKey;
+    n = nationalKey;
   }
 
-  return null;
+  return n;
 }
 
 const lookupStateByAbbr = (stateData, abbr) => {
-  if (!stateData) return null
+  let n = null;
 
-  for (const data in stateData) {
+  if (!stateData) return n
+
+  Object.keys(stateData).forEach(data => {
     if (stateData[data].state_abbr === abbr) {
-        return stateData[data]
+        n = stateData[data]
     }
-  }
+  })
 
   if (stateData === 'usa') {
-    return nationalKey;
+    n = nationalKey;
   }
 
-  return null;
+  return n;
 }
 
 const lookupRegionByName = (regionData, name) => {
-  if (!regionData) return null
+  let n = null;
+  if (!regionData) return n
 
-  for (const data in regionData) {
+  Object.keys(regionData).forEach(data => {
     if (lowerCase(regionData[data].region_name) === lowerCase(name) || slugify(lowerCase(regionData[data].region_name)) === lowerCase(name)) {
-        return regionData[data]
+        n = regionData[data]
     }
-  }
+  })
 
-  return null;
+  return n;
 }
 
 const lookupRegionByCode = (regionData, code) => {
-  if (!regionData) return null
+  let n = null;
+  if (!regionData) return n
 
-  for (const data in regionData) {
+  Object.keys(regionData).forEach(data => {
     if (regionData[data].region_code === code) {
-        return regionData[data]
+        n = regionData[data]
     }
-  }
+  })
 
-  return null;
+  return n;
 }
 
 const stateFromAbbr = (stateData, abbr) => stateData.find(d => d.state_abbr === abbr.toLowerCase())
@@ -67,11 +73,11 @@ const stateFromName = (stateData, name) => stateData.find(d => d.state_name === 
 
 const lookupStatesByRegion = (stateData, regioncode) => {
   const states = [];
-  for (const data in stateData) {
+  Object.keys(stateData).forEach(data => {
     if (stateData[data].region_code === regioncode) {
         states.push(stateData[data]);
     }
-  }
+  })
   return states;
 }
 
@@ -104,6 +110,7 @@ const generatePlaceId = (filters, regionData, stateData) => {
     } else if (filters.placeType === 'national') {
       return 'national';
     }
+    return null;
 }
 
 const validateFilter = (filters, regionData, stateData) => {
@@ -116,6 +123,7 @@ const validateFilter = (filters, regionData, stateData) => {
   } else if (filters.placeType === 'national') {
     return true;
   }
+  return false;
 }
 
 const lookupDisplayName = (filters, regionData, stateData) => {
@@ -149,6 +157,7 @@ const getPlaceId = (filters, regionData, stateData) => {
         return lookupRegionByName(regionData, filters.place).region_code
     }
   }
+  return null;
 }
 
 export { lookupStateByName, lookupRegionByName, lookupStatesByRegion,

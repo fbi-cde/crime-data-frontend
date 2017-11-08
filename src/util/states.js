@@ -1,6 +1,4 @@
-const reshapeData = data => {
-  return data[0];
-}
+const reshapeData = data => data[0];
 
 
 export { reshapeData as default }

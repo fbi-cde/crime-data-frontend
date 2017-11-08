@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { bindActionCreators } from 'redux'
 import lowerCase from 'lodash.lowercase'
-import snakeCase from 'lodash.snakecase'
 
 import LocationSelect from '../components/LocationSelect'
 import SharingTags from '../components/SharingTags'

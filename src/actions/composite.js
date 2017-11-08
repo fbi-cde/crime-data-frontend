@@ -24,7 +24,6 @@ const fetchData = () => (dispatch, getState) => {
 }
 
 export const updateApp = (change, router) => dispatch => {
-  console.log('updateApp:', change, router)
   dispatch(updateFilters(change))
 
   if (router) {
