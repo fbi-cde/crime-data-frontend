@@ -1,6 +1,10 @@
 import { slugify } from '../util/text'
 import { MIN_YEAR, MAX_YEAR } from '../util/years'
 
+export const getYearData = (summaries, place, minYr) => summaries[place].filter(
+    data => data.year === minYr
+  )
+
 export const calculateRates = (summaries, placeType) => {
   const nonOffenseKeys = ['caveats', 'population', 'state_abbr', 'year']
   let places
@@ -30,9 +34,7 @@ export const calculateRates = (summaries, placeType) => {
         let minYr = MIN_YEAR
         const summaryObject = Object()
         do {
-        const yrData = summaries[place].filter(
-          data => data.year === minYr
-        );
+        const yrData = getYearData(summaries, place, minYr)
         if (yrData.length > 0) {
           const offensesObject = Object()
           const offenses = Object.keys(yrData[0]).filter(
@@ -67,6 +69,7 @@ export const calculateRates = (summaries, placeType) => {
   }
   return Object.assign(...places)
 }
+
 
 export const combinePlaces = (summaries, offenses = []) => {
   const places = Object.keys(summaries)
