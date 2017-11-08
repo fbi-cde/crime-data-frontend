@@ -31,7 +31,7 @@ class Home extends React.Component {
 
   handleMapClick = e => {
     if (this.state.statesView) {
-      const { region, states } = this.props
+      const { states } = this.props
       const id = e.target.getAttribute('id')
       if (!id) return
       const { actions, filters, router } = this.props

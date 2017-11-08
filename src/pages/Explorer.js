@@ -58,10 +58,11 @@ class Explorer extends React.Component {
       this.props.actions.updateApp(filter)
     }
     if (!this.props.loaded && nextProps.loaded) {
+       const tmpNextProps = nextProps;
       if (!nextProps.filters.placeId) {
-        nextProps.filters.placeId = generatePlaceId(nextProps.filters, this.props.region.regions, this.props.states.states);
+        tmpNextProps.filters.placeId = generatePlaceId(nextProps.filters, this.props.region.regions, this.props.states.states);
       }
-      this.props.actions.updateApp(nextProps.filters, this.props.router)
+      this.props.actions.updateApp(tmpNextProps.filters, this.props.router)
     }
   }
 
