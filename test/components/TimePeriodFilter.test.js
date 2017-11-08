@@ -49,6 +49,7 @@ describe('TimePeriodFilter', () => {
       )
     })
 
+
     it('should not allow since to be greater than until', () => {
       const props = {
         ariaControls: '',

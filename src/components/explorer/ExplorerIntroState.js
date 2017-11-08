@@ -43,7 +43,7 @@ const ExplorerIntroState = ({ crime, place, participation, until, placeName }) =
               In {highlight(until)}
               , the FBI <EstimatedTerm /> crime statistics for{' '}
               {placeName} based on data received from{' '}
-              {highlight(formatNum(untilUcr.participating_agencies))} law
+              {highlight(formatNum(untilUcr.participating_agencies - untilUcr.covered_agencies))} law
               enforcement agencies out of{' '}
               {highlight(formatNum(untilUcr.total_agencies))} agencies in the
               state that year.
@@ -54,7 +54,7 @@ const ExplorerIntroState = ({ crime, place, participation, until, placeName }) =
               {placeName} reports {reportTerms} data to the FBI.
             </p>
             <p className="serif">
-              In {until}, {formatNum(untilUcr.participating_agencies)}{' '}
+              In {until}, {formatNum(untilUcr.participating_agencies - untilUcr.covered_agencies)}{' '}
               {placeName} law enforcement agencies voluntarily
               reported data to the FBI. The charts below feature unestimated
               data.
