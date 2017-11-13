@@ -41,9 +41,11 @@ class PlaceThumbnail extends React.Component {
     if (placeType === 'region') {
       const regionStates = lookupStatesByRegion(states.states, lookupRegionByName(region.regions, place).region_code)
       Object.keys(regionStates).forEach(sr => {
-        actives.push(geoStates.find(
-          s => s.properties.name === regionStates[sr].state_name,
-        ))
+        if(regionStates[sr].state_abbr !== 'DC'){
+          actives.push(geoStates.find(
+            s => s.properties.name === regionStates[sr].state_name
+          ))
+        }
       });
     } else if (place !== 'washington-dc') {
       actives.push(geoStates.find(
@@ -76,9 +78,9 @@ class PlaceThumbnail extends React.Component {
     window.gs = geoStates
 
     const geoHtml = []
+
     Object.keys(geoStates).forEach(geo => {
       let activeColor = '#dfe6ed'
-
       Object.keys(actives).forEach(active => {
           if (geoStates[geo].properties.name === actives[active].properties.name) {
             activeColor = '#94aabd'
