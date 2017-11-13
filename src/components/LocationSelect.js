@@ -27,6 +27,34 @@ class LocationSelect extends React.Component {
     })
   }
 
+  getRegionSelectOptions = (region) => {
+    const regionOpts = []
+    Object.keys(region.regions).forEach(r => {
+      //if the region is not 0 (us territory) or 99 (other), add the region as an option
+      if (region.regions[r].region_code !== 0 && region.regions[r].region_code !== 99) {
+        regionOpts.push(
+          <option key={lowerCase(region.regions[r].region_name)} value={lowerCase(region.regions[r].region_name)}>
+            {region.regions[r].region_desc} - {region.regions[r].region_name}
+          </option>);
+        }
+    })
+    return regionOpts
+  }
+
+  getStateSelectOptions = (states) => {
+    const stateOpts = []
+    Object.keys(states.states).forEach(s => {
+      //if state is in a region other than 0 (us territory) or 99 (other), and the state is not puerto rico, add it as an option
+      if (states.states[s].region_code !== 0 && states.states[s].region_code !== 99 && states.states[s].state_id !== 43) {
+        stateOpts.push(
+          <option key={slugify(lowerCase(states.states[s].state_name))} value={slugify(lowerCase(states.states[s].state_name))}>
+            {states.states[s].state_name}
+          </option>);
+      }
+    })
+    return stateOpts
+  }
+
   render() {
     const {
       ariaControls,
@@ -37,29 +65,8 @@ class LocationSelect extends React.Component {
       states,
     } = this.props
 
-    const regionOpts = []
-
-    Object.keys(region.regions).forEach(r => {
-      if (region.regions[r].region_code !== 0 && region.regions[r].region_code !== 99) {
-        regionOpts.push(
-          <option key={lowerCase(region.regions[r].region_name)} value={lowerCase(region.regions[r].region_name)}>
-            {region.regions[r].region_desc} - {region.regions[r].region_name}
-          </option>);
-        }
-    });
-
-
-    const stateOpts = []
-
-
-    Object.keys(states.states).forEach(s => {
-      if (states.states[s].region_code !== 0 && states.states[s].region_code !== 99 && states.states[s].state_id !== 43) {
-        stateOpts.push(
-          <option key={slugify(lowerCase(states.states[s].state_name))} value={slugify(lowerCase(states.states[s].state_name))}>
-            {states.states[s].state_name}
-          </option>);
-      }
-    });
+    const regionOpts = this.getRegionSelectOptions(region)
+    const stateOpts = this.getStateSelectOptions(states)
 
     return (
         <div>
