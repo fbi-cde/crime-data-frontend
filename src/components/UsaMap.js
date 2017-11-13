@@ -72,13 +72,13 @@ class UsaMap extends React.Component {
                 } else {
                   const state = lookupStateByAbbr(states.states, s.id);
                   if (state.region_code === 1) {
-                    defaultClass = 'fill-blue-light1'
+                    defaultClass = 'fill-blue-light-1'
                   } else if (state.region_code === 2) {
-                    defaultClass = 'fill-blue-light2'
+                    defaultClass = 'fill-blue-light-2'
                   } else if (state.region_code === 3) {
-                    defaultClass = 'fill-blue-light3'
+                    defaultClass = 'fill-blue-light-3'
                   } else if (state.region_code === 4) {
-                    defaultClass = 'fill-blue-light4'
+                    defaultClass = 'fill-blue-light-4'
                   }
                   if (place.length > 0) {
                     Object.keys(place).forEach(p => {
