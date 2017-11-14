@@ -76,7 +76,7 @@ const fetchArson = (place, placeId, placeType) => {
   if (placeType === 'state') {
     url = `${API}/arson/states/${placeId}?per_page=50`
   } else if (placeType === 'region') {
-    url = `${API}/arson/regions/${placeId}?per_page=50`
+    url = `${API}/arson/regions/${place}?per_page=50`
   } else {
     url = `${API}/arson/national?per_page=50`
   }
@@ -100,7 +100,7 @@ const fetchAggregates = (place, placeType, placeId) => {
   if (placeType === 'state') {
     estimatesApi = `estimates/states/${placeId}`
   } else if (placeType === 'region') {
-    estimatesApi = `estimates/regions/${placeId}`
+    estimatesApi = `estimates/regions/${place}`
   } else {
     estimatesApi = 'estimates/national'
   }
@@ -139,7 +139,7 @@ const getUcrParticipation = (place, placeId, placeType) => {
   } else if (placeType === 'state') {
     path = `participation/states/${placeId}`
   } else if (placeType === 'region') {
-    path = `participation/regions/${placeId}`
+    path = `participation/regions/${place}`
   }
 
   return get(`${API}/${path}`).then(response => ({
