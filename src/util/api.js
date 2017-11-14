@@ -6,9 +6,9 @@ import { get } from './http'
 import { mapToApiOffense } from './offenses'
 import { oriToState } from './agencies'
 import { slugify } from './text'
-import lookupUsa, { nationalKey } from './usa'
 
 export const API = '/api-proxy'
+export const nationalKey = 'united-states'
 
 const dimensionEndpoints = {
   ageNum: 'age_num',
@@ -21,13 +21,13 @@ const dimensionEndpoints = {
 
 const getAgency = ori => get(`${API}/agencies/${ori}`)
 
-const fetchNibrs = ({ crime, dim, place, placeType, type }) => {
+const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
   const loc =
     place === nationalKey
       ? 'national'
       : placeType === 'agency'
         ? `agencies/${place}`
-        : `states/${lookupUsa(place).id}`
+        : `states/${placeId}`
 
   const field = dimensionEndpoints[dim] || dim
   const fieldPath = dim === 'offenseName' ? field : `${field}/offenses`
@@ -66,15 +66,22 @@ const getNibrsRequests = params => {
 }
 
 const fetchResults = (key, path) =>
-  get(`${API}/${path}?per_page=200`).then(response => ({
+  get(`${API}/${path}?per_page=500`).then(response => ({
     key,
     results: response.results,
   }))
 
-const fetchArson = place => {
-  const url = place
-    ? `${API}/arson/states/${lookupUsa(place).id}?per_page=50`
-    : `${API}/arson/national?per_page=50`
+const fetchArson = (place, placeId, placeType) => {
+  let url
+  if (placeType === 'state') {
+    url = `${API}/arson/states/${placeId}?per_page=50`
+  } else if (placeType === 'region') {
+    url = `${API}/arson/regions/${place}?per_page=50`
+  } else {
+    url = `${API}/arson/national?per_page=50`
+  }
+
+
   return get(url).then(({ results }) =>
     results.map(d => ({ year: d.year, arson: d.actual })),
   )
@@ -88,10 +95,15 @@ const parseAggregates = ([estimates, arsons]) => ({
   })),
 })
 
-const fetchAggregates = place => {
-  const estimatesApi = place
-    ? `estimates/states/${lookupUsa(place).id}`
-    : 'estimates/national'
+const fetchAggregates = (place, placeType, placeId) => {
+  let estimatesApi
+  if (placeType === 'state') {
+    estimatesApi = `estimates/states/${placeId}`
+  } else if (placeType === 'region') {
+    estimatesApi = `estimates/regions/${place}`
+  } else {
+    estimatesApi = 'estimates/national'
+  }
 
   const requests = [
     fetchResults(place || nationalKey, estimatesApi),
@@ -107,28 +119,28 @@ const fetchAgencyAggregates = (ori, crime) => {
   return get(url, params).then(d => ({ key: ori, results: d.results }))
 }
 
-const getSummaryRequests = ({ crime, place, placeType }) => {
+const getSummaryRequests = ({ crime, place, placeType, placeId }) => {
   if (placeType === 'agency') {
     const stateName = slugify(oriToState(place))
     return [
       fetchAgencyAggregates(place, crime),
-      fetchAggregates(stateName),
+      fetchAggregates(stateName, placeType, placeId),
       fetchAggregates(),
     ]
   }
-
-  if (placeType === 'state') {
-    return [fetchAggregates(place), fetchAggregates()]
-  }
-
-  return [fetchAggregates()]
+  return [fetchAggregates(place, placeType, placeId), fetchAggregates()]
 }
 
-const getUcrParticipation = place => {
-  const path =
-    place === nationalKey
-      ? 'participation/national'
-      : `participation/states/${lookupUsa(place).id}`
+const getUcrParticipation = (place, placeId, placeType) => {
+  let path
+
+  if (place === nationalKey) {
+    path = 'participation/national';
+  } else if (placeType === 'state') {
+    path = `participation/states/${placeId}`
+  } else if (placeType === 'region') {
+    path = `participation/regions/${place}`
+  }
 
   return get(`${API}/${path}`).then(response => ({
     place,
@@ -136,15 +148,47 @@ const getUcrParticipation = place => {
   }))
 }
 
-const getUcrParticipationRequests = params => {
-  const { place } = params
+const getUcrParticipationRequests = filters => {
+  const { place, placeType, placeId } = filters
 
-  const requests = [getUcrParticipation(place)]
+  const requests = [getUcrParticipation(place, placeId, placeType)]
 
   // add national request (unless you already did)
   if (place !== nationalKey) {
     requests.push(getUcrParticipation(nationalKey))
   }
+
+  return requests
+}
+
+
+const getUcrRegions = () => {
+  const path = 'lookup/region'
+
+  return get(`${API}/${path}`).then(response => ({
+    results: response.results,
+  }))
+}
+
+const getUcrRegionRequests = () => {
+  const requests = [];
+  requests.push(getUcrRegions())
+
+  return requests
+}
+
+
+const getUcrStates = () => {
+  const path = 'lookup/state?per_page=100'
+
+  return get(`${API}/${path}`).then(response => ({
+    results: response.results,
+  }))
+}
+
+const getUcrStatesRequests = () => {
+  const requests = [];
+  requests.push(getUcrStates())
 
   return requests
 }
@@ -164,4 +208,8 @@ export default {
   getSummaryRequests,
   getUcrParticipation,
   getUcrParticipationRequests,
+  getUcrRegions,
+  getUcrRegionRequests,
+  getUcrStates,
+  getUcrStatesRequests,
 }

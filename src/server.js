@@ -21,6 +21,9 @@ import routes from './routes'
 import configureStore from './store'
 import { fetchingAgency, receivedAgency } from './actions/agencies'
 import { updateFilters } from './actions/filters'
+import { fetchUcrRegion } from './actions/region'
+import { fetchUcrState } from './actions/states'
+
 import createEnv from './util/env'
 import { hasThreatKeyword, notifyOfThreat } from './util/feedback'
 import { createIssue } from './util/github'
@@ -63,6 +66,7 @@ app.use(bodyParser.json())
 app.get('/api', (req, res) => {
   res.sendfile('/swagger/index.html', { root: publicDirPath })
 })
+
 
 app.get('/api-proxy/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')
@@ -116,6 +120,8 @@ app.get('/*', (req, res) => {
     } else if (props) {
       const store = configureStore(initState)
       const { place, placeType } = props.router.params
+      store.dispatch(fetchUcrRegion())
+      store.dispatch(fetchUcrState())
       store.dispatch(updateFilters({ ...props.router.params }))
 
       if (placeType === 'agency') {

@@ -3,8 +3,11 @@ import { geoAlbersUsa, geoPath } from 'd3-geo'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { feature, mesh } from 'topojson'
+import { connect } from 'react-redux'
+import lowerCase from 'lodash.lowercase'
 
-import lookupUsa from '../util/usa'
+
+import { lookupStatesByRegion, lookupRegionByName } from '../util/location'
 
 const Container = ({ children }) =>
   <div className="center bg-white rounded">
@@ -23,7 +26,7 @@ class PlaceThumbnail extends React.Component {
   }
 
   render() {
-    const { coordinates, usState } = this.props
+    const { coordinates, place, placeType, region, states } = this.props
     const { usa } = this.state
 
     if (!usa) return <Container />
@@ -33,13 +36,25 @@ class PlaceThumbnail extends React.Component {
     const path = geoPath().projection(projection)
     const geoStates = feature(usa, usa.objects.units).features
     const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
-    let active
-    if (usState !== 'washington-dc') {
-      active = geoStates.find(
-        s => s.properties.name === lookupUsa(usState).display,
-      )
+    const actives = []
+
+    if (placeType === 'region') {
+      const regionStates = lookupStatesByRegion(states.states, lookupRegionByName(region.regions, place).region_code)
+      Object.keys(regionStates).forEach(sr => {
+        if (regionStates[sr].state_abbr !== 'DC') {
+          actives.push(geoStates.find(
+            s => s.properties.name === regionStates[sr].state_name
+          ))
+        }
+      });
+    } else if (place !== 'washington-dc') {
+      if (place !== 'united-states') {
+        actives.push(geoStates.find(
+          s => lowerCase(s.properties.name) === lowerCase(place),
+        ))
+      }
     } else {
-      active = geoStates.find(s => s.id === 'US11')
+      actives.push(geoStates.find(s => s.id === 'US11'))
     }
     const { lat, lng } = coordinates || {}
     const pin = coordinates && projection([lng, lat])
@@ -47,8 +62,8 @@ class PlaceThumbnail extends React.Component {
     let scale = 1
     let translate = [0, 0]
     let strokeWidth = 1
-    if (active) {
-      const bounds = path.bounds(active)
+    if (actives && placeType !== 'region') {
+      const bounds = path.bounds(actives[0])
       const dx = bounds[1][0] - bounds[0][0]
       const dy = bounds[1][1] - bounds[0][1]
       const x = (bounds[0][0] + bounds[1][0]) / 2
@@ -64,6 +79,18 @@ class PlaceThumbnail extends React.Component {
 
     window.gs = geoStates
 
+    const geoHtml = []
+
+    Object.keys(geoStates).forEach(geo => {
+      let activeColor = '#dfe6ed'
+      Object.keys(actives).forEach(active => {
+          if (geoStates[geo].properties.name === actives[active].properties.name) {
+            activeColor = '#94aabd'
+          }
+        });
+      geoHtml.push(<path key={geoStates[geo].id} d={path(geoStates[geo])} fill={activeColor} />)
+    });
+
     return (
       <Container>
         <svg
@@ -76,13 +103,7 @@ class PlaceThumbnail extends React.Component {
             transform={`translate(${translate})scale(${scale})`}
           >
             <g>
-              {geoStates.map((d, i) =>
-                <path
-                  key={i}
-                  d={path(d)}
-                  fill={active && d.id === active.id ? '#94aabd' : '#dfe6ed'}
-                />,
-              )}
+              {geoHtml}
               <path
                 d={path(meshed)}
                 fill="none"
@@ -111,7 +132,21 @@ PlaceThumbnail.defaultProps = {
 
 PlaceThumbnail.propTypes = {
   coordinates: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  usState: PropTypes.string.isRequired,
+  place: PropTypes.string.isRequired,
+  placeType: PropTypes.string.isRequired,
+  states: PropTypes.object.isRequired,
+  region: PropTypes.object.isRequired,
 }
 
-export default PlaceThumbnail
+const mapStateToProps = ({ filters, region, states }) => {
+  const { place, placeType } = filters
+
+  return {
+    place,
+    placeType,
+    region,
+    states,
+  }
+}
+
+export default connect(mapStateToProps)(PlaceThumbnail)

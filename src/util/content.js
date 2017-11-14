@@ -32,7 +32,7 @@ const content = {
   },
 }
 
-export const generateCrimeReadme = ({ crime, title = 'README' }) => {
+export const generateCrimeReadme = (crime, title = 'README') => {
   const crimeJson = content.crimes[crime]
   const caveats = crimeJson.caveats
     .map(c => `### ${c.heading}\n\n${c.text}`)

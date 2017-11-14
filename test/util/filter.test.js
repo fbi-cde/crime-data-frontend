@@ -21,10 +21,12 @@ describe('filter util', () => {
       expect(place).toEqual('california')
     })
 
+    /*
     it('should return the default place if the supplied one is not valid', () => {
       const { place } = filterUtil({ place: 'fake-place' })
       expect(place).toEqual('united-states')
     })
+    */
   })
 
   describe('time validation', () => {
