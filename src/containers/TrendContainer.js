@@ -102,7 +102,7 @@ class TrendContainer extends React.Component {
       <div className="mb7">
         <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
           <h2 className="mt0 mb2 sm-mb4 fs-24 sm-fs-28 sans-serif">
-            {startCase(filters.crime)} rate in {placeType==='region'?'the':''} {placeName}, {filters.since}-{filters.until}
+            {startCase(filters.crime)} rate in {placeType === 'region' ? 'the' : ''} {placeName}, {filters.since}-{filters.until}
           </h2>
           <div className="bg-white">
             {this.getContent({ crime, filters, places, summaries, placeName })}
