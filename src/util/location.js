@@ -145,7 +145,7 @@ const generateDisplayName = (place, placeType) => {
   if (placeType === 'state') {
     const state = place.replace('-', ' ');
     return startCase(state)
-  } else if (placeType === 'region' && place !== "united-states") {
+  } else if (placeType === 'region' && place !== 'united-states') {
       return `${startCase(place)} Region`
   }
   return 'United States'

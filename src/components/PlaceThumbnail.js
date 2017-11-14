@@ -41,14 +41,14 @@ class PlaceThumbnail extends React.Component {
     if (placeType === 'region') {
       const regionStates = lookupStatesByRegion(states.states, lookupRegionByName(region.regions, place).region_code)
       Object.keys(regionStates).forEach(sr => {
-        if(regionStates[sr].state_abbr !== 'DC'){
+        if (regionStates[sr].state_abbr !== 'DC') {
           actives.push(geoStates.find(
             s => s.properties.name === regionStates[sr].state_name
           ))
         }
       });
     } else if (place !== 'washington-dc') {
-      if(place !== 'united-states'){
+      if (place !== 'united-states') {
         actives.push(geoStates.find(
           s => lowerCase(s.properties.name) === lowerCase(place),
         ))
