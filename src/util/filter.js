@@ -36,6 +36,10 @@ const validateFilter = filters => {
   if (filters.since && filters.until && filters.until - filters.since < 10) {
     newFilters.since = filters.until - 10
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0db1efb618465544acd6a978069cd91d08120720
   return newFilters
 }
 
