@@ -85,6 +85,7 @@ class About extends React.Component {
 
   render() {
     const { mapShown } = this.state
+    const { region, states } = this.props
     const toggles = [
       { disabled: !mapShown, type: 'table' },
       { disabled: mapShown, type: 'map' },
@@ -160,7 +161,7 @@ class About extends React.Component {
               </div>
               <div className="mb4 clearfix" id="us-ucr-participation">
                 {mapShown
-                  ? <ParticipationMap states={stateColors} />
+                  ? <ParticipationMap stateColors={stateColors} states={states} region={region} />
                   : <ParticipationTable states={stateColors} />}
               </div>
             </div>
@@ -280,12 +281,15 @@ About.propTypes = {
   }),
 }
 
-const ParticipationMap = ({ states }) =>
+const ParticipationMap = ({ stateColors, states, region }) =>
   <div>
     <div className="md-col md-col-9 md-pr7">
       <UsaMap
-        colors={states.reduce(reduceEntries('color'), {})}
+        colors={stateColors.reduce(reduceEntries('color'), {})}
         changeColorOnHover={false}
+        stateView={true}
+        states={states}
+        region={region}
       />
     </div>
     <div className="md-col md-col-3 pt1 relative table-cell">
@@ -293,7 +297,7 @@ const ParticipationMap = ({ states }) =>
         {legend
           .map(d => ({
             ...d,
-            count: states.filter(s => s.color === d.css).length,
+            count: stateColors.filter(s => s.color === d.css).length,
           }))
           .map((d, i) =>
             <div key={i} className="flex mt2 fs-14">
@@ -358,8 +362,13 @@ const ParticipationTable = ({ states }) =>
     </tbody>
   </table>
 
+const mapStateToProps = ({ region, states }) => ({
+  region,
+  states,
+})
+
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ showFeedback }, dispatch),
 })
 
-export default connect(null, mapDispatchToProps)(About)
+export default connect(mapStateToProps, mapDispatchToProps)(About)

@@ -61,7 +61,7 @@ class UsaMap extends React.Component {
               svgDataWithNames.map(s => {
               let defaultClass = 'fill-blue-light'
                 if (stateView === true) {
-                  if (place.length > 0) {
+                  if (place && place.length > 0) {
                     Object.keys(place).forEach(p => {
                       if (place[p]) {
                         if (s.id === place[p].state_abbr) {
@@ -81,7 +81,7 @@ class UsaMap extends React.Component {
                   } else if (state.region_code === 4) {
                     defaultClass = 'fill-blue-light-4'
                   }
-                  if (place.length > 0) {
+                  if (place && place.length > 0) {
                     Object.keys(place).forEach(p => {
                       if (s.id === place[p].state_abbr) {
                         defaultClass = 'fill-red-bright';
