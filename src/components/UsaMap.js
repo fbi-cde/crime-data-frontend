@@ -26,6 +26,7 @@ class UsaMap extends React.Component {
       });
      }
   }
+  /* eslint-disable */
 
   forgetValue = (id, stateView, states) => e => {
     this.setState({ hover: null })
@@ -38,6 +39,7 @@ class UsaMap extends React.Component {
       });
     }
   }
+  /* eslint-enable */
 
   render() {
     const { colors, changeColorOnHover, mapClick, place, stateView, states, region } = this.props
