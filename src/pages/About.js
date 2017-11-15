@@ -161,7 +161,7 @@ class About extends React.Component {
               </div>
               <div className="mb4 clearfix" id="us-ucr-participation">
                 {mapShown
-                  ? <ParticipationMap stateColors={stateColors} states={states} region={region} />
+                  ? <ParticipationMap states={states} region={region} />
                   : <ParticipationTable states={stateColors} />}
               </div>
             </div>
@@ -275,21 +275,23 @@ class About extends React.Component {
   }
 }
 
+/* eslint-disable */
 About.propTypes = {
   actions: PropTypes.shape({
     showFeedback: PropTypes.func,
   }),
 }
+/* eslint-enable */
 
-const ParticipationMap = ({ stateColors, states, region }) =>
+const ParticipationMap = ({ states, region }) =>
   <div>
     <div className="md-col md-col-9 md-pr7">
       <UsaMap
         colors={stateColors.reduce(reduceEntries('color'), {})}
         changeColorOnHover={false}
-        stateView={true}
         states={states}
         region={region}
+        stateView
       />
     </div>
     <div className="md-col md-col-3 pt1 relative table-cell">
