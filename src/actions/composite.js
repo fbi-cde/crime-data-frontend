@@ -2,24 +2,28 @@ import { updateFilters } from './filters'
 import { fetchNibrs } from './nibrs'
 import { fetchSummaries } from '../actions/summary'
 import { fetchUcrParticipation } from '../actions/participation'
+import { fetchAgencies } from '../actions/agencies'
 import history, { createNewLocation } from '../util/history'
-import { getPlaceId } from '../util/location'
+import { getPlaceId, validateFilter } from '../util/location'
+import { shouldFetchAgencies } from '../util/agencies'
+import offensesUtil from '../util/offenses'
 
 import {
-  shouldFetchUcr,
-  shouldFetchSummaries,
   shouldFetchNibrs,
 } from '../util/participation'
 
 const fetchData = () => (dispatch, getState) => {
-  const { filters, region, states } = getState()
+  const { filters, region, states, agencies } = getState()
   if (region.loaded && states.loaded) {
     if (!filters.placeId) {
       filters.placeId = getPlaceId(filters, region.region, states.states);
     }
-    if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
-    if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
-    if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
+    if (offensesUtil.includes(filters.crime) && validateFilter(filters, region.regions, states.states)) {
+      if (shouldFetchAgencies(filters) && agencies.locations !== filters.place) dispatch(fetchAgencies(filters))
+      dispatch(fetchUcrParticipation(filters))
+      dispatch(fetchSummaries(filters))
+      if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
+    }
   }
 }
 

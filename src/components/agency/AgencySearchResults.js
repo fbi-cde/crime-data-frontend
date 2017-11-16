@@ -36,6 +36,7 @@ const AgencySearchResults = ({
   onStateClick,
   usState,
 }) => {
+  console.log('AgencySearchResults: init')
   const noFederal = data.filter(d => d.agency_type_name !== 'Federal')
   const dataGrouped = groupValues.map(key => ({
     key,
@@ -45,6 +46,8 @@ const AgencySearchResults = ({
     key: 'No assigned county',
     data: noFederal.filter(d => d[groupKey] === null),
   })
+
+  console.log('AgencySearchResults:', dataGrouped);
 
   return (
     <div className="mb2 absolute bg-white col-12" style={{ maxHeight: 310 }}>

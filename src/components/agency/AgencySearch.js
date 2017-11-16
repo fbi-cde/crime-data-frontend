@@ -79,19 +79,36 @@ class AgencySearch extends Component {
   render() {
     const { data } = this.props
     const { search, hasSelection, showResults } = this.state
+    console.log('showResults:', showResults)
+    console.log('data.length:', Object.keys(data).length)
 
     // get unique set of counties (for result grouping)
-    const counties = {}
-    data.forEach(d => (counties[d.primary_county || 'N/A'] = true))
+    const counties = new Set()
+    for (const agency in data) {
+      if (data[agency].county_name === null) {
+        counties.add('N/A')
+      } else {
+        counties.add(data[agency].county_name)
+      }
+    }
+    Object.keys(data).forEach(agency => {
+      if (data[agency].county_name === null) {
+        counties.add('N/A')
+      } else {
+        counties.add(data[agency].county_name)
+      }
+    })
+    /*
+    Object.keys(data).forEach(data => {
+      if (data[data].county_name === null) {
+        counties.add('N/A')
+      }else{
+        counties.add(data[data].county_name)
+      }
+    })
+    */
+    console.log('AgencySearch: counties:', counties)
 
-    const searchUpper = search.toUpperCase()
-    const dataFiltered =
-      searchUpper === ''
-        ? data
-        : data.filter(d => {
-            const words = `${d.ori} ${d.agency_name}`.toUpperCase()
-            return words.includes(searchUpper)
-          })
 
     return (
       <div className="agency-search mt2">
@@ -131,13 +148,11 @@ class AgencySearch extends Component {
           </div>
           {!hasSelection &&
             showResults &&
-            dataFiltered.length > 0 &&
+            data.length > 0 &&
             <OnEscape handler={this.handleEscape}>
               <AgencySearchResults
-                data={dataFiltered.sort(
-                  (a, b) => a.agency_name > b.agency_name,
-                )}
-                groupKey="primary_county"
+                data={Object.keys(data).sort((a, b) => a.agency_name_edit > b.agency_name_edit)}
+                groupKey="county_name"
                 groupValues={Object.keys(counties).sort()}
                 onResultsClick={this.handleResultsClick}
                 onStateClick={this.handleStateClick}
@@ -152,7 +167,7 @@ class AgencySearch extends Component {
 
 AgencySearch.propTypes = {
   agency: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
   initialShowResults: PropTypes.bool,
 }
 

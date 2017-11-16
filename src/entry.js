@@ -21,7 +21,6 @@ const preloadedState = window.__STATE__
 delete window.__STATE__
 
 const store = configureStore(preloadedState)
-store.dispatch(fetchAgencies())
 store.dispatch(fetchUcrRegion())
 store.dispatch(fetchUcrState())
 

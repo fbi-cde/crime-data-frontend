@@ -32,3 +32,7 @@ export const getAgency = (agencies, ori) => {
   if (!agency) return
   return { ...agency, display: agencyDisplay(agency) }
 }
+
+// New Data
+export const shouldFetchAgencies = filters =>
+  (filters.placeType === 'state' || filters.placeType === 'agency')

@@ -8,7 +8,6 @@ import {
   AGENCY_RECEIVED,
 } from './constants'
 import api, { formatError } from '../util/api'
-import { reshapeData } from '../util/agencies'
 
 // fetching individual agency details...
 
@@ -21,9 +20,10 @@ export const fetchingAgency = () => ({
   type: AGENCY_FETCHING,
 })
 
-export const receivedAgency = agency => ({
+export const receivedAgency = (agency, location) => ({
   type: AGENCY_RECEIVED,
   agency,
+  location,
 })
 
 export const fetchAgency = params => dispatch => {
@@ -35,22 +35,23 @@ export const fetchAgency = params => dispatch => {
     .catch(error => dispatch(failedAgency(error)))
 }
 
-// loading subset of data for all agencies...
 
+// loading subset of data for all agencies...
 export const fetchingAgencies = () => ({
   type: AGENCIES_FETCHING,
 })
 
-export const receivedAgencies = agencies => ({
+export const receivedAgencies = (agencies, location) => ({
   type: AGENCIES_RECEIVED,
   agencies,
+  location,
 })
 
-export const fetchAgencies = () => dispatch => {
+export const fetchAgencies = filters => dispatch => {
   dispatch(fetchingAgencies())
+  // Look up Agency State?
 
-  return axios
-    .get('/data/agencies-by-state.json')
-    .then(response => reshapeData(response.data))
-    .then(agencies => dispatch(receivedAgencies(agencies)))
+  return api.getAgencies(filters.placeId)
+    .then(response => receivedAgencies(response, filters.place))
+    .then(agencies => dispatch(receivedAgencies(agencies, filters.place)))
 }

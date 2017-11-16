@@ -11,6 +11,8 @@ const initialState = {
   data: {},
   error: null,
   loading: false,
+  loaded: false,
+  location: null,
 }
 
 const updateData = (agency, data) => {
@@ -29,14 +31,19 @@ export default (state = initialState, action) => {
     case AGENCIES_RECEIVED:
       return {
         ...state,
-        data: action.agencies,
+        data: {
+          ...action.agencies.agencies,
+        },
+        location: action.agencies.location,
         loading: false,
+        loaded: true,
       }
     case AGENCY_FAILED:
       return {
         ...state,
         error: action.error,
         loading: false,
+        loaded: false,
       }
     case AGENCY_FETCHING:
     case AGENCIES_FETCHING:
@@ -44,12 +51,15 @@ export default (state = initialState, action) => {
         ...state,
         error: null,
         loading: true,
+        loaded: false,
       }
     case AGENCY_RECEIVED:
       return {
         ...state,
-        data: updateData(action.agency, state.data),
+        data: action.agencies.agencies,
+        location: action.agencies.location,
         loading: false,
+        loaded: true,
       }
     default:
       return state

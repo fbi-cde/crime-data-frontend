@@ -21,6 +21,8 @@ const dimensionEndpoints = {
 
 const getAgency = ori => get(`${API}/agencies/${ori}`)
 
+const getAgencies = state_abbr => get(`${API}/new/agencies/state/${state_abbr}`)
+
 const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
   const loc =
     place === nationalKey
@@ -203,6 +205,7 @@ export default {
   fetchAggregates,
   fetchAgencyAggregates,
   getAgency,
+  getAgencies,
   fetchNibrs,
   getNibrsRequests,
   getSummaryRequests,
