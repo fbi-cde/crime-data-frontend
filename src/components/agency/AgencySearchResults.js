@@ -6,11 +6,14 @@ const prevent = e => e.preventDefault()
 
 /* eslint-disable camelcase */
 const AgencySearchResultItem = ({ agency, onClick }) => {
-  const { agency_name: name, months_reported, nibrs_months_reported } = agency
+  console.log('AgencySearchResultItem:', agency)
+  /*
   const isActive =
     (months_reported && months_reported !== 0) ||
     (nibrs_months_reported && nibrs_months_reported !== 0)
   const color = isActive ? 'black' : 'blue-light cursor-default'
+*/
+const color = 'black'
 
   return (
     <li>
@@ -19,9 +22,9 @@ const AgencySearchResultItem = ({ agency, onClick }) => {
         style={{ lineHeight: '1.75' }}
         href="#!"
         id={agency.ori}
-        onClick={isActive ? onClick(agency) : prevent}
+        onClick={onClick(agency)}
       >
-        {name}
+        {agency.agency_name_edit}
       </a>
     </li>
   )
@@ -38,6 +41,9 @@ const AgencySearchResults = ({
 }) => {
   console.log('AgencySearchResults: init')
   const noFederal = data.filter(d => d.agency_type_name !== 'Federal')
+  console.log('AgencySearchResults: noFederal:', noFederal)
+  console.log('AgencySearchResults: groupValues:', groupValues)
+
   const dataGrouped = groupValues.map(key => ({
     key,
     data: noFederal.filter(d => d[groupKey] === key),
@@ -47,7 +53,7 @@ const AgencySearchResults = ({
     data: noFederal.filter(d => d[groupKey] === null),
   })
 
-  console.log('AgencySearchResults:', dataGrouped);
+  console.log('AgencySearchResults: dataGrouped:', dataGrouped);
 
   return (
     <div className="mb2 absolute bg-white col-12" style={{ maxHeight: 310 }}>

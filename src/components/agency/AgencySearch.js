@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import AgencySearchResults from './AgencySearchResults'
 import OnEscape from '../OnEscape'
-import { oriToState } from '../../util/agencies'
+import { newOriToState } from '../../util/agencies'
 
 class AgencySearch extends Component {
   constructor(props) {
@@ -77,25 +78,19 @@ class AgencySearch extends Component {
   }
 
   render() {
-    const { data } = this.props
+    const { data, states } = this.props
     const { search, hasSelection, showResults } = this.state
     console.log('showResults:', showResults)
     console.log('data.length:', Object.keys(data).length)
 
     // get unique set of counties (for result grouping)
-    const counties = new Set()
-    for (const agency in data) {
-      if (data[agency].county_name === null) {
-        counties.add('N/A')
-      } else {
-        counties.add(data[agency].county_name)
-      }
-    }
+    const countiesSet = new Set()
+
     Object.keys(data).forEach(agency => {
       if (data[agency].county_name === null) {
-        counties.add('N/A')
+        countiesSet.add('N/A')
       } else {
-        counties.add(data[agency].county_name)
+        countiesSet.add(data[agency].county_name)
       }
     })
     /*
@@ -107,8 +102,12 @@ class AgencySearch extends Component {
       }
     })
     */
-    console.log('AgencySearch: counties:', counties)
-
+    console.log('AgencySearch: counties:', countiesSet)
+    let selectedState
+    if (data.length > 0) {
+       selectedState = newOriToState(data[0].ori, states)
+    }
+    const counties = [...countiesSet]
 
     return (
       <div className="agency-search mt2">
@@ -151,12 +150,12 @@ class AgencySearch extends Component {
             data.length > 0 &&
             <OnEscape handler={this.handleEscape}>
               <AgencySearchResults
-                data={Object.keys(data).sort((a, b) => a.agency_name_edit > b.agency_name_edit)}
+                data={data}
                 groupKey="county_name"
-                groupValues={Object.keys(counties).sort()}
+                groupValues={counties.sort()}
                 onResultsClick={this.handleResultsClick}
                 onStateClick={this.handleStateClick}
-                usState={oriToState(data[0].ori)}
+                usState={selectedState}
               />
             </OnEscape>}
         </div>
@@ -169,10 +168,13 @@ AgencySearch.propTypes = {
   agency: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
   initialShowResults: PropTypes.bool,
+  states: PropTypes.object.isRequired,
 }
 
 AgencySearch.defaultProps = {
   initialShowResults: true,
 }
 
-export default AgencySearch
+const mapStateToProps = ({ states }) => ({ states })
+
+export default connect(mapStateToProps)(AgencySearch)

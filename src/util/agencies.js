@@ -2,6 +2,7 @@
 import reduceEntries from 'reduce-entries'
 
 import lookupUsa from './usa'
+import { lookupStateByAbbr } from './location'
 
 const postalMappingExceptions = {
   NB: 'NE',
@@ -18,6 +19,11 @@ export const oriToState = ori => {
   const oriAbbr = ori.slice(0, 2).toUpperCase()
   const postalAbbr = postalMappingExceptions[oriAbbr] || oriAbbr
   return lookupUsa(postalAbbr).slug
+}
+
+export const newOriToState = (ori, states) => {
+  const oriAbbr = ori.slice(0, 2).toUpperCase()
+  return lookupStateByAbbr(states.states, oriAbbr).state_name
 }
 
 export const agencyDisplay = ({ agency_name, agency_type_name }) => {
