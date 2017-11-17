@@ -6,7 +6,7 @@ import ExplorerIntroAgency from './ExplorerIntroAgency'
 import ExplorerIntroNational from './ExplorerIntroNational'
 import ExplorerIntroState from './ExplorerIntroState'
 import ExplorerIntroRegion from './ExplorerIntroRegion'
-import { oriToState } from '../../util/agencies'
+import { newOriToState } from '../../util/agencies'
 import { nationalKey } from '../../util/usa'
 
 const ExplorerIntro = ({ agency, filters, participation, placeName, region, states }) => {
@@ -17,7 +17,7 @@ const ExplorerIntro = ({ agency, filters, participation, placeName, region, stat
         crime={filters.crime}
         hasNibrs={agency.nibrs_months_reported === 12}
         name={agency.agency_name}
-        usState={oriToState(filters.place)}
+        usState={newOriToState(filters.place, states)}
         type={agency.agency_type_name}
       />
     )
@@ -61,7 +61,7 @@ const ExplorerIntro = ({ agency, filters, participation, placeName, region, stat
 }
 
 ExplorerIntro.propTypes = {
-  agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
+  agency: PropTypes.object.isRequired,
   participation: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.boolean,

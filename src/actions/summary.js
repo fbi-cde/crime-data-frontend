@@ -16,12 +16,12 @@ export const receivedSummary = summaries => ({
   summaries,
 })
 
-export const fetchSummaries = params => dispatch => {
+export const fetchSummaries = (filters, states) => dispatch => {
   dispatch(fetchingSummary())
-  const requests = api.getSummaryRequests(params)
+  const requests = api.getSummaryRequests(filters, states)
   return Promise.all(requests)
     .then(data => reshapeData(data))
-    .then(d => calculateRates(d, params.placeType))
-    .then(summaries => dispatch(receivedSummary(summaries, params)))
+    .then(d => calculateRates(d, filters.placeType))
+    .then(summaries => dispatch(receivedSummary(summaries, filters)))
     .catch(error => dispatch(failedSummary(error)))
 }

@@ -20,7 +20,7 @@ import { updateApp } from '../actions/composite'
 import { showTerm } from '../actions/glossary'
 import { hideSidebar, showSidebar } from '../actions/sidebar'
 import offensesUtil from '../util/offenses'
-import { getAgency } from '../util/agencies'
+import { newGetAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import { sentenceCase } from '../util/text'
 import { validateFilter, generatePlaceId } from '../util/location'
@@ -85,7 +85,8 @@ class Explorer extends React.Component {
 
     const { crime } = params
     const { place, placeType } = getPlaceInfo(params)
-    const agency = placeType === 'agency' && getAgency(agencies, place)
+    const agency = placeType === 'agency' && newGetAgency(agencies.data, place)
+    console.log('Explorer:', agency)
     const placeDisplay = agency ? agency.agency_name : startCase(place)
 
     // ensure app state place matches url params place
@@ -98,6 +99,10 @@ class Explorer extends React.Component {
     }
 
     if (!offensesUtil.includes(crime) || !validateFilter(filters, region.regions, states.states)) {
+      return <NotFound />
+    }
+
+    if (agencies.loaded && !agency) {
       return <NotFound />
     }
 

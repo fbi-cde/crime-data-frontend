@@ -21,7 +21,7 @@ const fetchData = () => (dispatch, getState) => {
     if (offensesUtil.includes(filters.crime) && validateFilter(filters, region.regions, states.states)) {
       if (shouldFetchAgencies(filters) && agencies.locations !== filters.place && filters.placeType !== 'agency') dispatch(fetchAgencies(filters))
       dispatch(fetchUcrParticipation(filters))
-      dispatch(fetchSummaries(filters))
+      dispatch(fetchSummaries(filters, states))
       if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
     }
   }

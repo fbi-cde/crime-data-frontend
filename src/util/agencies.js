@@ -44,6 +44,7 @@ export const newOriToState = (ori, states) => {
 }
 
 export const newGetAgency = (agencies, ori) => {
+  console.log('newGetAgency:', agencies, ori)
   let n = null;
 
   if (!agencies) return n

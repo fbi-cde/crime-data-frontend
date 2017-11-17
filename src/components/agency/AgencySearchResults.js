@@ -51,8 +51,6 @@ const AgencySearchResults = ({
   })
 
 
-  console.log('dataGrouped:', dataGrouped)
-
   return (
     <div className="mb2 absolute bg-white col-12" style={{ maxHeight: 310 }}>
       <div

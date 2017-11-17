@@ -6,7 +6,7 @@ import ExplorerIntro from '../components/explorer/ExplorerIntro'
 import Loading from '../components/Loading'
 import PlaceThumbnail from '../components/PlaceThumbnail'
 import UcrResourcesList from '../components/UcrResourcesList'
-import { getAgency, oriToState } from '../util/agencies'
+import { getAgency, newOriToState } from '../util/agencies'
 import { lookupDisplayName } from '../util/location'
 
 const ExplorerHeaderContainer = ({
@@ -24,7 +24,7 @@ const ExplorerHeaderContainer = ({
   let location
   if (filters.placeType === 'agency') {
     placeDisplay = agency.agency_name
-    location = oriToState(filters.place);
+    location = newOriToState(filters.place);
   } else if (filters.placeType === 'state' || filters.placeType === 'region') {
     placeDisplay = lookupDisplayName(filters, region.regions, states.states)
     location = filters.place;

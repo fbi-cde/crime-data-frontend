@@ -4,7 +4,7 @@ import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
 import { mapToApiOffense } from './offenses'
-import { oriToState } from './agencies'
+import { newOriToState, oriToState } from './agencies'
 import { slugify } from './text'
 
 export const API = '/api-proxy'
@@ -121,16 +121,16 @@ const fetchAgencyAggregates = (ori, crime) => {
   return get(url, params).then(d => ({ key: ori, results: d.results }))
 }
 
-const getSummaryRequests = ({ crime, place, placeType, placeId }) => {
-  if (placeType === 'agency') {
-    const stateName = slugify(oriToState(place))
+const getSummaryRequests = (filters, states) => {
+  if (filters.placeType === 'agency') {
+    const stateName = slugify(newOriToState(filters.place, states))
     return [
-      fetchAgencyAggregates(place, crime),
-      fetchAggregates(stateName, placeType, placeId),
+      fetchAgencyAggregates(filters.place, filters.crime),
+      fetchAggregates(stateName, filters.placeType, filters.placeId),
       fetchAggregates(),
     ]
   }
-  return [fetchAggregates(place, placeType, placeId), fetchAggregates()]
+  return [fetchAggregates(filters.place, filters.placeType, filters.placeId), fetchAggregates()]
 }
 
 const getUcrParticipation = (place, placeId, placeType) => {

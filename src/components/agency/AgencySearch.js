@@ -59,6 +59,7 @@ class AgencySearch extends Component {
   }
 
   handleResultsClick = d => e => {
+    console.log('d:', d)
     e.preventDefault()
     this.setState({ search: d.agency_name, hasSelection: true })
     this.props.onChange({ place: d.ori, placeType: 'agency' })
@@ -98,7 +99,6 @@ class AgencySearch extends Component {
        selectedState = newOriToState(data[0].ori, states)
     }
     const counties = [...countiesSet]
-    console.log('Search:', search)
     const searchUpper = search.toUpperCase()
     const dataFiltered =
       searchUpper === ''
@@ -107,7 +107,6 @@ class AgencySearch extends Component {
             const words = `${d.ori} ${d.agency_name_edit}`.toUpperCase()
             return words.includes(searchUpper)
         })
-    console.log('Search:', dataFiltered)
 
 
     return (
