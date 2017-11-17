@@ -11,7 +11,7 @@ class LocationFilter extends React.Component {
   getAgencyName = () => {
     const { agency } = this.props
 
-    return (agency || {}).agency_name || ''
+    return (agency || {}).agency_name_edit || ''
   }
 
   handleLocationFocus = () => {
@@ -20,7 +20,6 @@ class LocationFilter extends React.Component {
 
   render() {
     const { agencyData, ariaControls, onChange, usState, placeType } = this.props
-    console.log('LocationFilter: AgencyData:', agencyData)
     const { showResults } = this.state
     const showAgencySearch = placeType !== 'region' || 'national'
     return (
@@ -51,7 +50,7 @@ LocationFilter.defaultProps = {
 }
 
 LocationFilter.propTypes = {
-  agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
+  agency: PropTypes.object.isRequired,
   agencyData: PropTypes.arrayOf(PropTypes.object),
   ariaControls: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

@@ -19,7 +19,7 @@ const fetchData = () => (dispatch, getState) => {
       filters.placeId = getPlaceId(filters, region.region, states.states);
     }
     if (offensesUtil.includes(filters.crime) && validateFilter(filters, region.regions, states.states)) {
-      if (shouldFetchAgencies(filters) && agencies.locations !== filters.place) dispatch(fetchAgencies(filters))
+      if (shouldFetchAgencies(filters) && agencies.locations !== filters.place && filters.placeType !== 'agency') dispatch(fetchAgencies(filters))
       dispatch(fetchUcrParticipation(filters))
       dispatch(fetchSummaries(filters))
       if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))

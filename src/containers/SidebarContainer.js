@@ -6,7 +6,7 @@ import CrimeTypeFilter from '../components/CrimeTypeFilter'
 import LocationFilter from '../components/LocationFilter'
 import TimePeriodFilter from '../components/TimePeriodFilter'
 import { hideSidebar } from '../actions/sidebar'
-import { getAgency, oriToState } from '../util/agencies'
+import { newGetAgency, oriToState } from '../util/agencies'
 
 const SidebarContainer = ({
   actions,
@@ -68,13 +68,10 @@ const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   const isAgency = placeType === 'agency'
   const displayAgencies = (placeType !== 'region' || placeType !== 'national') && agencies.loaded
   const usState = isAgency ? oriToState(place) : place
-  console.log('SidebarContainer Agency Data: agencies:', agencies)
-  const agency = isAgency && !agencies.loading && getAgency(agencies, place)
-  console.log('SidebarContainer: displayAgencies:', displayAgencies)
-
+  const agency = isAgency && !agencies.loading && newGetAgency(agencies.data, place)
+  console.log('agency:', agency)
   const agencyData = displayAgencies ? Object.keys(agencies.data).map(k => agencies.data[k]) : []
 
-  console.log('SidebarContainer Agency Data: agencyData:', agencyData)
 
   return {
     agency,

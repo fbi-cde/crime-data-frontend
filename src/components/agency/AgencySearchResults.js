@@ -6,7 +6,6 @@ const prevent = e => e.preventDefault()
 
 /* eslint-disable camelcase */
 const AgencySearchResultItem = ({ agency, onClick }) => {
-  console.log('AgencySearchResultItem:', agency)
   /*
   const isActive =
     (months_reported && months_reported !== 0) ||
@@ -39,10 +38,8 @@ const AgencySearchResults = ({
   onStateClick,
   usState,
 }) => {
-  console.log('AgencySearchResults: init')
   const noFederal = data.filter(d => d.agency_type_name !== 'Federal')
-  console.log('AgencySearchResults: noFederal:', noFederal)
-  console.log('AgencySearchResults: groupValues:', groupValues)
+
 
   const dataGrouped = groupValues.map(key => ({
     key,
@@ -53,7 +50,8 @@ const AgencySearchResults = ({
     data: noFederal.filter(d => d[groupKey] === null),
   })
 
-  console.log('AgencySearchResults: dataGrouped:', dataGrouped);
+
+  console.log('dataGrouped:', dataGrouped)
 
   return (
     <div className="mb2 absolute bg-white col-12" style={{ maxHeight: 310 }}>

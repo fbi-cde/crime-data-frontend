@@ -80,8 +80,7 @@ class AgencySearch extends Component {
   render() {
     const { data, states } = this.props
     const { search, hasSelection, showResults } = this.state
-    console.log('showResults:', showResults)
-    console.log('data.length:', Object.keys(data).length)
+
 
     // get unique set of counties (for result grouping)
     const countiesSet = new Set()
@@ -93,21 +92,23 @@ class AgencySearch extends Component {
         countiesSet.add(data[agency].county_name)
       }
     })
-    /*
-    Object.keys(data).forEach(data => {
-      if (data[data].county_name === null) {
-        counties.add('N/A')
-      }else{
-        counties.add(data[data].county_name)
-      }
-    })
-    */
-    console.log('AgencySearch: counties:', countiesSet)
+
     let selectedState
     if (data.length > 0) {
        selectedState = newOriToState(data[0].ori, states)
     }
     const counties = [...countiesSet]
+    console.log('Search:', search)
+    const searchUpper = search.toUpperCase()
+    const dataFiltered =
+      searchUpper === ''
+        ? data
+        : data.filter(d => {
+            const words = `${d.ori} ${d.agency_name_edit}`.toUpperCase()
+            return words.includes(searchUpper)
+        })
+    console.log('Search:', dataFiltered)
+
 
     return (
       <div className="agency-search mt2">
@@ -150,7 +151,7 @@ class AgencySearch extends Component {
             data.length > 0 &&
             <OnEscape handler={this.handleEscape}>
               <AgencySearchResults
-                data={data}
+                data={dataFiltered}
                 groupKey="county_name"
                 groupValues={counties.sort()}
                 onResultsClick={this.handleResultsClick}
