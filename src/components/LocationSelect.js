@@ -24,7 +24,10 @@ class LocationSelect extends React.Component {
 
   getStateSelectOptions = states => {
     const stateOpts = []
-    Object.keys(states.states).forEach(s => {
+    Object.keys(states.states).sort((a, b) => {
+      if (states.states[a].state_name < states.states[b].state_name) { return -1; }
+      return 1;
+    }).forEach(s => {
       // if state is in a region other than 0 (us territory) or 99 (other), and the state is not puerto rico, add it as an option
       if (states.states[s].region_code !== 0 && states.states[s].region_code !== 99 && states.states[s].state_id !== 43) {
         stateOpts.push(
