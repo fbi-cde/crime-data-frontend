@@ -4,7 +4,7 @@ import upperFirst from 'lodash.upperfirst'
 
 import { get } from './http'
 import { mapToApiOffense } from './offenses'
-import { newOriToState, oriToState } from './agencies'
+import { newOriToState, newOriToStateAbbr } from './agencies'
 import { slugify } from './text'
 
 export const API = '/api-proxy'
@@ -121,6 +121,13 @@ const fetchAgencyAggregates = (ori, crime) => {
   return get(url, params).then(d => ({ key: ori, results: d.results }))
 }
 
+const fetchAgencySummarized = ori => {
+  const stateAbbr = newOriToStateAbbr(ori)
+  const url = `${API}/summarized/agency/${stateAbbr}/${ori}/`
+  const params = { per_page: 200 }
+  return get(url, params).then(d => ({ key: ori, results: d.results }))
+}
+
 const getSummaryRequests = (filters, states) => {
   if (filters.placeType === 'agency') {
     const stateName = slugify(newOriToState(filters.place, states))
@@ -131,6 +138,43 @@ const getSummaryRequests = (filters, states) => {
     ]
   }
   return [fetchAggregates(filters.place, filters.placeType, filters.placeId), fetchAggregates()]
+}
+
+const parseSummarized = summarized => ({
+  ...summarized,
+  results: summarized.results.map(datum => ({
+    ...datum,
+  })),
+})
+
+const fetchSummarized = (place, placeType, placeId) => {
+  let estimatesApi
+  if (placeType === 'state') {
+    estimatesApi = `summarized/state/${placeId}`
+  } else if (placeType === 'region') {
+    estimatesApi = `summarized/regions/${place}`
+  } else {
+    estimatesApi = 'summarized'
+  }
+
+  const requests = [
+    fetchResults(place || nationalKey, estimatesApi),
+  ]
+
+  return Promise.all(requests).then(parseSummarized)
+}
+
+
+const getSummarizedRequests = (filters, states) => {
+  if (filters.placeType === 'agency') {
+    const stateName = slugify(newOriToState(filters.place, states))
+    return [
+      fetchAgencySummarized(filters.place, filters.crime),
+      fetchSummarized(stateName, filters.placeType, filters.placeId),
+      fetchSummarized(),
+    ]
+  }
+  return [fetchSummarized(filters.place, filters.placeType, filters.placeId), fetchSummarized()]
 }
 
 const getUcrParticipation = (place, placeId, placeType) => {
@@ -204,11 +248,14 @@ export const formatError = error => ({
 export default {
   fetchAggregates,
   fetchAgencyAggregates,
+  fetchAgencySummarized,
+  fetchSummarized,
+  fetchNibrs,
   getAgency,
   getAgencies,
-  fetchNibrs,
   getNibrsRequests,
   getSummaryRequests,
+  getSummarizedRequests,
   getUcrParticipation,
   getUcrParticipationRequests,
   getUcrRegions,

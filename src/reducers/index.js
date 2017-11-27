@@ -8,6 +8,7 @@ import nibrs from './nibrs'
 import participation from './participation'
 import sidebar from './sidebar'
 import summaries from './summary'
+import summarized from './summarized'
 import region from './region'
 import states from './states'
 
@@ -23,4 +24,5 @@ export default combineReducers({
   summaries,
   region,
   states,
+  summarized,
 })

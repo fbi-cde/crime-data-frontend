@@ -1,6 +1,7 @@
 import { updateFilters } from './filters'
 import { fetchNibrs } from './nibrs'
 import { fetchSummaries } from '../actions/summary'
+import { fetchSummarized } from '../actions/summarized'
 import { fetchUcrParticipation } from '../actions/participation'
 import { fetchAgencies } from '../actions/agencies'
 import history, { createNewLocation } from '../util/history'
@@ -22,6 +23,8 @@ const fetchData = () => (dispatch, getState) => {
       if (shouldFetchAgencies(filters) && agencies.locations !== filters.place && filters.placeType !== 'agency') dispatch(fetchAgencies(filters))
       dispatch(fetchUcrParticipation(filters))
       dispatch(fetchSummaries(filters, states))
+      dispatch(fetchSummarized(filters, states))
+
       if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
     }
   }
