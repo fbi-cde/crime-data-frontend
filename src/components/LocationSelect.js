@@ -91,9 +91,6 @@ class LocationSelect extends React.Component {
             <option value="united-states">
               United States
             </option>
-            <option value="" disabled>
-              States
-            </option>
             {stateOpts}
             </select>
         </div>
