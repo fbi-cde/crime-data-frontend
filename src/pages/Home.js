@@ -188,7 +188,6 @@ class Home extends React.Component {
             <div className="clearfix mxn2 mb4 flex">
                 <div className="inline-block clearfix mx-auto">
                   <button className="left btn btn-outline  x-group-item rounded-left" value='states' onClick={this.handleMapTypeChange} >States</button>
-                  <button className="left btn btn-outline x-group-item rounded-right" value='regions' onClick={this.handleMapTypeChange} >Regions</button>
                 </div>
             </div>
             <div className="mb7 sm-hide md-hide lg-hide">
