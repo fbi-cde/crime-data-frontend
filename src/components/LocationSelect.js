@@ -66,7 +66,10 @@ class LocationSelect extends React.Component {
       states,
     } = this.props
 
+    /* eslint-disable */
     const regionOpts = this.getRegionSelectOptions(region)
+    /* eslint-enable */
+
     const stateOpts = this.getStateSelectOptions(states)
 
     return (
