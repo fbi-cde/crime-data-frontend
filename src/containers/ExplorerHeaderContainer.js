@@ -6,7 +6,7 @@ import ExplorerIntro from '../components/explorer/ExplorerIntro'
 import Loading from '../components/Loading'
 import PlaceThumbnail from '../components/PlaceThumbnail'
 import UcrResourcesList from '../components/UcrResourcesList'
-import { getAgency, newOriToState } from '../util/agencies'
+import { newGetAgency, newOriToState } from '../util/agencies'
 import { lookupDisplayName } from '../util/location'
 
 const ExplorerHeaderContainer = ({
@@ -76,9 +76,13 @@ const ExplorerHeaderContainer = ({
 
 const mapStateToProps = ({ agencies, filters, participation, region, states }) => {
   const isAgency = filters.placeType === 'agency'
-  const agency = isAgency && !agencies.loading && getAgency(agencies, filters.place)
-  const { icpsr_lat: lat, icpsr_lng: lng } = agency
-  const coordinates = isAgency && lat && lng && { lat, lng }
+  let agency = null
+  let coordinates = null;
+  if (isAgency) {
+    agency = newGetAgency(agencies, filters.place, filters.placeType)
+    const { icpsr_lat: lat, icpsr_lng: lng } = agency
+     coordinates = isAgency && lat && lng && { lat, lng }
+  }
 
   return {
     agencies,

@@ -43,11 +43,12 @@ export const newOriToState = (ori, states) => {
     return lookupStateByAbbr(states.states, oriAbbr).state_name
 }
 
-export const newGetAgency = (agencies, ori) => {
-  console.log('newGetAgency:', agencies, ori)
+export const newGetAgency = (agencies, ori, placeType) => {
+  console.log('newGetAgency:', agencies, ori, placeType)
   let n = null;
+  if (placeType !== 'agency') { return n; }
 
-  if (!agencies) return n
+  if (agencies.loaded === false) return n
 
   Object.keys(agencies).forEach(data => {
     if (agencies[data].ori === ori) {

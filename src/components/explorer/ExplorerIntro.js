@@ -61,7 +61,7 @@ const ExplorerIntro = ({ agency, filters, participation, placeName, region, stat
 }
 
 ExplorerIntro.propTypes = {
-  agency: PropTypes.object.isRequired,
+  agency: PropTypes.object,
   participation: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.boolean,

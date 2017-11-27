@@ -85,8 +85,11 @@ class Explorer extends React.Component {
 
     const { crime } = params
     const { place, placeType } = getPlaceInfo(params)
-    const agency = placeType === 'agency' && newGetAgency(agencies.data, place)
-    console.log('Explorer:', agency)
+    const isAgency = filters.placeType === 'agency'
+    let agency = null
+    if (isAgency) {
+       agency = newGetAgency(agencies, place, placeType)
+    }
     const placeDisplay = agency ? agency.agency_name : startCase(place)
 
     // ensure app state place matches url params place
@@ -102,7 +105,7 @@ class Explorer extends React.Component {
       return <NotFound />
     }
 
-    if (agencies.loaded && !agency) {
+    if (agencies.loaded && isAgency && !agency) {
       return <NotFound />
     }
 
