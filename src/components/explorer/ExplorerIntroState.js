@@ -42,9 +42,8 @@ const ExplorerIntroState = ({ crime, place, participation, until, placeName }) =
             <p className="serif">
               In {highlight(until)}
               , the FBI <EstimatedTerm /> crime statistics for{' '}
-
               {placeName} based on data received from{' '}
-              {highlight(formatNum(untilUcr.total_agencies - untilUcr.covered_agencies))} law
+              {highlight(formatNum(untilUcr.participating_agencies))} law
               enforcement agencies out of{' '}
               {highlight(formatNum(untilUcr.total_agencies))} agencies in the
               state that year.
