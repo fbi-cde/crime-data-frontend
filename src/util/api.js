@@ -142,7 +142,7 @@ const getSummaryRequests = (filters, states) => {
 
 const parseSummarized = summarized => ({
   ...summarized,
-  results: summarized.results.map(datum => ({
+  results: summarized.map(datum => ({
     ...datum,
   })),
 })
