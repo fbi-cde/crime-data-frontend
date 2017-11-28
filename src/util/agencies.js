@@ -50,7 +50,6 @@ export const newOriToStateAbbr = ori => {
 
 
 export const newGetAgency = (agencies, ori, placeType) => {
-  console.log('newGetAgency:', agencies, ori, placeType)
   let n = null;
   if (placeType !== 'agency') { return n; }
 

@@ -21,7 +21,7 @@ const dimensionEndpoints = {
 
 const getAgency = ori => get(`${API}/agencies/${ori}`)
 
-const getAgencies = state_abbr => get(`${API}/new/agencies/state/${state_abbr}`)
+const getAgencies = stateAbbr => get(`${API}/new/agencies/state/${stateAbbr}`)
 
 const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
   const loc =
@@ -140,9 +140,9 @@ const getSummaryRequests = (filters, states) => {
   return [fetchAggregates(filters.place, filters.placeType, filters.placeId), fetchAggregates()]
 }
 
-const parseSummarized = summarized => ({
+const parseSummarized = ([summarized]) => ({
   ...summarized,
-  results: summarized.map(datum => ({
+  results: summarized.results.map(datum => ({
     ...datum,
   })),
 })
@@ -160,6 +160,8 @@ const fetchSummarized = (place, placeType, placeId) => {
   const requests = [
     fetchResults(place || nationalKey, estimatesApi),
   ]
+
+  console.log('Requests:', requests)
 
   return Promise.all(requests).then(parseSummarized)
 }

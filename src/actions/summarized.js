@@ -1,6 +1,6 @@
 import { SUMMARIZED_FAILED, SUMMARIZED_FETCHING, SUMMARIZED_RECEIVED } from './constants'
 import api from '../util/api'
-import { calculateRates, reshapeData } from '../util/summary'
+import { calculateRates, reshapeData } from '../util/summarized'
 
 export const failedSummarized = error => ({
   type: SUMMARIZED_FAILED,
@@ -21,7 +21,7 @@ export const fetchSummarized = (filters, states) => dispatch => {
   dispatch(fetchingSummarized())
   const requests = api.getSummarizedRequests(filters, states)
   return Promise.all(requests)
-    .then(data => reshapeData(data))
+    .then(data => data)
     .then(d => calculateRates(d, filters.placeType))
     .then(summaries => dispatch(receivedSummarized(summaries, filters)))
     .catch(error => dispatch(failedSummarized(error)))
