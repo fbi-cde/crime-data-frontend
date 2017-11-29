@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
         ...state,
         data: {
           ...state.data,
-          ...action.summaries,
+          ...action.summarized,
         },
         loading: false,
       }

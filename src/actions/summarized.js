@@ -17,12 +17,10 @@ export const receivedSummarized = summarized => ({
 })
 
 export const fetchSummarized = (filters, states) => dispatch => {
-  console.log('fetchSummarized')
   dispatch(fetchingSummarized())
   const requests = api.getSummarizedRequests(filters, states)
   return Promise.all(requests)
-    .then(data => data)
-    .then(d => calculateRates(d, filters.placeType))
+    .then(data => reshapeData(data))
     .then(summaries => dispatch(receivedSummarized(summaries, filters)))
     .catch(error => dispatch(failedSummarized(error)))
 }

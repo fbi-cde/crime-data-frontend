@@ -151,6 +151,8 @@ const fetchSummarized = (place, placeType, placeId) => {
   let estimatesApi
   if (placeType === 'state') {
     estimatesApi = `summarized/state/${placeId}`
+  } else if (placeType === 'agency') {
+    estimatesApi = `summarized/state/${place}`
   } else if (placeType === 'region') {
     estimatesApi = `summarized/regions/${place}`
   } else {
@@ -161,18 +163,16 @@ const fetchSummarized = (place, placeType, placeId) => {
     fetchResults(place || nationalKey, estimatesApi),
   ]
 
-  console.log('Requests:', requests)
-
   return Promise.all(requests).then(parseSummarized)
 }
 
 
 const getSummarizedRequests = (filters, states) => {
   if (filters.placeType === 'agency') {
-    const stateName = slugify(newOriToState(filters.place, states))
+    const stateAbbr = newOriToStateAbbr(filters.place, states)
     return [
       fetchAgencySummarized(filters.place, filters.crime),
-      fetchSummarized(stateName, filters.placeType, filters.placeId),
+      fetchSummarized(stateAbbr, filters.placeType, filters.placeId),
       fetchSummarized(),
     ]
   }

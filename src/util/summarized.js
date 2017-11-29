@@ -8,6 +8,6 @@ export const calculateRates = (summaries, placeType) => {
   console.log('Calc Rates:', summaries, placeType)
 }
   export const reshapeData = dataIn => {
-    console.log('DataIn:', dataIn)
-    Object.assign(...dataIn.map(d => ({ [d.key]: d.results })))
+    console.log('Data In:', dataIn)
+    return Object.assign(...dataIn.map(d => ({ [d.key]: d.results })))
   }
