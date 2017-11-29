@@ -13,6 +13,7 @@ import TrendSourceText from '../components/trend/TrendSourceText'
 import { generateCrimeReadme } from '../util/content'
 import { getPlaceInfo } from '../util/place'
 import { combinePlaces, filterByYear } from '../util/summary'
+import { summarizedFilterByYear, summarizedCombinePlaces } from '../util/summarized'
 import { nationalKey } from '../util/usa'
 import { lookupDisplayName } from '../util/location'
 
@@ -23,20 +24,36 @@ class TrendContainer extends React.Component {
     this.state = { yearSelected: until }
   }
 
-  getContent = ({ crime, filters, places, summaries, placeName }) => {
+  getContent = ({ crime, filters, places, summaries, summarized, placeName }) => {
     const { loading, error } = summaries
+    const { summarizedLoading, summarizedError } = summarized
+
     const { yearSelected } = this.state
 
     if (loading) return <Loading />
     if (error) return <ErrorCard error={error} />
+
+    if (summarizedLoading) return <Loading />
+    if (summarizedError) return <ErrorCard error={error} />
 
 
     const offenses =
       crime === 'rape' ? ['rape-legacy', 'rape-revised'] : [crime]
 
     const filteredByYear = filterByYear(summaries.data, filters.since, filters.until)
+    console.log('Summaries:', summaries)
+    console.log('summarized:', summarized)
+    console.log('Summaries FilteredByYear:', filteredByYear)
+
+    const summarizedByYear = summarizedFilterByYear(summarized.data, filters.since, filters.until)
+    console.log('Summaries summarizedFilterByYear:', summarizedByYear)
+
     const data = combinePlaces(filteredByYear, offenses)
+    console.log('combinePlaces summary:', data)
     if (!data || data.length === 0) return <NoData />
+
+    const summarizedData = summarizedCombinePlaces(summarizedByYear, offenses)
+    console.log('summarizedCombinePlaces summary:', summarizedData)
 
     const fname = `${filters.place}-${filters.crime}-${filters.since}-${filters.until}`
     const title =
@@ -50,9 +67,20 @@ class TrendContainer extends React.Component {
       return { year: d.year, ...Object.assign(...placeData) }
     })
 
+    const summarizedDlData = summarizedData.map(d => {
+      const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }))
+      return { year: d.year, ...Object.assign(...placeData) }
+    })
+
+
     const download = [
       { content: readme, filename: 'README.md' },
       { data: dlData, filename: `${fname}.csv` },
+    ]
+
+    const summarizedDownload = [
+      { content: readme, filename: 'README.md' },
+      { data: summarizedDlData, filename: `${fname}.csv` },
     ]
 
     return (
@@ -60,7 +88,7 @@ class TrendContainer extends React.Component {
         <TrendChart
           crime={crime}
           filters={filters}
-          data={data}
+          data={summarizedData}
           places={places}
           onChangeYear={this.updateYear}
           initialYearSelected={yearSelected}
@@ -69,6 +97,11 @@ class TrendContainer extends React.Component {
         <DownloadDataBtn
           ariaLabel={`Download ${title} data as a CSV`}
           data={download}
+          filename={fname}
+        />
+        <DownloadDataBtn
+          ariaLabel={`New Download ${title} data as a CSV`}
+          data={summarizedDownload}
           filename={fname}
         />
       </div>
@@ -83,6 +116,7 @@ class TrendContainer extends React.Component {
     const {
       places,
       summaries,
+      summarized,
       region,
       states,
       filters,
@@ -105,7 +139,7 @@ class TrendContainer extends React.Component {
             {startCase(filters.crime)} rate in {placeType === 'region' ? 'the' : ''} {placeName}, {filters.since}-{filters.until}
           </h2>
           <div className="bg-white">
-            {this.getContent({ crime, filters, places, summaries, placeName })}
+            {this.getContent({ crime, filters, places, summaries, summarized, placeName })}
           </div>
         </div>
         <div>
@@ -123,6 +157,7 @@ class TrendContainer extends React.Component {
                       filters,
                       places,
                       summaries,
+                      summarized,
                       placeName
                     })}
                   </div>
@@ -143,11 +178,15 @@ TrendContainer.propTypes = {
     data: PropTypes.object,
     loading: PropTypes.boolean,
   }).isRequired,
+  summarized: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
+  }).isRequired,
   region: PropTypes.object,
   states: PropTypes.object,
 }
 
-export const mapStateToProps = ({ filters, summaries, region, states }) => {
+export const mapStateToProps = ({ filters, summaries, summarized, region, states }) => {
   const { place } = filters
 
   const places = [place]
@@ -156,6 +195,7 @@ export const mapStateToProps = ({ filters, summaries, region, states }) => {
   return {
     places,
     summaries,
+    summarized,
     ...getPlaceInfo(filters),
     region,
     states,
