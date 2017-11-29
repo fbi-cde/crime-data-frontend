@@ -1,5 +1,10 @@
 # Change Log
 All notable changes to this project be documented in this file.
+## [2.18.6] - 2017-11-28
+### Fixed
+- Fixes Agency Participation displayed on State Explorer Pages ([#1290](https://github.com/18F/crime-data-frontend/pull/1279))
+- Fixes UCR State Program Participation Display on About Page (https://github.com/18F/crime-data-frontend/commit/f2214862192a9025110a6b72647ec339bda12d7a)
+
 ## [2.18.5] - 2017-10-19
 ### Added
 - Added information that discusses issues with NIBRS data being displayed ([#1281](https://github.com/18F/crime-data-frontend/pull/1281))
