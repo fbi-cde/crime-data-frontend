@@ -19,12 +19,14 @@ const ExplorerHeaderContainer = ({
   region,
   states,
 }) => {
-  const isLoading = isAgency ? agencies.loading : participation.loading
+  // const isLoading = isAgency ? agencies.loading : participation.loading
+  const isLoading = agencies.loading
   let placeDisplay
   let location
   if (filters.placeType === 'agency') {
-    placeDisplay = agency.agency_name
+    placeDisplay = agency.agency_name_edit
     location = agencies.location;
+    console.log('ExplorerHeaderContainer:', agency, placeDisplay, location)
   } else if (filters.placeType === 'state' || filters.placeType === 'region') {
     placeDisplay = lookupDisplayName(filters, region.regions, states.states)
     location = filters.place;
@@ -32,6 +34,7 @@ const ExplorerHeaderContainer = ({
     placeDisplay = 'United States'
     location = filters.place;
   }
+
   return (
     <div>
       <div className="items-baseline mt2 mb4">

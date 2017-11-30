@@ -59,7 +59,6 @@ class AgencySearch extends Component {
   }
 
   handleResultsClick = d => e => {
-    console.log('d:', d)
     e.preventDefault()
     this.setState({ search: d.agency_name, hasSelection: true })
     this.props.onChange({ place: d.ori, placeType: 'agency' })

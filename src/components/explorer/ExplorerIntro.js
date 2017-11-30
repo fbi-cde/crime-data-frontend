@@ -10,13 +10,14 @@ import { newOriToState } from '../../util/agencies'
 import { nationalKey } from '../../util/usa'
 
 const ExplorerIntro = ({ agency, filters, participation, placeName, region, states }) => {
+  console.log('ExplorerIntro:', agency)
   if (agency) {
     return (
       <ExplorerIntroAgency
-        county={agency.primary_county}
+        county={agency.county_name}
         crime={filters.crime}
-        hasNibrs={agency.nibrs_months_reported === 12}
-        name={agency.agency_name}
+        hasNibrs={false}
+        name={agency.agency_name_edit}
         usState={newOriToState(filters.place, states)}
         type={agency.agency_type_name}
       />
