@@ -17,6 +17,7 @@ const ExplorerIntroAgency = ({
   usState,
   type,
 }) => {
+  console.log('ExplorerIntroAgency:', county, crime, hasNibrs, name, usState, type);
   const showCounty =
     (county && type === 'City') || type === 'University or College'
   const crimeTerm = (

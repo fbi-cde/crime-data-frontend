@@ -67,7 +67,7 @@ ExplorerIntro.propTypes = {
     loading: PropTypes.boolean,
   }).isRequired,
   filters: PropTypes.object.isRequired,
-  placeName: PropTypes.string.isRequired,
+  placeName: PropTypes.string,
   states: PropTypes.object,
   region: PropTypes.object,
 }

@@ -24,7 +24,7 @@ const ExplorerHeaderContainer = ({
   let location
   if (filters.placeType === 'agency') {
     placeDisplay = agency.agency_name
-    location = newOriToState(filters.place);
+    location = agencies.location;
   } else if (filters.placeType === 'state' || filters.placeType === 'region') {
     placeDisplay = lookupDisplayName(filters, region.regions, states.states)
     location = filters.place;

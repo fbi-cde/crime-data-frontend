@@ -41,19 +41,13 @@ class TrendContainer extends React.Component {
       crime === 'rape' ? ['rape-legacy', 'rape-revised'] : [crime]
 
     const filteredByYear = filterByYear(summaries.data, filters.since, filters.until)
-    console.log('Summaries:', summaries)
-    console.log('summarized:', summarized)
-    console.log('Summaries FilteredByYear:', filteredByYear)
 
     const summarizedByYear = summarizedFilterByYear(summarized.data, filters.since, filters.until)
-    console.log('Summaries summarizedFilterByYear:', summarizedByYear)
 
     const data = combinePlaces(filteredByYear, offenses)
-    console.log('combinePlaces summary:', data)
     if (!data || data.length === 0) return <NoData />
 
     const summarizedData = summarizedCombinePlaces(summarizedByYear, offenses)
-    console.log('summarizedCombinePlaces summary:', summarizedData)
 
     const fname = `${filters.place}-${filters.crime}-${filters.since}-${filters.until}`
     const title =

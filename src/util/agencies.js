@@ -56,10 +56,9 @@ export const newGetAgency = (agencies, ori, placeType) => {
   if (agencies.loaded === false) return n
 
   Object.keys(agencies.data).forEach(data => {
-    if (agencies[data].ori === ori) {
-        n = agencies[data]
+    if (agencies.data[data].ori === ori) {
+        n = agencies.data[data]
     }
   })
-
   return n;
 }

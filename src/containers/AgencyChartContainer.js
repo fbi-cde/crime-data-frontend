@@ -10,7 +10,7 @@ import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import NoData from '../components/NoData'
 import { NibrsTerm, SrsTerm } from '../components/Terms'
-import { getAgency } from '../util/agencies'
+import { newGetAgency } from '../util/agencies'
 
 const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
   const { error, loading } = summary
@@ -106,7 +106,7 @@ AgencyChartContainer.propTypes = {
 }
 
 const mapStateToProps = ({ agencies, filters, summaries }) => ({
-  agency: !agencies.loading && getAgency(agencies, filters.place),
+  agency: !agencies.loading && newGetAgency(agencies, filters.place, filters.placeType),
   ...filters,
   summary: summaries,
 })

@@ -169,7 +169,7 @@ const fetchSummarized = (place, placeType, placeId) => {
 
 const getSummarizedRequests = (filters, states) => {
   if (filters.placeType === 'agency') {
-    const stateAbbr = newOriToStateAbbr(filters.place, states)
+    const stateAbbr = newOriToStateAbbr(filters.place)
     return [
       fetchAgencySummarized(filters.place, filters.crime),
       fetchSummarized(stateAbbr, filters.placeType, filters.placeId),
@@ -188,6 +188,8 @@ const getUcrParticipation = (place, placeId, placeType) => {
     path = `participation/states/${placeId}`
   } else if (placeType === 'region') {
     path = `participation/regions/${place}`
+  } else if (placeType === 'agency') {
+    path = `participation/states/${newOriToStateAbbr(place)}`
   }
 
   return get(`${API}/${path}`).then(response => ({

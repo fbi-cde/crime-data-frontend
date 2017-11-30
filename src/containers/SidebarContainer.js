@@ -68,7 +68,7 @@ const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   const isAgency = placeType === 'agency'
   const displayAgencies = (placeType !== 'region' || placeType !== 'national') && agencies.loaded
   const usState = isAgency ? newOriToState(place, states) : place
-  const agency = newGetAgency(agencies.data, place, placeType)
+  const agency = newGetAgency(agencies, place, placeType)
   const agencyData = displayAgencies ? Object.keys(agencies.data).map(k => agencies.data[k]) : []
 
 
