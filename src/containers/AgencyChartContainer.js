@@ -11,14 +11,26 @@ import Loading from '../components/Loading'
 import NoData from '../components/NoData'
 import { NibrsTerm, SrsTerm } from '../components/Terms'
 import { newGetAgency } from '../util/agencies'
+import { summarizedFilterByYear, summarizedCombinePlaces } from '../util/summarized'
 
-const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
+const Content = ({ crime, place, since, submitsNibrs, summary, summarized, until }) => {
   const { error, loading } = summary
 
   if (loading) return <Loading />
   if (error) return <ErrorCard error={error} />
 
-  const data = summary.data[place]
+  // reshape the data to what the chart is expecting
+  let offense = crime.replace(/-/g,"_")
+  let data = summarized.data[place]
+
+  data.forEach(d => {
+    d.year = d.data_year
+    const actualCount = d[offense] ? d[offense] : 0
+    const clearedCount = actualCount
+    d.actual = { "count": actualCount }
+    d.cleared = { "count": clearedCount }
+  })
+
   if (!data || data.length === 0) return <NoData />
 
   const fname = `${place}-${crime}-${since}-${until}`
@@ -57,7 +69,7 @@ const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
 }
 
 const AgencyChartContainer = params => {
-  const { agency, crime, since, summary, until } = params
+  const { agency, crime, since, summary, summarized, until } = params
 
   if (!agency) return null
 
@@ -68,7 +80,7 @@ const AgencyChartContainer = params => {
     <div className="mb7">
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-          {startCase(crime)} {noun} reported by {agency.display}, {since}–{until}
+          {startCase(crime)} {noun} reported by {agency.agency_name_edit}, {since}–{until}
         </h2>
         <Content submitsNibrs={submitsNibrs} {...params} />
       </div>
@@ -105,10 +117,11 @@ AgencyChartContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, summaries }) => ({
+const mapStateToProps = ({ agencies, filters, summaries, summarized }) => ({
   agency: !agencies.loading && newGetAgency(agencies, filters.place, filters.placeType),
   ...filters,
   summary: summaries,
+  summarized: summarized
 })
 const mapDispatchToProps = dispatch => ({ dispatch })
 
