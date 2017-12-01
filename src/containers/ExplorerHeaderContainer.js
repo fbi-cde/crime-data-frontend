@@ -26,7 +26,6 @@ const ExplorerHeaderContainer = ({
   if (filters.placeType === 'agency') {
     placeDisplay = agency.agency_name_edit
     location = agencies.location;
-    console.log('ExplorerHeaderContainer:', agency, placeDisplay, location)
   } else if (filters.placeType === 'state' || filters.placeType === 'region') {
     placeDisplay = lookupDisplayName(filters, region.regions, states.states)
     location = filters.place;
@@ -42,7 +41,7 @@ const ExplorerHeaderContainer = ({
           id="explorerHeaderTitle"
           className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-light"
         >
-          {isAgency && isLoading !== 'region' ? 'Loading agency...' : placeDisplay}
+          {isAgency && isLoading ? 'Loading agency...' : placeDisplay}
         </h1>
       </div>
       <div className="mb5 clearfix">

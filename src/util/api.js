@@ -154,7 +154,7 @@ const fetchSummarized = (place, placeType, placeId) => {
   } else if (placeType === 'agency') {
     estimatesApi = `summarized/state/${place}`
   } else if (placeType === 'region') {
-    estimatesApi = `summarized/regions/${place}`
+    estimatesApi = `summarized/region/${place}`
   } else {
     estimatesApi = 'summarized'
   }
