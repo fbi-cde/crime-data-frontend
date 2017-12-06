@@ -74,7 +74,7 @@ const fetchPoliceEmployment = (place, placeType, placeId) => {
   } else if (placeType === 'agency') {
     peApi = `police-employment/state/${place}/agency/${placeId}`
   } else if (placeType === 'region') {
-    peApi = `police-employment/regions/${place}`
+    peApi = `police-employment/region/${place}`
   } else {
     peApi = 'police-employment'
   }
@@ -184,7 +184,7 @@ const fetchSummarized = (place, placeType, placeId) => {
   } else if (placeType === 'agency') {
     estimatesApi = `summarized/state/${place}`
   } else if (placeType === 'region') {
-    estimatesApi = `summarized/regions/${place}`
+    estimatesApi = `summarized/region/${place}`
   } else {
     estimatesApi = 'summarized'
   }
