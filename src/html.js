@@ -1,4 +1,4 @@
-export default (content, head, state, nonce) =>
+export default (content, head, state) =>
   `
   <!DOCTYPE html>
   <html lang='en'>
@@ -12,10 +12,10 @@ export default (content, head, state, nonce) =>
     </head>
     <body>
       <div id='app'>${content}</div>
-      <script nonce='${nonce}'>
+      <script>
         window.__STATE__ = ${JSON.stringify(state).replace(/</g, '\\u003c')}
       </script>
       <script src='/bundle.js'></script>
     </body>
   </html>
-`
+  `

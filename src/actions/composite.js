@@ -1,5 +1,6 @@
 import { updateFilters } from './filters'
 import { fetchNibrs } from './nibrs'
+import { fetchNibrsCounts } from '../actions/nibrsCounts'
 import { fetchSummaries } from '../actions/summary'
 import { fetchUcrParticipation } from '../actions/participation'
 import history, { createNewLocation } from '../util/history'
@@ -19,7 +20,15 @@ const fetchData = () => (dispatch, getState) => {
     }
     if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
     if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
+<<<<<<< master
     if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrs(filters))
+=======
+    if (shouldFetchNibrs(filters)) {
+      console.log('Fetch Nibrs')
+      dispatch(fetchNibrs(filters))
+      dispatch(fetchNibrsCounts(filters))
+    }
+>>>>>>> HEAD~22
   }
 }
 
