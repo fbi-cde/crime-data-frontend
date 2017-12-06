@@ -19,8 +19,7 @@ const ExplorerHeaderContainer = ({
   region,
   states,
 }) => {
-  // const isLoading = isAgency ? agencies.loading : participation.loading
-  const isLoading = agencies.loading
+  const isLoading = isAgency ? agencies.loading : participation.loading
   let placeDisplay
   let location
   if (filters.placeType === 'agency') {
