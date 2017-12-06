@@ -6,6 +6,7 @@ import filters from './filters'
 import glossary from './glossary'
 import nibrs from './nibrs'
 import participation from './participation'
+import policeEmployment from './policeEmployment'
 import sidebar from './sidebar'
 import summaries from './summary'
 import summarized from './summarized'
@@ -20,6 +21,7 @@ export default combineReducers({
   glossary,
   nibrs,
   participation,
+  policeEmployment,
   sidebar,
   summaries,
   region,

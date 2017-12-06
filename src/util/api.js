@@ -67,6 +67,36 @@ const getNibrsRequests = params => {
   return slices.map(s => fetchNibrs({ ...s, crime, place, placeType }))
 }
 
+const fetchPoliceEmployment = (place, placeType, placeId) => {
+  let peApi
+  if (placeType === 'state') {
+    peApi = `police-employment/state/${placeId}`
+  } else if (placeType === 'agency') {
+    peApi = `police-employment/state/${place}/agency/${placeId}`
+  } else if (placeType === 'region') {
+    peApi = `police-employment/regions/${place}`
+  } else {
+    peApi = 'police-employment'
+  }
+
+  const requests = [
+    fetchResults(place || nationalKey, peApi),
+  ]
+
+  return Promise.all(requests).then(parsePoliceEmployment)
+}
+
+const getPoliceEmploymentRequests = (filters) => {
+  return [fetchPoliceEmployment(filters.place, filters.placeType, filters.placeId)]
+}
+
+const parsePoliceEmployment = ([policeEmployment]) => ({
+  ...policeEmployment,
+  results: policeEmployment.results.map(datum => ({
+    ...datum,
+  })),
+})
+
 const fetchResults = (key, path) =>
   get(`${API}/${path}?per_page=500`).then(response => ({
     key,
@@ -258,6 +288,7 @@ export default {
   getAgency,
   getAgencies,
   getNibrsRequests,
+  getPoliceEmploymentRequests,
   getSummaryRequests,
   getSummarizedRequests,
   getUcrParticipation,

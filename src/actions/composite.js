@@ -1,5 +1,6 @@
 import { updateFilters } from './filters'
 import { fetchNibrs } from './nibrs'
+import { fetchPoliceEmployment} from './policeEmployment'
 import { fetchSummaries } from '../actions/summary'
 import { fetchSummarized } from '../actions/summarized'
 import { fetchUcrParticipation } from '../actions/participation'
@@ -24,6 +25,7 @@ const fetchData = () => (dispatch, getState) => {
       if (filters.placeType !== 'agency')dispatch(fetchUcrParticipation(filters))
       dispatch(fetchSummaries(filters, states))
       dispatch(fetchSummarized(filters, states))
+      dispatch(fetchPoliceEmployment(filters))
 
       if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
     }
