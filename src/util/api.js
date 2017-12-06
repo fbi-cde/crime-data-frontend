@@ -199,12 +199,59 @@ export const formatError = error => ({
   url: error.config.url,
 })
 
+const fetchNibrsCounts = ({ crime, dim, place, placeType, type, placeId }) => {
+  const loc =
+    place === nationalKey
+      ? 'national'
+      : placeType === 'agency'
+        ? `agencies/${place}`
+        : `states/${placeId}`
+
+  const field = dimensionEndpoints[dim] || dim
+  const url = `${API}/${type}/count/${field}/${loc}`
+
+  const params = {
+    per_page: 50,
+    aggregate_many: false,
+    explorer_offense: mapToApiOffense(crime),
+  }
+
+  console.log('URL:', url)
+  return get(url, params).then(d => ({
+    key: `${type}${upperFirst(dim)}`,
+    data: d.results,
+  }))
+}
+
+const getNibrsCountsRequests = params => {
+  const { crime, place, placeType } = params
+
+  const slices = [
+    { type: 'offender', dim: '' },
+    { type: 'offender', dim: 'age' },
+    { type: 'offender', dim: 'sex' },
+    { type: 'offender', dim: 'race_code' },
+    { type: 'offense', dim: 'ethnicity' },
+    { type: 'offense', dim: 'offenseName' },
+    { type: 'victim', dim: '' },
+    { type: 'victim', dim: 'age' },
+    { type: 'victim', dim: 'ethnicity' },
+    { type: 'victim', dim: 'race' },
+    { type: 'victim', dim: 'sex' },
+    { type: 'victim', dim: 'location' },
+  ]
+
+  return slices.map(s => fetchNibrsCounts({ ...s, crime, place, placeType }))
+}
+
 export default {
   fetchAggregates,
   fetchAgencyAggregates,
   getAgency,
   fetchNibrs,
   getNibrsRequests,
+  fetchNibrsCounts,
+  getNibrsCountsRequests,
   getSummaryRequests,
   getUcrParticipation,
   getUcrParticipationRequests,
