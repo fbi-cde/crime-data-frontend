@@ -24,6 +24,12 @@ const ExplorerIntroState = ({ crime, place, participation, until, placeName }) =
   const isArson = crime === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
   const untilUcr = participation.find(p => p.year === until)
+  let totalAgencies = 0
+  let coveredAgencies = 0
+  if ( untilUcr ) {
+    totalAgencies = untilUcr.total_agencies
+    coveredAgencies = untilUcr.covered_agencies
+  }
   const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
   const crimeTerm = (
     <Term id={mapCrimeToGlossaryTerm(crime)}>
@@ -44,9 +50,9 @@ const ExplorerIntroState = ({ crime, place, participation, until, placeName }) =
               , the FBI <EstimatedTerm /> crime statistics for{' '}
 
               {placeName} based on data received from{' '}
-              {highlight(formatNum(untilUcr.total_agencies - untilUcr.covered_agencies))} law
+              {highlight(formatNum(totalAgencies - coveredAgencies))} law
               enforcement agencies out of{' '}
-              {highlight(formatNum(untilUcr.total_agencies))} agencies in the
+              {highlight(formatNum(totalAgencies))} agencies in the
               state that year.
             </p>
           </div>
@@ -56,7 +62,7 @@ const ExplorerIntroState = ({ crime, place, participation, until, placeName }) =
             </p>
             <p className="serif">
 
-              In {until}, {formatNum(untilUcr.total_agencies - untilUcr.covered_agencies)}{' '}
+              In {until}, {formatNum(totalAgencies - coveredAgencies)}{' '}
               {placeName} law enforcement agencies voluntarily
               reported data to the FBI. The charts below feature unestimated
               data.

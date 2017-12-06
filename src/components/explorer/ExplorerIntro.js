@@ -10,7 +10,6 @@ import { newOriToState } from '../../util/agencies'
 import { nationalKey } from '../../util/usa'
 
 const ExplorerIntro = ({ agency, filters, participation, placeName, region, states }) => {
-  console.log('ExplorerIntro:', agency)
   if (agency) {
     return (
       <ExplorerIntroAgency
