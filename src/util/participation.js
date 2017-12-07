@@ -9,7 +9,7 @@ const lookup = state => data[state] || {}
 const isValidCrime = crime => offensesUtil.includes(crime)
 const noNibrs = ['violent-crime', 'property-crime']
 
-export const shouldFetchUcr = (filters, region, states) => validateFilter(filters, region.regions, states.states)
+export const shouldFetchUcr = (filters, region, states) => filters.placeType !== 'agency' && validateFilter(filters, region.regions, states.states)
 
 export const shouldFetchSummaries = (filters, region, states) =>
   isValidCrime(filters.crime) && validateFilter(filters, region.regions, states.states)
