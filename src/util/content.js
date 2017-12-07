@@ -33,7 +33,7 @@ const content = {
 }
 
 export const generateCrimeReadme = (crime, title = 'README') => {
-  console.log('CRIME:', crime)
+  console.log('generateCrimeReadme:', crime)
   const crimeJson = content.crimes[crime]
   const caveats = crimeJson.caveats
     .map(c => `### ${c.heading}\n\n${c.text}`)
