@@ -15,7 +15,7 @@ export const shouldFetchSummaries = (filters, region, states) =>
   isValidCrime(filters.crime) && validateFilter(filters, region.regions, states.states)
 
 export const shouldFetchNibrs = ({ crime, place, placeType }) => {
-  if (noNibrs.includes(crime) || !isValidState(place, placeType)) return false
+  if (noNibrs.includes(crime) || placeType === 'region') return false
 
   const placeNorm = placeType === 'agency' ? oriToState(place) : place
   const coverage = lookup(placeNorm)

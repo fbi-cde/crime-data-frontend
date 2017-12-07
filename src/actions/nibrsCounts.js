@@ -15,7 +15,7 @@ export const receivedNibrsCounts = data => ({
   data,
 })
 
-export const fetchNibrs = params => dispatch => {
+export const fetchNibrsCounts = params => dispatch => {
   dispatch(fetchingNibrsCounts())
 
   const requests = api.getNibrsCountsRequests(params)

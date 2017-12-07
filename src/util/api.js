@@ -200,6 +200,7 @@ export const formatError = error => ({
 })
 
 const fetchNibrsCounts = ({ crime, dim, place, placeType, type, placeId }) => {
+  console.log('fetchNibrsCounts:', crime, dim, place, placeType, type, placeId)
   const loc =
     place === nationalKey
       ? 'national'
@@ -208,7 +209,9 @@ const fetchNibrsCounts = ({ crime, dim, place, placeType, type, placeId }) => {
         : `states/${placeId}`
 
   const field = dimensionEndpoints[dim] || dim
-  const url = `${API}/${type}/count/${field}/${loc}`
+  let url
+  if (field !== '') { url = `${API}/nibrs/${type}/count/${loc}/${field}` } else { url = `${API}/nibrs/${type}/count/${loc}` }
+
 
   const params = {
     per_page: 50,
@@ -224,15 +227,14 @@ const fetchNibrsCounts = ({ crime, dim, place, placeType, type, placeId }) => {
 }
 
 const getNibrsCountsRequests = params => {
-  const { crime, place, placeType } = params
+  const { crime, place, placeType, placeId } = params
 
   const slices = [
     { type: 'offender', dim: '' },
     { type: 'offender', dim: 'age' },
     { type: 'offender', dim: 'sex' },
-    { type: 'offender', dim: 'race_code' },
-    { type: 'offense', dim: 'ethnicity' },
-    { type: 'offense', dim: 'offenseName' },
+    { type: 'offender', dim: 'race' },
+    { type: 'offender', dim: 'ethnicity' },
     { type: 'victim', dim: '' },
     { type: 'victim', dim: 'age' },
     { type: 'victim', dim: 'ethnicity' },
@@ -240,8 +242,8 @@ const getNibrsCountsRequests = params => {
     { type: 'victim', dim: 'sex' },
     { type: 'victim', dim: 'location' },
   ]
-
-  return slices.map(s => fetchNibrsCounts({ ...s, crime, place, placeType }))
+  console.log('getNibrsCountsRequests:', slices)
+  return slices.map(s => fetchNibrsCounts({ ...s, crime, place, placeType, placeId }))
 }
 
 export default {
