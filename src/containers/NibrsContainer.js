@@ -44,6 +44,7 @@ const NibrsContainer = ({
   crime,
   isAgency,
   nibrs,
+  nibrsCount,
   participation,
   place,
   placeType,
@@ -51,27 +52,24 @@ const NibrsContainer = ({
   until,
   states,
 }) => {
-  if (
-    (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
-    !shouldShowNibrs({ crime, place, placeType }, states)
-  ) {
-    return null
-  }
 
   const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
   const { data, error } = nibrs
 
   const isLoading = isAgency
-    ? nibrs.loading
-    : nibrs.loading || participation.loading
+    ? nibrsCount.loading
+    : nibrsCount.loading || participation.loading
   const isReady = !isLoading && error === null && !!data
 
   let totalCount = 0
   let content = null
 
+  console.log('NIBRSContainer: Booleans', isReady, error, isLoading)
+
   if (error) content = <ErrorCard error={error} />
   else if (isReady) {
+    console.log('NIBRS Ready')
     const filteredData = filterNibrsData(data, { since, until })
     const dataParsed = parseNibrs(filteredData, crime)
 
@@ -150,6 +148,10 @@ NibrsContainer.propTypes = {
     loading: PropTypes.bool,
   }).isRequired,
   place: PropTypes.string.isRequired,
+  nibrsCounts: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.bool,
+  }).isRequired,
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   participation: PropTypes.array.isRequired,
@@ -157,7 +159,11 @@ NibrsContainer.propTypes = {
   states: PropTypes.object.isRequired,
 }
 
+<<<<<<< master
 const mapStateToProps = ({ agencies, filters, nibrs, participation, states }) => {
+=======
+const mapStateToProps = ({ agencies, filters, nibrs, nibrsCounts, participation }) => {
+>>>>>>> HEAD~19
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -177,6 +183,7 @@ const mapStateToProps = ({ agencies, filters, nibrs, participation, states }) =>
     place,
     placeType,
     nibrs,
+    nibrsCounts,
     participation: filteredParticipation,
     states,
   }
