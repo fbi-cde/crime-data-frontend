@@ -44,33 +44,34 @@ const NibrsContainer = ({
   crime,
   isAgency,
   nibrs,
+  nibrsCount,
   participation,
   place,
   placeType,
   since,
   until,
 }) => {
-  if (
-    (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
-    !shouldShowNibrs({ crime, place, placeType })
-  ) {
-    return null
-  }
+  console.log('NIBRSContainer:', isAgency, 'Agency:', agency)
+
+  console.log('NIBRSContainer: I')
 
   const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
   const { data, error } = nibrs
 
   const isLoading = isAgency
-    ? nibrs.loading
-    : nibrs.loading || participation.loading
+    ? nibrsCount.loading
+    : nibrsCount.loading || participation.loading
   const isReady = !isLoading && error === null && !!data
 
   let totalCount = 0
   let content = null
 
+  console.log('NIBRSContainer: Booleans', isReady, error, isLoading)
+
   if (error) content = <ErrorCard error={error} />
   else if (isReady) {
+    console.log('NIBRS Ready')
     const filteredData = filterNibrsData(data, { since, until })
     const dataParsed = parseNibrs(filteredData, crime)
 
@@ -149,13 +150,17 @@ NibrsContainer.propTypes = {
     loading: PropTypes.bool,
   }).isRequired,
   place: PropTypes.string.isRequired,
+  nibrsCounts: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.bool,
+  }).isRequired,
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   participation: PropTypes.array.isRequired,
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, nibrs, participation }) => {
+const mapStateToProps = ({ agencies, filters, nibrs, nibrsCounts, participation }) => {
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -175,6 +180,7 @@ const mapStateToProps = ({ agencies, filters, nibrs, participation }) => {
     place,
     placeType,
     nibrs,
+    nibrsCounts,
     participation: filteredParticipation,
   }
 }
