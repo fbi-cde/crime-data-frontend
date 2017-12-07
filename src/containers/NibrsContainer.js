@@ -8,7 +8,7 @@ import Loading from '../components/Loading'
 import NibrsCard from '../components/nibrs/NibrsCard'
 import NibrsIntro from '../components/nibrs/NibrsIntro'
 import { NibrsTerm } from '../components/Terms'
-import parseNibrs from '../util/nibrs'
+import parseNibrsCounts from '../util/nibrsCounts'
 import { getAgency, oriToState } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import ucrParticipation, {
@@ -31,11 +31,11 @@ const filterNibrsData = (data, { since, until }) => {
   const filtered = {}
   Object.keys(data).forEach(key => {
     filtered[key] = data[key].filter(d => {
-      const year = parseInt(d.year, 10)
+      const year = parseInt(d.data_year, 10)
       return year >= since && year <= until
     })
   })
-
+  console.log('filterNibrsData:', filtered)
   return filtered
 }
 
@@ -44,7 +44,7 @@ const NibrsContainer = ({
   crime,
   isAgency,
   nibrs,
-  nibrsCount,
+  nibrsCounts,
   participation,
   place,
   placeType,
@@ -57,23 +57,26 @@ const NibrsContainer = ({
 
   const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
-  const { data, error } = nibrs
+  const { data, error } = nibrsCounts
 
+/*
   const isLoading = isAgency
-    ? nibrsCount.loading
-    : nibrsCount.loading || participation.loading
+    ? nibrsCounts.loading
+    : nibrsCounts.loading || participation.loading
   const isReady = !isLoading && error === null && !!data
-
+*/
+  const isReady = nibrsCounts.loaded
+  const isLoading = nibrsCounts.loading
   let totalCount = 0
   let content = null
 
-  console.log('NIBRSContainer: Booleans', isReady, error, isLoading)
+  console.log('NIBRSContainer: Booleans', isReady, error)
 
   if (error) content = <ErrorCard error={error} />
   else if (isReady) {
-    console.log('NIBRS Ready')
+    console.log('NIBRS Ready', data)
     const filteredData = filterNibrsData(data, { since, until })
-    const dataParsed = parseNibrs(filteredData, crime)
+    const dataParsed = parseNibrsCounts(filteredData, crime)
 
     totalCount = dataParsed
       .find(d => d.title === 'Offenses')
@@ -106,7 +109,7 @@ const NibrsContainer = ({
         <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} incident details reported by {placeDisplay}
         </h2>
-        {isLoading && <Loading />}
+        {!isLoading && <Loading />}
         {isReady &&
           <NibrsIntro
             crime={crime}

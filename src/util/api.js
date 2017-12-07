@@ -214,9 +214,8 @@ const fetchNibrsCounts = ({ crime, dim, place, placeType, type, placeId }) => {
 
 
   const params = {
-    per_page: 50,
+    per_page: 75,
     aggregate_many: false,
-    explorer_offense: mapToApiOffense(crime),
   }
 
   console.log('URL:', url)
