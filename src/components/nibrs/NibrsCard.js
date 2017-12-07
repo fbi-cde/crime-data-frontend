@@ -13,6 +13,7 @@ import { generateCrimeReadme } from '../../util/content'
 import { slugify } from '../../util/text'
 
 const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
+  console.log('NIBRSCARD CRIME:', crime)
   const charts = data.map((d, i) => {
     const props = {
       key: i,
@@ -51,15 +52,6 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
     )}-${since}-${until}.csv`,
   }))
 
-  download.push({
-    content: generateCrimeReadme({
-      crime,
-      title: `${title} of reported ${pluralize(crime)} in ${startCase(
-        place,
-      )}, ${since}–${until}`,
-    }),
-    filename: 'README.md',
-  })
 
   return (
     <div className="p2 sm-p3 bg-white black">
@@ -74,12 +66,7 @@ const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
           </span>
           <span className="bold fs-14 ml1 monospace">0</span>
         </div>}
-      <DownloadDataBtn
-        ariaLabel={`Download ${title} data as a CSV`}
-        data={download}
-        filename={`${place}-${crime}-${slugify(title)}-${since}-${until}`}
-        text="Download data"
-      />
+
     </div>
   )
 }
