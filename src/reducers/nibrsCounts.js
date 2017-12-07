@@ -8,6 +8,7 @@ const initialState = {
   data: null,
   error: null,
   loading: false,
+  loaded: false,
 }
 
 export default (state = initialState, action) => {
@@ -21,12 +22,14 @@ export default (state = initialState, action) => {
           url: action.error.config.url,
         },
         loading: false,
+        loaded: false,
       }
     case NIBRS_COUNTS_FETCHING:
       return {
         ...state,
         error: null,
         loading: true,
+        loaded: false,
       }
     case NIBRS_COUNTS_RECEIVED:
       return {
@@ -34,6 +37,7 @@ export default (state = initialState, action) => {
         data: action.data,
         error: null,
         loading: false,
+        loaded: true,
       }
     default:
       return state
