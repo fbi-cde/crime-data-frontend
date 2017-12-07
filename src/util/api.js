@@ -46,7 +46,7 @@ const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
 }
 
 const getNibrsRequests = params => {
-  const { crime, place, placeType } = params
+  const { crime, place, placeType, placeId } = params
 
   const slices = [
     { type: 'offender', dim: 'ageNum' },
@@ -62,7 +62,7 @@ const getNibrsRequests = params => {
     { type: 'victim', dim: 'relationship' },
   ]
 
-  return slices.map(s => fetchNibrs({ ...s, crime, place, placeType }))
+  return slices.map(s => fetchNibrs({ ...s, crime, place, placeType, placeId }))
 }
 
 const fetchResults = (key, path) =>
