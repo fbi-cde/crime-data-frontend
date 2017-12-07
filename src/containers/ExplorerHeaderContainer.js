@@ -62,7 +62,7 @@ const ExplorerHeaderContainer = ({
           />
         </div>
         <div className="sm-col sm-col-4 xs-hide">
-          <PlaceThumbnail placeName={placeDisplay} coordinates={coordinates} />
+          <PlaceThumbnail placeName={location} coordinates={coordinates} />
           <div className="mt-tiny fs-12 serif italic">
             {isAgency && !isLoading
               ? `${location}, ${placeDisplay}`
