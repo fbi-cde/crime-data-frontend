@@ -24,8 +24,7 @@ const fetchData = () => (dispatch, getState) => {
     if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrs(filters))
 =======
     if (shouldFetchNibrs(filters)) {
-      console.log('Fetch Nibrs')
-      dispatch(fetchNibrs(filters))
+      // dispatch(fetchNibrs(filters))
       dispatch(fetchNibrsCounts(filters))
     }
 >>>>>>> HEAD~22
