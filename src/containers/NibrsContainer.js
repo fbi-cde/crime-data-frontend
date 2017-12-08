@@ -1,4 +1,3 @@
-/* eslint-disable */
 import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'

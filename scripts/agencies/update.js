@@ -1,4 +1,4 @@
-/* eslint-disable no-console, arrow-body-style */
+/* eslint-disable*/
 const childProcess = require('child_process')
 const fs = require('fs')
 const path = require('path')
@@ -48,7 +48,6 @@ http
   .then(agencies => {
     const usStates = {}
     agencies.results.forEach(agency => {
-      /* eslint-disable */
       const {
         agency_name,
         agency_type_name,
@@ -61,7 +60,6 @@ http
         primary_county,
         state_abbr,
       } = agency
-      /* eslint-enable */
 
       if (!usStates[state_abbr]) usStates[state_abbr] = {}
       usStates[state_abbr][ori] = {
