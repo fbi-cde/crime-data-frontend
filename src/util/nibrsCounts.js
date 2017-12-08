@@ -139,13 +139,15 @@ export const reshapeSexData = (data, offense) => {
     unknown += filtered[i].unknown_count
   }
   const objs = [];
-  const obj = {}
+  let obj = {}
   obj.count = male
   obj.key = 'Male'
   objs.push(obj)
+  obj = {}
   obj.count = female
   obj.key = 'Female'
   objs.push(obj)
+  obj = {}
   obj.count = unknown
   obj.key = 'Unknown'
   objs.push(obj)
@@ -170,30 +172,36 @@ export const reshapeRaceData = (data, offense) => {
     americanIndian += filtered[i].american_indian
   }
   const objs = [];
-  const obj = {}
+  let obj = {}
   obj.count = americanIndian
   obj.key = 'American Indian or Alaska Native'
   objs.push(obj)
+  obj = {}
 
   obj.count = asian
   obj.key = 'Asian'
   objs.push(obj)
+  obj = {}
 
   obj.count = black
   obj.key = 'Black or African American'
   objs.push(obj)
+  obj = {}
 
   obj.count = white
   obj.key = 'White'
   objs.push(obj)
+  obj = {}
 
   obj.count = nativeHawaiian
   obj.key = 'Native Hawaiian or Pacific Islander'
   objs.push(obj)
+  obj = {}
 
   obj.count = unknown
   obj.key = 'Unknown'
   objs.push(obj)
+  obj = {}
 
   return objs;
 }
@@ -201,35 +209,363 @@ export const reshapeRaceData = (data, offense) => {
 export const reshapeEthnicityData = (data, offense) => {
   const filtered = getOffenseData(data, offense)
   let hispanic = 0;
-  let mulitple = 0
+  let multiple = 0
   let notHispanic = 0
   let unknown = 0
 
   for (const i in filtered) {
     hispanic += filtered[i].hispanic
-    mulitple += filtered[i].mulitple
+    multiple += filtered[i].multiple
     notHispanic += filtered[i].not_hispanic
     unknown += filtered[i].unknown
   }
   const objs = [];
-  const obj = {}
+  let obj = {}
   obj.count = hispanic
   obj.key = 'Hispanic or Latino'
   objs.push(obj)
+  obj = {}
 
   obj.count = notHispanic
   obj.key = 'Not Hispanic or Latino'
   objs.push(obj)
+  obj = {}
 
-
-  obj.count = mulitple
-  obj.key = 'Mulitple'
+  obj.count = multiple
+  obj.key = 'Multiple'
   objs.push(obj)
+  obj = {}
 
   obj.count = unknown
   obj.key = 'Unknown'
   objs.push(obj)
+  obj = {}
 
+  return objs;
+}
+
+export const reshapeLocationData = (data, offense) => {
+  const filtered = getOffenseData(data, offense)
+  let residencehome = 0
+  let parkinggaragelot = 0
+  let abandonedcondemnedstructure = 0
+  let airbustrainterminal = 0
+  let amusementpark = 0
+  let arenastadiumfairgrounds = 0
+  let atmseparatefrombank = 0
+  let autodealership = 0
+  let bank = 0
+  let barnightclub = 0
+  let campground = 0
+  let churchsynagoguetemplemosque = 0
+  let commercialofficebuilding = 0
+  let communitycenter = 0
+  let constructionsite = 0
+  let cyberspace = 0
+  let daycarefacility = 0
+  let departmentdiscountstore = 0
+  let dockwharfshippingterminal = 0
+  let drugstoredoctorsofficehospital = 0
+  let farmfacility = 0
+  let fieldwoods = 0
+  let gamblingfacilitycasinoracetrack = 0
+  let governmentpublicbuilding = 0
+  let grocerystore = 0
+  let highwayalleystreetsidewalk = 0
+  let hotelmotel = 0
+  let industrialsite = 0
+  let jailprisoncorrectionsfacility = 0
+  let lakewaterwaybeach = 0
+  let liquorstore = 0
+  let militarybase = 0
+  let unknown = 0
+  let parkplayground = 0
+  let rentalstoragefacility = 0
+  let restarea = 0
+  let restaurant = 0
+  let schoolcollege = 0
+  let schoolcollegeuniversity = 0
+  let schoolelementarysecondary = 0
+  let gasstation = 0
+  let missionhomelessshelter = 0
+  let shoppingmall = 0
+  let specialtystore = 0
+  let triballands = 0
+
+  for (const i in filtered) {
+    residencehome += filtered[i].residence_home
+    parkinggaragelot += filtered[i].parking_garage__lot
+    abandonedcondemnedstructure += filtered[i].abandoned_condemned__structure
+    airbustrainterminal += filtered[i].air__bus__train_terminal
+    amusementpark += filtered[i].amusement_park
+    arenastadiumfairgrounds += filtered[i].arena__stadium__fairgrounds
+    atmseparatefrombank += filtered[i].atm_separate_from_bank
+    autodealership += filtered[i].auto_dealership
+    bank += filtered[i].bank
+    barnightclub += filtered[i].bar_nightclub
+    campground += filtered[i].campground
+    churchsynagoguetemplemosque += filtered[i].church__synagogue__temple__mosque
+    commercialofficebuilding += filtered[i].commercial__office_building
+    communitycenter += filtered[i].community_center
+    constructionsite += filtered[i].construction_site
+    cyberspace += filtered[i].cyberspace
+    daycarefacility += filtered[i].daycare_facility
+    departmentdiscountstore += filtered[i].department__discount_store
+    dockwharfshippingterminal += filtered[i].dock__wharf__shipping_terminal
+    drugstoredoctorsofficehospital += filtered[i].drug_store__doctors_office__hospital
+    farmfacility += filtered[i].farm_facility
+    fieldwoods += filtered[i].field__woods
+    gamblingfacilitycasinoracetrack += filtered[i].gambling_facility__casino__race_track
+    governmentpublicbuilding += filtered[i].government__public_building
+    grocerystore += filtered[i].grocery_store
+    highwayalleystreetsidewalk += filtered[i].highway__alley__street__sidewalk
+    hotelmotel += filtered[i].hotel__motel
+    industrialsite += filtered[i].industrial_site
+    jailprisoncorrectionsfacility += filtered[i].jail__prison__corrections_facility
+    lakewaterwaybeach += filtered[i].lake__waterway__beach
+    liquorstore += filtered[i].liquor_store
+    militarybase += filtered[i].military_base
+    unknown += filtered[i].unknown
+    parkplayground += filtered[i].park__playground
+    rentalstoragefacility += filtered[i].rental_storage_facility
+    restarea += filtered[i].rest_area
+    restaurant += filtered[i].restaurant
+    schoolcollege += filtered[i].school__college
+    schoolcollegeuniversity += filtered[i].school_college__university
+    schoolelementarysecondary += filtered[i].school_elementary__secondary
+    gasstation += filtered[i].gas_station
+    missionhomelessshelter += filtered[i].mission__homeless_shelter
+    shoppingmall += filtered[i].shopping_mall
+    specialtystore += filtered[i].specialty_store
+    triballands += filtered[i].tribal_lands
+  }
+
+  const objs = [];
+  let obj = {}
+  obj.count = residencehome
+  obj.key = 'Residence Home'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = parkinggaragelot
+  obj.key = 'Parking Garage/Lot'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = abandonedcondemnedstructure
+  obj.key = 'Abandoned Condemned/Structure'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = airbustrainterminal
+  obj.key = 'Air/Bus/Train Terminal'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = amusementpark
+  obj.key = 'Amusement Park'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = arenastadiumfairgrounds
+  obj.key = 'Arena/Stadium/Fairgrounds'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = atmseparatefrombank
+  obj.key = 'ATM Separate From Bank'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = autodealership
+  obj.key = 'Auto Dealership'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = bank
+  obj.key = 'Bank'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = barnightclub
+  obj.key = 'Bar/Nightclub'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = campground
+  obj.key = 'Campground'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = churchsynagoguetemplemosque
+  obj.key = 'Church/Synagogue/Temple/Mosque'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = commercialofficebuilding
+  obj.key = 'Commercial/Office Building'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = communitycenter
+  obj.key = 'Community Center'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = constructionsite
+  obj.key = 'Construction Site'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = cyberspace
+  obj.key = 'Cyberspace'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = daycarefacility
+  obj.key = 'Daycare Facility'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = departmentdiscountstore
+  obj.key = 'Department/Discount Store'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = dockwharfshippingterminal
+  obj.key = 'Dock/Wharf/Shipping Terminal'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = drugstoredoctorsofficehospital
+  obj.key = 'Drug Store/Doctors Office/Hospital'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = farmfacility
+  obj.key = 'Farm Facility'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = fieldwoods
+  obj.key = 'Field/Woods'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = gamblingfacilitycasinoracetrack
+  obj.key = 'Gambling Facility/Casino/Race Track'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = governmentpublicbuilding
+  obj.key = 'Government/Public Building'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = grocerystore
+  obj.key = 'Grocery Store'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = highwayalleystreetsidewalk
+  obj.key = 'Highway/Alley/Street/Sidewalk'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = hotelmotel
+  obj.key = 'Hotel/Motel'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = industrialsite
+  obj.key = 'Industrial Site'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = jailprisoncorrectionsfacility
+  obj.key = 'Jail/Prison/Corrections Facility'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = lakewaterwaybeach
+  obj.key = 'Lake/Waterway/Beach'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = liquorstore
+  obj.key = 'Liquor Store'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = militarybase
+  obj.key = 'Military Base'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = unknown
+  obj.key = 'Unknown'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = parkplayground
+  obj.key = 'Park/Playground'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = rentalstoragefacility
+  obj.key = 'Rental Storage Facility'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = restarea
+  obj.key = 'Rest Area'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = restaurant
+  obj.key = 'Restaurant'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = schoolcollege
+  obj.key = 'School College'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = schoolcollegeuniversity
+  obj.key = 'School College/University'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = schoolelementarysecondary
+  obj.key = 'School Elementary Secondary'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = gasstation
+  obj.key = 'Gas Station'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = missionhomelessshelter
+  obj.key = 'Mission/Homeless Shelter'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = shoppingmall
+  obj.key = 'Shopping Mall'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = specialtystore
+  obj.key = 'Specialty Store'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = triballands
+  obj.key = 'Tribal Lands'
+  objs.push(obj)
+  obj = {}
   return objs;
 }
 
@@ -262,46 +598,57 @@ export const reshapeAgeData = (data, offense) => {
   }
 
   const objs = [];
-  const obj = {}
+  let obj = {}
   obj.count = range9099
   obj.key = '90-99'
   objs.push(obj)
+  obj = {}
 
   obj.count = range8089
   obj.key = '80-89'
   objs.push(obj)
+  obj = {}
 
   obj.count = range7079
   obj.key = '70-79'
   objs.push(obj)
+  obj = {}
 
   obj.count = range6069
   obj.key = '60-69'
   objs.push(obj)
+  obj = {}
 
   obj.count = range5059
   obj.key = '50-59'
   objs.push(obj)
+  obj = {}
 
   obj.count = range4049
   obj.key = '40-49'
   objs.push(obj)
+  obj = {}
 
   obj.count = range3039
   obj.key = '30-39'
   objs.push(obj)
+  obj = {}
 
   obj.count = range2029
   obj.key = '20-29'
   objs.push(obj)
+  obj = {}
 
   obj.count = range1019
   obj.key = '10-19'
   objs.push(obj)
+  obj = {}
 
   obj.count = range09
-  obj.key = '10-19'
+  obj.key = '0-9'
   objs.push(obj)
+  obj = {}
+
   return objs;
 }
 
@@ -350,7 +697,7 @@ const offenderDemo = (data, offense) => {
         data: reshapeAgeData(offenderAge, offense),
         noun: 'offender',
         title: 'Age of offender',
-        type: 'histogram',
+        type: 'table',
         xLabel: 'Offender Age',
       },
       {
@@ -390,7 +737,7 @@ const victimDemo = (data, offense) => {
         data: reshapeAgeData(victimAge, offense),
         noun: 'victim',
         title: 'Age of victim',
-        type: 'histogram',
+        type: 'table',
         xLabel: 'Victim Age',
       },
       {
@@ -445,7 +792,7 @@ const cleanLocationLabels = l => ({
   location_name: locationNameMapping[l.location_name],
 })
 
-const locations = data => {
+const locations = (data, offense) => {
   const { offenseLocationName } = data
   const locationData = offenseLocationName.map(cleanLocationLabels)
 
@@ -453,7 +800,7 @@ const locations = data => {
     title: 'Location type',
     data: [
       {
-        data: reshape(locationData, 'location_name'),
+        data: reshapeLocationData(locationData, offense),
         sortByValue: true,
         type: 'table',
         sentenceStart: 'Location type',
@@ -465,8 +812,8 @@ const parseNibrsCounts = (data, offense) => [
   offenderDemo(data, offense),
   victimDemo(data, offense),
   // relationships(data),
-  // locations(data),
-  offenses(data, offense),
+  locations(data, offense),
+  //offenses(data, offense),
 ]
 
 export default parseNibrsCounts
