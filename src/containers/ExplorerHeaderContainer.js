@@ -32,6 +32,7 @@ const ExplorerHeaderContainer = ({
     placeDisplay = 'United States'
     location = filters.place;
   }
+
   return (
     <div>
       <div className="items-baseline mt2 mb4">
@@ -39,7 +40,7 @@ const ExplorerHeaderContainer = ({
           id="explorerHeaderTitle"
           className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-light"
         >
-          {isAgency && isLoading !== 'region' ? 'Loading agency...' : placeDisplay}
+          {isAgency && isLoading ? 'Loading agency...' : placeDisplay}
         </h1>
       </div>
       <div className="mb5 clearfix">
@@ -62,7 +63,7 @@ const ExplorerHeaderContainer = ({
           />
         </div>
         <div className="sm-col sm-col-4 xs-hide">
-          <PlaceThumbnail placeName={placeDisplay} coordinates={coordinates} />
+          <PlaceThumbnail placeName={location} coordinates={coordinates} />
           <div className="mt-tiny fs-12 serif italic">
             {isAgency && !isLoading
               ? `${location}, ${placeDisplay}`

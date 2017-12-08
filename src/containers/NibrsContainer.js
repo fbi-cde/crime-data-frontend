@@ -50,10 +50,14 @@ const NibrsContainer = ({
   placeType,
   since,
   until,
+  states,
 }) => {
-  console.log('NIBRSContainer:', isAgency, 'Agency:', agency)
-
-  console.log('NIBRSContainer: I')
+  if (
+    (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
+    !shouldShowNibrs({ crime, place, placeType }, states)
+  ) {
+    return null
+  }
 
   const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
@@ -152,9 +156,10 @@ NibrsContainer.propTypes = {
   since: PropTypes.number.isRequired,
   participation: PropTypes.array.isRequired,
   until: PropTypes.number.isRequired,
+  states: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, nibrs, nibrsCounts, participation }) => {
+const mapStateToProps = ({ agencies, filters, nibrs, nibrsCounts, participation, states }) => {
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -176,6 +181,7 @@ const mapStateToProps = ({ agencies, filters, nibrs, nibrsCounts, participation 
     nibrs,
     nibrsCounts,
     participation: filteredParticipation,
+    states,
   }
 }
 

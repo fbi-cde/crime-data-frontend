@@ -43,7 +43,7 @@ class TrendContainer extends React.Component {
       `Reported ${pluralize(filters.crime)} in ` +
       `${placeName}, ${filters.since}-${filters.until}`
 
-    const readme = generateCrimeReadme(filters.crime, title)
+    const readme = generateCrimeReadme({ crime: filters.crime, title })
     const crimeNorm = filters.crime === 'rape' ? 'rape-legacy' : filters.crime
     const dlData = data.map(d => {
       const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }))
