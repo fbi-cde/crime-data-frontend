@@ -569,6 +569,195 @@ export const reshapeLocationData = (data, offense) => {
   return objs;
 }
 
+export const reshapeRelationship = (data, offense) => {
+  const filtered = getOffenseData(data, offense)
+  let acquaintance = 0
+  let babysittee = 0
+  let boyfriendgirlfriend = 0
+  let childboyfriendgirlfriend = 0
+  let child = 0
+  let commonlawspouse = 0
+  let employee = 0
+  let employer = 0
+  let friend = 0
+  let grandchild = 0
+  let grandparent = 0
+  let homosexualrelationship = 0
+  let inlaw = 0
+  let neighbor = 0
+  let otherfamilymember = 0
+  let otherwiseknown = 0
+  let parent = 0
+  let relationshipunknown = 0
+  let sibling = 0
+  let stepchild = 0
+  let spouse = 0
+  let stepparent = 0
+  let stepsibling = 0
+  let stranger = 0
+  let offender = 0
+  let exspouse = 0
+
+  for (const i in filtered) {
+    acquaintance += filtered[i].acquaintance
+    babysittee += filtered[i].babysittee
+    boyfriendgirlfriend += filtered[i].boyfriend_girlfriend
+    childboyfriendgirlfriend += filtered[i].child_boyfriend_girlfriend
+    child += filtered[i].child
+    commonlawspouse += filtered[i].common_law_spouse
+    employee += filtered[i].employee
+    employer += filtered[i].employer
+    friend += filtered[i].friend
+    grandchild += filtered[i].grandchild
+    grandparent += filtered[i].grandparent
+    homosexualrelationship += filtered[i].homosexual_relationship
+    inlaw += filtered[i].in_law
+    neighbor += filtered[i].neighbor
+    otherfamilymember += filtered[i].other_family_member
+    otherwiseknown += filtered[i].otherwise_known
+    parent += filtered[i].parent
+    relationshipunknown += filtered[i].relationship_unknown
+    sibling += filtered[i].sibling
+    stepchild += filtered[i].stepchild
+    spouse += filtered[i].spouse
+    stepparent += filtered[i].stepparent
+    stepsibling += filtered[i].stepsibling
+    stranger += filtered[i].stranger
+    offender += filtered[i].offender
+    exspouse += filtered[i].exspouse
+  }
+
+  const objs = [];
+  let obj = {}
+
+  obj.count = acquaintance
+  obj.key = 'Acquaintance'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = babysittee
+  obj.key = 'Babysittee'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = boyfriendgirlfriend
+  obj.key = 'Boyfriend/Girlfriend'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = childboyfriendgirlfriend
+  obj.key = 'Child of Boyfriend/Girlfriend'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = child
+  obj.key = 'Child'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = commonlawspouse
+  obj.key = 'Common Law Spouse'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = employee
+  obj.key = 'Employee'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = employer
+  obj.key = 'Employer'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = friend
+  obj.key = 'Friend'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = grandchild
+  obj.key = 'Grandchild'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = grandparent
+  obj.key = 'Grandparent'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = homosexualrelationship
+  obj.key = 'Homosexual Relationship'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = inlaw
+  obj.key = 'Inlaw'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = neighbor
+  obj.key = 'Neighbor'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = otherfamilymember
+  obj.key = 'Other Family Member'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = otherwiseknown
+  obj.key = 'Otherwise Known'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = parent
+  obj.key = 'Parent'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = relationshipunknown
+  obj.key = 'Relationship Unknown'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = sibling
+  obj.key = 'Sibling'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = stepchild
+  obj.key = 'Stepchild'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = spouse
+  obj.key = 'Spouse'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = stepparent
+  obj.key = 'Step-parent'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = stepsibling
+  obj.key = 'Step-sibling'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = stranger
+  obj.key = 'Stranger'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = exspouse
+  obj.key = 'exspouse'
+  objs.push(obj)
+  obj = {}
+
+  return objs
+}
+
 
 export const reshapeAgeData = (data, offense) => {
   const filtered = getOffenseData(data, offense)
@@ -653,24 +842,6 @@ export const reshapeAgeData = (data, offense) => {
 }
 
 
-export const rename = (data, lookup) =>
-  data.map(d => ({ key: lookup[d.key], count: d.count }))
-
-export const binAge = data => {
-  const cts = {}
-  data.forEach(d => {
-    const binNum = Math.floor(+d.key / 10) * 10
-    const [binStart, binEnd] = [binNum, binNum + 9]
-    const binKey = `${binStart}-${binEnd}`
-
-    if (isNaN(binNum)) return
-    if (!cts[binKey]) cts[binKey] = { binStart, binEnd, count: d.count }
-    else cts[binKey].count += d.count
-  })
-
-  return Object.keys(cts).map(key => ({ key, ...cts[key] }))
-}
-
 // nibrs cards
 
 const offenderDemo = (data, offense) => {
@@ -720,7 +891,7 @@ const offenderDemo = (data, offense) => {
 }
 
 const victimDemo = (data, offense) => {
-  const { victimAge, victimEthnicity, victimRace, victimSex, victimLocation } = data
+  const { victimAge, victimEthnicity, victimRace, victimSex } = data
 
   const obj = {
     title: 'Victim demographics',
@@ -769,16 +940,15 @@ const cleanRelationshipLabels = r => {
   }
 }
 
-const relationships = data => {
-  const { victimRelationship } = data
+const relationships = (data, offense) => {
+  const { victimRelationships } = data
 
-  const relationshipData = victimRelationship.map(cleanRelationshipLabels)
 
   return {
     title: 'Victim’s relationship to the offender',
     data: [
       {
-        data: reshape(relationshipData, 'offender_relationship'),
+        data: reshapeRelationship(data, offense),
         sortByValue: true,
         type: 'table',
         sentenceStart: 'The victim’s relationship to the offender',
@@ -787,32 +957,23 @@ const relationships = data => {
   }
 }
 
-const cleanLocationLabels = l => ({
-  ...l,
-  location_name: locationNameMapping[l.location_name],
-})
 
-const locations = (data, offense) => {
-  const { offenseLocationName } = data
-  const locationData = offenseLocationName.map(cleanLocationLabels)
-
-  return {
+const locations = (data, offense) => ({
     title: 'Location type',
     data: [
       {
-        data: reshapeLocationData(locationData, offense),
+        data: reshapeLocationData(data, offense),
         sortByValue: true,
         type: 'table',
         sentenceStart: 'Location type',
       },
     ],
-  }
-}
+  })
 const parseNibrsCounts = (data, offense) => [
   offenderDemo(data, offense),
   victimDemo(data, offense),
-  // relationships(data),
-  locations(data, offense),
+  relationships(data, offense),
+  locations(data.victimLocation, offense),
   //offenses(data, offense),
 ]
 
