@@ -13,6 +13,7 @@ import { generateCrimeReadme } from '../../util/content'
 import { slugify } from '../../util/text'
 
 const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
+  console.log('NibrsCard:', data)
   const charts = data.map((d, i) => {
     const props = {
       key: i,
