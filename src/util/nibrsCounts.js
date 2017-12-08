@@ -134,14 +134,27 @@ export const reshapeSexData = (data, offense) => {
   console.log('reshapeSexData', data, offense)
   const filtered = getOffenseData(data, offense)
   console.log('Filtered By Offense:', filtered)
-  let male_count = 0;
-  let female_count = 0
-  const unknow_count = 0
+  let male = 0;
+  let female = 0
+  let unknown = 0
   for (const i in filtered) {
-    male_count += filtered[i].male_count
-    female_count += filtered[i].female_count
-    unknown_count += filtered[i].unknown_count
+    male += filtered[i].male_count
+    female += filtered[i].female_count
+    unknown += filtered[i].unknown_count
   }
+  const objs = [];
+  const obj = {}
+  obj.count = male
+  obj.key = 'Male'
+  objs.push(obj)
+  obj.count = female
+  obj.key = 'Female'
+  objs.push(obj)
+  obj.count = unknown
+  obj.key = 'Unknown'
+  objs.push(obj)
+  console.log('Objs:', objs)
+  return objs;
 }
 
 
@@ -178,7 +191,7 @@ const offenderDemo = (data, offense) => {
     title: 'Offender demographics',
     data: [
       {
-        data: rename(reshapeSexData(offenderSex, offense), sexCodes),
+        data: reshapeSexData(offenderSex, offense),
         noun: 'offender',
         sentenceStart: 'Sex',
         title: 'Sex of offender',
