@@ -32,6 +32,8 @@ const ExplorerHeaderContainer = ({
     placeDisplay = 'United States'
     location = filters.place;
   }
+  console.log("isAgency="+isAgency)
+  console.log("isLoading="+isLoading)
   return (
     <div>
       <div className="items-baseline mt2 mb4">
@@ -39,7 +41,7 @@ const ExplorerHeaderContainer = ({
           id="explorerHeaderTitle"
           className="flex-auto m0 pb-tiny fs-22 sm-fs-32 border-bottom border-blue-light"
         >
-          {isAgency && isLoading !== 'region' ? 'Loading agency...' : placeDisplay}
+          {isAgency && isLoading ? 'Loading agency...' : placeDisplay}
         </h1>
       </div>
       <div className="mb5 clearfix">
