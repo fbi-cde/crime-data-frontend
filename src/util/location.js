@@ -103,7 +103,6 @@ const isValidPlaceType = placeType => {
 }
 
 const generatePlaceId = (filters, regionData, stateData) => {
-  console.log('generatePlaceId:', filters, regionData, stateData)
     if (filters.placeType === 'state') {
       return lookupStateByName(stateData, filters.place).state_abbr
     } else if (filters.placeType === 'region') {
