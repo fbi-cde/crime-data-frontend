@@ -1,4 +1,3 @@
-import startCase from 'lodash.startcase'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -13,7 +12,6 @@ import { generateCrimeReadme } from '../../util/content'
 import { slugify } from '../../util/text'
 
 const NibrsCard = ({ crime, data, place, placeType, since, title, until }) => {
-  console.log('NIBRSCARD CRIME:', crime)
   const charts = data.map((d, i) => {
     const props = {
       key: i,

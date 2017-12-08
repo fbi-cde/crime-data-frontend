@@ -1,6 +1,6 @@
 import offensesUtil from './offenses'
 import { oriToState } from './agencies'
-import { validateFilter, isValidState } from './location'
+import { validateFilter } from './location'
 
 import data from '../../public/data/ucr-program-participation.json'
 
@@ -17,10 +17,8 @@ export const shouldFetchSummaries = (filters, region, states) =>
 export const shouldFetchNibrs = ({ crime, place, placeType }, states) => {
   if (noNibrs.includes(crime) || placeType === 'region') return false
 
-
   const placeNorm = placeType === 'agency' ? oriToState(place) : place
   const coverage = lookup(placeNorm)
-  console.log(coverage)
   return coverage && coverage.nibrs
 }
 
