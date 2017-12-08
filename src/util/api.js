@@ -238,6 +238,7 @@ const getNibrsCountsRequests = params => {
     { type: 'victim', dim: 'race' },
     { type: 'victim', dim: 'sex' },
     { type: 'victim', dim: 'location' },
+    { type: 'victim', dim: 'relationships' },
   ]
   return slices.map(s => fetchNibrsCounts({ ...s, crime, place, placeType, placeId }))
 }
