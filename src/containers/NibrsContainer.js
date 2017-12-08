@@ -49,10 +49,11 @@ const NibrsContainer = ({
   placeType,
   since,
   until,
+  states,
 }) => {
   if (
     (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
-    !shouldShowNibrs({ crime, place, placeType })
+    !shouldShowNibrs({ crime, place, placeType }, states)
   ) {
     return null
   }
@@ -153,9 +154,10 @@ NibrsContainer.propTypes = {
   since: PropTypes.number.isRequired,
   participation: PropTypes.array.isRequired,
   until: PropTypes.number.isRequired,
+  states: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, nibrs, participation }) => {
+const mapStateToProps = ({ agencies, filters, nibrs, participation, states }) => {
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -176,6 +178,7 @@ const mapStateToProps = ({ agencies, filters, nibrs, participation }) => {
     placeType,
     nibrs,
     participation: filteredParticipation,
+    states,
   }
 }
 

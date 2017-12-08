@@ -26,7 +26,7 @@ class PlaceThumbnail extends React.Component {
   }
 
   render() {
-    const { coordinates, place, placeType, region, states } = this.props
+    const { coordinates, place, placeType, region, states, placeName } = this.props
     const { usa } = this.state
 
     if (!usa) return <Container />
@@ -50,7 +50,7 @@ class PlaceThumbnail extends React.Component {
     } else if (place !== 'washington-dc') {
       if (place !== 'united-states') {
         actives.push(geoStates.find(
-          s => lowerCase(s.properties.name) === lowerCase(place),
+          s => lowerCase(s.properties.name) === lowerCase(placeName),
         ))
       }
     } else {
@@ -83,12 +83,14 @@ class PlaceThumbnail extends React.Component {
 
     Object.keys(geoStates).forEach(geo => {
       let activeColor = '#dfe6ed'
-      Object.keys(actives).forEach(active => {
-          if (geoStates[geo].properties.name === actives[active].properties.name) {
-            activeColor = '#94aabd'
-          }
-        });
-      geoHtml.push(<path key={geoStates[geo].id} d={path(geoStates[geo])} fill={activeColor} />)
+      if (active) {
+        Object.keys(actives).forEach(active => {
+            if (geoStates[geo].properties.name === actives[active].properties.name) {
+              activeColor = '#94aabd'
+            }
+          });
+        geoHtml.push(<path key={geoStates[geo].id} d={path(geoStates[geo])} fill={activeColor} />)
+      }
     });
 
     return (
@@ -136,6 +138,7 @@ PlaceThumbnail.propTypes = {
   placeType: PropTypes.string.isRequired,
   states: PropTypes.object.isRequired,
   region: PropTypes.object.isRequired,
+  placeName: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = ({ filters, region, states }) => {

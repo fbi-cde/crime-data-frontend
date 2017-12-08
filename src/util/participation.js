@@ -9,13 +9,13 @@ const lookup = state => data[state] || {}
 const isValidCrime = crime => offensesUtil.includes(crime)
 const noNibrs = ['violent-crime', 'property-crime']
 
-export const shouldFetchUcr = (filters, region, states) => validateFilter(filters, region.regions, states.states)
+export const shouldFetchUcr = (filters, region, states) => filters.placeType !== 'agency' && validateFilter(filters, region.regions, states.states)
 
 export const shouldFetchSummaries = (filters, region, states) =>
   isValidCrime(filters.crime) && validateFilter(filters, region.regions, states.states)
 
-export const shouldFetchNibrs = ({ crime, place, placeType }) => {
-  if (noNibrs.includes(crime) || !isValidState(place, placeType)) return false
+export const shouldFetchNibrs = ({ crime, place, placeType }, states) => {
+  if (noNibrs.includes(crime) || placeType === 'region') return false
 
   const placeNorm = placeType === 'agency' ? oriToState(place) : place
   const coverage = lookup(placeNorm)

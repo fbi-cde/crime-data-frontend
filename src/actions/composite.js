@@ -27,7 +27,7 @@ const fetchData = () => (dispatch, getState) => {
       dispatch(fetchSummarized(filters, states))
       dispatch(fetchPoliceEmployment(filters))
 
-      if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
+      if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrs(filters))
     }
   }
 }
