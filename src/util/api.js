@@ -200,7 +200,6 @@ export const formatError = error => ({
 })
 
 const fetchNibrsCounts = ({ crime, dim, place, placeType, type, placeId }) => {
-  console.log('fetchNibrsCounts:', crime, dim, place, placeType, type, placeId)
   const loc =
     place === nationalKey
       ? 'national'
@@ -218,7 +217,6 @@ const fetchNibrsCounts = ({ crime, dim, place, placeType, type, placeId }) => {
     aggregate_many: false,
   }
 
-  console.log('URL:', url)
   return get(url, params).then(d => ({
     key: `${type}${upperFirst(dim)}`,
     data: d.results,
@@ -241,7 +239,6 @@ const getNibrsCountsRequests = params => {
     { type: 'victim', dim: 'sex' },
     { type: 'victim', dim: 'location' },
   ]
-  console.log('getNibrsCountsRequests:', slices)
   return slices.map(s => fetchNibrsCounts({ ...s, crime, place, placeType, placeId }))
 }
 
