@@ -199,7 +199,7 @@ export const formatError = error => ({
   url: error.config.url,
 })
 
-const fetchNibrsCounts = ({ crime, dim, place, placeType, type, placeId }) => {
+const fetchNibrsCounts = ({ dim, place, placeType, type, placeId }) => {
   const loc =
     place === nationalKey
       ? 'national'
@@ -239,6 +239,8 @@ const getNibrsCountsRequests = params => {
     { type: 'victim', dim: 'sex' },
     { type: 'victim', dim: 'location' },
     { type: 'victim', dim: 'relationships' },
+    { type: 'offense', dim: '' },
+
   ]
   return slices.map(s => fetchNibrsCounts({ ...s, crime, place, placeType, placeId }))
 }

@@ -624,7 +624,7 @@ export const reshapeRelationship = (data, offense) => {
     stepsibling += filtered[i].stepsibling
     stranger += filtered[i].stranger
     offender += filtered[i].offender
-    exspouse += filtered[i].exspouse
+    exspouse += filtered[i].ex_spouse
   }
 
   const objs = [];
@@ -747,6 +747,11 @@ export const reshapeRelationship = (data, offense) => {
 
   obj.count = stranger
   obj.key = 'Stranger'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = offender
+  obj.key = 'Offender'
   objs.push(obj)
   obj = {}
 
@@ -930,25 +935,15 @@ const victimDemo = (data, offense) => {
   return obj;
 }
 
-const cleanRelationshipLabels = r => {
-  if (!r.offender_relationship) return r
-  const reg = new RegExp('victim was', 'gi')
-
-  return {
-    ...r,
-    offender_relationship: r.offender_relationship.replace(reg, '').trim(),
-  }
-}
 
 const relationships = (data, offense) => {
   const { victimRelationships } = data
-
 
   return {
     title: 'Victim’s relationship to the offender',
     data: [
       {
-        data: reshapeRelationship(data, offense),
+        data: reshapeRelationship(victimRelationships, offense),
         sortByValue: true,
         type: 'table',
         sentenceStart: 'The victim’s relationship to the offender',
@@ -957,6 +952,21 @@ const relationships = (data, offense) => {
   }
 }
 
+export const offensesDemo = (data, offense) => {
+  const filtered = getOffenseData(data, offense)
+  let count = 0
+  for (const i in filtered) {
+    count += filtered[i].offense_count
+  }
+  const obj = {};
+  obj.count = count;
+  obj.key = offense
+
+  return {
+    title: 'Offenses',
+    data: obj,
+  }
+}
 
 const locations = (data, offense) => ({
     title: 'Location type',
@@ -974,7 +984,7 @@ const parseNibrsCounts = (data, offense) => [
   victimDemo(data, offense),
   relationships(data, offense),
   locations(data.victimLocation, offense),
-  //offenses(data, offense),
+  offensesDemo(data.offense, offense),
 ]
 
 export default parseNibrsCounts

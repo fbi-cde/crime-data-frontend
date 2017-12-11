@@ -36,7 +36,6 @@ const NibrsIntro = ({
   const agencyCts = participation.map(p => p.nibrs_participating_agencies)
   const agencyCt = max(agencyCts)
 
-  console.log('Agency Ct:', agencyCt)
   return (
     <div className="m0 sm-col-10">
       <p>
