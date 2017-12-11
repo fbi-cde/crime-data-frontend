@@ -35,7 +35,6 @@ const filterNibrsData = (data, { since, until }) => {
       return year >= since && year <= until
     })
   })
-  console.log('filterNibrsData:', filtered)
   return filtered
 }
 
@@ -63,32 +62,19 @@ const NibrsContainer = ({
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
   const { data, error } = nibrsCounts
 
-/*
-  const isLoading = isAgency
-    ? nibrsCounts.loading
-    : nibrsCounts.loading || participation.loading
-  const isReady = !isLoading && error === null && !!data
-*/
   const isReady = nibrsCounts.loaded
   const isLoading = nibrsCounts.loading
-  const totalCount = 0
+  let totalCount = 0
   let content = null
 
-  console.log('NIBRSContainer: Booleans', isReady, error)
 
   if (error) content = <ErrorCard error={error} />
   else if (isReady) {
-    console.log('NIBRS Ready', data)
     const filteredData = filterNibrsData(data, { since, until })
     const dataParsed = parseNibrsCounts(filteredData, crime)
-
-    console.log('dataParsed', dataParsed)
-
-/*
-    totalCount = dataParsed
+     const offenseObj = dataParsed
       .find(d => d.title === 'Offenses')
-      .data.reduce((accum, next) => accum + next.count, 0)
-*/
+    totalCount = offenseObj.data.count
     content = (
       <div className="clearfix mxn1">
         {dataParsed.filter(d => d.title !== 'Offenses').map((d, i) => {
@@ -116,6 +102,18 @@ const NibrsContainer = ({
         <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
           {startCase(crime)} incident details reported by {placeDisplay}
         </h2>
+        {isLoading && <Loading />}
+       {isReady &&
+         <NibrsIntro
+           crime={crime}
+           isAgency={isAgency}
+           nibrsFirstYear={nibrsFirstYear}
+           participation={participation}
+           place={place}
+           placeDisplay={placeDisplay}
+           totalCount={totalCount}
+           until={until}
+            />}
       </div>
       {content}
       {isReady &&
