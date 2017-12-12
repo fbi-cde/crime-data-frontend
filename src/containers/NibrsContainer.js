@@ -11,9 +11,7 @@ import { NibrsTerm } from '../components/Terms'
 import parseNibrsCounts from '../util/nibrsCounts'
 import { getAgency, oriToState } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
-import ucrParticipation, {
-  shouldFetchNibrs as shouldShowNibrs,
-} from '../util/participation'
+import ucrParticipation from '../util/participation'
 import lookupUsa from '../util/usa'
 
 const initialNibrsYear = ({ place, placeType, since }) => {
@@ -48,7 +46,6 @@ const NibrsContainer = ({
   placeType,
   since,
   until,
-  states,
 }) => {
   const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
@@ -147,7 +144,7 @@ NibrsContainer.propTypes = {
   states: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, nibrsCounts, participation, states }) => {
+const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -168,7 +165,6 @@ const mapStateToProps = ({ agencies, filters, nibrsCounts, participation, states
     placeType,
     nibrsCounts,
     participation: filteredParticipation,
-    states,
   }
 }
 
