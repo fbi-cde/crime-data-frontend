@@ -514,7 +514,6 @@ export const reshapeLocationData = (data, offense) => {
 
 export const reshapeRelationship = (data, offense) => {
   const filtered = getOffenseData(data, offense)
-  console.log('reshapeRelationship:filtered:', data, offense, filtered);
   let acquaintance = 0
   let babysittee = 0
   let boyfriendgirlfriend = 0
@@ -899,7 +898,6 @@ const relationships = (data, offense) => {
 export const offensesDemo = (data, offense) => {
   const filtered = getOffenseData(data, offense)
   let count = 0
-  console.log('OffenseDemo: filtered:', data, offense, filtered)
 
   for (const i in filtered) {
     count += filtered[i].offense_count
@@ -907,7 +905,6 @@ export const offensesDemo = (data, offense) => {
   const obj = {};
   obj.count = count;
   obj.key = offense
-  console.log('OffenseDemo:', obj)
   return {
     title: 'Offenses',
     data: obj,
