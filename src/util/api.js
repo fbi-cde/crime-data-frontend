@@ -213,7 +213,7 @@ const fetchNibrsCounts = ({ dim, place, placeType, type, placeId }) => {
 
 
   const params = {
-    per_page: 75,
+    per_page: 1000,
     aggregate_many: false,
   }
 
