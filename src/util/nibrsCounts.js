@@ -719,8 +719,7 @@ export const reshapeAgeData = (data, offense) => {
   let range7079 = 0
   let range8089 = 0
   let range9099 = 0
-  let unknown = 0;
-
+  let unknown = 0
 
   for (const i in filtered) {
     range09 += filtered[i].range_0_9
@@ -734,6 +733,7 @@ export const reshapeAgeData = (data, offense) => {
     range8089 += filtered[i].range_80_89
     range9099 += filtered[i].range_90_99
     unknown += filtered[i].unknown
+
   }
 
   const objs = [];
