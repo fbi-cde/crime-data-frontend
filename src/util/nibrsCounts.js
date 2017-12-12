@@ -1,5 +1,4 @@
-/* eslint-disable max-len*/
-// tslint:disable:max-line-length
+/* eslint-disable*/
 const sexCodes = {
   F: 'Female',
   M: 'Male',
