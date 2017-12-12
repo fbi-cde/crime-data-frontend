@@ -1,16 +1,6 @@
 engines:
   duplication:
     enabled: false
-  eslint:
-    enabled: false
-    channel: 'eslint-3'
-    checks:
-      import/no-unresolved:
-        enabled: false
-  csslint:
-    enabled: true
-  scss-lint:
-    enabled: true
 ratings:
   paths:
   - '**.js'
