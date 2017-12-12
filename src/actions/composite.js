@@ -1,5 +1,4 @@
 import { updateFilters } from './filters'
-import { fetchNibrs } from './nibrs'
 import { fetchNibrsCounts } from '../actions/nibrsCounts'
 import { fetchSummaries } from '../actions/summary'
 import { fetchUcrParticipation } from '../actions/participation'
@@ -18,7 +17,7 @@ const fetchData = () => (dispatch, getState) => {
     if (!filters.placeId) {
       filters.placeId = getPlaceId(filters, region.region, states.states);
     }
-  //  if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
+    if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
     if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
     if (shouldFetchNibrs(filters)) {
       // dispatch(fetchNibrs(filters))

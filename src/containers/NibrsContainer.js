@@ -42,7 +42,6 @@ const NibrsContainer = ({
   agency,
   crime,
   isAgency,
-  nibrs,
   nibrsCounts,
   participation,
   place,
@@ -143,10 +142,6 @@ const NibrsContainer = ({
 
 NibrsContainer.propTypes = {
   crime: PropTypes.string.isRequired,
-  nibrs: PropTypes.shape({
-    data: PropTypes.object,
-    loading: PropTypes.bool,
-  }).isRequired,
   place: PropTypes.string.isRequired,
   nibrsCounts: PropTypes.shape({
     data: PropTypes.object,
@@ -159,7 +154,7 @@ NibrsContainer.propTypes = {
   states: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, nibrs, nibrsCounts, participation, states }) => {
+const mapStateToProps = ({ agencies, filters, nibrsCounts, participation, states }) => {
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -178,7 +173,6 @@ const mapStateToProps = ({ agencies, filters, nibrs, nibrsCounts, participation,
     isAgency,
     place,
     placeType,
-    nibrs,
     nibrsCounts,
     participation: filteredParticipation,
     states,
