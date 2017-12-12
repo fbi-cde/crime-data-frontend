@@ -10,6 +10,7 @@ import sidebar from './sidebar'
 import summaries from './summary'
 import region from './region'
 import states from './states'
+import nibrsCounts from './nibrsCounts'
 
 
 export default combineReducers({
@@ -23,4 +24,5 @@ export default combineReducers({
   summaries,
   region,
   states,
+  nibrsCounts,
 })
