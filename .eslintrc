@@ -32,6 +32,6 @@
     "react/require-default-props": 0,
     "semi": 0,
     "jsx-quotes": 0,
-    max-lines: ["error", {"max": 750, "skipComments": true}]
+    "max-lines": ["error", {"max": 750, "skipComments": true}]
   }
 }
