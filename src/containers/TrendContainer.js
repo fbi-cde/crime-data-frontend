@@ -26,7 +26,8 @@ class TrendContainer extends React.Component {
 
   getContent = ({ crime, filters, places, summaries, summarized, placeName }) => {
     const { loading, error } = summaries
-    const { summarizedLoading, summarizedError } = summarized
+    const summarizedLoading = summarized.loading
+    const summarizedError = summarized.error
 
     const { yearSelected } = this.state
 

@@ -83,7 +83,7 @@ class PlaceThumbnail extends React.Component {
 
     Object.keys(geoStates).forEach(geo => {
       let activeColor = '#dfe6ed'
-      if (active) {
+      if (actives) {
         Object.keys(actives).forEach(active => {
             if (geoStates[geo].properties.name === actives[active].properties.name) {
               activeColor = '#94aabd'
