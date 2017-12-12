@@ -1,66 +1,9 @@
-const raceCodes = {
-  A: 'Asian',
-  AP: 'Native Hawaiian or Pacific Islander',
-  B: 'Black or African American',
-  I: 'American Indian or Alaska Native',
-  U: 'Unknown',
-  W: 'White',
-}
+/* eslint-disable*/
 
 const sexCodes = {
   F: 'Female',
   M: 'Male',
   U: 'Unknown',
-}
-
-const locationNameMapping = {
-  'Abandoned/Condemned Structure': 'Abandoned/Condemned Structure',
-  'Air/Bus/Train Terminal': 'Air/Bus/Train Terminal',
-  'Amusement Park': 'Amusement Park',
-  'Arena/Stadium/Fairgrounds/Coliseum': 'Arena/Stadium/Fairgrounds',
-  'ATM Separate from Bank': 'ATM Separate from Bank',
-  'Auto Dealership New/Used': 'Auto Dealership',
-  'Bank/Savings and Loan': 'Bank',
-  'Bar/Nightclub': 'Bar/Nightclub',
-  'Camp/Campground': 'Campground',
-  'Church Synagogue/Temple': 'Church/Synagogue/Temple/Mosque',
-  'Commercial/Office Building': 'Commercial/Office Building',
-  'Community Center': 'Community Center',
-  'Construction Site': 'Construction Site',
-  'Convenience Store': 'Convenience Store',
-  Cyberspace: 'Cyberspace',
-  'Daycare Facility': 'Daycare Facility',
-  'Department/Discount Store': 'Department/Discount Store',
-  'Dock/Wharf/Freight/Modal Terminal': 'Dock/Wharf/Shipping Terminal',
-  'Drug Store/Dr. s Office/Hospital': 'Drug Store/Doctor’s Office/Hospital',
-  'Farm Facility': 'Farm Facility',
-  'Field/Woods': 'Field/Woods',
-  'Gambling Facility/Casino/Race Track': 'Gambling Facility/Casino/Race Track',
-  'Government/Public Building': 'Government/Public Building',
-  'Grocery/Supermarket': 'Grocery Store',
-  'Highway/Road/Ally': 'Highway/Alley/Street/Sidewalk',
-  'Hotel/Motel/Etc.': 'Hotel/Motel',
-  'Industrial Site': 'Industrial Site',
-  'Jail/Prison': 'Jail/Prison/Corrections Facility',
-  'Lake/Waterway': 'Lake/Waterway/Beach',
-  'Liquor Store': 'Liquor Store',
-  'Military Installation': 'Military Base',
-  'Not Specified': 'Unknown',
-  'Other/Unknown': 'Unknown',
-  'Parking Lot/Garage': 'Parking Garage/Lot',
-  'Park/Playground': 'Park/Playground',
-  'Rental Stor. Facil.': 'Rental Storage Facility',
-  'Residence/Home': 'Residence/Home',
-  'Rest Area': 'Rest Area',
-  Restaurant: 'Restaurant',
-  'School/College': 'School/College',
-  'School-College/University': 'School - College/University',
-  'School-Elementary/Secondary': 'School - Elementary/Secondary',
-  'Service/Gas Station': 'Gas Station',
-  'Shelter-Mission/Homeless': 'Mission/Homeless Shelter',
-  'Shopping Mall': 'Shopping Mall',
-  'Specialty Store': 'Specialty Store',
-  'Tribal Lands': 'Tribal Lands',
 }
 
 export const offenseMapping = {
@@ -571,6 +514,7 @@ export const reshapeLocationData = (data, offense) => {
 
 export const reshapeRelationship = (data, offense) => {
   const filtered = getOffenseData(data, offense)
+  console.log('reshapeRelationship:filtered:', data, offense, filtered);
   let acquaintance = 0
   let babysittee = 0
   let boyfriendgirlfriend = 0
@@ -955,13 +899,15 @@ const relationships = (data, offense) => {
 export const offensesDemo = (data, offense) => {
   const filtered = getOffenseData(data, offense)
   let count = 0
+  console.log('OffenseDemo: filtered:', data, offense, filtered)
+
   for (const i in filtered) {
     count += filtered[i].offense_count
   }
   const obj = {};
   obj.count = count;
   obj.key = offense
-
+  console.log('OffenseDemo:', obj)
   return {
     title: 'Offenses',
     data: obj,
