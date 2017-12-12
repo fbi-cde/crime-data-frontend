@@ -19,7 +19,6 @@ const fetchData = () => (dispatch, getState) => {
     }
     if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
     if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
-
     if (shouldFetchNibrs(filters)) {
       // dispatch(fetchNibrs(filters))
       dispatch(fetchNibrsCounts(filters))
