@@ -141,7 +141,6 @@ NibrsContainer.propTypes = {
   since: PropTypes.number.isRequired,
   participation: PropTypes.array.isRequired,
   until: PropTypes.number.isRequired,
-  states: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
