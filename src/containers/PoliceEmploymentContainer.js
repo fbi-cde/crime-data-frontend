@@ -2,77 +2,86 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 import Loading from '../components/Loading'
+import TrendChart from '../components/trend/TrendChart'
 import { getPlaceInfo } from '../util/place'
 import { lookupDisplayName } from '../util/location'
+import { nationalKey } from '../util/usa'
+import { peFilterByYear, peCombinePlaces } from '../util/policeEmployment'
 
-const PoliceEmploymentContainer = ({
-  agency,
-  isAgency,
-  policeEmployment,
-  place,
-  placeType,
-  since,
-  until,
-  filters,
-  region,
-  states,
-}) => {
-  const { data, error } = policeEmployment
-  let placeDisplay = null
-  if ( isAgency ) {
-    placeDisplay = agency.display
-  }
-  else if ( placeType === 'region' || placeType === 'state' ) {
-    placeDisplay = lookupDisplayName(filters, region.regions, states.states)
-  }
-  else {
-    placeDisplay = "United States"
+class PoliceEmploymentContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    const { until } = props
+    this.state = { yearSelected: until }
   }
 
-  const isLoading = policeEmployment.loading
-  const isReady = !isLoading && error === null && !!data
+  getContent = ({
+    agency,
+    isAgency,
+    policeEmployment,
+    place,
+    placeType,
+    placeDisplay,
+    since,
+    until,
+    filters,
+    region,
+    states,
+  }) => {
+    const { yearSelected } = this.state
+    const { data, loading, error } = policeEmployment
 
-  let content = null;
-  if ( isReady ) {
-    content = (
-      <table className="table-bordered">
-        <tbody>
-          <tr>
-          <th>Year</th>
-          <th>Population</th>
-          <th>Total Law Enforcement Employees</th>
-          <th>Total Officers</th>
-          <th>Total Civilians</th>
-          <th>LE Employees per 1000 inhabitants</th>
-          </tr>
-          {data[place].map(function(yearData, i){
-            return (
-            <tr key={i}>
-              <td>{yearData.data_year}</td>
-              <td>{yearData.population}</td>
-              <td>{yearData.total_pe_ct}</td>
-              <td>{yearData.officer_ct}</td>
-              <td>{yearData.civilian_ct}</td>
-              <td>{yearData.pe_ct_per_1000}</td>
-            </tr>
-            )
-          })}
-        </tbody>
-      </table>
+    if (loading) return <Loading />
+    if (error) return <ErrorCard error={error} />
+
+    const places = [place]
+    if (place !== nationalKey) places.push(nationalKey)
+
+    const peByYear = peFilterByYear(data, since, until)
+    const peCombined = peCombinePlaces(peByYear, ['police-employment'])
+
+    return (
+      <div>
+        <TrendChart
+          crime="police-employment"
+          filters={filters}
+          data={peCombined}
+          places={places}
+          onChangeYear={this.updateYear}
+          initialYearSelected={yearSelected}
+          placeName={placeDisplay}
+        />
+      </div>
     )
   }
 
-  return (
-    <div className="mb6">
-      <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
-        <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-          {placeDisplay} Police Employment
-        </h2>
-        {isLoading && <Loading />}
-        {content}
+  updateYear = year => {
+    this.setState({ yearSelected: year })
+  }
+
+  render() {
+    const { agency, isAgency, policeEmployment, place, placeType, since, until, filters, region, states } = this.props
+    let placeDisplay = null
+    if ( isAgency ) {
+      placeDisplay = agency.display
+    }
+    else if ( placeType === 'region' || placeType === 'state' ) {
+      placeDisplay = lookupDisplayName(filters, region.regions, states.states)
+    }
+    else {
+      placeDisplay = "United States"
+    }
+    return (
+      <div className="mb6">
+        <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
+          <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
+            {placeDisplay} Police Employment
+          </h2>
+          {this.getContent({agency, isAgency, policeEmployment, place, placeType, placeDisplay, since, until, filters, region, states})}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 PoliceEmploymentContainer.propTypes = {

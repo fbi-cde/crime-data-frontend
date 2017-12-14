@@ -87,7 +87,7 @@ const fetchPoliceEmployment = (place, placeType, placeId) => {
 }
 
 const getPoliceEmploymentRequests = (filters) => {
-  return [fetchPoliceEmployment(filters.place, filters.placeType, filters.placeId)]
+  return [fetchPoliceEmployment(filters.place, filters.placeType, filters.placeId),fetchPoliceEmployment()]
 }
 
 const parsePoliceEmployment = ([policeEmployment]) => ({

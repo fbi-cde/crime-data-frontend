@@ -10,6 +10,7 @@ const crimeIds = {
   'rape-revised': 'rape (revised definition)',
   robbery: 'robbery',
   'violent-crime': 'violent crime',
+  'police-employment': 'police employment'
 }
 
 const mapCrimeToGlossaryTerm = crime => crimeIds[crime]
