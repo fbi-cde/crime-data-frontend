@@ -233,6 +233,7 @@ export const reshapeLocationData = (data, offense) => {
   let shoppingmall = 0
   let specialtystore = 0
   let triballands = 0
+  let conveniencestore = 0
 
   for (const i in filtered) {
     residencehome += filtered[i].residence_home
@@ -280,6 +281,7 @@ export const reshapeLocationData = (data, offense) => {
     shoppingmall += filtered[i].shopping_mall
     specialtystore += filtered[i].specialty_store
     triballands += filtered[i].tribal_lands
+    conveniencestore += filtered[i].convenience_store
   }
 
   const objs = [];
@@ -295,7 +297,7 @@ export const reshapeLocationData = (data, offense) => {
   obj = {}
 
   obj.count = abandonedcondemnedstructure
-  obj.key = 'Abandoned Condemned/Structure'
+  obj.key = 'Abandoned/Condemned Structure'
   objs.push(obj)
   obj = {}
 
@@ -310,7 +312,7 @@ export const reshapeLocationData = (data, offense) => {
   obj = {}
 
   obj.count = arenastadiumfairgrounds
-  obj.key = 'Arena/Stadium/Fairgrounds'
+  obj.key = 'Arena/Stadium/Fairgrounds/Coliseum'
   objs.push(obj)
   obj = {}
 
@@ -320,12 +322,12 @@ export const reshapeLocationData = (data, offense) => {
   obj = {}
 
   obj.count = autodealership
-  obj.key = 'Auto Dealership'
+  obj.key = 'Auto Dealership New/Used'
   objs.push(obj)
   obj = {}
 
   obj.count = bank
-  obj.key = 'Bank'
+  obj.key = 'Bank/Saving and Loan'
   objs.push(obj)
   obj = {}
 
@@ -335,7 +337,7 @@ export const reshapeLocationData = (data, offense) => {
   obj = {}
 
   obj.count = campground
-  obj.key = 'Campground'
+  obj.key = 'Camnp/Campground'
   objs.push(obj)
   obj = {}
 
@@ -359,6 +361,11 @@ export const reshapeLocationData = (data, offense) => {
   objs.push(obj)
   obj = {}
 
+  obj.count = conveniencestore
+  obj.key = 'Convenience Store'
+  objs.push(obj)
+  obj = {}
+
   obj.count = cyberspace
   obj.key = 'Cyberspace'
   objs.push(obj)
@@ -375,7 +382,7 @@ export const reshapeLocationData = (data, offense) => {
   obj = {}
 
   obj.count = dockwharfshippingterminal
-  obj.key = 'Dock/Wharf/Shipping Terminal'
+  obj.key = 'Dock/Wharf/Modal Terminal'
   objs.push(obj)
   obj = {}
 
@@ -405,17 +412,17 @@ export const reshapeLocationData = (data, offense) => {
   obj = {}
 
   obj.count = grocerystore
-  obj.key = 'Grocery Store'
+  obj.key = 'Grocery/Supermarket'
   objs.push(obj)
   obj = {}
 
   obj.count = highwayalleystreetsidewalk
-  obj.key = 'Highway/Alley/Street/Sidewalk'
+  obj.key = 'Highway/Road/Alley/Street/Sidewalk'
   objs.push(obj)
   obj = {}
 
   obj.count = hotelmotel
-  obj.key = 'Hotel/Motel'
+  obj.key = 'Hotel/Motel/Etc.'
   objs.push(obj)
   obj = {}
 
@@ -425,7 +432,7 @@ export const reshapeLocationData = (data, offense) => {
   obj = {}
 
   obj.count = jailprisoncorrectionsfacility
-  obj.key = 'Jail/Prison/Corrections Facility'
+  obj.key = 'Jail/Prison/Penitentiary/Corrections Facility'
   objs.push(obj)
   obj = {}
 
@@ -440,12 +447,12 @@ export const reshapeLocationData = (data, offense) => {
   obj = {}
 
   obj.count = militarybase
-  obj.key = 'Military Base'
+  obj.key = 'Military Installation'
   objs.push(obj)
   obj = {}
 
   obj.count = unknown
-  obj.key = 'Unknown'
+  obj.key = 'Other/Unknown'
   objs.push(obj)
   obj = {}
 
@@ -475,22 +482,22 @@ export const reshapeLocationData = (data, offense) => {
   obj = {}
 
   obj.count = schoolcollegeuniversity
-  obj.key = 'School College/University'
+  obj.key = 'School-College/University'
   objs.push(obj)
   obj = {}
 
   obj.count = schoolelementarysecondary
-  obj.key = 'School Elementary Secondary'
+  obj.key = 'School-Elementary Secondary'
   objs.push(obj)
   obj = {}
 
   obj.count = gasstation
-  obj.key = 'Gas Station'
+  obj.key = 'Service/Gas Station'
   objs.push(obj)
   obj = {}
 
   obj.count = missionhomelessshelter
-  obj.key = 'Mission/Homeless Shelter'
+  obj.key = 'Shelter-Mission/Homeless'
   objs.push(obj)
   obj = {}
 
@@ -719,7 +726,8 @@ export const reshapeAgeData = (data, offense) => {
   let range7079 = 0
   let range8089 = 0
   let range9099 = 0
-  let unknown = 0
+  let unknown = 0;
+
 
   for (const i in filtered) {
     range09 += filtered[i].range_0_9
