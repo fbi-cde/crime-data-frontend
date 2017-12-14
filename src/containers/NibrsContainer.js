@@ -11,8 +11,10 @@ import { NibrsTerm } from '../components/Terms'
 import parseNibrsCounts from '../util/nibrsCounts'
 import { getAgency, oriToState } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
-import ucrParticipation from '../util/participation'
 import lookupUsa from '../util/usa'
+import ucrParticipation, {
+  shouldFetchNibrs as shouldShowNibrs,
+} from '../util/participation'
 
 const initialNibrsYear = ({ place, placeType, since }) => {
   const placeNorm = placeType === 'agency' ? oriToState(place) : place
@@ -47,6 +49,13 @@ const NibrsContainer = ({
   since,
   until,
 }) => {
+  if (
+    (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
+    !shouldShowNibrs({ crime, place, placeType })
+  ) {
+    return null
+}
+
   const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
   const { data, error } = nibrsCounts
@@ -66,9 +75,12 @@ const NibrsContainer = ({
       .find(d => d.title === 'Offenses')
 
     totalCount = offenseObj.data.count
+    let displayCards = true
+    if (totalCount === 0) { displayCards = false }
+
     content = (
       <div className="clearfix mxn1">
-        {dataParsed.filter(d => d.title !== 'Offenses').map((d, i) => {
+        {displayCards && dataParsed.filter(d => d.title !== 'Offenses').map((d, i) => {
           const cls = i % 2 === 0 ? 'clear-left' : ''
           return (
             <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
