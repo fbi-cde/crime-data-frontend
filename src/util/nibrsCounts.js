@@ -253,7 +253,7 @@ export const reshapeLocationData = (data, offense) => {
     constructionsite += filtered[i].construction_site
     cyberspace += filtered[i].cyberspace
     daycarefacility += filtered[i].daycare_facility
-    departmentdiscountstore += filtered[i].department__discount_store
+    departmentdiscountstore += filtered[i].department__discout_store
     dockwharfshippingterminal += filtered[i].dock__wharf__shipping_terminal
     drugstoredoctorsofficehospital += filtered[i].drug_store__doctors_office__hospital
     farmfacility += filtered[i].farm_facility
