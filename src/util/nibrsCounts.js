@@ -287,7 +287,7 @@ export const reshapeLocationData = (data, offense) => {
   const objs = [];
   let obj = {}
   obj.count = residencehome
-  obj.key = 'Residence Home'
+  obj.key = 'Residence/Home'
   objs.push(obj)
   obj = {}
 
@@ -706,7 +706,7 @@ export const reshapeRelationship = (data, offense) => {
   obj = {}
 
   obj.count = exspouse
-  obj.key = 'exspouse'
+  obj.key = 'Ex-spouse'
   objs.push(obj)
   obj = {}
 
@@ -740,7 +740,8 @@ export const reshapeAgeData = (data, offense) => {
     range7079 += filtered[i].range_70_79
     range8089 += filtered[i].range_80_89
     range9099 += filtered[i].range_90_99
-    unknown
+    unknown += filtered[i].unknown
+
   }
 
   const objs = [];
@@ -792,6 +793,11 @@ export const reshapeAgeData = (data, offense) => {
 
   obj.count = range09
   obj.key = '0-9'
+  objs.push(obj)
+  obj = {}
+
+  obj.count = unknown
+  obj.key = 'Unknown'
   objs.push(obj)
   obj = {}
 
