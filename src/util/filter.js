@@ -32,11 +32,11 @@ const validateFilter = filters => {
     newFilters.since = defaults.since
     newFilters.until = defaults.until
   }
-  /*
+
   if (filters.since && filters.until && filters.until - filters.since < 10) {
     newFilters.since = filters.until - 10
   }
-  */
+
   return newFilters
 }
 
