@@ -1,5 +1,9 @@
 # Change Log
 All notable changes to this project be documented in this file.
+## [2.18.7] - 2017-12-15
+### Fixed
+- Fixes NIBRS Counts being incorrect via new backend services that report accurate numbers ([#1302](https://github.com/18F/crime-data-frontend/pull/1302))
+
 ## [2.18.6] - 2017-11-28
 ### Fixed
 - Fixes Agency Participation displayed on State Explorer Pages ([#1290](https://github.com/18F/crime-data-frontend/pull/1279))
