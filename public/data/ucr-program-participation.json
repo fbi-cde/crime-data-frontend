@@ -38,7 +38,8 @@
   "colorado": {
     "srs": false,
     "nibrs": {
-      "initial-year": 1992
+      "initial-year": 1992,
+      "no-data-years": [1995, 1996]
     },
     "state-program": true
   },
@@ -57,10 +58,8 @@
     "state-program": true
   },
   "washington-dc": {
-    "srs": false,
-    "nibrs": {
-      "initial-year": 2000
-    },
+    "srs": true,
+    "nibrs": false,
     "state-program": true
   },
   "florida": {
@@ -87,9 +86,7 @@
   },
   "illinois": {
     "srs": true,
-    "nibrs": {
-      "initial-year": 1993
-    },
+    "nibrs": false,
     "state-program": true
   },
   "indiana": {
@@ -102,7 +99,7 @@
   "iowa": {
     "srs": false,
     "nibrs": {
-      "initial-year": 1991
+      "initial-year": 1992
     },
     "state-program": true
   },
@@ -130,7 +127,7 @@
   "maine": {
     "srs": true,
     "nibrs": {
-      "initial-year": 2003
+      "initial-year": 2004
     },
     "state-program": true
   },
@@ -155,16 +152,12 @@
   },
   "minnesota": {
     "srs": true,
-    "nibrs":  {
-      "initial-year": 2016
-    },
+    "nibrs": false,
     "state-program": true
   },
   "mississippi": {
     "srs": true,
-    "nibrs": {
-      "initial-year": 2009
-    },
+    "nibrs": false,
     "state-program": false
   },
   "missouri": {
