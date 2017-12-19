@@ -1,5 +1,3 @@
-import snakecase from 'lodash.snakecase'
-
 export const reshapeData = dataIn => Object.assign(...dataIn.map(d => ({ [d.key]: d.results })))
 
 export const peFilterByYear = (policeEmploymentData, since, until) => {
@@ -30,8 +28,14 @@ export const peCombinePlaces = (policeEmploymentData, offenses = []) => {
         const yearData = policeEmploymentData[place].find(y => y.data_year === year)
         offenses.forEach(offense => {
           const off = {}
-          off.count = yearData['total_pe_ct']
-          off.rate = yearData['pe_ct_per_1000']
+          off.count = yearData.total_pe_ct
+          off.rate = yearData.pe_ct_per_1000
+          off.details = [
+            { key: 'Male Officers', count: yearData.male_officer_ct },
+            { key: 'Female Officers', count: yearData.female_officer_ct },
+            { key: 'Male Civilians', count: yearData.male_civilian_ct },
+            { key: 'Female Civilians', count: yearData.female_civilian_ct }
+          ]
           o[offense] = off
         })
         return { [place]: { population: yearData.population, ...o } }

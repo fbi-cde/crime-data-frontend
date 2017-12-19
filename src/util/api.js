@@ -67,12 +67,25 @@ const getNibrsRequests = params => {
   return slices.map(s => fetchNibrs({ ...s, crime, place, placeType, placeId }))
 }
 
+const fetchResults = (key, path) =>
+  get(`${API}/${path}?per_page=500`).then(response => ({
+    key,
+    results: response.results,
+  }))
+
+const parsePoliceEmployment = ([policeEmployment]) => ({
+  ...policeEmployment,
+  results: policeEmployment.results.map(datum => ({
+    ...datum,
+  })),
+})
+
 const fetchPoliceEmployment = (place, placeType, placeId) => {
   let peApi
   if (placeType === 'state') {
     peApi = `police-employment/state/${placeId}`
   } else if (placeType === 'agency') {
-    peApi = `police-employment/state/${place}/agency/${placeId}`
+    peApi = `police-employment/agency/${placeId}/${place}`
   } else if (placeType === 'region') {
     peApi = `police-employment/region/${place}`
   } else {
@@ -86,22 +99,9 @@ const fetchPoliceEmployment = (place, placeType, placeId) => {
   return Promise.all(requests).then(parsePoliceEmployment)
 }
 
-const getPoliceEmploymentRequests = (filters) => {
-  return [fetchPoliceEmployment(filters.place, filters.placeType, filters.placeId),fetchPoliceEmployment()]
+const getPoliceEmploymentRequests = filters => {
+  return [fetchPoliceEmployment(filters.place, filters.placeType, filters.placeId), fetchPoliceEmployment()]
 }
-
-const parsePoliceEmployment = ([policeEmployment]) => ({
-  ...policeEmployment,
-  results: policeEmployment.results.map(datum => ({
-    ...datum,
-  })),
-})
-
-const fetchResults = (key, path) =>
-  get(`${API}/${path}?per_page=500`).then(response => ({
-    key,
-    results: response.results,
-  }))
 
 const fetchArson = (place, placeId, placeType) => {
   let url
@@ -195,7 +195,6 @@ const fetchSummarized = (place, placeType, placeId) => {
 
   return Promise.all(requests).then(parseSummarized)
 }
-
 
 const getSummarizedRequests = (filters, states) => {
   if (filters.placeType === 'agency') {

@@ -1,6 +1,6 @@
 import { updateFilters } from './filters'
 import { fetchNibrs } from './nibrs'
-import { fetchPoliceEmployment} from './policeEmployment'
+import { fetchPoliceEmployment } from './policeEmployment'
 import { fetchSummaries } from '../actions/summary'
 import { fetchSummarized } from '../actions/summarized'
 import { fetchUcrParticipation } from '../actions/participation'

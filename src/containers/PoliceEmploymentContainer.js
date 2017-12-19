@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
+import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
-import TrendChart from '../components/trend/TrendChart'
+import HorizontalBarChart from '../components/HorizontalBarChart'
+import { getAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import { lookupDisplayName } from '../util/location'
 import { nationalKey } from '../util/usa'
@@ -42,14 +44,19 @@ class PoliceEmploymentContainer extends React.Component {
 
     return (
       <div>
-        <TrendChart
-          crime="police-employment"
-          filters={filters}
+        <HorizontalBarChart
+          id="police-employment"
           data={peCombined}
-          places={places}
-          onChangeYear={this.updateYear}
+          ratePer={1000}
           initialYearSelected={yearSelected}
+          onChangeYear={this.updateYear}
+          noun="police employee"
+          rowLim={4}
+          title=""
+          place={place}
           placeName={placeDisplay}
+          places={places}
+          filters={filters}
         />
       </div>
     )
@@ -62,14 +69,12 @@ class PoliceEmploymentContainer extends React.Component {
   render() {
     const { agency, isAgency, policeEmployment, place, placeType, since, until, filters, region, states } = this.props
     let placeDisplay = null
-    if ( isAgency ) {
+    if (isAgency) {
       placeDisplay = agency.display
-    }
-    else if ( placeType === 'region' || placeType === 'state' ) {
+    } else if (placeType === 'region' || placeType === 'state') {
       placeDisplay = lookupDisplayName(filters, region.regions, states.states)
-    }
-    else {
-      placeDisplay = "United States"
+    } else {
+      placeDisplay = 'United States'
     }
     return (
       <div className="mb6">
@@ -77,7 +82,7 @@ class PoliceEmploymentContainer extends React.Component {
           <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
             {placeDisplay} Police Employment
           </h2>
-          {this.getContent({agency, isAgency, policeEmployment, place, placeType, placeDisplay, since, until, filters, region, states})}
+          {this.getContent({ agency, isAgency, policeEmployment, place, placeType, placeDisplay, since, until, filters, region, states })}
         </div>
       </div>
     )
@@ -100,6 +105,12 @@ const mapStateToProps = ({ agencies, filters, policeEmployment, region, states }
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
   const agency = isAgency && !agencies.loading && getAgency(agencies, place)
+  console.log("placeType="+placeType)
+  console.log("place="+place)
+  console.log("isAgency="+isAgency)
+  console.log("agencies.loading="+agencies.loading)
+  if(isAgency)console.log("getAgency="+JSON.stringify(getAgency(agencies, place)))
+  console.log("pe agency="+agency)
 
   return {
     filters,
