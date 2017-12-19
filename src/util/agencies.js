@@ -28,12 +28,8 @@ export const agencyDisplay = ({ agency_name, agency_type_name }) => {
 }
 
 export const getAgency = (agencies, ori) => {
-  console.log("getAgency for ori: " + ori)
   const usState = oriToState(ori)
-  console.log("state for ori: " + usState)
-  console.log("agencies="+JSON.stringify(agencies))
   const agency = (agencies.data[usState] || {})[ori]
-  console.log("agency obj: " + JSON.stringify(agency))
   if (!agency) return
   return { ...agency, display: agencyDisplay(agency) }
 }

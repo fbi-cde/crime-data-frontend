@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import HorizontalBarChart from '../components/HorizontalBarChart'
-import { getAgency } from '../util/agencies'
+import { newGetAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import { lookupDisplayName } from '../util/location'
 import { nationalKey } from '../util/usa'
@@ -70,7 +70,7 @@ class PoliceEmploymentContainer extends React.Component {
     const { agency, isAgency, policeEmployment, place, placeType, since, until, filters, region, states } = this.props
     let placeDisplay = null
     if (isAgency) {
-      placeDisplay = agency.display
+      placeDisplay = agency.agency_name_edit
     } else if (placeType === 'region' || placeType === 'state') {
       placeDisplay = lookupDisplayName(filters, region.regions, states.states)
     } else {
@@ -104,13 +104,7 @@ const mapStateToProps = ({ agencies, filters, policeEmployment, region, states }
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
-  const agency = isAgency && !agencies.loading && getAgency(agencies, place)
-  console.log("placeType="+placeType)
-  console.log("place="+place)
-  console.log("isAgency="+isAgency)
-  console.log("agencies.loading="+agencies.loading)
-  if(isAgency)console.log("getAgency="+JSON.stringify(getAgency(agencies, place)))
-  console.log("pe agency="+agency)
+  const agency = isAgency && !agencies.loading && newGetAgency(agencies, place, placeType)
 
   return {
     filters,

@@ -156,7 +156,9 @@ const getPlaceId = (filters, regionData, stateData) => {
     if (filters.placeType === 'state') {
       return lookupStateByName(stateData, filters.place).state_abbr;
     } else if (filters.placeType === 'region') {
-        return lookupRegionByName(regionData, filters.place).region_name
+      return lookupRegionByName(regionData, filters.place).region_name
+    } else if (filters.placeType === 'agency') {
+      return filters.place.slice(0, 2).toUpperCase()
     }
   }
   return null;
