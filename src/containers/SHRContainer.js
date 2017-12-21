@@ -1,4 +1,3 @@
-import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
@@ -10,6 +9,7 @@ import parseSHRCounts from '../util/shrCounts'
 import ExpandedHomicideCard from '../components/shr/ExpandedHomicideCard'
 import SHRIntro from '../components/shr/SHRIntro'
 import { getPlaceInfo } from '../util/place'
+import { SHRTerm } from '../components/Terms'
 
 const shouldShowSHR = crime => {
   if (crime === 'homicide') {
@@ -42,12 +42,10 @@ const SHRContainer = ({
   since,
   until,
 }) => {
-  if (
-    (!isAgency) ||
-    !shouldShowSHR(crime)
-  ) {
-    return null
-}
+  console.log('SHRContainer:', crime)
+  if ((isAgency) || !shouldShowSHR(crime)) { return null }
+
+  console.log('SHRContainer II')
 
   const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
   const { data, error } = shrCounts
@@ -95,7 +93,7 @@ const SHRContainer = ({
     <div className="mb6">
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-          NIBRS {startCase(crime)} incident details reported by {placeDisplay}
+          <SHRTerm /> details reported by {placeDisplay}
         </h2>
         {isLoading && <Loading />}
        {isReady &&
@@ -128,7 +126,7 @@ SHRContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ filters, nibrsCounts, participation }) => {
+const mapStateToProps = ({ filters, shrCounts, participation }) => {
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -145,7 +143,7 @@ const mapStateToProps = ({ filters, nibrsCounts, participation }) => {
     isAgency,
     place,
     placeType,
-    nibrsCounts,
+    shrCounts,
     participation: filteredParticipation,
   }
 }

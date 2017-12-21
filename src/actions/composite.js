@@ -1,5 +1,6 @@
 import { updateFilters } from './filters'
 import { fetchNibrsCounts } from '../actions/nibrsCounts'
+import { fetchSHRCounts } from '../actions/shrCounts'
 import { fetchSummaries } from '../actions/summary'
 import { fetchUcrParticipation } from '../actions/participation'
 import history, { createNewLocation } from '../util/history'
@@ -9,6 +10,7 @@ import {
   shouldFetchUcr,
   shouldFetchSummaries,
   shouldFetchNibrs,
+  shouldFetchSHR,
 } from '../util/participation'
 
 const fetchData = () => (dispatch, getState) => {
@@ -22,6 +24,9 @@ const fetchData = () => (dispatch, getState) => {
     if (shouldFetchNibrs(filters)) {
       // dispatch(fetchNibrs(filters))
       dispatch(fetchNibrsCounts(filters))
+    }
+    if (shouldFetchSHR(filters.crime)) {
+      dispatch(fetchSHRCounts(filters))
     }
   }
 }

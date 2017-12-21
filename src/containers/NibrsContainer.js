@@ -103,7 +103,7 @@ const NibrsContainer = ({
     <div className="mb6">
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-          NIBRS {startCase(crime)} incident details reported by {placeDisplay}
+          {startCase(crime)} <NibrsTerm size="sm" /> details reported by {placeDisplay}
         </h2>
         {isLoading && <Loading />}
        {isReady &&

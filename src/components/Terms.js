@@ -24,6 +24,16 @@ NibrsTerm.defaultProps = {
   size: 'md',
 }
 
+export const SHRTerm = ({ children, size }) =>
+  <Term id={'Supplemental Homicide Report (SHR)'} size={size}>
+    {children || 'Supplemental Homicide Report (SHR)'}
+  </Term>
+
+NibrsTerm.propTypes = propTypes
+NibrsTerm.defaultProps = {
+  size: 'md',
+}
+
 export const SrsTerm = ({ children, size }) =>
   <Term id={'summary reporting system (srs)'} size={size}>
     {children || 'summary (SRS)'}

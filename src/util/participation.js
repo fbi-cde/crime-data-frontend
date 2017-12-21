@@ -22,6 +22,13 @@ export const shouldFetchNibrs = ({ crime, place, placeType }) => {
   return coverage && coverage.nibrs
 }
 
+export const shouldFetchSHR = crime => {
+  if (crime === 'homicide') {
+    return true;
+  }
+  return false;
+}
+
 export const reshapeData = dataIn => Object.assign(...dataIn.map(d => ({ [d.place]: d.results })))
 
 export default lookup
