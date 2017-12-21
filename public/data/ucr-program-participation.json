@@ -59,7 +59,9 @@
   },
   "washington-dc": {
     "srs": true,
-    "nibrs": false,
+    "nibrs": {
+      "initial-year": 2000
+    },
     "state-program": true
   },
   "florida": {
@@ -86,7 +88,9 @@
   },
   "illinois": {
     "srs": true,
-    "nibrs": false,
+    "nibrs": {
+      "initial-year": 1993
+    },
     "state-program": true
   },
   "indiana": {
