@@ -101,7 +101,6 @@ app.get('/api', (req, res) => {
 app.get('/api-proxy/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')
   const params = Object.assign({}, req.query, { api_key: apiKey })
-
   if (!apiKey) return res.status(401).end()
 
   return http

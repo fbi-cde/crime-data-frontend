@@ -3,29 +3,22 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
+import lookupUsa from '../util/usa'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
-import NibrsCard from '../components/nibrs/NibrsCard'
-import NibrsIntro from '../components/nibrs/NibrsIntro'
-import { NibrsTerm } from '../components/Terms'
-import parseNibrsCounts from '../util/nibrsCounts'
-import { getAgency, oriToState } from '../util/agencies'
+import parseSHRCounts from '../util/shrCounts'
+import ExpandedHomicideCard from '../components/shr/ExpandedHomicideCard'
+import SHRIntro from '../components/shr/SHRIntro'
 import { getPlaceInfo } from '../util/place'
-import lookupUsa from '../util/usa'
-import ucrParticipation, {
-  shouldFetchNibrs as shouldShowNibrs,
-} from '../util/participation'
 
-const initialNibrsYear = ({ place, placeType, since }) => {
-  const placeNorm = placeType === 'agency' ? oriToState(place) : place
-  const participation = ucrParticipation(placeNorm)
-  const initYear = participation && participation.nibrs['initial-year']
-
-  if (initYear && initYear > since) return initYear
-  return since
+const shouldShowSHR = crime => {
+  if (crime === 'homicide') {
+    return true;
+  }
+  return false;
 }
 
-const filterNibrsData = (data, { since, until }) => {
+const filterSHRData = (data, { since, until }) => {
   if (!data) return false
 
   const filtered = {}
@@ -38,39 +31,38 @@ const filterNibrsData = (data, { since, until }) => {
   return filtered
 }
 
-const NibrsContainer = ({
+const SHRContainer = ({
   agency,
   crime,
   isAgency,
-  nibrsCounts,
-  participation,
+  shrCounts,
   place,
   placeType,
+  participation,
   since,
   until,
 }) => {
   if (
-    (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
-    !shouldShowNibrs({ crime, place, placeType })
+    (!isAgency) ||
+    !shouldShowSHR(crime)
   ) {
     return null
 }
 
   const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
-  const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
-  const { data, error } = nibrsCounts
+  const { data, error } = shrCounts
 
-  const isReady = nibrsCounts.loaded
-  const isLoading = nibrsCounts.loading
+  const isReady = shrCounts.loaded
+  const isLoading = shrCounts.loading
   let totalCount = 0
   let content = null
 
 
   if (error) content = <ErrorCard error={error} />
   else if (isReady) {
-    const filteredData = filterNibrsData(data, { since, until })
+    const filteredData = filterSHRData(data, { since, until })
 
-    const dataParsed = parseNibrsCounts(filteredData, crime)
+    const dataParsed = parseSHRCounts(filteredData)
      const offenseObj = dataParsed
       .find(d => d.title === 'Offenses')
 
@@ -84,11 +76,11 @@ const NibrsContainer = ({
           const cls = i % 2 === 0 ? 'clear-left' : ''
           return (
             <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
-              <NibrsCard
+              <ExpandedHomicideCard
                 crime={crime}
                 place={place}
                 placeType={placeType}
-                since={nibrsFirstYear}
+                since={since}
                 until={until}
                 {...d}
               />
@@ -107,45 +99,26 @@ const NibrsContainer = ({
         </h2>
         {isLoading && <Loading />}
        {isReady &&
-         <NibrsIntro
+         <SHRIntro
            crime={crime}
            isAgency={isAgency}
-           nibrsFirstYear={nibrsFirstYear}
-           participation={participation}
+           since={since}
            place={place}
            placeDisplay={placeDisplay}
            totalCount={totalCount}
            until={until}
+           participation={participation}
             />}
       </div>
       {content}
-      {isReady &&
-        <div>
-          <div className="serif italic fs-12">
-            Source: Reported <NibrsTerm size="sm" /> data from {placeDisplay}.
-          </div>
-          <div className="serif italic fs-12">
-            Footnotes:
-          </div>
-          <div className="serif italic fs-12">
-            The complexity of NIBRS data presents unique impediments to interconnecting
-            all facets of the information collected. In instances of multiple
-            offenders, for example, the Crime Data Explorer currently links an offender
-            to only one offense—the first listed. The same is true for incidents
-            involving multiple victims. The Uniform Crime Reporting Program is
-            working hard to improve these specific functions within the Crime Data
-            Explorer so that presentations in the coming months will fully encompass
-            all aspects of the NIBRS data.
-          </div>
-        </div>}
     </div>
   )
 }
 
-NibrsContainer.propTypes = {
+SHRContainer.propTypes = {
   crime: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
-  nibrsCounts: PropTypes.shape({
+  shrCounts: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.bool,
   }).isRequired,
@@ -155,11 +128,10 @@ NibrsContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
+const mapStateToProps = ({ filters, nibrsCounts, participation }) => {
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
-  const agency = isAgency && !agencies.loading && getAgency(agencies, place)
 
   let filteredParticipation = []
   if (participation.data[place]) {
@@ -170,7 +142,6 @@ const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
 
   return {
     ...filters,
-    agency,
     isAgency,
     place,
     placeType,
@@ -179,4 +150,4 @@ const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
   }
 }
 
-export default connect(mapStateToProps)(NibrsContainer)
+export default connect(mapStateToProps)(SHRContainer)

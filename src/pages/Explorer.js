@@ -9,6 +9,7 @@ import AboutTheData from '../components/AboutTheData'
 import AgencyChartContainer from '../containers/AgencyChartContainer'
 import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer'
 import NibrsContainer from '../containers/NibrsContainer'
+import SHRContainer from '../containers/SHRContainer'
 import NotFound from './NotFound'
 import SharingTags from '../components/SharingTags'
 import SidebarContainer from '../containers/SidebarContainer'
@@ -134,6 +135,7 @@ class Explorer extends React.Component {
             <ExplorerHeaderContainer />
             {agency && <SparklineContainer />}
             {agency ? <AgencyChartContainer /> : <TrendContainer />}
+            <SHRContainer />
             <NibrsContainer />
             <AboutTheData
               crime={crime}
