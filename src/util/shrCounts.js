@@ -17,40 +17,8 @@ export const reshape = (data, key) => {
   return Object.keys(counts).map(k => ({ key: k, count: counts[k] }))
 }
 
-const offenses = (data, offense) => {
-  const nibrsOffense = offenseMapping[offense]
-
-
-  const offenseData = data.offenseOffenseName.filter(d => {
-    if (nibrsOffense.forEach) {
-      let isSame = false
-      nibrsOffense.forEach(o => {
-        if (d.offense_name === o) isSame = true
-      })
-      return isSame
-    }
-    return d.offense_name === nibrsOffense
-  })
-
-  return {
-    title: 'Offenses',
-    data: reshape(offenseData, 'offense_name'),
-  }
-}
-
-const getOffenseData = (data, offense) => {
-  const nibrsOffense = offenseMapping[offense]
-  const filteredData = [];
-  for (const i in data) {
-    if (nibrsOffense.indexOf(data[i].offense_name) > -1) {
-      filteredData.push(data[i])
-    }
-  }
-  return filteredData;
-}
-
 export const reshapeSexData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
+  const filtered = data
   let male = 0;
   let female = 0
   let unknown = 0
@@ -76,7 +44,7 @@ export const reshapeSexData = (data, offense) => {
 }
 
 export const reshapeRaceData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
+  const filtered = data
   let americanIndian = 0;
   let asian = 0
   let black = 0
@@ -128,7 +96,7 @@ export const reshapeRaceData = (data, offense) => {
 }
 
 export const reshapeEthnicityData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
+  const filtered = data
   let hispanic = 0;
   let multiple = 0
   let notHispanic = 0
@@ -167,7 +135,7 @@ export const reshapeEthnicityData = (data, offense) => {
 
 
 export const reshapeAgeData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
+  const filtered = data
   let range09 = 0;
   let range1019 = 0
   let range2029 = 0

@@ -52,7 +52,7 @@ const SHRContainer = ({
 
   const isReady = shrCounts.loaded
   const isLoading = shrCounts.loading
-  let totalCount = 0
+  const totalCount = 0
   let content = null
 
 
@@ -61,16 +61,15 @@ const SHRContainer = ({
     const filteredData = filterSHRData(data, { since, until })
 
     const dataParsed = parseSHRCounts(filteredData)
-     const offenseObj = dataParsed
-      .find(d => d.title === 'Offenses')
 
+    /*
     totalCount = offenseObj.data.count
     let displayCards = true
     if (totalCount === 0) { displayCards = false }
-
+    */
     content = (
       <div className="clearfix mxn1">
-        {displayCards && dataParsed.filter(d => d.title !== 'Offenses').map((d, i) => {
+        {dataParsed.map((d, i) => {
           const cls = i % 2 === 0 ? 'clear-left' : ''
           return (
             <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
