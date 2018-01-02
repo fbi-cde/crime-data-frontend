@@ -32,7 +32,7 @@ const ExplorerHeaderContainer = ({
     placeDisplay = 'United States'
     location = filters.place;
   }
-
+  console.log('Container')
   return (
     <div>
       <div className="items-baseline mt2 mb4">
@@ -56,7 +56,7 @@ const ExplorerHeaderContainer = ({
                 region={region}
               />}
           <UcrResourcesList
-            crime={filters.crime}
+            crime={filters.pageType}
             place={filters.place}
             placeType={filters.placeType}
             states={states}

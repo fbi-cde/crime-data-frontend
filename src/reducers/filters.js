@@ -3,7 +3,8 @@ import { FILTER_RESET, FILTERS_UPDATE } from '../actions/constants'
 import { MAX_YEAR } from '../util/years'
 
 const initialState = {
-  crime: 'violent-crime',
+  page: 'crime',
+  pageType: 'violent-crime',
   since: MAX_YEAR - 10,
   until: MAX_YEAR,
 }

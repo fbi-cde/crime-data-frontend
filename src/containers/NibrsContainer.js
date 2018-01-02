@@ -41,7 +41,7 @@ const filterNibrsData = (data, { since, until }) => {
 
 const NibrsContainer = ({
   agency,
-  crime,
+  pageType,
   isAgency,
   nibrs,
   participation,
@@ -53,7 +53,7 @@ const NibrsContainer = ({
 }) => {
   if (
     (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
-    !shouldShowNibrs({ crime, place, placeType }, states)
+    !shouldShowNibrs({ pageType, place, placeType }, states)
   ) {
     return null
   }
@@ -73,7 +73,7 @@ const NibrsContainer = ({
   if (error) content = <ErrorCard error={error} />
   else if (isReady) {
     const filteredData = filterNibrsData(data, { since, until })
-    const dataParsed = parseNibrs(filteredData, crime)
+    const dataParsed = parseNibrs(filteredData, pageType)
 
     totalCount = dataParsed
       .find(d => d.title === 'Offenses')
@@ -86,7 +86,7 @@ const NibrsContainer = ({
           return (
             <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
               <NibrsCard
-                crime={crime}
+                crime={pageType}
                 place={place}
                 placeType={placeType}
                 since={nibrsFirstYear}
@@ -104,12 +104,12 @@ const NibrsContainer = ({
     <div className="mb6">
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-          {startCase(crime)} incident details reported by {placeDisplay}
+          {startCase(pageType)} incident details reported by {placeDisplay}
         </h2>
         {isLoading && <Loading />}
         {isReady &&
           <NibrsIntro
-            crime={crime}
+            crime={pageType}
             isAgency={isAgency}
             nibrsFirstYear={nibrsFirstYear}
             participation={participation}
@@ -144,7 +144,7 @@ const NibrsContainer = ({
 }
 
 NibrsContainer.propTypes = {
-  crime: PropTypes.string.isRequired,
+  pageType: PropTypes.string.isRequired,
   nibrs: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.bool,

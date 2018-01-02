@@ -26,7 +26,7 @@ describe('TrendChart', () => {
   let chart
 
   beforeEach(() => {
-    chart = shallow(<TrendChart data={data} placeName={placeName} filters={filters} crime={filters.crime} places={filters.places}/>)
+    chart = shallow(<TrendChart data={data} placeName={placeName} filters={filters} crime={filters.pageType} places={filters.places} />)
   })
 
   it('TrendChart renders svg', () => {

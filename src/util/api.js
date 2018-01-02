@@ -99,9 +99,7 @@ const fetchPoliceEmployment = (place, placeType, placeId) => {
   return Promise.all(requests).then(parsePoliceEmployment)
 }
 
-const getPoliceEmploymentRequests = filters => {
-  return [fetchPoliceEmployment(filters.place, filters.placeType, filters.placeId), fetchPoliceEmployment()]
-}
+const getPoliceEmploymentRequests = filters => [fetchPoliceEmployment(filters.place, filters.placeType, filters.placeId), fetchPoliceEmployment()]
 
 const fetchArson = (place, placeId, placeType) => {
   let url
@@ -162,7 +160,7 @@ const getSummaryRequests = (filters, states) => {
   if (filters.placeType === 'agency') {
     const stateName = slugify(newOriToState(filters.place, states))
     return [
-      fetchAgencyAggregates(filters.place, filters.crime),
+      fetchAgencyAggregates(filters.place, filters.pageType),
       fetchAggregates(stateName, filters.placeType, filters.placeId),
       fetchAggregates(),
     ]
@@ -200,7 +198,7 @@ const getSummarizedRequests = (filters, states) => {
   if (filters.placeType === 'agency') {
     const stateAbbr = newOriToStateAbbr(filters.place)
     return [
-      fetchAgencySummarized(filters.place, filters.crime),
+      fetchAgencySummarized(filters.place, filters.pageType),
       fetchSummarized(stateAbbr, filters.placeType, filters.placeId),
       fetchSummarized(),
     ]

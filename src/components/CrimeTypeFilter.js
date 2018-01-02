@@ -21,7 +21,7 @@ const crimes = [
 const CrimeTypeFilter = ({ ariaControls, onChange, selected }) =>
   <div id="type-of-crime" className="mb4">
     <div className="mb3 fs-22 bold border-bottom border-blue-light">
-      Type of crime
+      Crime Data
     </div>
 
     {crimes.map((c, i) =>
@@ -49,7 +49,7 @@ const CrimeTypeFilter = ({ ariaControls, onChange, selected }) =>
                   checked={isActive}
                   id={id}
                   name="crime"
-                  onChange={e => onChange({ crime: e.target.value })}
+                  onChange={e => onChange({ pageType: e.target.value, page: 'crime' })}
                   type="radio"
                   value={id}
                 />

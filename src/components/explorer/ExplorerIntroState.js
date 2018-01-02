@@ -21,12 +21,13 @@ const getReportTerms = ({ nibrs, srs, hybrid }) =>
   </span>
 
 const ExplorerIntroState = ({ crime, place, participation, until, placeName }) => {
+  console.log('ExplorerIntroState:')
   const isArson = crime === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
   const untilUcr = participation.find(p => p.year === until)
   let totalAgencies = 0
   let coveredAgencies = 0
-  if ( untilUcr ) {
+  if (untilUcr) {
     totalAgencies = untilUcr.total_agencies
     coveredAgencies = untilUcr.covered_agencies
   }

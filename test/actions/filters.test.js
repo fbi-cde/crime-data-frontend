@@ -18,7 +18,7 @@ describe('filters actions', () => {
       const actual = updateFilters({ place: 'california', crime: 'robbery' })
       expect(actual.type).toEqual(FILTERS_UPDATE)
       expect(actual.filters.place).toEqual('california')
-      expect(actual.filters.crime).toEqual('robbery')
+      expect(actual.filters.pageType).toEqual('robbery')
     })
     /*
     it('should default place to united-states if not set properly', () => {
@@ -31,7 +31,7 @@ describe('filters actions', () => {
     it('should default offense to violent-crime if not set properly', () => {
       const actual = updateFilters({ crime: 'fake-crime' })
       expect(actual.type).toEqual(FILTERS_UPDATE)
-      expect(actual.filters.crime).toEqual('violent-crime')
+      expect(actual.filters.pageType).toEqual('violent-crime')
     })
 
     it('should work without any filters passed in', () => {
