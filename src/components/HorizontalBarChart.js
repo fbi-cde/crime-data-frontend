@@ -129,10 +129,6 @@ class HorizontalBarChart extends React.Component {
           </div>
         </div>
         <table className="mt1 mb2 table-fixed" id={id}>
-          {title &&
-            <caption className="hide">
-              {title}
-            </caption>}
           <thead className="v-hide">
             <tr style={{ lineHeight: '16px' }}>
               <th style={{ width: '15%' }} />
