@@ -36,7 +36,7 @@ class Home extends React.Component {
       if (!id) return
       const { actions, filters, router } = this.props
       const { pageType } = filters
-      const placeNew = { place: slugify(lookupStateByAbbr(states.states, id).state_name), placeType: 'state', placeId: id }
+      const placeNew = { place: slugify(lookupStateByAbbr(states.states, id).state_name), placeType: 'state', placeId: id, page: 'crime' }
       actions.updateFilters(placeNew)
       actions.updateApp({ pageType, ...placeNew }, router)
     } else {

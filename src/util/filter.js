@@ -4,7 +4,7 @@ import { MAX_YEAR } from '../util/years'
 const isValidCrime = crime => offenseUtil.includes(crime)
 
 const defaults = {
-  location: 'crime',
+  page: 'crime',
   pageType: 'violent-crime',
   place: 'united-states',
   placeType: 'national',
@@ -15,11 +15,17 @@ const defaults = {
 
 const validateFilter = filters => {
   const newFilters = { ...filters }
-  if (filters.location === 'location' && filters.pageType && !isValidCrime(filters.pageType)) {
+  if (filters.page === null) {
+    newFilters.page = defaults.page
     newFilters.pageType = defaults.pageType
   }
-  if (filters.location === null) {
-    newFilters.location = defaults.location
+
+  if (filters.page === 'crime' && filters.pageType && !isValidCrime(filters.pageType)) {
+    newFilters.pageType = defaults.pageType
+  }
+
+  if (isValidCrime(filters.pageType) && filters.page !== 'crime') {
+    newFilters.page = defaults.page
   }
 
   if (filters.place === 'usa') {
