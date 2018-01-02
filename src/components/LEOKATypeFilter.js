@@ -34,9 +34,7 @@ class LEOKATypeFilter extends React.Component {
   }
 
   render() {
-    console.log('leokaTypes:', leokaTypes)
     const selection = this.generateSelections()
-    console.log('generateSelections:', selection)
 
     return (<div id="type-of-leoka" className="mb4">
       <div className="mb3 fs-15 bold border-bottom border-blue-light">

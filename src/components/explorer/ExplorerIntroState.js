@@ -20,8 +20,8 @@ const getReportTerms = ({ nibrs, srs, hybrid }) =>
     {nibrs && <NibrsTerm />}
   </span>
 
-const ExplorerIntroState = ({ crime, place, participation, until, placeName }) => {
-  console.log('ExplorerIntroState:')
+const ExplorerIntroState = ({ crime, page, place, participation, until, placeName }) => {
+  const isCrime = page === 'crime'
   const isArson = crime === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
   const untilUcr = participation.find(p => p.year === until)
@@ -31,46 +31,50 @@ const ExplorerIntroState = ({ crime, place, participation, until, placeName }) =
     totalAgencies = untilUcr.total_agencies
     coveredAgencies = untilUcr.covered_agencies
   }
-  const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
-  const crimeTerm = (
-    <Term id={mapCrimeToGlossaryTerm(crime)}>
-      {upperFirst(lowerCase(crime))}
-    </Term>
-  )
 
-  return (
-    <div>
-      {!isArson
-        ? <div>
-            <p className="serif">
-              {crimeTerm} rates for {placeName} are derived from{' '}
-              {reportTerms} reports voluntarily submitted to the FBI.
-            </p>
-            <p className="serif">
-              In {highlight(until)}
-              , the FBI <EstimatedTerm /> crime statistics for{' '}
+  if (isCrime) {
+    const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
+    const crimeTerm = (
+      <Term id={mapCrimeToGlossaryTerm(crime)}>
+        {upperFirst(lowerCase(crime))}
+      </Term>
+    )
 
-              {placeName} based on data received from{' '}
-              {highlight(formatNum(totalAgencies - coveredAgencies))} law
-              enforcement agencies out of{' '}
-              {highlight(formatNum(totalAgencies))} agencies in the
-              state that year.
-            </p>
-          </div>
-        : <div>
-            <p className="serif">
-              {placeName} reports {reportTerms} data to the FBI.
-            </p>
-            <p className="serif">
+    return (
+      <div>
+        {!isArson
+          ? <div>
+              <p className="serif">
+                {crimeTerm} rates for {placeName} are derived from{' '}
+                {reportTerms} reports voluntarily submitted to the FBI.
+              </p>
+              <p className="serif">
+                In {highlight(until)}
+                , the FBI <EstimatedTerm /> crime statistics for{' '}
 
-              In {until}, {formatNum(totalAgencies - coveredAgencies)}{' '}
-              {placeName} law enforcement agencies voluntarily
-              reported data to the FBI. The charts below feature unestimated
-              data.
-            </p>
-          </div>}
-    </div>
-  )
+                {placeName} based on data received from{' '}
+                {highlight(formatNum(totalAgencies - coveredAgencies))} law
+                enforcement agencies out of{' '}
+                {highlight(formatNum(totalAgencies))} agencies in the
+                state that year.
+              </p>
+            </div>
+          : <div>
+              <p className="serif">
+                {placeName} reports {reportTerms} data to the FBI.
+              </p>
+              <p className="serif">
+
+                In {until}, {formatNum(totalAgencies - coveredAgencies)}{' '}
+                {placeName} law enforcement agencies voluntarily
+                reported data to the FBI. The charts below feature unestimated
+                data.
+              </p>
+            </div>}
+      </div>
+    )
+  }
+  return (<div />)
 }
 
 ExplorerIntroState.propTypes = {}

@@ -18,17 +18,12 @@ class PoliceEmploymentContainer extends React.Component {
   }
 
   getContent = ({
-    agency,
-    isAgency,
     policeEmployment,
     place,
-    placeType,
     placeDisplay,
     since,
     until,
     filters,
-    region,
-    states,
   }) => {
     const { yearSelected } = this.state
     const { data, loading, error } = policeEmployment
@@ -82,7 +77,7 @@ class PoliceEmploymentContainer extends React.Component {
           <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
             {placeDisplay} Police Employment
           </h2>
-          {this.getContent({ agency, isAgency, policeEmployment, place, placeType, placeDisplay, since, until, filters, region, states })}
+          {this.getContent({ policeEmployment, place, placeType, placeDisplay, since, until, filters })}
         </div>
       </div>
     )

@@ -32,7 +32,6 @@ const ExplorerHeaderContainer = ({
     placeDisplay = 'United States'
     location = filters.place;
   }
-  console.log('Container')
   return (
     <div>
       <div className="items-baseline mt2 mb4">

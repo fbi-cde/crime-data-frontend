@@ -87,6 +87,7 @@ class Explorer extends React.Component {
     const { pageType } = params
     const { place, placeType } = getPlaceInfo(params)
     const isAgency = filters.placeType === 'agency'
+    const crimePage = filters.page === 'crime'
     let agency = null
     if (isAgency) {
        agency = newGetAgency(agencies, place, placeType)
@@ -102,16 +103,16 @@ class Explorer extends React.Component {
       return <Loading />
     }
 
-    console.log('!offensesUtil.includes(pageType) :', params, pageType, offensesUtil.includes(pageType))
-
-    if (!offensesUtil.includes(pageType) || !validateFilter(filters, region.regions, states.states)) {
-      return <NotFound />
+    if (pageType === 'crime') {
+      if (!offensesUtil.includes(pageType) || !validateFilter(filters, region.regions, states.states)) {
+        return <NotFound />
+      }
     }
 
     if (agencies.loaded && isAgency && !agency) {
       return <NotFound />
     }
-
+    console.log('Crime Page:', crimePage)
     return (
       <div className="site-wrapper">
         <Helmet title="CDE :: Explorer" />
@@ -143,10 +144,11 @@ class Explorer extends React.Component {
         <div className="site-content" id="explorer">
           <div className="container-main mx-auto px2 md-py3 lg-px3">
             <ExplorerHeaderContainer />
-            {agency && <SparklineContainer />}
-            {agency ? <AgencyChartContainer /> : <TrendContainer />}
-            <NibrsContainer />
-            <PoliceEmploymentContainer />
+            {isAgency && crimePage && <SparklineContainer />}
+            {isAgency && <AgencyChartContainer /> }
+            {crimePage && !isAgency && <TrendContainer />}
+            {crimePage && <NibrsContainer /> }
+            {!crimePage && <PoliceEmploymentContainer /> }
             <AboutTheData
               crime={pageType}
               onTermClick={term => actions.showTerm(term)}

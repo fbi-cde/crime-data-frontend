@@ -27,11 +27,11 @@ const ExplorerIntro = ({ agency, filters, participation, placeName, region, stat
 
   if (participation.error) return <ErrorCard error={participation.error} />
 
-  console.log('Here')
   if (filters.place === nationalKey) {
     return (
       <ExplorerIntroNational
         crime={filters.pageType}
+        page={filters.page}
         until={filters.until}
         participation={participation.data[nationalKey]}
       />
@@ -41,6 +41,7 @@ const ExplorerIntro = ({ agency, filters, participation, placeName, region, stat
   if (filters.placeType === 'region') {
     return (<ExplorerIntroRegion
       crime={filters.pageType}
+      page={filters.page}
       until={filters.until}
       placeName={placeName}
       participation={participation.data[filters.place]}
@@ -53,6 +54,7 @@ const ExplorerIntro = ({ agency, filters, participation, placeName, region, stat
   return (
     <ExplorerIntroState
       crime={filters.pageType}
+      page={filters.page}
       place={filters.place}
       until={filters.until}
       participation={participation.data[filters.place]}
