@@ -31,6 +31,7 @@ const ExplorerIntroState = ({ crime, page, place, participation, until, placeNam
     totalAgencies = untilUcr.total_agencies
     coveredAgencies = untilUcr.covered_agencies
   }
+  console.log('ExplorerIntroState - page:', page)
 
   if (isCrime) {
     const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
@@ -74,7 +75,20 @@ const ExplorerIntroState = ({ crime, page, place, participation, until, placeNam
       </div>
     )
   }
-  return (<div />)
+  return (
+    <div>
+      <p className="serif">
+        In {highlight(until)}
+        , the FBI <EstimatedTerm /> crime statistics for{' '}
+
+        {placeName} based on data received from{' '}
+        {highlight(formatNum(totalAgencies - coveredAgencies))} law
+        enforcement agencies out of{' '}
+        {highlight(formatNum(totalAgencies))} agencies in the
+        state that year.
+      </p>
+    </div>
+  )
 }
 
 ExplorerIntroState.propTypes = {}

@@ -113,6 +113,8 @@ class Explorer extends React.Component {
       return <NotFound />
     }
     console.log('Crime Page:', crimePage)
+    const test = crimePage && !isAgency
+    console.log("test="+test)
     return (
       <div className="site-wrapper">
         <Helmet title="CDE :: Explorer" />

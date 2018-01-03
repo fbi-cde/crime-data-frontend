@@ -56,7 +56,19 @@ const ExplorerIntroNational = ({ crime, page, participation, until }) => {
       </div>
     )
   }
-  return (<div />)
+  return (
+    <div>
+      <p className="serif">
+        In {highlight(until)}
+        , the FBI <EstimatedTerm /> crime statistics for the nation based
+        on data received from{' '}
+        {highlight(formatNum(untilUcr.total_agencies - untilUcr.covered_agencies))} law
+        enforcement agencies out of{' '}
+        {highlight(formatNum(untilUcr.total_agencies))} in the country
+        that year.
+      </p>
+    </div>
+  )
 }
 
 ExplorerIntroNational.propTypes = {

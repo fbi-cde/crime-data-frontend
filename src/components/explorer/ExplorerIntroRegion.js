@@ -80,7 +80,22 @@ const ExplorerIntroRegion = ({ crime, page, participation, until, placeName, sta
       </div>
     )
   }
-  return (<div />)
+  return (
+    <div>
+      <p className="serif">
+        The {placeName} consists of the follow states: {stateNames}
+      </p>
+      <p className="serif">
+        In {highlight(until)}
+        , the FBI <EstimatedTerm /> crime statistics for the {placeName} based
+        on data received from{' '}
+        {highlight(formatNum(regionTotalObj.participating_agencies))} law
+        enforcement agencies out of{' '}
+        {highlight(formatNum(regionTotalObj.total_agencies))} in the country
+        that year.
+      </p>
+    </div>
+  )
 }
 
 
