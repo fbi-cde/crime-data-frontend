@@ -5,113 +5,134 @@ import { connect } from 'react-redux'
 import lookupUsa from '../util/usa'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
-import parseSHRCounts from '../util/shrCounts'
+import { parseSHRCardCounts, createTrendData } from '../util/shrCounts'
 import ExpandedHomicideCard from '../components/shr/ExpandedHomicideCard'
 import SHRIntro from '../components/shr/SHRIntro'
 import { getPlaceInfo } from '../util/place'
 import { SHRTerm } from '../components/Terms'
+import TrendChart from '../components/trend/TrendChart'
 
-const shouldShowSHR = crime => {
-  if (crime === 'homicide') {
-    return true;
+class SHRContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    const { until } = props
+    this.state = { yearSelected: until }
   }
-  return false;
-}
 
-const filterSHRData = (data, { since, until }) => {
-  if (!data) return false
+   shouldShowSHR = crime => {
+    if (crime === 'homicide') {
+      return true;
+    }
+    return false;
+  }
 
-  const filtered = {}
-  Object.keys(data).forEach(key => {
-    filtered[key] = data[key].filter(d => {
-      const year = parseInt(d.data_year, 10)
-      return year >= since && year <= until
+   filterSHRData = (data, { since, until }) => {
+    if (!data) return false
+
+    const filtered = {}
+    Object.keys(data).forEach(key => {
+      filtered[key] = data[key].filter(d => {
+        const year = parseInt(d.data_year, 10)
+        return year >= since && year <= until
+      })
     })
-  })
-  return filtered
-}
+    return filtered
+  }
 
-const SHRContainer = ({
-  agency,
-  crime,
-  isAgency,
-  shrCounts,
-  place,
-  placeType,
-  participation,
-  since,
-  until,
-}) => {
-  console.log('SHRContainer:', crime)
-  if ((isAgency) || !shouldShowSHR(crime)) { return null }
+  updateYear = year => {
+    this.setState({ yearSelected: year })
+  }
 
-  console.log('SHRContainer II')
+  render() {
+    const {
+    filters,
+    agency,
+    isAgency,
+    shrCounts,
+    place,
+    placeType,
+    participation,
+    since,
+    until,
+  } = this.props
+    if ((isAgency) || !this.shouldShowSHR(filters.crime)) { return null }
 
-  const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
-  const { data, error } = shrCounts
+    const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
+    const { data, error } = shrCounts
+    const { yearSelected } = this.state
 
-  const isReady = shrCounts.loaded
-  const isLoading = shrCounts.loading
-  const totalCount = 0
-  let content = null
+    const isReady = shrCounts.loaded
+    const isLoading = shrCounts.loading
 
+    if (isLoading) return <Loading />
 
-  if (error) content = <ErrorCard error={error} />
-  else if (isReady) {
-    const filteredData = filterSHRData(data, { since, until })
+    const totalCount = 0
+    let content = null
 
-    const dataParsed = parseSHRCounts(filteredData)
+    if (error) content = <ErrorCard error={error} />
+    else if (isReady) {
+      const filteredData = this.filterSHRData(data, { since, until })
 
-    /*
-    totalCount = offenseObj.data.count
-    let displayCards = true
-    if (totalCount === 0) { displayCards = false }
-    */
-    content = (
-      <div className="clearfix mxn1">
-        {dataParsed.map((d, i) => {
-          const cls = i % 2 === 0 ? 'clear-left' : ''
-          return (
-            <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
-              <ExpandedHomicideCard
-                crime={crime}
-                place={place}
-                placeType={placeType}
-                since={since}
-                until={until}
-                {...d}
-              />
-            </div>
-          )
-        })}
+      const dataParsed = parseSHRCardCounts(filteredData)
+
+      content = (
+        <div>
+          <TrendChart
+            crime={filters.crime}
+            filters={filters}
+            data={createTrendData(data)}
+            places={['victim', 'offender']}
+            onChangeYear={this.updateYear}
+            placeName={filters.place}
+            initialYearSelected={yearSelected}
+            type='shr'
+          />
+          <div className="clearfix mxn1">
+            {dataParsed.map((d, i) => {
+              const cls = i % 2 === 0 ? 'clear-left' : ''
+              return (
+                <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
+                  <ExpandedHomicideCard
+                    crime={filters.crime}
+                    place={place}
+                    placeType={placeType}
+                    since={since}
+                    until={until}
+                    {...d}
+                  />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
+        <div >
+          <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
+            <SHRTerm /> details reported by {placeDisplay}
+          </h2>
+          {isLoading && <Loading />}
+         {isReady &&
+           <SHRIntro
+             crime={filters.crime}
+             isAgency={isAgency}
+             since={since}
+             place={place}
+             placeDisplay={placeDisplay}
+             totalCount={totalCount}
+             until={until}
+             participation={participation}
+              />}
+        </div>
+        {content}
       </div>
     )
   }
 
-  return (
-    <div className="mb6">
-      <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
-        <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-          <SHRTerm /> details reported by {placeDisplay}
-        </h2>
-        {isLoading && <Loading />}
-       {isReady &&
-         <SHRIntro
-           crime={crime}
-           isAgency={isAgency}
-           since={since}
-           place={place}
-           placeDisplay={placeDisplay}
-           totalCount={totalCount}
-           until={until}
-           participation={participation}
-            />}
-      </div>
-      {content}
-    </div>
-  )
 }
-
 SHRContainer.propTypes = {
   crime: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
@@ -139,6 +160,7 @@ const mapStateToProps = ({ filters, shrCounts, participation }) => {
 
   return {
     ...filters,
+    filters,
     isAgency,
     place,
     placeType,

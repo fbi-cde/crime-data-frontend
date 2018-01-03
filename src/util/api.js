@@ -277,11 +277,12 @@ const getSHRCountsRequests = params => {
     { type: 'offender', dim: 'sex' },
     { type: 'offender', dim: 'race' },
     { type: 'offender', dim: 'ethnicity' },
+    { type: 'offender', dim: '' },
     { type: 'victim', dim: 'age' },
     { type: 'victim', dim: 'ethnicity' },
     { type: 'victim', dim: 'race' },
     { type: 'victim', dim: 'sex' },
-
+    { type: 'victim', dim: '' },
   ]
   return slices.map(s => fetchSHRCounts({ ...s, crime, place, placeType, placeId }))
 }

@@ -28,6 +28,7 @@ class NibrsStackedBar extends React.Component {
     const height = size.height - margin.top - margin.bottom
     const width = size.width - margin.left - margin.right
     const totalCt = data.reduce((a, b) => a + +b.count, 0)
+
     const x = scaleBand().domain([null]).rangeRound([0, width]).padding(0.4)
     const y = scaleLinear().domain([0, totalCt]).rangeRound([height, 0]).nice()
 

@@ -3,6 +3,7 @@ const sexCodes = {
   F: 'Female',
   M: 'Male',
   U: 'Unknown',
+  NRL: 'Not Reported',
 }
 
 
@@ -22,10 +23,13 @@ export const reshapeSexData = (data, offense) => {
   let male = 0;
   let female = 0
   let unknown = 0
+  let not_reported = 0
   for (const i in filtered) {
     male += filtered[i].male_count
     female += filtered[i].female_count
     unknown += filtered[i].unknown_count
+    not_reported += filtered[i].not_reported
+
   }
   const objs = [];
   let obj = {}
@@ -40,6 +44,10 @@ export const reshapeSexData = (data, offense) => {
   obj.count = unknown
   obj.key = 'Unknown'
   objs.push(obj)
+  obj = {}
+  obj.count = not_reported
+  obj.key = 'Not Reported'
+  objs.push(obj)
   return objs;
 }
 
@@ -51,6 +59,7 @@ export const reshapeRaceData = (data, offense) => {
   let nativeHawaiian = 0
   let unknown = 0
   let white = 0
+  let not_reported = 0
 
   for (const i in filtered) {
     asian += filtered[i].asian
@@ -59,6 +68,7 @@ export const reshapeRaceData = (data, offense) => {
     unknown += filtered[i].unknown
     nativeHawaiian += filtered[i].native_hawaiian
     americanIndian += filtered[i].american_indian
+    not_reported += filtered[i].not_reported
   }
   const objs = [];
   let obj = {}
@@ -92,6 +102,11 @@ export const reshapeRaceData = (data, offense) => {
   objs.push(obj)
   obj = {}
 
+  obj = {}
+  obj.count = not_reported
+  obj.key = 'Not Reported'
+  objs.push(obj)
+
   return objs;
 }
 
@@ -101,12 +116,14 @@ export const reshapeEthnicityData = (data, offense) => {
   let multiple = 0
   let notHispanic = 0
   let unknown = 0
+  let not_reported = 0
 
   for (const i in filtered) {
     hispanic += filtered[i].hispanic
     multiple += filtered[i].multiple
     notHispanic += filtered[i].not_hispanic
     unknown += filtered[i].unknown
+    not_reported += filtered[i].not_reported
   }
   const objs = [];
   let obj = {}
@@ -130,6 +147,11 @@ export const reshapeEthnicityData = (data, offense) => {
   objs.push(obj)
   obj = {}
 
+  obj = {}
+  obj.count = not_reported
+  obj.key = 'Not Reported'
+  objs.push(obj)
+
   return objs;
 }
 
@@ -147,7 +169,7 @@ export const reshapeAgeData = (data, offense) => {
   let range8089 = 0
   let range9099 = 0
   let unknown = 0;
-
+  let not_reported = 0
 
   for (const i in filtered) {
     range09 += filtered[i].range_0_9
@@ -161,7 +183,7 @@ export const reshapeAgeData = (data, offense) => {
     range8089 += filtered[i].range_80_89
     range9099 += filtered[i].range_90_99
     unknown += filtered[i].unknown
-
+    not_reported += filtered[i].not_reported
   }
 
   const objs = [];
@@ -220,6 +242,11 @@ export const reshapeAgeData = (data, offense) => {
   obj.key = 'Unknown'
   objs.push(obj)
   obj = {}
+
+  obj = {}
+  obj.count = not_reported
+  obj.key = 'Not Reported'
+  objs.push(obj)
 
   return objs;
 }
@@ -314,10 +341,33 @@ const victimDemo = (data, offense) => {
 }
 
 
-const parseSHRCounts = (data, offense) => [
+const parseSHRCardCounts = (data, offense) => [
   offenderDemo(data, offense),
   victimDemo(data, offense),
-
 ]
 
-export default parseSHRCounts
+const createTrendData = (data) => {
+  const victimData = data['victim']
+  const offenderData = data['offender']
+  let objs = [];
+  let obj = {}
+  for (const i in victimData) {
+    obj = {}
+    obj.year = victimData[i].data_year
+    let victim = {};
+    victim.count = victimData[i].count;
+    victim.rate = victimData[i].count / 10000 * 10000;
+    victim.crime = 'homicide'
+    obj.victim=victim;
+    let offender = {};
+    offender.count = offenderData[i].count;
+    offender.rate = offenderData[i].count / 10000 * 10000;
+    offender.crime = 'homicide'
+    obj.offender=offender;
+    objs.push(obj)
+  }
+  return objs;
+
+}
+
+export {parseSHRCardCounts, createTrendData}
