@@ -22,8 +22,8 @@ export const shouldFetchNibrs = ({ crime, place, placeType }) => {
   return coverage && coverage.nibrs
 }
 
-export const shouldFetchSHR = crime => {
-  if (crime === 'homicide') {
+export const shouldFetchSHR = (crime, placeType) => {
+  if (crime === 'homicide' && placeType !== 'region' && placeType !== 'agency') {
     return true;
   }
   return false;

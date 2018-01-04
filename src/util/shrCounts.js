@@ -356,13 +356,9 @@ const createTrendData = (data) => {
     obj.year = victimData[i].data_year
     let victim = {};
     victim.count = victimData[i].count;
-    victim.rate = victimData[i].count / 10000 * 10000;
-    victim.crime = 'homicide'
     obj.victim=victim;
     let offender = {};
     offender.count = offenderData[i].count;
-    offender.rate = offenderData[i].count / 10000 * 10000;
-    offender.crime = 'homicide'
     obj.offender=offender;
     objs.push(obj)
   }

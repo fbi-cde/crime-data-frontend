@@ -46,6 +46,7 @@ const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
               since={since}
               submitsNibrs={submitsNibrs}
               until={until}
+              keys={['actual', 'cleared']}
             />
             <DownloadDataBtn
               data={[{ data: dataClean, filename: `${fname}.csv` }]}

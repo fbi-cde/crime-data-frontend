@@ -12,7 +12,6 @@ import TrendChartHover from './TrendChartHover'
 import TrendChartLineSeries from './TrendChartLineSeries'
 import TrendChartRapeAnnotate from './TrendChartRapeAnnotate'
 import TrendChartRapeLegend from './TrendChartRapeLegend'
-import SHRTrendChartDetails from '../shr/SHRTrendChartDetails'
 import XAxis from '../XAxis'
 import YAxis from '../YAxis'
 import { formatYear } from '../../util/formats'
@@ -141,10 +140,8 @@ class TrendChart extends React.Component {
       size,
       placeName,
       filters,
-      type,
     } = this.props
 
-    const isSHRTrend = type !== 'crime';
     const { yearSelected } = this.state
     const { margin } = size
     const color = scaleOrdinal(colors)
@@ -156,10 +153,7 @@ class TrendChart extends React.Component {
       svgWidth,
     } = this.calculateDimensions()
 
-    let series
-    if (!isSHRTrend) { series = this.createSeries() } else {
-      series = this.createSHRSeries();
-    }
+    const series = this.createSeries()
     const dates = range(filters.since, filters.until + 1).map(d => formatYear(d))
     const rates = series
       .map(s => s.values)
@@ -183,7 +177,6 @@ class TrendChart extends React.Component {
     })
     return (
       <div>
-      {!isSHRTrend ?
         <TrendChartDetails
           active={active}
           colors={colors}
@@ -195,16 +188,6 @@ class TrendChart extends React.Component {
           placeName={placeName}
           placeType={filters.placeType}
         />
-      : <SHRTrendChartDetails
-        active={active}
-        colors={colors}
-        crime={crime}
-        keys={places}
-        since={filters.since}
-        onChangeYear={handleChangeYear}
-        until={filters.until}
-        placeType={filters.placeType}
-      />}
         <div className="mb2 clearfix">
           <div className="sm-col mb1 sm-m0 fs-12 bold monospace black">
             Rate per 100,000 people, by year
@@ -255,7 +238,6 @@ TrendChart.propTypes = {
   filters: PropTypes.object.isRequired,
   placeName: PropTypes.string.isRequired,
   crime: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
 }
 
 TrendChart.defaultProps = {

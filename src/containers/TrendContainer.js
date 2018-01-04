@@ -65,7 +65,6 @@ class TrendContainer extends React.Component {
           onChangeYear={this.updateYear}
           initialYearSelected={yearSelected}
           placeName={placeName}
-          type='crime'
         />
         <DownloadDataBtn
           ariaLabel={`Download ${title} data as a CSV`}

@@ -10,7 +10,7 @@ import ExpandedHomicideCard from '../components/shr/ExpandedHomicideCard'
 import SHRIntro from '../components/shr/SHRIntro'
 import { getPlaceInfo } from '../util/place'
 import { SHRTerm } from '../components/Terms'
-import TrendChart from '../components/trend/TrendChart'
+import AgencyChart from '../components/agency/AgencyChart'
 
 class SHRContainer extends React.Component {
   constructor(props) {
@@ -39,9 +39,6 @@ class SHRContainer extends React.Component {
     return filtered
   }
 
-  updateYear = year => {
-    this.setState({ yearSelected: year })
-  }
 
   render() {
     const {
@@ -59,7 +56,6 @@ class SHRContainer extends React.Component {
 
     const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
     const { data, error } = shrCounts
-    const { yearSelected } = this.state
 
     const isReady = shrCounts.loaded
     const isLoading = shrCounts.loading
@@ -77,14 +73,13 @@ class SHRContainer extends React.Component {
 
       content = (
         <div>
-          <TrendChart
+          <AgencyChart
             crime={filters.crime}
-            filters={filters}
-            data={createTrendData(data)}
-            places={['victim', 'offender']}
-            onChangeYear={this.updateYear}
-            placeName={filters.place}
-            initialYearSelected={yearSelected}
+            data={createTrendData(filteredData)}
+            since={since}
+            until={until}
+            submitsNibrs={false}
+            keys={['victim', 'offender']}
             type='shr'
           />
           <div className="clearfix mxn1">

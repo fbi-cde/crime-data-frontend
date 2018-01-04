@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import AgencyChartDetails from './AgencyChartDetails'
+import SHRChartDetails from '../shr/SHRChartDetails'
 import XAxis from '../XAxis'
 import YAxis from '../YAxis'
 import { rangeYears } from '../../util/years'
@@ -97,7 +98,15 @@ class AgencyChart extends React.Component {
       size,
       submitsNibrs,
       until,
+      keys,
+      type,
     } = this.props
+    console.log('Agency Chart Data:', data)
+    let incidientChart = true;
+    if (type === 'shr') {
+      incidientChart = false
+    }
+
     const { svgParentWidth } = this.state
 
     const svgWidth = svgParentWidth || size.width
@@ -107,7 +116,6 @@ class AgencyChart extends React.Component {
     const height = svgHeight - margin.top - margin.bottom
     const xPadding = svgWidth < 500 ? 20 : 40
 
-    const keys = ['actual', 'cleared']
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
     const noun = submitsNibrs ? 'incidents' : 'offenses'
@@ -135,17 +143,32 @@ class AgencyChart extends React.Component {
 
     return (
       <div>
-        <AgencyChartDetails
-          colors={colorMap}
-          crime={crime}
-          data={active}
-          dataPrior={activePriorYear}
-          keys={keys}
-          noun={noun}
-          since={since}
-          updateYear={this.updateYear}
-          until={until}
-        />
+        {incidientChart ?
+          <AgencyChartDetails
+            colors={colorMap}
+            crime={crime}
+            data={active}
+            dataPrior={activePriorYear}
+            keys={keys}
+            noun={noun}
+            since={since}
+            updateYear={this.updateYear}
+            until={until}
+            type='incident'
+          /> :
+          <SHRChartDetails
+            colors={colorMap}
+            crime={crime}
+            data={active}
+            dataPrior={activePriorYear}
+            keys={keys}
+            noun={noun}
+            since={since}
+            updateYear={this.updateYear}
+            until={until}
+            type='incident'
+          />
+        }
         <div className="mb2 h6 bold monospace black">
           Total {noun} reported by year
         </div>
@@ -210,6 +233,7 @@ class AgencyChart extends React.Component {
 
 AgencyChart.propTypes = {
   colors: PropTypes.array.isRequired,
+  keys: PropTypes.array.isRequired,
   crime: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   mutedColors: PropTypes.array.isRequired,
@@ -220,6 +244,7 @@ AgencyChart.propTypes = {
   }).isRequired,
   submitsNibrs: PropTypes.bool.isRequired,
   until: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
 }
 
 AgencyChart.defaultProps = {

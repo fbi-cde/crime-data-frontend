@@ -25,7 +25,7 @@ const fetchData = () => (dispatch, getState) => {
       // dispatch(fetchNibrs(filters))
       dispatch(fetchNibrsCounts(filters))
     }
-    if (shouldFetchSHR(filters.crime)) {
+    if (shouldFetchSHR(filters.crime, filters.placeType)) {
       dispatch(fetchSHRCounts(filters))
     }
   }
