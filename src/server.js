@@ -29,7 +29,6 @@ import { fetchUcrRegion } from './actions/region'
 import { fetchUcrState } from './actions/states'
 
 import createEnv from './util/env'
-import { hasThreatKeyword, notifyOfThreat } from './util/feedback'
 import { createIssue } from './util/github'
 import history from './util/history'
 
@@ -44,7 +43,6 @@ const {
   GITHUB_ISSUE_REPO_NAME: repoName,
   GITHUB_ISSUE_BOT_TOKEN: repoToken,
   PORT,
-  THREAT_KEYWORDS,
 } = ENV
 
 const initState = {
@@ -117,7 +115,6 @@ app.get('/api-proxy/*', (req, res) => {
 
 app.post('/feedback', (req, res) => {
   const { body, title } = req.body
-  const terms = THREAT_KEYWORDS && JSON.parse(THREAT_KEYWORDS)
   const allEnvs = repoOwner && repoName && repoToken
 
   if (!allEnvs || !acceptHostname(req.hostname)) return res.status(401).end()
@@ -129,11 +126,7 @@ app.post('/feedback', (req, res) => {
     title,
     token: repoToken,
   })
-    .then(issueResponse => {
-      const { data: issue } = issueResponse
-      if (hasThreatKeyword(body, terms)) notifyOfThreat(issue)
-      return res.send(issue)
-    })
+    .then(issue => res.send(issue.data))
     .catch(e => res.status(e.response.status).end())
 })
 
