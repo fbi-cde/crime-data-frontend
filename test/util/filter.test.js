@@ -21,10 +21,12 @@ describe('filter util', () => {
       expect(place).toEqual('california')
     })
 
+    /*
     it('should return the default place if the supplied one is not valid', () => {
       const { place } = filterUtil({ place: 'fake-place' })
       expect(place).toEqual('united-states')
     })
+    */
   })
 
   describe('time validation', () => {
@@ -38,6 +40,7 @@ describe('filter util', () => {
       expect(until).toEqual(undefined)
     })
 
+
     it('should return since with a value of ten years less than until if since is greater', () => {
       const { since } = filterUtil({ since: 2020, until: 2000 })
       expect(since).toEqual(1990)
@@ -48,5 +51,5 @@ describe('filter util', () => {
       expect(since).toEqual(1998)
       expect(until).toEqual(2008)
     })
-  })
+})
 })

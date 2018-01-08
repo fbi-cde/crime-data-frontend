@@ -21,7 +21,7 @@ class TrendChart extends React.Component {
     super(props)
     this.state = {
       svgParentWidth: null,
-      yearSelected: props.initialYearSelected,
+      yearSelected: props.until,
     }
     this.getDimensions = throttle(this.getDimensions, 20)
   }
@@ -49,7 +49,7 @@ class TrendChart extends React.Component {
   }
 
   getYearFromXPosition = xPosition => {
-    const { since, until } = this.props
+    const { since, until } = this.props.filters
     const { width, xPad } = this.calculateDimensions()
     const dates = range(since, until + 1).map(d => formatYear(d))
     const x = scaleTime().domain(extent(dates)).range([xPad, width - xPad])
@@ -67,7 +67,6 @@ class TrendChart extends React.Component {
     const isRape = crime === 'rape'
     const crimes = [isRape ? 'rape-legacy' : crime]
     if (isRape) crimes.push('rape-revised')
-
     const dataByYear = data.map(d => ({ ...d, date: formatYear(d.year) }))
     return places
       .map(place =>
@@ -80,7 +79,6 @@ class TrendChart extends React.Component {
               population: d[place].population,
               ...d[place][c],
             }))
-
           return { crime: c, place, values }
         }),
       )
@@ -116,13 +114,13 @@ class TrendChart extends React.Component {
       colors,
       places,
       onChangeYear: handleChangeYear,
-      since,
       size,
-      until,
+      placeName,
+      filters,
     } = this.props
+
     const { yearSelected } = this.state
     const { margin } = size
-
     const color = scaleOrdinal(colors)
     const {
       height,
@@ -133,7 +131,7 @@ class TrendChart extends React.Component {
     } = this.calculateDimensions()
 
     const series = this.createSeries()
-    const dates = range(since, until + 1).map(d => formatYear(d))
+    const dates = range(filters.since, filters.until + 1).map(d => formatYear(d))
     const rates = series
       .map(s => s.values)
       .reduce((accum, next) => accum.concat(next), [])
@@ -161,9 +159,11 @@ class TrendChart extends React.Component {
           colors={colors}
           crime={crime}
           keys={places}
-          since={since}
+          since={filters.since}
           onChangeYear={handleChangeYear}
-          until={until}
+          until={filters.until}
+          placeName={placeName}
+          placeType={filters.placeType}
         />
         <div className="mb2 clearfix">
           <div className="sm-col mb1 sm-m0 fs-12 bold monospace black">
@@ -183,7 +183,7 @@ class TrendChart extends React.Component {
               />
               <YAxis scale={y} width={width} />
               <TrendChartLineSeries color={color} series={series} x={x} y={y} />
-              {until > 2013 &&
+              {filters.until > 2013 &&
                 crime === 'rape' &&
                 <TrendChartRapeAnnotate height={height} x={x} />}
               <TrendChartHover
@@ -210,10 +210,11 @@ class TrendChart extends React.Component {
 
 TrendChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  since: PropTypes.number.isRequired,
-  until: PropTypes.number.isRequired,
   onChangeYear: PropTypes.func,
   initialYearSelected: PropTypes.number,
+  filters: PropTypes.object.isRequired,
+  placeName: PropTypes.string.isRequired,
+  crime: PropTypes.string.isRequired,
 }
 
 TrendChart.defaultProps = {

@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux'
 import Link from '../components/Link'
 import { showFeedback } from '../actions/feedback'
 
-const NotFound = ({ actions }) =>
+const NotFound = () =>
   <div className="container mb8 mx-auto px2 pt8">
     <Helmet title="CDE :: 404" />
     <h1 className="mt0 fs-40 col-12 sm-col-7">
@@ -18,16 +18,6 @@ const NotFound = ({ actions }) =>
     <Link to="/" className="btn btn-primary mb2 fs-18">
       Return home
     </Link>
-    <p className="fs-18 serif">
-      If you still can't find what you're looking for, please{' '}
-      <button
-        className="bg-transparent bold border-none color-inherit underline cursor-pointer serif p0"
-        onClick={() => actions.showFeedback()}
-      >
-        submit feedback
-      </button>{' '}
-      or contact us.
-    </p>
   </div>
 
 NotFound.propTypes = {

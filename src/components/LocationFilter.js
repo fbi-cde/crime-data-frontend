@@ -22,7 +22,6 @@ class LocationFilter extends React.Component {
     const { agencyData, ariaControls, onChange, usState } = this.props
     const { showResults } = this.state
     const showAgencySearch = usState !== nationalKey && agencyData.length > 0
-
     return (
       <div id="location" className="mb4">
         <div className="mb3 fs-22 bold border-bottom border-blue-light">

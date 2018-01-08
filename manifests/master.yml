@@ -9,5 +9,6 @@ applications:
   domain: fr.cloud.gov
 env:
   CDE_API: 'https://crime-data-api-master.fr.cloud.gov'
+  NEW_RELIC_APP_NAME: 'crime-data-frontend-master'
 services:
   - crime-data-api-key-development

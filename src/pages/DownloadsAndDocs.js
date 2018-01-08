@@ -12,7 +12,7 @@ import markdown from '../util/md'
 const border = 'border-bottom border-blue-light'
 const borderLight = 'border-bottom border-blue-lighter'
 
-const DownloadsAndDocs = () =>
+const DownloadsAndDocs = () => (
   <section className="bg-white">
     <Helmet title="CDE :: Downloads & Documentation" />
     <SharingTags title="Downloads & Documentation" />
@@ -41,10 +41,7 @@ const DownloadsAndDocs = () =>
               </a>
             </li>
             <li className="mb2">
-              <a href="/pdf/data-dictionary.pdf">Data dictionary</a>
-            </li>
-            <li className="mb2">
-              <a href="/pdf/NIBRS-attributes-and-map.pdf">NIBRS attributes</a>
+              <a href="/pdf/NIBRS-data-diagram.pdf">NIBRS data diagram</a>
             </li>
           </ul>
         </div>
@@ -65,7 +62,7 @@ const DownloadsAndDocs = () =>
           <div className="sm-col sm-col-4 sm-pl2">Dataset</div>
           <div className="sm-col sm-col-8">Description</div>
         </div>
-        {otherDatasets.map((d, i) =>
+        {otherDatasets.map((d, i) => (
           <div key={i} className={`clearfix pt2 pb4 ${borderLight}`}>
             <div className="sm-col sm-col-4 mb1 sm-pl2 sm-pr4 fs-16 sm-fs-20 bold">
               {d.title}
@@ -76,27 +73,30 @@ const DownloadsAndDocs = () =>
                   __html: markdown.render(d.description),
                 }}
               />
-              {d.downloads
-                ? d.downloads.map((dd, ii) =>
-                    <DownloadDataBtn
-                      ariaLabel={`Download ${dd.title} as a CSV`}
-                      className="block fs-12"
-                      data={[{ url: dd.href }]}
-                      key={ii}
-                      text={`Download ${dd.title} as a CSV`}
-                    />,
-                  )
-                : <DownloadDataBtn
-                    ariaLabel={`Download ${d.title} data as a CSV`}
+              {d.downloads ? (
+                d.downloads.map((dd, ii) => (
+                  <DownloadDataBtn
+                    ariaLabel={`Download ${dd.title} as a CSV`}
                     className="block fs-12"
-                    data={[{ url: d.href }]}
-                    text="Download CSV"
-                  />}
+                    data={[{ url: dd.href }]}
+                    key={ii}
+                    text={`Download ${dd.title} as a CSV`}
+                  />
+                ))
+              ) : (
+                <DownloadDataBtn
+                  ariaLabel={`Download ${d.title} data as a CSV`}
+                  className="block fs-12"
+                  data={[{ url: d.href }]}
+                  text="Download CSV"
+                />
+              )}
             </div>
-          </div>,
-        )}
+          </div>
+        ))}
       </div>
     </div>
   </section>
+)
 
 export default DownloadsAndDocs

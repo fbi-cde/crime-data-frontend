@@ -1,5 +1,58 @@
 # Change Log
 All notable changes to this project be documented in this file.
+## [2.18.7] - 2017-12-15
+### Fixed
+- Fixes NIBRS Counts being incorrect via new backend services that report accurate numbers ([#1302](https://github.com/18F/crime-data-frontend/pull/1302))
+
+## [2.18.6] - 2017-11-28
+### Fixed
+- Fixes Agency Participation displayed on State Explorer Pages ([#1290](https://github.com/18F/crime-data-frontend/pull/1279))
+- Fixes UCR State Program Participation Display on About Page (https://github.com/18F/crime-data-frontend/commit/f2214862192a9025110a6b72647ec339bda12d7a)
+
+## [2.18.5] - 2017-10-19
+### Added
+- Added information that discusses issues with NIBRS data being displayed ([#1281](https://github.com/18F/crime-data-frontend/pull/1281))
+
+### Fixed
+- Invalid data in year range csv ([#1279](https://github.com/18F/crime-data-frontend/pull/1279))
+
+## [2.18.4] - 2017-10-12
+### Added
+- Added information on when the data was last uploaded from UCR ([#1265](https://github.com/18F/crime-data-frontend/pull/1265))
+
+### Fixed
+- Invalid dates being displayed on Documents and Download Page ([#1267](https://github.com/18F/crime-data-frontend/pull/1267))
+- Addressed breakage with Selected Year Change causing Charts to fail to laod ([#1269](https://github.com/18F/crime-data-frontend/pull/1269))
+- Removal of Feedback on Page not Found Page ([#1271](https://github.com/18F/crime-data-frontend/pull/1271))
+- Update Agency Reference Year reference to 2016  ([#1268](https://github.com/18F/crime-data-frontend/pull/1268))
+- Agency View now displays Reported but is actual the "actual" count  ([#1264](https://github.com/18F/crime-data-frontend/pull/1264))
+- Corrects AWS link to LEO CSV ([#1261](https://github.com/18F/crime-data-frontend/pull/1261))
+- CDE to display proper agencies participation number ([#1276](https://github.com/18F/crime-data-frontend/pull/1276))
+
+### Changed
+- Rape is not calculated based upon Sodomy not incest ([#1273](https://github.com/18F/crime-data-frontend/pull/1273))
+
+## [2.18.3] - 2017-09-27
+### Fixed
+- Agency View narrative now displays Actual instead of Reported Counts  ([#1258](https://github.com/18F/crime-data-frontend/pull/1258))
+
+## [2.18.2] - 2017-09-27
+### Changed
+- Agency View now displays Actual instead of Reported Value  ([#1256](https://github.com/18F/crime-data-frontend/pull/1256))
+
+
+## [2.18.1] - 2017-09-25
+### Fixed
+- Use production API key service only to prevent env var collisions ([#1254](https://github.com/18F/crime-data-frontend/pull/1254))
+
+
+## [2.18.0] - 2017-09-25
+### Added
+- Show 2016 data by default ([#1253](https://github.com/18F/crime-data-frontend/pull/1253/commits/e27a2ef9c3ad1aa916a3dbb10d5d26fd089504db))
+
+### Fixed
+- Zoom out on some states in the place thumbnail to show more location context and to account for the lower fidelity geometry ([#1250](https://github.com/18F/crime-data-frontend/pull/1250))
+
 
 ## [2.17.1] - 2017-09-14
 ### Fixed

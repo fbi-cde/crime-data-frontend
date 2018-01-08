@@ -7,7 +7,6 @@ import { EstimatedTerm, NibrsTerm, SrsTerm } from '../Terms'
 import { formatNum } from '../../util/formats'
 import mapCrimeToGlossaryTerm from '../../util/glossary'
 import ucrParticipationLookup from '../../util/participation'
-import lookupUsa from '../../util/usa'
 
 const getReportTerms = ({ nibrs, srs, hybrid }) =>
   <span>
@@ -49,7 +48,8 @@ const highlight = txt =>
     {txt}
   </strong>
 
-const ExplorerIntroState = ({ crime, place, participation, until }) => {
+const ExplorerIntroState = ({ crime, place, participation, until, placeName }) => {
+
   const isArson = crime === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
   const hybrid = nibrs && srs
@@ -75,7 +75,7 @@ const ExplorerIntroState = ({ crime, place, participation, until }) => {
       {!isArson
         ? <div>
             <p className="serif">
-              {crimeTerm} rates for {placeDisplay} are derived from{' '}
+              {crimeTerm} rates for {placeName} are derived from{' '}
               {reportTerms} reports voluntarily submitted to the FBI.{' '}
               {programHistory}
             </p>
@@ -91,11 +91,11 @@ const ExplorerIntroState = ({ crime, place, participation, until }) => {
           </div>
         : <div>
             <p className="serif">
-              {placeDisplay} reports {reportTerms} data to the FBI.
+              {placeName} reports {reportTerms} data to the FBI.
             </p>
             <p className="serif">
               In {until}, {formatNum(untilUcr.participating_agencies)}{' '}
-              {placeDisplay} law enforcement agencies voluntarily reported data
+              {placeName} law enforcement agencies voluntarily reported data
               to the FBI. The charts below feature unestimated data.
             </p>
           </div>}

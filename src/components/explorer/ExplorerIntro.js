@@ -5,18 +5,19 @@ import ErrorCard from '../ErrorCard'
 import ExplorerIntroAgency from './ExplorerIntroAgency'
 import ExplorerIntroNational from './ExplorerIntroNational'
 import ExplorerIntroState from './ExplorerIntroState'
+import ExplorerIntroRegion from './ExplorerIntroRegion'
 import { oriToState } from '../../util/agencies'
 import { nationalKey } from '../../util/usa'
 
-const ExplorerIntro = ({ agency, crime, participation, place, until }) => {
+const ExplorerIntro = ({ agency, filters, participation, placeName, region, states }) => {
   if (agency) {
     return (
       <ExplorerIntroAgency
         county={agency.primary_county}
-        crime={crime}
+        crime={filters.crime}
         hasNibrs={agency.nibrs_months_reported === 12}
         name={agency.agency_name}
-        usState={oriToState(place)}
+        usState={oriToState(filters.place)}
         type={agency.agency_type_name}
       />
     )
@@ -26,35 +27,49 @@ const ExplorerIntro = ({ agency, crime, participation, place, until }) => {
 
   if (participation.error) return <ErrorCard error={participation.error} />
 
-  if (place === nationalKey) {
+  if (filters.place === nationalKey) {
     return (
       <ExplorerIntroNational
-        crime={crime}
-        until={until}
+        crime={filters.crime}
+        until={filters.until}
         participation={participation.data[nationalKey]}
       />
     )
   }
 
+  if (filters.placeType === 'region') {
+    return (<ExplorerIntroRegion
+      crime={filters.crime}
+      until={filters.until}
+      placeName={placeName}
+      participation={participation.data[filters.place]}
+      states={states}
+      region={region}
+      place={filters.place}
+    />)
+  }
+
   return (
     <ExplorerIntroState
-      crime={crime}
-      place={place}
-      until={until}
-      participation={participation.data[place]}
+      crime={filters.crime}
+      place={filters.place}
+      until={filters.until}
+      participation={participation.data[filters.place]}
+      placeName={placeName}
     />
   )
 }
 
 ExplorerIntro.propTypes = {
   agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
-  crime: PropTypes.string.isRequired,
-  place: PropTypes.string.isRequired,
   participation: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.boolean,
   }).isRequired,
-  until: PropTypes.number.isRequired,
+  filters: PropTypes.object.isRequired,
+  placeName: PropTypes.string.isRequired,
+  states: PropTypes.object,
+  region: PropTypes.object,
 }
 
 export default ExplorerIntro
