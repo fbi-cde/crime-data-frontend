@@ -19,10 +19,9 @@ export const receivedSummary = summaries => ({
 export const fetchSummaries = params => dispatch => {
   dispatch(fetchingSummary())
   const requests = api.getSummaryRequests(params)
-
   return Promise.all(requests)
     .then(data => reshapeData(data))
-    .then(d => calculateRates(d))
+    .then(d => calculateRates(d, params.placeType))
     .then(summaries => dispatch(receivedSummary(summaries, params)))
     .catch(error => dispatch(failedSummary(error)))
 }

@@ -98,6 +98,7 @@ class AgencySearch extends Component {
         <div className="relative">
           <div className="relative">
             <input
+              id="agencySearchInput"
               type="text"
               className="col-12 pr5 field field-sm fs-14 bold bg-white border-blue rounded-none placeholder-blue placeholder-fw-100 truncate border-blue"
               placeholder="Search for an agency"
@@ -105,6 +106,7 @@ class AgencySearch extends Component {
               onChange={this.handleChange}
             />
             <button
+              id="agencySearchBtn"
               className="absolute right-0 btn line-height-1 border-none"
               style={{
                 padding: '.5rem .75rem',

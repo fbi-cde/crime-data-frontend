@@ -1,8 +1,10 @@
 import { updateFilters } from './filters'
-import { fetchNibrs } from './nibrs'
+import { fetchNibrsCounts } from '../actions/nibrsCounts'
 import { fetchSummaries } from '../actions/summary'
 import { fetchUcrParticipation } from '../actions/participation'
 import history, { createNewLocation } from '../util/history'
+import { getPlaceId } from '../util/location'
+
 import {
   shouldFetchUcr,
   shouldFetchSummaries,
@@ -10,11 +12,18 @@ import {
 } from '../util/participation'
 
 const fetchData = () => (dispatch, getState) => {
-  const { filters } = getState()
-
-  if (shouldFetchUcr(filters)) dispatch(fetchUcrParticipation(filters))
-  if (shouldFetchSummaries(filters)) dispatch(fetchSummaries(filters))
-  if (shouldFetchNibrs(filters)) dispatch(fetchNibrs(filters))
+  const { filters, region, states } = getState()
+  if (region.loaded && states.loaded) {
+    if (!filters.placeId) {
+      filters.placeId = getPlaceId(filters, region.region, states.states);
+    }
+    if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
+    if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
+    if (shouldFetchNibrs(filters)) {
+      // dispatch(fetchNibrs(filters))
+      dispatch(fetchNibrsCounts(filters))
+    }
+  }
 }
 
 export const updateApp = (change, router) => dispatch => {

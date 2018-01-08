@@ -14,6 +14,8 @@ describe('LocationFilter', () => {
         ariaControls: 'explorer',
         onChange: () => {},
         usState: 'kentucky',
+        regionData: [],
+        stateData: [],
       }
       const wrapper = shallow(<LocationFilter {...props} />)
       const actual = wrapper.instance().getAgencyName()
@@ -27,6 +29,8 @@ describe('LocationFilter', () => {
         ariaControls: 'explorer',
         onChange: () => {},
         usState: 'kentucky',
+        regionData: [],
+        stateData: [],
       }
       const wrapper = shallow(<LocationFilter {...props} />)
       const actual = wrapper.instance().getAgencyName()
@@ -42,6 +46,9 @@ describe('LocationFilter', () => {
         ariaControls: 'explorer',
         onChange: () => {},
         usState: 'kentucky',
+        regionData: [],
+        stateData: [],
+
       }
 
       const wrapper = shallow(<LocationFilter {...props} />)

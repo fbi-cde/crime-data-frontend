@@ -10,11 +10,11 @@ import { getAgency, oriToState } from '../util/agencies'
 import { nationalKey } from '../util/usa'
 
 const SidebarContainer = ({
+  actions,
   agency,
   agencyData,
   ariaControls,
   crime,
-  hide,
   filters,
   isOpen,
   onChange,
@@ -25,7 +25,7 @@ const SidebarContainer = ({
       <button
         type="button"
         className="right btn p0 fs-12 caps line-height-4 black"
-        onClick={hide}
+        onClick={actions.hide}
       >
         Close
       </button>
@@ -69,9 +69,8 @@ const formatAgencyData = (agencies, state) =>
     ...agencies[state][id],
   }))
 
-const mapStateToProps = ({ agencies, filters, sidebar }) => {
+const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   const { crime, place, placeType } = filters
-
   const isAgency = placeType === 'agency'
   const isNational = place === nationalKey
   const usState = isAgency ? oriToState(place) : place
@@ -85,10 +84,14 @@ const mapStateToProps = ({ agencies, filters, sidebar }) => {
     filters,
     isOpen: sidebar.isOpen,
     usState,
+    region,
+    states,
   }
 }
 const mapDispatchToProps = dispatch => ({
-  hide: () => dispatch(hideSidebar()),
+  actions: {
+    hide: () => dispatch(hideSidebar()),
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarContainer)

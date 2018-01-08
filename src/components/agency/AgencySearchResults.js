@@ -18,6 +18,7 @@ const AgencySearchResultItem = ({ agency, onClick }) => {
         className={`block truncate ${color}`}
         style={{ lineHeight: '1.75' }}
         href="#!"
+        id={agency.ori}
         onClick={isActive ? onClick(agency) : prevent}
       >
         {name}
@@ -75,7 +76,7 @@ const AgencySearchResults = ({
       <div className="px2 pb2 border-box bg-white border-left border-right border-bottom">
         <hr className="mt0 mb2" />
         <p className="mb2 fs-12 italic serif">
-          Agencies that have submitted a full year’s worth of data in 2015 are
+          Agencies that have submitted a full year’s worth of data in 2016 are
           listed in dark blue.
         </p>
         <button

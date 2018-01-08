@@ -20,27 +20,31 @@ const NibrsIntro = ({
   totalCount,
   until,
 }) => {
-  const noun = 'offense'
+  const noun = 'incident'
   if (isAgency) {
     return (
-      <p className="m0 sm-col-9">
-        This agency reported {highlight(formatNum(totalCount))} individual{' '}
-        {crime} {pluralize(noun, totalCount)} to the FBI between{' '}
-        {highlight(nibrsFirstYear)} and {highlight(until)}.
-      </p>
+      <div className="m0 sm-col-10">
+        <p>
+          This agency reported {highlight(formatNum(totalCount))} individual{' '}
+          {crime} {pluralize(noun, totalCount)} to the FBI between{' '}
+          {highlight(nibrsFirstYear)} and {highlight(until)}.
+        </p>
+      </div>
     )
   }
   const agencyCts = participation.map(p => p.nibrs_participating_agencies)
   const agencyCt = max(agencyCts)
 
   return (
-    <p className="m0 sm-col-9">
-      There were {highlight(formatNum(totalCount))} individual {crime}{' '}
-      {pluralize(noun, totalCount)} reported to the FBI in {placeDisplay}{' '}
-      between {highlight(nibrsFirstYear)} and {highlight(until)} by{' '}
-      {highlight(agencyCt)} law enforcement {pluralize('agency', agencyCt)}{' '}
-      reporting {nibrsTerm} data.
-    </p>
+    <div className="m0 sm-col-10">
+      <p>
+        There were {highlight(formatNum(totalCount))} individual {crime}{' '}
+        {pluralize(noun, totalCount)} reported to the FBI in {placeDisplay}{' '}
+        between {highlight(nibrsFirstYear)} and {highlight(until)} by{' '}
+        {highlight(agencyCt)} law enforcement {pluralize('agency', agencyCt)}{' '}
+        reporting {nibrsTerm} data.
+      </p>
+    </div>
   )
 }
 

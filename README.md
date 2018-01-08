@@ -25,6 +25,12 @@ Use `npm run watch` to start the continuous `webpack` processes and a webserver.
 
 You can lint the code with `npm run lint` and run tests with `npm run test`.
 
+### Running Selenium tests
+1. Launch Selenium Stand-alone server with `npm run selenium:start` or `npm run selenium:start:mac` on a Mac. You will want to start this in a different shell or as a background task.
+2. Ensure CDE is running locally
+3. Configure `test/browser/release_verification.js` to use the port you have CDE running on
+4. Execute `npm run selenium:run` - This will execute the automated test that covers the [manual verification process](#manual-verification)
+
 ### Updating agency data
 
 We load a JSON file, sourced from the API, into the application that has all the agency ORIs and names to make the end user experience better. When we need to update that JSON file with new data from the API, we can just run `npm run agencies` and the data will be downloaded and gzipped properly. This is useful when agency names are updated.
@@ -49,9 +55,11 @@ Use `cf push -f manifest/staging.yml` to deploy. Remember that `cf` pushes from 
 
 This app follows [semver](http://semver.org/) and has [tagged releases](https://github.com/18F/crime-data-frontend/releases) by version number. You can see all notable changes in [CHANGELOG.md](https://github.com/18F/crime-data-frontend/blob/master/CHANGELOG.md).
 
+We use the following criteria to determine the proper next version number. A major version change is appropriate when the URL structure has changed (breaking any existing URLs) or when there is a major removal of content. A minor version change is appropriate when the changes include more than bug fixes but not breaking changes. A patch version is appropriate when only bugs or security issues are addressed.
+
 ### Manual verification
 
-Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2340`](https://github.com/18F/crime-data-frontend/commit/cdb2340830b0325dc9a05ba443a1a84c2e835430) it was about 77% of all statements), we run through a few basic user scenarios before tagging a release to check the application.
+Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2340`](https://github.com/18F/crime-data-frontend/commit/cdb2340830b0325dc9a05ba443a1a84c2e835430) it was about 77% of all statements), we run through a few basic user scenarios before tagging a release to check the application. We are working on getting the [automated browser tests](#running-selenium-tests) to replicate this exact process.
 
 1. Load homepage from `master` branch. Can be local or https://crime-data-explorer-master.fr.cloud.gov
 2. Select "Explorer" from navigation
@@ -77,4 +85,4 @@ Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2
 
 ## Browser support
 
-For the MVP launch of this project (Spring 2017), we’ll explicitly support Chrome, Safari, IE 10+, Firefox, and MS Edge.
+We explicitly support Chrome, Safari, IE 10+, Firefox, and MS Edge.

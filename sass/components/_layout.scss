@@ -42,27 +42,40 @@ footer {
 }
 
 .site-sidebar {
-  display: none;
   order: -1;
 }
 
 @media #{$breakpoint-max-md} {
-  .site-sidebar.open {
+  .site-sidebar {
     bottom: 0;
     box-sizing: border-box;
-    display: block;
-    left: 0;
     max-width: 90%;
     overflow-y: auto;
     position: fixed;
     top: 0;
+    transform: translateX(-100%);
+    transition: transform .2s;
     width: $sidebar-width;
+  }
+
+  .site-sidebar.open {
+    display: block;
+    transform: translateX(0%);
     z-index: 1;
   }
 }
 
 @media #{$breakpoint-md} {
-  .site-wrapper { flex-direction: row; }
-  .site-content { flex: 1; }
-  .site-sidebar { display: block; flex: 0 0 $sidebar-width; }
+  .site-wrapper {
+    flex-direction: row;
+  }
+
+  .site-content {
+    flex: 1;
+  }
+
+  .site-sidebar {
+    display: block;
+    flex: 0 0 $sidebar-width;
+  }
 }

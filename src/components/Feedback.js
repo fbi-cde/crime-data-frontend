@@ -1,4 +1,3 @@
-import http from 'axios' // use axios to skip localStorage
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -68,14 +67,7 @@ class Feedback extends React.Component {
     if (!this.validateSubmission()) {
       return this.handleValidationError()
     }
-
-    return http
-      .post('/feedback', {
-        body: this.createIssueBody(),
-        title: 'User feedback',
-      })
-      .then(this.handleSubmitSuccess)
-      .catch(this.handleSubmitError)
+    return null
   }
 
   handleSubmitError = ({ response }) => {

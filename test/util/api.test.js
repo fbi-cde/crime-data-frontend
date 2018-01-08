@@ -14,6 +14,7 @@ const params = {
   crime: 'homicide',
   place: 'california',
   placeType: 'state',
+  placeId: 'ca',
   since: 2004,
   until: 2014,
 }
@@ -98,7 +99,7 @@ describe('api utility', () => {
 
     it('should request /estimates/states/:state if place is a state', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      api.fetchAggregates('california').then(() => {
+      api.fetchAggregates('california','state','ca').then(() => {
         const url = spy.args[0].pop()
         expect(url.includes('/estimates/states/ca')).toEqual(true)
         done()
@@ -128,7 +129,7 @@ describe('api utility', () => {
   describe('getUcrParticipation()', () => {
     it('should call the /participation/states/:id endpoint', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      api.getUcrParticipation('california').then(() => {
+      api.getUcrParticipation('california','ca','state').then(() => {
         const url = spy.args[0].pop()
         expect(url.includes('/participation/states')).toEqual(true)
         done()

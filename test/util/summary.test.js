@@ -21,7 +21,7 @@ describe('summary util', () => {
     })
     it('should add rates to all offenses', () => {
       const resp = createApiResponse()
-      const actual = calculateRates(resp)['united-states'][0]
+      const actual = calculateRates(resp,'state')['united-states'][0]
       const expected = { count: 5, rate: 500 }
       expect(actual['violent-crime']).toEqual(expected)
       expect(actual.robbery).toEqual(expected)
@@ -29,7 +29,7 @@ describe('summary util', () => {
 
     it('should ignore certain keys such as population', () => {
       const resp = createApiResponse()
-      const actual = calculateRates(resp)['united-states'][0]
+      const actual = calculateRates(resp,'state')['united-states'][0]
       expect(actual.population).toEqual(1000)
     })
   })
@@ -117,7 +117,7 @@ describe('summary util', () => {
 
     it('should return data, inclusively, between since and until', () => {
       const resp = createApiResponse()
-      const actual = filterByYear(resp, { since: 2011, until: 2012 })
+      const actual = filterByYear(resp, 2011, 2012 )
       const hasYears = actual['united-states'].map(y => y.year)
       expect(hasYears).toEqual([2011, 2012])
     })

@@ -84,8 +84,8 @@ class About extends React.Component {
   }
 
   render() {
-    const { actions } = this.props
     const { mapShown } = this.state
+    const { region, states } = this.props
     const toggles = [
       { disabled: !mapShown, type: 'table' },
       { disabled: mapShown, type: 'map' },
@@ -161,7 +161,7 @@ class About extends React.Component {
               </div>
               <div className="mb4 clearfix" id="us-ucr-participation">
                 {mapShown
-                  ? <ParticipationMap states={stateColors} />
+                  ? <ParticipationMap states={states} region={region} />
                   : <ParticipationTable states={stateColors} />}
               </div>
             </div>
@@ -186,7 +186,7 @@ class About extends React.Component {
                 <div className="mb-tiny bold">
                   Summary (SRS) data
                   <span className="italic ml-tiny regular">
-                    1960—2015 data available
+                    1960—2016 data available
                   </span>
                 </div>
                 <p className="mb3">
@@ -202,7 +202,7 @@ class About extends React.Component {
                 <div className="mb-tiny bold">
                   Incident-based (NIBRS) data
                   <span className="italic ml-tiny regular">
-                    1991—2015 data available
+                    1991—2016 data available
                   </span>
                 </div>
                 <p>
@@ -223,6 +223,13 @@ class About extends React.Component {
                   <a href="/downloads-and-docs" className="underline">
                     bulk downloads
                   </a>.
+                </p>
+                <p>
+                  The data provided from{' '}
+                  <a href="https://ucr.fbi.gov/" className="underline">
+                      Uniform Crime Reporting (UCR) Program
+                    </a>{' '}
+                  for 2016 data was made available on 9/25/2017.
                 </p>
               </div>
               <div className="md-col md-col-3">
@@ -261,13 +268,6 @@ class About extends React.Component {
                 what you’d like to see next.
               </p>
             </div>
-            <button
-              className="btn btn-primary"
-              onClick={() => actions.showFeedback()}
-              type="button"
-            >
-              Submit feedback
-            </button>
           </div>
         </section>
       </div>
@@ -275,18 +275,23 @@ class About extends React.Component {
   }
 }
 
+/* eslint-disable */
 About.propTypes = {
   actions: PropTypes.shape({
     showFeedback: PropTypes.func,
   }),
 }
+/* eslint-enable */
 
-const ParticipationMap = ({ states }) =>
+const ParticipationMap = ({ states, region }) =>
   <div>
     <div className="md-col md-col-9 md-pr7">
       <UsaMap
-        colors={states.reduce(reduceEntries('color'), {})}
+        colors={stateColors.reduce(reduceEntries('color'), {})}
         changeColorOnHover={false}
+        states={states}
+        region={region}
+        stateView
       />
     </div>
     <div className="md-col md-col-3 pt1 relative table-cell">
@@ -294,7 +299,7 @@ const ParticipationMap = ({ states }) =>
         {legend
           .map(d => ({
             ...d,
-            count: states.filter(s => s.color === d.css).length,
+            count: stateColors.filter(s => s.color === d.css).length,
           }))
           .map((d, i) =>
             <div key={i} className="flex mt2 fs-14">
@@ -359,8 +364,13 @@ const ParticipationTable = ({ states }) =>
     </tbody>
   </table>
 
+const mapStateToProps = ({ region, states }) => ({
+  region,
+  states,
+})
+
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ showFeedback }, dispatch),
 })
 
-export default connect(null, mapDispatchToProps)(About)
+export default connect(mapStateToProps, mapDispatchToProps)(About)
