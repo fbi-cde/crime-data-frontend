@@ -57,6 +57,7 @@ class TrendContainer extends React.Component {
 
     const readme = generateCrimeReadme({ crime: filters.pageType, title })
     const crimeNorm = filters.pageType === 'rape' ? 'rape-legacy' : filters.pageType
+
     const dlData = data.map(d => {
       const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }))
       return { year: d.year, ...Object.assign(...placeData) }

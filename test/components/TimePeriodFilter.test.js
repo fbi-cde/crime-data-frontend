@@ -64,7 +64,6 @@ describe('TimePeriodFilter', () => {
         'The beginning year must be earlier than the end year',
       )
     })
-
   })
 
   describe('setError()', () => {

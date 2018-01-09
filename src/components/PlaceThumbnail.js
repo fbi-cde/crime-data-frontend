@@ -26,7 +26,9 @@ class PlaceThumbnail extends React.Component {
   }
 
   render() {
+    /* eslint-disable */
     const { coordinates, place, placeType, region, states, placeName } = this.props
+    /* eslint-enable */
     const { usa } = this.state
 
     if (!usa) return <Container />
@@ -80,7 +82,6 @@ class PlaceThumbnail extends React.Component {
     window.gs = geoStates
 
     const geoHtml = []
-
     Object.keys(geoStates).forEach(geo => {
       let activeColor = '#dfe6ed'
       if (actives) {

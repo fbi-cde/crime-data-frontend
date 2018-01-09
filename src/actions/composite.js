@@ -1,6 +1,9 @@
 import { updateFilters } from './filters'
 import { fetchNibrs } from './nibrs'
 import { fetchPoliceEmployment } from './policeEmployment'
+
+import { fetchNibrsCounts } from '../actions/nibrsCounts'
+
 import { fetchSummaries } from '../actions/summary'
 import { fetchSummarized } from '../actions/summarized'
 import { fetchUcrParticipation } from '../actions/participation'
@@ -27,7 +30,7 @@ const fetchData = () => (dispatch, getState) => {
       dispatch(fetchSummarized(filters, states))
       dispatch(fetchPoliceEmployment(filters))
 
-      if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrs(filters))
+      if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrsCounts(filters))
     }
   }
 }

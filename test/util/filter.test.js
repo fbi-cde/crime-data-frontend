@@ -40,6 +40,7 @@ describe('filter util', () => {
       expect(until).toEqual(undefined)
     })
 
+
     it('should return since with a value of ten years less than until if since is greater', () => {
       const { since } = filterUtil({ since: 2020, until: 2000 })
       expect(since).toEqual(1990)

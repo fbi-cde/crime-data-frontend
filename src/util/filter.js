@@ -46,6 +46,7 @@ const validateFilter = filters => {
   if (filters.since && filters.until && filters.until - filters.since < 10) {
     newFilters.since = filters.until - 10
   }
+
   return newFilters
 }
 

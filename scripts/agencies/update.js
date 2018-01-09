@@ -1,4 +1,4 @@
-/* eslint-disable no-console, arrow-body-style */
+/* eslint-disable*/
 const childProcess = require('child_process')
 const fs = require('fs')
 const path = require('path')

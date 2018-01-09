@@ -12,6 +12,7 @@ import summaries from './summary'
 import summarized from './summarized'
 import region from './region'
 import states from './states'
+import nibrsCounts from './nibrsCounts'
 
 
 export default combineReducers({
@@ -27,4 +28,5 @@ export default combineReducers({
   region,
   states,
   summarized,
+  nibrsCounts,
 })

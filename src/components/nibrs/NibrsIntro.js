@@ -20,7 +20,7 @@ const NibrsIntro = ({
   totalCount,
   until,
 }) => {
-  const noun = 'offense'
+  const noun = 'incident'
   if (isAgency) {
     return (
       <div className="m0 sm-col-10">
@@ -32,7 +32,6 @@ const NibrsIntro = ({
       </div>
     )
   }
-
   const agencyCts = participation.map(p => p.nibrs_participating_agencies)
   const agencyCt = max(agencyCts)
 

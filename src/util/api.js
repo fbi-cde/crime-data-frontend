@@ -276,6 +276,52 @@ export const formatError = error => ({
   url: error.config.url,
 })
 
+const fetchNibrsCounts = ({ dim, place, placeType, type, placeId }) => {
+  const loc =
+    place === nationalKey
+      ? 'national'
+      : placeType === 'agency'
+        ? `agencies/${place}`
+        : `states/${placeId}`
+
+  const field = dimensionEndpoints[dim] || dim
+  let url
+  if (field !== '') { url = `${API}/nibrs/${type}/count/${loc}/${field}` } else { url = `${API}/nibrs/${type}/count/${loc}` }
+
+
+  const params = {
+    per_page: 1000,
+    aggregate_many: false,
+  }
+
+  return get(url, params).then(d => ({
+    key: `${type}${upperFirst(dim)}`,
+    data: d.results,
+  }))
+}
+
+const getNibrsCountsRequests = params => {
+  const { crime, place, placeType, placeId } = params
+
+  const slices = [
+    { type: 'offender', dim: '' },
+    { type: 'offender', dim: 'age' },
+    { type: 'offender', dim: 'sex' },
+    { type: 'offender', dim: 'race' },
+    { type: 'offender', dim: 'ethnicity' },
+    { type: 'victim', dim: '' },
+    { type: 'victim', dim: 'age' },
+    { type: 'victim', dim: 'ethnicity' },
+    { type: 'victim', dim: 'race' },
+    { type: 'victim', dim: 'sex' },
+    { type: 'victim', dim: 'location' },
+    { type: 'victim', dim: 'relationships' },
+    { type: 'offense', dim: '' },
+
+  ]
+  return slices.map(s => fetchNibrsCounts({ ...s, crime, place, placeType, placeId }))
+}
+
 export default {
   fetchAggregates,
   fetchAgencyAggregates,
@@ -286,6 +332,8 @@ export default {
   getAgencies,
   getNibrsRequests,
   getPoliceEmploymentRequests,
+  fetchNibrsCounts,
+  getNibrsCountsRequests,
   getSummaryRequests,
   getSummarizedRequests,
   getUcrParticipation,

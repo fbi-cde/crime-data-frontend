@@ -8,13 +8,13 @@ import Loading from '../components/Loading'
 import NibrsCard from '../components/nibrs/NibrsCard'
 import NibrsIntro from '../components/nibrs/NibrsIntro'
 import { NibrsTerm } from '../components/Terms'
-import parseNibrs from '../util/nibrs'
+import parseNibrsCounts from '../util/nibrsCounts'
 import { getAgency, oriToState } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
+import lookupUsa from '../util/usa'
 import ucrParticipation, {
   shouldFetchNibrs as shouldShowNibrs,
 } from '../util/participation'
-import lookupUsa from '../util/usa'
 
 const initialNibrsYear = ({ place, placeType, since }) => {
   const placeNorm = placeType === 'agency' ? oriToState(place) : place
@@ -31,11 +31,10 @@ const filterNibrsData = (data, { since, until }) => {
   const filtered = {}
   Object.keys(data).forEach(key => {
     filtered[key] = data[key].filter(d => {
-      const year = parseInt(d.year, 10)
+      const year = parseInt(d.data_year, 10)
       return year >= since && year <= until
     })
   })
-
   return filtered
 }
 
@@ -43,7 +42,7 @@ const NibrsContainer = ({
   agency,
   pageType,
   isAgency,
-  nibrs,
+  nibrsCounts,
   participation,
   place,
   placeType,
@@ -56,32 +55,33 @@ const NibrsContainer = ({
     !shouldShowNibrs({ pageType, place, placeType }, states)
   ) {
     return null
-  }
+}
 
   const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
-  const { data, error } = nibrs
+  const { data, error } = nibrsCounts
 
-  const isLoading = isAgency
-    ? nibrs.loading
-    : nibrs.loading || participation.loading
-  const isReady = !isLoading && error === null && !!data
-
+  const isReady = nibrsCounts.loaded
+  const isLoading = nibrsCounts.loading
   let totalCount = 0
   let content = null
+
 
   if (error) content = <ErrorCard error={error} />
   else if (isReady) {
     const filteredData = filterNibrsData(data, { since, until })
-    const dataParsed = parseNibrs(filteredData, pageType)
 
-    totalCount = dataParsed
+    const dataParsed = parseNibrsCounts(filteredData, pageType)
+     const offenseObj = dataParsed
       .find(d => d.title === 'Offenses')
-      .data.reduce((accum, next) => accum + next.count, 0)
+
+    totalCount = offenseObj.data.count
+    let displayCards = true
+    if (totalCount === 0) { displayCards = false }
 
     content = (
       <div className="clearfix mxn1">
-        {dataParsed.filter(d => d.title !== 'Offenses').map((d, i) => {
+        {displayCards && dataParsed.filter(d => d.title !== 'Offenses').map((d, i) => {
           const cls = i % 2 === 0 ? 'clear-left' : ''
           return (
             <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
@@ -145,11 +145,11 @@ const NibrsContainer = ({
 
 NibrsContainer.propTypes = {
   pageType: PropTypes.string.isRequired,
-  nibrs: PropTypes.shape({
+  place: PropTypes.string.isRequired,
+  nibrsCounts: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.bool,
   }).isRequired,
-  place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   participation: PropTypes.array.isRequired,
@@ -157,7 +157,7 @@ NibrsContainer.propTypes = {
   states: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, nibrs, participation, states }) => {
+const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -176,9 +176,8 @@ const mapStateToProps = ({ agencies, filters, nibrs, participation, states }) =>
     isAgency,
     place,
     placeType,
-    nibrs,
+    nibrsCounts,
     participation: filteredParticipation,
-    states,
   }
 }
 
