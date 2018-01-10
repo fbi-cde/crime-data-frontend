@@ -1,5 +1,14 @@
 # Change Log
 All notable changes to this project be documented in this file.
+## [2.18.9] - 2018-1-8
+### Added
+- Added information on when a state started participating in NIBRS ([#1236]https://github.com/18F/crime-data-frontend/pull/1236)
+- Update to Node 6.12.X (https://github.com/18F/crime-data-frontend/commit/da853f8161386a917427829c6b2dd54114514996)
+
+### Fixed
+- Removes NIBRS Downloads for years a State did not report (https://github.com/18F/crime-data-frontend/commit/f8fecce89693265ac1d580cf5c0b52c067ee0be0)
+- Fixes State participation inaccuracies (https://github.com/18F/crime-data-frontend/commit/f23131c51e59573bb203d4d91096c233e1755ef0)
+- Update to "Reported" Glossary Term ([#1311] https://github.com/18F/crime-data-frontend/pull/1311)
 ## [2.18.7] - 2017-12-15
 ### Fixed
 - Fixes NIBRS Counts being incorrect via new backend services that report accurate numbers ([#1302](https://github.com/18F/crime-data-frontend/pull/1302))
