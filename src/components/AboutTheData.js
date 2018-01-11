@@ -29,7 +29,6 @@ class AboutTheData extends React.Component {
 
   render() {
     const { crime } = this.props
-    console.log("aboutthedata crime="+crime)
     const caveats = content.crimes[crime] ? content.crimes[crime].caveats : []
     const links = content.crimes[crime] ? content.crimes[crime].links : []
 

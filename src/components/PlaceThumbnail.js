@@ -18,7 +18,6 @@ const Container = ({ children }) =>
 
 class PlaceThumbnail extends React.Component {
   state = { usa: null }
-
   componentDidMount() {
     axios.get('/data/geo-usa-states.json').then(response => {
       this.setState({ usa: response.data })

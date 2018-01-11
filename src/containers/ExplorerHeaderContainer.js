@@ -6,7 +6,7 @@ import ExplorerIntro from '../components/explorer/ExplorerIntro'
 import Loading from '../components/Loading'
 import PlaceThumbnail from '../components/PlaceThumbnail'
 import UcrResourcesList from '../components/UcrResourcesList'
-import { newGetAgency, newOriToState } from '../util/agencies'
+import { newGetAgency } from '../util/agencies'
 import { lookupDisplayName } from '../util/location'
 
 const ExplorerHeaderContainer = ({
@@ -22,7 +22,7 @@ const ExplorerHeaderContainer = ({
   const isLoading = isAgency ? agencies.loading : participation.loading
   let placeDisplay
   let location
-  if (filters.placeType === 'agency') {
+  if (isAgency) {
     placeDisplay = agency.agency_name_edit
     location = agencies.location;
   } else if (filters.placeType === 'state' || filters.placeType === 'region') {
@@ -32,7 +32,7 @@ const ExplorerHeaderContainer = ({
     placeDisplay = 'United States'
     location = filters.place;
   }
-
+  console.log('participation:', participation)
   return (
     <div>
       <div className="items-baseline mt2 mb4">

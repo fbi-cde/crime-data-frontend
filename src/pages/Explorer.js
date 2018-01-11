@@ -112,9 +112,7 @@ class Explorer extends React.Component {
     if (agencies.loaded && isAgency && !agency) {
       return <NotFound />
     }
-    console.log('Crime Page:', crimePage)
-    const test = crimePage && !isAgency
-    console.log("test="+test)
+
     return (
       <div className="site-wrapper">
         <Helmet title="CDE :: Explorer" />
@@ -151,10 +149,10 @@ class Explorer extends React.Component {
             {crimePage && !isAgency && <TrendContainer />}
             {crimePage && <NibrsContainer /> }
             {!crimePage && <PoliceEmploymentContainer /> }
-            <AboutTheData
+            {crimePage && <AboutTheData
               crime={pageType}
               onTermClick={term => actions.showTerm(term)}
-            />
+            />}
           </div>
         </div>
       </div>
