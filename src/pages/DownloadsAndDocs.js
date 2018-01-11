@@ -3,6 +3,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 
 import DownloadBulkNibrs from '../components/DownloadBulkNibrs'
+import DownloadBulkLeoka from '../components/DownloadBulkLeoka'
 import DownloadDataBtn from '../components/DownloadDataBtn'
 import SharingTags from '../components/SharingTags'
 import { NibrsTerm } from '../components/Terms'
@@ -51,6 +52,12 @@ const DownloadsAndDocs = () => (
           Incident-based data by state
         </h2>
         <DownloadBulkNibrs />
+      </div>
+      <div className="py7">
+        <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
+          Leoka data by state
+        </h2>
+        <DownloadBulkLeoka />
       </div>
       <div className="mb8">
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
