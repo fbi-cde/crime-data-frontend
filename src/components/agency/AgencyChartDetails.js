@@ -38,7 +38,6 @@ const AgencyChartDetails = ({
       </span>
     )
   }
-  console.log('Keys:', keys)
   return (
     <div className="mb3 lg-flex">
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
