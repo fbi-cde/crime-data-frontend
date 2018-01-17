@@ -38,7 +38,6 @@ const AgencyChartDetails = ({
       </span>
     )
   }
-
   return (
     <div className="mb3 lg-flex">
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
@@ -85,7 +84,7 @@ const AgencyChartDetails = ({
                     className="mr1 inline-block"
                     style={{ width: 8, height: 8, backgroundColor: colors(k) }}
                   />
-                  <Term id={k} size="sm">
+                  <Term id={mapReported(k)} size="sm">
                     {startCase(mapReported(k))}
                   </Term>
                 </td>
