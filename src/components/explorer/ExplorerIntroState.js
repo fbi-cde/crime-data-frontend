@@ -23,15 +23,15 @@ const getStateReportingHistory = ({ nibrs, hybrid, placeName }) => {
   if (hybrid) {
     text = (
       <span>
-        has historically reported <SrsTerm /> data and began including{' '}
-        <NibrsTerm /> data in {nibrs['initial-year']}
+        has historically reported <SrsTerm /> data and but some agencies from the state of {placeName} began submitting{' '}
+        <NibrsTerm /> data reports in {nibrs['initial-year']}
       </span>
     )
   } else if (!hybrid && nibrs) {
     text = (
       <span>
-        historically reported <SrsTerm /> data but switched to submitting{' '}
-        <NibrsTerm /> data in {nibrs['initial-year']}
+        historically reported <SrsTerm /> data but some agencies from the state of {placeName} began submitting{' '}
+        <NibrsTerm /> data reports in {nibrs['initial-year']}
       </span>
     )
   }
