@@ -41,7 +41,12 @@ const DownloadsAndDocs = () => (
               </a>
             </li>
             <li className="mb2">
-              <a href="/pdf/NIBRS-data-diagram.pdf">NIBRS data diagram</a>
+              <a href="/pdf/NIBRS_DataDictionary.pdf">
+                NIBRS Data Dictionary
+              </a>
+            </li>
+            <li className="mb2">
+              <a href="/pdf/nibrs_diagram.pdf">NIBRS Data Diagram</a>
             </li>
           </ul>
         </div>
