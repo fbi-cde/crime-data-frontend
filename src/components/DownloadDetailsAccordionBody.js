@@ -46,6 +46,8 @@ class DownloadDetailsAccordionBody extends React.Component {
               <div>{details.year_range}</div>
               <h3 className="mt-tiny mb0 fs-18 sm-fs-22">Last Modified</h3>
               <div>{details.last_modified}</div>
+              <h3 className="mt-tiny mb0 fs-18 sm-fs-22">File Type</h3>
+              <div>{details.download_type}</div>
               <h3 className="mt-tiny mb0 fs-18 sm-fs-22">File Size</h3>
               <div>{details.file_size}</div>
               <br />
