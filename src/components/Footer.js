@@ -30,7 +30,7 @@ const links = [
   [
     {
       text: 'License',
-      href: 'https://github.com/18F/crime-data-frontend/blob/master/LICENSE.md',
+      href: 'https://github.com/fbi-cde/crime-data-frontend/blob/master/LICENSE.md',
     },
     /*
     {
@@ -76,7 +76,7 @@ const Footer = ({ actions }) =>
           v{packageJson.version} -{' '}
           <a
             className="white"
-            href="https://github.com/18F/crime-data-frontend/blob/master/CHANGELOG.md"
+            href="https://github.com/fbi-cde/crime-data-frontend/blob/master/CHANGELOG.md"
           >
             Changelog
           </a>
@@ -120,7 +120,7 @@ const Footer = ({ actions }) =>
             />
             <a
               className="white"
-              href="https://github.com/18F/crime-data-explorer"
+              href="https://github.com/fbi-cde/crime-data-explorer"
             >
               GitHub
             </a>

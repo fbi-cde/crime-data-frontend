@@ -1,14 +1,14 @@
 # Crime Data Explorer
 
-[![Build status on CircleCI](https://circleci.com/gh/18F/crime-data-frontend/tree/master.svg?style=svg)](https://circleci.com/gh/18F/crime-data-frontend/tree/master) [![Code Climate GPA](https://codeclimate.com/github/18F/crime-data-frontend/badges/gpa.svg)](https://codeclimate.com/github/18F/crime-data-frontend) [![Dependency Status](https://gemnasium.com/badges/github.com/18F/crime-data-frontend.svg)](https://gemnasium.com/github.com/18F/crime-data-frontend)
+[![Build status on CircleCI](https://circleci.com/gh/fbi-cde/crime-data-frontend/tree/master.svg?style=svg)](https://circleci.com/gh/fbi-cde/crime-data-frontend/tree/master) [![Code Climate GPA](https://codeclimate.com/github/fbi-cde/crime-data-frontend/badges/gpa.svg)](https://codeclimate.com/github/fbi-cde/crime-data-frontend) [![Dependency Status](https://gemnasium.com/badges/github.com/fbi-cde/crime-data-frontend.svg)](https://gemnasium.com/github.com/fbi-cde/crime-data-frontend)
 
-This project is the front end for the Crime Data Explorer, using data from [18f/crime-data-api](https://github.com/18f/crime-data-api). The Crime Data Explorer is a website that allows law enforcement and the general public to more easily access [Uniform Crime Reporting (UCR)](https://ucr.fbi.gov/) data. Over 18,000 city, university and college, county, state, tribal, and federal law enforcement agencies voluntarily report crime data to the program, and the FBI publishes it in [annual reports](https://ucr.fbi.gov/ucr-publications).
+This project is the front end for the Crime Data Explorer, using data from [fbi-cde/crime-data-api](https://github.com/fbi-cde/crime-data-api). The Crime Data Explorer is a website that allows law enforcement and the general public to more easily access [Uniform Crime Reporting (UCR)](https://ucr.fbi.gov/) data. Over 18,000 city, university and college, county, state, tribal, and federal law enforcement agencies voluntarily report crime data to the program, and the FBI publishes it in [annual reports](https://ucr.fbi.gov/ucr-publications).
 
 ## Installation
 
 You will need `node` and `npm` to install and run this project.
 
-1. `git clone git@github.com:18F/crime-data-frontend.git cde && cd cde`
+1. `git clone git@github.com:fbi-cde/crime-data-frontend.git cde && cd cde`
 2. `npm install`
 
 ### Running the app locally
@@ -53,13 +53,13 @@ Use `cf push -f manifest/staging.yml` to deploy. Remember that `cf` pushes from 
 
 ## Release process
 
-This app follows [semver](http://semver.org/) and has [tagged releases](https://github.com/18F/crime-data-frontend/releases) by version number. You can see all notable changes in [CHANGELOG.md](https://github.com/18F/crime-data-frontend/blob/master/CHANGELOG.md).
+This app follows [semver](http://semver.org/) and has [tagged releases](https://github.com/fbi-cde/crime-data-frontend/releases) by version number. You can see all notable changes in [CHANGELOG.md](https://github.com/fbi-cde/crime-data-frontend/blob/master/CHANGELOG.md).
 
 We use the following criteria to determine the proper next version number. A major version change is appropriate when the URL structure has changed (breaking any existing URLs) or when there is a major removal of content. A minor version change is appropriate when the changes include more than bug fixes but not breaking changes. A patch version is appropriate when only bugs or security issues are addressed.
 
 ### Manual verification
 
-Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2340`](https://github.com/18F/crime-data-frontend/commit/cdb2340830b0325dc9a05ba443a1a84c2e835430) it was about 77% of all statements), we run through a few basic user scenarios before tagging a release to check the application. We are working on getting the [automated browser tests](#running-selenium-tests) to replicate this exact process.
+Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2340`](https://github.com/fbi-cde/crime-data-frontend/commit/cdb2340830b0325dc9a05ba443a1a84c2e835430) it was about 77% of all statements), we run through a few basic user scenarios before tagging a release to check the application. We are working on getting the [automated browser tests](#running-selenium-tests) to replicate this exact process.
 
 1. Load homepage from `master` branch. Can be local or https://crime-data-explorer-master.fr.cloud.gov
 2. Select "Explorer" from navigation
@@ -76,7 +76,7 @@ Though unit test coverage is decent (check with `npm run coverage`, as of [`cdb2
 
 ### Tagging a release
 
-1. Compile the notable changes into the [CHANGELOG.md](https://github.com/18F/crime-data-frontend/blob/master/CHANGELOG.md). You can use the `/compare/:lastVersion...master` endpoint on Github. For example, this [`/compare` link was used to determine the changes in `v1.1.0`](https://github.com/18F/crime-data-frontend/compare/v1.0.0...33edf933009664a74e2601aa369f4bb6a67394c5)
+1. Compile the notable changes into the [CHANGELOG.md](https://github.com/fbi-cde/crime-data-frontend/blob/master/CHANGELOG.md). You can use the `/compare/:lastVersion...master` endpoint on Github. For example, this [`/compare` link was used to determine the changes in `v1.1.0`](https://github.com/fbi-cde/crime-data-frontend/compare/v1.0.0...33edf933009664a74e2601aa369f4bb6a67394c5)
 2. Determine if the version should be increased by a major, minor, or patch version
 3. Adjust the version number in `package.json` accordingly
 4. Submit a pull request without tagging the commit
