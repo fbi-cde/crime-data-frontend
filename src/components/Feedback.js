@@ -165,7 +165,7 @@ class Feedback extends React.Component {
                   our{' '}
                   <a
                     className="cursor-pointer underline white"
-                    href="https://github.com/18f/crime-data-explorer/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20User%20feedback"
+                    href="https://github.com/fbi-cde/crime-data-explorer/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20User%20feedback"
                   >
                     Github page
                   </a>

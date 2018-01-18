@@ -36,7 +36,7 @@ const DownloadsAndDocs = () => (
           <h3 className="mt-tiny mb2 fs-18 sm-fs-22">Resources</h3>
           <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
             <li className="mb2">
-              <a href="https://github.com/18F/crime-data-explorer/blob/master/README.md">
+              <a href="https://github.com/fbi-cde/crime-data-explorer/blob/master/README.md">
                 Readme
               </a>
             </li>
