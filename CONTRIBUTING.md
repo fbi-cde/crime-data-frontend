@@ -1,8 +1,8 @@
 ## Welcome!
 
-We're so glad you're thinking about contributing to an 18F open source project! If you're unsure about anything, just [send us an email](mailto:18f@gsa.gov) with your question — or submit the issue or pull request anyway. The worst that can happen is you'll be politely asked to change something. We love all friendly contributions.
+We're so glad you're thinking about contributing to an fbi-cde open source project! If you're unsure about anything, just [send us an email](mailto:fbi-cde@gsa.gov) with your question — or submit the issue or pull request anyway. The worst that can happen is you'll be politely asked to change something. We love all friendly contributions.
 
-We want to ensure a welcoming environment for all of our projects. Our staff follow the [18F Code of Conduct](https://github.com/18F/code-of-conduct/blob/master/code-of-conduct.md) and all contributors should do the same.
+We want to ensure a welcoming environment for all of our projects. Our staff follow the [fbi-cde Code of Conduct](https://github.com/fbi-cde/code-of-conduct/blob/master/code-of-conduct.md) and all contributors should do the same.
 
 We encourage you to read this project's CONTRIBUTING policy (you are here), its [LICENSE](LICENSE.md), and its [README](README.md).
 
@@ -12,13 +12,13 @@ We encourage you to read this project's CONTRIBUTING policy (you are here), its 
 ## High-level roadmap
 The Crime Data Explorer project is composed of a few repositories:
 
-0. [18f/crime-data-explorer](/18f/crime-data-explorer) - Main project repo
-1. [18f/crime-data-api](/18f/crime-data-api)
-2. [18f/crime-data-frontend](/18f/crime-data-frontend) - You are here
-3. [18f/crime-data-prototypes](/18f/crime-data-prototypes)
-4. [18f/crime-data-style](/18f/crime-data-style)
+0. [fbi-cde/crime-data-explorer](/fbi-cde/crime-data-explorer) - Main project repo
+1. [fbi-cde/crime-data-api](/fbi-cde/crime-data-api)
+2. [fbi-cde/crime-data-frontend](/fbi-cde/crime-data-frontend) - You are here
+3. [fbi-cde/crime-data-prototypes](/fbi-cde/crime-data-prototypes)
+4. [fbi-cde/crime-data-style](/fbi-cde/crime-data-style)
 
-We track work across these repositories with [this Waffle.io board](https://waffle.io/18F/crime-data-explorer).
+We track work across these repositories with [this Waffle.io board](https://waffle.io/fbi-cde/crime-data-explorer).
 
 We keep a running list of changes to this application in the [CHANGELOG](CHANGELOG.md).
 
@@ -72,7 +72,7 @@ In general, commit messages can be written in whatever way the author decides, b
 ### Coding style
 - [Airbnb styleguide for JS](https://github.com/airbnb/javascript)
   - Re-add deprecation warnings on linter when upgrade react.
-- [18F styleguide for CSS](https://pages.18f.gov/frontend/css-coding-styleguide/)
+- [fbi-cde styleguide for CSS](https://pages.fbi-cde.gov/frontend/css-coding-styleguide/)
 - Linting will be run before tests run, so will fail the tests if files are not linted.
 - Additionally, linting should always
   - fail on CI
