@@ -223,5 +223,4 @@ describe('location utility', () => {
         expect(getPlaceId({ placeType: 'nonPlaceType', place: 'U.S. Territories' }, [us, ne], [wv])).toEqual(null);
       });
   });
-
-})
+});
