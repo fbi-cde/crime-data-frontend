@@ -88,6 +88,8 @@ class Explorer extends React.Component {
     const { place, placeType } = getPlaceInfo(params)
     const isAgency = filters.placeType === 'agency'
     const crimePage = filters.page === 'crime'
+    const isCombinedCrime = crimePage && (filters.pageType === 'violent-crime' || filters.pageType === 'property-crime')
+
     let agency = null
     if (isAgency) {
        agency = getAgency(agencies, place)
@@ -146,7 +148,7 @@ class Explorer extends React.Component {
             {isAgency && crimePage && <SparklineContainer />}
             {isAgency && <AgencyChartContainer /> }
             {crimePage && !isAgency && <TrendContainer />}
-            {crimePage && <NibrsContainer /> }
+            {crimePage && !isCombinedCrime && <NibrsContainer /> }
             {!crimePage && <PoliceEmploymentContainer /> }
             <AboutTheData
               crime={pageType}
