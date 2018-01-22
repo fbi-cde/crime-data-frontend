@@ -3,11 +3,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import CrimeTypeFilter from '../components/CrimeTypeFilter'
+import LEOKATypeFilter from '../components/LEOKATypeFilter'
 import LocationFilter from '../components/LocationFilter'
 import TimePeriodFilter from '../components/TimePeriodFilter'
 import { hideSidebar } from '../actions/sidebar'
-import { getAgency, oriToState } from '../util/agencies'
-import { nationalKey } from '../util/usa'
+import { getAgency, newOriToState } from '../util/agencies'
 
 const SidebarContainer = ({
   actions,
@@ -44,6 +44,7 @@ const SidebarContainer = ({
         ariaControls={ariaControls}
         onChange={onChange}
         usState={usState}
+        placeType={filters.placeType}
       />
       <TimePeriodFilter
         ariaControls={ariaControls}
@@ -55,6 +56,13 @@ const SidebarContainer = ({
         onChange={onChange}
         selected={crime}
       />
+
+      <LEOKATypeFilter
+        ariaControls={ariaControls}
+        onChange={onChange}
+        selected={crime}
+      />
+
     </div>
   </nav>
 
@@ -63,19 +71,14 @@ SidebarContainer.propTypes = {
   onChange: PropTypes.func,
 }
 
-const formatAgencyData = (agencies, state) =>
-  Object.keys(agencies[state] || {}).map(id => ({
-    ori: id,
-    ...agencies[state][id],
-  }))
-
 const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   const { crime, place, placeType } = filters
   const isAgency = placeType === 'agency'
-  const isNational = place === nationalKey
-  const usState = isAgency ? oriToState(place) : place
-  const agency = isAgency && !agencies.loading && getAgency(agencies, place)
-  const agencyData = isNational ? [] : formatAgencyData(agencies.data, usState)
+  const displayAgencies = (placeType !== 'region' || placeType !== 'national') && agencies.loaded
+  const usState = isAgency ? newOriToState(place, states) : place
+  const agency = getAgency(agencies, place)
+  const agencyData = displayAgencies ? Object.keys(agencies.data).map(k => agencies.data[k]) : []
+
 
   return {
     agency,

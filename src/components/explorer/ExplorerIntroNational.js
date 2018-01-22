@@ -13,46 +13,50 @@ const highlight = txt =>
     {txt}
   </strong>
 
-const ExplorerIntroNational = ({ crime, participation, until }) => {
+const ExplorerIntroNational = ({ crime, page, participation, until }) => {
   const isArson = crime === 'arson'
+  const isCrime = page === 'crime'
   const untilUcr = participation.find(p => p.year === until)
-  const crimeTerm = (
-    <Term id={mapCrimeToGlossaryTerm(crime)}>
-      {upperFirst(lowerCase(crime))}
-    </Term>
-  )
 
-  return (
-    <div>
-      {!isArson
-        ? <div>
-            <p className="serif">
-              {crimeTerm} rates for the nation are derived from both <SrsTerm />{' '}
-              and <NibrsTerm /> reports voluntarily submitted to the FBI.
-            </p>
-            <p className="serif">
-              In {highlight(until)}
-              , the FBI <EstimatedTerm /> crime statistics for the nation based
-              on data received from{' '}
-              {highlight(formatNum(untilUcr.total_agencies - untilUcr.covered_agencies))} law
-              enforcement agencies out of{' '}
-              {highlight(formatNum(untilUcr.total_agencies))} in the country
-              that year.
-            </p>
-          </div>
-        : <div>
-            <p className="serif">
-              The number of arson incidents in the United States is derived from
-              both <SrsTerm /> and <NibrsTerm /> reports sent to the FBI.
-            </p>
-            <p className="serif">
-              In {highlight(until)}, the FBI received voluntary reports of arson
-              from {highlight(formatNum(untilUcr.total_agencies - untilUcr.covered_agencies))} law
-              enforcement agencies. The charts below feature unestimated data.
-            </p>
-          </div>}
-    </div>
-  )
+  if (isCrime) {
+    const crimeTerm = (
+      <Term id={mapCrimeToGlossaryTerm(crime)}>
+        {upperFirst(lowerCase(crime))}
+      </Term>
+    )
+    return (
+      <div>
+        {!isArson && isCrime
+          ? <div>
+              <p className="serif">
+                {crimeTerm} rates for the nation are derived from both <SrsTerm />{' '}
+                and <NibrsTerm /> reports voluntarily submitted to the FBI.
+              </p>
+              <p className="serif">
+                In {highlight(until)}
+                , the FBI <EstimatedTerm /> crime statistics for the nation based
+                on data received from{' '}
+                {highlight(formatNum(untilUcr.total_agencies - untilUcr.covered_agencies))} law
+                enforcement agencies out of{' '}
+                {highlight(formatNum(untilUcr.total_agencies))} in the country
+                that year.
+              </p>
+            </div>
+          : <div>
+              <p className="serif">
+                The number of arson incidents in the United States is derived from
+                both <SrsTerm /> and <NibrsTerm /> reports sent to the FBI.
+              </p>
+              <p className="serif">
+                In {highlight(until)}, the FBI received voluntary reports of arson
+                from {highlight(formatNum(untilUcr.total_agencies - untilUcr.covered_agencies))} law
+                enforcement agencies. The charts below feature unestimated data.
+              </p>
+            </div>}
+      </div>
+    )
+  }
+  return (<div />)
 }
 
 ExplorerIntroNational.propTypes = {

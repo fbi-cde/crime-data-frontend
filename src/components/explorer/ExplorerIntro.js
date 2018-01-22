@@ -14,7 +14,7 @@ const ExplorerIntro = ({ agency, filters, participation, placeName, region, stat
     return (
       <ExplorerIntroAgency
         county={agency.primary_county}
-        crime={filters.crime}
+        crime={filters.pageType}
         hasNibrs={agency.nibrs_months_reported === 12}
         name={agency.agency_name}
         usState={oriToState(filters.place)}
@@ -30,8 +30,9 @@ const ExplorerIntro = ({ agency, filters, participation, placeName, region, stat
   if (filters.place === nationalKey) {
     return (
       <ExplorerIntroNational
-        crime={filters.crime}
+        crime={filters.pageType}
         until={filters.until}
+        page={filters.page}
         participation={participation.data[nationalKey]}
       />
     )
@@ -39,21 +40,23 @@ const ExplorerIntro = ({ agency, filters, participation, placeName, region, stat
 
   if (filters.placeType === 'region') {
     return (<ExplorerIntroRegion
-      crime={filters.crime}
+      crime={filters.pageType}
       until={filters.until}
       placeName={placeName}
       participation={participation.data[filters.place]}
       states={states}
       region={region}
+      page={filters.page}
       place={filters.place}
     />)
   }
 
   return (
     <ExplorerIntroState
-      crime={filters.crime}
+      ccrime={filters.pageType}
       place={filters.place}
       until={filters.until}
+      page={filters.page}
       participation={participation.data[filters.place]}
       placeName={placeName}
     />

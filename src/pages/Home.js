@@ -35,22 +35,23 @@ class Home extends React.Component {
       const id = e.target.getAttribute('id')
       if (!id) return
       const { actions, filters, router } = this.props
-      const { crime } = filters
-      const placeNew = { place: slugify(lookupStateByAbbr(states.states, id).state_name), placeType: 'state', placeId: id }
+      console.log('filters:', filters)
+      const { pageType } = filters
+      const placeNew = { place: slugify(lookupStateByAbbr(states.states, id).state_name), placeType: 'state', placeId: id, page: 'crime' }
       actions.updateFilters(placeNew)
-      actions.updateApp({ crime, ...placeNew }, router)
+      actions.updateApp({ pageType, ...placeNew }, router)
     } else {
       // REGION DATA GET PLACES
       const { region, states } = this.props
       const id = e.target.getAttribute('id')
       if (!id) return
       const { actions, filters, router } = this.props
-      const { crime } = filters
+      const { pageType } = filters
       const placeNew = { place: lowerCase(lookupRegionByCode(region.regions, lookupStateByAbbr(states.states, id).region_code).region_name),
        placeType: 'region',
        placeId: lookupStateByAbbr(states.states, id).region_code }
       actions.updateFilters(placeNew)
-      actions.updateApp({ crime, ...placeNew }, router)
+      actions.updateApp({ pageType, ...placeNew }, router)
     }
   }
 
@@ -62,7 +63,7 @@ class Home extends React.Component {
 
   selectCrime = e => {
     const { actions } = this.props
-    actions.updateFilters({ crime: slugify(e.target.value) })
+    actions.updateFilters({ pageType: slugify(e.target.value) })
   }
 
   selectLocation = e => {

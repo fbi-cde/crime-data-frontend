@@ -1,10 +1,11 @@
 import { updateFilters } from './filters'
 import { fetchNibrsCounts } from '../actions/nibrsCounts'
 import { fetchSummaries } from '../actions/summary'
+import { fetchPoliceEmployment } from './policeEmployment'
 import { fetchUcrParticipation } from '../actions/participation'
 import history, { createNewLocation } from '../util/history'
-import { getPlaceId } from '../util/location'
-
+import { getPlaceId, validateFilter } from '../util/location'
+import offensesUtil from '../util/offenses'
 import {
   shouldFetchUcr,
   shouldFetchSummaries,
@@ -17,11 +18,14 @@ const fetchData = () => (dispatch, getState) => {
     if (!filters.placeId) {
       filters.placeId = getPlaceId(filters, region.region, states.states);
     }
-    if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
-    if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
-    if (shouldFetchNibrs(filters)) {
-      // dispatch(fetchNibrs(filters))
-      dispatch(fetchNibrsCounts(filters))
+    if (offensesUtil.includes(filters.pageType) && validateFilter(filters, region.regions, states.states)) {
+      if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
+      if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
+      if (shouldFetchNibrs(filters)) {
+        // dispatch(fetchNibrs(filters))
+        dispatch(fetchNibrsCounts(filters))
+      }
+       dispatch(fetchPoliceEmployment(filters))
     }
   }
 }
