@@ -121,6 +121,8 @@ class AgencyChart extends React.Component {
       .rangeRound([0 + xPadding, width - xPadding])
       .paddingInner(0.3)
 
+    const yrRange = data.map(d => d.year)
+
     const x1 = scaleBand()
       .domain(keys)
       .rangeRound([0, x0.bandwidth()])
@@ -142,9 +144,10 @@ class AgencyChart extends React.Component {
           dataPrior={activePriorYear}
           keys={keys}
           noun={noun}
-          since={since}
           updateYear={this.updateYear}
+          yrRange={yrRange}
           until={until}
+          since={since}
         />
         <div className="mb2 h6 bold monospace black">
           Total {noun} reported by year

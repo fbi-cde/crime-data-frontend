@@ -33,8 +33,11 @@ class DownloadBulkNibrs extends React.Component {
     if (!this.state.place) return []
     const { nibrs } = ucrProgram[this.state.place]
     const initialYear = nibrs['initial-year']
+    const noDataYears = nibrs['no-data-years'] || []
 
-    return range(MAX_YEAR + 1 - initialYear).map(y => initialYear + y)
+    return range(MAX_YEAR + 1 - initialYear)
+      .map(y => initialYear + y)
+      .filter(y => !noDataYears.includes(y))
   }
 
   handleClick = e => {
@@ -80,11 +83,11 @@ class DownloadBulkNibrs extends React.Component {
                 <option value="Location" disabled>
                   Location
                 </option>
-                {nibrsStates.sort().map((s, i) =>
+                {nibrsStates.sort().map((s, i) => (
                   <option key={i} value={s}>
                     {lookupUsa(s).display}
-                  </option>,
-                )}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="sm-col sm-col-4 px1 mb2 sm-m0">
@@ -100,11 +103,7 @@ class DownloadBulkNibrs extends React.Component {
                 <option value="Year" disabled>
                   Year
                 </option>
-                {nibrsYears.map((y, i) =>
-                  <option key={i}>
-                    {y}
-                  </option>,
-                )}
+                {nibrsYears.map((y, i) => <option key={i}>{y}</option>)}
               </select>
             </div>
             <div className="sm-col sm-col-3 px1 mb2 sm-m0">

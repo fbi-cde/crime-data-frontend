@@ -1,6 +1,5 @@
 import lowerCase from 'lodash.lowercase'
 import startCase from 'lodash.startcase'
-import range from 'lodash.range'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -22,12 +21,10 @@ const AgencyChartDetails = ({
   dataPrior,
   keys,
   noun,
-  since,
-  until,
+  yrRange,
   updateYear,
 }) => {
   const { cleared, year, actual } = data
-  const yearRange = range(since, until + 1)
   const crimeDisplay = lowerCase(crime)
   const handleSelectChange = e => updateYear(Number(e.target.value))
   let compSentence = null
@@ -41,7 +38,6 @@ const AgencyChartDetails = ({
       </span>
     )
   }
-
   return (
     <div className="mb3 lg-flex">
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
@@ -68,7 +64,7 @@ const AgencyChartDetails = ({
                   onChange={handleSelectChange}
                   value={year}
                 >
-                  {yearRange.map((y, i) =>
+                  {yrRange.map((y, i) =>
                     <option key={i}>
                       {y}
                     </option>,
@@ -88,7 +84,7 @@ const AgencyChartDetails = ({
                     className="mr1 inline-block"
                     style={{ width: 8, height: 8, backgroundColor: colors(k) }}
                   />
-                  <Term id={k} size="sm">
+                  <Term id={mapReported(k)} size="sm">
                     {startCase(mapReported(k))}
                   </Term>
                 </td>
@@ -115,9 +111,8 @@ AgencyChartDetails.propTypes = {
   data: PropTypes.object.isRequired,
   dataPrior: PropTypes.object,
   keys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  yrRange: PropTypes.arrayOf(PropTypes.number).isRequired,
   noun: PropTypes.string.isRequired,
-  since: PropTypes.number.isRequired,
-  until: PropTypes.number.isRequired,
   updateYear: PropTypes.func.isRequired,
 }
 

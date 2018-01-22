@@ -12,7 +12,7 @@ import markdown from '../util/md'
 const border = 'border-bottom border-blue-light'
 const borderLight = 'border-bottom border-blue-lighter'
 
-const DownloadsAndDocs = () =>
+const DownloadsAndDocs = () => (
   <section className="bg-white">
     <Helmet title="CDE :: Downloads & Documentation" />
     <SharingTags title="Downloads & Documentation" />
@@ -36,15 +36,17 @@ const DownloadsAndDocs = () =>
           <h3 className="mt-tiny mb2 fs-18 sm-fs-22">Resources</h3>
           <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
             <li className="mb2">
-              <a href="https://github.com/18F/crime-data-explorer/blob/master/README.md">
+              <a href="https://github.com/fbi-cde/crime-data-explorer/blob/master/README.md">
                 Readme
               </a>
             </li>
             <li className="mb2">
-              <a href="/pdf/data-dictionary.pdf">Data dictionary</a>
+              <a href="/pdf/NIBRS_DataDictionary.pdf">
+                NIBRS Data Dictionary
+              </a>
             </li>
             <li className="mb2">
-              <a href="/pdf/NIBRS-attributes-and-map.pdf">NIBRS attributes</a>
+              <a href="/pdf/nibrs_diagram.pdf">NIBRS Data Diagram</a>
             </li>
           </ul>
         </div>
@@ -65,7 +67,7 @@ const DownloadsAndDocs = () =>
           <div className="sm-col sm-col-4 sm-pl2">Dataset</div>
           <div className="sm-col sm-col-8">Description</div>
         </div>
-        {otherDatasets.map((d, i) =>
+        {otherDatasets.map((d, i) => (
           <div key={i} className={`clearfix pt2 pb4 ${borderLight}`}>
             <div className="sm-col sm-col-4 mb1 sm-pl2 sm-pr4 fs-16 sm-fs-20 bold">
               {d.title}
@@ -76,27 +78,30 @@ const DownloadsAndDocs = () =>
                   __html: markdown.render(d.description),
                 }}
               />
-              {d.downloads
-                ? d.downloads.map((dd, ii) =>
-                    <DownloadDataBtn
-                      ariaLabel={`Download ${dd.title} as a CSV`}
-                      className="block fs-12"
-                      data={[{ url: dd.href }]}
-                      key={ii}
-                      text={`Download ${dd.title} as a CSV`}
-                    />,
-                  )
-                : <DownloadDataBtn
-                    ariaLabel={`Download ${d.title} data as a CSV`}
+              {d.downloads ? (
+                d.downloads.map((dd, ii) => (
+                  <DownloadDataBtn
+                    ariaLabel={`Download ${dd.title} as a CSV`}
                     className="block fs-12"
-                    data={[{ url: d.href }]}
-                    text="Download CSV"
-                  />}
+                    data={[{ url: dd.href }]}
+                    key={ii}
+                    text={`Download ${dd.title} as a CSV`}
+                  />
+                ))
+              ) : (
+                <DownloadDataBtn
+                  ariaLabel={`Download ${d.title} data as a CSV`}
+                  className="block fs-12"
+                  data={[{ url: d.href }]}
+                  text="Download CSV"
+                />
+              )}
             </div>
-          </div>,
-        )}
+          </div>
+        ))}
       </div>
     </div>
   </section>
+)
 
 export default DownloadsAndDocs

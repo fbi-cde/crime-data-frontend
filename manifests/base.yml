@@ -3,6 +3,6 @@ services:
 - crime-data-feedback-creds
 - crime-data-threat-keywords
 env:
-  GITHUB_ISSUE_REPO_OWNER: '18f'
+  GITHUB_ISSUE_REPO_OWNER: 'fbi-cde'
   GITHUB_ISSUE_REPO_NAME: 'crime-data-explorer'
   NODE_ENV: 'production'

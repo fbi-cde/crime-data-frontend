@@ -1,27 +1,35 @@
 {
   "name": "crime-data-explorer",
-  "version": "2.18.7",
+  "version": "2.18.11",
   "private": true,
   "engines": {
-    "node": "6.11.x"
+    "node": "6.12.x"
   },
   "scripts": {
     "start": "node build/server.js",
     "postinstall": "npm run swagger",
-    "build": "export NODE_ENV=production && webpack -p --progress --config webpack.config.js && unset NODE_ENV",
-    "watch": "webpack -w --progress --config webpack.config.js & nodemon build/server.js",
+    "build":
+      "export NODE_ENV=production && webpack -p --progress --config webpack.config.js && unset NODE_ENV",
+    "watch":
+      "webpack -w --progress --config webpack.config.js & nodemon build/server.js",
     "lint": "npm run lint:js && npm run lint:yml",
-    "lint:js": "eslint src scripts server.js --ignore-path .gitignore || exit 0",
+    "lint:js":
+      "eslint src scripts server.js --ignore-path .gitignore || exit 0",
     "lint:yml": "yamllint content/**/*.yml || exit 0",
     "test": "jest --env=jsdom --no-cache",
     "test:debug": "node --debug-brk jest -i --env=jsdom",
     "test:watch": "jest --env=jsdom --watch",
-    "selenium:run": "mocha test/browser/release_verification.js --require babel-register --timeout=15000",
-    "selenium:start": "java -jar -Dwebdriver.gecko.driver=./test/browser/geckodriver ./test/browser/selenium-server-standalone-3.5.3.jar",
-    "selenium:start:mac": "java -jar -Dwebdriver.gecko.driver=./test/browser/geckodriver-mac ./test/browser/selenium-server-standalone-3.5.3.jar",
+    "selenium:run":
+      "mocha test/browser/release_verification.js --require babel-register --timeout=15000",
+    "selenium:start":
+      "java -jar -Dwebdriver.gecko.driver=./test/browser/geckodriver ./test/browser/selenium-server-standalone-3.5.3.jar",
+    "selenium:start:mac":
+      "java -jar -Dwebdriver.gecko.driver=./test/browser/geckodriver-mac ./test/browser/selenium-server-standalone-3.5.3.jar",
     "coverage": "npm test -- --coverage",
-    "prettier": "prettier --single-quote --trailing-comma all --semi false --write \"{src,test}/**/*.js\"",
-    "swagger": "rm -f node_modules/swagger-ui/dist/*.html && mkdir -p public/swagger/vendor && cp -r node_modules/swagger-ui/dist/* public/swagger/vendor",
+    "prettier":
+      "prettier --single-quote --trailing-comma all --semi false --write \"{src,test}/**/*.js\"",
+    "swagger":
+      "rm -f node_modules/swagger-ui/dist/*.html && mkdir -p public/swagger/vendor && cp -r node_modules/swagger-ui/dist/* public/swagger/vendor",
     "agencies": "node scripts/agencies/update.js"
   },
   "dependencies": {
@@ -118,18 +126,13 @@
     "geckodriver": "^1.8.1"
   },
   "babel": {
-    "presets": [
-      "es2015",
-      "stage-0",
-      "react"
-    ]
+    "presets": ["es2015", "stage-0", "react"]
   },
   "jest": {
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|yml|yaml)$": "<rootDir>/test/mocks/fileMock.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|yml|yaml)$":
+        "<rootDir>/test/mocks/fileMock.js"
     },
-    "testPathIgnorePatterns": [
-      "/test/browser"
-    ]
+    "testPathIgnorePatterns": ["/test/browser"]
   }
 }
