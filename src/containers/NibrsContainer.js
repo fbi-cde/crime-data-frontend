@@ -69,7 +69,6 @@ const NibrsContainer = ({
   if (error) content = <ErrorCard error={error} />
   else if (isReady) {
     const filteredData = filterNibrsData(data, { since, until })
-
     const dataParsed = parseNibrsCounts(filteredData, crime)
      const offenseObj = dataParsed
       .find(d => d.title === 'Offenses')
