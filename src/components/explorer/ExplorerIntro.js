@@ -53,7 +53,7 @@ const ExplorerIntro = ({ agency, filters, participation, placeName, region, stat
 
   return (
     <ExplorerIntroState
-      ccrime={filters.pageType}
+      crime={filters.pageType}
       place={filters.place}
       until={filters.until}
       page={filters.page}

@@ -35,7 +35,6 @@ class Home extends React.Component {
       const id = e.target.getAttribute('id')
       if (!id) return
       const { actions, filters, router } = this.props
-      console.log('filters:', filters)
       const { pageType } = filters
       const placeNew = { place: slugify(lookupStateByAbbr(states.states, id).state_name), placeType: 'state', placeId: id, page: 'crime' }
       actions.updateFilters(placeNew)

@@ -1,14 +1,17 @@
 import { updateFilters } from './filters'
-import { fetchNibrsCounts } from '../actions/nibrsCounts'
-import { fetchSummaries } from '../actions/summary'
 import { fetchPoliceEmployment } from './policeEmployment'
+
+import { fetchNibrsCounts } from '../actions/nibrsCounts'
+
+import { fetchSummaries } from '../actions/summary'
 import { fetchUcrParticipation } from '../actions/participation'
+// import { fetchAgencies } from '../actions/agencies'
 import history, { createNewLocation } from '../util/history'
 import { getPlaceId, validateFilter } from '../util/location'
+// import { shouldFetchAgencies } from '../util/agencies'
 import offensesUtil from '../util/offenses'
+
 import {
-  shouldFetchUcr,
-  shouldFetchSummaries,
   shouldFetchNibrs,
 } from '../util/participation'
 
@@ -19,13 +22,12 @@ const fetchData = () => (dispatch, getState) => {
       filters.placeId = getPlaceId(filters, region.region, states.states);
     }
     if (offensesUtil.includes(filters.pageType) && validateFilter(filters, region.regions, states.states)) {
-      if (shouldFetchUcr(filters, region, states)) dispatch(fetchUcrParticipation(filters))
-      if (shouldFetchSummaries(filters, region, states)) dispatch(fetchSummaries(filters))
-      if (shouldFetchNibrs(filters)) {
-        // dispatch(fetchNibrs(filters))
-        dispatch(fetchNibrsCounts(filters))
-      }
-       dispatch(fetchPoliceEmployment(filters))
+      // if (shouldFetchAgencies(filters) && agencies.locations !== filters.place && filters.placeType !== 'agency') dispatch(fetchAgencies(filters))
+      if (filters.placeType !== 'agency')dispatch(fetchUcrParticipation(filters))
+      dispatch(fetchSummaries(filters, states))
+      dispatch(fetchPoliceEmployment(filters))
+
+      if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrsCounts(filters))
     }
   }
 }

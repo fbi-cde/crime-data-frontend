@@ -50,7 +50,7 @@ LocationFilter.defaultProps = {
 }
 
 LocationFilter.propTypes = {
-  agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
+  agency: PropTypes.object,
   agencyData: PropTypes.arrayOf(PropTypes.object),
   ariaControls: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

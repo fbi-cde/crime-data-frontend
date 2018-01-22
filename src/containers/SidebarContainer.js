@@ -74,11 +74,10 @@ SidebarContainer.propTypes = {
 const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   const { crime, place, placeType } = filters
   const isAgency = placeType === 'agency'
-  const displayAgencies = (placeType !== 'region' || placeType !== 'national') && agencies.loaded
+  const displayAgencies = (placeType !== 'region' || placeType !== 'national')
   const usState = isAgency ? newOriToState(place, states) : place
   const agency = getAgency(agencies, place)
   const agencyData = displayAgencies ? Object.keys(agencies.data).map(k => agencies.data[k]) : []
-
 
   return {
     agency,

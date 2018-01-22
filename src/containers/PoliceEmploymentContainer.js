@@ -63,7 +63,6 @@ class PoliceEmploymentContainer extends React.Component {
 
   render() {
     const { agency, isAgency, policeEmployment, place, placeType, since, until, filters, region, states } = this.props
-    console.log('PE Container')
     let placeDisplay = null
     if (isAgency) {
       placeDisplay = agency.agency_name_edit
