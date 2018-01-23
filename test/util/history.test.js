@@ -16,21 +16,21 @@ describe('history utility', () => {
     }
 
     it('should change the place value in pathname if it is a state', () => {
-      const change = { place: 'california', placeType: 'state' }
+      const change = { place: 'california', placeType: 'state', pageType: 'homicide' }
       const router = Object.assign({}, mockRouter)
       const actual = createNewLocation({ change, router })
-      expect(actual.pathname).toEqual('/explorer/state/california/murder')
+      expect(actual.pathname).toEqual('/explorer/state/california/homicide')
     })
 
     it('should remove /state/:place from the pathname if it is national', () => {
-      const change = { place: nationalKey }
+      const change = { place: nationalKey, pageType: 'homicide' }
       const router = Object.assign({}, mockRouter)
       const actual = createNewLocation({ change, router })
-      expect(actual.pathname).toEqual('/explorer/murder')
+      expect(actual.pathname).toEqual('/explorer/homicide')
     })
 
     it('should change the crime value in pathname if it is a state', () => {
-      const change = { crime: 'robbery', place: 'oregon', placeType: 'state' }
+      const change = { pageType: 'robbery', place: 'oregon', placeType: 'state' }
       const router = Object.assign({}, mockRouter)
       const actual = createNewLocation({ change, router })
       expect(actual.pathname).toEqual('/explorer/state/oregon/robbery')
@@ -44,14 +44,14 @@ describe('history utility', () => {
     })
 
     it('should persist state if time filter changed', () => {
-      const change = { since: 2000 }
+      const change = { pageType: 'robbery', place: 'oregon', placeType: 'state', since: 2000 }
       const router = Object.assign({}, mockRouter)
       const actual = createNewLocation({ change, router })
-      expect(actual.pathname).toEqual('/explorer/state/oregon/murder')
+      expect(actual.pathname).toEqual('/explorer/state/oregon/robbery')
     })
 
     it('should ignore place and crime for the query', () => {
-      const change = { crime: 'robbery' }
+      const change = { pageType: 'robbery' }
       const router = Object.assign({}, mockRouter)
       const actual = createNewLocation({ change, router })
       expect(actual.query).toEqual({})

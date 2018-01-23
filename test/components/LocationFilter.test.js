@@ -24,7 +24,7 @@ describe('LocationFilter', () => {
 
     it('should return an empty string otherwise', () => {
       const props = {
-        agency: false,
+        agency: { },
         agencyData: [],
         ariaControls: 'explorer',
         onChange: () => {},
@@ -41,7 +41,7 @@ describe('LocationFilter', () => {
   describe('handleLocationFocus()', () => {
     it('should set showResults state to false', () => {
       const props = {
-        agency: false,
+        agency: { agency_name: 'Foo' },
         agencyData: [],
         ariaControls: 'explorer',
         onChange: () => {},

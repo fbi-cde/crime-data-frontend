@@ -24,9 +24,14 @@ const validateFilter = filters => {
     newFilters.pageType = defaults.pageType
   }
 
+  if (!isValidCrime(filters.pageType) && filters.page === 'crime') {
+    newFilters.pageType = defaults.pageType
+  }
+
   if (isValidCrime(filters.pageType) && filters.page !== 'crime') {
     newFilters.page = defaults.page
   }
+
 
   if (filters.place === 'usa') {
     newFilters.place = defaults.place
