@@ -81,7 +81,6 @@ const fetchArson = (place, placeId, placeType) => {
     url = `${API}/arson/national?per_page=50`
   }
 
-
   return get(url).then(({ results }) =>
     results.map(d => ({ year: d.year, arson: d.actual })),
   )
@@ -107,7 +106,7 @@ const fetchAggregates = (place, placeType, placeId) => {
 
   const requests = [
     fetchResults(place || nationalKey, estimatesApi),
-    fetchArson(place),
+    fetchArson(place, placeId, placeType),
   ]
 
   return Promise.all(requests).then(parseAggregates)
