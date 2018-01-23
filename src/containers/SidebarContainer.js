@@ -3,7 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import CrimeTypeFilter from '../components/CrimeTypeFilter'
-import LEOKATypeFilter from '../components/LEOKATypeFilter'
 import LocationFilter from '../components/LocationFilter'
 import TimePeriodFilter from '../components/TimePeriodFilter'
 import { hideSidebar } from '../actions/sidebar'
@@ -56,13 +55,6 @@ const SidebarContainer = ({
         onChange={onChange}
         selected={crime}
       />
-
-      <LEOKATypeFilter
-        ariaControls={ariaControls}
-        onChange={onChange}
-        selected={crime}
-      />
-
     </div>
   </nav>
 

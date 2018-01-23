@@ -148,8 +148,8 @@ class Explorer extends React.Component {
             {isAgency && crimePage && <SparklineContainer />}
             {isAgency && <AgencyChartContainer /> }
             {crimePage && !isAgency && <TrendContainer />}
+            {crimePage && <PoliceEmploymentContainer /> }
             {crimePage && !isCombinedCrime && <NibrsContainer /> }
-            {!crimePage && <PoliceEmploymentContainer /> }
             <AboutTheData
               crime={pageType}
               onTermClick={term => actions.showTerm(term)}
