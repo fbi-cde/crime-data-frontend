@@ -80,6 +80,7 @@ class AgencySearch extends Component {
     const { data } = this.props
     const { search, hasSelection, showResults } = this.state
 
+    console.log('Data:', data)
     // get unique set of counties (for result grouping)
     const counties = {}
     data.forEach(d => (counties[d.primary_county || 'N/A'] = true))
