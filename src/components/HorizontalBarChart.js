@@ -53,6 +53,7 @@ class HorizontalBarChart extends React.Component {
       place,
       placeName,
       places,
+      isAgency,
     } = this.props
     const { isCounts } = this.state
 
@@ -120,6 +121,7 @@ class HorizontalBarChart extends React.Component {
           until={filters.until}
           placeName={placeName}
           placeType={filters.placeType}
+          isAgency={isAgency}
         />
         <div className="clearfix">
           <div className="left">
@@ -175,6 +177,7 @@ HorizontalBarChart.propTypes = {
   id: PropTypes.string.isRequired,
   rowLim: PropTypes.number.isRequired,
   title: PropTypes.string,
+  isAgency: PropTypes.bool.isRequired,
 }
 
 export default HorizontalBarChart

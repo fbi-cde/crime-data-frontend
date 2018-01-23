@@ -42,6 +42,7 @@ const HorizontalBarChartDetails = ({
   onChangeYear,
   placeName,
   placeType,
+  isAgency,
 }) => {
   const handleSelectChange = e => onChangeYear(Number(e.target.value))
   const yearRange = range(since, until + 1)
@@ -127,7 +128,7 @@ const HorizontalBarChartDetails = ({
                       backgroundColor: colors[i] || '#000',
                     }}
                   />
-                  {generateDisplayName(d.place, placeType)}
+                  {isAgency && d.place === 'united-states' ? generateDisplayName(d.place, placeType) : placeName}
                 </td>
                 <td className="pt1 pr2 align-bottom right-align">
                   <span
@@ -178,6 +179,7 @@ HorizontalBarChartDetails.propTypes = {
   until: PropTypes.number.isRequired,
   onChangeYear: PropTypes.func.isRequired,
   placeName: PropTypes.string.isRequired,
+  isAgency: PropTypes.bool.isRequired,
 }
 
 export default HorizontalBarChartDetails

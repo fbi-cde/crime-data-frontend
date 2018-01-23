@@ -12,7 +12,7 @@ import NoData from '../components/NoData'
 import { NibrsTerm, SrsTerm } from '../components/Terms'
 import { getAgency } from '../util/agencies'
 
-const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
+const Content = ({ pageType, place, since, submitsNibrs, summary, until }) => {
   const { error, loading } = summary
 
   if (loading) return <Loading />
@@ -21,7 +21,7 @@ const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
   const data = summary.data[place]
   if (!data || data.length === 0) return <NoData />
 
-  const fname = `${place}-${crime}-${since}-${until}`
+  const fname = `${place}-${pageType}-${since}-${until}`
   const dataClean = data
     .filter(d => d.year >= since && d.year <= until)
     .sort((a, b) => a.year - b.year)
@@ -32,7 +32,7 @@ const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
 
   const noun = submitsNibrs ? 'incidents' : 'offenses'
   const noDataText = `There were no ${lowerCase(
-    crime,
+    pageType,
   )} ${noun} reported during this time period.`
 
   return (
@@ -41,7 +41,7 @@ const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
         ? <NoData text={noDataText} />
         : <div>
             <AgencyChart
-              crime={crime}
+              crime={pageType}
               data={dataClean}
               since={since}
               submitsNibrs={submitsNibrs}
@@ -57,7 +57,7 @@ const Content = ({ crime, place, since, submitsNibrs, summary, until }) => {
 }
 
 const AgencyChartContainer = params => {
-  const { agency, crime, since, summary, until } = params
+  const { agency, pageType, since, summary, until } = params
 
   if (!agency) return null
 
@@ -68,7 +68,7 @@ const AgencyChartContainer = params => {
     <div className="mb7">
       <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
         <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-          {startCase(crime)} {noun} reported by {agency.display}, {since}–{until}
+          {startCase(pageType)} {noun} reported by {agency.display}, {since}–{until}
         </h2>
         <Content submitsNibrs={submitsNibrs} {...params} />
       </div>
@@ -95,7 +95,7 @@ const AgencyChartContainer = params => {
 
 AgencyChartContainer.propTypes = {
   agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
-  crime: PropTypes.string.isRequired,
+  pageType: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   summary: PropTypes.shape({
