@@ -24,7 +24,6 @@ class PoliceEmploymentContainer extends React.Component {
     since,
     until,
     filters,
-    isAgency,
   }) => {
     const { yearSelected } = this.state
     const { data, loading, error } = policeEmployment
@@ -53,7 +52,6 @@ class PoliceEmploymentContainer extends React.Component {
           placeName={placeDisplay}
           places={places}
           filters={filters}
-          isAgency={isAgency}
         />
       </div>
     )
@@ -74,14 +72,13 @@ class PoliceEmploymentContainer extends React.Component {
     } else {
       placeDisplay = 'United States'
     }
-    console.log('PE Display Name:', placeDisplay)
     return (
       <div className="mb6">
         <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
           <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
             {placeDisplay} Police Employment
           </h2>
-          {this.getContent({ policeEmployment, place, placeType, placeDisplay, since, until, filters, isAgency })}
+          {this.getContent({ policeEmployment, place, placeType, placeDisplay, since, until, filters })}
         </div>
       </div>
     )

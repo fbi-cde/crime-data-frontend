@@ -7,7 +7,6 @@ import crimeTerm from '../util/glossary'
 import { formatNum, formatOneDec as formatRate } from '../util/formats'
 import { nationalKey } from '../util/usa'
 import generateId from '../util/id'
-import { generateDisplayName } from '../util/location'
 
 const highlight = txt =>
   <strong>
@@ -41,8 +40,6 @@ const HorizontalBarChartDetails = ({
   until,
   onChangeYear,
   placeName,
-  placeType,
-  isAgency,
 }) => {
   const handleSelectChange = e => onChangeYear(Number(e.target.value))
   const yearRange = range(since, until + 1)
@@ -128,7 +125,7 @@ const HorizontalBarChartDetails = ({
                       backgroundColor: colors[i] || '#000',
                     }}
                   />
-                  {isAgency && d.place === 'united-states' ? generateDisplayName(d.place, placeType) : placeName}
+                  {d.place === 'united-states' ? 'United States' : placeName}
                 </td>
                 <td className="pt1 pr2 align-bottom right-align">
                   <span
@@ -179,7 +176,6 @@ HorizontalBarChartDetails.propTypes = {
   until: PropTypes.number.isRequired,
   onChangeYear: PropTypes.func.isRequired,
   placeName: PropTypes.string.isRequired,
-  isAgency: PropTypes.bool.isRequired,
 }
 
 export default HorizontalBarChartDetails
