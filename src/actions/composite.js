@@ -4,6 +4,7 @@ import { fetchPoliceEmployment } from './policeEmployment'
 import { fetchNibrsCounts } from '../actions/nibrsCounts'
 
 import { fetchSummaries } from '../actions/summary'
+import { fetchLeoka } from '../actions/leoka'
 import { fetchUcrParticipation } from '../actions/participation'
 // import { fetchAgencies } from '../actions/agencies'
 import history, { createNewLocation } from '../util/history'
@@ -28,6 +29,9 @@ const fetchData = () => (dispatch, getState) => {
       dispatch(fetchPoliceEmployment(filters))
 
       if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrsCounts(filters))
+    }
+    if (filters.page === 'leoka') { // Add validation of leoka type and add a shouldFetch Method
+      dispatch(fetchLeoka(filters))
     }
   }
 }

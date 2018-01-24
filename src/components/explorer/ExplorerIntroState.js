@@ -20,9 +20,9 @@ const getReportTerms = ({ nibrs, srs, hybrid }) =>
     {nibrs && <NibrsTerm />}
   </span>
 
-const ExplorerIntroState = ({ crime, page, place, participation, until, placeName }) => {
+const ExplorerIntroState = ({ pageType, page, place, participation, until, placeName }) => {
   const isCrime = page === 'crime'
-  const isArson = crime === 'arson'
+  const isArson = pageType === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
   const untilUcr = participation.find(p => p.year === until)
   let totalAgencies = 0
@@ -35,8 +35,8 @@ const ExplorerIntroState = ({ crime, page, place, participation, until, placeNam
   if (isCrime) {
     const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })
     const crimeTerm = (
-      <Term id={mapCrimeToGlossaryTerm(crime)}>
-        {upperFirst(lowerCase(crime))}
+      <Term id={mapCrimeToGlossaryTerm(pageType)}>
+        {upperFirst(lowerCase(pageType))}
       </Term>
     )
 

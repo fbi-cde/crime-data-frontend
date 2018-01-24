@@ -1,8 +1,8 @@
 const leokaTypesText = [
-  { id: 'feloniously', text: 'Officer Feloniously Killed' },
-  { id: 'accidental', text: 'Officer Accidentally Killed' },
-  { id: 'assaulted', text: 'Officer Assaulted' },
-  { id: 'federal', text: 'Federal Officer Killed and Assault' },
+  { id: 'feloniously', text: 'Officer feloniously killed' },
+  { id: 'accidental', text: 'Officer accidentally killed' },
+  { id: 'assault', text: 'Officer assaulted' },
+  { id: 'federal', text: 'Federal officer killed and assault' },
 ]
 
 const leokaTypes = leokaTypesText

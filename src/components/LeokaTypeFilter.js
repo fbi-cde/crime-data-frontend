@@ -4,7 +4,7 @@ import React from 'react'
 import { leokaTypes } from '../util/leoka'
 import { slugify } from '../util/text'
 
-class LEOKATypeFilter extends React.Component {
+class LeokaTypeFilter extends React.Component {
   generateSelections() {
     const opts = [];
     Object.keys(leokaTypes).forEach(p => {
@@ -46,14 +46,14 @@ class LEOKATypeFilter extends React.Component {
     </div>)
   }
 }
-LEOKATypeFilter.propTypes = {
+LeokaTypeFilter.propTypes = {
   ariaControls: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   selected: PropTypes.string,
 }
 
-LEOKATypeFilter.defaultProps = {
+LeokaTypeFilter.defaultProps = {
   selected: '',
 }
 
-export default LEOKATypeFilter
+export default LeokaTypeFilter

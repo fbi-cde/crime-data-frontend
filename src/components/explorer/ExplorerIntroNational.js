@@ -13,15 +13,15 @@ const highlight = txt =>
     {txt}
   </strong>
 
-const ExplorerIntroNational = ({ crime, page, participation, until }) => {
-  const isArson = crime === 'arson'
+const ExplorerIntroNational = ({ pageType, page, participation, until }) => {
+  const isArson = pageType === 'arson'
   const isCrime = page === 'crime'
   const untilUcr = participation.find(p => p.year === until)
 
   if (isCrime) {
     const crimeTerm = (
-      <Term id={mapCrimeToGlossaryTerm(crime)}>
-        {upperFirst(lowerCase(crime))}
+      <Term id={mapCrimeToGlossaryTerm(pageType)}>
+        {upperFirst(lowerCase(pageType))}
       </Term>
     )
     return (
@@ -60,7 +60,7 @@ const ExplorerIntroNational = ({ crime, page, participation, until }) => {
 }
 
 ExplorerIntroNational.propTypes = {
-  crime: PropTypes.string,
+  pageType: PropTypes.string,
   participation: PropTypes.array,
   until: PropTypes.number,
 }

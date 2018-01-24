@@ -13,8 +13,8 @@ const highlight = txt =>
     {txt}
   </strong>
 
-const ExplorerIntroRegion = ({ crime, page, participation, until, placeName, states, region, place }) => {
-  const isArson = crime === 'arson'
+const ExplorerIntroRegion = ({ pageType, page, participation, until, placeName, states, region, place }) => {
+  const isArson = pageType === 'arson'
   const isCrime = page === 'crime'
 
   const untilUcr = participation.find(p => p.year === until)
@@ -41,8 +41,8 @@ const ExplorerIntroRegion = ({ crime, page, participation, until, placeName, sta
 
   if (isCrime) {
     const crimeTerm = (
-      <Term id={mapCrimeToGlossaryTerm(crime)}>
-        {upperFirst(lowerCase(crime))}
+      <Term id={mapCrimeToGlossaryTerm(pageType)}>
+        {upperFirst(lowerCase(pageType))}
       </Term>
     )
     return (
