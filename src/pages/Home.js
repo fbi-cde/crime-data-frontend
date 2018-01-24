@@ -89,8 +89,8 @@ class Home extends React.Component {
   render() {
     const { statesView } = this.state
     const { region, states } = this.props
-    const { crime, place, placeType } = this.props.filters
-    const isValid = !!(crime && place) || false
+    const { place, placeType } = this.props.filters
+    const isValid = true
     const usState = placeType === 'agency' ? oriToState(place) : place
     let mapSelected = [];
     if (place && placeType) {
