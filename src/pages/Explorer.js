@@ -10,6 +10,7 @@ import AgencyChartContainer from '../containers/AgencyChartContainer'
 import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer'
 import NibrsContainer from '../containers/NibrsContainer'
 import PoliceEmploymentContainer from '../containers/PoliceEmploymentContainer'
+import LeokaContainer from '../containers/LeokaContainer'
 import NotFound from './NotFound'
 import SharingTags from '../components/SharingTags'
 import SidebarContainer from '../containers/SidebarContainer'
@@ -114,6 +115,7 @@ class Explorer extends React.Component {
     if (agencies.loaded && isAgency && !agency) {
       return <NotFound />
     }
+    console.log('Explorer is Crime Type:', crimePage)
     return (
       <div className="site-wrapper">
         <Helmet title="CDE :: Explorer" />
@@ -145,15 +147,16 @@ class Explorer extends React.Component {
         <div className="site-content" id="explorer">
           <div className="container-main mx-auto px2 md-py3 lg-px3">
             <ExplorerHeaderContainer />
-            {isAgency && crimePage && <SparklineContainer />}
-            {isAgency && <AgencyChartContainer /> }
+            {crimePage && isAgency && crimePage && <SparklineContainer />}
+            {crimePage && isAgency && <AgencyChartContainer /> }
             {crimePage && !isAgency && <TrendContainer />}
             {crimePage && <PoliceEmploymentContainer /> }
+            {!crimePage && <LeokaContainer /> }
             {crimePage && !isCombinedCrime && <NibrsContainer /> }
-            <AboutTheData
+            {crimePage && <AboutTheData
               crime={pageType}
               onTermClick={term => actions.showTerm(term)}
-            />
+            /> }
           </div>
         </div>
       </div>
