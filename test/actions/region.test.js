@@ -32,7 +32,7 @@ describe('ucr actions', () => {
     sandbox.restore()
   })
 
-  describe('failedUcrParticipation()', () => {
+  describe('failedUcrRegion()', () => {
     it('should return failedUcrRegion type', () => {
       const actual = failedUcrRegion()
       expect(actual.type).toEqual(UCR_REGION_FAILED)
