@@ -32,7 +32,7 @@ deployment:
       - cf zero-downtime-push crime-data-explorer-master -f manifests/master.yml
   production:
     tag: /v[0-9]+(\.[0-9]+)*/
-    owner: 18F
+    owner: fbi-cde
     commands:
       - curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
       - sudo dpkg -i cf-cli_amd64.deb
