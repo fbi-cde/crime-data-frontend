@@ -23,7 +23,6 @@ const CrimeTypeFilter = ({ ariaControls, onChange, selected }) =>
     <div className="mb3 fs-22 bold border-bottom border-blue-light">
       Type of crime
     </div>
-
     {crimes.map((c, i) =>
       <div className="mb2 rounded overflow-hidden" key={i}>
         {c.title &&
