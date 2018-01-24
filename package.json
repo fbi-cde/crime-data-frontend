@@ -1,6 +1,6 @@
 {
   "name": "crime-data-explorer",
-  "version": "2.18.11",
+  "version": "2.19.0",
   "private": true,
   "engines": {
     "node": "6.12.x"
