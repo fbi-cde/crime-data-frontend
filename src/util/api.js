@@ -6,6 +6,7 @@ import { get } from './http'
 import { mapToApiOffense } from './offenses'
 import { oriToState } from './agencies'
 import { slugify } from './text'
+import { offenseMapping } from './nibrsCounts'
 
 export const API = '/api-proxy'
 export const nationalKey = 'united-states'
@@ -198,7 +199,7 @@ export const formatError = error => ({
   url: error.config.url,
 })
 
-const fetchNibrsCounts = ({ dim, place, placeType, type, placeId }) => {
+const fetchNibrsCounts = ({ dim, crime, place, placeType, type, placeId }) => {
   const loc =
     place === nationalKey
       ? 'national'
@@ -208,7 +209,7 @@ const fetchNibrsCounts = ({ dim, place, placeType, type, placeId }) => {
 
   const field = dimensionEndpoints[dim] || dim
   let url
-  if (field !== '') { url = `${API}/nibrs/${type}/count/${loc}/${field}` } else { url = `${API}/nibrs/${type}/count/${loc}` }
+  if (field !== '') { url = `${API}/nibrs/${type}/count/${crime}/${loc}/${field}` } else { url = `${API}/nibrs/${type}/count/${crime}/${loc}` }
 
 
   const params = {
@@ -224,7 +225,6 @@ const fetchNibrsCounts = ({ dim, place, placeType, type, placeId }) => {
 
 const getNibrsCountsRequests = params => {
   const { crime, place, placeType, placeId } = params
-
   const slices = [
     { type: 'offender', dim: '' },
     { type: 'offender', dim: 'age' },

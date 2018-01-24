@@ -71,14 +71,13 @@ const getOffenseData = (data, offense) => {
 }
 
 export const reshapeSexData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
   let male = 0;
   let female = 0
   let unknown = 0
-  for (const i in filtered) {
-    male += filtered[i].male_count
-    female += filtered[i].female_count
-    unknown += filtered[i].unknown_count
+  for (const i in data) {
+    male += data[i].male_count
+    female += data[i].female_count
+    unknown += data[i].unknown_count
   }
   const objs = [];
   let obj = {}
@@ -97,7 +96,6 @@ export const reshapeSexData = (data, offense) => {
 }
 
 export const reshapeRaceData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
   let americanIndian = 0;
   let asian = 0
   let black = 0
@@ -105,13 +103,13 @@ export const reshapeRaceData = (data, offense) => {
   let unknown = 0
   let white = 0
 
-  for (const i in filtered) {
-    asian += filtered[i].asian
-    black += filtered[i].black
-    white += filtered[i].white
-    unknown += filtered[i].unknown
-    nativeHawaiian += filtered[i].native_hawaiian
-    americanIndian += filtered[i].american_indian
+  for (const i in data) {
+    asian += data[i].asian
+    black += data[i].black
+    white += data[i].white
+    unknown += data[i].unknown
+    nativeHawaiian += data[i].native_hawaiian
+    americanIndian += data[i].american_indian
   }
   const objs = [];
   let obj = {}
@@ -149,17 +147,16 @@ export const reshapeRaceData = (data, offense) => {
 }
 
 export const reshapeEthnicityData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
   let hispanic = 0;
   let multiple = 0
   let notHispanic = 0
   let unknown = 0
 
-  for (const i in filtered) {
-    hispanic += filtered[i].hispanic
-    multiple += filtered[i].multiple
-    notHispanic += filtered[i].not_hispanic
-    unknown += filtered[i].unknown
+  for (const i in data) {
+    hispanic += data[i].hispanic
+    multiple += data[i].multiple
+    notHispanic += data[i].not_hispanic
+    unknown += data[i].unknown
   }
   const objs = [];
   let obj = {}
@@ -187,7 +184,6 @@ export const reshapeEthnicityData = (data, offense) => {
 }
 
 export const reshapeLocationData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
   let residencehome = 0
   let parkinggaragelot = 0
   let abandonedcondemnedstructure = 0
@@ -235,53 +231,53 @@ export const reshapeLocationData = (data, offense) => {
   let triballands = 0
   let conveniencestore = 0
 
-  for (const i in filtered) {
-    residencehome += filtered[i].residence_home
-    parkinggaragelot += filtered[i].parking_garage__lot
-    abandonedcondemnedstructure += filtered[i].abandoned_condemned__structure
-    airbustrainterminal += filtered[i].air__bus__train_terminal
-    amusementpark += filtered[i].amusement_park
-    arenastadiumfairgrounds += filtered[i].arena__stadium__fairgrounds
-    atmseparatefrombank += filtered[i].atm_separate_from_bank
-    autodealership += filtered[i].auto_dealership
-    bank += filtered[i].bank
-    barnightclub += filtered[i].bar_nightclub
-    campground += filtered[i].campground
-    churchsynagoguetemplemosque += filtered[i].church__synagogue__temple__mosque
-    commercialofficebuilding += filtered[i].commercial__office_building
-    communitycenter += filtered[i].community_center
-    constructionsite += filtered[i].construction_site
-    cyberspace += filtered[i].cyberspace
-    daycarefacility += filtered[i].daycare_facility
-    departmentdiscountstore += filtered[i].department__discount_store
-    dockwharfshippingterminal += filtered[i].dock__wharf__shipping_terminal
-    drugstoredoctorsofficehospital += filtered[i].drug_store__doctors_office__hospital
-    farmfacility += filtered[i].farm_facility
-    fieldwoods += filtered[i].field__woods
-    gamblingfacilitycasinoracetrack += filtered[i].gambling_facility__casino__race_track
-    governmentpublicbuilding += filtered[i].government__public_building
-    grocerystore += filtered[i].grocery_store
-    highwayalleystreetsidewalk += filtered[i].highway__alley__street__sidewalk
-    hotelmotel += filtered[i].hotel__motel
-    industrialsite += filtered[i].industrial_site
-    jailprisoncorrectionsfacility += filtered[i].jail__prison__corrections_facility
-    lakewaterwaybeach += filtered[i].lake__waterway__beach
-    liquorstore += filtered[i].liquor_store
-    militarybase += filtered[i].military_base
-    unknown += filtered[i].unknown
-    parkplayground += filtered[i].park__playground
-    rentalstoragefacility += filtered[i].rental_storage_facility
-    restarea += filtered[i].rest_area
-    restaurant += filtered[i].restaurant
-    schoolcollege += filtered[i].school__college
-    schoolcollegeuniversity += filtered[i].school_college__university
-    schoolelementarysecondary += filtered[i].school_elementary__secondary
-    gasstation += filtered[i].gas_station
-    missionhomelessshelter += filtered[i].mission__homeless_shelter
-    shoppingmall += filtered[i].shopping_mall
-    specialtystore += filtered[i].specialty_store
-    triballands += filtered[i].tribal_lands
-    conveniencestore += filtered[i].convenience_store
+  for (const i in data) {
+    residencehome += data[i].residence_home
+    parkinggaragelot += data[i].parking_garage__lot
+    abandonedcondemnedstructure += data[i].abandoned_condemned__structure
+    airbustrainterminal += data[i].air__bus__train_terminal
+    amusementpark += data[i].amusement_park
+    arenastadiumfairgrounds += data[i].arena__stadium__fairgrounds
+    atmseparatefrombank += data[i].atm_separate_from_bank
+    autodealership += data[i].auto_dealership
+    bank += data[i].bank
+    barnightclub += data[i].bar_nightclub
+    campground += data[i].campground
+    churchsynagoguetemplemosque += data[i].church__synagogue__temple__mosque
+    commercialofficebuilding += data[i].commercial__office_building
+    communitycenter += data[i].community_center
+    constructionsite += data[i].construction_site
+    cyberspace += data[i].cyberspace
+    daycarefacility += data[i].daycare_facility
+    departmentdiscountstore += data[i].department__discount_store
+    dockwharfshippingterminal += data[i].dock__wharf__shipping_terminal
+    drugstoredoctorsofficehospital += data[i].drug_store__doctors_office__hospital
+    farmfacility += data[i].farm_facility
+    fieldwoods += data[i].field__woods
+    gamblingfacilitycasinoracetrack += data[i].gambling_facility__casino__race_track
+    governmentpublicbuilding += data[i].government__public_building
+    grocerystore += data[i].grocery_store
+    highwayalleystreetsidewalk += data[i].highway__alley__street__sidewalk
+    hotelmotel += data[i].hotel__motel
+    industrialsite += data[i].industrial_site
+    jailprisoncorrectionsfacility += data[i].jail__prison__corrections_facility
+    lakewaterwaybeach += data[i].lake__waterway__beach
+    liquorstore += data[i].liquor_store
+    militarybase += data[i].military_base
+    unknown += data[i].unknown
+    parkplayground += data[i].park__playground
+    rentalstoragefacility += data[i].rental_storage_facility
+    restarea += data[i].rest_area
+    restaurant += data[i].restaurant
+    schoolcollege += data[i].school__college
+    schoolcollegeuniversity += data[i].school_college__university
+    schoolelementarysecondary += data[i].school_elementary__secondary
+    gasstation += data[i].gas_station
+    missionhomelessshelter += data[i].mission__homeless_shelter
+    shoppingmall += data[i].shopping_mall
+    specialtystore += data[i].specialty_store
+    triballands += data[i].tribal_lands
+    conveniencestore += data[i].convenience_store
   }
 
   const objs = [];
@@ -520,7 +516,6 @@ export const reshapeLocationData = (data, offense) => {
 }
 
 export const reshapeRelationship = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
   let acquaintance = 0
   let babysittee = 0
   let boyfriendgirlfriend = 0
@@ -548,33 +543,33 @@ export const reshapeRelationship = (data, offense) => {
   let offender = 0
   let exspouse = 0
 
-  for (const i in filtered) {
-    acquaintance += filtered[i].acquaintance
-    babysittee += filtered[i].babysittee
-    boyfriendgirlfriend += filtered[i].boyfriend_girlfriend
-    childboyfriendgirlfriend += filtered[i].child_boyfriend_girlfriend
-    child += filtered[i].child
-    commonlawspouse += filtered[i].common_law_spouse
-    employee += filtered[i].employee
-    employer += filtered[i].employer
-    friend += filtered[i].friend
-    grandchild += filtered[i].grandchild
-    grandparent += filtered[i].grandparent
-    homosexualrelationship += filtered[i].homosexual_relationship
-    inlaw += filtered[i].in_law
-    neighbor += filtered[i].neighbor
-    otherfamilymember += filtered[i].other_family_member
-    otherwiseknown += filtered[i].otherwise_known
-    parent += filtered[i].parent
-    relationshipunknown += filtered[i].relationship_unknown
-    sibling += filtered[i].sibling
-    stepchild += filtered[i].stepchild
-    spouse += filtered[i].spouse
-    stepparent += filtered[i].stepparent
-    stepsibling += filtered[i].stepsibling
-    stranger += filtered[i].stranger
-    offender += filtered[i].offender
-    exspouse += filtered[i].ex_spouse
+  for (const i in data) {
+    acquaintance += data[i].acquaintance
+    babysittee += data[i].babysittee
+    boyfriendgirlfriend += data[i].boyfriend_girlfriend
+    childboyfriendgirlfriend += data[i].child_boyfriend_girlfriend
+    child += data[i].child
+    commonlawspouse += data[i].common_law_spouse
+    employee += data[i].employee
+    employer += data[i].employer
+    friend += data[i].friend
+    grandchild += data[i].grandchild
+    grandparent += data[i].grandparent
+    homosexualrelationship += data[i].homosexual_relationship
+    inlaw += data[i].in_law
+    neighbor += data[i].neighbor
+    otherfamilymember += data[i].other_family_member
+    otherwiseknown += data[i].otherwise_known
+    parent += data[i].parent
+    relationshipunknown += data[i].relationship_unknown
+    sibling += data[i].sibling
+    stepchild += data[i].stepchild
+    spouse += data[i].spouse
+    stepparent += data[i].stepparent
+    stepsibling += data[i].stepsibling
+    stranger += data[i].stranger
+    offender += data[i].offender
+    exspouse += data[i].ex_spouse
   }
 
   const objs = [];
@@ -715,7 +710,6 @@ export const reshapeRelationship = (data, offense) => {
 
 
 export const reshapeAgeData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
   let range09 = 0;
   let range1019 = 0
   let range2029 = 0
@@ -728,19 +722,18 @@ export const reshapeAgeData = (data, offense) => {
   let range9099 = 0
   let unknown = 0;
 
-
-  for (const i in filtered) {
-    range09 += filtered[i].range_0_9
-    range1019 += filtered[i].range_10_19
-    range2029 += filtered[i].range_20_29
-    range3039 += filtered[i].range_30_39
-    range4049 += filtered[i].range_40_49
-    range5059 += filtered[i].range_50_59
-    range6069 += filtered[i].range_60_69
-    range7079 += filtered[i].range_70_79
-    range8089 += filtered[i].range_80_89
-    range9099 += filtered[i].range_90_99
-    unknown += filtered[i].unknown
+  for (const i in data) {
+    range09 += data[i].range_0_9
+    range1019 += data[i].range_10_19
+    range2029 += data[i].range_20_29
+    range3039 += data[i].range_30_39
+    range4049 += data[i].range_40_49
+    range5059 += data[i].range_50_59
+    range6069 += data[i].range_60_69
+    range7079 += data[i].range_70_79
+    range8089 += data[i].range_80_89
+    range9099 += data[i].range_90_99
+    unknown += data[i].unknown
 
   }
 
@@ -911,11 +904,10 @@ const relationships = (data, offense) => {
 }
 
 export const offensesDemo = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
   let count = 0
 
-  for (const i in filtered) {
-    count += filtered[i].offense_count
+  for (const i in data) {
+    count += data[i].offense_count
   }
   const obj = {};
   obj.count = count;
