@@ -299,9 +299,12 @@ const getLeokaRequests = params => {
     { dim: 'group' },
     { dim: 'assign-dist' },
     { dim: 'weapon' },
-    { dim: 'weapon-group' },
-    { dim: 'weapon-activity' },
   ]
+
+  if (placeType !== 'agency') {
+    slices.push({ dim: 'weapon-group' })
+    slices.push({ dim: 'weapon-activity' })
+  }
   return slices.map(s => fetchLeoka({ ...s, pageType, place, placeType, placeId }))
 }
 
