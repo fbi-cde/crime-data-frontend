@@ -20,9 +20,10 @@ export const fetchLeoka = params => dispatch => {
   dispatch(fetchingLeoka())
 
   const requests = api.getLeokaRequests(params)
+  const reduceData = (accum, next) => ({ ...accum, [next.key]: next.data })
 
   return Promise.all(requests)
-    .then(data => reshapeData(data))
+    .then(data => data.reduce(reduceData, {}))
     .then(data => dispatch(receivedLeoka(data)))
     .catch(error => dispatch(failedLeoka(error)))
 }
