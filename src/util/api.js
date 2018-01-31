@@ -81,7 +81,7 @@ const parsePoliceEmployment = ([policeEmployment]) => ({
 const fetchPoliceEmployment = (place, placeType, placeId) => {
   let peApi
   if (placeType === 'state') {
-    peApi = `police-employment/state/${placeId}`
+    peApi = `police-employment/states/${placeId}`
   } else if (placeType === 'agency') {
     peApi = `police-employment/agency/${placeId}/${place}`
   } else if (placeType === 'region') {
@@ -279,7 +279,7 @@ const fetchLeoka = ({ dim, place, placeType, placeId, pageType }) => {
         ? `agencies/${place}`
         : `states/${placeId}`
 
-  const url = `${API}/leoka/${pageType}/${dim}/count/${loc}`;
+  const url = `${API}/leoka/${pageType}/${loc}/${dim}`;
 
   const params = {
     per_page: 1000,
@@ -288,7 +288,7 @@ const fetchLeoka = ({ dim, place, placeType, placeId, pageType }) => {
 
   return get(url, params).then(d => ({
     key: `${pageType}${upperFirst(dim)}`,
-    data: d.results,
+    data: JSON.parse(d.results),
   }))
 }
 
