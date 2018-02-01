@@ -7,6 +7,7 @@ import Analytics from './components/Analytics'
 import BetaBanner from './components/BetaBanner'
 import ClearCacheBtn from './components/ClearCacheBtn'
 import Disclaimer from './components/Disclaimer'
+import NOEDisclaimer from './components/NOEDisclaimer'
 import Feedback from './components/Feedback'
 import Footer from './components/Footer'
 import Glossary from './components/Glossary'
@@ -27,7 +28,8 @@ const App = ({
 }) =>
   <div className={`site ${sidebarOpen ? 'no-scroll' : ''}`}>
     <SkipContent skipTo=".site-main" />
-    <Disclaimer />
+    {!isProd && <NOEDisclaimer />}
+    {isProd && <Disclaimer />}
     <BetaBanner onFeedbackClick={actions.showFeedback} />
     <Header location={location} />
     <main id="cde-main" className="site-main">
