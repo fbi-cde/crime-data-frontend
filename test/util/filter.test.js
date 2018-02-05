@@ -5,13 +5,13 @@ import filterUtil from '../../src/util/filter'
 describe('filter util', () => {
   describe('crime validation', () => {
     it('should return the passed in crime if it is valid', () => {
-      const { crime } = filterUtil({ crime: 'homicide' })
-      expect(crime).toEqual('homicide')
+      const { pageType } = filterUtil({ pageType: 'homicide' })
+      expect(pageType).toEqual('homicide')
     })
 
     it('should return the default crime if the supplied one is not valid', () => {
-      const { crime } = filterUtil({ crime: 'fake-crime' })
-      expect(crime).toEqual('violent-crime')
+      const { pageType } = filterUtil({ pageType: 'fake-crime', page: 'crime' })
+      expect(pageType).toEqual('violent-crime')
     })
   })
 
@@ -20,13 +20,6 @@ describe('filter util', () => {
       const { place } = filterUtil({ place: 'california' })
       expect(place).toEqual('california')
     })
-
-    /*
-    it('should return the default place if the supplied one is not valid', () => {
-      const { place } = filterUtil({ place: 'fake-place' })
-      expect(place).toEqual('united-states')
-    })
-    */
   })
 
   describe('time validation', () => {

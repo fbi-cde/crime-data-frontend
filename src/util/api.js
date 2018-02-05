@@ -71,6 +71,32 @@ const fetchResults = (key, path) =>
     results: response.results,
   }))
 
+const parsePoliceEmployment = ([policeEmployment]) => ({
+  ...policeEmployment,
+  results: policeEmployment.results.map(datum => ({
+    ...datum,
+  })),
+})
+
+const fetchPoliceEmployment = (place, placeType, placeId) => {
+  let peApi
+  if (placeType === 'state') {
+    peApi = `police-employment/state/${placeId}`
+  } else if (placeType === 'agency') {
+    peApi = `police-employment/agency/${placeId}/${place}`
+  } else if (placeType === 'region') {
+    peApi = `police-employment/region/${place}`
+  } else {
+    peApi = 'police-employment'
+  }
+  const requests = [
+    fetchResults(place || nationalKey, peApi),
+  ]
+    return Promise.all(requests).then(parsePoliceEmployment)
+}
+
+const getPoliceEmploymentRequests = filters => [fetchPoliceEmployment(filters.place, filters.placeType, filters.placeId), fetchPoliceEmployment()]
+
 const fetchArson = (place, placeId, placeType) => {
   let url
   if (placeType === 'state') {
@@ -223,7 +249,7 @@ const fetchNibrsCounts = ({ dim, place, placeType, type, placeId }) => {
 }
 
 const getNibrsCountsRequests = params => {
-  const { crime, place, placeType, placeId } = params
+  const { pageType, place, placeType, placeId } = params
 
   const slices = [
     { type: 'offender', dim: '' },
@@ -241,7 +267,44 @@ const getNibrsCountsRequests = params => {
     { type: 'offense', dim: '' },
 
   ]
-  return slices.map(s => fetchNibrsCounts({ ...s, crime, place, placeType, placeId }))
+  return slices.map(s => fetchNibrsCounts({ ...s, pageType, place, placeType, placeId }))
+}
+
+const fetchLeoka = ({ dim, place, placeType, placeId, pageType }) => {
+  const loc =
+    place === nationalKey
+      ? 'national'
+      : placeType === 'agency'
+        ? `agencies/${place}`
+        : `states/${placeId}`
+
+  const url = `${API}/leoka/${pageType}/${dim}/count/${loc}`;
+
+  const params = {
+    per_page: 1000,
+    aggregate_many: false,
+  }
+
+  return get(url, params).then(d => ({
+    key: `${pageType}${upperFirst(dim)}`,
+    data: d.results,
+  }))
+}
+
+const getLeokaRequests = params => {
+  const { pageType, place, placeType, placeId } = params
+
+  const slices = [
+    { dim: 'group' },
+    { dim: 'assign-dist' },
+    { dim: 'weapon' },
+  ]
+
+  if (placeType !== 'agency') {
+    slices.push({ dim: 'weapon-group' })
+    slices.push({ dim: 'weapon-activity' })
+  }
+  return slices.map(s => fetchLeoka({ ...s, pageType, place, placeType, placeId }))
 }
 
 export default {
@@ -252,6 +315,7 @@ export default {
   getNibrsRequests,
   fetchNibrsCounts,
   getNibrsCountsRequests,
+  getPoliceEmploymentRequests,
   getSummaryRequests,
   getUcrParticipation,
   getUcrParticipationRequests,
@@ -259,4 +323,5 @@ export default {
   getUcrRegionRequests,
   getUcrStates,
   getUcrStatesRequests,
+  getLeokaRequests,
 }

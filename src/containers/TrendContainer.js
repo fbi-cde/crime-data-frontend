@@ -38,13 +38,13 @@ class TrendContainer extends React.Component {
     const data = combinePlaces(filteredByYear, offenses)
     if (!data || data.length === 0) return <NoData />
 
-    const fname = `${filters.place}-${filters.crime}-${filters.since}-${filters.until}`
+    const fname = `${filters.place}-${filters.pageType}-${filters.since}-${filters.until}`
     const title =
-      `Reported ${pluralize(filters.crime)} in ` +
+      `Reported ${pluralize(filters.pageType)} in ` +
       `${placeName}, ${filters.since}-${filters.until}`
 
-    const readme = generateCrimeReadme({ crime: filters.crime, title })
-    const crimeNorm = filters.crime === 'rape' ? 'rape-legacy' : filters.crime
+    const readme = generateCrimeReadme({ crime: filters.pageType, title })
+    const crimeNorm = filters.pageType === 'rape' ? 'rape-legacy' : filters.pageType
     const dlData = data.map(d => {
       const placeData = places.map(p => ({ [p]: { ...d[p][crimeNorm] } }))
       return { year: d.year, ...Object.assign(...placeData) }
@@ -91,18 +91,18 @@ class TrendContainer extends React.Component {
     const isReady = !summaries.loading
 
     let otherCrimes = []
-    if (filters.crime === 'violent-crime') {
-      otherCrimes = ['homicide', 'rape', 'robbery', 'aggravated-assault']
-    } else if (filters.crime === 'property-crime') {
-      otherCrimes = ['arson', 'burglary', 'larceny', 'motor-vehicle-theft']
-    }
-    const crime = filters.crime
+    if (filters.pageType === 'violent-crime') {
+     otherCrimes = ['homicide', 'rape', 'robbery', 'aggravated-assault']
+   } else if (filters.pageType === 'property-crime') {
+     otherCrimes = ['arson', 'burglary', 'larceny', 'motor-vehicle-theft']
+}
+    const crime = filters.pageType
     const placeType = filters.placeType
     return (
       <div className="mb7">
         <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
           <h2 className="mt0 mb2 sm-mb4 fs-24 sm-fs-28 sans-serif">
-            {startCase(filters.crime)} rate in {placeType === 'region' ? 'the' : ''} {placeName}, {filters.since}-{filters.until}
+            {startCase(filters.pageType)} rate in {placeType === 'region' ? 'the' : ''} {placeName}, {filters.since}-{filters.until}
           </h2>
           <div className="bg-white">
             {this.getContent({ crime, filters, places, summaries, placeName })}
@@ -132,7 +132,7 @@ class TrendContainer extends React.Component {
           </div>
         </div>
         {isReady &&
-          <TrendSourceText crime={filters.crime} place={filters.place} placeType={filters.placeType} placeName={placeName} />}
+          <TrendSourceText crime={filters.pageType} place={filters.place} placeType={filters.placeType} placeName={placeName} />}
       </div>
     )
   }

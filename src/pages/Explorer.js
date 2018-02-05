@@ -9,6 +9,8 @@ import AboutTheData from '../components/AboutTheData'
 import AgencyChartContainer from '../containers/AgencyChartContainer'
 import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer'
 import NibrsContainer from '../containers/NibrsContainer'
+import PoliceEmploymentContainer from '../containers/PoliceEmploymentContainer'
+import LeokaContainer from '../containers/LeokaContainer'
 import NotFound from './NotFound'
 import SharingTags from '../components/SharingTags'
 import SidebarContainer from '../containers/SidebarContainer'
@@ -48,11 +50,11 @@ class Explorer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { crime } = nextProps.filters
+    const { pageType } = nextProps.filters
 
     if (this.props.filters.place !== nextProps.filters.place) {
       const filter = {};
-      filter.crime = crime;
+      filter.pageType = pageType;
       filter.place = nextProps.filters.place
       filter.placeId = generatePlaceId(nextProps.filters, this.props.region.regions, this.props.states.states);
       this.props.actions.updateApp(filter)
@@ -83,29 +85,41 @@ class Explorer extends React.Component {
   render() {
     const { actions, agencies, filters, params, region, states } = this.props
 
-    const { crime } = params
+    const { pageType } = params
     const { place, placeType } = getPlaceInfo(params)
-    const agency = placeType === 'agency' && getAgency(agencies, place)
+    const isAgency = filters.placeType === 'agency'
+    const crimePage = filters.page === 'crime'
+    const isCombinedCrime = crimePage && (filters.pageType === 'violent-crime' || filters.pageType === 'property-crime')
+
+    let agency = null
+    if (isAgency) {
+       agency = getAgency(agencies, place)
+    }
     const placeDisplay = agency ? agency.agency_name : startCase(place)
 
     // ensure app state place matches url params place
     if (filters.place && filters.place !== place) return null
 
-    // show not found page if crime or place unfamiliar
+    // show not found page if pageType or place unfamiliar
 
     if (!region.loaded || !states.loaded) {
       return <Loading />
     }
 
-    if (!offensesUtil.includes(crime) || !validateFilter(filters, region.regions, states.states)) {
-      return <NotFound />
+    if (pageType === 'crime') {
+      if (!offensesUtil.includes(pageType) || !validateFilter(filters, region.regions, states.states)) {
+        return <NotFound />
+      }
     }
 
+    if (agencies.loaded && isAgency && !agency) {
+      return <NotFound />
+    }
     return (
       <div className="site-wrapper">
         <Helmet title="CDE :: Explorer" />
         <SharingTags
-          title={`${sentenceCase(crime)} reported ${placeType === 'agency'
+          title={`${sentenceCase(pageType)} reported ${placeType === 'agency'
             ? 'by the'
             : 'in'} ${placeDisplay}`}
         />
@@ -132,13 +146,16 @@ class Explorer extends React.Component {
         <div className="site-content" id="explorer">
           <div className="container-main mx-auto px2 md-py3 lg-px3">
             <ExplorerHeaderContainer />
-            {agency && <SparklineContainer />}
-            {agency ? <AgencyChartContainer /> : <TrendContainer />}
-            <NibrsContainer />
-            <AboutTheData
-              crime={crime}
+            {crimePage && isAgency && crimePage && <SparklineContainer />}
+            {crimePage && isAgency && <AgencyChartContainer /> }
+            {crimePage && !isAgency && <TrendContainer />}
+            {crimePage && <PoliceEmploymentContainer /> }
+            {!crimePage && <LeokaContainer /> }
+            {crimePage && !isCombinedCrime && <NibrsContainer /> }
+            {crimePage && <AboutTheData
+              crime={pageType}
               onTermClick={term => actions.showTerm(term)}
-            />
+            /> }
           </div>
         </div>
       </div>

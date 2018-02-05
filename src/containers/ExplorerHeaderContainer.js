@@ -55,12 +55,12 @@ const ExplorerHeaderContainer = ({
                 states={states}
                 region={region}
               />}
-          <UcrResourcesList
-            crime={filters.crime}
-            place={filters.place}
-            placeType={filters.placeType}
-            states={states}
-          />
+              <UcrResourcesList
+                crime={filters.pageType}
+                place={filters.place}
+                placeType={filters.placeType}
+                states={states}
+              />
         </div>
         <div className="sm-col sm-col-4 xs-hide">
           <PlaceThumbnail placeName={location} coordinates={coordinates} />

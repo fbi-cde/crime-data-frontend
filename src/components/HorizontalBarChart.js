@@ -1,11 +1,11 @@
-import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import NibrsCountPercentToggle from './NibrsCountPercentToggle'
-import { formatNum, formatPerc, formatSI } from '../../util/formats'
+import HorizontalBarChartDetails from './HorizontalBarChartDetails'
 
-class NibrsTableWithBars extends React.Component {
+import { formatPerc, formatSI, formatYear } from '../util/formats'
+
+class HorizontalBarChart extends React.Component {
   state = { isCounts: false }
 
   showCounts = e => {
@@ -18,22 +18,51 @@ class NibrsTableWithBars extends React.Component {
     this.setState({ isCounts: false })
   }
 
+  createSeries = () => {
+    const { id, data, places } = this.props
+    const crimes = [id]
+    const dataByYear = data.map(d => ({ ...d, date: formatYear(d.year) }))
+    return places
+      .map(place =>
+        crimes.map(c => {
+          const values = dataByYear
+            .filter(d => d[place][c] && d[place][c].count)
+            .map(d => ({
+              date: d.date,
+              year: d.year,
+              population: d[place].population,
+              ...d[place][c],
+            }))
+          return { crime: c, place, values }
+        }),
+      )
+      .reduce((a, n) => a.concat(n), [])
+  }
+
   render() {
     const {
       data,
+      ratePer,
       id,
-      noun,
       rowLim,
-      sentenceStart,
-      sortByValue,
+      sortByKey,
+      initialYearSelected,
+      onChangeYear: handleChangeYear,
       title,
+      filters,
+      place,
+      placeName,
+      places,
     } = this.props
     const { isCounts } = this.state
 
+    const dataByYear = data.filter(d => d.year === initialYearSelected)
+    const dataDetails = dataByYear[0][place][id].details
+
     const agg = (a, b) => a + b.count
-    const total = data.reduce(agg, 0)
-    let dataMunged = [...data.filter(d => d.key)]
-    dataMunged.sort((a, b) => +b.count - +a.count)
+    const total = dataDetails.reduce(agg, 0)
+
+    let dataMunged = [...dataDetails.filter(d => d.key)]
 
     if (dataMunged.length > rowLim) {
       const other = dataMunged.slice(rowLim)
@@ -58,30 +87,48 @@ class NibrsTableWithBars extends React.Component {
       }
     })
 
-    if (!sortByValue) dataFormatted.sort((a, b) => a.key > b.key)
+    if (sortByKey) dataFormatted.sort((a, b) => a.key > b.key)
+
+    const series = this.createSeries()
+
+    const active = series.map(s => {
+      const { values } = s
+      const activeValue = initialYearSelected
+        ? values.find(v => v.year === initialYearSelected)
+        : values[values.length - 1]
+
+      return {
+        crime: s.crime,
+        place: s.place,
+        ...activeValue,
+      }
+    })
+
+    const colors = ['#ff5e50', '#95aabc', '#52687d']
+    const subject = id
 
     return (
       <div id={id}>
+        <HorizontalBarChartDetails
+          active={active}
+          ratePer={ratePer}
+          colors={colors}
+          subject={subject}
+          keys={places}
+          since={filters.since}
+          onChangeYear={handleChangeYear}
+          until={filters.until}
+          placeName={placeName}
+          placeType={filters.placeType}
+        />
         <div className="clearfix">
           <div className="left">
             <div className="blue bold">
               {title}
             </div>
           </div>
-          <div className="right">
-            <NibrsCountPercentToggle
-              ariaControls={id}
-              isCounts={isCounts}
-              showCounts={this.showCounts}
-              showPercents={this.showPercents}
-            />
-          </div>
         </div>
         <table className="mt1 mb2 table-fixed" id={id}>
-          {title &&
-            <caption className="hide">
-              {title}
-            </caption>}
           <thead className="v-hide">
             <tr style={{ lineHeight: '16px' }}>
               <th style={{ width: '15%' }} />
@@ -114,26 +161,20 @@ class NibrsTableWithBars extends React.Component {
             )}
           </tbody>
         </table>
-        <div className="mt-tiny fs-14 mb3">
-          {sentenceStart} was reported for{' '}
-          <span className="bold red">{formatNum(total)}</span> {pluralize(noun)}.
-        </div>
       </div>
     )
   }
 }
 
-NibrsTableWithBars.defaultProps = {
-  noun: 'incident',
+HorizontalBarChart.defaultProps = {
   rowLim: 12,
 }
 
-NibrsTableWithBars.propTypes = {
+HorizontalBarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string.isRequired,
-  noun: PropTypes.string.isRequired,
   rowLim: PropTypes.number.isRequired,
   title: PropTypes.string,
 }
 
-export default NibrsTableWithBars
+export default HorizontalBarChart
