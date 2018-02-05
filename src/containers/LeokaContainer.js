@@ -5,7 +5,6 @@ import { getPlaceInfo } from '../util/place'
 
 class LeokaContainer extends React.Component {
   render() {
-    console.log('LeokaContainer Render')
     return (<div>Test</div>)
   }
 }
