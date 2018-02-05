@@ -45,6 +45,7 @@ class LeokaContainer extends React.Component {
 
 
   render() {
+<<<<<<< HEAD
     const { leoka, place, since, until, placeType, pageType, isAgency, agency } = this.props
     if (leoka.loading === true) return <Loading />
     if (leoka.error) return <ErrorCard error={leoka.error} />
@@ -96,6 +97,9 @@ class LeokaContainer extends React.Component {
           </div>
       </div>
     )
+=======
+    return (<div>Test</div>)
+>>>>>>> master
   }
 }
 

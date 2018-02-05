@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import CrimeTypeFilter from '../components/CrimeTypeFilter'
 import LocationFilter from '../components/LocationFilter'
 import TimePeriodFilter from '../components/TimePeriodFilter'
-import LeokaTypeFilter from '../components/LeokaTypeFilter'
 import { hideSidebar } from '../actions/sidebar'
 import { getAgency, oriToState } from '../util/agencies'
 import { nationalKey } from '../util/usa'
@@ -52,12 +51,6 @@ const SidebarContainer = ({
         {...filters}
       />
       <CrimeTypeFilter
-        ariaControls={ariaControls}
-        onChange={onChange}
-        selected={crime}
-      />
-
-      <LeokaTypeFilter
         ariaControls={ariaControls}
         onChange={onChange}
         selected={crime}

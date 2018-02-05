@@ -9,6 +9,7 @@ import url from 'url'
 import http from 'axios'
 import bodyParser from 'body-parser'
 import express from 'express'
+import basicAuth from 'express-basic-auth'
 import gzipStatic from 'connect-gzip-static'
 import helmet from 'helmet'
 import React from 'react'
@@ -33,6 +34,7 @@ import { createIssue } from './util/github'
 import history from './util/history'
 
 const isProd = process.env.NODE_ENV === 'production'
+const isMaster = process.env.CDE_API === 'https://crime-data-api-master.fr.cloud.gov'
 
 const ENV = createEnv()
 
@@ -59,6 +61,14 @@ const acceptHostname = hostname => {
 }
 
 const app = express()
+
+if (isMaster) {
+  app.use(basicAuth({
+    users: { public: 'cilbup' },
+    challenge: true,
+    realm: 'crime-data-explorer-master'
+  }))
+}
 
 const publicDirPath = path.join(__dirname, '..', 'public')
 app.use((req, res, next) => {
