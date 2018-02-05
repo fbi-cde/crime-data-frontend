@@ -78,9 +78,8 @@ class TableChart extends React.Component {
           percentFmt: formatPerc(p),
         })
     }
-
-
     console.log('dataFormatted:', dataFormatted)
+
     return (
       <div id={id}>
         <div className="clearfix">
