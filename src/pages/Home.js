@@ -89,8 +89,8 @@ class Home extends React.Component {
   render() {
     const { statesView } = this.state
     const { region, states } = this.props
-    const { crime, place, placeType } = this.props.filters
-    const isValid = !!(crime && place) || false
+    const { place, placeType } = this.props.filters
+    const isValid = true
     const usState = placeType === 'agency' ? oriToState(place) : place
     let mapSelected = [];
     if (place && placeType) {
@@ -184,6 +184,12 @@ class Home extends React.Component {
             </div>
             <div className="py4 sm-py7 sm-col-9 mx-auto">
               <UsaMap mapClick={this.handleMapClick} place={mapSelected} stateView={statesView} states={states} region={region} />
+            </div>
+            <div className="clearfix mxn2 mb4 flex">
+               <div className="inline-block clearfix mx-auto">
+                  <button className="left btn btn-outline  x-group-item rounded-left" value='states' onClick={this.handleMapTypeChange} >States</button>
+                  <button className="left btn btn-outline x-group-item rounded-right" value='regions' onClick={this.handleMapTypeChange} >Regions</button>
+                </div>
             </div>
             <div className="mb7 sm-hide md-hide lg-hide">
               <button
