@@ -18,3 +18,4 @@ exclude_paths:
 - build/**/*
 - test/**/*
 - /src/util/nibrsCounts.js
+- /src/pages/Home.js
