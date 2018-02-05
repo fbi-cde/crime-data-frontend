@@ -272,12 +272,15 @@ const getNibrsCountsRequests = params => {
 }
 
 const fetchLeoka = ({ dim, place, placeType, placeId, pageType }) => {
-  const loc =
-    place === nationalKey
-      ? 'national'
-      : placeType === 'agency'
-        ? `agencies/${place}`
-        : `states/${placeId}`
+  let loc
+
+    if (placeType === 'state') {
+      loc = `/states/${placeId}`
+    } else if (placeType === 'region') {
+      loc = `/regions/${place}`
+    } else {
+        loc = '/national'
+    }
 
   const url = `${API}/leoka/${pageType}/${loc}/${dim}`;
 
