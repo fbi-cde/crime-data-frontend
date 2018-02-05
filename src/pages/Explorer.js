@@ -115,7 +115,6 @@ class Explorer extends React.Component {
     if (agencies.loaded && isAgency && !agency) {
       return <NotFound />
     }
-    console.log('Explorer is Crime Type:', crimePage)
     return (
       <div className="site-wrapper">
         <Helmet title="CDE :: Explorer" />

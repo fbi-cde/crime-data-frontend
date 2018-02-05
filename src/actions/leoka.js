@@ -1,6 +1,5 @@
 import { LEOKA_FAILED, LEOKA_FETCHING, LEOKA_RECEIVED } from './constants'
 import api from '../util/api'
-import { reshapeData } from '../util/leoka'
 
 export const failedLeoka = error => ({
   type: LEOKA_FAILED,

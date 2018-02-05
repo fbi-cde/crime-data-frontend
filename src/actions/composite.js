@@ -41,7 +41,6 @@ export const updateApp = (change, router) => dispatch => {
 
   if (router) {
     const loc = createNewLocation({ change, router })
-    console.log('Location:', loc)
     if (window.caches) {
       caches
         .open('crime-data-explorer')
