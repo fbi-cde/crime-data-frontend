@@ -107,6 +107,7 @@ const fetchArson = (place, placeId, placeType) => {
     url = `${API}/arson/national?per_page=50`
   }
 
+
   return get(url).then(({ results }) =>
     results.map(d => ({ year: d.year, arson: d.actual })),
   )
@@ -132,7 +133,7 @@ const fetchAggregates = (place, placeType, placeId) => {
 
   const requests = [
     fetchResults(place || nationalKey, estimatesApi),
-    fetchArson(place, placeId, placeType),
+    fetchArson(place),
   ]
 
   return Promise.all(requests).then(parseAggregates)
@@ -274,11 +275,11 @@ const fetchLeoka = ({ dim, place, placeType, placeId, pageType }) => {
   let loc
 
     if (placeType === 'state') {
-      loc = `/states/${placeId}`
+      loc = `states/${placeId}`
     } else if (placeType === 'region') {
-      loc = `/regions/${place}`
+      loc = `regions/${place}`
     } else {
-        loc = '/national'
+        loc = 'national'
     }
 
   const url = `${API}/leoka/${pageType}/${loc}/${dim}`;
@@ -306,7 +307,14 @@ const getLeokaRequests = params => {
   if (placeType !== 'agency') {
     slices.push({ dim: 'weapon-group' })
     slices.push({ dim: 'weapon-activity' })
+    slices.push({ dim: 'weapon-injury' })
   }
+
+  if (placeType === 'national') {
+    slices.push({ dim: 'time' })
+  }
+
+
   return slices.map(s => fetchLeoka({ ...s, pageType, place, placeType, placeId }))
 }
 

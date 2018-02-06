@@ -45,8 +45,7 @@ class LeokaContainer extends React.Component {
 
 
   render() {
-<<<<<<< HEAD
-    const { leoka, place, since, until, placeType, pageType, isAgency, agency } = this.props
+    const { leoka, place, since, until, pageType, isAgency, agency } = this.props
     if (leoka.loading === true) return <Loading />
     if (leoka.error) return <ErrorCard error={leoka.error} />
     const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
@@ -97,9 +96,6 @@ class LeokaContainer extends React.Component {
           </div>
       </div>
     )
-=======
-    return (<div>Test</div>)
->>>>>>> master
   }
 }
 

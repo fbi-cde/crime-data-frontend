@@ -9,25 +9,27 @@ class LeokaTypeFilter extends React.Component {
     const opts = [];
     Object.keys(leokaTypes).forEach(p => {
       const isActive = leokaTypes[p].id === slugify(this.props.selected)
-      opts.push(
-        <label
-          key={leokaTypes[p].id}
-          className={`block cursor-pointer hover-bg-blue-light rounded px3 sm-lh-30
-              ${isActive ? 'bg-blue white bold hover-blue rounded px3 sm-lh-30' : ''}`}
-          htmlFor={leokaTypes[p].id}
-        >
-          <input
-            aria-controls={this.props.ariaControls}
-            className="hide"
-            checked={isActive}
-            id={leokaTypes[p].id}
-            name="crime"
-            type="radio"
-            onChange={e => this.props.onChange({ pageType: e.target.value, page: 'leoka' })}
-            value={leokaTypes[p].id}
-          />
-          {leokaTypes[p].text}
-        </label>)
+      if (leokaTypes[p].enabled) {
+        opts.push(
+          <label
+            key={leokaTypes[p].id}
+            className={`block cursor-pointer hover-bg-blue-light rounded px3 sm-lh-30
+                ${isActive ? 'bg-blue white bold hover-blue rounded px3 sm-lh-30' : ''}`}
+            htmlFor={leokaTypes[p].id}
+          >
+            <input
+              aria-controls={this.props.ariaControls}
+              className="hide"
+              checked={isActive}
+              id={leokaTypes[p].id}
+              name="crime"
+              type="radio"
+              onChange={e => this.props.onChange({ pageType: e.target.value, page: 'leoka' })}
+              value={leokaTypes[p].id}
+            />
+            {leokaTypes[p].text}
+          </label>)
+        }
     });
 
     return opts;

@@ -8,6 +8,7 @@ import TimePeriodFilter from '../components/TimePeriodFilter'
 import { hideSidebar } from '../actions/sidebar'
 import { getAgency, oriToState } from '../util/agencies'
 import { nationalKey } from '../util/usa'
+import LeokaTypeFilter from '../components/LeokaTypeFilter'
 
 const SidebarContainer = ({
   actions,
@@ -55,6 +56,12 @@ const SidebarContainer = ({
         onChange={onChange}
         selected={crime}
       />
+
+      <LeokaTypeFilter
+       ariaControls={ariaControls}
+       onChange={onChange}
+       selected={crime}
+       />
     </div>
   </nav>
 
