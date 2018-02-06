@@ -49,7 +49,7 @@ const CrimeTypeFilter = ({ ariaControls, onChange, selected }) =>
                   checked={isActive}
                   id={id}
                   name="crime"
-                  onChange={e => onChange({ crime: e.target.value })}
+                  onChange={e => onChange({ crime: e.target.value, page: 'crime' })}
                   type="radio"
                   value={id}
                 />

@@ -21,6 +21,8 @@ const dimensionEndpoints = {
 
 const getAgency = ori => get(`${API}/agencies/${ori}`)
 
+const getAsrMaleByAge = ( level, levelValue ) => get(`${API}/asr/male/age/${level}/${levelValue}`)
+
 const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
   const loc =
     place === nationalKey
@@ -259,4 +261,5 @@ export default {
   getUcrRegionRequests,
   getUcrStates,
   getUcrStatesRequests,
+  getAsrMaleByAge,
 }

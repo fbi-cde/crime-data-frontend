@@ -9,6 +9,7 @@ import AboutTheData from '../components/AboutTheData'
 import AgencyChartContainer from '../containers/AgencyChartContainer'
 import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer'
 import NibrsContainer from '../containers/NibrsContainer'
+import AsrContainer from '../containers/AsrContainer'
 import NotFound from './NotFound'
 import SharingTags from '../components/SharingTags'
 import SidebarContainer from '../containers/SidebarContainer'
@@ -87,6 +88,8 @@ class Explorer extends React.Component {
     const { place, placeType } = getPlaceInfo(params)
     const agency = placeType === 'agency' && getAgency(agencies, place)
     const placeDisplay = agency ? agency.agency_name : startCase(place)
+    const crimePage = filters.page === 'crime'
+    const asrPage = filters.page === 'asr'
 
     // ensure app state place matches url params place
     if (filters.place && filters.place !== place) return null
@@ -132,9 +135,11 @@ class Explorer extends React.Component {
         <div className="site-content" id="explorer">
           <div className="container-main mx-auto px2 md-py3 lg-px3">
             <ExplorerHeaderContainer />
-            {agency && <SparklineContainer />}
-            {agency ? <AgencyChartContainer /> : <TrendContainer />}
-            <NibrsContainer />
+            { crimePage && agency && <SparklineContainer /> }
+            { crimePage && agency && <AgencyChartContainer /> }
+            { crimePage && !agency && <TrendContainer/> }
+            { crimePage && <NibrsContainer /> }
+            { asrPage && <AsrContainer/> }
             <AboutTheData
               crime={crime}
               onTermClick={term => actions.showTerm(term)}
