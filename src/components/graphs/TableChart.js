@@ -64,8 +64,6 @@ class TableChart extends React.Component {
     const total = dataFormattedByKey.reduce(agg, 0)
     dataFormattedByKey.sort((a, b) => +b.value - +a.value)
 
-    console.log('dataFormattedByKey:', dataFormattedByKey)
-    console.log('State Key:', this.state.key)
 
     for (let i = 0; i < dataFormattedByKey.length; i++) {
       const d = dataFormattedByKey[i]
@@ -78,7 +76,6 @@ class TableChart extends React.Component {
           percentFmt: formatPerc(p),
         })
     }
-    console.log('dataFormatted:', dataFormatted)
 
     return (
       <div id={id}>

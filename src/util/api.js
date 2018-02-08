@@ -273,8 +273,9 @@ const getNibrsCountsRequests = params => {
 
 const fetchLeoka = ({ dim, place, placeType, placeId, pageType }) => {
   let loc
-
-    if (placeType === 'state') {
+    if (placeType === 'agency') {
+      loc = `agencies/${place}`
+    } else if (placeType === 'state') {
       loc = `states/${placeId}`
     } else if (placeType === 'region') {
       loc = `regions/${place}`
@@ -292,21 +293,21 @@ const fetchLeoka = ({ dim, place, placeType, placeId, pageType }) => {
   return get(url, params).then(d => ({
     key: `${pageType}${upperFirst(dim)}`,
     data: JSON.parse(d.results),
-  }))
+    }));
 }
 
 const getLeokaRequests = params => {
   const { pageType, place, placeType, placeId } = params
 
   const slices = [
-    { dim: 'group' },
     { dim: 'assign-dist' },
     { dim: 'weapon' },
+    { dim: 'weapon-activity' },
   ]
 
   if (placeType !== 'agency') {
+    slices.push({ dim: 'group' })
     slices.push({ dim: 'weapon-group' })
-    slices.push({ dim: 'weapon-activity' })
     slices.push({ dim: 'weapon-injury' })
   }
 
