@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
+import BarChart from '../components/graphs/BarChart'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import { getAgency } from '../util/agencies'
@@ -16,10 +17,12 @@ class AsrContainer extends React.Component {
   }
 
   componentDidMount() {
+    console.log("componentDidMount")
     const { filters } = this.props
     const place = filters.placeType
     const placeValue = place==='agency'?filters.place:filters.placeId
     api.getAsrMaleByAge(place,placeValue).then(asrData => {
+      console.log("asrMount="+JSON.stringify(asrData))
       this.setState({ asrData })
     })
   }
@@ -33,13 +36,14 @@ class AsrContainer extends React.Component {
   }) => {
     const { asrData } = this.state
     const asrString = JSON.stringify(asrData)
+    console.log("asr="+asrString)
 
     const places = [place]
     if (place !== nationalKey) places.push(nationalKey)
 
     return (
       <div>
-        { asrString }
+        <BarChart data={asrData} year={2016}/>
       </div>
     )
   }
