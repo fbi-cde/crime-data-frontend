@@ -1,4 +1,5 @@
 import { updateFilters } from './filters'
+import { fetchAsr } from './asr'
 import { fetchNibrsCounts } from '../actions/nibrsCounts'
 import { fetchSummaries } from '../actions/summary'
 import { fetchUcrParticipation } from '../actions/participation'
@@ -22,6 +23,7 @@ const fetchData = () => (dispatch, getState) => {
     if (shouldFetchNibrs(filters)) {
       // dispatch(fetchNibrs(filters))
       dispatch(fetchNibrsCounts(filters))
+      dispatch(fetchAsr(filters))
     }
   }
 }

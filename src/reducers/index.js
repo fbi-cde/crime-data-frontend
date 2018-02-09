@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 import agencies from './agencies'
+import asr from './asr'
 import feedback from './feedback'
 import filters from './filters'
 import glossary from './glossary'
@@ -15,6 +16,7 @@ import nibrsCounts from './nibrsCounts'
 
 export default combineReducers({
   agencies,
+  asr,
   feedback,
   filters,
   glossary,

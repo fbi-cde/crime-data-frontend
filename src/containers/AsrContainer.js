@@ -16,17 +16,6 @@ class AsrContainer extends React.Component {
     this.state = { asrData: {} }
   }
 
-  componentDidMount() {
-    console.log("componentDidMount")
-    const { filters } = this.props
-    const place = filters.placeType
-    const placeValue = place==='agency'?filters.place:filters.placeId
-    api.getAsrMaleByAge(place,placeValue).then(asrData => {
-      console.log("asrMount="+JSON.stringify(asrData))
-      this.setState({ asrData })
-    })
-  }
-
   getContent = ({
     place,
     placeDisplay,
@@ -34,16 +23,13 @@ class AsrContainer extends React.Component {
     until,
     filters,
   }) => {
-    const { asrData } = this.state
-    const asrString = JSON.stringify(asrData)
-    console.log("asr="+asrString)
 
     const places = [place]
     if (place !== nationalKey) places.push(nationalKey)
-
+//<BarChart data={asrData} year={2016}/>
     return (
       <div>
-        <BarChart data={asrData} year={2016}/>
+
       </div>
     )
   }

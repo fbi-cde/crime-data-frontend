@@ -21,7 +21,24 @@ const dimensionEndpoints = {
 
 const getAgency = ori => get(`${API}/agencies/${ori}`)
 
-const getAsrMaleByAge = ( level, levelValue ) => get(`${API}/asr/male/age/${level}/${levelValue}`)
+const parseAsr = ([asr]) => ({
+  ...asr,
+  results: asr.results.map(datum => ({
+    ...datum,
+  })),
+})
+
+const fetchAsr = (place, placeType, placeId) => {
+  const placeValue = placeType==='agency'?place:placeId
+  let asrApi = `asr/male/age/${placeType}/${placeValue}`
+
+  const requests = [
+    fetchResults(place || nationalKey, asrApi),
+  ]
+    return Promise.all(requests).then(parseAsr)
+}
+
+const getAsrRequests = filters => [fetchAsr(filters.place, filters.placeType, filters.placeId), fetchAsr()]
 
 const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
   const loc =
@@ -250,6 +267,7 @@ export default {
   fetchAggregates,
   fetchAgencyAggregates,
   getAgency,
+  getAsrRequests,
   fetchNibrs,
   getNibrsRequests,
   fetchNibrsCounts,
@@ -261,5 +279,4 @@ export default {
   getUcrRegionRequests,
   getUcrStates,
   getUcrStatesRequests,
-  getAsrMaleByAge,
 }
