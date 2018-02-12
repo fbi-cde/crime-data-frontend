@@ -13,10 +13,10 @@ import api from '../util/api'
 class AsrContainer extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { asrData: {} }
   }
 
   getContent = ({
+    asr,
     place,
     placeDisplay,
     since,
@@ -26,16 +26,16 @@ class AsrContainer extends React.Component {
 
     const places = [place]
     if (place !== nationalKey) places.push(nationalKey)
-//<BarChart data={asrData} year={2016}/>
+
     return (
       <div>
-
+        <BarChart data={asr} year={2016}/>
       </div>
     )
   }
 
   render() {
-    const { agency, isAgency, place, placeType, since, until, filters } = this.props
+    const { agency, isAgency, asr, place, placeType, since, until, filters } = this.props
 
     const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
 
@@ -45,7 +45,7 @@ class AsrContainer extends React.Component {
           <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
             {placeDisplay} Arrest Data
           </h2>
-          {this.getContent({ place, placeType, placeDisplay, since, until, filters })}
+          {this.getContent({ asr, place, placeType, placeDisplay, since, until, filters })}
         </div>
       </div>
     )
@@ -59,7 +59,7 @@ AsrContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters }) => {
+const mapStateToProps = ({ agencies, asr, filters }) => {
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -67,6 +67,7 @@ const mapStateToProps = ({ agencies, filters }) => {
 
   return {
     filters,
+    asr,
     agency,
     isAgency,
     place,
