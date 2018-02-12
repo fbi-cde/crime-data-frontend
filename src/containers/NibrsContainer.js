@@ -12,136 +12,172 @@ import parseNibrsCounts from '../util/nibrsCounts'
 import { getAgency, oriToState } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import lookupUsa from '../util/usa'
+import { rangeYears } from '../util/years'
+
 import ucrParticipation, {
   shouldFetchNibrs as shouldShowNibrs,
 } from '../util/participation'
 
-const initialNibrsYear = ({ place, placeType, since }) => {
-  const placeNorm = placeType === 'agency' ? oriToState(place) : place
-  const participation = ucrParticipation(placeNorm)
-  const initYear = participation && participation.nibrs['initial-year']
+class NibrsContainer extends React.Component {
 
-  if (initYear && initYear > since) return initYear
-  return since
-}
+  constructor(props) {
+    super(props)
+    const { until } = props
+    this.state = { yearSelected: until }
+  }
 
-const filterNibrsData = (data, { since, until }) => {
-  if (!data) return false
+  updateYear = year => {
+    this.setState({ yearSelected: year })
+  }
 
-  const filtered = {}
-  Object.keys(data).forEach(key => {
-    filtered[key] = data[key].filter(d => {
-      const year = parseInt(d.data_year, 10)
-      return year >= since && year <= until
+  initialNibrsYear(place, placeType, since) {
+    const placeNorm = placeType === 'agency' ? oriToState(place) : place
+    const participation = ucrParticipation(placeNorm)
+    const initYear = participation && participation.nibrs['initial-year']
+
+    if (initYear && initYear > since) return initYear
+    return since
+  }
+
+  filterNibrsData(data, since, until) {
+    if (!data) return false
+
+    const filtered = {}
+    Object.keys(data).forEach(key => {
+      filtered[key] = data[key].filter(d => {
+        const year = parseInt(d.data_year, 10)
+        return year >= since && year <= until
+      })
     })
-  })
-  return filtered
-}
+    return filtered
+  }
 
-const NibrsContainer = ({
-  agency,
-  pageType,
-  isAgency,
-  nibrsCounts,
-  participation,
-  place,
-  placeType,
-  since,
-  until,
-  states,
-}) => {
-  if (
-    (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
-    !shouldShowNibrs({ pageType, place, placeType }, states)
-  ) {
-    return null
-}
+  render() {
+     const {
+      agency,
+      pageType,
+      isAgency,
+      nibrsCounts,
+      participation,
+      place,
+      placeType,
+      since,
+      until,
+      states,
+    } = this.props
 
-  const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
-  const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
-  const { data, error } = nibrsCounts
+    if (
+      (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
+      !shouldShowNibrs({ pageType, place, placeType }, states)
+    ) {
+      return null
+    }
 
-  const isReady = nibrsCounts.loaded
-  const isLoading = nibrsCounts.loading
-  let totalCount = 0
-  let content = null
+    const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
+    const nibrsFirstYear = this.initialNibrsYear(place, placeType, since)
+    const { data, error } = nibrsCounts
+
+    const isReady = nibrsCounts.loaded
+    const isLoading = nibrsCounts.loading
+    let totalCount = 0
+    let content = null
+    const yrRange = rangeYears(nibrsFirstYear, until);
 
 
-  if (error) content = <ErrorCard error={error} />
-  else if (isReady) {
-    const filteredData = filterNibrsData(data, { since, until })
+    if (error) content = <ErrorCard error={error} />
+    else if (isReady) {
+      const filteredData = this.filterNibrsData(data, since, until)
 
-    const dataParsed = parseNibrsCounts(filteredData, pageType)
+      const dataParsed = parseNibrsCounts(filteredData, pageType)
 
-     const offenseObj = dataParsed
-      .find(d => d.title === 'Offenses')
+       const offenseObj = dataParsed
+        .find(d => d.title === 'Offenses')
 
-    totalCount = offenseObj.data.count
-    let displayCards = true
-    if (totalCount === 0) { displayCards = false }
+      totalCount = offenseObj.data.count
+      let displayCards = true
+      if (totalCount === 0) { displayCards = false }
 
-    content = (
-      <div className="clearfix mxn1">
-        {displayCards && dataParsed.filter(d => d.title !== 'Offenses').map((d, i) => {
-          const cls = i % 2 === 0 ? 'clear-left' : ''
-          return (
-            <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
-              <NibrsCard
-                crime={pageType}
-                place={place}
-                placeType={placeType}
-                since={nibrsFirstYear}
-                until={until}
-                {...d}
-              />
+      content = (
+        <div className="clearfix mxn1">
+          {displayCards && dataParsed.filter(d => d.title !== 'Offenses').map((d, i) => {
+            const cls = i % 2 === 0 ? 'clear-left' : ''
+            return (
+              <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
+                <NibrsCard
+                  crime={pageType}
+                  place={place}
+                  placeType={placeType}
+                  since={nibrsFirstYear}
+                  until={until}
+                  {...d}
+                />
+              </div>
+            )
+          })}
+        </div>
+      )
+    }
+
+    return (
+      <div className="mb6">
+        <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
+          <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
+            {startCase(pageType)} incident details reported by {placeDisplay}
+          </h2>
+          {isLoading && <Loading />}
+          {isReady &&
+            <div className='mb3'>
+              <label htmlFor="year-selected" className="hide">
+                Year selected
+              </label>
+              <select
+                className="field field-sm select select-dark col-10"
+                id="year-selected"
+                onChange={this.updateYear}
+                value={this.state.yearSelected}
+              >
+                {yrRange.map((y, i) =>
+                  <option key={i}>
+                    {y}
+                  </option>,
+                )}
+              </select>
             </div>
-          )
-        })}
+          }
+          {isReady &&
+            <NibrsIntro
+              crime={pageType}
+              isAgency={isAgency}
+              participation={participation}
+              place={place}
+              placeDisplay={placeDisplay}
+              totalCount={totalCount}
+              selectedYear={this.state.yearSelected}
+            />}
+        </div>
+        {content}
+        {isReady &&
+          <div>
+            <div className="serif italic fs-12">
+              Source: Reported <NibrsTerm size="sm" /> data from {placeDisplay}.
+            </div>
+            <div className="serif italic fs-12">
+              Footnotes:
+            </div>
+            <div className="serif italic fs-12">
+              The complexity of NIBRS data presents unique impediments to interconnecting
+              all facets of the information collected. In instances of multiple
+              offenders, for example, the Crime Data Explorer currently links an offender
+              to only one offense—the first listed. The same is true for incidents
+              involving multiple victims. The Uniform Crime Reporting Program is
+              working hard to improve these specific functions within the Crime Data
+              Explorer so that presentations in the coming months will fully encompass
+              all aspects of the NIBRS data.
+            </div>
+          </div>}
       </div>
     )
   }
-
-  return (
-    <div className="mb6">
-      <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
-        <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-          {startCase(pageType)} incident details reported by {placeDisplay}
-        </h2>
-        {isLoading && <Loading />}
-        {isReady &&
-          <NibrsIntro
-            crime={pageType}
-            isAgency={isAgency}
-            nibrsFirstYear={nibrsFirstYear}
-            participation={participation}
-            place={place}
-            placeDisplay={placeDisplay}
-            totalCount={totalCount}
-            until={until}
-          />}
-      </div>
-      {content}
-      {isReady &&
-        <div>
-          <div className="serif italic fs-12">
-            Source: Reported <NibrsTerm size="sm" /> data from {placeDisplay}.
-          </div>
-          <div className="serif italic fs-12">
-            Footnotes:
-          </div>
-          <div className="serif italic fs-12">
-            The complexity of NIBRS data presents unique impediments to interconnecting
-            all facets of the information collected. In instances of multiple
-            offenders, for example, the Crime Data Explorer currently links an offender
-            to only one offense—the first listed. The same is true for incidents
-            involving multiple victims. The Uniform Crime Reporting Program is
-            working hard to improve these specific functions within the Crime Data
-            Explorer so that presentations in the coming months will fully encompass
-            all aspects of the NIBRS data.
-          </div>
-        </div>}
-    </div>
-  )
 }
 
 NibrsContainer.propTypes = {
@@ -157,6 +193,7 @@ NibrsContainer.propTypes = {
   until: PropTypes.number.isRequired,
   states: PropTypes.object.isRequired,
 }
+
 
 const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
   const { since, until } = filters
