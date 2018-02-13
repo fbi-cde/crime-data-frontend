@@ -3,7 +3,7 @@ import flatten from 'lodash.flatten'
 import range from 'lodash.range'
 
 export const get = (url, params = {}) =>
-  http.get(url, { params }).then(f => f.data)
+  http.get(url, { params }).then(f => f.data).catch(e => console.error(e))
 
 export const getAll = (url, params = {}) => {
   const all = get(url, params)
