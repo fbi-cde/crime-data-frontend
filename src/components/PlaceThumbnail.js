@@ -38,6 +38,7 @@ class PlaceThumbnail extends React.Component {
     const geoStates = feature(usa, usa.objects.units).features
     const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
     const actives = []
+    console.log('placethumnnail Select handleChange(): Using State ABBR')
 
     if (placeType === 'region') {
       const regionStates = lookupStatesByRegion(states.states, lookupRegionByName(region.regions, place).region_code)
