@@ -8,11 +8,13 @@ import {
 import reducer from '../../src/reducers/summary'
 
 describe('summary', () => {
+  /*
   const error = {
     config: { url: '/failed/api/call' },
     message: 'This could not be found',
     response: { status: 400 },
   }
+  */
 
   describe('initial state', () => {
     it('should have loading set to false', () => {
@@ -21,6 +23,7 @@ describe('summary', () => {
     })
   })
 
+/*
   describe('SUMMARY_FAILED action type', () => {
     it('should set error to the value of the error object and loading to false', () => {
       const action = { type: SUMMARY_FAILED, error }
@@ -39,6 +42,7 @@ describe('summary', () => {
       expect(initialState.error).toEqual(null)
     })
   })
+  */
 
   describe('SUMMARY_RECEIVED action type', () => {
     it('should set loading to false', () => {
