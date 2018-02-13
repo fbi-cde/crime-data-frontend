@@ -33,8 +33,8 @@ class DisplayCard extends React.Component {
       }
 
       return (
-        <div className="p2 sm-p3 bg-white black">
-          <h2 className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
+        <div className="bg-white p2">
+          <h2 className="mt0 mb2 sm-mb4 fs-18 sans-serif">
             {data.noun}
           </h2>
           {charts}

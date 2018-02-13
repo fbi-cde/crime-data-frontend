@@ -42,21 +42,22 @@ class NibrsContainer extends React.Component {
     const cards = []
     let cnt = -1;
     Object.keys(data).forEach(d => {
+      cnt += 1;
       const obj = data[d]
       if (d.includes('victim')) { obj.noun = `Victim ${obj.noun}` } else if (d.includes('offender')) { obj.noun = `Offender ${obj.noun}` }
       const cls = cnt % 2 === 0 ? 'clear-left' : ''
-      cnt += 1;
       if (d !== 'offenseCount') {
         cards.push(
-        <div key={cnt} className={`col col-12 sm-col-12 mb2 px1 ${cls}`}>
+        <div key={cnt} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
           <DisplayCard
             data={obj}
             place={place}
             year={this.state.yearSelected}
           />
         </div>)
-}
+      }
     })
+
     return cards
 }
 
@@ -133,7 +134,9 @@ class NibrsContainer extends React.Component {
                 selectedYear={this.state.yearSelected}
               />}
           </div>
-          {this.getCards(data, place)}
+          <div className="clearfix mxn1">
+           {this.getCards(data, place)}
+          </div>
           {isReady &&
             <div>
               <div className="serif italic fs-12">

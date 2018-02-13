@@ -21,50 +21,6 @@ const dimensionEndpoints = {
 
 const getAgency = ori => get(`${API}/agencies/${ori}`)
 
-const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
-  const loc =
-    place === nationalKey
-      ? 'national'
-      : placeType === 'agency'
-        ? `agencies/${place}`
-        : `states/${placeId}`
-
-  const field = dimensionEndpoints[dim] || dim
-  const fieldPath = dim === 'offenseName' ? field : `${field}/offenses`
-  const url = `${API}/${type}s/count/${loc}/${fieldPath}`
-
-  const params = {
-    per_page: 50,
-    aggregate_many: false,
-    explorer_offense: mapToApiOffense(crime),
-  }
-
-  return get(url, params).then(d => ({
-    key: `${type}${upperFirst(dim)}`,
-    data: d.results,
-  }))
-}
-
-const getNibrsRequests = params => {
-  const { crime, place, placeType, placeId } = params
-
-  const slices = [
-    { type: 'offender', dim: 'ageNum' },
-    { type: 'offender', dim: 'ethnicity' },
-    { type: 'offender', dim: 'raceCode' },
-    { type: 'offender', dim: 'sexCode' },
-    { type: 'offense', dim: 'locationName' },
-    { type: 'offense', dim: 'offenseName' },
-    { type: 'victim', dim: 'ageNum' },
-    { type: 'victim', dim: 'ethnicity' },
-    { type: 'victim', dim: 'raceCode' },
-    { type: 'victim', dim: 'sexCode' },
-    { type: 'victim', dim: 'relationship' },
-  ]
-
-  return slices.map(s => fetchNibrs({ ...s, crime, place, placeType, placeId }))
-}
-
 const fetchResults = (key, path) =>
   get(`${API}/${path}?per_page=500`).then(response => ({
     key,
@@ -311,9 +267,6 @@ export default {
   fetchAggregates,
   fetchAgencyAggregates,
   getAgency,
-  fetchNibrs,
-  getNibrsRequests,
-  fetchNibrsCounts,
   getNibrsCountsRequests,
   getPoliceEmploymentRequests,
   getSummaryRequests,
