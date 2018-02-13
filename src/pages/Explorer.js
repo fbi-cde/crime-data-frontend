@@ -56,13 +56,16 @@ class Explorer extends React.Component {
       const filter = {};
       filter.pageType = pageType;
       filter.place = nextProps.filters.place
+      console.log('HERE')
       filter.placeId = generatePlaceId(nextProps.filters, this.props.region.regions, this.props.states.states);
       this.props.actions.updateApp(filter)
     }
     if (!this.props.loaded && nextProps.loaded) {
        const tmpNextProps = nextProps;
       if (!nextProps.filters.placeId) {
-        tmpNextProps.filters.placeId = generatePlaceId(nextProps.filters, this.props.region.regions, this.props.states.states);
+        console.log('HERE II')
+
+        tmpNextProps.filters.placeId = generatePlaceId(nextProps.filters, nextProps.region.regions, nextProps.states.states);
       }
       this.props.actions.updateApp(tmpNextProps.filters, this.props.router)
     }

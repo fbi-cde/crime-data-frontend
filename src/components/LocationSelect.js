@@ -40,6 +40,8 @@ class LocationSelect extends React.Component {
   }
 
   handleChange = e => {
+    console.log('Location Select handleChange(): Using State ABBR')
+
     const { states, region } = this.props
     let placeType = 'state'
     let placeId
