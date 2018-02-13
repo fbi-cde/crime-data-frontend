@@ -24,12 +24,13 @@ class AsrContainer extends React.Component {
     filters,
   }) => {
 
-    const places = [place]
-    if (place !== nationalKey) places.push(nationalKey)
+    let maleByAge = asr.data["male-by-age"]
+    const filteredByOffense = maleByAge.data.filter(d => d.key_type === "Murder and Nonnegligent Manslaughter")
+    maleByAge.data = filteredByOffense
 
     return (
       <div>
-        <BarChart data={asr} year={2016}/>
+        <BarChart data={maleByAge} year={2016} />
       </div>
     )
   }

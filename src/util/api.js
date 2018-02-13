@@ -28,17 +28,31 @@ const parseAsr = ([asr]) => ({
   })),
 })
 
-const fetchAsr = (place, placeType, placeId) => {
+const fetchAsr = ({dim, pageType, place, placeType, placeId}) => {
   const placeValue = placeType==='agency'?place:placeId
-  let asrApi = `asr/male/age/${placeType}/${placeValue}`
+  let asrApi = `${API}/asr/male/age/${placeType}/${placeValue}`
 
-  const requests = [
-    fetchResults(place || nationalKey, asrApi),
-  ]
-    return Promise.all(requests).then(parseAsr)
+  const params = {
+    per_page: 1000,
+    aggregate_many: false,
+  }
+
+  return get(asrApi, params).then(d=>({
+    key: `${dim}`,
+    data: JSON.parse(d.results),
+  }))
 }
 
-const getAsrRequests = filters => [fetchAsr(filters.place, filters.placeType, filters.placeId), fetchAsr()]
+//const getAsrRequests = filters => [fetchAsr(filters.place, filters.placeType, filters.placeId)]
+const getAsrRequests = params => {
+  const { pageType, place, placeType, placeId } = params
+
+  const slices = [
+    { dim: 'male-by-age' },
+  ]
+
+  return slices.map(s => fetchAsr({ ...s, pageType, place, placeType, placeId }))
+}
 
 const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
   const loc =
