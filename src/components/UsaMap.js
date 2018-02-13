@@ -22,7 +22,6 @@ class UsaMap extends React.Component {
       })
       const statesData = lookupStatesByRegion(states.states, lookupStateByName(states.states, name).region_code)
       Object.keys(statesData).forEach(st => {
-        console.log('UsaMap: Using State ABBR')
         if (document.getElementById(statesData[st].state_abbr)) document.getElementById(statesData[st].state_abbr).style.fill = '#f48e88';
       });
      }
@@ -49,7 +48,6 @@ class UsaMap extends React.Component {
       ...s,
       name: stateLookup(s.id).display,
     }))
-    console.log('UsaMap Render(): Using State ABBR')
 
     return (
       <div>

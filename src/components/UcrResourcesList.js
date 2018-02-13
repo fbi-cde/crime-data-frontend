@@ -12,8 +12,6 @@ import { nationalKey } from '../util/usa'
 const participationCsvLink = (place, type, states) => {
   if (type === 'agency') return []
   if (type === 'region') return []
-  console.log('participationCsvLink handleChange(): Using State ABBR')
-
   const path =
     place === nationalKey
       ? 'participation/national'
