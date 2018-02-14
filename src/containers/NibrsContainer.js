@@ -52,10 +52,6 @@ const NibrsContainer = ({
 }) => {
   let content = null
 
-  if (!states) {
-    return <Loading />
-  }
-
   if (
     (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
     !shouldShowNibrs({ pageType, place, placeType }, states)
