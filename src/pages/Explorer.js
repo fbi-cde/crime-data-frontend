@@ -56,17 +56,13 @@ class Explorer extends React.Component {
       const filter = {};
       filter.pageType = pageType;
       filter.place = nextProps.filters.place
-      console.log('HERE', filter)
       filter.placeId = generatePlaceId(nextProps.filters, this.props.region.regions, this.props.states.states);
-      console.log('filter.placeId :', filter.placeId)
 
       this.props.actions.updateApp(filter)
     }
     if (!this.props.loaded && nextProps.loaded) {
        const tmpNextProps = nextProps;
       if (!nextProps.filters.placeId) {
-        console.log('HERE II')
-
         tmpNextProps.filters.placeId = generatePlaceId(nextProps.filters, nextProps.region.regions, nextProps.states.states);
       }
       this.props.actions.updateApp(tmpNextProps.filters, this.props.router)
@@ -106,6 +102,9 @@ class Explorer extends React.Component {
     if (filters.place && filters.place !== place) return null
 
     // show not found page if pageType or place unfamiliar
+    if (!region || !states) {
+      return <Loading />
+    }
 
     if (!region.loaded || !states.loaded) {
       return <Loading />
