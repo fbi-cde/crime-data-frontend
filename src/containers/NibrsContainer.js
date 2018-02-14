@@ -38,28 +38,38 @@ class NibrsContainer extends React.Component {
     return since
   }
 
-  getCards(data, place) {
-    const cards = []
-    let cnt = -1;
-    Object.keys(data).forEach(d => {
-      cnt += 1;
-      const obj = data[d]
-      if (d.includes('victim')) { obj.noun = `Victim ${obj.noun}` } else if (d.includes('offender')) { obj.noun = `Offender ${obj.noun}` }
-      const cls = cnt % 2 === 0 ? 'clear-left' : ''
-      if (d !== 'offenseCount') {
-        cards.push(
-        <div key={cnt} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
-          <DisplayCard
-            data={obj}
-            place={place}
-            year={this.state.yearSelected}
-          />
-        </div>)
-      }
-    })
+  getCards(data, place, categories) {
+    let cards = []
+    const content = [];
+    let cnt = 0;
 
-    return cards
-}
+    Object.keys(categories).forEach(c => {
+      const category = categories[c]
+      const cls = cnt % 2 === 0 ? 'clear-left' : ''
+      cnt += 1;
+      cards = []
+      Object.keys(data).sort((a, b) => {
+        if (data[a].noun < data[b].noun) { return -1; }
+        return 1;
+      }).forEach(d => {
+        const obj = data[d]
+        if (d !== 'offenseCount' && obj.category === category) {
+          cards.push(
+            <div className='bg-white p2 border-bottom border-blue-light'>
+              <DisplayCard
+                data={obj}
+                place={place}
+                year={this.state.yearSelected}
+              />
+            </div>
+          )
+        }
+      });
+        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls}`}><div className='p2 sm-p3 bg-white black'>            <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
+    });
+
+    return content
+  }
 
   render() {
      const {
@@ -90,6 +100,19 @@ class NibrsContainer extends React.Component {
     const isLoading = nibrsCounts.loading
     let totalCount = 0
     const yrRange = rangeYears(nibrsFirstYear, until);
+
+
+    // Get Categories
+    const categories = [];
+    Object.keys(data).forEach(d => {
+      console.log('d:', data[d])
+      if (data[d].category) {
+        if (categories.indexOf(data[d].category) === -1) {
+          categories.push(data[d].category)
+          console.log('added:', data[d].category)
+        }
+      }
+    })
 
 
     if (error) return (<ErrorCard error={error} />)
@@ -135,7 +158,7 @@ class NibrsContainer extends React.Component {
               />}
           </div>
           <div className="clearfix mxn1">
-           {this.getCards(data, place)}
+           {this.getCards(data, place, categories)}
           </div>
           {isReady &&
             <div>
