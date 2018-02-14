@@ -52,7 +52,7 @@ class Explorer extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { pageType } = nextProps.filters
 
-    if (this.props.filters.place !== nextProps.filters.place) {
+    if (this.props.filters.place !== nextProps.filters.place && nextProps.states.loaded && nextProps.regions.located) {
       const filter = {};
       filter.pageType = pageType;
       filter.place = nextProps.filters.place
@@ -62,7 +62,7 @@ class Explorer extends React.Component {
     if (!this.props.loaded && nextProps.loaded) {
        const tmpNextProps = nextProps;
       if (!nextProps.filters.placeId) {
-        tmpNextProps.filters.placeId = generatePlaceId(nextProps.filters, this.props.region.regions, this.props.states.states);
+        tmpNextProps.filters.placeId = generatePlaceId(nextProps.filters, nextProps.region.regions, nextProps.states.states);
       }
       this.props.actions.updateApp(tmpNextProps.filters, this.props.router)
     }
@@ -101,6 +101,9 @@ class Explorer extends React.Component {
     if (filters.place && filters.place !== place) return null
 
     // show not found page if pageType or place unfamiliar
+    if (!region || !states) {
+      return <Loading />
+    }
 
     if (!region.loaded || !states.loaded) {
       return <Loading />

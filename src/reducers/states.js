@@ -17,9 +17,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: {
-          code: action.error.response.status,
           message: action.error.message,
-          url: action.error.config.url,
         },
         loading: false,
       }

@@ -25,19 +25,6 @@ class NibrsContainer extends React.Component {
     this.state = { yearSelected: until }
   }
 
-  updateYear = year => {
-    this.setState({ yearSelected: year })
-  }
-
-  initialNibrsYear(place, placeType, since) {
-    const placeNorm = placeType === 'agency' ? oriToState(place) : place
-    const participation = ucrParticipation(placeNorm)
-    const initYear = participation && participation.nibrs['initial-year']
-
-    if (initYear && initYear > since) return initYear
-    return since
-  }
-
   getCards(data, place, categories) {
     let cards = []
     const content = [];
@@ -65,10 +52,23 @@ class NibrsContainer extends React.Component {
           )
         }
       });
-        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls}`}><div className='p2 sm-p3 bg-white black'>            <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
+        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls}`}><div className='p2 sm-p3 bg-white black'>                      <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
     });
 
     return content
+  }
+
+  updateYear = year => {
+    this.setState({ yearSelected: year })
+  }
+
+  initialNibrsYear(place, placeType, since) {
+    const placeNorm = placeType === 'agency' ? oriToState(place) : place
+    const participation = ucrParticipation(placeNorm)
+    const initYear = participation && participation.nibrs['initial-year']
+
+    if (initYear && initYear > since) return initYear
+    return since
   }
 
   render() {
@@ -195,7 +195,7 @@ NibrsContainer.propTypes = {
   since: PropTypes.number.isRequired,
   participation: PropTypes.array.isRequired,
   until: PropTypes.number.isRequired,
-  states: PropTypes.object.isRequired,
+  states: PropTypes.object,
 }
 
 

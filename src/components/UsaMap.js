@@ -48,6 +48,7 @@ class UsaMap extends React.Component {
       ...s,
       name: stateLookup(s.id).display,
     }))
+
     return (
       <div>
         <svg

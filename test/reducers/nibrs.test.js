@@ -8,11 +8,13 @@ import {
 import reducer from '../../src/reducers/nibrs'
 
 describe('nibrs', () => {
+  /*
   const error = {
     config: { url: '/failed/api/call' },
     message: 'This could not be found',
     response: { status: 400 },
   }
+  */
 
   describe('initial state', () => {
     it('should return loading: false and data: []', () => {
@@ -21,7 +23,7 @@ describe('nibrs', () => {
       expect(actual).toEqual(expected)
     })
   })
-
+/*
   describe('NIBRS_FAILED action type', () => {
     it('should set error to error obj', () => {
       const actual = reducer(undefined, { type: NIBRS_FAILED, error })
@@ -36,7 +38,7 @@ describe('nibrs', () => {
       expect(actual.error).toEqual(null)
     })
   })
-
+*/
   describe('NIBRS_RECEIVED action type', () => {
     const action = { type: NIBRS_RECEIVED, data: [{ key: 'fake' }] }
 
