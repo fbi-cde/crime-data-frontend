@@ -54,7 +54,7 @@ class NibrsContainer extends React.Component {
           )
         }
       });
-        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls}`}><div className='p2 sm-p3 bg-white black'>                                                                                                                                                                  <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
+        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls}`}><div className='p2 sm-p3 bg-white black'>                                                                                                                                                                                                <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
     });
 
     return content
@@ -117,6 +117,9 @@ class NibrsContainer extends React.Component {
 
     if (error) return (<ErrorCard error={error} />)
     if (isLoading) return (<Loading />)
+
+    console.log('Data Selected Year:', this.state.yearSelected)
+    console.log('offenseCount:', data.offenseCount)
 
     const countDataByYear = data.offenseCount.data.filter(d => d.data_year === this.state.yearSelected)
     totalCount = countDataByYear.filter(d => d.key === 'Incident Count')[0].value
