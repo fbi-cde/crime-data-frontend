@@ -9,10 +9,13 @@ import { getPlaceInfo } from '../util/place'
 import { nationalKey } from '../util/usa'
 import lookupUsa from '../util/usa'
 import api from '../util/api'
+import { rangeYears } from '../util/years'
 
 class AsrContainer extends React.Component {
   constructor(props) {
     super(props)
+    const { until } = props
+    this.state = { yearSelected: until }
   }
 
   getContent = ({
@@ -30,15 +33,20 @@ class AsrContainer extends React.Component {
 
     return (
       <div>
-        <BarChart data={maleByAge} year={2016} />
+        <BarChart data={maleByAge} year={this.state.yearSelected} />
       </div>
     )
   }
 
+  updateYear = year => {
+    this.setState({ yearSelected: year })
+  }
+
   render() {
     const { agency, isAgency, asr, place, placeType, since, until, filters } = this.props
-
     const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
+    const yrRange = rangeYears(since, until);
+    const handleSelectChange = e => this.updateYear(Number(e.target.value))
 
     return (
       <div className="mb6">
@@ -46,7 +54,26 @@ class AsrContainer extends React.Component {
           <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
             {placeDisplay} Arrest Data
           </h2>
-          {this.getContent({ asr, place, placeType, placeDisplay, since, until, filters })}
+          <div className='mb3'>
+            <label htmlFor="year-selected" className="hide">
+              Year selected
+            </label>
+            <select
+                className="field field-sm select select-dark col-10"
+                id="year-selected"
+                onChange={handleSelectChange}
+                value={this.state.yearSelected}
+            >
+                {yrRange.map((y, i) =>
+                  <option key={i}>
+                    {y}
+                  </option>,
+                )}
+            </select>
+          </div>
+          <div>
+            {this.getContent({ asr, place, placeType, placeDisplay, since, until, filters })}
+          </div>
         </div>
       </div>
     )
