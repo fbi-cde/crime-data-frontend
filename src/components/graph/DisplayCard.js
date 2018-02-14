@@ -22,9 +22,10 @@ class DisplayCard extends React.Component {
         case 'stacked_table':
             return <StackedBarChart data={data} year={year} />
         default:
-          charts = (<p>{data.ui_type} not supported!</p>)
+          charts = null
       }
 
+      if (!charts) return null;
 
       const download = {
         data: data.data,
@@ -33,17 +34,19 @@ class DisplayCard extends React.Component {
       }
 
       return (
-        <div className="mt0 mb2 pb1 fs-18">
-          <h2 className="mt0 mb2 sm-mb4 fs-18 sans-serif blue">
-            {data.title}
-          </h2>
-            {charts}
-            <DownloadDataBtn
-              ariaLabel={`Download ${data.noun} data as a CSV`}
-              data={download}
-              filename={`${place}-leoka-${slugify(data.noun)}-${year}`}
-              text="Download data"
-            />
+        <div className='bg-white p2 border-bottom border-blue-light'>
+          <div className="mt0 mb2 pb1 fs-18">
+            <h2 className="mt0 mb2 sm-mb4 fs-18 sans-serif blue">
+              {data.title}
+            </h2>
+              {charts}
+              <DownloadDataBtn
+                ariaLabel={`Download ${data.noun} data as a CSV`}
+                data={download}
+                filename={`${place}-leoka-${slugify(data.noun)}-${year}`}
+                text="Download data"
+              />
+          </div>
         </div>
       )
     }

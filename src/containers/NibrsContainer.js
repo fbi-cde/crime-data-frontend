@@ -35,24 +35,26 @@ class NibrsContainer extends React.Component {
       const cls = cnt % 2 === 0 ? 'clear-left' : ''
       cnt += 1;
       cards = []
-      Object.keys(data).sort((a, b) => {
-        if (data[a].noun < data[b].noun) { return -1; }
+      const sortedData = Object.keys(data).sort((a, b) => {
+        if (data[a].title < data[b].title) { return -1; }
         return 1;
-      }).forEach(d => {
-        const obj = data[d]
+      });
+      console.log('sortedData:', sortedData);
+      console.log('data:', data);
+
+      Object.keys(sortedData).forEach(d => {
+        const obj = data[sortedData[d]]
         if (d !== 'offenseCount' && obj.category === category) {
           cards.push(
-            <div className='bg-white p2 border-bottom border-blue-light'>
               <DisplayCard
                 data={obj}
                 place={place}
                 year={this.state.yearSelected}
               />
-            </div>
           )
         }
       });
-        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls}`}><div className='p2 sm-p3 bg-white black'>                      <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
+        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls}`}><div className='p2 sm-p3 bg-white black'>                                                                                                                                                                  <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
     });
 
     return content
@@ -105,11 +107,9 @@ class NibrsContainer extends React.Component {
     // Get Categories
     const categories = [];
     Object.keys(data).forEach(d => {
-      console.log('d:', data[d])
       if (data[d].category) {
         if (categories.indexOf(data[d].category) === -1) {
           categories.push(data[d].category)
-          console.log('added:', data[d].category)
         }
       }
     })

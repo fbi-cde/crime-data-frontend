@@ -52,12 +52,12 @@ class StackedBarChart extends React.Component {
 
 
     return (
-      <div className="p2 sm-p3 bg-white black">
+      <div className="p2 sm-p2 bg-white black border-bottom border-blue-light">
         <div className="clearfix">
           <div className="left">
-            <div className="mb2 blue bold">
+            <h2 className='mt0 mb2 sm-mb4 fs-18 sans-serif blue'>
               {data.title}
-            </div>
+            </h2>
           </div>
           <div className="right">
             <CountPercentToggle
