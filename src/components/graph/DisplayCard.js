@@ -33,16 +33,11 @@ class DisplayCard extends React.Component {
       }
 
       return (
-        <div className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
-          <h2 className="mt0 mb2 sm-mb4 fs-18 sans-serif">
-            {data.noun}
+        <div className="mt0 mb2 pb1 fs-18">
+          <h2 className="mt0 mb2 sm-mb4 fs-18 sans-serif blue">
+            {data.title}
           </h2>
-          {charts}
-            <div className="mt-tiny">
-              <span className="bold caps fs-12 red">
-                Reported {pluralize(data.noun)}
-              </span>
-            </div>
+            {charts}
             <DownloadDataBtn
               ariaLabel={`Download ${data.noun} data as a CSV`}
               data={download}

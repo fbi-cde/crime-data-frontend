@@ -34,8 +34,6 @@ class StackedBarChart extends React.Component {
       .range(colors)
 
     const lookup = Object.assign(fitleredDataByYear.map(d => ({ [d.key]: +d.value })))
-    console.log('fitleredDataByYear:', fitleredDataByYear)
-    console.log('lookup:', lookup)
 
 
       const dataClean = {}
@@ -45,12 +43,10 @@ class StackedBarChart extends React.Component {
         }
       }
 
-      console.log('dataClean:', lookup)
 
     const stackGen = stack()
       .keys(Object.keys(dataClean))
       .order(stackOrderReverse)
-    console.log('dataClean:', dataClean)
     const dataStacked = stackGen([dataClean])
     const dataEntries = entries(dataClean)
 
@@ -60,7 +56,7 @@ class StackedBarChart extends React.Component {
         <div className="clearfix">
           <div className="left">
             <div className="mb2 blue bold">
-              {data.noun}
+              {data.title}
             </div>
           </div>
           <div className="right">
@@ -112,7 +108,7 @@ class StackedBarChart extends React.Component {
           </div>
         </div>
         <div className="mt-tiny fs-14 mb3">
-          {data.noun} was reported for{' '}
+          {data.short_title} was reported for{' '}
           <span className="bold red">{formatNum(totalCt)}</span>{' '}
           {pluralize(data.noun, totalCt)}.
         </div>
