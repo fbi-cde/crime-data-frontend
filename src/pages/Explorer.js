@@ -52,7 +52,7 @@ class Explorer extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { pageType } = nextProps.filters
 
-    if (nextProps.state && nextProps.regions) {
+    if (nextProps.states && nextProps.regions) {
       if (this.props.filters.place !== nextProps.filters.place && nextProps.states.loaded && nextProps.regions.loaded) {
         const filter = {};
         filter.pageType = pageType;
