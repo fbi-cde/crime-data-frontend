@@ -49,8 +49,7 @@ export const receivedAgencies = agencies => ({
 export const fetchAgencies = () => dispatch => {
   dispatch(fetchingAgencies())
 
-  return axios
-    .get('/data/agencies-by-state.json')
-    .then(response => reshapeData(response.data))
+  return api.getAgencies()
+    .then(response => reshapeData(response))
     .then(agencies => dispatch(receivedAgencies(agencies)))
 }

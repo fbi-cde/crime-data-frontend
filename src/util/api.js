@@ -20,6 +20,7 @@ const dimensionEndpoints = {
 }
 
 const getAgency = ori => get(`${API}/agencies/${ori}`)
+const getAgencies = () => get(`${API}/api/agencies`)
 
 const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
   const loc =
@@ -34,7 +35,7 @@ const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
   const url = `${API}/${type}s/count/${loc}/${fieldPath}`
 
   const params = {
-    per_page: 50,
+    size: 50,
     aggregate_many: false,
     explorer_offense: mapToApiOffense(crime),
   }
@@ -66,7 +67,7 @@ const getNibrsRequests = params => {
 }
 
 const fetchResults = (key, path) =>
-  get(`${API}/${path}?per_page=500`).then(response => ({
+  get(`${API}/${path}?size=500`).then(response => ({
     key,
     results: response.results,
   }))
@@ -81,13 +82,13 @@ const parsePoliceEmployment = ([policeEmployment]) => ({
 const fetchPoliceEmployment = (place, placeType, placeId) => {
   let peApi
   if (placeType === 'state') {
-    peApi = `police-employment/state/${placeId}`
+    peApi = `api/police-employment/states/${placeId}`
   } else if (placeType === 'agency') {
-    peApi = `police-employment/agency/${placeId}/${place}`
+    peApi = `api/police-employment/agencies/${place}`
   } else if (placeType === 'region') {
-    peApi = `police-employment/region/${place}`
+    peApi = `api/police-employment/regions/${place}`
   } else {
-    peApi = 'police-employment'
+    peApi = 'api/police-employment/national'
   }
   const requests = [
     fetchResults(place || nationalKey, peApi),
@@ -100,11 +101,11 @@ const getPoliceEmploymentRequests = filters => [fetchPoliceEmployment(filters.pl
 const fetchArson = (place, placeId, placeType) => {
   let url
   if (placeType === 'state') {
-    url = `${API}/arson/states/${placeId}?per_page=50`
+    url = `${API}/api/arson/states/${placeId}?size=50`
   } else if (placeType === 'region') {
-    url = `${API}/arson/regions/${place}?per_page=50`
+    url = `${API}/api/arson/regions/${place}?size=50`
   } else {
-    url = `${API}/arson/national?per_page=50`
+    url = `${API}/api/arson/national?size=50`
   }
 
   return get(url).then(({ results }) =>
@@ -123,11 +124,11 @@ const parseAggregates = ([estimates, arsons]) => ({
 const fetchAggregates = (place, placeType, placeId) => {
   let estimatesApi
   if (placeType === 'state') {
-    estimatesApi = `estimates/states/${placeId}`
+    estimatesApi = `api/estimates/states/${placeId}`
   } else if (placeType === 'region') {
-    estimatesApi = `estimates/regions/${place}`
+    estimatesApi = `api/estimates/regions/${place}`
   } else {
-    estimatesApi = 'estimates/national'
+    estimatesApi = 'api/estimates/national'
   }
 
   const requests = [
@@ -140,7 +141,7 @@ const fetchAggregates = (place, placeType, placeId) => {
 
 const fetchAgencyAggregates = (ori, crime) => {
   const url = `${API}/agencies/count/${ori}/offenses`
-  const params = { explorer_offense: mapToApiOffense(crime), per_page: 200 }
+  const params = { explorer_offense: mapToApiOffense(crime), size: 200 }
   return get(url, params).then(d => ({ key: ori, results: d.results }))
 }
 
@@ -160,11 +161,11 @@ const getUcrParticipation = (place, placeId, placeType) => {
   let path
 
   if (place === nationalKey) {
-    path = 'participation/national';
+    path = 'api/participation/national';
   } else if (placeType === 'state') {
-    path = `participation/states/${placeId}`
+    path = `api/participation/states/${placeId}`
   } else if (placeType === 'region') {
-    path = `participation/regions/${place}`
+    path = `api/participation/regions/${place}`
   }
 
   return get(`${API}/${path}`).then(response => ({
@@ -188,7 +189,7 @@ const getUcrParticipationRequests = filters => {
 
 
 const getUcrRegions = () => {
-  const path = 'lookup/region'
+  const path = 'api/regions'
 
   return get(`${API}/${path}`).then(response => ({
     results: response.results,
@@ -204,7 +205,7 @@ const getUcrRegionRequests = () => {
 
 
 const getUcrStates = () => {
-  const path = 'lookup/state?per_page=100'
+  const path = 'api/states?size=100'
 
   return get(`${API}/${path}`).then(response => ({
     results: response.results,
@@ -234,11 +235,11 @@ const fetchNibrsCounts = ({ dim, place, placeType, type, placeId }) => {
 
   const field = dimensionEndpoints[dim] || dim
   let url
-  if (field !== '') { url = `${API}/nibrs/${type}/count/${loc}/${field}` } else { url = `${API}/nibrs/${type}/count/${loc}` }
+  if (field !== '') { url = `${API}/api/nibrs/${type}/${loc}/${field}` } else { url = `${API}/api/nibrs/${type}/${loc}` }
 
 
   const params = {
-    per_page: 1000,
+    size: 1000,
     aggregate_many: false,
   }
 
@@ -281,7 +282,7 @@ const fetchLeoka = ({ dim, place, placeType, placeId, pageType }) => {
   const url = `${API}/leoka/${pageType}/${dim}/count/${loc}`;
 
   const params = {
-    per_page: 1000,
+    size: 1000,
     aggregate_many: false,
   }
 
@@ -311,6 +312,7 @@ export default {
   fetchAggregates,
   fetchAgencyAggregates,
   getAgency,
+  getAgencies,
   fetchNibrs,
   getNibrsRequests,
   fetchNibrsCounts,
