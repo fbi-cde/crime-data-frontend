@@ -110,7 +110,7 @@ describe('api utility', () => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
       api.fetchAgencyAggregates('NJ123', 'robbery').then(() => {
         const url = spy.args[0][0]
-        const pathPartial = '/agencies/count/NJ123'
+        const pathPartial = 'api/agencies/NJ123'
         expect(url.includes(pathPartial)).toEqual(true)
         done()
       })
