@@ -19,7 +19,7 @@ const dimensionEndpoints = {
   sexCode: 'sex_code',
 }
 
-const getAgency = ori => get(`${API}/agencies/${ori}`)
+const getAgency = ori => get(`${API}/api/agencies/${ori}`)
 const getAgencies = () => get(`${API}/api/agencies`)
 
 const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
@@ -140,7 +140,7 @@ const fetchAggregates = (place, placeType, placeId) => {
 }
 
 const fetchAgencyAggregates = (ori, crime) => {
-  const url = `${API}/agencies/count/${ori}/offenses`
+  const url = `${API}/api/agencies/${ori}/offenses`
   const params = { explorer_offense: mapToApiOffense(crime), size: 200 }
   return get(url, params).then(d => ({ key: ori, results: d.results }))
 }
