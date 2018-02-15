@@ -14,7 +14,7 @@ const SidebarContainer = ({
   agency,
   agencyData,
   ariaControls,
-  crime,
+  pageType,
   filters,
   isOpen,
   onChange,
@@ -53,7 +53,7 @@ const SidebarContainer = ({
       <CrimeTypeFilter
         ariaControls={ariaControls}
         onChange={onChange}
-        selected={crime}
+        selected={pageType}
       />
     </div>
   </nav>
@@ -70,7 +70,7 @@ const formatAgencyData = (agencies, state) =>
   }))
 
 const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
-  const { crime, place, placeType } = filters
+  const { pageType, place, placeType } = filters
   const isAgency = placeType === 'agency'
   const isNational = place === nationalKey
   const usState = isAgency ? oriToState(place) : place
@@ -82,7 +82,7 @@ const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   return {
     agency,
     agencyData,
-    crime,
+    pageType,
     filters,
     isOpen: sidebar.isOpen,
     usState,
