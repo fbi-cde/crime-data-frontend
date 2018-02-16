@@ -24,19 +24,18 @@ export const receivedUcrParticipation = results => ({
 export const fetchUcrParticipation = filters => dispatch => {
   dispatch(fetchingUcrParticipation())
   const { place, placeType, placeId } = filters
-  const fn = r => ({ place, results: r.results })
-  const requests = [api.getNationalParticipation().then(fn)]
+  const requests = [api.getNationalParticipation().then(r => ({ place: nationalKey, results: r.results }))]
   if (place !== nationalKey) {
     if (placeType === 'region') {
-      requests.push(api.getRegionalParticipation(place).then(fn))
+      requests.push(api.getRegionalParticipation(place).then(r => ({ place, results: r.results })))
     } else if (placeType === 'state') {
-      requests.push(api.getStateParticipation(placeId).then(fn))
+      requests.push(api.getStateParticipation(placeId).then(r => ({ place, results: r.results })))
     } else if (placeType === 'agency') {
-      requests.push(api.getAgencyParticipation(placeId).then(fn))
+      requests.push(api.getAgencyParticipation(placeId).then(r => ({ place, results: r.results })))
     }
   }
   return Promise.all(requests)
     .then(data => reshapeData(data))
-    .then(results => dispatch(receivedUcrParticipation(results)))
+    .then(results => { dispatch(receivedUcrParticipation(results)) })
     .catch(error => dispatch(failedUcrParticipation(error)))
 }
