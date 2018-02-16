@@ -8,6 +8,7 @@ import { oriToState } from './agencies'
 import { slugify } from './text'
 import agencyApi from './api/agency'
 import participationApi from './api/participation'
+import lookupsApi from './api/lookups'
 
 export const API = '/api-proxy'
 export const nationalKey = 'united-states'
@@ -190,13 +191,10 @@ const getUcrParticipationRequests = filters => {
 }
 
 
-const getUcrRegions = () => {
-  const path = 'api/regions'
-
-  return get(`${API}/${path}`).then(response => ({
-    results: response.results,
+const getUcrRegions = () =>
+  lookupsApi.getRegions().then(r => ({
+    results: r.results,
   }))
-}
 
 const getUcrRegionRequests = () => {
   const requests = [];
@@ -206,13 +204,10 @@ const getUcrRegionRequests = () => {
 }
 
 
-const getUcrStates = () => {
-  const path = 'api/states?size=100'
-
-  return get(`${API}/${path}`).then(response => ({
-    results: response.results,
+const getUcrStates = () =>
+  lookupsApi.getStates({ size: 100 }).then(r => ({
+    results: r.results,
   }))
-}
 
 const getUcrStatesRequests = () => {
   const requests = [];
