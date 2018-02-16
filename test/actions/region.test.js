@@ -14,7 +14,7 @@ import {
   fetchUcrRegion,
 } from '../../src/actions/region'
 
-import api from '../../src/util/api'
+import api from '../../src/util/api/lookups'
 
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)
@@ -57,7 +57,7 @@ describe('ucr actions', () => {
     it('should trigger fetching and received actions', done => {
       const dispatch = sandbox.spy()
       const fn = () => [createPromise({ results: [] })]
-      sandbox.stub(api, 'getUcrRegionRequests', fn)
+      sandbox.stub(api, 'getRegions', fn)
 
       fetchUcrRegion()(dispatch).then(() => {
         const first = dispatch.getCall(0)

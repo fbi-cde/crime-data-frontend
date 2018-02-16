@@ -190,32 +190,6 @@ const getUcrParticipationRequests = filters => {
   return requests
 }
 
-
-const getUcrRegions = () =>
-  lookupsApi.getRegions().then(r => ({
-    results: r.results,
-  }))
-
-const getUcrRegionRequests = () => {
-  const requests = [];
-  requests.push(getUcrRegions())
-
-  return requests
-}
-
-
-const getUcrStates = () =>
-  lookupsApi.getStates({ size: 100 }).then(r => ({
-    results: r.results,
-  }))
-
-const getUcrStatesRequests = () => {
-  const requests = [];
-  requests.push(getUcrStates())
-
-  return requests
-}
-
 export const formatError = error => ({
   code: error.response.status,
   message: error.message,
@@ -316,9 +290,5 @@ export default {
   getSummaryRequests,
   getUcrParticipation,
   getUcrParticipationRequests,
-  getUcrRegions,
-  getUcrRegionRequests,
-  getUcrStates,
-  getUcrStatesRequests,
   getLeokaRequests,
 }
