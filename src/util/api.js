@@ -19,9 +19,6 @@ const dimensionEndpoints = {
   sexCode: 'sex_code',
 }
 
-const getAgency = ori => get(`${API}/api/agencies/${ori}`)
-const getAgencies = () => get(`${API}/api/agencies`)
-
 const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
   const loc =
     place === nationalKey
@@ -311,8 +308,6 @@ const getLeokaRequests = params => {
 export default {
   fetchAggregates,
   fetchAgencyAggregates,
-  getAgency,
-  getAgencies,
   fetchNibrs,
   getNibrsRequests,
   fetchNibrsCounts,
