@@ -91,8 +91,10 @@ describe('api utility', () => {
     it('should request /estimates/national for national', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
       api.fetchAggregates().then(() => {
-        const url = spy.args[0].pop()
-        expect(url.includes('/estimates/national')).toEqual(true)
+        const url0 = spy.args[0][0]
+        const url1 = spy.args[1][0]
+        expect(url0.includes('/estimates/national')).toEqual(true)
+        expect(url1.includes('/arson/national')).toEqual(true)
         done()
       })
     })
@@ -100,8 +102,10 @@ describe('api utility', () => {
     it('should request /estimates/states/:state if place is a state', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
       api.fetchAggregates('california', 'state', 'ca').then(() => {
-        const url = spy.args[0].pop()
-        expect(url.includes('/estimates/states/ca')).toEqual(true)
+        const url0 = spy.args[0][0]
+        const url1 = spy.args[1][0]
+        expect(url0.includes('/estimates/states/ca')).toEqual(true)
+        expect(url1.includes('/arson/states/ca')).toEqual(true)
         done()
       })
     })

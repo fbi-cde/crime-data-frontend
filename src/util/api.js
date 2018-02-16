@@ -6,10 +6,11 @@ import { get } from './http'
 import { mapToApiOffense } from './offenses'
 import { oriToState } from './agencies'
 import { slugify } from './text'
+import { nationalKey } from './api/constants'
 import agencyApi from './api/agency'
+import summaryApi from './api/summary'
 
 export const API = '/api-proxy'
-export const nationalKey = 'united-states'
 
 const dimensionEndpoints = {
   ageNum: 'age_num',
@@ -64,25 +65,37 @@ const getNibrsRequests = params => {
   return slices.map(s => fetchNibrs({ ...s, crime, place, placeType, placeId }))
 }
 
-const fetchResults = (key, path) =>
-  get(`${API}/${path}?size=500`).then(response => ({
-    key,
-    results: response.results,
-  }))
-
 const fetchArson = (place, placeId, placeType) => {
-  let url
+  let api
+  const params = { size: 50 }
   if (placeType === 'state') {
-    url = `${API}/api/arson/states/${placeId}?size=50`
+    api = summaryApi.getStateArson(placeId, params)
   } else if (placeType === 'region') {
-    url = `${API}/api/arson/regions/${place}?size=50`
+    api = summaryApi.getRegionalArson(place, params)
   } else {
-    url = `${API}/api/arson/national?size=50`
+    api = summaryApi.getNationalArson(params);
   }
 
-  return get(url).then(({ results }) =>
-    results.map(d => ({ year: d.year, arson: d.actual })),
-  )
+  return api.then(r => r.results.map(d => ({
+     year: d.year, arson: d.actual
+   })))
+}
+
+const fetchEstimates = (place, placeId, placeType) => {
+    let api
+    const params = { size: 500 }
+    if (placeType === 'state') {
+      api = summaryApi.getStateEstimates(placeId, params)
+    } else if (placeType === 'region') {
+      api = summaryApi.getRegionalEstimates(place, params)
+    } else {
+      api = summaryApi.getNationalEstimates(params);
+    }
+
+    return api.then(r => ({
+      key: place || nationalKey,
+      results: r.results,
+    }))
 }
 
 const parseAggregates = ([estimates, arsons]) => ({
@@ -94,18 +107,9 @@ const parseAggregates = ([estimates, arsons]) => ({
 })
 
 const fetchAggregates = (place, placeType, placeId) => {
-  let estimatesApi
-  if (placeType === 'state') {
-    estimatesApi = `api/estimates/states/${placeId}`
-  } else if (placeType === 'region') {
-    estimatesApi = `api/estimates/regions/${place}`
-  } else {
-    estimatesApi = 'api/estimates/national'
-  }
-
   const requests = [
-    fetchResults(place || nationalKey, estimatesApi),
-    fetchArson(place, placeId, placeType),
+    fetchEstimates(place, placeId, placeType),
+    fetchArson(place, placeId, placeType)
   ]
 
   return Promise.all(requests).then(parseAggregates)
