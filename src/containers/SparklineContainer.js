@@ -11,9 +11,9 @@ import Sparkline from '../components/Sparkline'
 import { oriToState } from '../util/agencies'
 import lookupUsa, { nationalKey } from '../util/usa'
 
-const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
+const SparklineContainer = ({ pageType, since, summaries, until, usState }) => {
   const { data, error, loading } = summaries
-  const normalizedCrime = crime === 'rape' ? 'rape-legacy' : crime
+  const normalizedCrime = pageType === 'rape' ? 'rape-legacy' : pageType
 
   if (error) return <ErrorCard error={error} />
 
@@ -28,12 +28,12 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
     {
       data: data[usState] || [],
       place: lookupUsa(usState).display,
-      url: `/explorer/state/${usState}/${crime}`,
+      url: `/explorer/state/${usState}/${pageType}`,
     },
     {
       data: data[nationalKey] || [],
       place: 'United States',
-      url: `/explorer/${crime}`,
+      url: `/explorer/${pageType}`,
     },
   ]
 
@@ -45,7 +45,7 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
   return (
     <div className="mb4">
       <h3 className="mt0 mb2 fs-18">
-        State and national {lowerCase(crime)} rates
+        State and national {lowerCase(pageType)} rates
       </h3>
       <div className="clearfix mxn1">
         {sparklines.map((s, i) =>
@@ -56,7 +56,7 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
                   {s.place}
                 </h4>
                 <p className="mb2 mw8 fs-14">
-                  {startCase(crime)},{' '}
+                  {startCase(pageType)},{' '}
                   <span className="nowrap">
                     {since}-{until}
                   </span>
@@ -91,7 +91,7 @@ const SparklineContainer = ({ crime, since, summaries, until, usState }) => {
 }
 
 SparklineContainer.propTypes = {
-  crime: PropTypes.string.isRequired,
+  pageType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   summaries: PropTypes.shape({
     data: PropTypes.object,

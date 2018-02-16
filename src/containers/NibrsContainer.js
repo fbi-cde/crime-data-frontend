@@ -13,6 +13,7 @@ import { getPlaceInfo } from '../util/place'
 import lookupUsa from '../util/usa'
 import { rangeYears } from '../util/years'
 
+
 import ucrParticipation, {
   shouldFetchNibrs as shouldShowNibrs,
 } from '../util/participation'
@@ -52,7 +53,7 @@ class NibrsContainer extends React.Component {
           )
         }
       });
-        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls}`}><div className='p2 sm-p3 bg-white black'>                                                                                                                                                                                                                                        <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
+        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls}`}><div className='p2 sm-p3 bg-white black'>                                                                                                                                                                                                                                                                                                                                                      <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
     });
 
     return content
@@ -99,6 +100,10 @@ class NibrsContainer extends React.Component {
 
     const isReady = nibrsCounts.loaded
     const isLoading = nibrsCounts.loading
+
+    if (error) return (<ErrorCard error={error} />)
+    if (isLoading) return (<Loading />)
+
     let totalCount = 0
     const yrRange = rangeYears(nibrsFirstYear, until);
 
@@ -114,19 +119,17 @@ class NibrsContainer extends React.Component {
     })
 
 
-    if (error) return (<ErrorCard error={error} />)
-    if (isLoading) return (<Loading />)
-
-    console.log('Data Selected Year:', this.state.yearSelected)
-    console.log('offenseCount:', data.offenseCount)
     const handleSelectChange = e => this.updateYear(Number(e.target.value))
     const countDataByYear = data.offenseCount.data.filter(d => d.data_year === this.state.yearSelected)
-    totalCount = countDataByYear.filter(d => d.key === 'Incident Count')[0].value
+    if (countDataByYear.length === 0) {
+      totalCount = 0
+    } else totalCount = countDataByYear.filter(d => d.key === 'Incident Count')[0].value
+
     return (
         <div className="mb6">
           <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
             <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-              {startCase(pageType)} incident details reported by {placeDisplay}
+              {startCase(pageType)} <NibrsTerm /> details reported by {placeDisplay}
             </h2>
             {isLoading && <Loading />}
             {isReady &&
@@ -146,8 +149,7 @@ class NibrsContainer extends React.Component {
                     </option>,
                   )}
                 </select>
-              </div>
-            }
+              </div>}
             {isReady &&
               <NibrsIntro
                 crime={pageType}

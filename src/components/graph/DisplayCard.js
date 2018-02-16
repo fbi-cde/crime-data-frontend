@@ -13,7 +13,6 @@ class DisplayCard extends React.Component {
 
     render() {
       const { data, place, year } = this.props
-      console.log('Create Card:', data)
       let charts = null;
       switch (data.ui_type) {
         case 'basic_table':
@@ -40,12 +39,6 @@ class DisplayCard extends React.Component {
               {data.title}
             </h2>
               {charts}
-              <DownloadDataBtn
-                ariaLabel={`Download ${data.noun} data as a CSV`}
-                data={download}
-                filename={`${place}-leoka-${slugify(data.noun)}-${year}`}
-                text="Download data"
-              />
           </div>
         </div>
       )

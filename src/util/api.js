@@ -185,7 +185,7 @@ const fetchNibrsCounts = ({ dim, pageType, place, placeType, type, placeId }) =>
     place === nationalKey
       ? 'national'
       : placeType === 'agency'
-        ? `agencies/${place}`
+        ? `agency/${place}`
         : `states/${placeId}`
 
   const field = dimensionEndpoints[dim] || dim
