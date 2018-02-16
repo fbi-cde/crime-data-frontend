@@ -7,6 +7,7 @@ import { mapToApiOffense } from './offenses'
 import { oriToState } from './agencies'
 import { slugify } from './text'
 import agencyApi from './api/agency'
+import participationApi from './api/participation'
 
 export const API = '/api-proxy'
 export const nationalKey = 'united-states'
@@ -155,17 +156,21 @@ const getSummaryRequests = ({ crime, place, placeType, placeId }) => {
 }
 
 const getUcrParticipation = (place, placeId, placeType) => {
-  let path
+  let api
 
   if (place === nationalKey) {
-    path = 'api/participation/national';
-  } else if (placeType === 'state') {
-    path = `api/participation/states/${placeId}`
+    api = participationApi.getNationalParticipation()
   } else if (placeType === 'region') {
-    path = `api/participation/regions/${place}`
+    api = participationApi.getRegionalParticipation(place)
+  } else if (placeType === 'state') {
+    api = participationApi.getStateParticipation(placeId)
+  } else if (placeType === 'agency') {
+    api = participationApi.getAgencyParticipation(placeId)
+  } else {
+    api = participationApi.getNationalParticipation();
   }
 
-  return get(`${API}/${path}`).then(response => ({
+  return api.then(response => ({
     place,
     results: response.results,
   }))
