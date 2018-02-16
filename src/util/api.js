@@ -180,43 +180,6 @@ const getNibrsCountsRequests = params => {
   return slices.map(s => fetchNibrsCounts({ ...s, pageType, place, placeType, placeId }))
 }
 
-const fetchLeoka = ({ dim, place, placeType, placeId, pageType }) => {
-  const loc =
-    place === nationalKey
-      ? 'national'
-      : placeType === 'agency'
-        ? `agencies/${place}`
-        : `states/${placeId}`
-
-  const url = `${API}/leoka/${pageType}/${dim}/count/${loc}`;
-
-  const params = {
-    size: 1000,
-    aggregate_many: false,
-  }
-
-  return get(url, params).then(d => ({
-    key: `${pageType}${upperFirst(dim)}`,
-    data: d.results,
-  }))
-}
-
-const getLeokaRequests = params => {
-  const { pageType, place, placeType, placeId } = params
-
-  const slices = [
-    { dim: 'group' },
-    { dim: 'assign-dist' },
-    { dim: 'weapon' },
-  ]
-
-  if (placeType !== 'agency') {
-    slices.push({ dim: 'weapon-group' })
-    slices.push({ dim: 'weapon-activity' })
-  }
-  return slices.map(s => fetchLeoka({ ...s, pageType, place, placeType, placeId }))
-}
-
 export default {
   fetchAggregates,
   fetchAgencyAggregates,
@@ -225,5 +188,4 @@ export default {
   fetchNibrsCounts,
   getNibrsCountsRequests,
   getSummaryRequests,
-  getLeokaRequests,
 }
