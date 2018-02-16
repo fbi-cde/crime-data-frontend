@@ -22,7 +22,7 @@ export const receivedUcrState = states => ({
 
 export const fetchUcrState = () => dispatch => {
   dispatch(fetchingUcrState())
-  return Promise.all([api.getStates()])
+  return Promise.all([api.getStates({ size: 100 })])
     // .then(r => ({ results: r.results }))
     .then(data => dispatch(receivedUcrState(reshapeData(data))))
     .catch(error => dispatch(failedUcrState(error)))

@@ -99,7 +99,7 @@ describe('api utility', () => {
 
     it('should request /estimates/states/:state if place is a state', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      api.fetchAggregates('california','state','ca').then(() => {
+      api.fetchAggregates('california', 'state', 'ca').then(() => {
         const url = spy.args[0].pop()
         expect(url.includes('/estimates/states/ca')).toEqual(true)
         done()
@@ -120,26 +120,6 @@ describe('api utility', () => {
       sandbox.stub(http, 'get', () => createPromise(success))
       api.fetchAggregates('california').then(data => {
         expect(data.key).toEqual('california')
-        expect(data.results).toEqual(success.results)
-        done()
-      })
-    })
-  })
-
-  describe('getUcrParticipation()', () => {
-    it('should call the /participation/states/:id endpoint', done => {
-      const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      api.getUcrParticipation('california','ca','state').then(() => {
-        const url = spy.args[0].pop()
-        expect(url.includes('/participation/states')).toEqual(true)
-        done()
-      })
-    })
-
-    it('should return a data structure with the place and the results', done => {
-      sandbox.stub(http, 'get', () => createPromise(success))
-      api.getUcrParticipation('california').then(data => {
-        expect(data.place).toEqual('california')
         expect(data.results).toEqual(success.results)
         done()
       })

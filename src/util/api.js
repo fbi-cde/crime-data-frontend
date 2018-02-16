@@ -7,8 +7,6 @@ import { mapToApiOffense } from './offenses'
 import { oriToState } from './agencies'
 import { slugify } from './text'
 import agencyApi from './api/agency'
-import participationApi from './api/participation'
-import lookupsApi from './api/lookups'
 
 export const API = '/api-proxy'
 export const nationalKey = 'united-states'
@@ -156,40 +154,6 @@ const getSummaryRequests = ({ crime, place, placeType, placeId }) => {
   return [fetchAggregates(place, placeType, placeId), fetchAggregates()]
 }
 
-const getUcrParticipation = (place, placeId, placeType) => {
-  let api
-
-  if (place === nationalKey) {
-    api = participationApi.getNationalParticipation()
-  } else if (placeType === 'region') {
-    api = participationApi.getRegionalParticipation(place)
-  } else if (placeType === 'state') {
-    api = participationApi.getStateParticipation(placeId)
-  } else if (placeType === 'agency') {
-    api = participationApi.getAgencyParticipation(placeId)
-  } else {
-    api = participationApi.getNationalParticipation();
-  }
-
-  return api.then(response => ({
-    place,
-    results: response.results,
-  }))
-}
-
-const getUcrParticipationRequests = filters => {
-  const { place, placeType, placeId } = filters
-
-  const requests = [getUcrParticipation(place, placeId, placeType)]
-
-  // add national request (unless you already did)
-  if (place !== nationalKey) {
-    requests.push(getUcrParticipation(nationalKey))
-  }
-
-  return requests
-}
-
 export const formatError = error => ({
   code: error.response.status,
   message: error.message,
@@ -288,7 +252,5 @@ export default {
   getNibrsCountsRequests,
   getPoliceEmploymentRequests,
   getSummaryRequests,
-  getUcrParticipation,
-  getUcrParticipationRequests,
   getLeokaRequests,
 }
