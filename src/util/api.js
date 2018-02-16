@@ -6,6 +6,7 @@ import { get } from './http'
 import { mapToApiOffense } from './offenses'
 import { oriToState } from './agencies'
 import { slugify } from './text'
+import agencyApi from './api/agency'
 
 export const API = '/api-proxy'
 export const nationalKey = 'united-states'
@@ -137,9 +138,8 @@ const fetchAggregates = (place, placeType, placeId) => {
 }
 
 const fetchAgencyAggregates = (ori, crime) => {
-  const url = `${API}/api/agencies/${ori}/offenses`
   const params = { explorer_offense: mapToApiOffense(crime), size: 200 }
-  return get(url, params).then(d => ({ key: ori, results: d.results }))
+  return agencyApi.getAgencyOffenses(ori, params).then(d => ({ key: ori, results: d.results }))
 }
 
 const getSummaryRequests = ({ crime, place, placeType, placeId }) => {
