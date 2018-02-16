@@ -1,5 +1,10 @@
-import { POLICE_EMPLOYMENT_FAILED, POLICE_EMPLOYMENT_FETCHING, POLICE_EMPLOYMENT_RECEIVED } from './constants'
-import api from '../util/api'
+import {
+  POLICE_EMPLOYMENT_FAILED,
+  POLICE_EMPLOYMENT_FETCHING,
+  POLICE_EMPLOYMENT_RECEIVED
+} from './constants'
+import api from '../util/api/policeEmployment'
+import { nationalKey } from '../util/api/constants'
 import { reshapeData } from '../util/policeEmployment'
 
 export const failedPoliceEmployment = error => ({
@@ -16,10 +21,24 @@ export const receivedPoliceEmployment = data => ({
   data,
 })
 
-export const fetchPoliceEmployment = params => dispatch => {
+export const fetchPoliceEmployment = filters => dispatch => {
   dispatch(fetchingPoliceEmployment())
 
-  const requests = api.getPoliceEmploymentRequests(params)
+  const { place, placeType, placeId } = filters
+  const requests = [api.getNationalPoliceEmployment()
+    .then(r => ({ key: nationalKey, results: r.results }))]
+  if (place !== nationalKey) {
+    if (placeType === 'region') {
+      requests.push(api.getRegionalPoliceEmployment(place)
+        .then(r => ({ key: place, results: r.results })))
+    } else if (placeType === 'state') {
+      requests.push(api.getStatePoliceEmployment(placeId)
+        .then(r => ({ key: place, results: r.results })))
+    } else if (placeType === 'agency') {
+      requests.push(api.getAgencyPoliceEmployment(placeId)
+        .then(r => ({ key: place, results: r.results })))
+    }
+  }
 
   return Promise.all(requests)
     .then(data => reshapeData(data))

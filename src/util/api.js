@@ -70,32 +70,6 @@ const fetchResults = (key, path) =>
     results: response.results,
   }))
 
-const parsePoliceEmployment = ([policeEmployment]) => ({
-  ...policeEmployment,
-  results: policeEmployment.results.map(datum => ({
-    ...datum,
-  })),
-})
-
-const fetchPoliceEmployment = (place, placeType, placeId) => {
-  let peApi
-  if (placeType === 'state') {
-    peApi = `api/police-employment/states/${placeId}`
-  } else if (placeType === 'agency') {
-    peApi = `api/police-employment/agencies/${place}`
-  } else if (placeType === 'region') {
-    peApi = `api/police-employment/regions/${place}`
-  } else {
-    peApi = 'api/police-employment/national'
-  }
-  const requests = [
-    fetchResults(place || nationalKey, peApi),
-  ]
-    return Promise.all(requests).then(parsePoliceEmployment)
-}
-
-const getPoliceEmploymentRequests = filters => [fetchPoliceEmployment(filters.place, filters.placeType, filters.placeId), fetchPoliceEmployment()]
-
 const fetchArson = (place, placeId, placeType) => {
   let url
   if (placeType === 'state') {
@@ -250,7 +224,6 @@ export default {
   getNibrsRequests,
   fetchNibrsCounts,
   getNibrsCountsRequests,
-  getPoliceEmploymentRequests,
   getSummaryRequests,
   getLeokaRequests,
 }
