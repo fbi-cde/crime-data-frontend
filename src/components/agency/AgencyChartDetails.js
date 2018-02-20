@@ -24,6 +24,7 @@ const AgencyChartDetails = ({
   yrRange,
   updateYear,
 }) => {
+  console.log('AgencyChartDetails:', data);
   const { cleared, year, actual } = data
   const crimeDisplay = lowerCase(crime)
   const handleSelectChange = e => updateYear(Number(e.target.value))
@@ -43,10 +44,10 @@ const AgencyChartDetails = ({
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
         <p className="m0" style={{ maxWidth: 400 }}>
           In <span id="selected-year-text">{highlight(year)}</span>, there{' '}
-          {pluralize('were', actual.count)} {highlight(fmt(actual.count))}{' '}
-          reported {pluralize(noun, actual.count)} of {crimeDisplay}. There{' '}
-          {pluralize('were', cleared.count)} {highlight(fmt(cleared.count))}{' '}
-          cleared {crimeDisplay} {pluralize(noun, cleared.count)}. Crimes are
+          {pluralize('were', actual)} {highlight(fmt(actual))}{' '}
+          reported {pluralize(noun, actual)} of {crimeDisplay}. There{' '}
+          {pluralize('were', cleared)} {highlight(fmt(cleared))}{' '}
+          cleared {crimeDisplay} {pluralize(noun, cleared)}. Crimes are
           not necessarily cleared in the year they occur. {compSentence}
         </p>
       </div>
@@ -93,7 +94,7 @@ const AgencyChartDetails = ({
                     className="inline-block border-bottom border-blue-light col-12"
                     id={generateId(`${k}-agency-chart-column`)}
                   >
-                    {fmt(data[k].count)}
+                    {fmt(data[k])}
                   </span>
                 </td>
               </tr>,

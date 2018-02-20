@@ -13,6 +13,7 @@ import region from './region'
 import states from './states'
 import nibrsCounts from './nibrsCounts'
 import leoka from './leoka'
+import summarized from './summarized'
 
 
 export default combineReducers({
@@ -29,4 +30,5 @@ export default combineReducers({
   states,
   nibrsCounts,
   leoka,
+  summarized,
 })

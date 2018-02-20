@@ -105,6 +105,7 @@ const mapStateToProps = ({ filters, summaries }) => ({
   ...filters,
   usState: oriToState(filters.place),
   summaries,
+  crime: filters.pageType,
 })
 
 export default connect(mapStateToProps)(SparklineContainer)

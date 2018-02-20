@@ -307,6 +307,14 @@ const getLeokaRequests = params => {
   return slices.map(s => fetchLeoka({ ...s, pageType, place, placeType, placeId }))
 }
 
+const getSummarizedRequest = filters => {
+  const estimatesApi = `${API}/summarized/agency/${filters.place}/${filters.pageType}`
+  return get(estimatesApi).then(d => ({
+    data: d.results,
+  }))
+}
+
+
 export default {
   fetchAggregates,
   fetchAgencyAggregates,
@@ -324,4 +332,5 @@ export default {
   getUcrStates,
   getUcrStatesRequests,
   getLeokaRequests,
+  getSummarizedRequest,
 }

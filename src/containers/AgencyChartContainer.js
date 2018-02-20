@@ -18,17 +18,29 @@ const Content = ({ pageType, place, since, submitsNibrs, summary, until }) => {
   if (loading) return <Loading />
   if (error) return <ErrorCard error={error} />
 
-  const data = summary.data[place]
+  const data = summary.data.data
   if (!data || data.length === 0) return <NoData />
 
   const fname = `${place}-${pageType}-${since}-${until}`
-  const dataClean = data
-    .filter(d => d.year >= since && d.year <= until)
-    .sort((a, b) => a.year - b.year)
+  console.log('Data:', data)
 
+/*
+  console.log('data:', data)
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].data_year >= since && data[i].data_year <= until) {
+      dataClean.push(data[i])
+    }
+  }
+  console.log('dataClean:', dataClean)
+  */
+  const dataClean = data
+    .filter(d => d.data_year >= since && d.data_year <= until)
+    .sort((a, b) => a.data_year - b.data_year)
+
+  console.log('dataClean:', dataClean)
   const hasNoValues =
     dataClean.length ===
-    dataClean.filter(d => d.reported === 0 && d.cleared === 0).length
+    dataClean.filter(d => d.actual === 0 && d.cleared === 0).length
 
   const noun = submitsNibrs ? 'incidents' : 'offenses'
   const noDataText = `There were no ${lowerCase(
@@ -105,10 +117,10 @@ AgencyChartContainer.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, summaries }) => ({
+const mapStateToProps = ({ agencies, filters, summarized }) => ({
   agency: !agencies.loading && getAgency(agencies, filters.place),
   ...filters,
-  summary: summaries,
+  summary: summarized,
 })
 const mapDispatchToProps = dispatch => ({ dispatch })
 
