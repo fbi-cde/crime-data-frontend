@@ -24,7 +24,6 @@ const AgencyChartDetails = ({
   yrRange,
   updateYear,
 }) => {
-  console.log('AgencyChartDetails:', data);
   const { cleared, year, actual } = data
   const crimeDisplay = lowerCase(crime)
   const handleSelectChange = e => updateYear(Number(e.target.value))

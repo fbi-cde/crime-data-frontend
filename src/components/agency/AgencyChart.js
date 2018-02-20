@@ -54,7 +54,6 @@ class AgencyChart extends React.Component {
     }
 
     const priorYear = data.find(d => d.data_year === active.year - 1)
-    console.log('getActive:', active)
     return {
       active,
       priorYear,
@@ -123,7 +122,7 @@ class AgencyChart extends React.Component {
       .rangeRound([0 + xPadding, width - xPadding])
       .paddingInner(0.3)
 
-    const yrRange = data.map(d => d.data_year)
+    const yrRange = rangeYears(since, until)
 
     const x1 = scaleBand()
       .domain(keys)
@@ -138,7 +137,6 @@ class AgencyChart extends React.Component {
     const [ndHeight, ndCircle, ndTextY, ndTextSize] =
       svgWidth < 500 ? [10, 5, 2.5, 8] : [20, 8, 4, 11]
 
-      console.log('yrRange:', yrRange)
     return (
       <div>
         <AgencyChartDetails
