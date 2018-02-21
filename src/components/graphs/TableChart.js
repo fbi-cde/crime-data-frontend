@@ -31,7 +31,8 @@ class TableChart extends React.Component {
   render() {
     const {
       data,
-      year
+      year,
+      disableSort,
     } = this.props
     console.log('TableChart Render:', data, year)
     const id = snakeCase(data.ui_text)
@@ -62,7 +63,7 @@ class TableChart extends React.Component {
 
     const agg = (a, b) => a + b.value
     const total = dataFormattedByKey.reduce(agg, 0)
-    dataFormattedByKey.sort((a, b) => +b.value - +a.value)
+    if (!disableSort) dataFormattedByKey.sort((a, b) => +b.value - +a.value)
 
     console.log('dataFormattedByKey:', dataFormattedByKey)
     console.log('State Key:', this.state.key)

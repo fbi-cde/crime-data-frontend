@@ -10,6 +10,7 @@ import {
   shouldFetchUcr,
   shouldFetchSummaries,
   shouldFetchNibrs,
+  shouldFetchAsr,
 } from '../util/participation'
 
 const fetchData = () => (dispatch, getState) => {
@@ -23,8 +24,8 @@ const fetchData = () => (dispatch, getState) => {
     if (shouldFetchNibrs(filters)) {
       // dispatch(fetchNibrs(filters))
       dispatch(fetchNibrsCounts(filters))
-      dispatch(fetchAsr(filters))
     }
+    if (shouldFetchAsr(filters, region, states)) dispatch(fetchAsr(filters))
   }
 }
 

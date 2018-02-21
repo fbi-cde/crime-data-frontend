@@ -35,12 +35,12 @@ class AsrContainer extends React.Component {
         <h2 className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
           {maleByAge.noun} (Male)
         </h2>
-        <TableChart data={maleByAge} year={this.state.yearSelected} />
-
+        <TableChart data={maleByAge} year={this.state.yearSelected} disableSort={true}/>
         <h2 className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
           {femaleByAge.noun} (Female)
         </h2>
-        <TableChart data={femaleByAge} year={this.state.yearSelected} />
+        <TableChart data={femaleByAge} year={this.state.yearSelected} disableSort={true}/>
+        )
       </div>
     )
   }
@@ -54,6 +54,8 @@ class AsrContainer extends React.Component {
     const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
     const yrRange = rangeYears(since, until);
     const handleSelectChange = e => this.updateYear(Number(e.target.value))
+    const showAsrBySex = filters.pageType === 'asr-sex'
+    const showAsrByRace = filters.pageType === 'asr-race'
 
     return (
       <div className="mb6">
@@ -79,7 +81,7 @@ class AsrContainer extends React.Component {
             </select>
           </div>
           <div>
-            {this.getContent({ asr, place, placeType, placeDisplay, since, until, filters })}
+            {showAsrBySex && this.getContent({ asr, place, placeType, placeDisplay, since, until, filters })}
           </div>
         </div>
       </div>

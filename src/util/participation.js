@@ -22,6 +22,8 @@ export const shouldFetchNibrs = ({ crime, place, placeType }) => {
   return coverage && coverage.nibrs
 }
 
+export const shouldFetchAsr = (filters, region, states) => filters.page === 'asr' && validateFilter(filters, region.regions, states.states)
+
 export const reshapeData = dataIn => Object.assign(...dataIn.map(d => ({ [d.place]: d.results })))
 
 export default lookup
