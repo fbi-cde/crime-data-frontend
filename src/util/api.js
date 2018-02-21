@@ -30,7 +30,7 @@ const parseAsr = ([asr]) => ({
 
 const fetchAsr = ({dim, pageType, place, placeType, placeId}) => {
   const placeValue = placeType==='agency'?place:placeId
-  let asrApi = `${API}/asr/male/age/${placeType}/${placeValue}`
+  let asrApi = `${API}/asr/${dim}/age/${placeType}/${placeValue}`
 
   const params = {
     per_page: 1000,
@@ -48,7 +48,8 @@ const getAsrRequests = params => {
   const { pageType, place, placeType, placeId } = params
 
   const slices = [
-    { dim: 'male-by-age' },
+    { dim: 'male' },
+    { dim: 'female' },
   ]
 
   return slices.map(s => fetchAsr({ ...s, pageType, place, placeType, placeId }))

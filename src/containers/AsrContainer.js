@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
-import BarChart from '../components/graphs/BarChart'
+import TableChart from '../components/graphs/TableChart'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import { getAgency } from '../util/agencies'
@@ -27,13 +27,20 @@ class AsrContainer extends React.Component {
     filters,
   }) => {
 
-    let maleByAge = asr.data["male-by-age"]
-    const filteredByOffense = maleByAge.data.filter(d => d.key_type === "Murder and Nonnegligent Manslaughter")
-    maleByAge.data = filteredByOffense
+    let maleByAge = asr.data["male"]
+    let femaleByAge = asr.data["female"]
 
     return (
       <div>
-        <BarChart data={maleByAge} year={this.state.yearSelected} />
+        <h2 className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
+          {maleByAge.noun} (Male)
+        </h2>
+        <TableChart data={maleByAge} year={this.state.yearSelected} />
+
+        <h2 className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
+          {femaleByAge.noun} (Female)
+        </h2>
+        <TableChart data={femaleByAge} year={this.state.yearSelected} />
       </div>
     )
   }
