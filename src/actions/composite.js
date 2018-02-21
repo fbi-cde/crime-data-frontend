@@ -2,7 +2,7 @@ import { updateFilters } from './filters'
 import { fetchPoliceEmployment } from './policeEmployment'
 
 import { fetchNibrsCounts } from '../actions/nibrsCounts'
-
+import { fetchSummarized } from '../actions/summarized'
 import { fetchSummaries } from '../actions/summary'
 import { fetchLeoka } from '../actions/leoka'
 import { fetchUcrParticipation } from '../actions/participation'
@@ -24,10 +24,12 @@ const fetchData = () => (dispatch, getState) => {
     }
     if (offensesUtil.includes(filters.pageType) && validateFilter(filters, region.regions, states.states)) {
       // if (shouldFetchAgencies(filters) && agencies.locations !== filters.place && filters.placeType !== 'agency') dispatch(fetchAgencies(filters))
-      if (filters.placeType !== 'agency')dispatch(fetchUcrParticipation(filters))
-      dispatch(fetchSummaries(filters, states))
+      if (filters.placeType !== 'agency') {
+        dispatch(fetchUcrParticipation(filters))
+        dispatch(fetchSummaries(filters, states))
+      }
       dispatch(fetchPoliceEmployment(filters))
-
+      if (filters.placeType === 'agency') dispatch(fetchSummarized(filters, states))
       if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrsCounts(filters))
     }
     if (filters.page === 'leoka') { // Add validation of leoka type and add a shouldFetch Method
