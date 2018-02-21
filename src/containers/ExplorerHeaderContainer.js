@@ -7,7 +7,7 @@ import Loading from '../components/Loading'
 import PlaceThumbnail from '../components/PlaceThumbnail'
 import UcrResourcesList from '../components/UcrResourcesList'
 import { getAgency, oriToState } from '../util/agencies'
-import { lookupDisplayName } from '../util/location'
+import { lookupDisplayName, lookupStateByName } from '../util/location'
 
 const ExplorerHeaderContainer = ({
   agencies,
@@ -25,6 +25,7 @@ const ExplorerHeaderContainer = ({
   if (filters.placeType === 'agency') {
     placeDisplay = agency.agency_name
     location = oriToState(filters.place);
+    location = lookupStateByName(states.states, location).state_name;
   } else if (filters.placeType === 'state' || filters.placeType === 'region') {
     placeDisplay = lookupDisplayName(filters, region.regions, states.states)
     location = filters.place;
