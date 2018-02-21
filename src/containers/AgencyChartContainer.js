@@ -22,22 +22,11 @@ const Content = ({ pageType, place, since, submitsNibrs, summary, until }) => {
   if (!data || data.length === 0) return <NoData />
 
   const fname = `${place}-${pageType}-${since}-${until}`
-  console.log('Data:', data)
 
-/*
-  console.log('data:', data)
-  for (let i = 0; i < data.length; i++) {
-    if (data[i].data_year >= since && data[i].data_year <= until) {
-      dataClean.push(data[i])
-    }
-  }
-  console.log('dataClean:', dataClean)
-  */
   const dataClean = data
     .filter(d => d.data_year >= since && d.data_year <= until)
     .sort((a, b) => a.data_year - b.data_year)
 
-  console.log('dataClean:', dataClean)
   const hasNoValues =
     dataClean.length ===
     dataClean.filter(d => d.actual === 0 && d.cleared === 0).length
