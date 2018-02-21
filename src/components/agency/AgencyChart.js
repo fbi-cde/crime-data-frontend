@@ -166,7 +166,7 @@ class AgencyChart extends React.Component {
               <YAxis scale={y} width={width} />
               <g transform="translate(0, -0.5)">
                 {data.map(d =>
-                  <g key={d.year} transform={`translate(${x0(d.year)}, 0)`}>
+                  <g key={d.year} transform={`translate(${x0(d.data_year)}, 0)`}>
                     {keys.map(k =>
                       <rect
                         key={`${d.data_year}-${k}`}
