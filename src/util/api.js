@@ -309,7 +309,10 @@ const getLeokaRequests = params => {
 
 const getSummarizedRequest = filters => {
   const estimatesApi = `${API}/summarized/agency/${filters.place}/${filters.pageType}`
-  return get(estimatesApi).then(d => ({
+  const params = {
+    per_page: 100,
+  }
+  return get(estimatesApi, params).then(d => ({
     data: d.results,
   }))
 }
