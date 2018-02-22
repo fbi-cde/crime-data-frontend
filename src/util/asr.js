@@ -1,6 +1,6 @@
 const AsrTypesText = [
+  { id: 'asr-age', text: 'Arrests by Age' },
   { id: 'asr-race', text: 'Arrests by Race' },
-  { id: 'asr-sex', text: 'Arrests by Sex' },
 ]
 
 const asrTypes = AsrTypesText

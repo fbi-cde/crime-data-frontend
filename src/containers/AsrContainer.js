@@ -18,7 +18,7 @@ class AsrContainer extends React.Component {
     this.state = { yearSelected: until }
   }
 
-  getContent = ({
+  getAsrByAgeContent = ({
     asr,
     place,
     placeDisplay,
@@ -40,7 +40,32 @@ class AsrContainer extends React.Component {
           {femaleByAge.noun} (Female)
         </h2>
         <TableChart data={femaleByAge} year={this.state.yearSelected} disableSort={true}/>
-        )
+      </div>
+    )
+  }
+
+  getAsrByRaceContent = ({
+    asr,
+    place,
+    placeDisplay,
+    since,
+    until,
+    filters,
+  }) => {
+
+    let raceData = asr.data["race"]
+    let raceYouthData = asr.data["race-youth"]
+
+    return (
+      <div>
+        <h2 className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
+          {raceData.noun}
+        </h2>
+        <TableChart data={raceData} year={this.state.yearSelected}/>
+        <h2 className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
+          {raceYouthData.noun} (Youth)
+        </h2>
+        <TableChart data={raceYouthData} year={this.state.yearSelected}/>
       </div>
     )
   }
@@ -54,7 +79,7 @@ class AsrContainer extends React.Component {
     const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
     const yrRange = rangeYears(since, until);
     const handleSelectChange = e => this.updateYear(Number(e.target.value))
-    const showAsrBySex = filters.pageType === 'asr-sex'
+    const showAsrByAge = filters.pageType === 'asr-age'
     const showAsrByRace = filters.pageType === 'asr-race'
 
     return (
@@ -81,7 +106,8 @@ class AsrContainer extends React.Component {
             </select>
           </div>
           <div>
-            {showAsrBySex && this.getContent({ asr, place, placeType, placeDisplay, since, until, filters })}
+            {showAsrByAge && this.getAsrByAgeContent({ asr, place, placeType, placeDisplay, since, until, filters })}
+            {showAsrByRace && this.getAsrByRaceContent({ asr, place, placeType, placeDisplay, since, until, filters })}
           </div>
         </div>
       </div>

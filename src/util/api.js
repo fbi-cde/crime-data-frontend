@@ -30,7 +30,15 @@ const parseAsr = ([asr]) => ({
 
 const fetchAsr = ({dim, pageType, place, placeType, placeId}) => {
   const placeValue = placeType==='agency'?place:placeId
-  let asrApi = `${API}/asr/${dim}/age/${placeType}/${placeValue}`
+
+  let asrApi
+  if (dim==='male' || dim==='female'){
+    asrApi = `${API}/asr/${dim}/age/${placeType}/${placeValue}`
+  } else if (dim==='race-youth'){
+    asrApi = `${API}/asr/race/youth/${placeType}/${placeValue}`
+  } else {
+    asrApi = `${API}/asr/race/${placeType}/${placeValue}`
+  }
 
   const params = {
     per_page: 1000,
@@ -43,13 +51,14 @@ const fetchAsr = ({dim, pageType, place, placeType, placeId}) => {
   }))
 }
 
-//const getAsrRequests = filters => [fetchAsr(filters.place, filters.placeType, filters.placeId)]
 const getAsrRequests = params => {
   const { pageType, place, placeType, placeId } = params
 
   const slices = [
     { dim: 'male' },
     { dim: 'female' },
+    { dim: 'race' },
+    { dim: 'race-youth' },
   ]
 
   return slices.map(s => fetchAsr({ ...s, pageType, place, placeType, placeId }))
