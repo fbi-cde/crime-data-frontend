@@ -9,11 +9,14 @@ const getNationalArson = params => get(`${API}/arson/national`, params)
 const getRegionalArson = (regionName, params) => get(`${API}/arson/regions/${regionName}`, params)
 const getStateArson = (stateAbbr, params) => get(`${API}/arson/states/${stateAbbr}`, params)
 
+const getAgencySummarized = (ori, offense, params) => get(`${API}/summarized/agencies/${ori}/${offense}`, params)
+
 export default {
   getNationalEstimates,
   getRegionalEstimates,
   getStateEstimates,
   getNationalArson,
   getRegionalArson,
-  getStateArson
+  getStateArson,
+  getAgencySummarized
 }

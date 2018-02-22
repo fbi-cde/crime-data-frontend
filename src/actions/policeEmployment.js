@@ -35,7 +35,7 @@ export const fetchPoliceEmployment = filters => dispatch => {
       requests.push(api.getStatePoliceEmployment(placeId)
         .then(r => ({ key: place, results: r.results })))
     } else if (placeType === 'agency') {
-      requests.push(api.getAgencyPoliceEmployment(placeId)
+      requests.push(api.getAgencyPoliceEmployment(place)
         .then(r => ({ key: place, results: r.results })))
     }
   }

@@ -184,6 +184,12 @@ const getNibrsCountsRequests = params => {
   return slices.map(s => fetchNibrsCounts({ ...s, pageType, place, placeType, placeId }))
 }
 
+const getSummarizedRequest = filters => {
+  const estimatesApi = `${API}/summarized/agency/${filters.place}/${filters.pageType}`
+  return get(estimatesApi).then(d => ({
+    data: d.results,
+  }))
+}
 export default {
   fetchAggregates,
   fetchAgencyAggregates,
@@ -192,4 +198,5 @@ export default {
   fetchNibrsCounts,
   getNibrsCountsRequests,
   getSummaryRequests,
+  getSummarizedRequest,
 }

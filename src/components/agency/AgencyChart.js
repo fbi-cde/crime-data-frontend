@@ -36,23 +36,24 @@ class AgencyChart extends React.Component {
     const { yearSelected } = this.state
 
     let active
-    const selected = data.find(d => d.year === yearSelected)
+    const selected = data.find(d => d.data_year === yearSelected)
 
     if (yearSelected && selected) {
       active = selected
+      active.year = selected.data_year
     } else if (yearSelected && !selected) {
       // year selected but no data reported
       active = {
         year: yearSelected,
-        reported: { count: 0 },
-        cleared: { count: 0 },
+        actual: 0,
+        cleared: 0,
       }
     } else {
       active = data[data.length - 1]
+      active.year = active.data_year
     }
 
-    const priorYear = data.find(d => d.year === active.year - 1)
-
+    const priorYear = data.find(d => d.data_year === active.year - 1)
     return {
       active,
       priorYear,
@@ -62,18 +63,18 @@ class AgencyChart extends React.Component {
   getYMax = (data, keys = []) => {
     const min = 3
     const counts = data
-      .map(d => keys.map(k => d[k].count))
+      .map(d => keys.map(k => d[k]))
       .reduce((accum, next) => [...accum, ...next], [min])
     return max(counts)
   }
 
   getNoDataYears = (data = [], since, until) => {
     const missingYears = rangeYears(since, until).filter(
-      year => !data.find(d => d.year === year),
+      year => !data.find(d => d.data_year === year),
     )
     const zeroReportedYears = data
-      .filter(d => d.reported === 0 && d.cleared === 0)
-      .map(d => d.year)
+      .filter(d => d.actual === 0 && d.cleared === 0)
+      .map(d => d.data_year)
     const noDataYears = missingYears.concat(zeroReportedYears)
 
     return uniqBy(noDataYears).sort()
@@ -121,7 +122,7 @@ class AgencyChart extends React.Component {
       .rangeRound([0 + xPadding, width - xPadding])
       .paddingInner(0.3)
 
-    const yrRange = data.map(d => d.year)
+    const yrRange = rangeYears(since, until)
 
     const x1 = scaleBand()
       .domain(keys)
@@ -130,6 +131,7 @@ class AgencyChart extends React.Component {
 
     const { active, priorYear: activePriorYear } = this.getActive(data)
     const noDataYears = this.getNoDataYears(data, since, until)
+
 
     // no data (nd) element responsive values
     const [ndHeight, ndCircle, ndTextY, ndTextSize] =
@@ -164,22 +166,22 @@ class AgencyChart extends React.Component {
               <YAxis scale={y} width={width} />
               <g transform="translate(0, -0.5)">
                 {data.map(d =>
-                  <g key={d.year} transform={`translate(${x0(d.year)}, 0)`}>
+                  <g key={d.year} transform={`translate(${x0(d.data_year)}, 0)`}>
                     {keys.map(k =>
                       <rect
-                        key={`${d.year}-${k}`}
+                        key={`${d.data_year}-${k}`}
                         x={x1(k)}
-                        y={y(d[k].count)}
-                        height={Math.max(0, height - y(d[k].count))}
+                        y={y(d[k])}
+                        height={Math.max(0, height - y(d[k]))}
                         width={x1.bandwidth()}
                         fill={
-                          this.state.yearSelected === d.year
+                          this.state.yearSelected === d.data_year
                             ? colorMap(k)
                             : mutedColorMap(k)
                         }
                         className="cursor-pointer"
                         pointerEvents="all"
-                        onMouseOver={this.handleMouseOver(d.year)}
+                        onMouseOver={this.handleMouseOver(d.data_year)}
                       />,
                     )}
                   </g>,
