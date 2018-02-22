@@ -4,26 +4,26 @@ import React from 'react'
 const btn = 'btn btn-primary p1 sans-serif regular'
 
 const AgencyChartToggle = ({
-  isEstimate,
+  isSummary,
   showNibrs,
-  showEstimate,
+  showSummary,
 }) => {
   const btns = [
     {
-      handleClick: showEstimate,
-      selected: isEstimate,
-      text: 'Estimated',
+      handleClick: showSummary,
+      selected: isSummary,
+      text: 'Summary',
     },
     {
       handleClick: showNibrs,
-      selected: !isEstimate,
+      selected: !isSummary,
       text: 'NIBRS',
     },
   ]
   const style = { margin: '5px' }
 
   return (
-    <div className="italic serif">
+    <div className="mt0 mb2 italic serif">
       {btns.map((b, i) =>
         <button
           className={`${btn} ${!b.selected && 'bg-white blue border-blue'}`}
@@ -39,9 +39,9 @@ const AgencyChartToggle = ({
 }
 
 AgencyChartToggle.propTypes = {
-  isEstimate: PropTypes.bool.isRequired,
+  isSummary: PropTypes.bool.isRequired,
   showNibrs: PropTypes.func.isRequired,
-  showEstimate: PropTypes.func.isRequired,
+  showSummary: PropTypes.func.isRequired,
 }
 
 export default AgencyChartToggle

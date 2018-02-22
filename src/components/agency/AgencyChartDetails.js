@@ -23,32 +23,59 @@ const AgencyChartDetails = ({
   noun,
   yrRange,
   updateYear,
+  nibrsDetails,
 }) => {
-  const { cleared, year, actual } = data
   const crimeDisplay = lowerCase(crime)
   const handleSelectChange = e => updateYear(Number(e.target.value))
   let compSentence = null
-  const actualLastYr = dataPrior && dataPrior.actual
-
-  if (actualLastYr && actual.count > 0) {
-    const comp = actual.count > actualLastYr.count ? 'increased' : 'decreased'
-    compSentence = (
-      <span>
-        Reported {noun} {highlight(comp)} from the previous year.
-      </span>
-    )
+  const { year } = data
+  let actualLastYr
+  let comp
+  let cleared
+  let actual
+  let value
+  if (!nibrsDetails) {
+    cleared = data.cleared
+    actual = data.actual
+    actualLastYr = dataPrior && dataPrior.actual
+    if (actualLastYr && actual.count > 0) {
+       comp = actual.count > actualLastYr.count ? 'increased' : 'decreased'
+      compSentence = (
+        <span>
+          Reported {noun} {highlight(comp)} from the previous year.
+        </span>
+      )
+    }
+  } else {
+    value = data.value
+    const valueLastYear = dataPrior && dataPrior.value
+    if (valueLastYear && value > 0) {
+       comp = value > valueLastYear.value ? 'increased' : 'decreased'
+      compSentence = (
+        <span>
+          Reported {noun} {highlight(comp)} from the previous year.
+        </span>
+      )
+    }
   }
+
   return (
     <div className="mb3 lg-flex">
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
-        <p className="m0" style={{ maxWidth: 400 }}>
-          In <span id="selected-year-text">{highlight(year)}</span>, there{' '}
-          {pluralize('were', actual.count)} {highlight(fmt(actual.count))}{' '}
-          reported {pluralize(noun, actual.count)} of {crimeDisplay}. There{' '}
-          {pluralize('were', cleared.count)} {highlight(fmt(cleared.count))}{' '}
-          cleared {crimeDisplay} {pluralize(noun, cleared.count)}. Crimes are
-          not necessarily cleared in the year they occur. {compSentence}
-        </p>
+        {!nibrsDetails ?
+          <p className="m0" style={{ maxWidth: 400 }}>
+            In <span id="selected-year-text">{highlight(year)}</span>, there{' '}
+            {pluralize('were', actual)} {highlight(fmt(actual))}{' '}
+            reported {pluralize(noun, actual)} of {crimeDisplay}. There{' '}
+            {pluralize('were', cleared)} {highlight(fmt(cleared))}{' '}
+            cleared {crimeDisplay} {pluralize(noun, cleared)}. Crimes are
+            not necessarily cleared in the year they occur. {compSentence}
+          </p> :
+          <p className="m0" style={{ maxWidth: 400 }}>
+            In <span id="selected-year-text">{highlight(year)}</span>, there{' '}
+            {pluralize('were', value)} {highlight(fmt(value))}{' '}
+            reported {pluralize(noun, value)} of {crimeDisplay}.
+          </p> }
       </div>
       <div className="flex-none" style={{ width: 210 }}>
         <table className="mb1 lg-m0 p2 bg-blue-white">
@@ -93,7 +120,7 @@ const AgencyChartDetails = ({
                     className="inline-block border-bottom border-blue-light col-12"
                     id={generateId(`${k}-agency-chart-column`)}
                   >
-                    {fmt(data[k].count)}
+                    {fmt(data[k])}
                   </span>
                 </td>
               </tr>,
@@ -114,6 +141,7 @@ AgencyChartDetails.propTypes = {
   yrRange: PropTypes.arrayOf(PropTypes.number).isRequired,
   noun: PropTypes.string.isRequired,
   updateYear: PropTypes.func.isRequired,
+  nibrsDetails: PropTypes.bool.isRequired,
 }
 
 export default AgencyChartDetails
