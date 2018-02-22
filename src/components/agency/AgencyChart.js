@@ -8,7 +8,6 @@ import React from 'react'
 import AgencyChartDetails from './AgencyChartDetails'
 import XAxis from '../XAxis'
 import YAxis from '../YAxis'
-import TrendChartRapeAnnotate from '../trend/TrendChartRapeAnnotate'
 import { rangeYears } from '../../util/years'
 
 class AgencyChart extends React.Component {
@@ -134,7 +133,6 @@ class AgencyChart extends React.Component {
       .padding(0)
 
     const { active, priorYear: activePriorYear } = this.getActive(data)
-    console.log('Data:', data)
     let lastRapeLegacyReported = 1995;
     if (crime === 'rape') {
       const dataSet = []
@@ -150,7 +148,6 @@ class AgencyChart extends React.Component {
       }
       data = dataSet
     }
-    console.log('Data Cleaned:', data)
 
     const noDataYears = this.getNoDataYears(data, since, until)
 
