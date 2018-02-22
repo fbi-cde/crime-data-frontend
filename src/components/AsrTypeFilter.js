@@ -38,7 +38,7 @@ class AsrTypeFilter extends React.Component {
 
     return (<div id="type-of-asr" className="mb4">
       <div className="mb3 fs-15 bold border-bottom border-blue-light">
-         Arrest Data
+         Arrests
       </div>
       <div>
         {selection}
