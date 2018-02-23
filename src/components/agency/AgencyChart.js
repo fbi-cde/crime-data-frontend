@@ -92,13 +92,13 @@ class AgencyChart extends React.Component {
     const {
       colors,
       crime,
-      data,
       mutedColors,
       since,
       size,
       submitsNibrs,
       until,
     } = this.props
+    let data = this.props.data
     const { svgParentWidth } = this.state
 
     const svgWidth = svgParentWidth || size.width
@@ -106,6 +106,9 @@ class AgencyChart extends React.Component {
     const { margin } = size
     const width = svgWidth - margin.left - margin.right
     const height = svgHeight - margin.top - margin.bottom
+    const negHeight = height * -1
+    const negHeight2 = negHeight + 10
+
     const xPadding = svgWidth < 500 ? 20 : 40
 
     const keys = ['actual', 'cleared']
@@ -130,6 +133,22 @@ class AgencyChart extends React.Component {
       .padding(0)
 
     const { active, priorYear: activePriorYear } = this.getActive(data)
+    let lastRapeLegacyReported = 1995;
+    if (crime === 'rape') {
+      const dataSet = []
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].actual !== 0 && data[i].cleared !== 0) {
+          if (data[i].offense === 'rape-legacy') {
+            if (data[i].data_year > lastRapeLegacyReported) {
+              lastRapeLegacyReported = data[i].data_year
+            }
+          }
+          dataSet.push(data[i]);
+        }
+      }
+      data = dataSet
+    }
+
     const noDataYears = this.getNoDataYears(data, since, until)
 
 
@@ -164,16 +183,45 @@ class AgencyChart extends React.Component {
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x0} height={height} />
               <YAxis scale={y} width={width} />
+              {until > 2013 &&
+                crime === 'rape' &&
+                <g transform={`translate(${x0(lastRapeLegacyReported)}, ${height})`}>
+                  <line stroke="#95aabc" strokeWidth="1" y2={-height} />
+                  <rect
+                    className="fill-blue"
+                    height="8"
+                    transform="rotate(45 4 4)"
+                    width="8"
+                    x={-4 * Math.sqrt(2)}
+                  />
+                  <text
+                    className="fill-blue fs-10 italic serif"
+                    textAnchor="end"
+                    x="-12"
+                    y={negHeight}
+                  >
+                    Revised rape
+                  </text>
+                  <text
+                    className="fill-blue fs-10 italic serif"
+                    textAnchor="end"
+                    x="-12"
+                    y={negHeight2}
+                  >
+                    definition
+                  </text>
+                </g>
+              }
               <g transform="translate(0, -0.5)">
                 {data.map(d =>
                   <g key={d.year} transform={`translate(${x0(d.data_year)}, 0)`}>
                     {keys.map(k =>
                       <rect
                         key={`${d.data_year}-${k}`}
-                        x={x1(k)}
+                        x={x1(k) + 5}
                         y={y(d[k])}
                         height={Math.max(0, height - y(d[k]))}
-                        width={x1.bandwidth()}
+                        width={x1.bandwidth() - 5}
                         fill={
                           this.state.yearSelected === d.data_year
                             ? colorMap(k)
@@ -185,6 +233,7 @@ class AgencyChart extends React.Component {
                       />,
                     )}
                   </g>,
+
                 )}
                 {noDataYears.map(year =>
                   <g
