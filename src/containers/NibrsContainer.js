@@ -5,144 +5,186 @@ import { connect } from 'react-redux'
 
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
-import NibrsCard from '../components/nibrs/NibrsCard'
+import DisplayCard from '../components/graph/DisplayCard'
 import NibrsIntro from '../components/nibrs/NibrsIntro'
 import { NibrsTerm } from '../components/Terms'
-import parseNibrsCounts from '../util/nibrsCounts'
 import { getAgency, oriToState } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import lookupUsa from '../util/usa'
+import { rangeYears } from '../util/years'
+
+
 import ucrParticipation, {
   shouldFetchNibrs as shouldShowNibrs,
 } from '../util/participation'
 
-const initialNibrsYear = ({ place, placeType, since }) => {
-  const placeNorm = placeType === 'agency' ? oriToState(place) : place
-  const participation = ucrParticipation(placeNorm)
-  const initYear = participation && participation.nibrs['initial-year']
+class NibrsContainer extends React.Component {
 
-  if (initYear && initYear > since) return initYear
-  return since
-}
-
-const filterNibrsData = (data, { since, until }) => {
-  if (!data) return false
-
-  const filtered = {}
-  Object.keys(data).forEach(key => {
-    filtered[key] = data[key].filter(d => {
-      const year = parseInt(d.data_year, 10)
-      return year >= since && year <= until
-    })
-  })
-  return filtered
-}
-
-const NibrsContainer = ({
-  agency,
-  pageType,
-  isAgency,
-  nibrsCounts,
-  participation,
-  place,
-  placeType,
-  since,
-  until,
-  states,
-}) => {
-  let content = null
-
-  if (
-    (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
-    !shouldShowNibrs({ pageType, place, placeType }, states)
-  ) {
-    return null
+  constructor(props) {
+    super(props)
+    const { until } = props
+    this.state = { yearSelected: until }
   }
 
-  const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
-  const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
-  const { data, error } = nibrsCounts
+  getCards(data, place, categories) {
+    let cards = []
+    const content = [];
+    let cnt = 0;
 
-  const isReady = nibrsCounts.loaded
-  const isLoading = nibrsCounts.loading
-  let totalCount = 0
+    Object.keys(categories).forEach(c => {
+      const category = categories[c]
+      const cls = cnt % 2 === 0 ? 'clear-left' : ''
+      cnt += 1;
+      cards = []
+      const sortedData = Object.keys(data).sort((a, b) => {
+        if (data[a].title < data[b].title) { return -1; }
+        return 1;
+      });
 
-
-  if (error) content = <ErrorCard error={error} />
-  else if (isReady) {
-    const filteredData = filterNibrsData(data, { since, until })
-
-    const dataParsed = parseNibrsCounts(filteredData, pageType)
-
-     const offenseObj = dataParsed
-      .find(d => d.title === 'Offenses')
-
-    totalCount = offenseObj.data.count
-    let displayCards = true
-    if (totalCount === 0) { displayCards = false }
-
-    content = (
-      <div className="clearfix mxn1">
-        {displayCards && dataParsed.filter(d => d.title !== 'Offenses').map((d, i) => {
-          const cls = i % 2 === 0 ? 'clear-left' : ''
-          return (
-            <div key={i} className={`col col-12 sm-col-6 mb2 px1 ${cls}`}>
-              <NibrsCard
-                crime={pageType}
+      Object.keys(sortedData).forEach(d => {
+        const obj = data[sortedData[d]]
+        if (d !== 'offenseCount' && obj.category === category) {
+          cards.push(
+              <DisplayCard
+                data={obj}
                 place={place}
-                placeType={placeType}
-                since={nibrsFirstYear}
-                until={until}
-                {...d}
+                year={this.state.yearSelected}
               />
-            </div>
           )
-        })}
-      </div>
-    )
+        }
+      });
+        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls}`}><div className='p2 sm-p3 bg-white black'>                                                                                                                                                                                                                                                                                                                                                                <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
+    });
+
+    return content
   }
 
-  return (
-    <div className="mb6">
-      <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
-        <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-          {startCase(pageType)} incident details reported by {placeDisplay}
-        </h2>
-        {isLoading && <Loading />}
-        {isReady &&
-          <NibrsIntro
-            crime={pageType}
-            isAgency={isAgency}
-            nibrsFirstYear={nibrsFirstYear}
-            participation={participation}
-            place={place}
-            placeDisplay={placeDisplay}
-            totalCount={totalCount}
-            until={until}
-          />}
-      </div>
-      {content}
-      {isReady &&
-        <div>
-          <div className="serif italic fs-12">
-            Source: Reported <NibrsTerm size="sm" /> data from {placeDisplay}.
+  updateYear = year => {
+    this.setState({ yearSelected: year })
+  }
+
+  initialNibrsYear(place, placeType, since) {
+    const placeNorm = placeType === 'agency' ? oriToState(place) : place
+    const participation = ucrParticipation(placeNorm)
+    const initYear = participation && participation.nibrs['initial-year']
+
+    if (initYear && initYear > since) return initYear
+    return since
+  }
+
+  render() {
+     const {
+      agency,
+      pageType,
+      isAgency,
+      nibrsCounts,
+      participation,
+      place,
+      placeType,
+      since,
+      until,
+      states,
+    } = this.props
+
+    if (
+      (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
+      !shouldShowNibrs({ pageType, place, placeType }, states)
+    ) {
+      return null
+    }
+
+    const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
+    const nibrsFirstYear = this.initialNibrsYear(place, placeType, since)
+    const { data, error } = nibrsCounts
+
+    const isReady = nibrsCounts.loaded
+    const isLoading = nibrsCounts.loading
+
+    if (error) return (<ErrorCard error={error} />)
+    if (isLoading) return (<Loading />)
+
+    let totalCount = 0
+    const yrRange = rangeYears(nibrsFirstYear, until);
+
+
+    // Get Categories
+    const categories = [];
+    Object.keys(data).forEach(d => {
+      if (data[d].category) {
+        if (categories.indexOf(data[d].category) === -1) {
+          categories.push(data[d].category)
+        }
+      }
+    })
+
+
+    const handleSelectChange = e => this.updateYear(Number(e.target.value))
+    const countDataByYear = data.offenseCount.data.filter(d => d.data_year === this.state.yearSelected)
+    if (countDataByYear.length === 0) {
+      totalCount = 0
+    } else totalCount = countDataByYear.filter(d => d.key === 'Incident Count')[0].value
+
+    return (
+        <div className="mb6">
+          <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
+            <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
+              {startCase(pageType)} <NibrsTerm /> details reported by {placeDisplay}
+            </h2>
+            {isLoading && <Loading />}
+            {isReady &&
+              <div className='mb3'>
+                <label htmlFor="year-selected" className="hide">
+                  Year selected
+                </label>
+                <select
+                  className="field field-sm select select-dark col-10"
+                  id="year-selected"
+                  onChange={handleSelectChange}
+                  value={this.state.yearSelected}
+                >
+                  {yrRange.map((y, i) =>
+                    <option key={i}>
+                      {y}
+                    </option>,
+                  )}
+                </select>
+              </div>}
+            {isReady &&
+              <NibrsIntro
+                crime={pageType}
+                isAgency={isAgency}
+                participation={participation}
+                place={place}
+                placeDisplay={placeDisplay}
+                totalCount={totalCount}
+                selectedYear={this.state.yearSelected}
+              />}
           </div>
-          <div className="serif italic fs-12">
-            Footnotes:
+          <div className="clearfix mxn1">
+           {this.getCards(data, place, categories)}
           </div>
-          <div className="serif italic fs-12">
-            The complexity of NIBRS data presents unique impediments to interconnecting
-            all facets of the information collected. In instances of multiple
-            offenders, for example, the Crime Data Explorer currently links an offender
-            to only one offense—the first listed. The same is true for incidents
-            involving multiple victims. The Uniform Crime Reporting Program is
-            working hard to improve these specific functions within the Crime Data
-            Explorer so that presentations in the coming months will fully encompass
-            all aspects of the NIBRS data.
-          </div>
-        </div>}
-    </div>
-  )
+          {isReady &&
+            <div>
+              <div className="serif italic fs-12">
+                Source: Reported <NibrsTerm size="sm" /> data from {placeDisplay}.
+              </div>
+              <div className="serif italic fs-12">
+                Footnotes:
+              </div>
+              <div className="serif italic fs-12">
+                The complexity of NIBRS data presents unique impediments to interconnecting
+                all facets of the information collected. In instances of multiple
+                offenders, for example, the Crime Data Explorer currently links an offender
+                to only one offense—the first listed. The same is true for incidents
+                involving multiple victims. The Uniform Crime Reporting Program is
+                working hard to improve these specific functions within the Crime Data
+                Explorer so that presentations in the coming months will fully encompass
+                all aspects of the NIBRS data.
+              </div>
+            </div>}
+        </div>
+      )
+  }
 }
 
 NibrsContainer.propTypes = {
@@ -158,6 +200,7 @@ NibrsContainer.propTypes = {
   until: PropTypes.number.isRequired,
   states: PropTypes.object,
 }
+
 
 const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
   const { since, until } = filters
