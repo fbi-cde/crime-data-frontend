@@ -5,7 +5,6 @@ import React from 'react'
 
 import { nibrsTerm } from '../Terms'
 import { formatNum } from '../../util/formats'
-import { rangeYears } from '../../util/years'
 
 const highlight = txt =>
   <strong>

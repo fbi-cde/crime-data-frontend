@@ -1,9 +1,6 @@
-import startCase from 'lodash.startcase'
-import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import DownloadDataBtn from '../DownloadDataBtn'
 import BarChart from './BarChart'
 import StackedBarChart from './StackedBarChart'
 

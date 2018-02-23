@@ -18,7 +18,6 @@ class AgencyChartContainer extends React.Component {
   state = { isSummary: true }
 
   generateTable(pageType, place, since, nibrsCounts, summary, until, submitsNibrs, isSummary) {
-    console.log('generateTable:', isSummary)
     const summaryLoading = summary.loading
     const summaryError = summary.error
     const nibrsError = nibrsCounts.error
