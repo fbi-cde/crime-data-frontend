@@ -1,6 +1,5 @@
 import { SUMMARIZED_FAILED, SUMMARIZED_FETCHING, SUMMARIZED_RECEIVED } from './constants'
 import api from '../util/api'
-// import { calculateRates, reshapeData } from '../util/summarized'
 
 export const failedSummarized = error => ({
   type: SUMMARIZED_FAILED,

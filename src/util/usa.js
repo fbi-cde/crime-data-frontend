@@ -54,6 +54,10 @@ const data = [
   { id: 'wv', slug: 'west-virginia', placeType: 'state' },
   { id: 'wi', slug: 'wisconsin', placeType: 'state' },
   { id: 'wy', slug: 'wyoming', placeType: 'state' },
+  { id: 'west', slug: 'west', placeType: 'region' },
+  { id: 'south', slug: 'south', placeType: 'region' },
+  { id: 'northeast', slug: 'northeast', placeType: 'region' },
+  { id: 'midwest', slug: 'midwest', placeType: 'region' },
 ].map(d => ({
   ...d,
   display: d.display || startCase(d.slug),
