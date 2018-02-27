@@ -35,6 +35,7 @@ export const calculateRates = (summaries, placeType) => {
         const summaryObject = Object()
         do {
         const yrData = getYearData(summaries, place, minYr)
+
         if (yrData.length > 0) {
           const offensesObject = Object()
           const offenses = Object.keys(yrData[0]).filter(
@@ -60,8 +61,8 @@ export const calculateRates = (summaries, placeType) => {
           offensesObject.year = minYr;
           offensesObject.population = population
           withRegionRates.push(offensesObject)
-          minYr += 1;
         }
+        minYr += 1;
       } while (minYr <= MAX_YEAR)
       summaryObject[place] = withRegionRates;
       return summaryObject;
