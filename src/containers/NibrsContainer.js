@@ -72,7 +72,6 @@ const NibrsContainer = ({
     const filteredData = filterNibrsData(data, { since, until })
 
     const dataParsed = parseNibrsCounts(filteredData, pageType)
-    console.log('dataParsed:', dataParsed)
 
      const offenseObj = dataParsed
       .find(d => d.title === 'Offenses')
