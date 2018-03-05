@@ -85,6 +85,7 @@ class About extends React.Component {
 
   render() {
     const { mapShown } = this.state
+    const { actions } = this.props
     const { region, states } = this.props
     const toggles = [
       { disabled: !mapShown, type: 'table' },
@@ -248,6 +249,11 @@ class About extends React.Component {
                   <li className="mb1">
                     <a href="https://ucr.fbi.gov/nibrs/nibrs-user-manual">
                       NIBRS User Manual
+                    </a>
+                  </li>
+                  <li className="mb1">
+                    <a href="https://forms.fbi.gov/cde">
+                      Submit Feedback
                     </a>
                   </li>
                 </ul>

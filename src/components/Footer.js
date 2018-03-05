@@ -54,6 +54,10 @@ const links = [
       text: 'Accessibility',
       href: 'https://www.fbi.gov/accessibility',
     },
+    {
+      text: 'Submit Feedback',
+      href: 'https://forms.fbi.gov/cde',
+    },
   ],
 ]
 

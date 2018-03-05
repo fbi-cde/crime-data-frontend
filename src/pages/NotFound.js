@@ -18,6 +18,15 @@ const NotFound = () =>
     <Link to="/" className="btn btn-primary mb2 fs-18">
       Return home
     </Link>
+    <p className="fs-18 serif">
+      If you still can't find what you're looking for, please{' '}
+    </p>
+    <Link to="https://forms.fbi.gov/cde" className="btn btn-primary mb2 fs-18">
+      Submit Feedback
+    </Link>
+    <p className="fs-18 serif">
+      or contact us.
+    </p>
   </div>
 
 NotFound.propTypes = {
