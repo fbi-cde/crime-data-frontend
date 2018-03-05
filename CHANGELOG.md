@@ -2,6 +2,9 @@
 All notable changes to this project be documented in this file.
 # Change Log
 All notable changes to this project be documented in this file.
+## [2.20.0] - 2018-1-23
+##Added
+- Adds Feedback Links that forward to https://forms.fbi.gov/cde
 ## [2.19.0] - 2018-1-23
 ##Fixed
 - Fixed issue with CDE inaccuracly displaying Arson totals. ([#1320] https://github.com/fbi-cde/crime-data-frontend/pull/1320)
