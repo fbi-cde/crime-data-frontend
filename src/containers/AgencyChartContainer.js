@@ -31,6 +31,25 @@ class AgencyChartContainer extends React.Component {
 
     const summaryData = summary.data.data
 
+
+    let nibrsData
+    let nibrsDataClean
+    let hasNoNibrsValues
+    let noNibrsDataText
+    if (submitsNibrs) {
+      nibrsData = nibrsCounts.data.offenseCount.data
+      nibrsDataClean = nibrsData
+         .filter(d => d.key === 'Incident Count' && d.data_year >= since && d.data_year <= until)
+         .sort((a, b) => a.data_year - b.data_year)
+
+      hasNoNibrsValues =
+         nibrsDataClean.length ===
+         nibrsDataClean.filter(d => d.actual === 0 && d.cleared === 0).length
+
+      noNibrsDataText = `There were no ${lowerCase(
+         pageType,
+       )} incidents reported during this time period.`
+    }
     // if (!data || data.length === 0) return <NoData />
 
     const fname = `${place}-${pageType}-${since}-${until}`
@@ -67,7 +86,27 @@ class AgencyChartContainer extends React.Component {
              </div>}
        </div>
      )
-   }
+   } else if (!isSummary && submitsNibrs) {
+     return (
+       <div>
+         {hasNoSummaryValues
+           ? <NoData text={noNibrsDataText} />
+           : <div>
+               <AgencyNibrsChart
+                 crime={pageType}
+                 data={nibrsDataClean}
+                 since={since}
+                 submitsNibrs
+                 until={until}
+               />
+               <DownloadDataBtn
+                 data={[{ data: nibrsDataClean, filename: `${fname}.csv` }]}
+                 filename={fname}
+               />
+             </div>}
+       </div>
+     )
+    }
     return <div />
   }
 
@@ -84,6 +123,19 @@ class AgencyChartContainer extends React.Component {
           <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
             {startCase(pageType)} reported by {agency.display}, {since}–{until}
           </h2>
+          <div className="center">
+            {submitsNibrs &&
+              <AgencyChartToggle
+              isSummary={this.state.isSummary}
+              showSummary={() => {
+                this.setState({ isSummary: true })
+              }}
+              showNibrs={() => {
+                this.setState({ isSummary: false })
+              }}
+              />
+            }
+          </div>
           {this.generateTable(pageType, place, since, nibrsCounts, summary, until, submitsNibrs, this.state.isSummary)}
         </div>
         {!summary.loading &&
