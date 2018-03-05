@@ -2,7 +2,7 @@
 All notable changes to this project be documented in this file.
 # Change Log
 All notable changes to this project be documented in this file.
-## [2.20.0] - 2018-1-23
+## [2.20.0] - 2018-3-05
 ##Added
 - Adds Feedback Links that forward to https://forms.fbi.gov/cde
 ## [2.19.0] - 2018-1-23
