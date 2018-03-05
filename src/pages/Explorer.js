@@ -153,6 +153,7 @@ class Explorer extends React.Component {
             {crimePage && isAgency && crimePage && <SparklineContainer />}
             {crimePage && isAgency && <AgencyChartContainer /> }
             {crimePage && !isAgency && <TrendContainer />}
+            {crimePage && <PoliceEmploymentContainer /> }
             {!crimePage && <LeokaContainer /> }
             {crimePage && !isCombinedCrime && <NibrsContainer /> }
             {crimePage && <AboutTheData
