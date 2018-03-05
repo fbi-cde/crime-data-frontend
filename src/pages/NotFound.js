@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Link from '../components/Link'
-import { showFeedback } from '../actions/feedback'
 
 const NotFound = () =>
   <div className="container mb8 mx-auto px2 pt8">
@@ -30,13 +29,10 @@ const NotFound = () =>
   </div>
 
 NotFound.propTypes = {
-  actions: PropTypes.shape({
-    showFeedback: PropTypes.func,
-  }),
+
 }
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ showFeedback }, dispatch),
 })
 
 export default connect(null, mapDispatchToProps)(NotFound)

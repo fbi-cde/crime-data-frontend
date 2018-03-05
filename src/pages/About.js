@@ -11,7 +11,6 @@ import Term from '../components/Term'
 import UsaMap from '../components/UsaMap'
 
 import DownloadDataBtn from '../components/DownloadDataBtn'
-import { showFeedback } from '../actions/feedback'
 import participation from '../util/participation'
 import { data as usaData, nationalKey } from '../util/usa'
 
@@ -283,9 +282,6 @@ class About extends React.Component {
 
 /* eslint-disable */
 About.propTypes = {
-  actions: PropTypes.shape({
-    showFeedback: PropTypes.func,
-  }),
 }
 /* eslint-enable */
 
@@ -375,8 +371,5 @@ const mapStateToProps = ({ region, states }) => ({
   states,
 })
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ showFeedback }, dispatch),
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(About)
+export default connect(mapStateToProps)(About)
