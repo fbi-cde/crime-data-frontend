@@ -30,7 +30,6 @@ import { fetchUcrRegion } from './actions/region'
 import { fetchUcrState } from './actions/states'
 
 import createEnv from './util/env'
-import { createIssue } from './util/github'
 import history from './util/history'
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -41,9 +40,6 @@ const ENV = createEnv()
 const {
   CDE_API: API,
   API_KEY: apiKey,
-  GITHUB_ISSUE_REPO_OWNER: repoOwner,
-  GITHUB_ISSUE_REPO_NAME: repoName,
-  GITHUB_ISSUE_BOT_TOKEN: repoToken,
   PORT,
 } = ENV
 
@@ -121,23 +117,6 @@ app.get('/api-proxy/*', (req, res) => {
     .catch(e => {
       res.status(e.response.status).end()
     })
-})
-
-app.post('/feedback', (req, res) => {
-  const { body, title } = req.body
-  const allEnvs = repoOwner && repoName && repoToken
-
-  if (!allEnvs || !acceptHostname(req.hostname)) return res.status(401).end()
-
-  return createIssue({
-    body,
-    owner: repoOwner,
-    repo: repoName,
-    title,
-    token: repoToken,
-  })
-    .then(issue => res.send(issue.data))
-    .catch(e => res.status(e.response.status).end())
 })
 
 app.get('/status', (req, res) => res.send(`OK v${packageJson.version}`))

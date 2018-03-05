@@ -1,17 +1,14 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import reduceEntries from 'reduce-entries'
-import { bindActionCreators } from 'redux'
 
 import SharingTags from '../components/SharingTags'
 import Term from '../components/Term'
 import UsaMap from '../components/UsaMap'
 
 import DownloadDataBtn from '../components/DownloadDataBtn'
-import { showFeedback } from '../actions/feedback'
 import participation from '../util/participation'
 import { data as usaData, nationalKey } from '../util/usa'
 
@@ -250,6 +247,11 @@ class About extends React.Component {
                       NIBRS User Manual
                     </a>
                   </li>
+                  <li className="mb1">
+                    <a href="https://forms.fbi.gov/cde">
+                      Submit Feedback
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -277,9 +279,6 @@ class About extends React.Component {
 
 /* eslint-disable */
 About.propTypes = {
-  actions: PropTypes.shape({
-    showFeedback: PropTypes.func,
-  }),
 }
 /* eslint-enable */
 
@@ -369,8 +368,5 @@ const mapStateToProps = ({ region, states }) => ({
   states,
 })
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ showFeedback }, dispatch),
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(About)
+export default connect(mapStateToProps)(About)
