@@ -200,7 +200,7 @@ const fetchNibrsCounts = ({ dim, pageType, place, placeType, type, placeId }) =>
 
   return get(url, params).then(d => ({
     key: `${type}${upperFirst(dim)}`,
-    data: JSON.parse(d.results),
+    data: d.results,
   }))
 }
 

@@ -14,19 +14,20 @@ const highlight = txt =>
 const NibrsIntro = ({
   crime,
   isAgency,
-  selectedYear,
+  nibrsFirstYear,
   participation,
   placeDisplay,
   totalCount,
+  until,
 }) => {
   const noun = 'incident'
-
   if (isAgency) {
     return (
       <div className="m0 sm-col-10">
         <p>
-          In {highlight((selectedYear))}, this agency reported {highlight(formatNum(totalCount))} individual{' '}
-          {crime} {pluralize(noun, totalCount)} to the FBI.
+          This agency reported {highlight(formatNum(totalCount))} individual{' '}
+          {crime} {pluralize(noun, totalCount)} to the FBI between{' '}
+          {highlight(nibrsFirstYear)} and {highlight(until)}.
         </p>
       </div>
     )
@@ -37,8 +38,9 @@ const NibrsIntro = ({
   return (
     <div className="m0 sm-col-10">
       <p>
-        In {highlight((selectedYear))}, there were {highlight(formatNum(totalCount))} individual {crime}{' '}
-        {pluralize(noun, totalCount)} reported to the FBI in {placeDisplay}{' '} by{' '}
+        There were {highlight(formatNum(totalCount))} individual {crime}{' '}
+        {pluralize(noun, totalCount)} reported to the FBI in {placeDisplay}{' '}
+        between {highlight(nibrsFirstYear)} and {highlight(until)} by{' '}
         {highlight(agencyCt)} law enforcement {pluralize('agency', agencyCt)}{' '}
         reporting {nibrsTerm} data.
       </p>
@@ -49,10 +51,11 @@ const NibrsIntro = ({
 NibrsIntro.propTypes = {
   crime: PropTypes.string.isRequired,
   isAgency: PropTypes.bool.isRequired,
-  selectedYear: PropTypes.number.isRequired,
+  nibrsFirstYear: PropTypes.number.isRequired,
   placeDisplay: PropTypes.string.isRequired,
   totalCount: PropTypes.number.isRequired,
   participation: PropTypes.array.isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 export default NibrsIntro
