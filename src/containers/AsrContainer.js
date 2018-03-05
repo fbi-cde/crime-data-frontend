@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import TableChart from '../components/graphs/TableChart'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
-import DownloadDataBtn from '../components/DownloadDataBtn'
+import DownloadDataBtn2 from '../components/DownloadDataBtn2'
 import { getAgency } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import { nationalKey } from '../util/usa'
@@ -33,18 +33,6 @@ class AsrContainer extends React.Component {
     let femaleByAge = asr.data["female"]
     let year = this.state.yearSelected
 
-    const downloadm = {
-      data: maleByAge.data,
-      filename: `${place}-asr-${slugify(maleByAge.noun
-      )}-${year}.csv`,
-    }
-
-    const downloadf = {
-      data: femaleByAge.data,
-      filename: `${place}-asr-${slugify(femaleByAge.noun
-      )}-${year}.csv`,
-    }
-
     return (
       <div>
         <h2 className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
@@ -56,10 +44,10 @@ class AsrContainer extends React.Component {
               Reported Offenses
             </span>
         </div>
-        <DownloadDataBtn
+        <DownloadDataBtn2
             ariaLabel={`Download ${maleByAge.noun} data as a CSV`}
-            data={downloadm}
-            filename={`${place}-asr-${slugify(maleByAge.noun)}-${year}`}
+            data={maleByAge.data}
+            filename={`${place}-asr-${slugify(maleByAge.noun)}-male-${year}`}
             text="Download data"
             />
         <h2 className="mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
@@ -71,10 +59,10 @@ class AsrContainer extends React.Component {
               Reported Offenses
             </span>
         </div>
-        <DownloadDataBtn
+        <DownloadDataBtn2
             ariaLabel={`Download ${femaleByAge.noun} data as a CSV`}
-            data={downloadf}
-            filename={`${place}-asr-${slugify(femaleByAge.noun)}-${year}`}
+            data={femaleByAge.data}
+            filename={`${place}-asr-${slugify(femaleByAge.noun)}-female-${year}`}
             text="Download data"
             />
       </div>
@@ -94,18 +82,6 @@ class AsrContainer extends React.Component {
     let raceYouthData = asr.data["race-youth"]
     let year = this.state.yearSelected
 
-    const downloadr = {
-      data: raceData.data,
-      filename: `${place}-asr-${slugify(raceData.noun
-      )}-${year}.csv`,
-    }
-
-    const downloadyth = {
-      data: raceYouthData.data,
-      filename: `${place}-asr-${slugify(raceYouthData.noun
-      )}-${year}.csv`,
-    }
-
     return (
       <div>
         <h2 className="mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light">
@@ -117,9 +93,9 @@ class AsrContainer extends React.Component {
               Reported Offenses
             </span>
         </div>
-        <DownloadDataBtn
+        <DownloadDataBtn2
             ariaLabel={`Download ${raceData.noun} data as a CSV`}
-            data={downloadr}
+            data={raceData.data}
             filename={`${place}-asr-${slugify(raceData.noun)}-${year}`}
             text="Download data"
             />
@@ -132,10 +108,10 @@ class AsrContainer extends React.Component {
               Reported Offenses
             </span>
         </div>
-        <DownloadDataBtn
+        <DownloadDataBtn2
             ariaLabel={`Download ${raceYouthData.noun} data as a CSV`}
-            data={downloadyth}
-            filename={`${place}-asr-${slugify(raceYouthData.noun)}-${year}`}
+            data={raceYouthData.data}
+            filename={`${place}-asr-${slugify(raceYouthData.noun)}-yth-${year}`}
             text="Download data"
             />
       </div>
