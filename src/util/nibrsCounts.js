@@ -71,7 +71,7 @@ const getOffenseData = (data, offense) => {
 }
 
 export const reshapeSexData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
+  const filtered = data
   let male = 0;
   let female = 0
   let unknown = 0
@@ -97,7 +97,7 @@ export const reshapeSexData = (data, offense) => {
 }
 
 export const reshapeRaceData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
+  const filtered = data
   let americanIndian = 0;
   let asian = 0
   let black = 0
@@ -149,7 +149,7 @@ export const reshapeRaceData = (data, offense) => {
 }
 
 export const reshapeEthnicityData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
+  const filtered = data
   let hispanic = 0;
   let multiple = 0
   let notHispanic = 0
@@ -187,7 +187,7 @@ export const reshapeEthnicityData = (data, offense) => {
 }
 
 export const reshapeLocationData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
+  const filtered = data
   let residencehome = 0
   let parkinggaragelot = 0
   let abandonedcondemnedstructure = 0
@@ -520,7 +520,7 @@ export const reshapeLocationData = (data, offense) => {
 }
 
 export const reshapeRelationship = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
+  const filtered = data
   let acquaintance = 0
   let babysittee = 0
   let boyfriendgirlfriend = 0
@@ -715,7 +715,7 @@ export const reshapeRelationship = (data, offense) => {
 
 
 export const reshapeAgeData = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
+  const filtered = data
   let range09 = 0;
   let range1019 = 0
   let range2029 = 0
@@ -911,11 +911,10 @@ const relationships = (data, offense) => {
 }
 
 export const offensesDemo = (data, offense) => {
-  const filtered = getOffenseData(data, offense)
   let count = 0
-
-  for (const i in filtered) {
-    count += filtered[i].offense_count
+  console.log("Demo:",data)
+  for (const i in data) {
+    count += data[i].offense_count
   }
   const obj = {};
   obj.count = count;
@@ -942,7 +941,7 @@ const parseNibrsCounts = (data, offense) => [
   victimDemo(data, offense),
   relationships(data, offense),
   locations(data.victimLocation, offense),
-  offensesDemo(data.offense, offense),
+  offensesDemo(data.offenseCount, offense),
 ]
 
 export default parseNibrsCounts

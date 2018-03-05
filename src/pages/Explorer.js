@@ -9,7 +9,6 @@ import AboutTheData from '../components/AboutTheData'
 import AgencyChartContainer from '../containers/AgencyChartContainer'
 import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer'
 import NibrsContainer from '../containers/NibrsContainer'
-import PoliceEmploymentContainer from '../containers/PoliceEmploymentContainer'
 import LeokaContainer from '../containers/LeokaContainer'
 import NotFound from './NotFound'
 import SharingTags from '../components/SharingTags'
@@ -154,7 +153,6 @@ class Explorer extends React.Component {
             {crimePage && isAgency && crimePage && <SparklineContainer />}
             {crimePage && isAgency && <AgencyChartContainer /> }
             {crimePage && !isAgency && <TrendContainer />}
-            {crimePage && <PoliceEmploymentContainer /> }
             {!crimePage && <LeokaContainer /> }
             {crimePage && !isCombinedCrime && <NibrsContainer /> }
             {crimePage && <AboutTheData
