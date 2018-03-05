@@ -84,7 +84,6 @@ class About extends React.Component {
 
   render() {
     const { mapShown } = this.state
-    const { actions } = this.props
     const { region, states } = this.props
     const toggles = [
       { disabled: !mapShown, type: 'table' },

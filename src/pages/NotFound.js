@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 import Link from '../components/Link'
 
@@ -32,7 +31,4 @@ NotFound.propTypes = {
 
 }
 
-const mapDispatchToProps = dispatch => ({
-})
-
-export default connect(null, mapDispatchToProps)(NotFound)
+export default connect(null)(NotFound)

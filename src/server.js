@@ -40,9 +40,6 @@ const ENV = createEnv()
 const {
   CDE_API: API,
   API_KEY: apiKey,
-  GITHUB_ISSUE_REPO_OWNER: repoOwner,
-  GITHUB_ISSUE_REPO_NAME: repoName,
-  GITHUB_ISSUE_BOT_TOKEN: repoToken,
   PORT,
 } = ENV
 
