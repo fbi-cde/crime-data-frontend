@@ -32,12 +32,6 @@ const links = [
       text: 'License',
       href: 'https://github.com/fbi-cde/crime-data-frontend/blob/master/LICENSE.md',
     },
-    /*
-    {
-      text: 'Feedback',
-      action: 'showFeedback',
-    },
-    */
     {
       text: 'Privacy Policy',
       href: 'https://www.fbi.gov/privacy_policy',
@@ -53,6 +47,10 @@ const links = [
     {
       text: 'Accessibility',
       href: 'https://www.fbi.gov/accessibility',
+    },
+    {
+      text: 'Submit Feedback',
+      href: 'https://forms.fbi.gov/cde',
     },
   ],
 ]
