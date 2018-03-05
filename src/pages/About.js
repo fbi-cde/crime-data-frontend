@@ -1,10 +1,8 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import reduceEntries from 'reduce-entries'
-import { bindActionCreators } from 'redux'
 
 import SharingTags from '../components/SharingTags'
 import Term from '../components/Term'
