@@ -10,7 +10,7 @@ import XAxis from '../XAxis'
 import YAxis from '../YAxis'
 import { rangeYears } from '../../util/years'
 
-class AgencyChart extends React.Component {
+class AgencySummaryChart extends React.Component {
   constructor(props) {
     super(props)
     this.state = { svgParentWidth: null, yearSelected: null }
@@ -170,6 +170,7 @@ class AgencyChart extends React.Component {
           yrRange={yrRange}
           until={until}
           since={since}
+          nibrsDetails={false}
         />
         <div className="mb2 h6 bold monospace black">
           Total {noun} reported by year
@@ -263,7 +264,7 @@ class AgencyChart extends React.Component {
   }
 }
 
-AgencyChart.propTypes = {
+AgencySummaryChart.propTypes = {
   colors: PropTypes.array.isRequired,
   crime: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -277,7 +278,7 @@ AgencyChart.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-AgencyChart.defaultProps = {
+AgencySummaryChart.defaultProps = {
   colors: ['#702c27', '#ff5e50'],
   mutedColors: ['#f4e1df', '#faefee'],
   size: {
@@ -286,4 +287,4 @@ AgencyChart.defaultProps = {
   },
 }
 
-export default AgencyChart
+export default AgencySummaryChart

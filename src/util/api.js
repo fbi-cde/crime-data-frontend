@@ -12,74 +12,21 @@ import summaryApi from './api/summary'
 
 export const API = '/api-proxy'
 
-const dimensionEndpoints = {
-  ageNum: 'age_num',
-  locationName: 'location_name',
-  offenseName: 'offense_name',
-  raceCode: 'race_code',
-  relationship: 'offender_relationship',
-  sexCode: 'sex_code',
-}
-
-const fetchNibrs = ({ crime, dim, place, placeType, type, placeId }) => {
-  const loc =
-    place === nationalKey
-      ? 'national'
-      : placeType === 'agency'
-        ? `agencies/${place}`
-        : `states/${placeId}`
-
-  const field = dimensionEndpoints[dim] || dim
-  const fieldPath = dim === 'offenseName' ? field : `${field}/offenses`
-  const url = `${API}/${type}s/count/${loc}/${fieldPath}`
-
-  const params = {
-    size: 50,
-    aggregate_many: false,
-    explorer_offense: mapToApiOffense(crime),
-  }
-
-  return get(url, params).then(d => ({
-    key: `${type}${upperFirst(dim)}`,
-    data: d.results,
-  }))
-}
-
-const getNibrsRequests = params => {
-  const { crime, place, placeType, placeId } = params
-
-  const slices = [
-    { type: 'offender', dim: 'ageNum' },
-    { type: 'offender', dim: 'ethnicity' },
-    { type: 'offender', dim: 'raceCode' },
-    { type: 'offender', dim: 'sexCode' },
-    { type: 'offense', dim: 'locationName' },
-    { type: 'offense', dim: 'offenseName' },
-    { type: 'victim', dim: 'ageNum' },
-    { type: 'victim', dim: 'ethnicity' },
-    { type: 'victim', dim: 'raceCode' },
-    { type: 'victim', dim: 'sexCode' },
-    { type: 'victim', dim: 'relationship' },
-  ]
-
-  return slices.map(s => fetchNibrs({ ...s, crime, place, placeType, placeId }))
-}
-
 const fetchArson = (place, placeId, placeType) => {
-  let api
-  const params = { size: 50 }
+  let url
   if (placeType === 'state') {
-    api = summaryApi.getStateArson(placeId, params)
+    url = `${API}/api/arson/states/${placeId}?per_page=50`
   } else if (placeType === 'region') {
-    api = summaryApi.getRegionalArson(place, params)
+    url = `${API}/api/arson/regions/${place}?per_page=50`
   } else {
-    api = summaryApi.getNationalArson(params);
+    url = `${API}/api/arson/national?per_page=50`
   }
 
-  return api.then(r => r.results.map(d => ({
-     year: d.year, arson: d.actual
-   })))
+  return get(url).then(({ results }) =>
+    results.map(d => ({ year: d.year, arson: d.actual })),
+  )
 }
+const getAgency = ori => get(`${API}/agencies/${ori}`)
 
 const fetchEstimates = (place, placeId, placeType) => {
     let api
@@ -138,18 +85,15 @@ export const formatError = error => ({
   url: error.config.url,
 })
 
-const fetchNibrsCounts = ({ dim, place, placeType, type, placeId }) => {
+const fetchNibrsCounts = ({ dim, pageType, place, placeType, type, placeId }) => {
   const loc =
     place === nationalKey
       ? 'national'
       : placeType === 'agency'
-        ? `agencies/${place}`
+        ? `agency/${place}`
         : `states/${placeId}`
 
-  const field = dimensionEndpoints[dim] || dim
-  let url
-  if (field !== '') { url = `${API}/api/nibrs/${type}/${loc}/${field}` } else { url = `${API}/api/nibrs/${type}/${loc}` }
-
+  const url = dim !== '' ? `${API}/api/nibrs/${pageType}/${type}/${loc}/${dim}` : `${API}/api/nibrs/${pageType}/${type}/${loc}`
 
   const params = {
     size: 1000,
@@ -166,19 +110,19 @@ const getNibrsCountsRequests = params => {
   const { pageType, place, placeType, placeId } = params
 
   const slices = [
-    { type: 'offender', dim: '' },
+    { type: 'offender', dim: 'count' },
     { type: 'offender', dim: 'age' },
     { type: 'offender', dim: 'sex' },
     { type: 'offender', dim: 'race' },
     { type: 'offender', dim: 'ethnicity' },
-    { type: 'victim', dim: '' },
+    { type: 'victim', dim: 'count' },
     { type: 'victim', dim: 'age' },
     { type: 'victim', dim: 'ethnicity' },
     { type: 'victim', dim: 'race' },
     { type: 'victim', dim: 'sex' },
     { type: 'victim', dim: 'location' },
-    { type: 'victim', dim: 'relationships' },
-    { type: 'offense', dim: '' },
+    { type: 'victim', dim: 'relationship' },
+    { type: 'offense', dim: 'count' },
 
   ]
   return slices.map(s => fetchNibrsCounts({ ...s, pageType, place, placeType, placeId }))
@@ -186,16 +130,18 @@ const getNibrsCountsRequests = params => {
 
 const getSummarizedRequest = filters => {
   const estimatesApi = `${API}/summarized/agency/${filters.place}/${filters.pageType}`
-  return get(estimatesApi).then(d => ({
+  const params = {
+    per_page: 100,
+  }
+  return get(estimatesApi, params).then(d => ({
     data: d.results,
   }))
 }
+
 export default {
   fetchAggregates,
   fetchAgencyAggregates,
-  fetchNibrs,
-  getNibrsRequests,
-  fetchNibrsCounts,
+  getAgency,
   getNibrsCountsRequests,
   getSummaryRequests,
   getSummarizedRequest,

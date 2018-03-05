@@ -7,6 +7,9 @@ const initialState = {
   pageType: 'violent-crime',
   since: MAX_YEAR - 10,
   until: MAX_YEAR,
+  place: 'united-states',
+  placeType: 'national',
+  placeid: 'usa',
 }
 
 export default (state = initialState, action) => {

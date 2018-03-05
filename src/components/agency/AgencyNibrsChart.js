@@ -10,7 +10,7 @@ import XAxis from '../XAxis'
 import YAxis from '../YAxis'
 import { rangeYears } from '../../util/years'
 
-class AgencyChart extends React.Component {
+class AgencyNibrsChart extends React.Component {
   constructor(props) {
     super(props)
     this.state = { svgParentWidth: null, yearSelected: null }
@@ -45,8 +45,7 @@ class AgencyChart extends React.Component {
       // year selected but no data reported
       active = {
         year: yearSelected,
-        actual: 0,
-        cleared: 0,
+        value: 0,
       }
     } else {
       active = data[data.length - 1]
@@ -73,7 +72,7 @@ class AgencyChart extends React.Component {
       year => !data.find(d => d.data_year === year),
     )
     const zeroReportedYears = data
-      .filter(d => d.actual === 0 && d.cleared === 0)
+      .filter(d => d.value === 0)
       .map(d => d.data_year)
     const noDataYears = missingYears.concat(zeroReportedYears)
 
@@ -92,13 +91,13 @@ class AgencyChart extends React.Component {
     const {
       colors,
       crime,
+      data,
       mutedColors,
       since,
       size,
       submitsNibrs,
       until,
     } = this.props
-    let data = this.props.data
     const { svgParentWidth } = this.state
 
     const svgWidth = svgParentWidth || size.width
@@ -106,12 +105,9 @@ class AgencyChart extends React.Component {
     const { margin } = size
     const width = svgWidth - margin.left - margin.right
     const height = svgHeight - margin.top - margin.bottom
-    const negHeight = height * -1
-    const negHeight2 = negHeight + 10
-
     const xPadding = svgWidth < 500 ? 20 : 40
 
-    const keys = ['actual', 'cleared']
+    const keys = ['value']
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
     const noun = submitsNibrs ? 'incidents' : 'offenses'
@@ -133,23 +129,6 @@ class AgencyChart extends React.Component {
       .padding(0)
 
     const { active, priorYear: activePriorYear } = this.getActive(data)
-    let lastRapeLegacyReported = 1995;
-    if (crime === 'rape') {
-      const dataSet = []
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].actual !== 0 && data[i].cleared !== 0) {
-          if (data[i].offense === 'rape-legacy') {
-            if (data[i].data_year > lastRapeLegacyReported) {
-              lastRapeLegacyReported = data[i].data_year
-            }
-          }
-          dataSet.push(data[i]);
-        }
-      }
-      data = dataSet
-    }
-    lastRapeLegacyReported += 1;
-
     const noDataYears = this.getNoDataYears(data, since, until)
 
 
@@ -170,6 +149,7 @@ class AgencyChart extends React.Component {
           yrRange={yrRange}
           until={until}
           since={since}
+          nibrsDetails
         />
         <div className="mb2 h6 bold monospace black">
           Total {noun} reported by year
@@ -184,45 +164,16 @@ class AgencyChart extends React.Component {
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x0} height={height} />
               <YAxis scale={y} width={width} />
-              {until > 2013 &&
-                crime === 'rape' &&
-                <g transform={`translate(${x0(lastRapeLegacyReported)}, ${height})`}>
-                  <line stroke="#95aabc" strokeWidth="1" y2={-height} />
-                  <rect
-                    className="fill-blue"
-                    height="8"
-                    transform="rotate(45 4 4)"
-                    width="8"
-                    x={-4 * Math.sqrt(2)}
-                  />
-                  <text
-                    className="fill-blue fs-10 italic serif"
-                    textAnchor="end"
-                    x="-12"
-                    y={negHeight}
-                  >
-                    Revised rape
-                  </text>
-                  <text
-                    className="fill-blue fs-10 italic serif"
-                    textAnchor="end"
-                    x="-12"
-                    y={negHeight2}
-                  >
-                    definition
-                  </text>
-                </g>
-              }
               <g transform="translate(0, -0.5)">
                 {data.map(d =>
                   <g key={d.year} transform={`translate(${x0(d.data_year)}, 0)`}>
                     {keys.map(k =>
                       <rect
                         key={`${d.data_year}-${k}`}
-                        x={x1(k) + 5}
+                        x={x1(k)}
                         y={y(d[k])}
                         height={Math.max(0, height - y(d[k]))}
-                        width={x1.bandwidth() - 5}
+                        width={x1.bandwidth()}
                         fill={
                           this.state.yearSelected === d.data_year
                             ? colorMap(k)
@@ -234,7 +185,6 @@ class AgencyChart extends React.Component {
                       />,
                     )}
                   </g>,
-
                 )}
                 {noDataYears.map(year =>
                   <g
@@ -263,7 +213,7 @@ class AgencyChart extends React.Component {
   }
 }
 
-AgencyChart.propTypes = {
+AgencyNibrsChart.propTypes = {
   colors: PropTypes.array.isRequired,
   crime: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -277,7 +227,7 @@ AgencyChart.propTypes = {
   until: PropTypes.number.isRequired,
 }
 
-AgencyChart.defaultProps = {
+AgencyNibrsChart.defaultProps = {
   colors: ['#702c27', '#ff5e50'],
   mutedColors: ['#f4e1df', '#faefee'],
   size: {
@@ -286,4 +236,4 @@ AgencyChart.defaultProps = {
   },
 }
 
-export default AgencyChart
+export default AgencyNibrsChart

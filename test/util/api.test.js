@@ -52,40 +52,6 @@ describe('api utility', () => {
     })
   })
 
-  describe('fetchNibrs()', () => {
-    it('should call the /offenders/count/states/:postal_abbr/:dim/offenses endpoint', done => {
-      const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      const args = { ...params, type: 'offender', dim: 'sexCode' }
-      api.fetchNibrs(args).then(() => {
-        const spyArgs = spy.args[0]
-        const expectedUrl =
-          '/api-proxy/offenders/count/states/ca/sex_code/offenses'
-        expect(spyArgs[0]).toEqual(expectedUrl)
-        expect(spyArgs[1].explorer_offense).toEqual(params.crime)
-        done()
-      })
-    })
-
-    it('should return a data structure with a key and data', done => {
-      sandbox.stub(http, 'get', () => createPromise(success))
-      const args = { ...params, type: 'offender', dim: 'sexCode' }
-      api.fetchNibrs(args).then(d => {
-        expect(d.key).toEqual('offenderSexCode')
-        expect(d.data).toEqual(success.results)
-        done()
-      })
-    })
-  })
-
-  describe('getNibrsRequests()', () => {
-    it('should call getNibrs 11 times', done => {
-      const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      Promise.all(api.getNibrsRequests(params)).then(() => {
-        expect(spy.callCount).toEqual(11)
-        done()
-      })
-    })
-  })
 
   describe('fetching summary data', () => {
     it('should request /estimates/national for national', done => {

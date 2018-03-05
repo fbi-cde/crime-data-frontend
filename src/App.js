@@ -8,12 +8,10 @@ import BetaBanner from './components/BetaBanner'
 import ClearCacheBtn from './components/ClearCacheBtn'
 import Disclaimer from './components/Disclaimer'
 import NOEDisclaimer from './components/NOEDisclaimer'
-import Feedback from './components/Feedback'
 import Footer from './components/Footer'
 import Glossary from './components/Glossary'
 import Header from './components/Header'
 import SkipContent from './components/SkipContent'
-import { hideFeedback, showFeedback } from './actions/feedback'
 import * as glossaryActions from './actions/glossary'
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -21,7 +19,6 @@ const isProd = process.env.NODE_ENV === 'production'
 const App = ({
   actions,
   children,
-  feedbackOpen,
   glossary,
   location,
   sidebarOpen,
@@ -38,7 +35,6 @@ const App = ({
     <Glossary actions={actions} {...glossary} />
     <Footer actions={actions} />
     {!isProd && <ClearCacheBtn />}
-    <Feedback isOpen={feedbackOpen} onClose={actions.hideFeedback} />
     <Analytics />
   </div>
 
@@ -47,20 +43,18 @@ App.propTypes = {
     hideFeedback: PropTypes.func,
     showFeedback: PropTypes.func,
   }),
-  feedbackOpen: PropTypes.bool,
   glossary: PropTypes.object,
   sidebarOpen: PropTypes.bool,
 }
 
-const mapStateToProps = ({ feedback, glossary, sidebar }) => ({
-  feedbackOpen: feedback.isOpen,
+const mapStateToProps = ({ glossary, sidebar }) => ({
   glossary,
   sidebarOpen: sidebar.isOpen,
 })
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
-    { hideFeedback, showFeedback, ...glossaryActions },
+    { ...glossaryActions },
     dispatch,
   ),
 })

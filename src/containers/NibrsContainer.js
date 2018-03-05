@@ -50,14 +50,12 @@ const NibrsContainer = ({
   until,
   states,
 }) => {
-  let content = null
-
   if (
     (isAgency && (!agency || agency.nibrs_months_reported !== 12)) ||
     !shouldShowNibrs({ pageType, place, placeType }, states)
   ) {
     return null
-  }
+}
 
   const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
   const nibrsFirstYear = initialNibrsYear({ place, placeType, since })
@@ -66,6 +64,7 @@ const NibrsContainer = ({
   const isReady = nibrsCounts.loaded
   const isLoading = nibrsCounts.loading
   let totalCount = 0
+  let content = null
 
 
   if (error) content = <ErrorCard error={error} />
@@ -156,10 +155,10 @@ NibrsContainer.propTypes = {
   since: PropTypes.number.isRequired,
   participation: PropTypes.array.isRequired,
   until: PropTypes.number.isRequired,
-  states: PropTypes.object,
+  states: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
+const mapStateToProps = ({ agencies, filters, nibrsCounts, participation, states }) => {
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -180,6 +179,7 @@ const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
     placeType,
     nibrsCounts,
     participation: filteredParticipation,
+    states,
   }
 }
 

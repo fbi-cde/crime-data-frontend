@@ -1,6 +1,6 @@
 /* eslint no-undef: 0 */
 
-import AgencyChart from '../../src/components/agency/AgencyChart'
+import AgencyChart from '../../src/components/agency/AgencySummaryChart'
 
 describe('AgencyChart component', () => {
   describe('getActive()', () => {
