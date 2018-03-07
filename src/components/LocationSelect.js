@@ -98,6 +98,10 @@ class LocationSelect extends React.Component {
               States
             </option>
             {stateOpts}
+            <option value="" disabled>
+              Regions
+            </option>
+            {regionOpts}
             </select>
         </div>
       )
