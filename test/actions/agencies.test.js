@@ -13,7 +13,7 @@ import {
   fetchingAgency,
   receivedAgency,
 } from '../../src/actions/agencies'
-import api from '../../src/util/api'
+import api from '../../src/util/api/agency'
 
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)

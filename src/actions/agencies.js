@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import {
   AGENCIES_FETCHING,
   AGENCIES_RECEIVED,
@@ -7,7 +5,8 @@ import {
   AGENCY_FETCHING,
   AGENCY_RECEIVED,
 } from './constants'
-import api, { formatError } from '../util/api'
+import api from '../util/api/agency'
+import { formatError } from '../util/api'
 import { reshapeData } from '../util/agencies'
 
 // fetching individual agency details...
@@ -49,8 +48,7 @@ export const receivedAgencies = agencies => ({
 export const fetchAgencies = () => dispatch => {
   dispatch(fetchingAgencies())
 
-  return axios
-    .get('/data/agencies-by-state.json')
-    .then(response => reshapeData(response.data))
+  return api.getAgencies()
+    .then(response => reshapeData(response))
     .then(agencies => dispatch(receivedAgencies(agencies)))
 }
