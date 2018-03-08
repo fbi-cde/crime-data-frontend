@@ -82,7 +82,7 @@ class AgencySearch extends Component {
 
     // get unique set of counties (for result grouping)
     const counties = {}
-    data.forEach(d => (counties[d.primary_county || 'N/A'] = true))
+    data.forEach(d => (counties[d.county_name || 'N/A'] = true))
 
     const searchUpper = search.toUpperCase()
     const dataFiltered =
@@ -137,7 +137,7 @@ class AgencySearch extends Component {
                 data={dataFiltered.sort(
                   (a, b) => a.agency_name > b.agency_name,
                 )}
-                groupKey="primary_county"
+                groupKey="county_name"
                 groupValues={Object.keys(counties).sort()}
                 onResultsClick={this.handleResultsClick}
                 onStateClick={this.handleStateClick}
