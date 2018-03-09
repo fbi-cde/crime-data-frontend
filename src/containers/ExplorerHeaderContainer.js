@@ -79,7 +79,7 @@ const ExplorerHeaderContainer = ({
 const mapStateToProps = ({ agencies, filters, participation, region, states }) => {
   const isAgency = filters.placeType === 'agency'
   const agency = isAgency && !agencies.loading && getAgency(agencies, filters.place)
-  const { icpsr_lat: lat, icpsr_lng: lng } = agency
+  const { latitude: lat, longitude: lng } = agency
   const coordinates = isAgency && lat && lng && { lat, lng }
 
   return {

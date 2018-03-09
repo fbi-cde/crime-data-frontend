@@ -4,7 +4,7 @@ import React from 'react'
 
 /* eslint-disable camelcase */
 const AgencySearchResultItem = ({ agency, onClick }) => {
-  const { edited_name } = agency
+  const { agency_name } = agency
 
   return (
     <li>
@@ -15,7 +15,7 @@ const AgencySearchResultItem = ({ agency, onClick }) => {
         id={agency.ori}
         onClick={onClick(agency)}
       >
-        {edited_name}
+        {agency_name}
       </a>
     </li>
   )
