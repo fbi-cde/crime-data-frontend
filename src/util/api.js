@@ -15,11 +15,11 @@ export const API = '/api-proxy'
 const fetchArson = (place, placeId, placeType) => {
   let url
   if (placeType === 'state') {
-    url = `${API}/api/arson/states/${placeId}?per_page=50`
+    url = `${API}/api/arson/states/${placeId}?size=100`
   } else if (placeType === 'region') {
-    url = `${API}/api/arson/regions/${place}?per_page=50`
+    url = `${API}/api/arson/regions/${place}?size=100`
   } else {
-    url = `${API}/api/arson/national?per_page=50`
+    url = `${API}/api/arson/national?size=100`
   }
 
   return get(url).then(({ results }) =>
@@ -30,7 +30,7 @@ const getAgency = ori => get(`${API}/agencies/${ori}`)
 
 const fetchEstimates = (place, placeId, placeType) => {
     let api
-    const params = { size: 500 }
+    const params = { size: 100 }
     if (placeType === 'state') {
       api = summaryApi.getStateEstimates(placeId, params)
     } else if (placeType === 'region') {
@@ -102,7 +102,7 @@ const fetchNibrsCounts = ({ dim, pageType, place, placeType, type, placeId }) =>
 
   return get(url, params).then(d => ({
     key: `${type}${upperFirst(dim)}`,
-    data: JSON.parse(d.results),
+    data: d,
   }))
 }
 
@@ -131,7 +131,7 @@ const getNibrsCountsRequests = params => {
 const getSummarizedRequest = filters => {
   const estimatesApi = `${API}/summarized/agency/${filters.place}/${filters.pageType}`
   const params = {
-    per_page: 100,
+    size: 100,
   }
   return get(estimatesApi, params).then(d => ({
     data: d.results,
