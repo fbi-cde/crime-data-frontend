@@ -912,7 +912,6 @@ const relationships = (data, offense) => {
 
 export const offensesDemo = (data, offense) => {
   let count = 0
-  console.log("Demo:",data)
   for (const i in data) {
     count += data[i].offense_count
   }

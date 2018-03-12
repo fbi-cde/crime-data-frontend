@@ -5,10 +5,10 @@ applications:
   host: crime-data-explorer-noe
   buildpack: nodejs_buildpack
   memory: 256M
+  disk_quota: 256M
   domain: fr.cloud.gov
-  instances: 2
 env:
-  CDE_API: 'http://api.usa.gov/crime/fbi/ucr/sapi'
+  CDE_API: 'https://api.usa.gov/crime/fbi/sapi'
   NEW_RELIC_ENABLED: false
 services:
-  - crime-data-api-key-development
+  - crime-data-api-key-noe
