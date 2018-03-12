@@ -90,7 +90,7 @@ const fetchNibrsCounts = ({ dim, pageType, place, placeType, type, placeId }) =>
     place === nationalKey
       ? 'national'
       : placeType === 'agency'
-        ? `agency/${place}`
+        ? `agencies/${place}`
         : `states/${placeId}`
 
   const url = dim !== '' ? `${API}/api/nibrs/${pageType}/${type}/${loc}/${dim}` : `${API}/api/nibrs/${pageType}/${type}/${loc}`
