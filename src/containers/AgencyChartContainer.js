@@ -115,7 +115,7 @@ class AgencyChartContainer extends React.Component {
 
     if (!agency) return null
 
-    const submitsNibrs = agency.nibrs_months_reported === 12 && pageType !== 'violent-crime' && pageType !== 'property-crime'
+    const submitsNibrs = agency.nibrs === true && pageType !== 'violent-crime' && pageType !== 'property-crime'
     return (
       <div className="mb7">
 

@@ -148,6 +148,7 @@ class AgencyChart extends React.Component {
       }
       data = dataSet
     }
+    console.log('AgencyChart Data:',data)
     lastRapeLegacyReported += 1;
 
     const noDataYears = this.getNoDataYears(data, since, until)

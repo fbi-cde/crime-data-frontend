@@ -87,7 +87,7 @@ class NibrsContainer extends React.Component {
     } = this.props
 
     if (
-      (isAgency && (!agency || agency.nibrs === true)) ||
+      (isAgency && (!agency || agency.nibrs === false)) ||
       !shouldShowNibrs({ pageType, place, placeType }, states)
     ) {
       return null
