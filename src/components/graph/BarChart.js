@@ -39,14 +39,15 @@ class BarChart extends React.Component {
     const dataFormatted = fitleredDataByYear.map(d => {
       const p = d.value / total
       return {
-        ...d,
-        percent: p,
-        countFmt: formatSI(d.value),
-        percentFmt: formatPerc(p),
+          ...d,
+          percent: p,
+          countFmt: formatSI(d.value),
+          percentFmt: formatPerc(p),
+
       }
     })
 
-    if (data.title.includes('Age')) { dataFormatted.sort((a, b) => a.key > b.key) }
+    if (!data.title.includes('Age')) { dataFormatted.sort((a, b) => a.value < b.value) }
 
     return (
       <div id={id}>

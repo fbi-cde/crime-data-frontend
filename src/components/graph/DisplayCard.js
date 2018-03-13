@@ -16,7 +16,7 @@ class DisplayCard extends React.Component {
           charts = (<BarChart data={data} year={year} />)
           break;
         case 'stacked_table':
-            return (<div className='bg-white p2'><div className="mt0 mb2 pb1 fs-18">  <h2 className="mt0 mb2 sm-mb4 fs-18 sans-serif blue">  {data.title}</h2><StackedBarChart data={data} year={year} /> </div>  </div>)
+            return (<div className='bg-blue-white p2'><div className="mt0 pb1 fs-18">  <h2 className="mt0 fs-18 sans-serif blue">  {data.title}</h2><StackedBarChart data={data} year={year} /> </div>  </div>)
         default:
           charts = null
       }
@@ -30,9 +30,9 @@ class DisplayCard extends React.Component {
       }
 
       return (
-        <div className='bg-white p2 border-bottom border-blue-light'>
-          <div className="mt0 mb2 pb1 fs-18">
-            <h2 className="mt0 mb2 sm-mb4 fs-18 sans-serif blue">
+        <div className='bg-blue-white p2 border-bottom border-blue-light'>
+          <div className="mt0  pb1 fs-18">
+            <h2 className="mt0 fs-18 sans-serif blue">
               {data.title}
             </h2>
               {charts}

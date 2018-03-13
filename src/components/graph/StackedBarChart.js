@@ -55,13 +55,8 @@ class StackedBarChart extends React.Component {
 
 
     return (
-      <div className="p2 sm-p2 bg-white black border-bottom border-blue-light">
+      <div className="p2 sm-p2  bg-blue-white black border-bottom border-blue-light">
         <div className="clearfix">
-          <div className="left">
-            <h2 className='mt0 mb2 sm-mb4 fs-18 sans-serif blue'>
-              {data.title}
-            </h2>
-          </div>
           <div className="right">
             <CountPercentToggle
               ariaControls={data.noun}

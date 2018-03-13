@@ -53,7 +53,7 @@ class NibrsContainer extends React.Component {
           )
         }
       });
-        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls} `}><div className='p2 sm-p3 bg-white black'>                                                                                                                                                                                                                                                                                                                                                                                                                  <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
+        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls} `}><div className='p2 sm-p3 bg-blue-white black'>                                                                                                                                                                                                                                                                                                                                                                                                                  <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
     });
 
     return content
@@ -100,6 +100,7 @@ class NibrsContainer extends React.Component {
     const isReady = nibrsCounts.loaded
     const isLoading = nibrsCounts.loading
 
+    const style = { margin: '5px' }
     if (error) return (<ErrorCard error={error} />)
     if (isLoading) return (<Loading />)
 
@@ -161,7 +162,7 @@ class NibrsContainer extends React.Component {
                 selectedYear={this.state.yearSelected}
               />}
           </div>
-          <div className="clearfix mxn1">
+          <div className="clearfix mxn1" style={style}>
            {this.getCards(data, place, categories)}
           </div>
           </div>
