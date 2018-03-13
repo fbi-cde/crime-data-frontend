@@ -126,7 +126,7 @@ class NibrsContainer extends React.Component {
 
     return (
       <div>
-        <div className="mb6 bg-white border-top border-blue border-w8">
+        <div className="mb1 bg-white border-top border-blue border-w8">
           <div className="mb0 p2 sm-p4">
             <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
               {startCase(pageType)} <NibrsTerm size='xl'/> details reported by {placeDisplay}
@@ -166,7 +166,7 @@ class NibrsContainer extends React.Component {
           </div>
           </div>
           {isReady &&
-            <div>
+            <div className="mb1">
               <div className="serif italic fs-12">
                 Source: Reported <NibrsTerm size="sm" /> data from {placeDisplay}.
               </div>
