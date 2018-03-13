@@ -53,7 +53,7 @@ class NibrsContainer extends React.Component {
           )
         }
       });
-        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls}`}><div className='p2 sm-p3 bg-white black'>                                                                                                                                                                                                                                                                                                                                                                                                                  <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
+        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls} `}><div className='p2 sm-p3 bg-white black'>                                                                                                                                                                                                                                                                                                                                                                                                                  <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
     });
 
     return content
@@ -125,10 +125,11 @@ class NibrsContainer extends React.Component {
     } else totalCount = countDataByYear.filter(d => d.key === 'Incident Count')[0].value
 
     return (
-        <div className="mb6">
-          <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
+      <div>
+        <div className="mb6 bg-white border-top border-blue border-w8">
+          <div className="mb0 p2 sm-p4">
             <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-              {startCase(pageType)} <NibrsTerm /> details reported by {placeDisplay}
+              {startCase(pageType)} <NibrsTerm size='xl'/> details reported by {placeDisplay}
             </h2>
             {isLoading && <Loading />}
             {isReady &&
@@ -137,7 +138,7 @@ class NibrsContainer extends React.Component {
                   Year selected
                 </label>
                 <select
-                  className="field field-sm select select-dark col-10"
+                  className="field field-sm select select-dark col-12"
                   id="year-selected"
                   onChange={handleSelectChange}
                   value={this.state.yearSelected}
@@ -162,6 +163,7 @@ class NibrsContainer extends React.Component {
           </div>
           <div className="clearfix mxn1">
            {this.getCards(data, place, categories)}
+          </div>
           </div>
           {isReady &&
             <div>

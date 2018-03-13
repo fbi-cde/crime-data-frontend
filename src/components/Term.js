@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { showTerm } from '../actions/glossary'
 
 const imgSize = size => {
-  const options = { sm: 10, md: 14, lg: 18 }
+  const options = { sm: 10, md: 14, lg: 18, xl: 24 }
   return options[size] || options.md
 }
 

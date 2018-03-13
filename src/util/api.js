@@ -131,7 +131,7 @@ const getNibrsCountsRequests = params => {
 const getSummarizedRequest = filters => {
   const estimatesApi = `${API}/summarized/agency/${filters.place}/${filters.pageType}`
   const params = {
-    size: 100,
+    size: 500,
   }
   return get(estimatesApi, params).then(d => ({
     data: d.results,

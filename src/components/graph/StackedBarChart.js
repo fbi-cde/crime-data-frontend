@@ -8,6 +8,7 @@ import React from 'react'
 import CountPercentToggle from './CountPercentToggle'
 import StackedBarDetails from './StackedBarChartDetails'
 import { formatNum } from '../../util/formats'
+import NoDataCard from './NoDataCard'
 
 class StackedBarChart extends React.Component {
   state = { isCounts: false }
@@ -21,7 +22,9 @@ class StackedBarChart extends React.Component {
       year,
     } = this.props
     const fitleredDataByYear = data.data.filter(d => d.data_year === year)
-
+    if (fitleredDataByYear.length === 0) {
+      return (<NoDataCard noun={data.title} year={year} />)
+    }
     const { isCounts } = this.state
     const height = size.height - margin.top - margin.bottom
     const width = size.width - margin.left - margin.right

@@ -124,7 +124,7 @@ class AgencyChartContainer extends React.Component {
             {startCase(pageType)} reported by {agency.display}, {since}–{until}
           </h2>
           <div className="center">
-            {submitsNibrs &&
+            {submitsNibrs && !summary.loading &&
               <AgencyChartToggle
               isSummary={this.state.isSummary}
               showSummary={() => {

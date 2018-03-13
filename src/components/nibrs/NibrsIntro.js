@@ -23,7 +23,7 @@ const NibrsIntro = ({
 
   if (isAgency) {
     return (
-      <div className="m0 sm-col-10">
+      <div className="m0 sm-col-12 serif fs-18 border-bottom border-blue-light">
         <p>
           In {highlight((selectedYear))}, this agency reported {highlight(formatNum(totalCount))} individual{' '}
           {crime} {pluralize(noun, totalCount)} to the FBI.
@@ -35,7 +35,7 @@ const NibrsIntro = ({
   const agencyCt = max(agencyCts)
 
   return (
-    <div className="m0 sm-col-10">
+    <div className="m0 sm-col-12 serif fs-18 border-bottom border-blue-light">
       <p>
         In {highlight((selectedYear))}, there were {highlight(formatNum(totalCount))} individual {crime}{' '}
         {pluralize(noun, totalCount)} reported to the FBI in {placeDisplay}{' '} by{' '}
