@@ -1,0 +1,14 @@
+---
+inherit: base.yml
+applications:
+- name: crime-data-explorer-stage2
+  host: crime-data-explorer-noe
+  buildpack: nodejs_buildpack
+  memory: 256M
+  disk_quota: 256M
+  domain: fr.cloud.gov
+env:
+  CDE_API: 'https://api.usa.gov/crime/fbi/sapi'
+  NEW_RELIC_ENABLED: false
+services:
+  - crime-data-api-key-stage2
