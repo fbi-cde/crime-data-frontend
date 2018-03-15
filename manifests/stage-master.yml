@@ -8,7 +8,7 @@ applications:
   disk_quota: 256M
   domain: fr.cloud.gov
 env:
-  CDE_API: 'https://api.usa.gov/crime/fbi/sapi/master'
+  CDE_API: 'https://api.usa.gov/crime/fbi/master'
   NEW_RELIC_ENABLED: false
 services:
-  - crime-data-api-key-master
+  - crime-data-api-key-prod
