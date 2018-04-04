@@ -48,7 +48,7 @@ class AgencyChartContainer extends React.Component {
 
       noNibrsDataText = `There were no ${lowerCase(
          pageType,
-       )} offeneses reported during this time period.`
+       )} offenses reported during this time period.`
     }
     // if (!data || data.length === 0) return <NoData />
 

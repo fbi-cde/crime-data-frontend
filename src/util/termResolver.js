@@ -2,7 +2,7 @@ export const mapActualToReported = str => {
   if (str === 'actual') {
     return 'reported'
   }
-  if (str == 'value') {
+  if (str === 'value') {
     return 'offense'
   }
   return str;

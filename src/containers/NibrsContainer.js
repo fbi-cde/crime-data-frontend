@@ -26,7 +26,7 @@ class NibrsContainer extends React.Component {
     this.state = { yearSelected: until }
   }
 
-  getCards(data, place, categories) {
+  getCards(data, place, categories, until) {
     let cards = []
     const content = [];
     let cnt = 0;
@@ -49,17 +49,19 @@ class NibrsContainer extends React.Component {
                 data={obj}
                 place={place}
                 year={this.state.yearSelected}
+                until={until}
               />
           )
         }
       });
-        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls} `}><div className='p2 sm-p3 bg-blue-white black'>                                                                                                                                                                                                                                                                                                                                                                                                                  <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
+        content.push(<div className={`col col-12 sm-col-6 mb2 px1 ${cls} `}><div className='p2 sm-p3 bg-blue-white black'>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <h2 className='mt0 mb2 pb1 fs-18 sm-fs-22 sans-serif blue border-bottom border-blue-light'> {category}</h2> {cards}</div></div>)
     });
 
     return content
   }
 
   updateYear = year => {
+    console.log('Update Year:', year)
     this.setState({ yearSelected: year })
   }
 
@@ -120,7 +122,32 @@ class NibrsContainer extends React.Component {
 
 
     const handleSelectChange = e => this.updateYear(Number(e.target.value))
-    const countDataByYear = data.offenseCount.data.filter(d => d.data_year === this.state.yearSelected)
+    let countDataByYear
+    let titlenoun;
+    if (this.state.yearSelected !== 2 && this.state.yearSelected !== 5 && this.state.yearSelected !== 10) {
+      countDataByYear = data.offenseCount.data.filter(d => d.data_year === this.state.yearSelected)
+      titlenoun = this.state.yearSelected;
+    } else {
+      const years = rangeYears(until - this.state.yearSelected + 1, until)
+      titlenoun = `Past ${this.state.yearSelected} Years`
+      countDataByYear = data.offenseCount.data.filter(d => years.includes(d.data_year))
+      const keys = new Set();
+      for (const i in countDataByYear) {
+        keys.add(countDataByYear[i].key)
+      }
+      const newdata = []
+      for (const i in Array.from(keys)) {
+        console.log('i:', Array.from(keys)[i])
+        const object = new Object()
+        object.key = Array.from(keys)[i];
+        object.value = 0
+        for (const j in countDataByYear) {
+          if (countDataByYear[j].key === Array.from(keys)[i]) { object.value += countDataByYear[j].value }
+        }
+        newdata.push(object)
+      }
+      countDataByYear = newdata
+    }
     if (countDataByYear.length === 0) {
       totalCount = 0
     } else totalCount = countDataByYear.filter(d => d.key === 'Incident Count')[0].value
@@ -130,7 +157,7 @@ class NibrsContainer extends React.Component {
         <div className="mb1 bg-white border-top border-blue border-w8">
           <div className="mb0 p2 sm-p4">
             <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-              {startCase(pageType)} <NibrsTerm size='xl'/> details reported by {placeDisplay}
+              {startCase(pageType)} <NibrsTerm size='xl' /> details reported by {placeDisplay}
             </h2>
             {isLoading && <Loading />}
             {isReady &&
@@ -149,6 +176,19 @@ class NibrsContainer extends React.Component {
                       {y}
                     </option>,
                   )}
+                  <option value="" disabled>
+                    Aggregates
+                  </option>
+                  <option value="2" key='2'>
+                    Past Two Years
+                  </option>
+                  <option value="5" key='3'>
+                    Past Five Years
+                  </option>
+                  <option value="10" key='10'>
+                    Past Ten Years
+                  </option>
+
                 </select>
               </div>}
             {isReady &&
@@ -159,11 +199,11 @@ class NibrsContainer extends React.Component {
                 place={place}
                 placeDisplay={placeDisplay}
                 totalCount={totalCount}
-                selectedYear={this.state.yearSelected}
+                selectedYear={titlenoun}
               />}
           </div>
           <div className="clearfix mxn1" style={style}>
-           {this.getCards(data, place, categories)}
+           {this.getCards(data, place, categories, until)}
           </div>
           </div>
           {isReady &&

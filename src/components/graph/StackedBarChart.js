@@ -9,6 +9,7 @@ import CountPercentToggle from './CountPercentToggle'
 import StackedBarDetails from './StackedBarChartDetails'
 import { formatNum } from '../../util/formats'
 import NoDataCard from './NoDataCard'
+import { rangeYears } from '../../util/years'
 
 class StackedBarChart extends React.Component {
   state = { isCounts: false }
@@ -20,8 +21,33 @@ class StackedBarChart extends React.Component {
       size,
       data,
       year,
+      until,
     } = this.props
-    const fitleredDataByYear = data.data.filter(d => d.data_year === year)
+
+
+    let fitleredDataByYear
+    if (year !== 2 && year !== 5 && year !== 10) {
+      fitleredDataByYear = data.data.filter(d => d.data_year === year)
+    } else {
+      const years = rangeYears(until - year, until)
+      fitleredDataByYear = data.data.filter(d => years.includes(d.data_year))
+      const keys = new Set();
+      for (const i in fitleredDataByYear) {
+        keys.add(fitleredDataByYear[i].key)
+      }
+      const newdata = []
+      for (const i in Array.from(keys)) {
+        const object = new Object()
+        object.key = Array.from(keys)[i];
+        object.value = 0
+        for (const j in fitleredDataByYear) {
+          if (fitleredDataByYear[j].key === Array.from(keys)[i]) { object.value += fitleredDataByYear[j].value }
+        }
+        newdata.push(object)
+      }
+      fitleredDataByYear = newdata
+    }
+
     if (fitleredDataByYear.length === 0) {
       return (<NoDataCard noun={data.title} year={year} />)
     }
@@ -125,6 +151,7 @@ StackedBarChart.propTypes = {
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
   data: PropTypes.object.isRequired,
   year: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
   size: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number,
