@@ -112,7 +112,7 @@ const AgencyChartDetails = ({
                     style={{ width: 8, height: 8, backgroundColor: colors(k) }}
                   />
                   <Term id={mapReported(k)} size="sm">
-                    {k === 'value'? startCase(mapReported('incidents')):startCase(mapReported(k))}
+                    {k === 'value' ? startCase(mapReported('offenses')) : startCase(mapReported(k))}
                   </Term>
                 </td>
                 <td className="pt1 line-height-4 align-bottom right-align">

@@ -39,7 +39,7 @@ class AgencyChartContainer extends React.Component {
     if (submitsNibrs) {
       nibrsData = nibrsCounts.data.offenseCount.data
       nibrsDataClean = nibrsData
-         .filter(d => d.key === 'Incident Count' && d.data_year >= since && d.data_year <= until)
+         .filter(d => d.key === 'Offense Count' && d.data_year >= since && d.data_year <= until)
          .sort((a, b) => a.data_year - b.data_year)
 
       hasNoNibrsValues =
@@ -48,7 +48,7 @@ class AgencyChartContainer extends React.Component {
 
       noNibrsDataText = `There were no ${lowerCase(
          pageType,
-       )} incidents reported during this time period.`
+       )} offeneses reported during this time period.`
     }
     // if (!data || data.length === 0) return <NoData />
 

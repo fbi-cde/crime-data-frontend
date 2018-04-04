@@ -110,7 +110,7 @@ class AgencyNibrsChart extends React.Component {
     const keys = ['value']
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
-    const noun = submitsNibrs ? 'incidents' : 'offenses'
+    const noun = 'offenses'
     const yMax = this.getYMax(data, keys)
 
     const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()

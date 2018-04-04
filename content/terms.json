@@ -236,6 +236,10 @@
     "definition": "Unlawful, nonviolent acts by a family member (or legal guardian) that threaten the physical, mental, or economic well-being or morals of another family member and that are not classifiable as other offenses, such as assault, incest, or statutory rape."
   },
   {
+    "term": "Offense",
+    "definition": "The UCR Program collects statistics on the number of offenses known to law enforcement. In the traditional Summary Reporting System (SRS), there are eight crimes, or Part I offenses, (murder and nonnegligent homicide, rape (legacy & revised), robbery, aggravated assault, burglary, motor vehicle theft, larceny-theft, and arson) to be reported to the UCR Program. These offenses were chosen because they are serious crimes, they occur with regularity in all areas of the country, and they are likely to be reported to police."
+  },
+  {
     "term": "Old UCR",
     "definition": "The mainframe-based system of collecting, separating, and analyzing Uniform Crime Reporting (UCR) data."
   },
