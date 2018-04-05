@@ -32,11 +32,19 @@ class AgencySummaryChart extends React.Component {
     }
   }
 
-  getActive = data => {
-    const { yearSelected } = this.state
-
+  getActive = (data, crime, until, lastRapeLegacyReported) => {
+    let yearSelected = this.state.yearSelected
+    if (yearSelected == null) {
+      yearSelected = until
+    }
     let active
-    const selected = data.find(d => d.data_year === yearSelected)
+    console.log('getActive:', data)
+    let selected = data.find(d => d.data_year === yearSelected)
+    console.log('selected:', selected)
+
+    if (crime === 'rape' && yearSelected < lastRapeLegacyReported) {
+      selected = data.find(d => d.data_year === yearSelected && d.offense === 'rape-legacy')
+    }
 
     if (yearSelected && selected) {
       active = selected
@@ -132,7 +140,6 @@ class AgencySummaryChart extends React.Component {
       .rangeRound([0, x0.bandwidth()])
       .padding(0)
 
-    const { active, priorYear: activePriorYear } = this.getActive(data)
     let lastRapeLegacyReported = 1995;
     if (crime === 'rape') {
       const dataSet = []
@@ -149,6 +156,8 @@ class AgencySummaryChart extends React.Component {
       data = dataSet
     }
     lastRapeLegacyReported += 1;
+    console.log('data:', data)
+    const { active, priorYear: activePriorYear } = this.getActive(data, crime, until, lastRapeLegacyReported)
 
     const noDataYears = this.getNoDataYears(data, since, until)
 
