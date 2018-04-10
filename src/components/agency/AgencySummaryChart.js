@@ -38,9 +38,7 @@ class AgencySummaryChart extends React.Component {
       yearSelected = until
     }
     let active
-    console.log('getActive:', data)
     let selected = data.find(d => d.data_year === yearSelected)
-    console.log('selected:', selected)
 
     if (crime === 'rape' && yearSelected < lastRapeLegacyReported) {
       selected = data.find(d => d.data_year === yearSelected && d.offense === 'rape-legacy')
@@ -141,6 +139,7 @@ class AgencySummaryChart extends React.Component {
       .padding(0)
 
     let lastRapeLegacyReported = 1995;
+    let displayRapeLine = true
     if (crime === 'rape') {
       const dataSet = []
       for (let i = 0; i < data.length; i++) {
@@ -156,7 +155,9 @@ class AgencySummaryChart extends React.Component {
       data = dataSet
     }
     lastRapeLegacyReported += 1;
-    console.log('data:', data)
+    if (lastRapeLegacyReported === 1996) {
+      displayRapeLine = false;
+    }
     const { active, priorYear: activePriorYear } = this.getActive(data, crime, until, lastRapeLegacyReported)
 
     const noDataYears = this.getNoDataYears(data, since, until)
@@ -194,7 +195,7 @@ class AgencySummaryChart extends React.Component {
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x0} height={height} />
               <YAxis scale={y} width={width} />
-              {until > 2013 &&
+              {until > 2013 && displayRapeLine &&
                 crime === 'rape' &&
                 <g transform={`translate(${x0(lastRapeLegacyReported)}, ${height})`}>
                   <line stroke="#95aabc" strokeWidth="1" y2={-height} />

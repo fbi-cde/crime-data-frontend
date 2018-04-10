@@ -134,6 +134,8 @@ class AgencyChart extends React.Component {
 
     const { active, priorYear: activePriorYear } = this.getActive(data)
     let lastRapeLegacyReported = 1995;
+    let displayRapeLine = true
+
     if (crime === 'rape') {
       const dataSet = []
       for (let i = 0; i < data.length; i++) {
@@ -149,7 +151,9 @@ class AgencyChart extends React.Component {
       data = dataSet
     }
     lastRapeLegacyReported += 1;
-
+    if (lastRapeLegacyReported === 1996) {
+      displayRapeLine = false;
+    }
     const noDataYears = this.getNoDataYears(data, since, until)
 
 
@@ -185,7 +189,7 @@ class AgencyChart extends React.Component {
               <XAxis scale={x0} height={height} />
               <YAxis scale={y} width={width} />
               {until > 2013 &&
-                crime === 'rape' &&
+                crime === 'rape' && displayRapeLine &&
                 <g transform={`translate(${x0(lastRapeLegacyReported)}, ${height})`}>
                   <line stroke="#95aabc" strokeWidth="1" y2={-height} />
                   <rect
