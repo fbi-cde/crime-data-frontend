@@ -51,7 +51,7 @@
   }
 
   window.swaggerUi = new SwaggerUi({
-    url: '/api-proxy/static/swagger.json',
+    url: '/api-proxy/v2/api-docs',
     dom_id: 'swagger-ui',
     operationsSorter: 'alpha',
     docExpansion: 'list',
