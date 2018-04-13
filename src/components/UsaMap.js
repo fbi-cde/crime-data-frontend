@@ -4,6 +4,8 @@ import React from 'react'
 import Hint from './Hint'
 import stateLookup from '../util/usa'
 import svgData from '../../public/data/usa-state-svg.json'
+
+
 import { lookupStateByAbbr, lookupStateByName, lookupRegionByCode, lookupStatesByRegion } from '../util/location'
 
 class UsaMap extends React.Component {
@@ -44,6 +46,7 @@ class UsaMap extends React.Component {
   render() {
     const { colors, changeColorOnHover, mapClick, place, stateView, states, region } = this.props
     const { hover } = this.state
+
     const svgDataWithNames = svgData.map(s => ({
       ...s,
       name: stateLookup(s.id).display,
