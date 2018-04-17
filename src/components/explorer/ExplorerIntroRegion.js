@@ -17,7 +17,7 @@ const ExplorerIntroRegion = ({ pageType, page, participation, until, placeName, 
   const isArson = pageType === 'arson'
   const isCrime = page === 'crime'
 
-  const untilUcr = participation.find(p => p.year === until)
+  const untilUcr = participation.find(p => p.data_year === until)
   const regionTotalObj = {};
   regionTotalObj.participating_agencies = 0;
   regionTotalObj.total_agencies = 0;

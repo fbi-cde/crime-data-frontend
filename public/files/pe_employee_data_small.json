@@ -1,0 +1,56 @@
+[
+  {
+    "state_postal_abbr": "NY",
+    "data_year": 1969,
+    "felony": 6,
+    "accident": ""
+  },
+  {
+    "state_postal_abbr": "SD",
+    "data_year": 2001,
+    "felony": 0,
+    "accident": 0
+  },
+  {
+    "state_postal_abbr": "TN",
+    "data_year": 2001,
+    "felony": 0,
+    "accident": 0
+  },
+  {
+    "state_postal_abbr": "NM",
+    "data_year": 1983,
+    "felony": 1,
+    "accident": 0
+  },
+  {
+    "state_postal_abbr": "AZ",
+    "data_year": 2010,
+    "felony": 4,
+    "accident": 0
+  },
+  {
+    "state_postal_abbr": "NC",
+    "data_year": 1967,
+    "felony": 0,
+    "accident": ""
+  },
+  {
+    "state_postal_abbr": "KS",
+    "data_year": 1964,
+    "felony": 1,
+    "accident": ""
+  },
+  {
+    "state_postal_abbr": "LA",
+    "data_year": 2000,
+    "felony": 2,
+    "accident": 0
+  },
+  {
+    "state_postal_abbr": "NJ",
+    "data_year": 1977,
+    "felony": 2,
+    "accident": 2
+  }
+]

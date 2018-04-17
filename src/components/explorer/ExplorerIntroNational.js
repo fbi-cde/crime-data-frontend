@@ -16,7 +16,7 @@ const highlight = txt =>
 const ExplorerIntroNational = ({ pageType, page, participation, until }) => {
   const isArson = pageType === 'arson'
   const isCrime = page === 'crime'
-  const untilUcr = participation.find(p => p.year === until)
+  const untilUcr = participation.find(p => p.data_year === until)
 
   if (isCrime) {
     const crimeTerm = (
