@@ -67,11 +67,10 @@ const fetchAgencyAggregates = (ori, crime) => {
   return agencyApi.getAgencyOffenses(ori, params).then(d => ({ key: ori, results: d.results }))
 }
 
-const getSummaryRequests = ({ crime, place, placeType, placeId }) => {
+const getSummaryRequests = ({ place, placeType, placeId }) => {
   if (placeType === 'agency') {
     const stateName = slugify(oriToState(place))
     return [
-      fetchAgencyAggregates(place, crime),
       fetchAggregates(stateName, placeType, placeId),
       fetchAggregates(),
     ]

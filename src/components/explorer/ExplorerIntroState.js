@@ -31,7 +31,6 @@ const ExplorerIntroState = ({ pageType, page, place, participation, until, place
     totalAgencies = untilUcr.total_agency_count
     coveredAgencies = untilUcr.covered_agency_count
   }
-  console.log('untilUcr:', untilUcr)
 
   if (isCrime) {
     const reportTerms = getReportTerms({ nibrs, srs, hybrid: nibrs && srs })

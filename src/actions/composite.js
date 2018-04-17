@@ -29,7 +29,10 @@ const fetchData = () => (dispatch, getState) => {
         dispatch(fetchSummaries(filters, states))
       }
       dispatch(fetchPoliceEmployment(filters))
-      if (filters.placeType === 'agency') dispatch(fetchSummarized(filters))
+      if (filters.placeType === 'agency') {
+        dispatch(fetchSummarized(filters))
+        dispatch(fetchSummaries(filters, states))
+      }
       if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrsCounts(filters))
     }
     if (filters.page === 'leoka') { // Add validation of leoka type and add a shouldFetch Method

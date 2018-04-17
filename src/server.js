@@ -82,6 +82,7 @@ const defaultSrc = [
   url.parse(API).hostname, // enable any requests to the API server
   'www.google-analytics.com',
   'dap.digitalgov.gov',
+  API,
 ]
 app.use(helmet())
 app.use(

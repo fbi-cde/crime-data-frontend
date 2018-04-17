@@ -12,6 +12,7 @@ import { oriToState } from '../util/agencies'
 import lookupUsa, { nationalKey } from '../util/usa'
 
 const SparklineContainer = ({ pageType, since, summaries, until, usState }) => {
+  console.log('SparklineContainer:', summaries)
   const { data, error, loading } = summaries
   const normalizedCrime = pageType === 'rape' ? 'rape-legacy' : pageType
 
