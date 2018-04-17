@@ -7,6 +7,7 @@ All notable changes to this project be documented in this file.
 ##Fixed
 - Fixed Nibrs Offense Counts now changed to appropriate counting based upon type of offense
 - Improved Agency location on Map, due adding lat/lon data into Agency data table
+- Fixed issue with Agency Explorer State and National Sparklines not showing up properly
 
 ##Added
 - On Agency Explorer Page you can not easily compare Summary vs NIBRS Counts for offenses
