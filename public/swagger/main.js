@@ -59,6 +59,9 @@
       showApiKeyForm()
       $('#api-key-container').on('submit', handleApiKeyChange)
       restructureEndpointHeadings()
+      $('.sandbox_header').each(function(i,e) {
+        $(e).hide();
+      })
     },
   })
 

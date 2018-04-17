@@ -100,7 +100,7 @@ app.use(
 )
 
 app.get('/api', (req, res) => {
-  res.sendfile('/swagger/index.html', { root: publicDirPath })
+  res.sendFile('/swagger/index.html', { root: publicDirPath })
 })
 
 app.get('/api-proxy/*', (req, res) => {
