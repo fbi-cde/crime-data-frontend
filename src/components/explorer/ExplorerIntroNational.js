@@ -36,9 +36,9 @@ const ExplorerIntroNational = ({ pageType, page, participation, until }) => {
                 In {highlight(until)}
                 , the FBI <EstimatedTerm /> crime statistics for the nation based
                 on data received from{' '}
-                {highlight(formatNum(untilUcr.total_agencies - untilUcr.covered_agencies))} law
+                {highlight(formatNum(untilUcr.total_agency_count - untilUcr.covered_agency_count))} law
                 enforcement agencies out of{' '}
-                {highlight(formatNum(untilUcr.total_agencies))} in the country
+                {highlight(formatNum(untilUcr.total_agency_count))} in the country
                 that year.
               </p>
             </div>

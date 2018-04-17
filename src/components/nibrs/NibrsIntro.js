@@ -33,15 +33,15 @@ const NibrsIntro = ({
           In {highlight((selectedYear))}, this agency reported {highlight(formatNum(totalCount))} individual{' '}
           <Term id={mapCrimeToGlossaryTerm(crime)}>
             {upperFirst(lowerCase(crime))}
-          </Term>  <Term id={startCase(noun)}>
+          </Term>                                                                                                      <Term id={startCase(noun)}>
             {upperFirst(lowerCase(pluralize(noun, totalCount)))}
           </Term>  to the FBI.
         </p>
       </div>
     )
   }
-  const agencyCts = participation.map(p => p.nibrs_participating_agencies)
-  const agencyCt = max(agencyCts)
+  const untilUcr = participation.find(p => p.data_year === selectedYear)
+  const agencyCt = untilUcr.agency_count_nibrs_submitting
 
   return (
     <div className="m0 sm-col-12 serif fs-18 border-bottom border-blue-light">
