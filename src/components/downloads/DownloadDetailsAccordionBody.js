@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-import downloadDetails from '../../../content/downloadContentTest.yml'
+import downloadDetails from '../../../content/downloadDetails.yml'
 import markdown from '../../util/md'
 import DownloadFilesTable from './DownloadFilesTable'
 
