@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import DownloadDataBtn from '../components/DownloadDataBtn'
+import DownloadDataBtn from '../components/downloads/DownloadDataBtn'
 import ErrorCard from '../components/ErrorCard'
 import Loading from '../components/Loading'
 import NoData from '../components/NoData'

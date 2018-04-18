@@ -32,3 +32,25 @@
 .table-striped-white {
   tbody tr:nth-of-type(even) { background-color: $white; }
 }
+
+.jsonTable {
+  max-width: 100%;
+  width: 100%;
+  th, td {
+    border-bottom: 1px solid $table-border-color;
+    padding: $table-cell-padding-y $table-cell-padding-x;
+  }
+  thead { th, td { border-bottom-width: 2px; } }
+  tr:last-child td { border-bottom: 0; }
+}
+
+.jsonTable tr:nth-child(even){background-color: $white;}
+
+.jsonTabler:hover {background-color: #ddd;}
+
+.jsonTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: $white;
+}

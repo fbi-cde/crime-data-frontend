@@ -3,7 +3,7 @@ import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import DownloadDataBtn from '../DownloadDataBtn'
+import DownloadDataBtn from '../downloads/DownloadDataBtn'
 import NibrsDonut from './NibrsDonut'
 import NibrsHistogram from './NibrsHistogram'
 import NibrsStackedBar from './NibrsStackedBar'

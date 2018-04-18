@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import downloadDetails from '../../../content/downloadContentTest.yml'
 import markdown from '../../util/md'
 import DownloadFilesTable from './DownloadFilesTable'
-import DownloadDataBtn from './DownloadDataBtn'
 
 
 class DownloadDetailsAccordionBody extends React.Component {
@@ -12,7 +11,6 @@ class DownloadDetailsAccordionBody extends React.Component {
     const { title } = this.props
     console.log('title:', title)
     const details = downloadDetails.find(e => e.title === title)
-    console.log('Details:', details)
     if (!details) return (<div>TBD</div>)
       return (
         <div className='clearfix'>
@@ -52,15 +50,12 @@ class DownloadDetailsAccordionBody extends React.Component {
               <h3 className="mt-tiny mb0 fs-18 sm-fs-22">File Size</h3>
               <div>{details.file_size}</div>
               <br />
-              <DownloadDataBtn
-                ariaLabel={`Download ${details.title} as a CSV`}
-                className="fs-18"
-                data={[{ url: details.href }]}
-                text={'Download'}
-              />
             </div>
               <DownloadFilesTable
               files={details.files}
+              link={details.href}
+              title={details.title}
+              fileType={details.download_type}
               sampleFile={details.sampleFile}
               />
           </div>

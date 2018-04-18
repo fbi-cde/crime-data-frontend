@@ -1,0 +1,113 @@
+- title: Summary (SRS) Data with Estimates
+  description: |
+    Summary (SRS) data that has been estimated to create trends for crime occurrences on the state and national level. The FBI has traditionally included estimates in their [annual publications](https://ucr.fbi.gov/ucr-publications). Download this dataset to see the FBI's estimated crime totals for the nation and its 50 states from 1994 to 2016.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/estimated_crimes.csv'
+  files:
+    - file: estimated_crimes.csv
+      description: Information about Esimated crimes
+  data_type: Esimated crimes
+  year_range: 1995-2016
+  last_modified: January 1, 2016
+  download_type: CSV
+  file_size: 96.9 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/estimated_data_small.json
+- title: Assaults on Law Enforcement Officers
+  description: |
+    The Assaults on Law Enforcement Officers dataset consists of reported assaults against law enforcement officers. The UCR Program defines law enforcement officers as individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically to pay sworn law enforcement. Download this dataset to see totals for officers who were killed or assaulted in the line of duty from 1974–2016.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/estimated_crimes.csv'
+  files:
+    - file: leoka.csv
+      description: Information about LEOKA Data
+  data_type: LEOKA
+  year_range: 1974-2016
+  last_modified: January 1, 2016
+  download_type: CSV
+  file_size: 35.5 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/leoka_data_small.json
+- title: Police Employee Data
+  description: |
+    The Police Employee dataset  is made up of data collected annually about law enforcement officers and civilians employed by police departments. The dataset contains information about the number of officers and civilians employed and the rate of police employees per a location’s population. <br /><br />The Uniform Crime Reporting (UCR) Program defines law enforcement officers as individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically for sworn law enforcement representatives.<br /><br />Civilian employees include personnel such as clerks, radio dispatchers, meter attendants, stenographers, jailers, correctional officers, and mechanics provided that they are full-time employees of the agency.<br /><br />Please see the UCR resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/topic-pages/police-employee-data.pdf">more information on police employee data</a>. Download this dataset to see how many full-time sworn and civilian law enforcement employees have served in each state from 1960–2016.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/pe_employee_data.csv'
+  files:
+    - file: pe_employee_data.csv
+      description: Information about Police Employee Data
+  data_type: Police Data
+  year_range: 1974-2016
+  last_modified: January 1, 2016
+  download_type: CSV
+  file_size: 81.4 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/pe_employee_data_small.json
+- title: Hate Crime
+  description: |
+    The Hate Crime Statistics dataset provides annual statistics on the number of incidents, offenses, victims, and offenders in reported crimes that are motivated in whole, or in part, by an offender’s bias against the victim’s perceived race, gender, gender identity, religion, disability, sexual orientation, and ethnicity. Hate crime data is captured by including the element of bias in offenses already being reported to the UCR Program.<br /><br />All law enforcement agencies, whether they submit summary (SRS) or incident-based (NIBRS) reports, can contribute hate crime data to the UCR using forms specified to collect such information. <br /><br />Please see the UCR resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/hate-crime/2015/home">for more information on hate crime</a>. Download this dataset to see totals for hate crimes across the country from 1991–2014.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/hate_crime.csv'
+  files:
+    - file: hate_crime.csv
+      description: Information about Hate Crime Data
+  data_type: Hate Crime
+  year_range: 1991-2016
+  last_modified: January 1, 2016
+  licenses: Open Data
+  download_type: CSV
+  file_size: 436 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/hate_crime_data_small.json
+- title: Human Trafficking
+  description: |
+    The FBI began accepting data on human trafficking from states in January 2013. Human trafficking includes offenses related to commercial sex acts and involuntary servitude.  Human Trafficking data available through the Crime Data Explorer includes offenses and arrests recorded by state and local agencies that currently have the ability to report this crime to the national UCR Program.<br /><br />Please see the resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/additional-publications/human-trafficking/human-trafficking.pdf">more information on human trafficking</a>. Download this dataset to see totals by state and offense for commercial sex acts and involuntary servitude from 2013–2015.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/human_trafficking.csv'
+  files:
+    - file: human_trafficking.csv
+      description: Information about Human Trafficking
+  data_type: Human Trafficking
+  year_range: 2013-2015
+  last_modified: January 1, 2016
+  download_type: CSV
+  file_size: 3.5 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/human_trafficking_data_small.json
+- title: Uniform Crime Reporting Program Participation Data
+  description: |
+    Participation data provides Information about agencies that report summary or incident-based data to the UCR program. This data helps understand the percentage of the population covered by reported data. <br /><br />Please see the resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/nibrs/2015/tables/main">more information on participation data</a>. Download this dataset to see how many law enforcement agencies have reported crime data to the FBI by state and year from 1960–2015.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/ucr_participation.csv'
+  files:
+    - file: ucr_participation.csv
+      description: Information about Agency Participation
+  data_type: Participation Data
+  year_range: 1960-2016
+  last_modified: January 1, 2016
+  download_type: CSV
+  file_size: 173 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/ucr_participation_data_small.json
+- title: Cargo Theft
+  description: |
+    Cargo Theft is defined as “the criminal taking of any cargo.”  This could also include physical theft as well as cyber theft and documentation fraud, where the ownership, destination, or contents of a cargo shipment is altered. For purposes of this definition, cargo shall be deemed as ‘moving in commerce’ at all points between the point of origin and the final destination. <br /><br />Please see the cargo theft user manual provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/additional-publications/cargo-theft/cargo-theft.pdf">more information on cargo theft data</a>. Download this dataset to see totals for cargo thefts from 2013–2015.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/cargo_theft.csv'
+  files:
+    - file: cargo_theft.csv
+      description: Information about Cargo Theft
+  data_type: Cargo Theft
+  year_range: 2013-2015
+  last_modified: January 1, 2016
+  download_type: CSV
+  file_size: 19.9 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/cargo_theft_data_small.json
+- title: US Territory Data
+  description: |
+    Summary data from United States territories including Puerto Rico, American Samoa, Guam and the U.S. Virgin Islands. Download this dataset to see totals of reported crime for U.S. territories between 1995 and 2015.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/territories.csv'
+  files:
+    - file: territories.csv
+      description: Information about US Territories
+  data_type: Crime Data
+  year_range: 1995-2015
+  last_modified: January 1, 2016
+  download_type: CSV
+  file_size: 7.9 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/territories_data_small.json

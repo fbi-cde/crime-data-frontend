@@ -1,56 +1,74 @@
 [
   {
-    "state_postal_abbr": "NY",
-    "data_year": 1969,
-    "felony": 6,
-    "accident": ""
+    "state_postal_abbr": "WY",
+    "data_year": 1971,
+    "officer_count": 60,
+    "officer_rate_per_1000": 0.17,
+    "civilian_count": 21,
+    "civilian_rate_per_1000": 0.06,
+    "population": 348812
   },
   {
-    "state_postal_abbr": "SD",
-    "data_year": 2001,
-    "felony": 0,
-    "accident": 0
+    "state_postal_abbr": "WV",
+    "data_year": 1971,
+    "officer_count": 107,
+    "officer_rate_per_1000": 0.06,
+    "civilian_count": 15,
+    "civilian_rate_per_1000": 0.01,
+    "population": 1758559
   },
   {
-    "state_postal_abbr": "TN",
-    "data_year": 2001,
-    "felony": 0,
-    "accident": 0
+    "state_postal_abbr": "WI",
+    "data_year": 1971,
+    "officer_count": 3967,
+    "officer_rate_per_1000": 0.89,
+    "civilian_count": 434,
+    "civilian_rate_per_1000": 0.1,
+    "population": 4480975
   },
   {
-    "state_postal_abbr": "NM",
-    "data_year": 1983,
-    "felony": 1,
-    "accident": 0
+    "state_postal_abbr": "WA",
+    "data_year": 1971,
+    "officer_count": 542,
+    "officer_rate_per_1000": 0.16,
+    "civilian_count": 98,
+    "civilian_rate_per_1000": 0.03,
+    "population": 3470293
   },
   {
-    "state_postal_abbr": "AZ",
-    "data_year": 2010,
-    "felony": 4,
-    "accident": 0
+    "state_postal_abbr": "VT",
+    "data_year": 1971,
+    "officer_count": 55,
+    "officer_rate_per_1000": 0.12,
+    "civilian_count": 16,
+    "civilian_rate_per_1000": 0.03,
+    "population": 458000
   },
   {
-    "state_postal_abbr": "NC",
-    "data_year": 1967,
-    "felony": 0,
-    "accident": ""
+    "state_postal_abbr": "VA",
+    "data_year": 1971,
+    "officer_count": 704,
+    "officer_rate_per_1000": 0.15,
+    "civilian_count": 137,
+    "civilian_rate_per_1000": 0.03,
+    "population": 4783444
   },
   {
-    "state_postal_abbr": "KS",
-    "data_year": 1964,
-    "felony": 1,
-    "accident": ""
+    "state_postal_abbr": "UT",
+    "data_year": 1971,
+    "officer_count": 135,
+    "officer_rate_per_1000": 0.12,
+    "civilian_count": 20,
+    "civilian_rate_per_1000": 0.02,
+    "population": 1155162
   },
   {
-    "state_postal_abbr": "LA",
-    "data_year": 2000,
-    "felony": 2,
-    "accident": 0
-  },
-  {
-    "state_postal_abbr": "NJ",
-    "data_year": 1977,
-    "felony": 2,
-    "accident": 2
+    "state_postal_abbr": "TX",
+    "data_year": 1971,
+    "officer_count": 6051,
+    "officer_rate_per_1000": 0.52,
+    "civilian_count": 1360,
+    "civilian_rate_per_1000": 0.12,
+    "population": 11726323
   }
 ]
