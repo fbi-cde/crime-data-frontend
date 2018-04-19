@@ -9,7 +9,6 @@ import DownloadFilesTable from './DownloadFilesTable'
 class DownloadDetailsAccordionBody extends React.Component {
   render() {
     const { title } = this.props
-    console.log('title:', title)
     const details = downloadDetails.find(e => e.title === title)
     if (!details) return (<div>TBD</div>)
       return (
