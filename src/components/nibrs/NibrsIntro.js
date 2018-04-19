@@ -8,6 +8,8 @@ import upperFirst from 'lodash.upperfirst'
 
 import { nibrsTerm } from '../Terms'
 import { formatNum } from '../../util/formats'
+import { MAX_YEAR } from '../../util/years'
+
 import Term from '../Term'
 import mapCrimeToGlossaryTerm from '../../util/glossary'
 
@@ -33,15 +35,17 @@ const NibrsIntro = ({
           In {highlight((selectedYear))}, this agency reported {highlight(formatNum(totalCount))} individual{' '}
           <Term id={mapCrimeToGlossaryTerm(crime)}>
             {upperFirst(lowerCase(crime))}
-          </Term>                                                                                                      <Term id={startCase(noun)}>
+          </Term>                                                                                                                                              <Term id={startCase(noun)}>
             {upperFirst(lowerCase(pluralize(noun, totalCount)))}
           </Term>  to the FBI.
         </p>
       </div>
     )
   }
+  console.log('selectedYear:', selectedYear)
   const untilUcr = participation.find(p => p.data_year === selectedYear)
-  const agencyCt = untilUcr.agency_count_nibrs_submitting
+  let agencyCt = 0;
+  if (untilUcr) { agencyCt = untilUcr.agency_count_nibrs_submitting } else agencyCt = participation.find(p => p.data_year === MAX_YEAR).agency_count_nibrs_submitting
 
   return (
     <div className="m0 sm-col-12 serif fs-18 border-bottom border-blue-light">
