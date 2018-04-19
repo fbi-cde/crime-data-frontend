@@ -34,14 +34,14 @@ const NibrsIntro = ({
           In {highlight((selectedYear))}, this agency reported {highlight(formatNum(totalCount))} individual{' '}
           <Term id={mapCrimeToGlossaryTerm(crime)}>
             {upperFirst(lowerCase(crime))}
-          </Term>                                                                                                                                                        <Term id={startCase(noun)}>
+          </Term>                                                                                                                                                                  <Term id={startCase(noun)}>
             {upperFirst(lowerCase(pluralize(noun, totalCount)))}
           </Term>  to the FBI.
         </p>
       </div>
     )
   }
-  console.log('selectedYear:', selectedYear)
+
   const untilUcr = participation.find(p => p.data_year === selectedYear)
   let agencyCt = 0;
   if (untilUcr) { agencyCt = untilUcr.agency_count_nibrs_submitting } else agencyCt = participation.find(p => p.data_year === MAX_YEAR).agency_count_nibrs_submitting
