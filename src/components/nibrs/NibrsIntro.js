@@ -6,11 +6,10 @@ import lowerCase from 'lodash.lowercase'
 import startCase from 'lodash.startcase'
 import upperFirst from 'lodash.upperfirst'
 
-import { nibrsTerm } from '../Terms'
+import { Term, nibrsTerm } from '../Terms'
 import { formatNum } from '../../util/formats'
 import { MAX_YEAR } from '../../util/years'
 
-import Term from '../Term'
 import mapCrimeToGlossaryTerm from '../../util/glossary'
 
 const highlight = txt =>
@@ -35,7 +34,7 @@ const NibrsIntro = ({
           In {highlight((selectedYear))}, this agency reported {highlight(formatNum(totalCount))} individual{' '}
           <Term id={mapCrimeToGlossaryTerm(crime)}>
             {upperFirst(lowerCase(crime))}
-          </Term>                                                                                                                                              <Term id={startCase(noun)}>
+          </Term>                                                                                                                                                        <Term id={startCase(noun)}>
             {upperFirst(lowerCase(pluralize(noun, totalCount)))}
           </Term>  to the FBI.
         </p>
