@@ -10,7 +10,6 @@ All notable changes to this project be documented in this file.
 - Fixed issue with Agency Explorer State and National Sparklines not showing up properly
 
 ##Added
-- On Agency Explorer Page you can not easily compare Summary vs NIBRS Counts for offenses
 - NIBRS Details can now be viewed by year not by the 11 year combined roll up
 
 ## Changed
