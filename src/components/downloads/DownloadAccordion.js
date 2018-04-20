@@ -6,7 +6,7 @@ import {
     AccordionItemBody,
 } from 'react-accessible-accordion';
 
-import otherDatasets from '../../../content/datasets.yml'
+import otherDatasets from '../../../content/downloadDetails.yml'
 import DownloadDetailsAccordionBody from './DownloadDetailsAccordionBody'
 
 class DownloadAccordion extends React.Component {
@@ -32,7 +32,6 @@ class DownloadAccordion extends React.Component {
       }
 
       render() {
-        console.log('otherDatasets:', otherDatasets)
           return (
             <div>
             <Accordion>

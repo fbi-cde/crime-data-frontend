@@ -58,7 +58,7 @@ const DownloadsAndDocs = () => (
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
           Additional datasets
         </h2>
-        <DownloadAccordion />
+          <DownloadAccordion />
       </div>
     </div>
   </section>
