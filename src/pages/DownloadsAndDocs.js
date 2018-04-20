@@ -2,16 +2,12 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 
-import DownloadBulkNibrs from '../components/DownloadBulkNibrs'
-import DownloadDataBtn from '../components/DownloadDataBtn'
+import DownloadBulkNibrs from '../components/downloads/DownloadBulkNibrs'
 import SharingTags from '../components/SharingTags'
 import { NibrsTerm } from '../components/Terms'
-import otherDatasets from '../../content/datasets.yml'
-import markdown from '../util/md'
-import DownloadAccordion from '../components/DownloadAccordion'
+import DownloadAccordion from '../components/downloads/DownloadAccordion'
 
 const border = 'border-bottom border-blue-light'
-const borderLight = 'border-bottom border-blue-lighter'
 
 const DownloadsAndDocs = () => (
   <section className="bg-white">
