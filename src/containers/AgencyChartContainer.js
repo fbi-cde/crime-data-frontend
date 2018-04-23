@@ -66,6 +66,13 @@ class AgencyChartContainer extends React.Component {
        pageType,
      )} ${noun} reported during this time period.`
 
+     const footNotename = `${place}-Foot-Notes-for-${pageType}-${since}-${until}`
+     let addFootnoteFile = false;
+     if(footnotes.data[0]!== null){
+       addFootnoteFile = true
+     }
+
+
      if (isSummary) {
      return (
        <div>
@@ -79,12 +86,23 @@ class AgencyChartContainer extends React.Component {
                  submitsNibrs={false}
                  until={until}
                />
+               {addFootnoteFile
+                ?
+                 <DownloadDataBtn
+                   data={[{ data: summaryDataClean, filename: `${fname}.csv` },
+                          { data: footnotes.data.data, filename: `${footNotename}.csv` }
+                          ]}
+                   filename={fname}
+                 />
+               :
                <DownloadDataBtn
                  data={[{ data: summaryDataClean, filename: `${fname}.csv` }]}
                  filename={fname}
                />
-             </div>}
-             <FootNotesCard footnotes={footnotes.data} />
+             }
+           </div>
+         }
+           <FootNotesCard footnotes={footnotes.data} />
        </div>
      )
    } else if (!isSummary && submitsNibrs) {
