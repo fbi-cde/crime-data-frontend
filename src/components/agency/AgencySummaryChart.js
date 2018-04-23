@@ -101,7 +101,6 @@ class AgencySummaryChart extends React.Component {
       mutedColors,
       since,
       size,
-      submitsNibrs,
       until,
     } = this.props
     let data = this.props.data
@@ -226,7 +225,7 @@ class AgencySummaryChart extends React.Component {
               }
               <g transform="translate(0, -0.5)">
                 {data.map(d =>
-                  <g key={d.year} transform={`translate(${x0(d.data_year)}, 0)`}>
+                  <g transform={`translate(${x0(d.data_year)}, 0)`}>
                     {keys.map(k =>
                       <rect
                         key={`${d.data_year}-${k}`}
@@ -249,7 +248,6 @@ class AgencySummaryChart extends React.Component {
                 )}
                 {noDataYears.map(year =>
                   <g
-                    key={`ndy-${year}`}
                     transform={`translate(${x0(year) +
                       x1.bandwidth()}, ${height - ndHeight})`}
                     className="cursor-pointer no-year-data"

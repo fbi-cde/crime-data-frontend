@@ -5,6 +5,7 @@ import { fetchNibrsCounts } from '../actions/nibrsCounts'
 import { fetchSummarized } from '../actions/summarized'
 import { fetchSummaries } from '../actions/summary'
 import { fetchLeoka } from '../actions/leoka'
+import { fetchFootnote } from '../actions/footnote'
 import { fetchUcrParticipation } from '../actions/participation'
 // import { fetchAgencies } from '../actions/agencies'
 import history, { createNewLocation } from '../util/history'
@@ -32,6 +33,7 @@ const fetchData = () => (dispatch, getState) => {
       if (filters.placeType === 'agency') {
         dispatch(fetchSummarized(filters))
         dispatch(fetchSummaries(filters, states))
+        dispatch(fetchFootnote(filters))
       }
       if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrsCounts(filters))
     }
