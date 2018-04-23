@@ -9,6 +9,8 @@ import { slugify } from './text'
 import { nationalKey } from './api/constants'
 import agencyApi from './api/agency'
 import summaryApi from './api/summary'
+import footnoteApi from './api/footnote'
+
 
 export const API = '/api-proxy'
 
@@ -41,6 +43,18 @@ const fetchEstimates = (place, placeId, placeType) => {
 
     return api.then(r => ({
       key: place || nationalKey,
+      results: r.results,
+    }))
+}
+
+const fetchFootnotes = (place, placeType, offense) => {
+    let api
+
+    if (placeType === 'agency') {
+      api = footnoteApi.getAgencyFootnotes(place, offense);
+    }
+    return api.then(r => ({
+      key: place,
       results: r.results,
     }))
 }
@@ -144,4 +158,5 @@ export default {
   getNibrsCountsRequests,
   getSummaryRequests,
   getSummarizedRequest,
+  fetchFootnotes,
 }

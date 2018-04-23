@@ -9,6 +9,7 @@ import AgencyNibrsChart from '../components/agency/AgencyNibrsChart'
 import AgencyChartToggle from '../components/agency/AgencyChartToggle'
 import DownloadDataBtn from '../components/downloads/DownloadDataBtn'
 import ErrorCard from '../components/ErrorCard'
+import FootNotesCard from '../components/FootNoteCard'
 import Loading from '../components/Loading'
 import NoData from '../components/NoData'
 import { NibrsTerm, SrsTerm } from '../components/Terms'
@@ -17,22 +18,22 @@ import { getAgency } from '../util/agencies'
 class AgencyChartContainer extends React.Component {
   state = { isSummary: true }
 
-  generateTable(pageType, place, since, nibrsCounts, summary, until, submitsNibrs, isSummary) {
+  generateTable(pageType, place, since, nibrsCounts, summary, until, submitsNibrs, isSummary, footnotes) {
     const summaryLoading = summary.loading
     const summaryError = summary.error
     const nibrsError = nibrsCounts.error
     const nibrsLoading = nibrsCounts.loading
+    const footnotesLoading = footnotes.loading
 
-
-    if (summaryLoading) return <Loading />
+    if (summaryLoading || footnotesLoading) return <Loading />
     if (summaryError) return <ErrorCard error={summaryError} />
     if (submitsNibrs && nibrsLoading) return <Loading />
     if (submitsNibrs && nibrsError) return <ErrorCard error={nibrsError} />
 
     const summaryData = summary.data.data
 
-
     let nibrsData
+
     let nibrsDataClean
     let hasNoNibrsValues
     let noNibrsDataText
@@ -50,7 +51,6 @@ class AgencyChartContainer extends React.Component {
          pageType,
        )} offenses reported during this time period.`
     }
-    // if (!data || data.length === 0) return <NoData />
 
     const fname = `${place}-${pageType}-${since}-${until}`
     const summaryDataClean = summaryData
@@ -66,6 +66,13 @@ class AgencyChartContainer extends React.Component {
        pageType,
      )} ${noun} reported during this time period.`
 
+     const footNotename = `${place}-Foot-Notes-for-${pageType}-${since}-${until}`
+     let addFootnoteFile = false;
+     if(footnotes.data[0]!== null){
+       addFootnoteFile = true
+     }
+
+
      if (isSummary) {
      return (
        <div>
@@ -79,11 +86,23 @@ class AgencyChartContainer extends React.Component {
                  submitsNibrs={false}
                  until={until}
                />
+               {addFootnoteFile
+                ?
+                 <DownloadDataBtn
+                   data={[{ data: summaryDataClean, filename: `${fname}.csv` },
+                          { data: footnotes.data.data, filename: `${footNotename}.csv` }
+                          ]}
+                   filename={fname}
+                 />
+               :
                <DownloadDataBtn
                  data={[{ data: summaryDataClean, filename: `${fname}.csv` }]}
                  filename={fname}
                />
-             </div>}
+             }
+           </div>
+         }
+           <FootNotesCard footnotes={footnotes.data} />
        </div>
      )
    } else if (!isSummary && submitsNibrs) {
@@ -111,12 +130,13 @@ class AgencyChartContainer extends React.Component {
   }
 
   render() {
-    const { agency, pageType, since, summary, until, place, nibrsCounts } = this.props
+    const { agency, pageType, since, summary, until, place, nibrsCounts, footnotes } = this.props
 
     if (!agency) return null
 
     let submitsNibrs = agency.nibrs === true && pageType !== 'violent-crime' && pageType !== 'property-crime'
     submitsNibrs = false;
+
     return (
       <div className="mb7">
 
@@ -125,7 +145,7 @@ class AgencyChartContainer extends React.Component {
             {startCase(pageType)} reported by {agency.display}, {since}–{until}
           </h2>
           <div className="center">
-            {submitsNibrs && !summary.loading &&
+            {submitsNibrs && !summary.loading && !footnotes.loading &&
               <AgencyChartToggle
               isSummary={this.state.isSummary}
               showSummary={() => {
@@ -137,7 +157,7 @@ class AgencyChartContainer extends React.Component {
               />
             }
           </div>
-          {this.generateTable(pageType, place, since, nibrsCounts, summary, until, submitsNibrs, this.state.isSummary)}
+          {this.generateTable(pageType, place, since, nibrsCounts, summary, until, submitsNibrs, this.state.isSummary, footnotes)}
         </div>
         {!summary.loading &&
           <div className="fs-12 serif italic">
@@ -174,15 +194,20 @@ AgencyChartContainer.propTypes = {
     data: PropTypes.object,
     loading: PropTypes.boolean,
   }).isRequired,
+  footnotes: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.boolean,
+  }).isRequired,
   until: PropTypes.number.isRequired,
 }
 
 
-const mapStateToProps = ({ agencies, filters, nibrsCounts, summarized }) => ({
+const mapStateToProps = ({ agencies, filters, nibrsCounts, summarized, footnotes }) => ({
   agency: !agencies.loading && getAgency(agencies, filters.place),
   ...filters,
   summary: summarized,
   nibrsCounts,
+  footnotes,
 })
 const mapDispatchToProps = dispatch => ({ dispatch })
 
