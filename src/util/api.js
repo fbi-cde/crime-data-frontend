@@ -55,7 +55,7 @@ const fetchFootnotes = (place, placeType, offense) => {
     }
     return api.then(r => ({
       key: place,
-      results: r,
+      results: r.results,
     }))
 }
 
