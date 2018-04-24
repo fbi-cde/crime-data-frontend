@@ -42,7 +42,6 @@ const NibrsIntro = ({
       </div>
     )
   }
-  console.log('selectedYear:', selectedYear)
   const untilUcr = participation.find(p => p.data_year === selectedYear)
   let agencyCt = 0;
   if (untilUcr) { agencyCt = untilUcr.agency_count_nibrs_submitting } else agencyCt = participation.find(p => p.data_year === MAX_YEAR).agency_count_nibrs_submitting

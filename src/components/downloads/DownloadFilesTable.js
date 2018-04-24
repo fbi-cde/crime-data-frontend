@@ -17,7 +17,6 @@ class DownloadDetailsAccordionBody extends React.Component {
 
   render() {
     const { files, sampleFile, title, fileType, link } = this.props
-    // console.log('Files:', files)
     let data;
     if (sampleFile === '/files/pe_employee_data_small.json') { data = peCsv } else if (sampleFile === '/files/hate_crime_data_small.json') { data = hcCsv } else if (sampleFile === '/files/cargo_theft_data_small.json') { data = ctCsv } else if (sampleFile === '/files/estimated_data_small.json') { data = estCsv } else if (sampleFile === '/files/territories_data_small.json') { data = terCsv } else if (sampleFile === '/files/ucr_participation_data_small.json') { data = partCsv } else if (sampleFile === '/files/human_trafficking_data_small.json') { data = htCsv } else if (sampleFile === '/files/leoka_data_small.json') { data = leoCsv }
 

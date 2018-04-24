@@ -21,8 +21,6 @@ const fetchData = () => (dispatch, getState) => {
   const { filters, region, states } = getState()
   if (region.loaded && states.loaded) {
     filters.placeId = getPlaceId(filters, region.region, states.states);
-
-    console.log("FetchChart PlaceId:",filters.placeId )
     if (offensesUtil.includes(filters.pageType) && validateFilter(filters, region.regions, states.states)) {
       // if (shouldFetchAgencies(filters) && agencies.locations !== filters.place && filters.placeType !== 'agency') dispatch(fetchAgencies(filters))
       if (filters.placeType !== 'agency') {
