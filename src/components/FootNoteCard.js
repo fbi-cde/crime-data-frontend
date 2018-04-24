@@ -5,10 +5,8 @@ class FootNoteCard extends React.Component {
 
   generateDiv = data => {
       const footnotes = []
-      console.log("data:",data)
 
       Object.keys(data).forEach(r => {
-        console.log("r:",r)
           footnotes.push(
             <p>
               {data[r].data_year} - {data[r].foot_notes}

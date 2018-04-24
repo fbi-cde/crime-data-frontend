@@ -20,9 +20,7 @@ import {
 const fetchData = () => (dispatch, getState) => {
   const { filters, region, states } = getState()
   if (region.loaded && states.loaded) {
-    if (!filters.placeId) {
-      filters.placeId = getPlaceId(filters, region.region, states.states);
-    }
+    filters.placeId = getPlaceId(filters, region.region, states.states);
     if (offensesUtil.includes(filters.pageType) && validateFilter(filters, region.regions, states.states)) {
       // if (shouldFetchAgencies(filters) && agencies.locations !== filters.place && filters.placeType !== 'agency') dispatch(fetchAgencies(filters))
       if (filters.placeType !== 'agency') {
