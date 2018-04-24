@@ -19,7 +19,7 @@ export const receivedSummarized = summarized => ({
 export const fetchSummarized = filters => dispatch => {
   const params = { size: 100 }
   dispatch(fetchingSummarized())
-  return api.getAgencySummarized(filters.place, filters.pageType,params)
+  return api.getAgencySummarized(filters.place, filters.pageType, params)
     .then(d => ({ data: d.results }))
     .then(summarized => dispatch(receivedSummarized(summarized)))
     .catch(error => dispatch(failedSummarized(error)))

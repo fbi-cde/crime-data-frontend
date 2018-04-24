@@ -9,6 +9,8 @@ import { slugify } from './text'
 import { nationalKey } from './api/constants'
 import agencyApi from './api/agency'
 import summaryApi from './api/summary'
+import footnoteApi from './api/footnote'
+
 
 export const API = '/api-proxy'
 
@@ -45,6 +47,18 @@ const fetchEstimates = (place, placeId, placeType) => {
     }))
 }
 
+const fetchFootnotes = (place, placeType, offense) => {
+    let api
+
+    if (placeType === 'agency') {
+      api = footnoteApi.getAgencyFootnotes(place, offense);
+    }
+    return api.then(r => ({
+      key: place,
+      results: r.results,
+    }))
+}
+
 const parseAggregates = ([estimates, arsons]) => ({
   ...estimates,
   results: estimates.results.map(datum => ({
@@ -67,11 +81,10 @@ const fetchAgencyAggregates = (ori, crime) => {
   return agencyApi.getAgencyOffenses(ori, params).then(d => ({ key: ori, results: d.results }))
 }
 
-const getSummaryRequests = ({ crime, place, placeType, placeId }) => {
+const getSummaryRequests = ({ place, placeType, placeId }) => {
   if (placeType === 'agency') {
     const stateName = slugify(oriToState(place))
     return [
-      fetchAgencyAggregates(place, crime),
       fetchAggregates(stateName, placeType, placeId),
       fetchAggregates(),
     ]
@@ -145,4 +158,5 @@ export default {
   getNibrsCountsRequests,
   getSummaryRequests,
   getSummarizedRequest,
+  fetchFootnotes,
 }

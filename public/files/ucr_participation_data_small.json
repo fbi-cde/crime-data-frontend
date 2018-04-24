@@ -1,0 +1,93 @@
+[
+  {
+    "year": 2016,
+    "state_name": "Alabama",
+    "total_agencies": 477,
+    "participating_agencies": 320,
+    "participation_pct": 67.09,
+    "nibrs_participating_agencies": 1,
+    "nibrs_participation_pct": 0.21,
+    "covered_agencies": 63,
+    "covered_pct": 13.21,
+    "total_population": 4883134,
+    "nibrs_participating_population": 4571434
+  },
+  {
+    "year": 2016,
+    "state_name": "Alaska",
+    "total_agencies": 48,
+    "participating_agencies": 42,
+    "participation_pct": 87.5,
+    "nibrs_participating_agencies": 0,
+    "nibrs_participation_pct": 0,
+    "covered_agencies": 10,
+    "covered_pct": 20.83,
+    "total_population": 743350,
+    "nibrs_participating_population": 740014
+  },
+  {
+    "year": 2016,
+    "state_name": "Arizona",
+    "total_agencies": 137,
+    "participating_agencies": 106,
+    "participation_pct": 77.37,
+    "nibrs_participating_agencies": 5,
+    "nibrs_participation_pct": 3.65,
+    "covered_agencies": 13,
+    "covered_pct": 9.49,
+    "total_population": 6848298,
+    "nibrs_participating_population": 6595581
+  },
+  {
+    "year": 2016,
+    "state_name": "Arkansas",
+    "total_agencies": 320,
+    "participating_agencies": 292,
+    "participation_pct": 91.25,
+    "nibrs_participating_agencies": 294,
+    "nibrs_participation_pct": 91.88,
+    "covered_agencies": 20,
+    "covered_pct": 6.25,
+    "total_population": 2995780,
+    "nibrs_participating_population": 2841953
+  },
+  {
+    "year": 2016,
+    "state_name": "California",
+    "total_agencies": 896,
+    "participating_agencies": 886,
+    "participation_pct": 98.88,
+    "nibrs_participating_agencies": 0,
+    "nibrs_participation_pct": 0,
+    "covered_agencies": 154,
+    "covered_pct": 17.19,
+    "total_population": 39315163,
+    "nibrs_participating_population": 39275076
+  },
+  {
+    "year": 2016,
+    "state_name": "Canal Zone",
+    "total_agencies": 1,
+    "participating_agencies": 0,
+    "participation_pct": 0,
+    "nibrs_participating_agencies": 0,
+    "nibrs_participation_pct": 0,
+    "covered_agencies": 0,
+    "covered_pct": 0,
+    "total_population": 0,
+    "nibrs_participating_population": 0
+  },
+  {
+    "year": 2016,
+    "state_name": "Colorado",
+    "total_agencies": 304,
+    "participating_agencies": 255,
+    "participation_pct": 83.88,
+    "nibrs_participating_agencies": 256,
+    "nibrs_participation_pct": 84.21,
+    "covered_agencies": 57,
+    "covered_pct": 18.75,
+    "total_population": 5504989,
+    "nibrs_participating_population": 5368639
+  }
+]

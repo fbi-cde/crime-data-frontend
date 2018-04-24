@@ -24,12 +24,12 @@ const ExplorerIntroState = ({ pageType, page, place, participation, until, place
   const isCrime = page === 'crime'
   const isArson = pageType === 'arson'
   const { nibrs, srs } = ucrParticipationLookup(place)
-  const untilUcr = participation.find(p => p.year === until)
+  const untilUcr = participation.find(p => p.data_year === until)
   let totalAgencies = 0
   let coveredAgencies = 0
   if (untilUcr) {
-    totalAgencies = untilUcr.total_agencies
-    coveredAgencies = untilUcr.covered_agencies
+    totalAgencies = untilUcr.total_agency_count
+    coveredAgencies = untilUcr.covered_agency_count
   }
 
   if (isCrime) {

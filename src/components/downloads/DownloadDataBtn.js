@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import Zip from 'jszip'
 
-import jsonToCsv from '../util/csv'
+import jsonToCsv from '../../util/csv'
 
 const triggerUrlDownload = url => {
   const a = document.createElement('a')
@@ -50,11 +50,11 @@ const DownloadDataBtn = ({ ariaLabel, className, data, filename, text }) => {
   return (
     <button
       aria-label={ariaLabel}
-      className={`btn p0 nowrap ${className}`}
+      className={`btn ${className}`}
       onClick={clickHander}
     >
       <img
-        className="mr-tiny align-tb"
+        className="mr-tiny align-middle"
         width="15"
         height="14"
         src="/img/download.svg"

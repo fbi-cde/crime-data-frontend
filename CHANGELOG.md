@@ -2,6 +2,20 @@
 All notable changes to this project be documented in this file.
 # Change Log
 All notable changes to this project be documented in this file.
+
+## [3.0.0] - 2018-1-23
+##Fixed
+- Fixed Nibrs Offense Counts now changed to appropriate counting based upon type of offense
+- Improved Agency location on Map, due adding lat/lon data into Agency data table
+- Fixed issue with Agency Explorer State and National Sparklines not showing up properly
+
+##Added
+- NIBRS Details can now be viewed by year not by the 11 year combined roll up
+
+## Changed
+- On Agency Explorer Page NIBRS Charts are now the same format as on State Explorer Page
+- Frontend Server utilizes new Java/Spring backend server.
+
 ## [2.19.0] - 2018-1-23
 ##Fixed
 - Fixed issue with CDE inaccuracly displaying Arson totals. ([#1320] https://github.com/fbi-cde/crime-data-frontend/pull/1320)

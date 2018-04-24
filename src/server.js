@@ -82,6 +82,7 @@ const defaultSrc = [
   url.parse(API).hostname, // enable any requests to the API server
   'www.google-analytics.com',
   'dap.digitalgov.gov',
+  API,
 ]
 app.use(helmet())
 app.use(
@@ -99,12 +100,13 @@ app.use(
 )
 
 app.get('/api', (req, res) => {
-  res.sendfile('/swagger/index.html', { root: publicDirPath })
+  res.sendFile('/swagger/index.html', { root: publicDirPath })
 })
 
 app.get('/api-proxy/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')
   const params = Object.assign({}, req.query, { api_key: apiKey })
+
 
   if (!apiKey) return res.status(401).end()
 
