@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux'
 import AboutTheData from '../components/AboutTheData'
 import AgencyChartContainer from '../containers/AgencyChartContainer'
 import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer'
+import PopulationCoveredContainer from '../containers/PopulationCoveredContainer'
 import NibrsContainer from '../containers/NibrsContainer'
 import LeokaContainer from '../containers/LeokaContainer'
 import NotFound from './NotFound'
@@ -89,6 +90,8 @@ class Explorer extends React.Component {
     const { pageType } = params
     const { place, placeType } = getPlaceInfo(params)
     const isAgency = filters.placeType === 'agency'
+    const isState = filters.placeType === 'state'
+
     const crimePage = filters.page === 'crime'
     const isCombinedCrime = crimePage && (filters.pageType === 'violent-crime' || filters.pageType === 'property-crime')
 
@@ -153,6 +156,7 @@ class Explorer extends React.Component {
             {crimePage && isAgency && crimePage && <SparklineContainer />}
             {crimePage && isAgency && <AgencyChartContainer /> }
             {crimePage && !isAgency && <TrendContainer />}
+            {crimePage && isState && <PopulationCoveredContainer />}
             {!crimePage && <LeokaContainer /> }
             {crimePage && !isCombinedCrime && <NibrsContainer /> }
             {crimePage && <AboutTheData
