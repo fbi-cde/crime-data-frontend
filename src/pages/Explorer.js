@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux'
 import AboutTheData from '../components/AboutTheData'
 import AgencyChartContainer from '../containers/AgencyChartContainer'
 import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer'
+import PoliceEmploymentContainer from '../containers/PoliceEmploymentContainer'
 import NibrsContainer from '../containers/NibrsContainer'
 import LeokaContainer from '../containers/LeokaContainer'
 import NotFound from './NotFound'
@@ -154,6 +155,7 @@ class Explorer extends React.Component {
             {crimePage && isAgency && <AgencyChartContainer /> }
             {crimePage && !isAgency && <TrendContainer />}
             {!crimePage && <LeokaContainer /> }
+            {crimePage && <PoliceEmploymentContainer /> }
             {crimePage && !isCombinedCrime && <NibrsContainer /> }
             {crimePage && <AboutTheData
               crime={pageType}
