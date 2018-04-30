@@ -111,3 +111,59 @@
   file_size: 7.9 KB
   unziped_size: 545.3M unzipped
   sampleFile: /files/territories_data_small.json
+- title: Arrest Data - Estimated Number of Arrests by Crime
+  description: |
+    National arrest data is estimated by the FBI and dates back to 1995. Arrest data contains monthly counts of arrests for various offenses broken down by age and sex or age and race. Not all agencies report race and ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months are counted for the annual counts that are included in the database.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national.csv'
+  files:
+    - file: arrests_national.csv
+      description: Information about National Arrest Data
+  data_type: Crime Data
+  year_range: 1995-2015
+  last_modified: January 1, 2016
+  download_type: CSV
+  file_size: 2.5 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/arrest_national.json
+- title:  Arrest Data - Estimated Number of Adult Arrests by Crime
+  description: |
+    National arrest data is estimated by the FBI and dates back to 1995. Arrest data contains monthly counts of arrests for various offenses broken down by age and sex or age and race. Not all agencies report race and ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months are counted for the annual counts that are included in the database.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national_adults.csv'
+  files:
+    - file: arrests_national_adults.csv
+      description: Information about National Adult Arrest Data
+  data_type: Crime Data
+  year_range: 1995-2015
+  last_modified: January 1, 2016
+  download_type: CSV
+  file_size: 156 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/arrest_national_adults.json
+- title:  Arrest Data - Estimated Number of Juvenile Arrests by Crime
+  description: |
+    National arrest data is estimated by the FBI and dates back to 1995. Arrest data contains monthly counts of arrests for various offenses broken down by age and sex or age and race. Not all agencies report race and ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months are counted for the annual counts that are included in the database. The UCR Program considers a juvenile to be an individual under 18 years of age regardless of state definition. The program does not collect data regarding police contact with a juvenile who has not committed an offense, nor does it collect data on situations in which police take a juvenile into custody for his or her protection, e.g., neglect cases.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national_juvenile.csv'
+  files:
+    - file: arrests_national_adults.csv
+      description: Information about National Juvenile Arrest Data
+  data_type: Crime Data
+  year_range: 1995-2015
+  last_modified: January 1, 2016
+  download_type: CSV
+  file_size: 98.1 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/arrests_national_juvenile.json
+- title:  Arrest Data - Estimated Number of Drug Arrests
+  description: |
+    National arrest data is estimated by the FBI and dates back to 1995. Arrest data contains monthly counts of arrests for various offenses broken down by age and sex or age and race. Not all agencies report race and ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months are counted for the annual counts that are included in the database. The UCR Program considers a juvenile to be an individual under 18 years of age regardless of state definition. The program does not collect data regarding police contact with a juvenile who has not committed an offense, nor does it collect data on situations in which police take a juvenile into custody for his or her protection, e.g., neglect cases.
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national_drug.csv'
+  files:
+    - file: arrests_national_adults.csv
+      description: Information about National Drug Arrest Data
+  data_type: Crime Data
+  year_range: 1995-2015
+  last_modified: January 1, 2016
+  download_type: CSV
+  file_size: 2.4 KB
+  unziped_size: 545.3M unzipped
+  sampleFile: /files/arrests_national_drug.json
