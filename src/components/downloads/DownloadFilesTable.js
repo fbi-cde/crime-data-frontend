@@ -11,6 +11,11 @@ import htCsv from '../../../public/files/human_trafficking_data_small.json'
 import terCsv from '../../../public/files/territories_data_small.json'
 import partCsv from '../../../public/files/ucr_participation_data_small.json'
 import leoCsv from '../../../public/files/leoka_data_small.json'
+import arrestN from '../../../public/files/arrest_national.json'
+import arrestA from '../../../public/files/arrests_national_adults.json'
+import arrestJ from '../../../public/files/arrests_national_juvenile.json'
+import arrestD from '../../../public/files/arrests_national_drug.json'
+
 import DownloadDataBtn from './DownloadDataBtn'
 
 class DownloadDetailsAccordionBody extends React.Component {
@@ -18,7 +23,7 @@ class DownloadDetailsAccordionBody extends React.Component {
   render() {
     const { files, sampleFile, title, fileType, link } = this.props
     let data;
-    if (sampleFile === '/files/pe_employee_data_small.json') { data = peCsv } else if (sampleFile === '/files/hate_crime_data_small.json') { data = hcCsv } else if (sampleFile === '/files/cargo_theft_data_small.json') { data = ctCsv } else if (sampleFile === '/files/estimated_data_small.json') { data = estCsv } else if (sampleFile === '/files/territories_data_small.json') { data = terCsv } else if (sampleFile === '/files/ucr_participation_data_small.json') { data = partCsv } else if (sampleFile === '/files/human_trafficking_data_small.json') { data = htCsv } else if (sampleFile === '/files/leoka_data_small.json') { data = leoCsv }
+    if (sampleFile === '/files/pe_employee_data_small.json') { data = peCsv } else if (sampleFile === '/files/hate_crime_data_small.json') { data = hcCsv } else if (sampleFile === '/files/cargo_theft_data_small.json') { data = ctCsv } else if (sampleFile === '/files/estimated_data_small.json') { data = estCsv } else if (sampleFile === '/files/territories_data_small.json') { data = terCsv } else if (sampleFile === '/files/ucr_participation_data_small.json') { data = partCsv } else if (sampleFile === '/files/human_trafficking_data_small.json') { data = htCsv } else if (sampleFile === '/files/leoka_data_small.json') { data = leoCsv } else if (sampleFile === '/files/arrest_national.json') { data = arrestN } else if (sampleFile === '/files/arrests_national_adults.json') { data = arrestA } else if (sampleFile === '/files/arrests_national_juvenile.json') { data = arrestJ } else if (sampleFile === '/files/arrests_national_drug.json') { data = arrestD }
 
 
     return (<div
