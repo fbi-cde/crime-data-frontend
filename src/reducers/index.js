@@ -14,6 +14,7 @@ import nibrsCounts from './nibrsCounts'
 import leoka from './leoka'
 import summarized from './summarized'
 import footnotes from './footnote'
+import counties from './counties'
 
 
 export default combineReducers({
@@ -31,4 +32,5 @@ export default combineReducers({
   leoka,
   summarized,
   footnotes,
+  counties,
 })

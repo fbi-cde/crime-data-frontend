@@ -6,6 +6,8 @@ import { fetchSummarized } from '../actions/summarized'
 import { fetchSummaries } from '../actions/summary'
 import { fetchLeoka } from '../actions/leoka'
 import { fetchFootnote } from '../actions/footnote'
+import { fetchCounties } from '../actions/counties'
+
 import { fetchUcrParticipation } from '../actions/participation'
 // import { fetchAgencies } from '../actions/agencies'
 import history, { createNewLocation } from '../util/history'
@@ -26,6 +28,7 @@ const fetchData = () => (dispatch, getState) => {
       if (filters.placeType !== 'agency') {
         dispatch(fetchUcrParticipation(filters))
         dispatch(fetchSummaries(filters, states))
+        dispatch(fetchCounties(filters))
       }
       dispatch(fetchPoliceEmployment(filters))
       if (filters.placeType === 'agency') {

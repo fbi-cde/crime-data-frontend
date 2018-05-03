@@ -10,6 +10,7 @@ import { nationalKey } from './api/constants'
 import agencyApi from './api/agency'
 import summaryApi from './api/summary'
 import footnoteApi from './api/footnote'
+import countiesApi from './api/counties'
 
 
 export const API = '/api-proxy'
@@ -55,6 +56,18 @@ const fetchFootnotes = (place, placeType, offense) => {
     }
     return api.then(r => ({
       key: place,
+      results: r.results,
+    }))
+}
+
+const fetchCounties = (placeId, placeType, offense) => {
+    let api
+
+    if (placeType === 'state') {
+      api = countiesApi.getCountyData(placeId, offense);
+    }
+    return api.then(r => ({
+      key: placeId,
       results: r.results,
     }))
 }
@@ -159,4 +172,5 @@ export default {
   getSummaryRequests,
   getSummarizedRequest,
   fetchFootnotes,
+  fetchCounties,
 }

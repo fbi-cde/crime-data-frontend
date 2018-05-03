@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux'
 import AboutTheData from '../components/AboutTheData'
 import AgencyChartContainer from '../containers/AgencyChartContainer'
 import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer'
-import PopulationCoveredContainer from '../containers/PopulationCoveredContainer'
+import CountyViewContainer from '../containers/CountyViewContainer'
 
 import PoliceEmploymentContainer from '../containers/PoliceEmploymentContainer'
 import NibrsContainer from '../containers/NibrsContainer'
@@ -47,7 +47,7 @@ class Explorer extends React.Component {
       placeType,
       ...query,
       since: clean(query.since, since),
-      until: clean(query.until, until),
+      until: clean(query.until, until)
     })
   }
 
@@ -55,18 +55,30 @@ class Explorer extends React.Component {
     const { pageType } = nextProps.filters
 
     if (nextProps.states && nextProps.regions) {
-      if (this.props.filters.place !== nextProps.filters.place && nextProps.states.loaded && nextProps.regions.loaded) {
-        const filter = {};
-        filter.pageType = pageType;
+      if (
+        this.props.filters.place !== nextProps.filters.place &&
+        nextProps.states.loaded &&
+        nextProps.regions.loaded
+      ) {
+        const filter = {}
+        filter.pageType = pageType
         filter.place = nextProps.filters.place
-        filter.placeId = generatePlaceId(nextProps.filters, this.props.region.regions, this.props.states.states);
+        filter.placeId = generatePlaceId(
+          nextProps.filters,
+          this.props.region.regions,
+          this.props.states.states
+        )
         this.props.actions.updateApp(filter)
       }
     }
     if (!this.props.loaded && nextProps.loaded) {
-       const tmpNextProps = nextProps;
+      const tmpNextProps = nextProps
       if (!nextProps.filters.placeId) {
-        tmpNextProps.filters.placeId = generatePlaceId(nextProps.filters, nextProps.region.regions, nextProps.states.states);
+        tmpNextProps.filters.placeId = generatePlaceId(
+          nextProps.filters,
+          nextProps.region.regions,
+          nextProps.states.states
+        )
       }
       this.props.actions.updateApp(tmpNextProps.filters, this.props.router)
     }
@@ -95,11 +107,14 @@ class Explorer extends React.Component {
     const isState = filters.placeType === 'state'
 
     const crimePage = filters.page === 'crime'
-    const isCombinedCrime = crimePage && (filters.pageType === 'violent-crime' || filters.pageType === 'property-crime')
+    const isCombinedCrime =
+      crimePage &&
+      (filters.pageType === 'violent-crime' ||
+        filters.pageType === 'property-crime')
 
     let agency = null
     if (isAgency) {
-       agency = getAgency(agencies, place)
+      agency = getAgency(agencies, place)
     }
     const placeDisplay = agency ? agency.agency_name : startCase(place)
 
@@ -116,7 +131,10 @@ class Explorer extends React.Component {
     }
 
     if (pageType === 'crime') {
-      if (!offensesUtil.includes(pageType) || !validateFilter(filters, region.regions, states.states)) {
+      if (
+        !offensesUtil.includes(pageType) ||
+        !validateFilter(filters, region.regions, states.states)
+      ) {
         return <NotFound />
       }
     }
@@ -128,9 +146,9 @@ class Explorer extends React.Component {
       <div className="site-wrapper">
         <Helmet title="CDE :: Explorer" />
         <SharingTags
-          title={`${sentenceCase(pageType)} reported ${placeType === 'agency'
-            ? 'by the'
-            : 'in'} ${placeDisplay}`}
+          title={`${sentenceCase(pageType)} reported ${
+            placeType === 'agency' ? 'by the' : 'in'
+          } ${placeDisplay}`}
         />
         <div className="sticky top-0">
           <div className="inline-block p1 bg-red-bright rounded-br md-hide lg-hide">
@@ -156,16 +174,18 @@ class Explorer extends React.Component {
           <div className="container-main mx-auto px2 md-py3 lg-px3">
             <ExplorerHeaderContainer />
             {crimePage && isAgency && crimePage && <SparklineContainer />}
-            {crimePage && isAgency && <AgencyChartContainer /> }
+            {crimePage && isAgency && <AgencyChartContainer />}
             {crimePage && !isAgency && <TrendContainer />}
-            {crimePage && isState && <PopulationCoveredContainer />}
-            {!crimePage && <LeokaContainer /> }
-            {crimePage && <PoliceEmploymentContainer /> }
-            {crimePage && !isCombinedCrime && <NibrsContainer /> }
-            {crimePage && <AboutTheData
-              crime={pageType}
-              onTermClick={term => actions.showTerm(term)}
-            /> }
+            {crimePage && isState && <CountyViewContainer />}
+            {!crimePage && <LeokaContainer />}
+            {crimePage && <PoliceEmploymentContainer />}
+            {crimePage && !isCombinedCrime && <NibrsContainer />}
+            {crimePage && (
+              <AboutTheData
+                crime={pageType}
+                onTermClick={term => actions.showTerm(term)}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -178,7 +198,7 @@ Explorer.propTypes = {
     hideSidebar: PropTypes.func,
     showSidebar: PropTypes.func,
     showTerm: PropTypes.func,
-    updateApp: PropTypes.func,
+    updateApp: PropTypes.func
   }),
   agencies: PropTypes.object,
   filters: PropTypes.object,
@@ -186,18 +206,25 @@ Explorer.propTypes = {
   states: PropTypes.object,
   params: PropTypes.object,
   router: PropTypes.object,
-  loaded: PropTypes.bool,
+  loaded: PropTypes.bool
 }
 
 Explorer.defaultProps = {
-  isOpen: false,
+  isOpen: false
 }
 
-const mapStateToProps = ({ agencies, filters, region, states }) => ({ agencies, filters, region, states, loaded: region.loaded && states.loaded })
+const mapStateToProps = ({ agencies, filters, region, states }) => ({
+  agencies,
+  filters,
+  region,
+  states,
+  loaded: region.loaded && states.loaded
+})
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
     { hideSidebar, showSidebar, showTerm, updateApp },
-    dispatch,
-  ) })
+    dispatch
+  )
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Explorer)

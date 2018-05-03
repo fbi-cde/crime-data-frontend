@@ -187,9 +187,6 @@ class Home extends React.Component {
             <div className="py4 sm-py7 sm-col-9 mx-auto">
               <UsaMap mapClick={this.handleMapClick} place={mapSelected} stateView={statesView} states={states} region={region} />
             </div>
-            <div className="py4 sm-py7 sm-col-9 mx-auto">
-              <CountyMap />
-            </div>
             <div className="mb7 sm-hide md-hide lg-hide">
               <button
                 className="btn btn-primary"

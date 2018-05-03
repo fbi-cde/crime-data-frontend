@@ -6,16 +6,13 @@ import { feature, mesh } from 'topojson'
 import { connect } from 'react-redux'
 import lowerCase from 'lodash.lowercase'
 import d3 from 'd3'
+import { sentenceCase } from '../util/text'
 
-
-import { lookupStatesByRegion, lookupRegionByName } from '../util/location'
-
-const Container = ({ children }) =>
+const Container = ({ children }) => (
   <div className="center bg-white rounded">
-    <div className="aspect-ratio aspect-ratio--4x3">
-      {children}
-    </div>
+    <div className="aspect-ratio aspect-ratio--4x3">{children}</div>
   </div>
+)
 
 class StateCountyThumbnail extends React.Component {
   state = { usa: null, counties: null }
@@ -28,27 +25,52 @@ class StateCountyThumbnail extends React.Component {
     })
   }
 
-  rememberValue = (name, fips) => e => {
-      document.getElementById(fips).style.fill = '#f48e88'
+  rememberValue = name => e => {
+    console.log('rememberValue:', name)
+    document.getElementById(name).style.fill = '#f48e88'
   }
 
-  forgetValue = fips => e => {
-    if (document.getElementById(fips)) { document.getElementById(fips).style.fill = ''; }
+  forgetValue = name => e => {
+    if (document.getElementById(name)) {
+      document.getElementById(name).style.fill = ''
+    }
   }
 
   render() {
     /* eslint-disable */
-    const { coordinates, place, placeType, region, states, placeName } = this.props
+    const {
+      coordinates,
+      place,
+      placeType,
+      region,
+      states,
+      placeName,
+      countyData,
+      onChangeLocation,
+      selectedCountyString
+    } = this.props
     /* eslint-enable */
     const { usa, counties } = this.state
+
+    console.log('State Thumbnail:', countyData, selectedCountyString)
+    const handleLocationSelectChange = e => {
+      console.log('e.target.value', e.target.id)
+      onChangeLocation(String(e.target.id))
+    }
 
     if (!usa) return <Container />
 
     const [w, h] = [400, 300]
-    const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
+    const projection = geoAlbersUsa()
+      .scale(500)
+      .translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
     const geoCounties = feature(counties, counties.objects.collection).features
-    const meshedCounties = mesh(counties, counties.objects.collection, (a, b) => a !== b)
+    const meshedCounties = mesh(
+      counties,
+      counties.objects.collection,
+      (a, b) => a !== b
+    )
 
     const geoStates = feature(usa, usa.objects.units).features
     const meshedStates = mesh(usa, usa.objects.units, (a, b) => a !== b)
@@ -60,9 +82,11 @@ class StateCountyThumbnail extends React.Component {
 
     if (place !== 'washington-dc') {
       if (place !== 'united-states') {
-        activeState.push(geoStates.find(
-          s => lowerCase(s.properties.name) === lowerCase(placeName),
-        ))
+        activeState.push(
+          geoStates.find(
+            s => lowerCase(s.properties.name) === lowerCase(placeName)
+          )
+        )
       }
     } else {
       activeState.push(geoStates.find(s => s.id === 'US11'))
@@ -70,17 +94,17 @@ class StateCountyThumbnail extends React.Component {
 
     if (place !== 'washington-dc') {
       Object.keys(geoCounties).forEach(geo => {
-        if (lowerCase(geoCounties[geo].properties.state) === lowerCase(placeName)) {
+        if (
+          lowerCase(geoCounties[geo].properties.state) === lowerCase(placeName)
+        ) {
           activeCounties.push(geoCounties[geo])
         }
       })
     } else {
-      activeCounties.push(geoStates.find(s => s.state === 'District of Columbia'))
+      activeCounties.push(
+        geoStates.find(s => s.state === 'District of Columbia')
+      )
     }
-
-    // console.log('activeState:', activeState)
-    // console.log('activeCounties:', activeCounties)
-
 
     const { lat, lng } = coordinates || {}
     const pin = coordinates && projection([lng, lat])
@@ -104,21 +128,51 @@ class StateCountyThumbnail extends React.Component {
     }
 
     window.gs = geoStates
-
+    const fillColor = { fill: '#f48e88' }
     const geoCountiesHtml = []
-    activeCounties.map((d, i) => (
-      geoCountiesHtml.push(<path
-          id={`county-${d.properties.fips}`}
-          key={`county-${i}-${d.properties.fips}`}
-          d={path(d)}
-          className="country fill-blue-light"
-          stroke="#FFFFFF"
-          strokeWidth={0.5}
-          onMouseOver={this.rememberValue(d.properties.name, `county-${d.properties.fips}`)}
-          onMouseMove={this.rememberValue(d.properties.name, `county-${d.properties.fips}`)}
-          onMouseOut={this.forgetValue(`county-${d.properties.fips}`)}
-        ><title>{d.properties.name}</title></path>)
-    ))
+    activeCounties.map((d, i) => {
+      if (d.properties.name !== sentenceCase(selectedCountyString).trim()) {
+        geoCountiesHtml.push(
+          <path
+            id={d.properties.name}
+            value={d.properties.name}
+            key={`county-${i}-${d.properties.fips}`}
+            d={path(d)}
+            className="county fill-blue-light"
+            stroke="#FFFFFF"
+            strokeWidth={0.1}
+            onMouseOver={this.rememberValue(d.properties.name)}
+            onMouseMove={this.rememberValue(d.properties.name)}
+            onMouseOut={this.forgetValue(d.properties.name)}
+            onClick={handleLocationSelectChange}
+          >
+            <title>{d.properties.name}</title>
+          </path>
+        )
+      } else {
+        console.log('Select County Set Fill', d.properties.name)
+        geoCountiesHtml.push(
+          <path
+            id={d.properties.name}
+            value={d.properties.name}
+            key={`county-${i}-${d.properties.fips}`}
+            d={path(d)}
+            className="county"
+            stroke="#FFFFFF"
+            fill="#f48e88"
+            strokeWidth={0.1}
+            onMouseOver={this.rememberValue(d.properties.name)}
+            onMouseMove={this.rememberValue(d.properties.name)}
+            onMouseOut={this.forgetValue(d.properties.name)}
+            onClick={handleLocationSelectChange}
+          >
+            <title>{d.properties.name}</title>
+          </path>
+        )
+      }
+    })
+
+    // Select County
 
     return (
       <Container>
@@ -149,7 +203,7 @@ class StateCountyThumbnail extends React.Component {
 }
 
 StateCountyThumbnail.defaultProps = {
-  coordinates: false,
+  coordinates: false
 }
 
 StateCountyThumbnail.propTypes = {
@@ -159,6 +213,9 @@ StateCountyThumbnail.propTypes = {
   states: PropTypes.object.isRequired,
   region: PropTypes.object.isRequired,
   placeName: PropTypes.string.isRequired,
+  countyData: PropTypes.object.isRequired,
+  onChangeLocation: PropTypes.func.isRequired,
+  selectedCountyString: PropTypes.string.isRequired
 }
 
 const mapStateToProps = ({ filters, region, states }) => {
@@ -168,7 +225,7 @@ const mapStateToProps = ({ filters, region, states }) => {
     place,
     placeType,
     region,
-    states,
+    states
   }
 }
 
