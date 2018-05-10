@@ -1,11 +1,15 @@
 import { get } from '../http'
 import { API } from './constants'
 
-const getNationalParticipation = () => get(`${API}/participation/national`);
-const getRegionalParticipation = regionName => get(`${API}/participation/regions/${regionName}`)
-const getStateParticipation = stateAbbr => get(`${API}/participation/states/${stateAbbr}`)
+const getNationalParticipation = params =>
+  get(`${API}/participation/national`, params)
+const getRegionalParticipation = (regionName, params) =>
+  get(`${API}/participation/regions/${regionName}`, params)
+const getStateParticipation = (stateAbbr, params) =>
+  get(`${API}/participation/states/${stateAbbr}`, params)
 // NOT YET IMPLEMENTED
-const getAgencyParticipation = ori => get(`${API}/participation/agencies/${ori}`)
+const getAgencyParticipation = (ori, params) =>
+  get(`${API}/participation/agencies/${ori}`, params)
 
 export default {
   getNationalParticipation,

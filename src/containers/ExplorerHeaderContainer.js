@@ -17,21 +17,21 @@ const ExplorerHeaderContainer = ({
   participation,
   filters,
   region,
-  states,
+  states
 }) => {
   const isLoading = isAgency ? agencies.loading : participation.loading
   let placeDisplay
   let location
   if (filters.placeType === 'agency') {
     placeDisplay = agency.agency_name
-    location = oriToState(filters.place);
-    location = lookupStateByName(states.states, location).state_name;
+    location = oriToState(filters.place)
+    location = lookupStateByName(states.states, location).state_name
   } else if (filters.placeType === 'state' || filters.placeType === 'region') {
     placeDisplay = lookupDisplayName(filters, region.regions, states.states)
-    location = filters.place;
+    location = filters.place
   } else {
     placeDisplay = 'United States'
-    location = filters.place;
+    location = filters.place
   }
 
   return (
@@ -46,22 +46,25 @@ const ExplorerHeaderContainer = ({
       </div>
       <div className="mb5 clearfix">
         <div className="sm-col sm-col-8 mb2 lg-m0 p0 sm-pr4 lg-pr6 fs-18">
-          {isLoading
-            ? <Loading />
-            : <ExplorerIntro
-                agency={agency}
-                participation={participation}
-                filters={filters}
-                placeName={placeDisplay}
-                states={states}
-                region={region}
-              />}
-              <UcrResourcesList
-                crime={filters.pageType}
-                place={filters.place}
-                placeType={filters.placeType}
-                states={states}
-              />
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <ExplorerIntro
+              agency={agency}
+              participation={participation}
+              filters={filters}
+              placeName={placeDisplay}
+              states={states}
+              region={region}
+            />
+          )}
+          <UcrResourcesList
+            crime={filters.pageType}
+            place={filters.place}
+            placeType={filters.placeType}
+            states={states}
+            participation={participation}
+          />
         </div>
         <div className="sm-col sm-col-4 xs-hide">
           <PlaceThumbnail placeName={location} coordinates={coordinates} />
@@ -76,9 +79,16 @@ const ExplorerHeaderContainer = ({
   )
 }
 
-const mapStateToProps = ({ agencies, filters, participation, region, states }) => {
+const mapStateToProps = ({
+  agencies,
+  filters,
+  participation,
+  region,
+  states
+}) => {
   const isAgency = filters.placeType === 'agency'
-  const agency = isAgency && !agencies.loading && getAgency(agencies, filters.place)
+  const agency =
+    isAgency && !agencies.loading && getAgency(agencies, filters.place)
   const { latitude: lat, longitude: lng } = agency
   const coordinates = isAgency && lat && lng && { lat, lng }
 
@@ -90,7 +100,7 @@ const mapStateToProps = ({ agencies, filters, participation, region, states }) =
     participation,
     filters,
     region,
-    states,
+    states
   }
 }
 
