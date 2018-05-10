@@ -23,12 +23,12 @@ class PoliceEmploymentContainer extends React.Component {
     placeDisplay,
     since,
     until,
-    filters,
+    filters
   }) => {
     const { yearSelected } = this.state
     const { data, loading, error } = policeEmployment
 
-    if (loading) return <Loading />
+    if (loading || data === null) return <Loading />
     if (error) return <ErrorCard error={error} />
 
     const places = [place]
@@ -62,7 +62,18 @@ class PoliceEmploymentContainer extends React.Component {
   }
 
   render() {
-    const { agency, isAgency, policeEmployment, place, placeType, since, until, filters, region, states } = this.props
+    const {
+      agency,
+      isAgency,
+      policeEmployment,
+      place,
+      placeType,
+      since,
+      until,
+      filters,
+      region,
+      states
+    } = this.props
 
     let placeDisplay = null
     if (isAgency) {
@@ -78,7 +89,15 @@ class PoliceEmploymentContainer extends React.Component {
           <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
             {placeDisplay} Police Employment
           </h2>
-          {this.getContent({ policeEmployment, place, placeType, placeDisplay, since, until, filters })}
+          {this.getContent({
+            policeEmployment,
+            place,
+            placeType,
+            placeDisplay,
+            since,
+            until,
+            filters
+          })}
         </div>
       </div>
     )
@@ -88,15 +107,21 @@ class PoliceEmploymentContainer extends React.Component {
 PoliceEmploymentContainer.propTypes = {
   policeEmployment: PropTypes.shape({
     data: PropTypes.object,
-    loading: PropTypes.bool,
+    loading: PropTypes.bool
   }).isRequired,
   place: PropTypes.string.isRequired,
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
-  until: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired
 }
 
-const mapStateToProps = ({ agencies, filters, policeEmployment, region, states }) => {
+const mapStateToProps = ({
+  agencies,
+  filters,
+  policeEmployment,
+  region,
+  states
+}) => {
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -112,7 +137,7 @@ const mapStateToProps = ({ agencies, filters, policeEmployment, region, states }
     until,
     policeEmployment,
     region,
-    states,
+    states
   }
 }
 
