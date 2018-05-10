@@ -45,11 +45,7 @@ const participationCsvLink = (place, type, states, participation) => {
 
   return (
     <li className="mb1" key="participation_dl">
-      <a
-        id="participationLink"
-        className="mb1"
-        onClick={clickHander}
-      >
+      <a id="participationLink" className="mb1" onClick={clickHander}>
         Download participation and population data{' '}
       </a>
     </li>
