@@ -18,7 +18,17 @@ import { getAgency } from '../util/agencies'
 class AgencyChartContainer extends React.Component {
   state = { isSummary: true }
 
-  generateTable(pageType, place, since, nibrsCounts, summary, until, submitsNibrs, isSummary, footnotes) {
+  generateTable(
+    pageType,
+    place,
+    since,
+    nibrsCounts,
+    summary,
+    until,
+    submitsNibrs,
+    isSummary,
+    footnotes
+  ) {
     const summaryLoading = summary.loading
     const summaryError = summary.error
     const nibrsError = nibrsCounts.error
@@ -40,142 +50,173 @@ class AgencyChartContainer extends React.Component {
     if (submitsNibrs) {
       nibrsData = nibrsCounts.data.offenseCount.data
       nibrsDataClean = nibrsData
-         .filter(d => d.key === 'Offense Count' && d.data_year >= since && d.data_year <= until)
-         .sort((a, b) => a.data_year - b.data_year)
+        .filter(
+          d =>
+            d.key === 'Offense Count' &&
+            d.data_year >= since &&
+            d.data_year <= until
+        )
+        .sort((a, b) => a.data_year - b.data_year)
 
       hasNoNibrsValues =
-         nibrsDataClean.length ===
-         nibrsDataClean.filter(d => d.actual === 0 && d.cleared === 0).length
+        nibrsDataClean.length ===
+        nibrsDataClean.filter(d => d.actual === 0 && d.cleared === 0).length
 
       noNibrsDataText = `There were no ${lowerCase(
-         pageType,
-       )} offenses reported during this time period.`
+        pageType
+      )} offenses reported during this time period.`
     }
 
     const fname = `${place}-${pageType}-${since}-${until}`
     const summaryDataClean = summaryData
-       .filter(d => d.data_year >= since && d.data_year <= until)
-       .sort((a, b) => a.data_year - b.data_year)
+      .filter(d => d.data_year >= since && d.data_year <= until)
+      .sort((a, b) => a.data_year - b.data_year)
 
-     const hasNoSummaryValues =
-       summaryDataClean.length ===
-       summaryDataClean.filter(d => d.actual === 0 && d.cleared === 0).length
+    const hasNoSummaryValues =
+      summaryDataClean.length ===
+      summaryDataClean.filter(d => d.actual === 0 && d.cleared === 0).length
 
-     const noun = 'offenses'
-     const noSummaryDataText = `There were no ${lowerCase(
-       pageType,
-     )} ${noun} reported during this time period.`
+    const noun = 'offenses'
+    const noSummaryDataText = `There were no ${lowerCase(
+      pageType
+    )} ${noun} reported during this time period.`
 
-     const footNotename = `${place}-Foot-Notes-for-${pageType}-${since}-${until}`
-     let addFootnoteFile = false;
-     if(footnotes.data[0]!== null){
-       addFootnoteFile = true
-     }
+    const footNotename = `${place}-Foot-Notes-for-${pageType}-${since}-${until}`
+    let addFootnoteFile = false
+    if (footnotes.data[0] !== null) {
+      addFootnoteFile = true
+    }
 
-
-     if (isSummary) {
-     return (
-       <div>
-         {hasNoSummaryValues
-           ? <NoData text={noSummaryDataText} />
-           : <div>
-               <AgencySummaryChart
-                 crime={pageType}
-                 data={summaryDataClean}
-                 since={since}
-                 submitsNibrs={false}
-                 until={until}
-               />
-               {addFootnoteFile
-                ?
-                 <DownloadDataBtn
-                   data={[{ data: summaryDataClean, filename: `${fname}.csv` },
-                          { data: footnotes.data.data, filename: `${footNotename}.csv` }
-                          ]}
-                   filename={fname}
-                 />
-               :
-               <DownloadDataBtn
-                 data={[{ data: summaryDataClean, filename: `${fname}.csv` }]}
-                 filename={fname}
-               />
-             }
-           </div>
-         }
-           <FootNotesCard footnotes={footnotes.data} />
-       </div>
-     )
-   } else if (!isSummary && submitsNibrs) {
-     return (
-       <div>
-         {hasNoSummaryValues
-           ? <NoData text={noNibrsDataText} />
-           : <div>
-               <AgencyNibrsChart
-                 crime={pageType}
-                 data={nibrsDataClean}
-                 since={since}
-                 submitsNibrs
-                 until={until}
-               />
-               <DownloadDataBtn
-                 data={[{ data: nibrsDataClean, filename: `${fname}.csv` }]}
-                 filename={fname}
-               />
-             </div>}
-       </div>
-     )
+    if (isSummary) {
+      return (
+        <div>
+          {hasNoSummaryValues ? (
+            <NoData text={noSummaryDataText} />
+          ) : (
+            <div>
+              <AgencySummaryChart
+                crime={pageType}
+                data={summaryDataClean}
+                since={since}
+                submitsNibrs={false}
+                until={until}
+              />
+              {addFootnoteFile ? (
+                <DownloadDataBtn
+                  data={[
+                    { data: summaryDataClean, filename: `${fname}.csv` },
+                    {
+                      data: footnotes.data.data,
+                      filename: `${footNotename}.csv`
+                    }
+                  ]}
+                  filename={fname}
+                />
+              ) : (
+                <DownloadDataBtn
+                  data={[{ data: summaryDataClean, filename: `${fname}.csv` }]}
+                  filename={fname}
+                />
+              )}
+            </div>
+          )}
+        </div>
+      )
+    } else if (!isSummary && submitsNibrs) {
+      return (
+        <div>
+          {hasNoSummaryValues ? (
+            <NoData text={noNibrsDataText} />
+          ) : (
+            <div>
+              <AgencyNibrsChart
+                crime={pageType}
+                data={nibrsDataClean}
+                since={since}
+                submitsNibrs
+                until={until}
+              />
+              <DownloadDataBtn
+                data={[{ data: nibrsDataClean, filename: `${fname}.csv` }]}
+                filename={fname}
+              />
+            </div>
+          )}
+        </div>
+      )
     }
     return <div />
   }
 
   render() {
-    const { agency, pageType, since, summary, until, place, nibrsCounts, footnotes } = this.props
+    const {
+      agency,
+      pageType,
+      since,
+      summary,
+      until,
+      place,
+      nibrsCounts,
+      footnotes
+    } = this.props
 
     if (!agency) return null
 
-    let submitsNibrs = agency.nibrs === true && pageType !== 'violent-crime' && pageType !== 'property-crime'
-    submitsNibrs = false;
+    let submitsNibrs =
+      agency.nibrs === true &&
+      pageType !== 'violent-crime' &&
+      pageType !== 'property-crime'
+    submitsNibrs = false
 
     return (
       <div className="mb7">
-
         <div className="mb2 p2 sm-p4 bg-white border-top border-blue border-w8">
           <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
             {startCase(pageType)} reported by {agency.display}, {since}–{until}
           </h2>
           <div className="center">
-            {submitsNibrs && !summary.loading && !footnotes.loading &&
-              <AgencyChartToggle
-              isSummary={this.state.isSummary}
-              showSummary={() => {
-                this.setState({ isSummary: true })
-              }}
-              showNibrs={() => {
-                this.setState({ isSummary: false })
-              }}
-              />
-            }
+            {submitsNibrs &&
+              !summary.loading &&
+              !footnotes.loading && (
+                <AgencyChartToggle
+                  isSummary={this.state.isSummary}
+                  showSummary={() => {
+                    this.setState({ isSummary: true })
+                  }}
+                  showNibrs={() => {
+                    this.setState({ isSummary: false })
+                  }}
+                />
+              )}
           </div>
-          {this.generateTable(pageType, place, since, nibrsCounts, summary, until, submitsNibrs, this.state.isSummary, footnotes)}
+          {this.generateTable(
+            pageType,
+            place,
+            since,
+            nibrsCounts,
+            summary,
+            until,
+            submitsNibrs,
+            this.state.isSummary,
+            footnotes
+          )}
         </div>
-        {!summary.loading &&
+        {!summary.loading && (
           <div className="fs-12 serif italic">
-            No data or low data may be the result of an agency not participating,
-            reporting no incidents, changes in reporting, or being “covered by”
-            another agency. In addition, classification, organization, and the
-            hierarchy of agencies can vary by state. To learn more, please see
-            agency-level data in the{' '}
+            No data or low data may be the result of an agency not
+            participating, reporting no incidents, changes in reporting, or
+            being “covered by” another agency. In addition, classification,
+            organization, and the hierarchy of agencies can vary by state. To
+            learn more, please see agency-level data in the{' '}
             <a
               className="mr-tiny underline"
               href="https://ucr.fbi.gov/crime-in-the-u.s"
             >
               Crime in the United States publications
-            </a>. Source: Reported {submitsNibrs
-              ? <NibrsTerm />
-              : <SrsTerm />}{' '}
+            </a>. Source: Reported {submitsNibrs ? <NibrsTerm /> : <SrsTerm />}{' '}
             data from {agency.display}.
-          </div>}
+          </div>
+        )}
       </div>
     )
   }
@@ -188,26 +229,31 @@ AgencyChartContainer.propTypes = {
   since: PropTypes.number.isRequired,
   summary: PropTypes.shape({
     data: PropTypes.object,
-    loading: PropTypes.boolean,
+    loading: PropTypes.boolean
   }).isRequired,
   nibrsCounts: PropTypes.shape({
     data: PropTypes.object,
-    loading: PropTypes.boolean,
+    loading: PropTypes.boolean
   }).isRequired,
   footnotes: PropTypes.shape({
     data: PropTypes.object,
-    loading: PropTypes.boolean,
+    loading: PropTypes.boolean
   }).isRequired,
-  until: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired
 }
 
-
-const mapStateToProps = ({ agencies, filters, nibrsCounts, summarized, footnotes }) => ({
+const mapStateToProps = ({
+  agencies,
+  filters,
+  nibrsCounts,
+  summarized,
+  footnotes
+}) => ({
   agency: !agencies.loading && getAgency(agencies, filters.place),
   ...filters,
   summary: summarized,
   nibrsCounts,
-  footnotes,
+  footnotes
 })
 const mapDispatchToProps = dispatch => ({ dispatch })
 
