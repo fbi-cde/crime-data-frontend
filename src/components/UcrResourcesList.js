@@ -15,9 +15,6 @@ const participationCsvLink = (place, type, states, participation) => {
   if (type === 'agency') return []
   if (type === 'region') return []
 
-  console.log('participationCsvLink:', place, type, states, participation)
-  console.log('participation Location:', participation.data[place])
-
   const clickHander = () => {
     const data = participation.data[place]
     const dirname = `${place}_participation_population_data`
@@ -25,7 +22,6 @@ const participationCsvLink = (place, type, states, participation) => {
 
     zip.file(`${dirname}/README.md`, `# ${lowerCase(dirname)}\n`)
     const content = jsonToCsv(data)
-    console.log('content,', content)
     zip.file(`${dirname}/${dirname}`, content)
 
     return zip
