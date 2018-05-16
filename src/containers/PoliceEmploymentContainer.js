@@ -25,7 +25,10 @@ class PoliceEmploymentContainer extends React.Component {
     until,
     filters
   }) => {
-    const { yearSelected } = this.state
+    let { yearSelected } = this.state
+    if (yearSelected > until) {
+      yearSelected = until
+    }
     const { data, loading, error } = policeEmployment
 
     if (loading || data === null) return <Loading />

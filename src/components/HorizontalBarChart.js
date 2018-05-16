@@ -23,6 +23,7 @@ class HorizontalBarChart extends React.Component {
     const { id, data, places } = this.props
     const crimes = [id]
     const dataByYear = data.map(d => ({ ...d, date: formatYear(d.year) }))
+
     return places
       .map(place =>
         crimes.map(c => {
@@ -56,7 +57,6 @@ class HorizontalBarChart extends React.Component {
       places
     } = this.props
     const { isCounts } = this.state
-
     const dataByYear = data.filter(d => d.year === initialYearSelected)
     const dataDetails = dataByYear[0][place][id].details
 
