@@ -202,7 +202,7 @@ class NibrsContainer extends React.Component {
                   <option value="2" key="2">
                     Past Two Years
                   </option>
-                  <option value="5" key="3">
+                  <option value="5" key="5">
                     Past Five Years
                   </option>
                   <option value="10" key="10">
