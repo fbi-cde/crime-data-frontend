@@ -15,7 +15,7 @@
 - title: Assaults on Law Enforcement Officers
   description: |
     The Assaults on Law Enforcement Officers dataset consists of reported assaults against law enforcement officers. The UCR Program defines law enforcement officers as individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically to pay sworn law enforcement. Download this dataset to see totals for officers who were killed or assaulted in the line of duty from 1974–2016.
-  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/estimated_crimes.csv'
+  href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/leoka.csv'
   files:
     - file: leoka.csv
       description: Information about LEOKA Data
