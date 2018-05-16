@@ -129,7 +129,7 @@ class HorizontalBarChart extends React.Component {
         </div>
         <table className="mt1 mb2 table-fixed" id={id}>
           <thead>
-            <tr style={{ lineHeight: '16px' }}>
+            <tr style={{ lineHeight: '60px' }}>
               <th style={{ width: '35%' }} />
               <th style={{ width: '20%' }}>
                 <CountPercentToggle
