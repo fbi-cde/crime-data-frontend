@@ -1,6 +1,6 @@
 - title: Summary (SRS) Data with Estimates
   description: |
-    Summary (SRS) data that has been estimated to create trends for crime occurrences on the state and national level. The FBI has traditionally included estimates in their [annual publications](https://ucr.fbi.gov/ucr-publications). Download this dataset to see the FBI's estimated crime totals for the nation and its 50 states from 1994 to 2016.
+    This dataset contains estimated data at the state and national level and was derived from the Summary Reporting System (SRS). These data reflect the estimates the FBI has traditionally included in its annual publications. Download this dataset to see the FBI's estimated crime totals for the nation and all 50 states from 1994–2016.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/estimated_crimes.csv'
   files:
     - file: estimated_crimes.csv
@@ -14,7 +14,7 @@
   sampleFile: /files/estimated_data_small.json
 - title: Assaults on Law Enforcement Officers
   description: |
-    The Assaults on Law Enforcement Officers dataset consists of reported assaults against law enforcement officers. The UCR Program defines law enforcement officers as individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically to pay sworn law enforcement. Download this dataset to see totals for officers who were killed or assaulted in the line of duty from 1974–2016.
+    The Assaults on Law Enforcement Officers dataset consists of reported assaults against law enforcement officers. (The Uniform Crime Reporting [UCR] Program defines law enforcement officers as individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically to pay sworn law enforcement.) Download this dataset to see totals for officers who were killed or assaulted in the line of duty from 1995–2016.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/leoka.csv'
   files:
     - file: leoka.csv
@@ -28,7 +28,7 @@
   sampleFile: /files/leoka_data_small.json
 - title: Police Employee Data
   description: |
-    The Police Employee dataset  is made up of data collected annually about law enforcement officers and civilians employed by police departments. The dataset contains information about the number of officers and civilians employed and the rate of police employees per a location’s population. <br /><br />The Uniform Crime Reporting (UCR) Program defines law enforcement officers as individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically for sworn law enforcement representatives.<br /><br />Civilian employees include personnel such as clerks, radio dispatchers, meter attendants, stenographers, jailers, correctional officers, and mechanics provided that they are full-time employees of the agency.<br /><br />Please see the UCR resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/topic-pages/police-employee-data.pdf">more information on police employee data</a>. Download this dataset to see how many full-time sworn and civilian law enforcement employees have served in each state from 1960–2016.
+    The Police Employee dataset is made up of data collected annually about law enforcement officers and civilians employed by law enforcement agencies. The dataset contains information about the number of officers and civilians employed and the rate of police employees per a location’s population.<br /><br />The Uniform Crime Reporting (UCR) Program defines law enforcement officers as individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically for sworn law enforcement representatives.<br /><br />Please see the UCR resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/topic-pages/police-employee-data.pdf">for more information on police employee data</a>. Download this dataset to see how many full-time sworn and civilian law enforcement employees have served in each state from 1971–2016.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/pe_employee_data.csv'
   files:
     - file: pe_employee_data.csv
@@ -42,7 +42,8 @@
   sampleFile: /files/pe_employee_data_small.json
 - title: Hate Crime
   description: |
-    The Hate Crime Statistics dataset provides annual statistics on the number of incidents, offenses, victims, and offenders in reported crimes that are motivated in whole, or in part, by an offender’s bias against the victim’s perceived race, gender, gender identity, religion, disability, sexual orientation, and ethnicity. Hate crime data is captured by including the element of bias in offenses already being reported to the UCR Program.<br /><br />All law enforcement agencies, whether they submit summary (SRS) or incident-based (NIBRS) reports, can contribute hate crime data to the UCR using forms specified to collect such information. <br /><br />Please see the UCR resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/hate-crime/2015/home">for more information on hate crime</a>. Download this dataset to see totals for hate crimes across the country from 1991–2014.
+    The Hate Crime Statistics dataset provides annual statistics on the number of incidents, offenses, victims, and offenders in reported crimes that are motivated in whole, or in part, by an offender’s bias against the victim’s perceived race, gender, gender identity, religion, disability, sexual orientation, or ethnicity. Hate crime data is captured by indicating the element of bias present in offenses already being reported to the UCR Program.
+    <br /><br />All law enforcement agencies, whether they submit Summary Reporting System (SRS) or National Incident-Based Reporting System (NIBRS) reports, can contribute hate crime data to the UCR Program using forms specified to collect such information.<br /><br /> Please see the UCR resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/hate-crime/2015/home">for more information on hate crime</a>. Download this dataset to see totals for hate crimes across the country from 1991–2014.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/hate_crime.csv'
   files:
     - file: hate_crime.csv
@@ -57,7 +58,9 @@
   sampleFile: /files/hate_crime_data_small.json
 - title: Human Trafficking
   description: |
-    The FBI began accepting data on human trafficking from states in January 2013. Human trafficking includes offenses related to commercial sex acts and involuntary servitude.  Human Trafficking data available through the Crime Data Explorer includes offenses and arrests recorded by state and local agencies that currently have the ability to report this crime to the national UCR Program.<br /><br />Please see the resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/additional-publications/human-trafficking/human-trafficking.pdf">more information on human trafficking</a>. Download this dataset to see totals by state and offense for commercial sex acts and involuntary servitude from 2013–2015.
+    The FBI began accepting data on human trafficking from states in January 2013. Human trafficking includes offenses related to commercial sex acts and involuntary servitude. Human Trafficking data available through the Crime Data Explorer include offenses and arrests recorded by state and local agencies that currently have the ability to report this crime to the national UCR Program.
+    <br /><br />
+    Please see the resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/additional-publications/human-trafficking/human-trafficking.pdf">more information on human trafficking</a>. Download this dataset to see totals by state and offense for commercial sex acts and involuntary servitude from 2013–2015.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/human_trafficking.csv'
   files:
     - file: human_trafficking.csv
@@ -71,7 +74,9 @@
   sampleFile: /files/human_trafficking_data_small.json
 - title: Uniform Crime Reporting Program Participation Data
   description: |
-    Participation data provides Information about agencies that report summary or incident-based data to the UCR program. This data helps understand the percentage of the population covered by reported data. <br /><br />Please see the resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/nibrs/2015/tables/main">more information on participation data</a>. Download this dataset to see how many law enforcement agencies have reported crime data to the FBI by state and year from 1960–2015.
+    UCR Program participation data provides Information about agencies that report data, regardless of format (summary or incident-based data), to the UCR program. These data help clarify the percentage of the population covered by reported data.
+    <br /><br />
+    Please see the resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/nibrs/2015/tables/main">more information on participation data</a>. Download this dataset to see how many law enforcement agencies have reported crime data to the FBI by state and year from 1960–2015.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/ucr_participation.csv'
   files:
     - file: ucr_participation.csv
@@ -85,7 +90,9 @@
   sampleFile: /files/ucr_participation_data_small.json
 - title: Cargo Theft
   description: |
-    Cargo Theft is defined as “the criminal taking of any cargo.”  This could also include physical theft as well as cyber theft and documentation fraud, where the ownership, destination, or contents of a cargo shipment is altered. For purposes of this definition, cargo shall be deemed as ‘moving in commerce’ at all points between the point of origin and the final destination. <br /><br />Please see the cargo theft user manual provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/additional-publications/cargo-theft/cargo-theft.pdf">more information on cargo theft data</a>. Download this dataset to see totals for cargo thefts from 2013–2015.
+     Cargo Theft is defined as “the criminal taking of any cargo.” This includes actual physical theft as well as cyber theft and documentation fraud, which is the altering of the ownership, destination, or contents of a cargo shipment. For purposes of this definition, cargo shall be deemed as “moving in commerce” at all points between the point of origin and the final destination.
+     <br /><br />
+     Please see the cargo theft user manual provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/additional-publications/cargo-theft/cargo-theft.pdf">more information on cargo theft data</a>. Download this dataset to see totals for cargo thefts from 2013–2015.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/cargo_theft.csv'
   files:
     - file: cargo_theft.csv
@@ -97,9 +104,9 @@
   file_size: 19.9 KB
   unziped_size: 545.3M unzipped
   sampleFile: /files/cargo_theft_data_small.json
-- title: US Territory Data
+- title: U.S. Territory Data
   description: |
-    Summary data from United States territories including Puerto Rico, American Samoa, Guam and the U.S. Virgin Islands. Download this dataset to see totals of reported crime for U.S. territories between 1995 and 2015.
+    This dataset contains summary data from U.S. territories including Puerto Rico, American Samoa, Guam and the U.S. Virgin Islands. Download this dataset to see totals of reported crime for U.S. territories from 1995–2015
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/territories.csv'
   files:
     - file: territories.csv
@@ -111,9 +118,9 @@
   file_size: 7.9 KB
   unziped_size: 545.3M unzipped
   sampleFile: /files/territories_data_small.json
-- title: Arrest Data - Estimated Number of Arrests by Crime
+- title: Arrest Data - Reported Number of Arrests by Crime
   description: |
-    National arrest data is estimated by the FBI and dates back to 1995. Arrest data contains monthly counts of arrests for various offenses broken down by age and sex or age and race. Not all agencies report race and ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months are counted for the annual counts that are included in the database.
+    This dataset contains the monthly number of reported arrests for various offenses reported by participating law enforcement agencies from 1995. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex.  Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. Download this dataset to see totals of reported arrests for the nation from 1995–2015.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national.csv'
   files:
     - file: arrests_national.csv
@@ -125,9 +132,9 @@
   file_size: 2.5 KB
   unziped_size: 545.3M unzipped
   sampleFile: /files/arrest_national.json
-- title:  Arrest Data - Estimated Number of Adult Arrests by Crime
+- title:  Arrest Data - Reported Number of Adult Arrests by Crime
   description: |
-    National arrest data is estimated by the FBI and dates back to 1995. Arrest data contains monthly counts of arrests for various offenses broken down by age and sex or age and race. Not all agencies report race and ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months are counted for the annual counts that are included in the database.
+    This dataset contains the monthly number of arrests of adults for various offenses reported by participating law enforcement agencies from 1995–2015. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. Download this dataset to see totals of reported arrests of adults for the nation from 1995–2015.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national_adults.csv'
   files:
     - file: arrests_national_adults.csv
@@ -139,9 +146,9 @@
   file_size: 156 KB
   unziped_size: 545.3M unzipped
   sampleFile: /files/arrests_national_adults.json
-- title:  Arrest Data - Estimated Number of Juvenile Arrests by Crime
+- title:  Arrest Data - Reported Number of Juvenile Arrests by Crime
   description: |
-    National arrest data is estimated by the FBI and dates back to 1995. Arrest data contains monthly counts of arrests for various offenses broken down by age and sex or age and race. Not all agencies report race and ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months are counted for the annual counts that are included in the database. The UCR Program considers a juvenile to be an individual under 18 years of age regardless of state definition. The program does not collect data regarding police contact with a juvenile who has not committed an offense, nor does it collect data on situations in which police take a juvenile into custody for his or her protection, e.g., neglect cases.
+    This dataset contains the monthly number of arrests of juveniles for various offenses reported by participating law enforcement agencies from 1995–2015. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. The UCR Program considers a juvenile to be an individual under 18 years of age regardless of state definition. The program does not collect data regarding police contact with a juvenile who has not committed an offense, nor does it collect data on situations in which police take a juvenile into custody for his or her protection, e.g., neglect cases. Download this dataset to see totals of reported arrests of juveniles for the nation from 1995–2015.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national_juvenile.csv'
   files:
     - file: arrests_national_juvenile.csv
@@ -153,9 +160,9 @@
   file_size: 98.1 KB
   unziped_size: 545.3M unzipped
   sampleFile: /files/arrests_national_juvenile.json
-- title:  Arrest Data - Estimated Number of Drug Arrests
+- title:  Arrest Data - Reported Number of Drug Arrests
   description: |
-    National arrest data is estimated by the FBI and dates back to 1995. Arrest data contains monthly counts of arrests for various offenses broken down by age and sex or age and race. Not all agencies report race and ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months are counted for the annual counts that are included in the database. The UCR Program considers a juvenile to be an individual under 18 years of age regardless of state definition. The program does not collect data regarding police contact with a juvenile who has not committed an offense, nor does it collect data on situations in which police take a juvenile into custody for his or her protection, e.g., neglect cases.
+    This dataset contains monthly number of arrests for drug abuse violations reported by participating law enforcement agencies from 1995–2015. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. Download this dataset to see totals of reported arrests for drug abuse violation in the nation from 1995–2015.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national_drug.csv'
   files:
     - file: arrests_national_drug.csv
