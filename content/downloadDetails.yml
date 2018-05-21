@@ -1,6 +1,6 @@
 - title: Summary (SRS) Data with Estimates
   description: |
-    This dataset contains estimated data at the state and national level and was derived from the Summary Reporting System (SRS). These data reflect the estimates the FBI has traditionally included in its annual publications. Download this dataset to see the FBI's estimated crime totals for the nation and all 50 states from 1994–2016.
+    This dataset contains estimated data at the state and national level and was derived from the Summary Reporting System (SRS). These data reflect the estimates the FBI has traditionally included in its annual publications. Download this dataset to see the FBI's estimated crime totals for the nation and all 50 states from 1995–2016.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/estimated_crimes.csv'
   files:
     - file: estimated_crimes.csv
@@ -34,7 +34,7 @@
     - file: pe_employee_data.csv
       description: Information about Police Employee Data
   data_type: Police Data
-  year_range: 1974-2016
+  year_range: 1971-2016
   last_modified: January 1, 2016
   download_type: CSV
   file_size: 81.4 KB
@@ -76,7 +76,7 @@
   description: |
     UCR Program participation data provides Information about agencies that report data, regardless of format (summary or incident-based data), to the UCR program. These data help clarify the percentage of the population covered by reported data.
     <br /><br />
-    Please see the resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/nibrs/2015/tables/main">more information on participation data</a>. Download this dataset to see how many law enforcement agencies have reported crime data to the FBI by state and year from 1960–2015.
+    Please see the resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/nibrs/2015/tables/main">more information on participation data</a>. Download this dataset to see how many law enforcement agencies have reported crime data to the FBI by state and year from 1960–2016.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/ucr_participation.csv'
   files:
     - file: ucr_participation.csv
@@ -120,13 +120,13 @@
   sampleFile: /files/territories_data_small.json
 - title: Arrest Data - Reported Number of Arrests by Crime
   description: |
-    This dataset contains the monthly number of reported arrests for various offenses reported by participating law enforcement agencies from 1995. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex.  Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. Download this dataset to see totals of reported arrests for the nation from 1995–2015.
+    This dataset contains the monthly number of reported arrests for various offenses reported by participating law enforcement agencies from 1995. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex.  Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. Download this dataset to see totals of reported arrests for the nation from 1995–2016.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national.csv'
   files:
     - file: arrests_national.csv
       description: Information about National Arrest Data
   data_type: Crime Data
-  year_range: 1995-2015
+  year_range: 1995-2016
   last_modified: January 1, 2016
   download_type: CSV
   file_size: 2.5 KB
@@ -134,13 +134,13 @@
   sampleFile: /files/arrest_national.json
 - title:  Arrest Data - Reported Number of Adult Arrests by Crime
   description: |
-    This dataset contains the monthly number of arrests of adults for various offenses reported by participating law enforcement agencies from 1995–2015. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. Download this dataset to see totals of reported arrests of adults for the nation from 1995–2015.
+    This dataset contains the monthly number of arrests of adults for various offenses reported by participating law enforcement agencies from 1995–2016. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. Download this dataset to see totals of reported arrests of adults for the nation from 1995–2016.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national_adults.csv'
   files:
     - file: arrests_national_adults.csv
       description: Information about National Adult Arrest Data
   data_type: Crime Data
-  year_range: 1995-2015
+  year_range: 1995-2016
   last_modified: January 1, 2016
   download_type: CSV
   file_size: 156 KB
@@ -148,13 +148,13 @@
   sampleFile: /files/arrests_national_adults.json
 - title:  Arrest Data - Reported Number of Juvenile Arrests by Crime
   description: |
-    This dataset contains the monthly number of arrests of juveniles for various offenses reported by participating law enforcement agencies from 1995–2015. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. The UCR Program considers a juvenile to be an individual under 18 years of age regardless of state definition. The program does not collect data regarding police contact with a juvenile who has not committed an offense, nor does it collect data on situations in which police take a juvenile into custody for his or her protection, e.g., neglect cases. Download this dataset to see totals of reported arrests of juveniles for the nation from 1995–2015.
+    This dataset contains the monthly number of arrests of juveniles for various offenses reported by participating law enforcement agencies from 1995–2016. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. The UCR Program considers a juvenile to be an individual under 18 years of age regardless of state definition. The program does not collect data regarding police contact with a juvenile who has not committed an offense, nor does it collect data on situations in which police take a juvenile into custody for his or her protection, e.g., neglect cases. Download this dataset to see totals of reported arrests of juveniles for the nation from 1995–2016.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national_juvenile.csv'
   files:
     - file: arrests_national_juvenile.csv
       description: Information about National Juvenile Arrest Data
   data_type: Crime Data
-  year_range: 1995-2015
+  year_range: 1995-2016
   last_modified: January 1, 2016
   download_type: CSV
   file_size: 98.1 KB
@@ -162,13 +162,13 @@
   sampleFile: /files/arrests_national_juvenile.json
 - title:  Arrest Data - Reported Number of Drug Arrests
   description: |
-    This dataset contains monthly number of arrests for drug abuse violations reported by participating law enforcement agencies from 1995–2015. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. Download this dataset to see totals of reported arrests for drug abuse violation in the nation from 1995–2015.
+    This dataset contains monthly number of arrests for drug abuse violations reported by participating law enforcement agencies from 1995–2016. The arrests are by offense and broken down by age and sex or age and race.  Not all agencies report race and/or ethnicity for arrests but they must report age and sex. Note that only agencies that have reported arrests for 12 months of the year are represented in the annual counts that are included in the database. Download this dataset to see totals of reported arrests for drug abuse violation in the nation from 1995–2016.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/arrests_national_drug.csv'
   files:
     - file: arrests_national_drug.csv
       description: Information about National Drug Arrest Data
   data_type: Crime Data
-  year_range: 1995-2015
+  year_range: 1995-2016
   last_modified: January 1, 2016
   download_type: CSV
   file_size: 2.4 KB
