@@ -1,7 +1,7 @@
 ---
 inherit: base.yml
 applications:
-- name: crime-data-explorer
+- name: crime-data-explorer-noe
   host: crime-data-explorer-noe
   buildpack: nodejs_buildpack
   memory: 256M

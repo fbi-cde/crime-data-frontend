@@ -14,15 +14,10 @@ import Header from './components/Header'
 import SkipContent from './components/SkipContent'
 import * as glossaryActions from './actions/glossary'
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV == 'production'
 
-const App = ({
-  actions,
-  children,
-  glossary,
-  location,
-  sidebarOpen,
-}) =>
+
+const App = ({ actions, children, glossary, location, sidebarOpen }) => (
   <div className={`site ${sidebarOpen ? 'no-scroll' : ''}`}>
     <SkipContent skipTo=".site-main" />
     {!isProd && <NOEDisclaimer />}
@@ -37,26 +32,24 @@ const App = ({
     {!isProd && <ClearCacheBtn />}
     <Analytics />
   </div>
+)
 
 App.propTypes = {
   actions: PropTypes.shape({
     hideFeedback: PropTypes.func,
-    showFeedback: PropTypes.func,
+    showFeedback: PropTypes.func
   }),
   glossary: PropTypes.object,
-  sidebarOpen: PropTypes.bool,
+  sidebarOpen: PropTypes.bool
 }
 
 const mapStateToProps = ({ glossary, sidebar }) => ({
   glossary,
-  sidebarOpen: sidebar.isOpen,
+  sidebarOpen: sidebar.isOpen
 })
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(
-    { ...glossaryActions },
-    dispatch,
-  ),
+  actions: bindActionCreators({ ...glossaryActions }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

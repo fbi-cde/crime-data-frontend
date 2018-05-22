@@ -32,7 +32,9 @@ import { fetchUcrState } from './actions/states'
 import createEnv from './util/env'
 import history from './util/history'
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV == 'production'
+const isMaster =
+  process.env.CDE_API == 'https://crime-data-api-noe.fr.cloud.gov'
 
 const ENV = createEnv()
 
@@ -52,6 +54,16 @@ const acceptHostname = hostname => {
 }
 
 const app = express()
+
+if (isMaster) {
+  app.use(
+    basicAuth({
+      users: { public: 'cilbup' },
+      challenge: true,
+      realm: 'crime-data-explorer-noe'
+    })
+  )
+}
 
 const publicDirPath = path.join(__dirname, '..', 'public')
 app.use((req, res, next) => {
