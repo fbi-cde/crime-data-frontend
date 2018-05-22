@@ -4,7 +4,7 @@
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/estimated_crimes.csv'
   files:
     - file: estimated_crimes.csv
-      description: Information about Esimated crimes
+      description: Information about Estimated crimes
   data_type: Estimated crimes
   year_range: 1995-2016
   last_modified: January 1, 2016
