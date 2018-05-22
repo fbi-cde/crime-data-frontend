@@ -33,7 +33,7 @@ const NibrsIntro = ({
           In {highlight(selectedYearNoun)}, this agency reported{' '}
           {highlight(formatNum(totalCount))} individual{' '}
           <Term id={mapCrimeToGlossaryTerm(crime)}>
-            {upperFirst(lowerCase(crime))}
+            {upperFirst(pluralize(noun, lowerCase(crime)))}
           </Term>{' '}
           <Term id={startCase(noun)}>
             {upperFirst(lowerCase(pluralize(noun, totalCount)))}
@@ -60,7 +60,7 @@ const NibrsIntro = ({
       <div className="m0 sm-col-12 serif fs-18 border-bottom border-blue-light">
         <p>
           In {highlight(selectedYearNoun)}, there were{' '}
-          {highlight(formatNum(totalCount))} individual {crime}{' '}
+          {highlight(formatNum(totalCount))} individual {pluralize(noun, crime)}{' '}
           {pluralize(noun, totalCount)} reported to the FBI in {placeDisplay} by{' '}
           {highlight(agencyCt)} law enforcement {pluralize('agency', agencyCt)}{' '}
           reporting <NibrsTerm /> data.
@@ -72,9 +72,9 @@ const NibrsIntro = ({
     <div className="m0 sm-col-12 serif fs-18 border-bottom border-blue-light">
       <p>
         In {highlight(selectedYearNoun)}, there were{' '}
-        {highlight(formatNum(totalCount))} individual {crime} reported to the
-        FBI in {placeDisplay} by law enforcement agencies reporting{' '}
-        <NibrsTerm /> data.
+        {highlight(formatNum(totalCount))} individual {pluralize(noun, crime)}{' '}
+        reported to the FBI in {placeDisplay} by law enforcement agencies
+        reporting <NibrsTerm /> data.
       </p>
     </div>
   )

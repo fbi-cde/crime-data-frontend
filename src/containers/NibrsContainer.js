@@ -146,7 +146,7 @@ class NibrsContainer extends React.Component {
       }
     } else {
       const years = rangeYears(until - this.state.yearSelected + 1, until)
-      titlenoun = `Past ${this.state.yearSelected} Years`
+      titlenoun = `the Past ${this.state.yearSelected} Years`
       countDataByYear = data.offenseCount.data.filter(d =>
         years.includes(d.data_year)
       )
