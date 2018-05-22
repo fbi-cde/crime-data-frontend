@@ -5,7 +5,7 @@
   files:
     - file: estimated_crimes.csv
       description: Information about Esimated crimes
-  data_type: Esimated crimes
+  data_type: Estimated crimes
   year_range: 1995-2016
   last_modified: January 1, 2016
   download_type: CSV
