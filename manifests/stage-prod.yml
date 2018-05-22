@@ -2,10 +2,10 @@
 inherit: base.yml
 applications:
 - name: crime-data-explorer
-  host: crime-data-explorer-noe
+  host: crime-data-explorer
   buildpack: nodejs_buildpack
-  memory: 256M
-  disk_quota: 256M
+  memory: 512M
+  instances: 2
   domain: fr.cloud.gov
 env:
   CDE_API: 'https://api.usa.gov/crime/fbi/sapi'

@@ -33,20 +33,18 @@ import createEnv from './util/env'
 import history from './util/history'
 
 const isProd = process.env.NODE_ENV === 'production'
-const isMaster = process.env.CDE_API === 'https://crime-data-api-master.fr.cloud.gov' || 'https://crime-data-api-noe.fr.cloud.gov'
+const isMaster =
+  process.env.CDE_API === 'https://crime-data-api-master.fr.cloud.gov' ||
+  'https://crime-data-api-noe.fr.cloud.gov'
 
 const ENV = createEnv()
 
-const {
-  CDE_API: API,
-  API_KEY: apiKey,
-  PORT,
-} = ENV
+const { CDE_API: API, API_KEY: apiKey, PORT } = ENV
 
 const initState = {
   agencies: { data: {} },
   participation: { data: {}, loading: true },
-  summaries: { data: {}, loading: true },
+  summaries: { data: {}, loading: true }
 }
 
 const acceptHostname = hostname => {
@@ -57,14 +55,6 @@ const acceptHostname = hostname => {
 }
 
 const app = express()
-
-if (isMaster) {
-  app.use(basicAuth({
-    users: { public: 'cilbup' },
-    challenge: true,
-    realm: 'crime-data-explorer-master'
-  }))
-}
 
 const publicDirPath = path.join(__dirname, '..', 'public')
 app.use((req, res, next) => {
@@ -82,7 +72,7 @@ const defaultSrc = [
   url.parse(API).hostname, // enable any requests to the API server
   'www.google-analytics.com',
   'dap.digitalgov.gov',
-  API,
+  API
 ]
 app.use(helmet())
 app.use(
@@ -92,11 +82,11 @@ app.use(
       scriptSrc: [
         ...defaultSrc,
         "'unsafe-eval'", // unfortunately, required for DAP right now
-        (req, res) => `'nonce-${res.locals.nonce}'`,
+        (req, res) => `'nonce-${res.locals.nonce}'`
       ],
-      styleSrc: [...defaultSrc, "'unsafe-inline'"],
-    },
-  }),
+      styleSrc: [...defaultSrc, "'unsafe-inline'"]
+    }
+  })
 )
 
 app.get('/api', (req, res) => {
@@ -106,7 +96,6 @@ app.get('/api', (req, res) => {
 app.get('/api-proxy/*', (req, res) => {
   const route = `${API}/${req.params['0']}`.replace(/\/$/g, '')
   const params = Object.assign({}, req.query, { api_key: apiKey })
-
 
   if (!apiKey) return res.status(401).end()
 
@@ -141,8 +130,8 @@ app.get('/*', (req, res) => {
         store.dispatch(
           receivedAgency({
             ori: place,
-            agency_name: agencyNames[place],
-          }),
+            agency_name: agencyNames[place]
+          })
         )
         store.dispatch(fetchingAgency())
       }
@@ -150,7 +139,7 @@ app.get('/*', (req, res) => {
       const html = renderToString(
         <Provider store={store}>
           <RouterContext {...props} />
-        </Provider>,
+        </Provider>
       )
       const head = ReactHelmet.rewind()
       res.send(renderHtml(html, head, store.getState(), res.locals.nonce))
