@@ -11,7 +11,7 @@ import lookupUsa from '../../util/usa'
 
 const ExplorerIntroAgency = ({
   county,
-  crime,
+  pageType,
   hasNibrs,
   name,
   usState,
@@ -20,8 +20,8 @@ const ExplorerIntroAgency = ({
   const showCounty =
     (county && type === 'City') || type === 'University or College'
   const crimeTerm = (
-    <Term id={mapCrimeToGlossaryTerm(crime)}>
-      {upperFirst(lowerCase(crime))}
+    <Term id={mapCrimeToGlossaryTerm(pageType)}>
+      {upperFirst(lowerCase(pageType))}
     </Term>
   )
 
@@ -41,6 +41,7 @@ ExplorerIntroAgency.defaultProps = {
 
 ExplorerIntroAgency.propTypes = {
   county: PropTypes.string,
+  pageType: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   usState: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,

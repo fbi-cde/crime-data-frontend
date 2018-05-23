@@ -13,23 +13,23 @@ const AgencyChartToggle = ({
       handleClick: showSummary,
       selected: isSummary,
       text: 'Summary',
+      css: 'left-rounded'
     },
     {
       handleClick: showNibrs,
       selected: !isSummary,
       text: 'NIBRS',
+      css: 'right-rounded'
     },
   ]
-  const style = { margin: '5px' }
 
   return (
-    <div className="mt0 mb2 italic serif">
+    <div className="mt0 mb2 italic serif inline-block clearfix">
       {btns.map((b, i) =>
         <button
           className={`${btn} ${!b.selected && 'bg-white blue border-blue'}`}
           key={i}
           onClick={b.handleClick}
-          style={style}
         >
           {b.text}
         </button>,

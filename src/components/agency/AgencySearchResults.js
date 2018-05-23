@@ -2,26 +2,20 @@ import startCase from 'lodash.startcase'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const prevent = e => e.preventDefault()
-
 /* eslint-disable camelcase */
 const AgencySearchResultItem = ({ agency, onClick }) => {
-  const { agency_name: name, months_reported, nibrs_months_reported } = agency
-  const isActive =
-    (months_reported && months_reported !== 0) ||
-    (nibrs_months_reported && nibrs_months_reported !== 0)
-  const color = isActive ? 'black' : 'blue-light cursor-default'
+  const { agency_name } = agency
 
   return (
     <li>
       <a
-        className={`block truncate ${color}`}
+        className={'block truncate black'}
         style={{ lineHeight: '1.75' }}
         href="#!"
         id={agency.ori}
-        onClick={isActive ? onClick(agency) : prevent}
+        onClick={onClick(agency)}
       >
-        {name}
+        {agency_name}
       </a>
     </li>
   )

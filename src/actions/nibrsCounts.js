@@ -20,7 +20,6 @@ export const fetchNibrsCounts = params => dispatch => {
 
   const requests = api.getNibrsCountsRequests(params)
   const reduceData = (accum, next) => ({ ...accum, [next.key]: next.data })
-
   return Promise.all(requests)
     .then(data => data.reduce(reduceData, {}))
     .then(data => dispatch(receivedNibrsCounts(data)))

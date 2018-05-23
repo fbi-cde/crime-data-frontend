@@ -1,0 +1,58 @@
+[
+  {
+    "state_postal_abbr": "VA",
+    "year": 2013,
+    "property_type": "Alcohol",
+    "stolen_value": 360000,
+    "recovered_value": 0
+  },
+  {
+    "state_postal_abbr": "MI",
+    "year": 2013,
+    "property_type": "Automobile",
+    "stolen_value": 77005,
+    "recovered_value": 5
+  },
+  {
+    "state_postal_abbr": "TN",
+    "year": 2013,
+    "property_type": "Automobile",
+    "stolen_value": 365635,
+    "recovered_value": 304000
+  },
+  {
+    "state_postal_abbr": "VA",
+    "year": 2013,
+    "property_type": "Automobile",
+    "stolen_value": 40002,
+    "recovered_value": 40002
+  },
+  {
+    "state_postal_abbr": "DE",
+    "year": 2013,
+    "property_type": "Building Materials",
+    "stolen_value": 6300,
+    "recovered_value": 0
+  },
+  {
+    "state_postal_abbr": "MI",
+    "year": 2013,
+    "property_type": "Building Materials",
+    "stolen_value": 2600,
+    "recovered_value": 0
+  },
+  {
+    "state_postal_abbr": "TN",
+    "year": 2013,
+    "property_type": "Building Materials",
+    "stolen_value": 3000,
+    "recovered_value": 0
+  },
+  {
+    "state_postal_abbr": "VA",
+    "year": 2013,
+    "property_type": "Building Materials",
+    "stolen_value": 15200,
+    "recovered_value": 0
+  }
+]

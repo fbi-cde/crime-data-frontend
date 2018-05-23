@@ -1,9 +1,9 @@
 import range from 'lodash.range'
 import React from 'react'
 
-import lookupUsa from '../util/usa'
-import { MAX_YEAR } from '../util/years'
-import ucrProgram from '../../public/data/ucr-program-participation.json'
+import lookupUsa from '../../util/usa'
+import { MAX_YEAR } from '../../util/years'
+import ucrProgram from '../../../public/data/ucr-program-participation.json'
 
 const nibrsStates = Object.keys(ucrProgram).filter(
   s => s !== 'united-states' && ucrProgram[s].nibrs,

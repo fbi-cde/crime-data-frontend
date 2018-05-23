@@ -32,11 +32,17 @@ class AgencySummaryChart extends React.Component {
     }
   }
 
-  getActive = data => {
-    const { yearSelected } = this.state
-
+  getActive = (data, crime, until, lastRapeLegacyReported) => {
+    let yearSelected = this.state.yearSelected
+    if (yearSelected == null) {
+      yearSelected = until
+    }
     let active
-    const selected = data.find(d => d.data_year === yearSelected)
+    let selected = data.find(d => d.data_year === yearSelected)
+
+    if (crime === 'rape' && yearSelected < lastRapeLegacyReported) {
+      selected = data.find(d => d.data_year === yearSelected && d.offense === 'rape-legacy')
+    }
 
     if (yearSelected && selected) {
       active = selected
@@ -95,7 +101,6 @@ class AgencySummaryChart extends React.Component {
       mutedColors,
       since,
       size,
-      submitsNibrs,
       until,
     } = this.props
     let data = this.props.data
@@ -114,7 +119,7 @@ class AgencySummaryChart extends React.Component {
     const keys = ['actual', 'cleared']
     const colorMap = scaleOrdinal().domain(keys).range(colors)
     const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
-    const noun = submitsNibrs ? 'incidents' : 'offenses'
+    const noun = 'offenses'
     const yMax = this.getYMax(data, keys)
 
     const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()
@@ -132,8 +137,8 @@ class AgencySummaryChart extends React.Component {
       .rangeRound([0, x0.bandwidth()])
       .padding(0)
 
-    const { active, priorYear: activePriorYear } = this.getActive(data)
     let lastRapeLegacyReported = 1995;
+    let displayRapeLine = true
     if (crime === 'rape') {
       const dataSet = []
       for (let i = 0; i < data.length; i++) {
@@ -149,6 +154,10 @@ class AgencySummaryChart extends React.Component {
       data = dataSet
     }
     lastRapeLegacyReported += 1;
+    if (lastRapeLegacyReported === 1996) {
+      displayRapeLine = false;
+    }
+    const { active, priorYear: activePriorYear } = this.getActive(data, crime, until, lastRapeLegacyReported)
 
     const noDataYears = this.getNoDataYears(data, since, until)
 
@@ -185,7 +194,7 @@ class AgencySummaryChart extends React.Component {
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x0} height={height} />
               <YAxis scale={y} width={width} />
-              {until > 2013 &&
+              {until > 2013 && displayRapeLine &&
                 crime === 'rape' &&
                 <g transform={`translate(${x0(lastRapeLegacyReported)}, ${height})`}>
                   <line stroke="#95aabc" strokeWidth="1" y2={-height} />
@@ -216,7 +225,7 @@ class AgencySummaryChart extends React.Component {
               }
               <g transform="translate(0, -0.5)">
                 {data.map(d =>
-                  <g key={d.year} transform={`translate(${x0(d.data_year)}, 0)`}>
+                  <g transform={`translate(${x0(d.data_year)}, 0)`}>
                     {keys.map(k =>
                       <rect
                         key={`${d.data_year}-${k}`}
@@ -239,7 +248,6 @@ class AgencySummaryChart extends React.Component {
                 )}
                 {noDataYears.map(year =>
                   <g
-                    key={`ndy-${year}`}
                     transform={`translate(${x0(year) +
                       x1.bandwidth()}, ${height - ndHeight})`}
                     className="cursor-pointer no-year-data"

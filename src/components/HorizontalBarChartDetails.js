@@ -8,10 +8,7 @@ import { formatNum, formatOneDec as formatRate } from '../util/formats'
 import { nationalKey } from '../util/usa'
 import generateId from '../util/id'
 
-const highlight = txt =>
-  <strong>
-    {txt}
-  </strong>
+const highlight = txt => <strong>{txt}</strong>
 const borderColor = { borderColor: '#c8d3dd' }
 const cellStyle = { width: 68, ...borderColor }
 
@@ -21,13 +18,11 @@ const getComparison = ({ place, data }) => {
   const nationalRate = data.find(d => d.place === nationalKey).rate
   const diff = (placeRate / nationalRate - 1) * 100
 
-  return Math.abs(diff) < threshold
-    ? <span>
-        about the same (within {threshold}%) as
-      </span>
-    : <span>
-        {<Highlight text={`${diff > 0 ? 'higher' : 'lower'}`} />} than
-      </span>
+  return Math.abs(diff) < threshold ? (
+    <span>about the same (within {threshold}%) as</span>
+  ) : (
+    <span>{<Highlight text={`${diff > 0 ? 'higher' : 'lower'}`} />} than</span>
+  )
 }
 
 const HorizontalBarChartDetails = ({
@@ -39,7 +34,7 @@ const HorizontalBarChartDetails = ({
   since,
   until,
   onChangeYear,
-  placeName,
+  placeName
 }) => {
   const handleSelectChange = e => onChangeYear(Number(e.target.value))
   const yearRange = range(since, until + 1)
@@ -55,28 +50,24 @@ const HorizontalBarChartDetails = ({
   if (isNational) {
     sentence = (
       <span>
-        In <span id="selected-year-text">{highlight(year)}</span>,{' '}
-        the {term} rate was{' '}
-        {highlight(formatRate(rate))} per {ratePer} inhabitants.
+        In <span id="selected-year-text">{highlight(year)}</span>, the {term}{' '}
+        rate was {highlight(formatRate(rate))} per {ratePer} inhabitants.
       </span>
     )
   } else {
     sentence = (
       <span>
-        In <span id="selected-year-text">{highlight(year)}</span>,{' '}
-        {placeName}’s {term} rate was{' '}
-        {highlight(formatRate(rate))} per {ratePer} inhabitants. The rate for
-        that year was {comparison} that of the United States.
+        In <span id="selected-year-text">{highlight(year)}</span>, {placeName}’s{' '}
+        {term} rate was {highlight(formatRate(rate))} per {ratePer} inhabitants.
+        The rate for that year was {comparison} that of the United States.
       </span>
     )
   }
 
   return (
-    <div className="mb3 sm-mb5 lg-flex trend-chart-details">
+    <div className="lg-flex">
       <div className="flex-auto">
-        <p className="mb2 lg-m0 lg-pr5 lg-mh-88p fs-14">
-          {sentence}
-        </p>
+        <p className="mb2 lg-m0 lg-pr5 lg-mh-88p fs-14">{sentence}</p>
       </div>
       <div
         id={crimeId}
@@ -96,11 +87,7 @@ const HorizontalBarChartDetails = ({
                   onChange={handleSelectChange}
                   value={year}
                 >
-                  {yearRange.map((y, i) =>
-                    <option key={i}>
-                      {y}
-                    </option>,
-                  )}
+                  {yearRange.map((y, i) => <option key={i}>{y}</option>)}
                 </select>
               </td>
               <td className="pr2 align-middle">Rate</td>
@@ -111,7 +98,7 @@ const HorizontalBarChartDetails = ({
             </tr>
           </thead>
           <tbody className="fs-12 bold line-height-4">
-            {data.map((d, i) =>
+            {data.map((d, i) => (
               <tr key={i} id={generateId(`${d.place}-trend-chart-details-row`)}>
                 <td
                   className="pr2 nowrap truncate align-bottom"
@@ -122,7 +109,7 @@ const HorizontalBarChartDetails = ({
                     style={{
                       width: 8,
                       height: 8,
-                      backgroundColor: colors[i] || '#000',
+                      backgroundColor: colors[i] || '#000'
                     }}
                   />
                   {d.place === 'united-states' ? 'United States' : placeName}
@@ -151,7 +138,7 @@ const HorizontalBarChartDetails = ({
                 >
                   <span
                     id={generateId(
-                      `${d.place}-trend-chart-details-row-population`,
+                      `${d.place}-trend-chart-details-row-population`
                     )}
                     className="inline-block border-bottom"
                     style={cellStyle}
@@ -159,8 +146,8 @@ const HorizontalBarChartDetails = ({
                     {formatNum(d.population)}
                   </span>
                 </td>
-              </tr>,
-            )}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -175,7 +162,7 @@ HorizontalBarChartDetails.propTypes = {
   since: PropTypes.number.isRequired,
   until: PropTypes.number.isRequired,
   onChangeYear: PropTypes.func.isRequired,
-  placeName: PropTypes.string.isRequired,
+  placeName: PropTypes.string.isRequired
 }
 
 export default HorizontalBarChartDetails

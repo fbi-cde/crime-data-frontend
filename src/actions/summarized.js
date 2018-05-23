@@ -1,5 +1,5 @@
 import { SUMMARIZED_FAILED, SUMMARIZED_FETCHING, SUMMARIZED_RECEIVED } from './constants'
-import api from '../util/api'
+import api from '../util/api/summary'
 // import { calculateRates, reshapeData } from '../util/summarized'
 
 export const failedSummarized = error => ({
@@ -16,9 +16,11 @@ export const receivedSummarized = summarized => ({
   summarized,
 })
 
-export const fetchSummarized = (filters, states) => dispatch => {
+export const fetchSummarized = filters => dispatch => {
+  const params = { size: 100 }
   dispatch(fetchingSummarized())
-  const requests = api.getSummarizedRequest(filters, states)
-  return requests.then(summarized => dispatch(receivedSummarized(summarized)))
-  .catch(error => dispatch(failedSummarized(error)))
+  return api.getAgencySummarized(filters.place, filters.pageType, params)
+    .then(d => ({ data: d.results }))
+    .then(summarized => dispatch(receivedSummarized(summarized)))
+    .catch(error => dispatch(failedSummarized(error)))
 }

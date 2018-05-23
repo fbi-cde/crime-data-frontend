@@ -8,7 +8,7 @@ import SharingTags from '../components/SharingTags'
 import Term from '../components/Term'
 import UsaMap from '../components/UsaMap'
 
-import DownloadDataBtn from '../components/DownloadDataBtn'
+import DownloadDataBtn from '../components/downloads/DownloadDataBtn'
 import participation from '../util/participation'
 import { data as usaData, nationalKey } from '../util/usa'
 

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import HorizontalBarChartDetails from './HorizontalBarChartDetails'
+import CountPercentToggle from './graph/CountPercentToggle'
 
 import { formatPerc, formatSI, formatYear } from '../util/formats'
 
@@ -22,6 +23,7 @@ class HorizontalBarChart extends React.Component {
     const { id, data, places } = this.props
     const crimes = [id]
     const dataByYear = data.map(d => ({ ...d, date: formatYear(d.year) }))
+
     return places
       .map(place =>
         crimes.map(c => {
@@ -31,10 +33,10 @@ class HorizontalBarChart extends React.Component {
               date: d.date,
               year: d.year,
               population: d[place].population,
-              ...d[place][c],
+              ...d[place][c]
             }))
           return { crime: c, place, values }
-        }),
+        })
       )
       .reduce((a, n) => a.concat(n), [])
   }
@@ -52,10 +54,9 @@ class HorizontalBarChart extends React.Component {
       filters,
       place,
       placeName,
-      places,
+      places
     } = this.props
     const { isCounts } = this.state
-
     const dataByYear = data.filter(d => d.year === initialYearSelected)
     const dataDetails = dataByYear[0][place][id].details
 
@@ -72,8 +73,8 @@ class HorizontalBarChart extends React.Component {
         {
           key: `Other (${other.length})`,
           count: other.reduce(agg, 0),
-          children: [...other],
-        },
+          children: [...other]
+        }
       ]
     }
 
@@ -83,7 +84,7 @@ class HorizontalBarChart extends React.Component {
         ...d,
         percent: p,
         countFmt: formatSI(d.count),
-        percentFmt: formatPerc(p),
+        percentFmt: formatPerc(p)
       }
     })
 
@@ -100,7 +101,7 @@ class HorizontalBarChart extends React.Component {
       return {
         crime: s.crime,
         place: s.place,
-        ...activeValue,
+        ...activeValue
       }
     })
 
@@ -123,25 +124,30 @@ class HorizontalBarChart extends React.Component {
         />
         <div className="clearfix">
           <div className="left">
-            <div className="blue bold">
-              {title}
-            </div>
+            <div className="blue bold">{title}</div>
           </div>
         </div>
         <table className="mt1 mb2 table-fixed" id={id}>
-          <thead className="v-hide">
-            <tr style={{ lineHeight: '16px' }}>
-              <th style={{ width: '15%' }} />
+          <thead>
+            <tr style={{ lineHeight: '60px' }}>
+              <th style={{ width: '35%' }} />
               <th style={{ width: '20%' }}>
-                {isCounts ? 'Count' : 'Percent'}
+                <CountPercentToggle
+                  ariaControls={data.noun}
+                  isCounts={isCounts}
+                  showCounts={() => {
+                    this.setState({ isCounts: true })
+                  }}
+                  showPercents={() => {
+                    this.setState({ isCounts: false })
+                  }}
+                />
               </th>
-              <th style={{ width: '65%' }}>
-                {title}
-              </th>
+              <th style={{ width: '45%' }} />
             </tr>
           </thead>
           <tbody>
-            {dataFormatted.map((d, i) =>
+            {dataFormatted.map((d, i) => (
               <tr key={i} className="fs-14">
                 <td className="border-right border-gray">
                   <div className="progress-bar my1">
@@ -157,8 +163,8 @@ class HorizontalBarChart extends React.Component {
                 <td className="px1" title={d.key}>
                   {d.key.replace && d.key.replace(/\//g, ' / ')}
                 </td>
-              </tr>,
-            )}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -167,14 +173,14 @@ class HorizontalBarChart extends React.Component {
 }
 
 HorizontalBarChart.defaultProps = {
-  rowLim: 12,
+  rowLim: 12
 }
 
 HorizontalBarChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string.isRequired,
   rowLim: PropTypes.number.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.string
 }
 
 export default HorizontalBarChart

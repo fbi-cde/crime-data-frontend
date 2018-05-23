@@ -8,14 +8,15 @@ import ExplorerIntroState from './ExplorerIntroState'
 import ExplorerIntroRegion from './ExplorerIntroRegion'
 import { oriToState } from '../../util/agencies'
 import { nationalKey } from '../../util/usa'
+import { sentenceCase } from '../../util/text'
 
 const ExplorerIntro = ({ agency, filters, participation, placeName, region, states }) => {
   if (agency) {
     return (
       <ExplorerIntroAgency
-        county={agency.primary_county}
+        county={sentenceCase(agency.county_name)}
         pageType={filters.pageType}
-        hasNibrs={agency.nibrs_months_reported === 12}
+        hasNibrs={agency.nibrs}
         name={agency.agency_name}
         usState={oriToState(filters.place)}
         type={agency.agency_type_name}

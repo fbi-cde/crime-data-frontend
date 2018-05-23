@@ -57,8 +57,10 @@ describe('api utility', () => {
     it('should request /estimates/national for national', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
       api.fetchAggregates().then(() => {
-        const url = spy.args[0].pop()
-        expect(url.includes('/estimates/national')).toEqual(true)
+        const url0 = spy.args[0][0]
+        const url1 = spy.args[1][0]
+        expect(url0.includes('/estimates/national')).toEqual(true)
+        expect(url1.includes('/arson/national')).toEqual(true)
         done()
       })
     })
@@ -66,8 +68,10 @@ describe('api utility', () => {
     it('should request /estimates/states/:state if place is a state', done => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
       api.fetchAggregates('california', 'state', 'ca').then(() => {
-        const url = spy.args[0].pop()
-        expect(url.includes('/estimates/states/ca')).toEqual(true)
+        const url0 = spy.args[0][0]
+        const url1 = spy.args[1][0]
+        expect(url0.includes('/estimates/states/ca')).toEqual(true)
+        expect(url1.includes('/arson/states/ca')).toEqual(true)
         done()
       })
     })
@@ -76,7 +80,7 @@ describe('api utility', () => {
       const spy = sandbox.stub(http, 'get', () => createPromise(success))
       api.fetchAgencyAggregates('NJ123', 'robbery').then(() => {
         const url = spy.args[0][0]
-        const pathPartial = '/agencies/count/NJ123'
+        const pathPartial = 'api/agencies/NJ123'
         expect(url.includes(pathPartial)).toEqual(true)
         done()
       })
@@ -86,26 +90,6 @@ describe('api utility', () => {
       sandbox.stub(http, 'get', () => createPromise(success))
       api.fetchAggregates('california').then(data => {
         expect(data.key).toEqual('california')
-        expect(data.results).toEqual(success.results)
-        done()
-      })
-    })
-  })
-
-  describe('getUcrParticipation()', () => {
-    it('should call the /participation/states/:id endpoint', done => {
-      const spy = sandbox.stub(http, 'get', () => createPromise(success))
-      api.getUcrParticipation('california', 'ca', 'state').then(() => {
-        const url = spy.args[0].pop()
-        expect(url.includes('/participation/states')).toEqual(true)
-        done()
-      })
-    })
-
-    it('should return a data structure with the place and the results', done => {
-      sandbox.stub(http, 'get', () => createPromise(success))
-      api.getUcrParticipation('california').then(data => {
-        expect(data.place).toEqual('california')
         expect(data.results).toEqual(success.results)
         done()
       })

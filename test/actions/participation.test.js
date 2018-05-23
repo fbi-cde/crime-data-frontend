@@ -13,7 +13,8 @@ import {
   receivedUcrParticipation,
   fetchUcrParticipation,
 } from '../../src/actions/participation'
-import api from '../../src/util/api'
+import { nationalKey } from '../../src/util/api/constants'
+import api from '../../src/util/api/participation'
 
 const createPromise = (res, err) => {
   if (!err) return Promise.resolve(res)
@@ -60,10 +61,13 @@ describe('ucr actions', () => {
   describe('fetchUcrParticipation()', () => {
     it('should trigger fetching and received actions', done => {
       const dispatch = sandbox.spy()
-      const fn = () => [createPromise({ place: 'california', results: [] })]
-      sandbox.stub(api, 'getUcrParticipationRequests', fn)
+      const fn0 = () => createPromise({ place: nationalKey, results: [] })
+      const fn1 = () => createPromise({ place: 'california', results: [] })
+      sandbox.stub(api, 'getNationalParticipation', fn0)
+      sandbox.stub(api, 'getStateParticipation', fn1)
 
-      fetchUcrParticipation({ place: 'california' })(dispatch).then(() => {
+      const filter = { place: 'california', placeType: 'state', placeId: 'ca' }
+      fetchUcrParticipation(filter)(dispatch).then(() => {
         const first = dispatch.getCall(0)
         const second = dispatch.getCall(1)
         expect(first.args[0].type).toEqual(UCR_PARTICIPATION_FETCHING)
@@ -72,23 +76,29 @@ describe('ucr actions', () => {
       })
     })
 
-    it('should call api.getUcrParticipationRequests', done => {
+    it('should call getNationalParticipation and getStateParticipation', done => {
       const dispatch = sandbox.spy()
-      const fn = () => [createPromise({ place: 'california', results: [] })]
-      const spy = sandbox.stub(api, 'getUcrParticipationRequests', fn)
+      const fn0 = () => createPromise({ place: nationalKey, results: [] })
+      const fn1 = () => createPromise({ place: 'california', results: [] })
+      const spy0 = sandbox.stub(api, 'getNationalParticipation', fn0)
+      const spy1 = sandbox.stub(api, 'getStateParticipation', fn1)
 
-      fetchUcrParticipation({ place: 'california' })(dispatch).then(() => {
-        expect(spy.callCount).toEqual(1)
+      const filter = { place: 'california', placeType: 'state', placeId: 'ca' }
+      fetchUcrParticipation(filter)(dispatch).then(() => {
+        expect(spy0.callCount).toEqual(1)
+        expect(spy1.callCount).toEqual(1)
         done()
       })
     })
 
     it('should dispatch UCR_PARTICIPATION_FAILED if API call fails', done => {
       const dispatch = sandbox.spy()
-      const fn = () => [Promise.reject(true)]
-      sandbox.stub(api, 'getUcrParticipationRequests', fn)
+      const fn = () => Promise.reject(true)
+      sandbox.stub(api, 'getNationalParticipation', fn)
+      sandbox.stub(api, 'getStateParticipation', fn)
 
-      fetchUcrParticipation({ place: 'california' })(dispatch).then(() => {
+      const filter = { place: 'california', placeType: 'state', placeId: 'ca' }
+      fetchUcrParticipation(filter)(dispatch).then(() => {
         const dispatched = dispatch.getCall(1)
         expect(dispatched.args[0].type).toEqual('UCR_PARTICIPATION_FAILED')
         done()

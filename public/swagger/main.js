@@ -51,7 +51,7 @@
   }
 
   window.swaggerUi = new SwaggerUi({
-    url: '/api-proxy/static/swagger.json',
+    url: '/api-proxy/v2/api-docs',
     dom_id: 'swagger-ui',
     operationsSorter: 'alpha',
     docExpansion: 'list',
@@ -59,6 +59,9 @@
       showApiKeyForm()
       $('#api-key-container').on('submit', handleApiKeyChange)
       restructureEndpointHeadings()
+      $('.sandbox_header').each(function(i,e) {
+        $(e).hide();
+      })
     },
   })
 

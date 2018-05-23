@@ -32,21 +32,17 @@ import { fetchUcrState } from './actions/states'
 import createEnv from './util/env'
 import history from './util/history'
 
-const isProd = process.env.NODE_ENV === 'production'
-const isMaster = process.env.CDE_API === 'https://crime-data-api-master.fr.cloud.gov'
+const isProd = process.env.NODE_ENV == 'production'
+const isMaster = process.env.CDE_API == 'https://api.usa.gov/crime/fbi/master'
 
 const ENV = createEnv()
 
-const {
-  CDE_API: API,
-  API_KEY: apiKey,
-  PORT,
-} = ENV
+const { CDE_API: API, API_KEY: apiKey, PORT } = ENV
 
 const initState = {
   agencies: { data: {} },
   participation: { data: {}, loading: true },
-  summaries: { data: {}, loading: true },
+  summaries: { data: {}, loading: true }
 }
 
 const acceptHostname = hostname => {
@@ -59,11 +55,13 @@ const acceptHostname = hostname => {
 const app = express()
 
 if (isMaster) {
-  app.use(basicAuth({
-    users: { public: 'cilbup' },
-    challenge: true,
-    realm: 'crime-data-explorer-master'
-  }))
+  app.use(
+    basicAuth({
+      users: { public: 'cilbup' },
+      challenge: true,
+      realm: 'crime-data-explorer-noe'
+    })
+  )
 }
 
 const publicDirPath = path.join(__dirname, '..', 'public')
@@ -82,6 +80,7 @@ const defaultSrc = [
   url.parse(API).hostname, // enable any requests to the API server
   'www.google-analytics.com',
   'dap.digitalgov.gov',
+  API
 ]
 app.use(helmet())
 app.use(
@@ -91,15 +90,15 @@ app.use(
       scriptSrc: [
         ...defaultSrc,
         "'unsafe-eval'", // unfortunately, required for DAP right now
-        (req, res) => `'nonce-${res.locals.nonce}'`,
+        (req, res) => `'nonce-${res.locals.nonce}'`
       ],
-      styleSrc: [...defaultSrc, "'unsafe-inline'"],
-    },
-  }),
+      styleSrc: [...defaultSrc, "'unsafe-inline'"]
+    }
+  })
 )
 
 app.get('/api', (req, res) => {
-  res.sendfile('/swagger/index.html', { root: publicDirPath })
+  res.sendFile('/swagger/index.html', { root: publicDirPath })
 })
 
 app.get('/api-proxy/*', (req, res) => {
@@ -139,8 +138,8 @@ app.get('/*', (req, res) => {
         store.dispatch(
           receivedAgency({
             ori: place,
-            agency_name: agencyNames[place],
-          }),
+            agency_name: agencyNames[place]
+          })
         )
         store.dispatch(fetchingAgency())
       }
@@ -148,7 +147,7 @@ app.get('/*', (req, res) => {
       const html = renderToString(
         <Provider store={store}>
           <RouterContext {...props} />
-        </Provider>,
+        </Provider>
       )
       const head = ReactHelmet.rewind()
       res.send(renderHtml(html, head, store.getState(), res.locals.nonce))

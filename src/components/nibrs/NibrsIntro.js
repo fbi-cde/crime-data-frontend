@@ -2,47 +2,79 @@ import { max } from 'd3-array'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
+import lowerCase from 'lodash.lowercase'
+import startCase from 'lodash.startcase'
+import upperFirst from 'lodash.upperfirst'
 
-import { nibrsTerm } from '../Terms'
+import { NibrsTerm } from '../Terms'
 import { formatNum } from '../../util/formats'
+import { MAX_YEAR } from '../../util/years'
 
-const highlight = txt =>
-  <strong>
-    {txt}
-  </strong>
+import Term from '../Term'
+import mapCrimeToGlossaryTerm from '../../util/glossary'
+
+const highlight = txt => <strong>{txt}</strong>
 
 const NibrsIntro = ({
   crime,
   isAgency,
-  nibrsFirstYear,
+  selectedYear,
+  selectedYearNoun,
   participation,
   placeDisplay,
-  totalCount,
-  until,
+  totalCount
 }) => {
   const noun = 'incident'
+
   if (isAgency) {
     return (
-      <div className="m0 sm-col-10">
+      <div className="m0 sm-col-12 serif fs-18 border-bottom border-blue-light">
         <p>
-          This agency reported {highlight(formatNum(totalCount))} individual{' '}
-          {crime} {pluralize(noun, totalCount)} to the FBI between{' '}
-          {highlight(nibrsFirstYear)} and {highlight(until)}.
+          In {highlight(selectedYearNoun)}, this agency reported{' '}
+          {highlight(formatNum(totalCount))} individual{' '}
+          <Term id={mapCrimeToGlossaryTerm(crime)}>
+            {upperFirst(pluralize(lowerCase(crime), totalCount))}
+          </Term>{' '}
+          <Term id={startCase(noun)}>
+            {upperFirst(lowerCase(pluralize(noun, totalCount)))}
+          </Term>{' '}
+          to the FBI.
         </p>
       </div>
     )
   }
-  const agencyCts = participation.map(p => p.nibrs_participating_agencies)
-  const agencyCt = max(agencyCts)
+  let agencyCt
+  let untilUcr
 
+  if (
+    selectedYear &&
+    selectedYear !== 2 &&
+    selectedYear !== 5 &&
+    selectedYear !== 10
+  ) {
+    untilUcr = participation.find(p => p.data_year === selectedYear)
+    if (untilUcr) {
+      agencyCt = untilUcr.agency_count_nibrs_submitting
+    }
+    return (
+      <div className="m0 sm-col-12 serif fs-18 border-bottom border-blue-light">
+        <p>
+          In {highlight(selectedYearNoun)}, there were{' '}
+          {highlight(formatNum(totalCount))} individual{' '}
+          {pluralize(crime, totalCount)} {pluralize(noun, totalCount)} reported
+          to the FBI in {placeDisplay} by {highlight(agencyCt)} law enforcement{' '}
+          {pluralize('agency', agencyCt)} reporting <NibrsTerm /> data.
+        </p>
+      </div>
+    )
+  }
   return (
-    <div className="m0 sm-col-10">
+    <div className="m0 sm-col-12 serif fs-18 border-bottom border-blue-light">
       <p>
-        There were {highlight(formatNum(totalCount))} individual {crime}{' '}
-        {pluralize(noun, totalCount)} reported to the FBI in {placeDisplay}{' '}
-        between {highlight(nibrsFirstYear)} and {highlight(until)} by{' '}
-        {highlight(agencyCt)} law enforcement {pluralize('agency', agencyCt)}{' '}
-        reporting {nibrsTerm} data.
+        In {highlight(selectedYearNoun)}, there were{' '}
+        {highlight(formatNum(totalCount))} individual{' '}
+        {pluralize(crime, totalCount)} reported to the FBI in {placeDisplay} by
+        law enforcement agencies reporting <NibrsTerm /> data.
       </p>
     </div>
   )
@@ -51,11 +83,11 @@ const NibrsIntro = ({
 NibrsIntro.propTypes = {
   crime: PropTypes.string.isRequired,
   isAgency: PropTypes.bool.isRequired,
-  nibrsFirstYear: PropTypes.number.isRequired,
+  selectedYear: PropTypes.number,
   placeDisplay: PropTypes.string.isRequired,
   totalCount: PropTypes.number.isRequired,
   participation: PropTypes.array.isRequired,
-  until: PropTypes.number.isRequired,
+  selectedYearNoun: PropTypes.string.isRequired
 }
 
 export default NibrsIntro

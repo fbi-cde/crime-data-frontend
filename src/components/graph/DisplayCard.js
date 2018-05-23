@@ -9,14 +9,14 @@ import { slugify } from '../../util/text'
 class DisplayCard extends React.Component {
 
     render() {
-      const { data, place, year } = this.props
+      const { data, place, year, until } = this.props
       let charts = null;
       switch (data.ui_type) {
         case 'basic_table':
-          charts = (<BarChart data={data} year={year} />)
+          charts = (<BarChart data={data} year={year} until={until} />)
           break;
         case 'stacked_table':
-            return <StackedBarChart data={data} year={year} />
+            return (<div className='bg-blue-white p2'><div className="mt0 pb1 fs-18">                                                              <h2 className="mt0 fs-18 sans-serif blue">                                                              {data.title}</h2><StackedBarChart data={data} year={year} until={until} /> </div>                                                              </div>)
         default:
           charts = null
       }
@@ -30,9 +30,9 @@ class DisplayCard extends React.Component {
       }
 
       return (
-        <div className='bg-white p2 border-bottom border-blue-light'>
-          <div className="mt0 mb2 pb1 fs-18">
-            <h2 className="mt0 mb2 sm-mb4 fs-18 sans-serif blue">
+        <div className='bg-blue-white p2 border-bottom border-blue-light'>
+          <div className="mt0  pb1 fs-18">
+            <h2 className="mt0 fs-18 sans-serif blue">
               {data.title}
             </h2>
               {charts}
@@ -47,6 +47,7 @@ DisplayCard.propTypes = {
   data: PropTypes.object.isRequired,
   place: PropTypes.string,
   year: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 export default DisplayCard

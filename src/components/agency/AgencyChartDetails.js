@@ -60,7 +60,7 @@ const AgencyChartDetails = ({
   }
 
   return (
-    <div className="mb3 lg-flex">
+    <div className="mb3 lg-flex serif fs-18">
       <div className="mb2 sm-mb0 sm-mr7 flex-auto">
         {!nibrsDetails ?
           <p className="m0" style={{ maxWidth: 400 }}>
@@ -112,7 +112,7 @@ const AgencyChartDetails = ({
                     style={{ width: 8, height: 8, backgroundColor: colors(k) }}
                   />
                   <Term id={mapReported(k)} size="sm">
-                    {startCase(mapReported(k))}
+                    {k === 'value' ? startCase(mapReported('offenses')) : startCase(mapReported(k))}
                   </Term>
                 </td>
                 <td className="pt1 line-height-4 align-bottom right-align">

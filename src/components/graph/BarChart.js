@@ -6,6 +6,7 @@ import pluralize from 'pluralize'
 import NibrsCountPercentToggle from '../nibrs/NibrsCountPercentToggle'
 import { formatNum, formatPerc, formatSI } from '../../util/formats'
 import NoDataCard from './NoDataCard'
+import { rangeYears } from '../../util/years'
 
 class BarChart extends React.Component {
   state = { isCounts: false }
@@ -23,14 +24,36 @@ class BarChart extends React.Component {
   render() {
     const {
       data,
-      year
+      year,
+      until
     } = this.props
     const id = snakeCase(data.ui_text)
 
     const { isCounts } = this.state
 
 
-    const fitleredDataByYear = data.data.filter(d => d.data_year === year)
+    let fitleredDataByYear
+    if (year !== 2 && year !== 5 && year !== 10) {
+      fitleredDataByYear = data.data.filter(d => d.data_year === year)
+    } else {
+      const years = rangeYears(until - year + 1, until)
+      fitleredDataByYear = data.data.filter(d => years.includes(d.data_year))
+      const keys = new Set();
+      for (const i in fitleredDataByYear) {
+        keys.add(fitleredDataByYear[i].key)
+      }
+      const newdata = []
+      for (const i in Array.from(keys)) {
+        const object = new Object()
+        object.key = Array.from(keys)[i];
+        object.value = 0
+        for (const j in fitleredDataByYear) {
+          if (fitleredDataByYear[j].key === Array.from(keys)[i]) { object.value += fitleredDataByYear[j].value }
+        }
+        newdata.push(object)
+      }
+      fitleredDataByYear = newdata
+    }
     if (fitleredDataByYear.length === 0) {
       return (<NoDataCard noun={data.title} year={year} />)
     }
@@ -39,14 +62,15 @@ class BarChart extends React.Component {
     const dataFormatted = fitleredDataByYear.map(d => {
       const p = d.value / total
       return {
-        ...d,
-        percent: p,
-        countFmt: formatSI(d.value),
-        percentFmt: formatPerc(p),
+          ...d,
+          percent: p,
+          countFmt: formatSI(d.value),
+          percentFmt: formatPerc(p),
+
       }
     })
 
-    if (data.title.includes('Age')) { dataFormatted.sort((a, b) => a.key > b.key) }
+    if (!data.title.includes('Age')) { dataFormatted.sort((a, b) => a.value < b.value) }
 
     return (
       <div id={id}>
@@ -112,6 +136,7 @@ class BarChart extends React.Component {
 BarChart.propTypes = {
   data: PropTypes.object.isRequired,
   year: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
 }
 
 export default BarChart

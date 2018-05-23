@@ -8,6 +8,8 @@ import React from 'react'
 import CountPercentToggle from './CountPercentToggle'
 import StackedBarDetails from './StackedBarChartDetails'
 import { formatNum } from '../../util/formats'
+import NoDataCard from './NoDataCard'
+import { rangeYears } from '../../util/years'
 
 class StackedBarChart extends React.Component {
   state = { isCounts: false }
@@ -19,9 +21,36 @@ class StackedBarChart extends React.Component {
       size,
       data,
       year,
+      until,
     } = this.props
-    const fitleredDataByYear = data.data.filter(d => d.data_year === year)
 
+
+    let fitleredDataByYear
+    if (year !== 2 && year !== 5 && year !== 10) {
+      fitleredDataByYear = data.data.filter(d => d.data_year === year)
+    } else {
+      const years = rangeYears(until - year, until)
+      fitleredDataByYear = data.data.filter(d => years.includes(d.data_year))
+      const keys = new Set();
+      for (const i in fitleredDataByYear) {
+        keys.add(fitleredDataByYear[i].key)
+      }
+      const newdata = []
+      for (const i in Array.from(keys)) {
+        const object = new Object()
+        object.key = Array.from(keys)[i];
+        object.value = 0
+        for (const j in fitleredDataByYear) {
+          if (fitleredDataByYear[j].key === Array.from(keys)[i]) { object.value += fitleredDataByYear[j].value }
+        }
+        newdata.push(object)
+      }
+      fitleredDataByYear = newdata
+    }
+
+    if (fitleredDataByYear.length === 0) {
+      return (<NoDataCard noun={data.title} year={year} />)
+    }
     const { isCounts } = this.state
     const height = size.height - margin.top - margin.bottom
     const width = size.width - margin.left - margin.right
@@ -52,13 +81,8 @@ class StackedBarChart extends React.Component {
 
 
     return (
-      <div className="p2 sm-p2 bg-white black border-bottom border-blue-light">
+      <div className="p2 sm-p2  bg-blue-white black border-bottom border-blue-light">
         <div className="clearfix">
-          <div className="left">
-            <h2 className='mt0 mb2 sm-mb4 fs-18 sans-serif blue'>
-              {data.title}
-            </h2>
-          </div>
           <div className="right">
             <CountPercentToggle
               ariaControls={data.noun}
@@ -127,6 +151,7 @@ StackedBarChart.propTypes = {
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
   data: PropTypes.object.isRequired,
   year: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired,
   size: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number,
