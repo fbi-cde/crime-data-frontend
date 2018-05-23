@@ -1,11 +1,6 @@
 machine:
   node:
     version: 6
-  environment:
-    CF_API: https://api.fr.cloud.gov
-    CF_USERNAME: fbi-crime-explorer_deployer
-    CF_ORGANIZATION: fbi-crime-explorer
-    CF_SPACE: prototype
 
 dependencies:
   cache_directories:
@@ -15,28 +10,3 @@ test:
   override:
     - npm run lint
     - npm run test
-
-deployment:
-  master:
-    branch: master
-    commands:
-      - curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-      - sudo dpkg -i cf-cli_amd64.deb
-      - curl -v -L -o ~/autopilot-linux 'https://github.com/contraband/autopilot/releases/download/0.0.3/autopilot-linux'
-      - chmod a+x ~/autopilot-linux
-      - cf install-plugin -f ~/autopilot-linux
-      - cf api $CF_API
-      - cf auth $CF_USERNAME $CF_PASSWORD && cf target -o $CF_ORGANIZATION -s $CF_SPACE
-      - npm run build
-      - cf zero-downtime-push crime-data-explorer-master -f manifests/master.yml
-  production:
-    tag: /v[0-9]+(\.[0-9]+)*/
-    owner: fbi-cde
-    commands:
-      - curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-      - sudo dpkg -i cf-cli_amd64.deb
-      - cf install-plugin autopilot -f -r CF-Community
-      - cf api $CF_API
-      - cf auth $CF_USERNAME $CF_PASSWORD && cf target -o $CF_ORGANIZATION -s $CF_SPACE
-      - npm run build
-      - cf zero-downtime-push crime-data-explorer -f manifests/production.yml
