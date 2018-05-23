@@ -1,5 +1,4 @@
 ---
-inherit: base.yml
 applications:
 - name: crime-data-explorer-noe
   host: crime-data-explorer-noe
@@ -8,7 +7,7 @@ applications:
   disk_quota: 256M
   domain: fr.cloud.gov
 env:
-  CDE_API: 'https://api.usa.gov/crime/fbi/sapi'
+  CDE_API: 'https://api.usa.gov/crime/fbi/master'
   NEW_RELIC_ENABLED: false
 services:
   - crime-data-api-key-prod

@@ -16,7 +16,6 @@ import * as glossaryActions from './actions/glossary'
 
 const isProd = process.env.NODE_ENV == 'production'
 
-
 const App = ({ actions, children, glossary, location, sidebarOpen }) => (
   <div className={`site ${sidebarOpen ? 'no-scroll' : ''}`}>
     <SkipContent skipTo=".site-main" />

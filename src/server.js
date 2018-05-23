@@ -33,8 +33,7 @@ import createEnv from './util/env'
 import history from './util/history'
 
 const isProd = process.env.NODE_ENV == 'production'
-const isMaster =
-  process.env.CDE_API == 'https://crime-data-api-noe.fr.cloud.gov'
+const isMaster = process.env.CDE_API == 'https://api.usa.gov/crime/fbi/master'
 
 const ENV = createEnv()
 
