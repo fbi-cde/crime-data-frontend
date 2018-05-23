@@ -6,7 +6,7 @@ All notable changes to this project be documented in this file.
 
 All notable changes to this project be documented in this file.
 
-## [3.0.0] - XXXX-XX-XX
+## [3.0.0] - 05-22-2018
 
 ##Fixed
 
@@ -20,7 +20,6 @@ All notable changes to this project be documented in this file.
 
 * NIBRS Details can now be viewed by year not by the 11 year combined roll up
 * Police Employment Data Add to State and Agency Explorer views
-* Agency Level Footnotes Add for Agencies for 2006 to 2014 Added to Agency Explorer view
 * Agency Data now pulled from API with improved model.
 
 ## Changed
