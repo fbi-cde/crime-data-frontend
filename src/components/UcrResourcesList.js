@@ -22,7 +22,7 @@ const participationCsvLink = (place, type, states, participation) => {
 
     zip.file(`${dirname}/README.md`, `# ${lowerCase(dirname)}\n`)
     const content = jsonToCsv(data)
-    zip.file(`${dirname}/${dirname}`, content)
+    zip.file(`${dirname}/${dirname}.csv`, content)
 
     return zip
       .generateAsync({ type: 'blob' })
