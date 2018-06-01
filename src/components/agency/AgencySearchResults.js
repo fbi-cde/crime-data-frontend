@@ -28,16 +28,16 @@ const AgencySearchResults = ({
   groupValues,
   onResultsClick,
   onStateClick,
-  usState,
+  usState
 }) => {
   const noFederal = data.filter(d => d.agency_type_name !== 'Federal')
   const dataGrouped = groupValues.map(key => ({
     key,
-    data: noFederal.filter(d => d[groupKey] === key),
+    data: noFederal.filter(d => d[groupKey] === key)
   }))
   dataGrouped.push({
     key: 'No assigned county',
-    data: noFederal.filter(d => d[groupKey] === null),
+    data: noFederal.filter(d => d[groupKey] === null || d[groupKey] === '')
   })
 
   return (
@@ -47,25 +47,23 @@ const AgencySearchResults = ({
         style={{ marginTop: -1, maxHeight: 180 }}
       >
         {noFederal.length === 0 && <div className="fs-12">No results</div>}
-        {dataGrouped.filter(g => g.data.length > 0).map(g =>
+        {dataGrouped.filter(g => g.data.length > 0).map(g => (
           <div key={g.key}>
-            <div className="fs-10 bold caps blue">
-              {g.key}
-            </div>
+            <div className="fs-10 bold caps blue">{g.key}</div>
             <ul className="mt0 mb1 list-reset fs-12">
               {g.data
                 .slice(0, 100)
                 .sort((a, b) => a.agency_name < b.agency_name)
-                .map((d, i) =>
+                .map((d, i) => (
                   <AgencySearchResultItem
                     agency={d}
                     key={i}
                     onClick={onResultsClick}
-                  />,
-                )}
+                  />
+                ))}
             </ul>
-          </div>,
-        )}
+          </div>
+        ))}
       </div>
       <div className="px2 pb2 border-box bg-white border-left border-right border-bottom">
         <hr className="mt0 mb2" />
@@ -90,7 +88,7 @@ AgencySearchResults.propTypes = {
   groupValues: PropTypes.arrayOf(PropTypes.string).isRequired,
   onResultsClick: PropTypes.func.isRequired,
   onStateClick: PropTypes.func.isRequired,
-  usState: PropTypes.string.isRequired,
+  usState: PropTypes.string.isRequired
 }
 
 export default AgencySearchResults
