@@ -21,7 +21,7 @@ class NibrsContainer extends React.Component {
   constructor(props) {
     super(props)
     const { until } = props
-    this.state = { yearSelected: until }
+    this.state = { yearSelected: until, expanded: false }
   }
 
   getCards(data, place, categories, until) {
@@ -50,6 +50,7 @@ class NibrsContainer extends React.Component {
               place={place}
               year={this.state.yearSelected}
               until={until}
+              showMore
             />
           )
         }
