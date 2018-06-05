@@ -75,7 +75,8 @@ class BarChart extends React.Component {
       data.title.includes('Weapon') ||
       data.title.includes('Location') ||
       data.title.includes('relationship') ||
-      data.title.includes('Activity')
+      data.title.includes('Activity') ||
+      data.title.includes('Linked')
     ) {
       let dataFormattedd = dataFormatted.map(j => {
         if (j.value > 0) {
@@ -85,7 +86,6 @@ class BarChart extends React.Component {
         }
       })
       dataFormattedd = dataFormattedd.filter(item => item !== undefined)
-      console.log('dataFormattedd:', dataFormattedd)
       dataFormatted = dataFormattedd
     }
 
