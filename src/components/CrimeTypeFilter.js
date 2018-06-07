@@ -10,26 +10,25 @@ const { violentCrime, propertyCrime } = crimeTypes
 const crimes = [
   {
     title: 'Violent Crime',
-    options: violentCrime,
+    options: violentCrime
   },
   {
     title: 'Property Crime',
-    options: propertyCrime,
-  },
+    options: propertyCrime
+  }
 ]
 
-const CrimeTypeFilter = ({ ariaControls, onChange, selected }) =>
+const CrimeTypeFilter = ({ ariaControls, onChange, selected }) => (
   <div id="type-of-crime" className="mb4">
     <div className="mb3 fs-22 bold border-bottom border-blue-light">
       Type of crime
     </div>
 
-    {crimes.map((c, i) =>
+    {crimes.map((c, i) => (
       <div className="mb2 rounded overflow-hidden" key={i}>
-        {c.title &&
-          <div className="mb1 sm-m0 px2 sm-lh-30 bold">
-            {c.title}
-          </div>}
+        {c.title && (
+          <div className="mb1 sm-m0 px2 sm-lh-30 bold">{c.title}</div>
+        )}
         <div>
           {c.options.map((o, ii) => {
             const id = o.id || slugify(o)
@@ -49,7 +48,9 @@ const CrimeTypeFilter = ({ ariaControls, onChange, selected }) =>
                   checked={isActive}
                   id={id}
                   name="crime"
-                  onChange={e => onChange({ pageType: e.target.value, page: 'crime' })}
+                  onChange={e =>
+                    onChange({ pageType: e.target.value, page: 'crime' })
+                  }
                   type="radio"
                   value={id}
                 />
@@ -58,21 +59,19 @@ const CrimeTypeFilter = ({ ariaControls, onChange, selected }) =>
             )
           })}
         </div>
-      </div>,
-    )}
-    <Link className="px2 underline" to="/downloads-and-docs">
-      Additional datasets
-    </Link>
+      </div>
+    ))}
   </div>
+)
 
 CrimeTypeFilter.propTypes = {
   ariaControls: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  selected: PropTypes.string,
+  selected: PropTypes.string
 }
 
 CrimeTypeFilter.defaultProps = {
-  selected: '',
+  selected: ''
 }
 
 export default CrimeTypeFilter

@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import CrimeTypeFilter from '../components/CrimeTypeFilter'
+import DataSetFilter from '../components/DataSetFilter'
 import LocationFilter from '../components/LocationFilter'
 import TimePeriodFilter from '../components/TimePeriodFilter'
 import { hideSidebar } from '../actions/sidebar'
@@ -18,8 +19,8 @@ const SidebarContainer = ({
   filters,
   isOpen,
   onChange,
-  usState,
-}) =>
+  usState
+}) => (
   <nav className={`site-sidebar bg-white ${isOpen ? 'open' : ''}`}>
     <div className="p2 bg-red-bright line-height-1 md-hide lg-hide">
       <button
@@ -55,18 +56,24 @@ const SidebarContainer = ({
         onChange={onChange}
         selected={pageType}
       />
+      <DataSetFilter
+        ariaControls={ariaControls}
+        onChange={onChange}
+        selected={pageType}
+      />
     </div>
   </nav>
+)
 
 SidebarContainer.propTypes = {
   ariaControls: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func
 }
 
 const formatAgencyData = (agencies, state) =>
   Object.keys(agencies[state] || {}).map(id => ({
     ori: id,
-    ...agencies[state][id],
+    ...agencies[state][id]
   }))
 
 const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
@@ -87,13 +94,13 @@ const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
     isOpen: sidebar.isOpen,
     usState,
     region,
-    states,
+    states
   }
 }
 const mapDispatchToProps = dispatch => ({
   actions: {
-    hide: () => dispatch(hideSidebar()),
-  },
+    hide: () => dispatch(hideSidebar())
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarContainer)
