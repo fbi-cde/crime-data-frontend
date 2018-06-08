@@ -5,16 +5,18 @@
 This project is the front end for the Crime Data Explorer, using data from [fbi-cde/crime-data-api](https://github.com/fbi-cde/crime-data-api). The Crime Data Explorer is a website that allows law enforcement and the general public to more easily access [Uniform Crime Reporting (UCR)](https://ucr.fbi.gov/) data. Over 18,000 city, university and college, county, state, tribal, and federal law enforcement agencies voluntarily report crime data to the program, and the FBI publishes it in [annual reports](https://ucr.fbi.gov/ucr-publications).
 
 ## Using the API Directly
+API Base URL: `https://api.usa.gov/crime/fbi/sapi`
 
-API Base URL: https://api.usa.gov/crime/fbi/sapi
 Requests Format:
-https://api.usa.gov/crime/fbi/sapi/{desired_endpiont}?api_key=<API_KEY>
-See more information about API endpoints at [https://crime-data-explorer-master.fr.cloud.gov/api](https://crime-data-explorer-master.fr.cloud.gov/api)
+`https://api.usa.gov/crime/fbi/sapi/{desired_endpiont}?api_key=<API_KEY>`
+
+See more information about API endpoints at [https://crime-data-explorer-master.fr.cloud.gov/api](https://crime-data-explorer.fr.cloud.gov/api)
 API Requests are required to have an API Key appended to the request to sign up for an API key please vist [https://api.data.gov/signup/](https://api.data.gov/signup/)
+
 Example Requests:
 
-* https://api.usa.gov/crime/fbi/sapi/api/participation/national?api_key=XXX
-* https://api.usa.gov/crime/fbi/sapi/api/agencies?api_key=iiHnOKfno2Mgkt5AynpvPpUQTEyxE77jo1RU8PIv
+* `https://api.usa.gov/crime/fbi/sapi/api/participation/national?api_key=XXX`
+* `https://api.usa.gov/crime/fbi/sapi/api/agencies?api_key=iiHnOKfno2Mgkt5AynpvPpUQTEyxE77jo1RU8PIv`
 
 ## Installation
 
