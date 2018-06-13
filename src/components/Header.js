@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 
 const isHome = loc => loc.pathname === '/'
 const isExplorer = loc => loc.pathname.includes('explorer')
+const isDataSet = loc => loc.pathname.includes('dataset')
+
 const active = { borderBottom: '3px solid #ff5e50', paddingBottom: '1px' }
 
 class Header extends React.Component {
@@ -69,6 +71,16 @@ class Header extends React.Component {
               </li>
               <li className="mb1 md-m0">
                 <Link
+                  to={'/dataset/violent-crime-women'}
+                  className="mx1 lg-mx2 fs-14 md-fs-18 white"
+                  style={isDataSet(location) ? active : {}}
+                  id="explorer-link-header"
+                >
+                  Data Sets
+                </Link>
+              </li>
+              <li className="mb1 md-m0">
+                <Link
                   to="/downloads-and-docs"
                   className="mx1 lg-mx2 fs-14 md-fs-18 white"
                   activeStyle={active}
@@ -96,7 +108,7 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  location: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 }
 
 export default Header

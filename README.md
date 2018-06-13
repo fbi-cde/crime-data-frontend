@@ -5,6 +5,7 @@
 This project is the front end for the Crime Data Explorer, using data from [fbi-cde/crime-data-api](https://github.com/fbi-cde/crime-data-api). The Crime Data Explorer is a website that allows law enforcement and the general public to more easily access [Uniform Crime Reporting (UCR)](https://ucr.fbi.gov/) data. Over 18,000 city, university and college, county, state, tribal, and federal law enforcement agencies voluntarily report crime data to the program, and the FBI publishes it in [annual reports](https://ucr.fbi.gov/ucr-publications).
 
 ## Using the API Directly
+
 API Base URL: `https://api.usa.gov/crime/fbi/sapi`
 
 Requests Format:
