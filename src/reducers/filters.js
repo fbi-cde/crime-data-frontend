@@ -5,11 +5,12 @@ import { MAX_YEAR } from '../util/years'
 const initialState = {
   page: 'crime',
   pageType: 'violent-crime',
+  param: 'violent-crime',
   since: MAX_YEAR - 10,
   until: MAX_YEAR,
   place: 'united-states',
   placeType: 'national',
-  placeid: 'usa',
+  placeid: 'usa'
 }
 
 export default (state = initialState, action) => {
@@ -22,7 +23,7 @@ export default (state = initialState, action) => {
     case FILTERS_UPDATE:
       return {
         ...state,
-        ...action.filters,
+        ...action.filters
       }
     default:
       return state

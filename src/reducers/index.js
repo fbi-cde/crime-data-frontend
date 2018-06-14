@@ -14,7 +14,7 @@ import nibrsCounts from './nibrsCounts'
 import leoka from './leoka'
 import summarized from './summarized'
 import footnotes from './footnote'
-
+import vaw from './vaw'
 
 export default combineReducers({
   agencies,
@@ -31,4 +31,5 @@ export default combineReducers({
   leoka,
   summarized,
   footnotes,
+  vaw
 })

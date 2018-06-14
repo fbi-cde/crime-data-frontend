@@ -90,6 +90,13 @@ const ExplorerIntroRegion = ({
       </div>
     )
   }
+  if (page === 'dataset' && pageType === 'violence-against-women') {
+    return (
+      <p className="serif">
+        {placeName} Details About Violent Crime Againist Women dataset
+      </p>
+    )
+  }
   return <div />
 }
 

@@ -12,6 +12,7 @@ import { getAgency, oriToState } from '../util/agencies'
 import { getPlaceInfo } from '../util/place'
 import lookupUsa from '../util/usa'
 import { rangeYears } from '../util/years'
+import { lookUpVAWCrime } from '../util/specializedDataSet'
 
 import ucrParticipation, {
   shouldFetchNibrs as shouldShowNibrs
@@ -89,13 +90,15 @@ class NibrsContainer extends React.Component {
       agency,
       pageType,
       isAgency,
-      nibrsCounts,
+      nibrsData,
       participation,
       place,
+      page,
       placeType,
       since,
       until,
-      states
+      states,
+      param
     } = this.props
 
     if (
@@ -104,13 +107,19 @@ class NibrsContainer extends React.Component {
     ) {
       return null
     }
+    let crime
+    if (pageType === 'violence-against-women') {
+      crime = lookUpVAWCrime(param).text
+    } else {
+      crime = pageType
+    }
 
     const placeDisplay = isAgency ? agency.display : lookupUsa(place).display
     const nibrsFirstYear = this.initialNibrsYear(place, placeType, since)
-    const { data, error } = nibrsCounts
+    const { data, error } = nibrsData
 
-    const isReady = nibrsCounts.loaded
-    const isLoading = nibrsCounts.loading
+    const isReady = nibrsData.loaded
+    const isLoading = nibrsData.loading
 
     const style = { margin: '5px' }
     if (error) return <ErrorCard error={error} />
@@ -174,14 +183,19 @@ class NibrsContainer extends React.Component {
       totalCount = countDataByYear.filter(d => d.key === 'Incident Count')[0]
         .value
     }
+    let title
+    if (page === 'crime') {
+      title = startCase(pageType)
+    } else if (page === 'dataset' && pageType === 'violence-against-women') {
+      title = `Violence Against Women: ${crime}`
+    }
 
     return (
       <div>
         <div className="mb1 bg-white border-top border-blue border-w8">
           <div className="mb0 p2 sm-p4">
             <h2 className="mt0 mb2 fs-24 sm-fs-28 sans-serif">
-              {startCase(pageType)} <NibrsTerm size="xl" /> details reported by{' '}
-              {placeDisplay}
+              {title} <NibrsTerm size="xl" /> details reported by {placeDisplay}
             </h2>
             {isLoading && <Loading />}
             {isReady && (
@@ -213,7 +227,7 @@ class NibrsContainer extends React.Component {
             )}
             {isReady && (
               <NibrsIntro
-                crime={pageType}
+                crime={crime}
                 isAgency={isAgency}
                 participation={participation}
                 place={place}
@@ -254,19 +268,40 @@ class NibrsContainer extends React.Component {
 
 NibrsContainer.propTypes = {
   pageType: PropTypes.string.isRequired,
+  page: PropTypes.string.isRequired,
   place: PropTypes.string.isRequired,
   nibrsCounts: PropTypes.shape({
     data: PropTypes.object,
     loading: PropTypes.bool
-  }).isRequired,
+  }),
+  vaw: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.bool
+  }),
   placeType: PropTypes.string.isRequired,
   since: PropTypes.number.isRequired,
   participation: PropTypes.array.isRequired,
   until: PropTypes.number.isRequired,
-  states: PropTypes.object
+  states: PropTypes.object,
+  param: PropTypes.string
 }
 
-const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
+const mapStateToProps = ({
+  agencies,
+  filters,
+  nibrsCounts,
+  vaw,
+  participation
+}) => {
+  let nibrsData
+  if (
+    filters.page === 'dataset' &&
+    filters.pageType === 'violence-against-women'
+  ) {
+    nibrsData = vaw
+  } else {
+    nibrsData = nibrsCounts
+  }
   const { since, until } = filters
   const { place, placeType } = getPlaceInfo(filters)
   const isAgency = placeType === 'agency'
@@ -284,7 +319,7 @@ const mapStateToProps = ({ agencies, filters, nibrsCounts, participation }) => {
     isAgency,
     place,
     placeType,
-    nibrsCounts,
+    nibrsData,
     participation: filteredParticipation
   }
 }

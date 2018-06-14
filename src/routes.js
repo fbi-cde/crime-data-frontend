@@ -17,7 +17,10 @@ const routes = (
       <IndexRoute component={Home} />
       <Route path="/downloads-and-docs" component={DownloadsAndDocs} />
       <Route path="/explorer/:pageType" component={Explorer} />
-      <Route path="/explorer/:placeType/:place/:pageType" component={Explorer} />
+      <Route
+        path="/explorer/:placeType/:place/:pageType"
+        component={Explorer}
+      />
       <Route path="/about" component={About} />
       <Route path="/*" component={NotFound} />
     </Route>

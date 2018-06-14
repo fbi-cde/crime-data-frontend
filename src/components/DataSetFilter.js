@@ -8,17 +8,16 @@ import { slugify } from '../util/text'
 const DataSetFilter = ({ ariaControls, onChange, selected }) => (
   <div id="specialized-data-set" className="mb4">
     <div className="mb3 fs-22 bold border-bottom border-blue-light">
-      Specialized data set
+      Specialized Data Set
     </div>
 
     {dataSets.map(o => {
       const id = o.id || slugify(o)
       const isActive = id === slugify(selected)
 
-      console.log('o', o)
       return (
         <label
-          key={o.id}
+          key={id}
           className={`block cursor-pointer hover-bg-blue-light rounded px3 sm-lh-30'
               ${isActive ? 'bg-blue white bold hover-blue rounded' : ''}}`}
           htmlFor={o.id}
@@ -30,7 +29,11 @@ const DataSetFilter = ({ ariaControls, onChange, selected }) => (
             id={o.id}
             name="dataset"
             onChange={e =>
-              onChange({ pageType: e.target.value, page: 'dataset' })
+              onChange({
+                pageType: e.target.value,
+                page: 'dataset',
+                param: o.param
+              })
             }
             type="radio"
             value={o.id}

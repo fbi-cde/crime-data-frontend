@@ -71,16 +71,6 @@ class Header extends React.Component {
               </li>
               <li className="mb1 md-m0">
                 <Link
-                  to={'/dataset/violent-crime-women'}
-                  className="mx1 lg-mx2 fs-14 md-fs-18 white"
-                  style={isDataSet(location) ? active : {}}
-                  id="explorer-link-header"
-                >
-                  Data Sets
-                </Link>
-              </li>
-              <li className="mb1 md-m0">
-                <Link
                   to="/downloads-and-docs"
                   className="mx1 lg-mx2 fs-14 md-fs-18 white"
                   activeStyle={active}

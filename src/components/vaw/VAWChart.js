@@ -5,12 +5,12 @@ import uniqBy from 'lodash.uniqby'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import AgencyChartDetails from './AgencyChartDetails'
+import VAWChartDetails from './VAWChartDetails'
 import XAxis from '../XAxis'
 import YAxis from '../YAxis'
 import { rangeYears } from '../../util/years'
 
-class AgencySummaryChart extends React.Component {
+class VAWChart extends React.Component {
   constructor(props) {
     super(props)
     this.state = { svgParentWidth: null, yearSelected: null }
@@ -32,19 +32,11 @@ class AgencySummaryChart extends React.Component {
     }
   }
 
-  getActive = (data, crime, until, lastRapeLegacyReported) => {
-    let yearSelected = this.state.yearSelected
-    if (yearSelected == null) {
-      yearSelected = until
-    }
-    let active
-    let selected = data.find(d => d.data_year === yearSelected)
+  getActive = data => {
+    const { yearSelected } = this.state
 
-    if (crime === 'rape' && yearSelected < lastRapeLegacyReported) {
-      selected = data.find(
-        d => d.data_year === yearSelected && d.offense === 'rape-legacy'
-      )
-    }
+    let active
+    const selected = data.find(d => d.data_year === yearSelected)
 
     if (yearSelected && selected) {
       active = selected
@@ -53,8 +45,7 @@ class AgencySummaryChart extends React.Component {
       // year selected but no data reported
       active = {
         year: yearSelected,
-        actual: 0,
-        cleared: 0
+        value: 0
       }
     } else {
       active = data[data.length - 1]
@@ -81,7 +72,7 @@ class AgencySummaryChart extends React.Component {
       year => !data.find(d => d.data_year === year)
     )
     const zeroReportedYears = data
-      .filter(d => d.actual === 0 && d.cleared === 0)
+      .filter(d => d.value === 0)
       .map(d => d.data_year)
     const noDataYears = missingYears.concat(zeroReportedYears)
 
@@ -97,9 +88,16 @@ class AgencySummaryChart extends React.Component {
   }
 
   render() {
-    const { colors, crime, mutedColors, since, size, until } = this.props
-    let data = this.props.data
-    console.log('AgencyChart Data:', data)
+    const {
+      colors,
+      crime,
+      data,
+      mutedColors,
+      since,
+      size,
+      submitsNibrs,
+      until
+    } = this.props
     const { svgParentWidth } = this.state
 
     const svgWidth = svgParentWidth || size.width
@@ -107,12 +105,9 @@ class AgencySummaryChart extends React.Component {
     const { margin } = size
     const width = svgWidth - margin.left - margin.right
     const height = svgHeight - margin.top - margin.bottom
-    const negHeight = height * -1
-    const negHeight2 = negHeight + 10
-
     const xPadding = svgWidth < 500 ? 20 : 40
 
-    const keys = ['actual', 'cleared']
+    const keys = ['value']
     const colorMap = scaleOrdinal()
       .domain(keys)
       .range(colors)
@@ -140,33 +135,7 @@ class AgencySummaryChart extends React.Component {
       .rangeRound([0, x0.bandwidth()])
       .padding(0)
 
-    let lastRapeLegacyReported = 1995
-    let displayRapeLine = true
-    if (crime === 'rape') {
-      const dataSet = []
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].actual !== 0 && data[i].cleared !== 0) {
-          if (data[i].offense === 'rape-legacy') {
-            if (data[i].data_year > lastRapeLegacyReported) {
-              lastRapeLegacyReported = data[i].data_year
-            }
-          }
-          dataSet.push(data[i])
-        }
-      }
-      data = dataSet
-    }
-    lastRapeLegacyReported += 1
-    if (lastRapeLegacyReported === 1996) {
-      displayRapeLine = false
-    }
-    const { active, priorYear: activePriorYear } = this.getActive(
-      data,
-      crime,
-      until,
-      lastRapeLegacyReported
-    )
-
+    const { active, priorYear: activePriorYear } = this.getActive(data)
     const noDataYears = this.getNoDataYears(data, since, until)
 
     // no data (nd) element responsive values
@@ -175,7 +144,7 @@ class AgencySummaryChart extends React.Component {
 
     return (
       <div>
-        <AgencyChartDetails
+        <VAWChartDetails
           colors={colorMap}
           crime={crime}
           data={active}
@@ -186,7 +155,7 @@ class AgencySummaryChart extends React.Component {
           yrRange={yrRange}
           until={until}
           since={since}
-          nibrsDetails={false}
+          nibrsDetails
         />
         <div className="mb2 h6 bold monospace black">
           Total {noun} reported by year
@@ -201,50 +170,16 @@ class AgencySummaryChart extends React.Component {
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x0} height={height} />
               <YAxis scale={y} width={width} />
-              {until > 2013 &&
-                displayRapeLine &&
-                crime === 'rape' && (
-                  <g
-                    transform={`translate(${x0(
-                      lastRapeLegacyReported
-                    )}, ${height})`}
-                  >
-                    <line stroke="#95aabc" strokeWidth="1" y2={-height} />
-                    <rect
-                      className="fill-blue"
-                      height="8"
-                      transform="rotate(45 4 4)"
-                      width="8"
-                      x={-4 * Math.sqrt(2)}
-                    />
-                    <text
-                      className="fill-blue fs-10 italic serif"
-                      textAnchor="end"
-                      x="-12"
-                      y={negHeight}
-                    >
-                      Revised rape
-                    </text>
-                    <text
-                      className="fill-blue fs-10 italic serif"
-                      textAnchor="end"
-                      x="-12"
-                      y={negHeight2}
-                    >
-                      definition
-                    </text>
-                  </g>
-                )}
               <g transform="translate(0, -0.5)">
                 {data.map(d => (
                   <g transform={`translate(${x0(d.data_year)}, 0)`}>
                     {keys.map(k => (
                       <rect
-                        key={`${d.data_year}-${k}`}
-                        x={x1(k) + 5}
+                        key={`vaw-${d.data_year}-${k}`}
+                        x={x1(k)}
                         y={y(d[k])}
                         height={Math.max(0, height - y(d[k]))}
-                        width={x1.bandwidth() - 5}
+                        width={x1.bandwidth()}
                         fill={
                           this.state.yearSelected === d.data_year
                             ? colorMap(k)
@@ -259,6 +194,7 @@ class AgencySummaryChart extends React.Component {
                 ))}
                 {noDataYears.map(year => (
                   <g
+                    key={`vaw-ndy-${year}`}
                     transform={`translate(${x0(year) +
                       x1.bandwidth()}, ${height - ndHeight})`}
                     className="cursor-pointer no-year-data"
@@ -283,7 +219,7 @@ class AgencySummaryChart extends React.Component {
   }
 }
 
-AgencySummaryChart.propTypes = {
+VAWChart.propTypes = {
   colors: PropTypes.array.isRequired,
   crime: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -297,7 +233,7 @@ AgencySummaryChart.propTypes = {
   until: PropTypes.number.isRequired
 }
 
-AgencySummaryChart.defaultProps = {
+VAWChart.defaultProps = {
   colors: ['#702c27', '#ff5e50'],
   mutedColors: ['#f4e1df', '#faefee'],
   size: {
@@ -306,4 +242,4 @@ AgencySummaryChart.defaultProps = {
   }
 }
 
-export default AgencySummaryChart
+export default VAWChart

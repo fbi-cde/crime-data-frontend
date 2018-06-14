@@ -7,10 +7,11 @@ import { bindActionCreators } from 'redux'
 
 import AboutTheData from '../components/AboutTheData'
 import AgencyChartContainer from '../containers/AgencyChartContainer'
+import DataSetNavigatorContainer from '../containers/DataSetNavigatorContainer'
 import ExplorerHeaderContainer from '../containers/ExplorerHeaderContainer'
 import PoliceEmploymentContainer from '../containers/PoliceEmploymentContainer'
 import NibrsContainer from '../containers/NibrsContainer'
-import LeokaContainer from '../containers/LeokaContainer'
+import VAWContainer from '../containers/VAWContainer'
 import NotFound from './NotFound'
 import SharingTags from '../components/SharingTags'
 import SidebarContainer from '../containers/SidebarContainer'
@@ -103,6 +104,14 @@ class Explorer extends React.Component {
     const { place, placeType } = getPlaceInfo(params)
     const isAgency = filters.placeType === 'agency'
     const crimePage = filters.page === 'crime'
+    const dataSetPage = filters.page === 'dataset'
+    let vawPage = false
+    if (dataSetPage) {
+      if (filters.pageType === 'violence-against-women') {
+        vawPage = true
+      }
+    }
+
     const isCombinedCrime =
       crimePage &&
       (filters.pageType === 'violent-crime' ||
@@ -169,12 +178,15 @@ class Explorer extends React.Component {
         <div className="site-content" id="explorer">
           <div className="container-main mx-auto px2 md-py3 lg-px3">
             <ExplorerHeaderContainer />
+            {dataSetPage && (
+              <DataSetNavigatorContainer onChange={this.handleSidebarChange} />
+            )}
             {crimePage && isAgency && crimePage && <SparklineContainer />}
             {crimePage && isAgency && <AgencyChartContainer />}
             {crimePage && !isAgency && <TrendContainer />}
-            {!crimePage && <LeokaContainer />}
+            {dataSetPage && vawPage && <VAWContainer />}
             {crimePage && <PoliceEmploymentContainer />}
-            {crimePage && !isCombinedCrime && <NibrsContainer />}
+            {((crimePage && !isCombinedCrime) || vawPage) && <NibrsContainer />}
             {crimePage && (
               <AboutTheData
                 crime={pageType}

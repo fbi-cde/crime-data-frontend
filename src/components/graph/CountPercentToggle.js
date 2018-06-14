@@ -7,25 +7,25 @@ const CountPercentToggle = ({
   ariaControls,
   isCounts,
   showCounts,
-  showPercents,
+  showPercents
 }) => {
   const btns = [
     {
       handleClick: showCounts,
       selected: isCounts,
-      text: '#',
+      text: '#'
     },
     {
       handleClick: showPercents,
       selected: !isCounts,
-      text: '%',
-    },
+      text: '%'
+    }
   ]
 
   return (
     <div className="mt-tiny fs-10 italic serif">
       View by
-      {btns.map((b, i) =>
+      {btns.map((b, i) => (
         <button
           aria-controls={ariaControls}
           className={`${btn} ${!b.selected && 'bg-white blue border-blue'}`}
@@ -34,17 +34,17 @@ const CountPercentToggle = ({
           style={{ width: 18 }}
         >
           {b.text}
-        </button>,
-      )}
+        </button>
+      ))}
     </div>
   )
 }
 
 CountPercentToggle.propTypes = {
-  ariaControls: PropTypes.string.isRequired,
+  ariaControls: PropTypes.string,
   isCounts: PropTypes.bool.isRequired,
   showCounts: PropTypes.func.isRequired,
-  showPercents: PropTypes.func.isRequired,
+  showPercents: PropTypes.func.isRequired
 }
 
 export default CountPercentToggle

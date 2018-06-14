@@ -1,4 +1,6 @@
 import offenseUtil from '../util/offenses'
+import { lookUpVAWCrime } from '../util/specializedDataSet'
+
 import { MAX_YEAR } from '../util/years'
 
 const isValidCrime = crime => offenseUtil.includes(crime)
@@ -9,8 +11,9 @@ const defaults = {
   place: 'united-states',
   placeType: 'national',
   placeid: 'usa',
+  param: 'violent-crime',
   since: MAX_YEAR - 10,
-  until: MAX_YEAR,
+  until: MAX_YEAR
 }
 
 const validateFilter = filters => {
@@ -20,7 +23,11 @@ const validateFilter = filters => {
     newFilters.pageType = defaults.pageType
   }
 
-  if (filters.page === 'crime' && filters.pageType && !isValidCrime(filters.pageType)) {
+  if (
+    filters.page === 'crime' &&
+    filters.pageType &&
+    !isValidCrime(filters.pageType)
+  ) {
     newFilters.pageType = defaults.pageType
   }
 
@@ -32,6 +39,17 @@ const validateFilter = filters => {
     newFilters.page = defaults.page
   }
 
+  if (filters.page === 'dataset') {
+    if (filters.pageType === 'violence-against-women') {
+      if (filters.param) {
+        if (!lookUpVAWCrime(filters.param)) {
+          newFilters.param = defaults.param
+        }
+      } else {
+        newFilters.param = defaults.param
+      }
+    }
+  }
 
   if (filters.place === 'usa') {
     newFilters.place = defaults.place

@@ -55,6 +55,13 @@ const ExplorerIntroNational = ({ pageType, page, participation, until }) => {
       </div>
     )
   }
+  if (page === 'dataset' && pageType === 'violence-against-women') {
+    return (
+      <p className="serif">
+        Nation details About Violent Crime Againist Women dataset
+      </p>
+    )
+  }
   return <div />
 }
 

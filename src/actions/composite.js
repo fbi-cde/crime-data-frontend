@@ -2,26 +2,28 @@ import { updateFilters } from './filters'
 import { fetchPoliceEmployment } from './policeEmployment'
 
 import { fetchNibrsCounts } from '../actions/nibrsCounts'
+import { fetchVAW } from '../actions/vaw'
+
 import { fetchSummarized } from '../actions/summarized'
 import { fetchSummaries } from '../actions/summary'
 import { fetchLeoka } from '../actions/leoka'
 import { fetchFootnote } from '../actions/footnote'
 import { fetchUcrParticipation } from '../actions/participation'
-// import { fetchAgencies } from '../actions/agencies'
 import history, { createNewLocation } from '../util/history'
 import { getPlaceId, validateFilter } from '../util/location'
-// import { shouldFetchAgencies } from '../util/agencies'
 import offensesUtil from '../util/offenses'
 
-import {
-  shouldFetchNibrs,
-} from '../util/participation'
+import { shouldFetchNibrs } from '../util/participation'
 
 const fetchData = () => (dispatch, getState) => {
   const { filters, region, states } = getState()
   if (region.loaded && states.loaded) {
-    filters.placeId = getPlaceId(filters, region.region, states.states);
-    if (offensesUtil.includes(filters.pageType) && validateFilter(filters, region.regions, states.states)) {
+    filters.placeId = getPlaceId(filters, region.region, states.states)
+    if (
+      filters.page === 'crime' &&
+      offensesUtil.includes(filters.pageType) &&
+      validateFilter(filters, region.regions, states.states)
+    ) {
       // if (shouldFetchAgencies(filters) && agencies.locations !== filters.place && filters.placeType !== 'agency') dispatch(fetchAgencies(filters))
       if (filters.placeType !== 'agency') {
         dispatch(fetchUcrParticipation(filters))
@@ -35,7 +37,17 @@ const fetchData = () => (dispatch, getState) => {
       }
       if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrsCounts(filters))
     }
-    if (filters.page === 'leoka') { // Add validation of leoka type and add a shouldFetch Method
+    if (
+      shouldFetchNibrs(filters, states) &&
+      filters.page === 'dataset' &&
+      filters.pageType === 'violence-against-women'
+    ) {
+      console.log('Fetch VAW Data')
+      dispatch(fetchVAW(filters))
+    }
+
+    if (filters.page === 'dataset' && filters.pageType === 'leoka') {
+      // Add validation of leoka type and add a shouldFetch Method
       dispatch(fetchLeoka(filters))
     }
   }

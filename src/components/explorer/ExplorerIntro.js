@@ -10,12 +10,20 @@ import { oriToState } from '../../util/agencies'
 import { nationalKey } from '../../util/usa'
 import { sentenceCase } from '../../util/text'
 
-const ExplorerIntro = ({ agency, filters, participation, placeName, region, states }) => {
+const ExplorerIntro = ({
+  agency,
+  filters,
+  participation,
+  placeName,
+  region,
+  states
+}) => {
   if (agency) {
     return (
       <ExplorerIntroAgency
         county={sentenceCase(agency.county_name)}
         pageType={filters.pageType}
+        page={filters.page}
         hasNibrs={agency.nibrs}
         name={agency.agency_name}
         usState={oriToState(filters.place)}
@@ -40,16 +48,18 @@ const ExplorerIntro = ({ agency, filters, participation, placeName, region, stat
   }
 
   if (filters.placeType === 'region') {
-    return (<ExplorerIntroRegion
-      pageType={filters.pageType}
-      until={filters.until}
-      placeName={placeName}
-      participation={participation.data[filters.place]}
-      states={states}
-      region={region}
-      page={filters.page}
-      place={filters.place}
-    />)
+    return (
+      <ExplorerIntroRegion
+        pageType={filters.pageType}
+        until={filters.until}
+        placeName={placeName}
+        participation={participation.data[filters.place]}
+        states={states}
+        region={region}
+        page={filters.page}
+        place={filters.place}
+      />
+    )
   }
 
   return (
@@ -68,12 +78,12 @@ ExplorerIntro.propTypes = {
   agency: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
   participation: PropTypes.shape({
     data: PropTypes.object,
-    loading: PropTypes.boolean,
+    loading: PropTypes.boolean
   }).isRequired,
   filters: PropTypes.object.isRequired,
   placeName: PropTypes.string.isRequired,
   states: PropTypes.object,
-  region: PropTypes.object,
+  region: PropTypes.object
 }
 
 export default ExplorerIntro
