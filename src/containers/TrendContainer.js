@@ -24,14 +24,6 @@ class TrendContainer extends React.Component {
   }
 
   getContent = ({ crime, filters, places, summaries, placeName }) => {
-    console.log(
-      'crime, filters, places, summaries, placeName:',
-      crime,
-      filters,
-      places,
-      summaries,
-      placeName
-    )
     const { loading, error } = summaries
     const { yearSelected } = this.state
 
