@@ -28,6 +28,14 @@ const DownloadsAndDocs = () => (
               Crime Data Explorer API
             </a>.
           </p>
+          <br />
+          <p className="mb1 md-col-9 fs-16 sm-fs-20 serif">
+            The data provided from{' '}
+            <a href="https://ucr.fbi.gov/" className="underline">
+              Uniform Crime Reporting (UCR) Program
+            </a>{' '}
+            for 2016 data was made available on 9/25/2017.
+          </p>
         </div>
         <div className="md-col md-col-3">
           <h3 className="mt-tiny mb2 fs-18 sm-fs-22">Resources</h3>

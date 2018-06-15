@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:6-browsers
+        environment:
+          FIREFOX_BIN: "/usr/bin/firefox"
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: dependency-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: npm run lint
+      - run: npm run test
