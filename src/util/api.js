@@ -145,8 +145,6 @@ const getNibrsCountsRequests = params => {
     { type: 'victim', dim: 'relationship' },
     { type: 'offense', dim: 'count' },
     { type: 'offense/weapons', dim: 'count' },
-    { type: 'offense/activity', dim: 'count' },
-    { type: 'offense/using', dim: 'count' },
     { type: 'offense/linkedoffense', dim: 'count' }
   ]
   return slices.map(s =>
