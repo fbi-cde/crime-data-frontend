@@ -14,7 +14,7 @@ class AgencySearch extends Component {
     this.state = {
       search,
       hasSelection,
-      showResults: props.initialShowResults,
+      showResults: props.initialShowResults
     }
   }
 
@@ -29,7 +29,7 @@ class AgencySearch extends Component {
 
     this.setState({
       search: agency,
-      hasSelection: agency !== '',
+      hasSelection: agency !== ''
     })
   }
 
@@ -41,7 +41,7 @@ class AgencySearch extends Component {
     this.setState({
       search: e.target.value,
       hasSelection: false,
-      showResults: true,
+      showResults: true
     })
   }
 
@@ -83,7 +83,6 @@ class AgencySearch extends Component {
     // get unique set of counties (for result grouping)
     const counties = {}
     data.forEach(d => (counties[d.county_name || 'N/A'] = true))
-
     const searchUpper = search.toUpperCase()
     const dataFiltered =
       searchUpper === ''
@@ -110,40 +109,38 @@ class AgencySearch extends Component {
               className="absolute right-0 btn line-height-1 border-none"
               style={{
                 padding: '.5rem .75rem',
-                borderLeft: '1px solid #284152',
+                borderLeft: '1px solid #284152'
               }}
               onClick={hasSelection ? this.clearInput : this.toggleResults}
             >
-              {hasSelection
-                ? <img
-                    src="/img/x-navy.svg"
-                    alt="close"
-                    width="10"
-                    height="10"
-                  />
-                : <img
-                    src="/img/chevron-down-navy.svg"
-                    alt="see results"
-                    width="12"
-                    height="12"
-                  />}
+              {hasSelection ? (
+                <img src="/img/x-navy.svg" alt="close" width="10" height="10" />
+              ) : (
+                <img
+                  src="/img/chevron-down-navy.svg"
+                  alt="see results"
+                  width="12"
+                  height="12"
+                />
+              )}
             </button>
           </div>
           {!hasSelection &&
             showResults &&
-            dataFiltered.length > 0 &&
-            <OnEscape handler={this.handleEscape}>
-              <AgencySearchResults
-                data={dataFiltered.sort(
-                  (a, b) => a.agency_name > b.agency_name,
-                )}
-                groupKey="county_name"
-                groupValues={Object.keys(counties).sort()}
-                onResultsClick={this.handleResultsClick}
-                onStateClick={this.handleStateClick}
-                usState={oriToState(data[0].ori)}
-              />
-            </OnEscape>}
+            dataFiltered.length > 0 && (
+              <OnEscape handler={this.handleEscape}>
+                <AgencySearchResults
+                  data={dataFiltered.sort(
+                    (a, b) => a.agency_name > b.agency_name
+                  )}
+                  groupKey="county_name"
+                  groupValues={Object.keys(counties).sort()}
+                  onResultsClick={this.handleResultsClick}
+                  onStateClick={this.handleStateClick}
+                  usState={oriToState(data[0].ori)}
+                />
+              </OnEscape>
+            )}
         </div>
       </div>
     )
@@ -153,11 +150,11 @@ class AgencySearch extends Component {
 AgencySearch.propTypes = {
   agency: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  initialShowResults: PropTypes.bool,
+  initialShowResults: PropTypes.bool
 }
 
 AgencySearch.defaultProps = {
-  initialShowResults: true,
+  initialShowResults: true
 }
 
 export default AgencySearch
