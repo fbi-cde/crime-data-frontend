@@ -15,14 +15,18 @@ import { updateFilters } from '../actions/filters'
 import { oriToState } from '../util/agencies'
 import { crimeTypes } from '../util/offenses'
 import { slugify } from '../util/text'
-import { lookupStatesByRegion, lookupRegionByName, lookupRegionByCode, lookupStateByName, lookupStateByAbbr } from '../util/location'
+import {
+  lookupStatesByRegion,
+  lookupRegionByName,
+  lookupRegionByCode,
+  lookupStateByName,
+  lookupStateByAbbr
+} from '../util/location'
 
 import dataPreview from '../../content/preview.yml'
 
 class Home extends React.Component {
-
   state = { statesView: true }
-
 
   componentDidMount() {
     const { actions } = this.props
@@ -36,7 +40,12 @@ class Home extends React.Component {
       if (!id) return
       const { actions, filters, router } = this.props
       const { pageType } = filters
-      const placeNew = { place: slugify(lookupStateByAbbr(states.states, id).state_name), placeType: 'state', placeId: id, page: 'crime' }
+      const placeNew = {
+        place: slugify(lookupStateByAbbr(states.states, id).state_name),
+        placeType: 'state',
+        placeId: id,
+        page: 'crime'
+      }
       actions.updateFilters(placeNew)
       actions.updateApp({ pageType, ...placeNew }, router)
     } else {
@@ -46,9 +55,16 @@ class Home extends React.Component {
       if (!id) return
       const { actions, filters, router } = this.props
       const { pageType } = filters
-      const placeNew = { place: lowerCase(lookupRegionByCode(region.regions, lookupStateByAbbr(states.states, id).region_code).region_name),
-       placeType: 'region',
-       placeId: lookupStateByAbbr(states.states, id).region_code }
+      const placeNew = {
+        place: lowerCase(
+          lookupRegionByCode(
+            region.regions,
+            lookupStateByAbbr(states.states, id).region_code
+          ).region_name
+        ),
+        placeType: 'region',
+        placeId: lookupStateByAbbr(states.states, id).region_code
+      }
       actions.updateFilters(placeNew)
       actions.updateApp({ pageType, ...placeNew }, router)
     }
@@ -75,14 +91,16 @@ class Home extends React.Component {
 
     let { statesView } = this.state
     if (e.target.value === 'states' && statesView === false) {
-      statesView = true;
+      statesView = true
       this.setState({ statesView })
     } else if (e.target.value === 'regions' && statesView === true) {
-      statesView = false;
+      statesView = false
       this.setState({ statesView })
     }
-    const placeNew = { place: 'united-states',
-     placeType: 'national', }
+    const placeNew = {
+      place: 'united-states',
+      placeType: 'national'
+    }
     actions.updateFilters(placeNew)
   }
 
@@ -92,13 +110,13 @@ class Home extends React.Component {
     const { place, placeType } = this.props.filters
     const isValid = true
     const usState = placeType === 'agency' ? oriToState(place) : place
-    let mapSelected = [];
+    let mapSelected = []
     if (place && placeType) {
       if (placeType === 'region') {
         const r = lookupRegionByName(region.regions, place)
         mapSelected = lookupStatesByRegion(states.states, r.region_code)
       } else if (placeType === 'state') {
-        mapSelected.push(lookupStateByName(states.states, usState));
+        mapSelected.push(lookupStateByName(states.states, usState))
       }
     }
     return (
@@ -129,7 +147,7 @@ class Home extends React.Component {
         <section className="px2 bg-white">
           <div className="py7 container mx-auto">
             <h2 className="mt0 mb4 fs-22 sm-fs-32">
-              Explore by location and type of crime
+              Explore Crime Data by location and type of crime
             </h2>
             <div className="clearfix mxn2">
               <div className="sm-col sm-col-4 px2 mb2 sm-m0">
@@ -152,26 +170,26 @@ class Home extends React.Component {
                     Crime Type
                   </option>
                   <optgroup label="Violent Crime">
-                    {crimeTypes.violentCrime.map((o, i) =>
+                    {crimeTypes.violentCrime.map((o, i) => (
                       <option key={i} value={o.id || slugify(o)}>
                         {o.text || o}
-                      </option>,
-                    )}
+                      </option>
+                    ))}
                   </optgroup>
                   <optgroup label="Property Crime">
-                    {crimeTypes.propertyCrime.map((o, i) =>
+                    {crimeTypes.propertyCrime.map((o, i) => (
                       <option key={i} value={o.id || slugify(o)}>
                         {o.text || o}
-                      </option>,
-                    )}
+                      </option>
+                    ))}
                   </optgroup>
                 </select>
               </div>
               <div className="sm-col sm-col-4 px2 mb2 sm-m0 xs-hide">
                 <button
-                  className={`col-12 btn btn-primary ${isValid
-                    ? ''
-                    : 'hint-bottom'}`}
+                  className={`col-12 btn btn-primary ${
+                    isValid ? '' : 'hint-bottom'
+                  }`}
                   aria-label={
                     isValid ? '' : 'Please select a location and crime type'
                   }
@@ -183,7 +201,13 @@ class Home extends React.Component {
               </div>
             </div>
             <div className="py4 sm-py7 sm-col-9 mx-auto">
-              <UsaMap mapClick={this.handleMapClick} place={mapSelected} stateView={statesView} states={states} region={region} />
+              <UsaMap
+                mapClick={this.handleMapClick}
+                place={mapSelected}
+                stateView={statesView}
+                states={states}
+                region={region}
+              />
             </div>
             <div className="mb7 sm-hide md-hide lg-hide">
               <button
@@ -198,7 +222,7 @@ class Home extends React.Component {
               Use our data in your project
             </h2>
             <div className="flex flex-wrap mxn2">
-              {dataPreview.map((d, i) =>
+              {dataPreview.map((d, i) => (
                 <div
                   key={i}
                   className="flex col col-12 sm-col-6 md-col-4 px2 mb2 sm-mb4"
@@ -207,12 +231,10 @@ class Home extends React.Component {
                     <div className="mb1 pb-tiny bold border-bottom border-blue-light">
                       {d.title}
                     </div>
-                    <p className="mb2">
-                      {d.description}
-                    </p>
+                    <p className="mb2">{d.description}</p>
                   </div>
-                </div>,
-              )}
+                </div>
+              ))}
             </div>
             <div>
               <Link
@@ -248,19 +270,18 @@ class Home extends React.Component {
 Home.propTypes = {
   actions: PropTypes.shape({
     updateApp: PropTypes.func,
-    updateFilters: PropTypes.func,
+    updateFilters: PropTypes.func
   }),
-  filters: PropTypes.object,
-
+  filters: PropTypes.object
 }
 const mapStateToProps = ({ filters, region, states }) => ({
-    filters,
-    region,
-    states,
-  })
+  filters,
+  region,
+  states
+})
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ updateApp, updateFilters }, dispatch),
+  actions: bindActionCreators({ updateApp, updateFilters }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
