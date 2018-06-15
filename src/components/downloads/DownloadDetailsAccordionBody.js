@@ -28,6 +28,12 @@ class DownloadDetailsAccordionBody extends React.Component {
                 <a href="https://github.com/fbi-cde/crime-data-frontend/blob/master/README.md">
                   Read me
                 </a>
+                <img
+                  className="mr1 align-middle"
+                  width="20"
+                  src="/img/github.svg"
+                  alt="github"
+                />
               </li>
             </ul>
           </div>

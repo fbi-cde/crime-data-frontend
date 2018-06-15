@@ -22,15 +22,10 @@ class BarChart extends React.Component {
   }
 
   render() {
-    const {
-      data,
-      year,
-      until
-    } = this.props
+    const { data, year, until } = this.props
     const id = snakeCase(data.ui_text)
 
     const { isCounts } = this.state
-
 
     let fitleredDataByYear
     if (year !== 2 && year !== 5 && year !== 10) {
@@ -38,39 +33,60 @@ class BarChart extends React.Component {
     } else {
       const years = rangeYears(until - year + 1, until)
       fitleredDataByYear = data.data.filter(d => years.includes(d.data_year))
-      const keys = new Set();
+      const keys = new Set()
       for (const i in fitleredDataByYear) {
         keys.add(fitleredDataByYear[i].key)
       }
       const newdata = []
       for (const i in Array.from(keys)) {
         const object = new Object()
-        object.key = Array.from(keys)[i];
+        object.key = Array.from(keys)[i]
         object.value = 0
         for (const j in fitleredDataByYear) {
-          if (fitleredDataByYear[j].key === Array.from(keys)[i]) { object.value += fitleredDataByYear[j].value }
+          if (fitleredDataByYear[j].key === Array.from(keys)[i]) {
+            object.value += fitleredDataByYear[j].value
+          }
         }
         newdata.push(object)
       }
       fitleredDataByYear = newdata
     }
     if (fitleredDataByYear.length === 0) {
-      return (<NoDataCard noun={data.title} year={year} />)
+      return <NoDataCard noun={data.title} year={year} />
     }
     const agg = (a, b) => a + b.value
     const total = fitleredDataByYear.reduce(agg, 0)
-    const dataFormatted = fitleredDataByYear.map(d => {
+    let dataFormatted = fitleredDataByYear.map(d => {
       const p = d.value / total
       return {
-          ...d,
-          percent: p,
-          countFmt: formatSI(d.value),
-          percentFmt: formatPerc(p),
-
+        ...d,
+        percent: p,
+        countFmt: formatSI(d.value),
+        percentFmt: formatPerc(p)
       }
     })
 
-    if (!data.title.includes('Age')) { dataFormatted.sort((a, b) => a.value < b.value) }
+    if (!data.title.includes('Age')) {
+      dataFormatted.sort((a, b) => a.value < b.value)
+    }
+
+    if (
+      data.title.includes('Weapon') ||
+      data.title.includes('Location') ||
+      data.title.includes('relationship') ||
+      data.title.includes('Activity') ||
+      data.title.includes('Linked')
+    ) {
+      let dataFormattedd = dataFormatted.map(j => {
+        if (j.value > 0) {
+          return {
+            ...j
+          }
+        }
+      })
+      dataFormattedd = dataFormattedd.filter(item => item !== undefined)
+      dataFormatted = dataFormattedd
+    }
 
     return (
       <div id={id}>
@@ -88,23 +104,16 @@ class BarChart extends React.Component {
           </div>
         </div>
         <table className="mt1 mb2 table-fixed" id={id}>
-          {data.title &&
-            <caption className="hide">
-              {data.title}
-            </caption>}
+          {data.title && <caption className="hide">{data.title}</caption>}
           <thead className="v-hide">
             <tr style={{ lineHeight: '16px' }}>
               <th style={{ width: '15%' }} />
-              <th style={{ width: '20%' }}>
-                {isCounts ? 'Count' : 'Percent'}
-              </th>
-              <th style={{ width: '65%' }}>
-                {data.title}
-              </th>
+              <th style={{ width: '20%' }}>{isCounts ? 'Count' : 'Percent'}</th>
+              <th style={{ width: '65%' }}>{data.title}</th>
             </tr>
           </thead>
           <tbody>
-            {dataFormatted.map((d, i) =>
+            {dataFormatted.map((d, i) => (
               <tr key={i} className="fs-14">
                 <td className="border-right border-gray">
                   <div className="progress-bar my1">
@@ -120,13 +129,14 @@ class BarChart extends React.Component {
                 <td className="px1" title={d.key}>
                   {d.key.replace && d.key.replace(/\//g, ' / ')}
                 </td>
-              </tr>,
-            )}
+              </tr>
+            ))}
           </tbody>
         </table>
         <div className="mt-tiny fs-14 mb3">
           {data.short_title ? data.short_title : data.title} was reported for{' '}
-          <span className="bold red">{formatNum(total)}</span> {pluralize(data.noun, total)}.
+          <span className="bold red">{formatNum(total)}</span>{' '}
+          {pluralize(data.noun, total)}.
         </div>
       </div>
     )
@@ -136,7 +146,7 @@ class BarChart extends React.Component {
 BarChart.propTypes = {
   data: PropTypes.object.isRequired,
   year: PropTypes.number.isRequired,
-  until: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired
 }
 
 export default BarChart

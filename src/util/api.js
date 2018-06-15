@@ -143,7 +143,9 @@ const getNibrsCountsRequests = params => {
     { type: 'victim', dim: 'sex' },
     { type: 'victim', dim: 'location' },
     { type: 'victim', dim: 'relationship' },
-    { type: 'offense', dim: 'count' }
+    { type: 'offense', dim: 'count' },
+    { type: 'offense/weapons', dim: 'count' },
+    { type: 'offense/linkedoffense', dim: 'count' }
   ]
   return slices.map(s =>
     fetchNibrsCounts({ ...s, pageType, place, placeType, placeId })
@@ -197,10 +199,13 @@ const getVAWRequests = params => {
     { type: 'victim', dim: 'race' },
     { type: 'victim', dim: 'location' },
     { type: 'victim', dim: 'relationship' },
-    { type: 'offense', dim: 'count' }
+    { type: 'offense', dim: 'count' },
+    { type: 'offense', dim: 'count' },
+    { type: 'offense/weapons', dim: 'count' },
+    { type: 'offense/linkedoffense', dim: 'count' }
   ]
   return slices.map(s =>
-    fetchVAW({ ...s, pageType, place, placeType, placeId, param })
+    fetchNibrsCounts({ ...s, pageType, place, placeType, placeId })
   )
 }
 
