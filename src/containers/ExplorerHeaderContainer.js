@@ -75,6 +75,14 @@ const ExplorerHeaderContainer = ({
           </div>
         </div>
       </div>
+      <p className="serif">
+        The data provided from{' '}
+        <a href="https://ucr.fbi.gov/" className="underline">
+          Uniform Crime Reporting (UCR) Program
+        </a>{' '}
+        for 2016 data was made available on 9/25/2017.
+      </p>
+      <br />
     </div>
   )
 }
