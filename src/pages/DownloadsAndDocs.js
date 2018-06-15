@@ -33,14 +33,18 @@ const DownloadsAndDocs = () => (
           <h3 className="mt-tiny mb2 fs-18 sm-fs-22">Resources</h3>
           <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
             <li className="mb2">
+              <img
+                className="mr1 align-middle"
+                width="20"
+                src="/img/github.svg"
+                alt="github"
+              />
               <a href="https://github.com/fbi-cde/crime-data-frontend/blob/master/README.md">
                 Readme
               </a>
             </li>
             <li className="mb2">
-              <a href="/pdf/NIBRS_DataDictionary.pdf">
-                NIBRS Data Dictionary
-              </a>
+              <a href="/pdf/NIBRS_DataDictionary.pdf">NIBRS Data Dictionary</a>
             </li>
             <li className="mb2">
               <a href="/pdf/nibrs_diagram.pdf">NIBRS Data Diagram</a>
@@ -58,7 +62,7 @@ const DownloadsAndDocs = () => (
         <h2 className={`mt0 mb5 pb1 fs-22 sm-fs-32 ${border}`}>
           Additional datasets
         </h2>
-          <DownloadAccordion />
+        <DownloadAccordion />
       </div>
     </div>
   </section>
