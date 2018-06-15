@@ -11,7 +11,6 @@ import agencyApi from './api/agency'
 import summaryApi from './api/summary'
 import footnoteApi from './api/footnote'
 
-
 export const API = '/api-proxy'
 
 const fetchArson = (place, placeId, placeType) => {
@@ -25,46 +24,46 @@ const fetchArson = (place, placeId, placeType) => {
   }
 
   return get(url).then(({ results }) =>
-    results.map(d => ({ year: d.year, arson: d.actual })),
+    results.map(d => ({ year: d.year, arson: d.actual }))
   )
 }
 const getAgency = ori => get(`${API}/agencies/${ori}`)
 
 const fetchEstimates = (place, placeId, placeType) => {
-    let api
-    const params = { size: 500 }
-    if (placeType === 'state') {
-      api = summaryApi.getStateEstimates(placeId, params)
-    } else if (placeType === 'region') {
-      api = summaryApi.getRegionalEstimates(place, params)
-    } else {
-      api = summaryApi.getNationalEstimates(params);
-    }
+  let api
+  const params = { size: 500 }
+  if (placeType === 'state') {
+    api = summaryApi.getStateEstimates(placeId, params)
+  } else if (placeType === 'region') {
+    api = summaryApi.getRegionalEstimates(place, params)
+  } else {
+    api = summaryApi.getNationalEstimates(params)
+  }
 
-    return api.then(r => ({
-      key: place || nationalKey,
-      results: r.results,
-    }))
+  return api.then(r => ({
+    key: place || nationalKey,
+    results: r.results
+  }))
 }
 
 const fetchFootnotes = (place, placeType, offense) => {
-    let api
+  let api
 
-    if (placeType === 'agency') {
-      api = footnoteApi.getAgencyFootnotes(place, offense);
-    }
-    return api.then(r => ({
-      key: place,
-      results: r.results,
-    }))
+  if (placeType === 'agency') {
+    api = footnoteApi.getAgencyFootnotes(place, offense)
+  }
+  return api.then(r => ({
+    key: place,
+    results: r.results
+  }))
 }
 
 const parseAggregates = ([estimates, arsons]) => ({
   ...estimates,
   results: estimates.results.map(datum => ({
     ...datum,
-    arson: (arsons.find(a => a.year === datum.year) || {}).arson,
-  })),
+    arson: (arsons.find(a => a.year === datum.year) || {}).arson
+  }))
 })
 
 const fetchAggregates = (place, placeType, placeId) => {
@@ -78,16 +77,15 @@ const fetchAggregates = (place, placeType, placeId) => {
 
 const fetchAgencyAggregates = (ori, crime) => {
   const params = { explorer_offense: mapToApiOffense(crime), size: 200 }
-  return agencyApi.getAgencyOffenses(ori, params).then(d => ({ key: ori, results: d.results }))
+  return agencyApi
+    .getAgencyOffenses(ori, params)
+    .then(d => ({ key: ori, results: d.results }))
 }
 
 const getSummaryRequests = ({ place, placeType, placeId }) => {
   if (placeType === 'agency') {
     const stateName = slugify(oriToState(place))
-    return [
-      fetchAggregates(stateName, placeType, placeId),
-      fetchAggregates(),
-    ]
+    return [fetchAggregates(stateName, placeType, placeId), fetchAggregates()]
   }
   return [fetchAggregates(place, placeType, placeId), fetchAggregates()]
 }
@@ -95,10 +93,17 @@ const getSummaryRequests = ({ place, placeType, placeId }) => {
 export const formatError = error => ({
   code: error.response.status,
   message: error.message,
-  url: error.config.url,
+  url: error.config.url
 })
 
-const fetchNibrsCounts = ({ dim, pageType, place, placeType, type, placeId }) => {
+const fetchNibrsCounts = ({
+  dim,
+  pageType,
+  place,
+  placeType,
+  type,
+  placeId
+}) => {
   const loc =
     place === nationalKey
       ? 'national'
@@ -106,16 +111,19 @@ const fetchNibrsCounts = ({ dim, pageType, place, placeType, type, placeId }) =>
         ? `agencies/${place}`
         : `states/${placeId}`
 
-  const url = dim !== '' ? `${API}/api/nibrs/${pageType}/${type}/${loc}/${dim}` : `${API}/api/nibrs/${pageType}/${type}/${loc}`
+  const url =
+    dim !== ''
+      ? `${API}/api/nibrs/${pageType}/${type}/${loc}/${dim}`
+      : `${API}/api/nibrs/${pageType}/${type}/${loc}`
 
   const params = {
     size: 100,
-    aggregate_many: false,
+    aggregate_many: false
   }
 
   return get(url, params).then(d => ({
     key: `${type}${upperFirst(dim)}`,
-    data: d,
+    data: d
   }))
 }
 
@@ -136,18 +144,23 @@ const getNibrsCountsRequests = params => {
     { type: 'victim', dim: 'location' },
     { type: 'victim', dim: 'relationship' },
     { type: 'offense', dim: 'count' },
-
+    { type: 'offense/weapons', dim: 'count' },
+    { type: 'offense/linkedoffense', dim: 'count' }
   ]
-  return slices.map(s => fetchNibrsCounts({ ...s, pageType, place, placeType, placeId }))
+  return slices.map(s =>
+    fetchNibrsCounts({ ...s, pageType, place, placeType, placeId })
+  )
 }
 
 const getSummarizedRequest = filters => {
-  const estimatesApi = `${API}/summarized/agency/${filters.place}/${filters.pageType}`
+  const estimatesApi = `${API}/summarized/agency/${filters.place}/${
+    filters.pageType
+  }`
   const params = {
-    size: 500,
+    size: 500
   }
   return get(estimatesApi, params).then(d => ({
-    data: d.results,
+    data: d.results
   }))
 }
 
@@ -158,5 +171,5 @@ export default {
   getNibrsCountsRequests,
   getSummaryRequests,
   getSummarizedRequest,
-  fetchFootnotes,
+  fetchFootnotes
 }

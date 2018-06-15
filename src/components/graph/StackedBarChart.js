@@ -4,6 +4,7 @@ import { stack, stackOrderReverse } from 'd3-shape'
 import pluralize from 'pluralize'
 import PropTypes from 'prop-types'
 import React from 'react'
+import snakeCase from 'lodash.snakecase'
 
 import CountPercentToggle from './CountPercentToggle'
 import StackedBarDetails from './StackedBarChartDetails'
@@ -15,15 +16,7 @@ class StackedBarChart extends React.Component {
   state = { isCounts: false }
 
   render() {
-    const {
-      colors,
-      margin,
-      size,
-      data,
-      year,
-      until,
-    } = this.props
-
+    const { colors, margin, size, data, year, until } = this.props
 
     let fitleredDataByYear
     if (year !== 2 && year !== 5 && year !== 10) {
@@ -31,17 +24,19 @@ class StackedBarChart extends React.Component {
     } else {
       const years = rangeYears(until - year, until)
       fitleredDataByYear = data.data.filter(d => years.includes(d.data_year))
-      const keys = new Set();
+      const keys = new Set()
       for (const i in fitleredDataByYear) {
         keys.add(fitleredDataByYear[i].key)
       }
       const newdata = []
       for (const i in Array.from(keys)) {
         const object = new Object()
-        object.key = Array.from(keys)[i];
+        object.key = Array.from(keys)[i]
         object.value = 0
         for (const j in fitleredDataByYear) {
-          if (fitleredDataByYear[j].key === Array.from(keys)[i]) { object.value += fitleredDataByYear[j].value }
+          if (fitleredDataByYear[j].key === Array.from(keys)[i]) {
+            object.value += fitleredDataByYear[j].value
+          }
         }
         newdata.push(object)
       }
@@ -49,29 +44,38 @@ class StackedBarChart extends React.Component {
     }
 
     if (fitleredDataByYear.length === 0) {
-      return (<NoDataCard noun={data.title} year={year} />)
+      return <NoDataCard noun={data.title} year={year} />
     }
     const { isCounts } = this.state
     const height = size.height - margin.top - margin.bottom
     const width = size.width - margin.left - margin.right
     const totalCt = fitleredDataByYear.reduce((a, b) => a + +b.value, 0)
-    const x = scaleBand().domain([null]).rangeRound([0, width]).padding(0.4)
-    const y = scaleLinear().domain([0, totalCt]).rangeRound([height, 0]).nice()
+    const x = scaleBand()
+      .domain([null])
+      .rangeRound([0, width])
+      .padding(0.4)
+    const y = scaleLinear()
+      .domain([0, totalCt])
+      .rangeRound([height, 0])
+      .nice()
+    const id = snakeCase(data.ui_text)
 
     const colorMap = scaleOrdinal()
       .domain(data.keys || data.keys.map(d => d.key).sort())
       .range(colors)
 
-    const lookup = Object.assign(fitleredDataByYear.map(d => ({ [d.key]: +d.value })))
+    const lookup = Object.assign(
+      fitleredDataByYear.map(d => ({ [d.key]: +d.value }))
+    )
 
-
-      const dataClean = {}
-      for (const d in fitleredDataByYear) {
-        for (const m in data.keys) {
-          if (fitleredDataByYear[d].key === data.keys[m]) { dataClean[data.keys[m]] = fitleredDataByYear[d].value; }
+    const dataClean = {}
+    for (const d in fitleredDataByYear) {
+      for (const m in data.keys) {
+        if (fitleredDataByYear[d].key === data.keys[m]) {
+          dataClean[data.keys[m]] = fitleredDataByYear[d].value
         }
       }
-
+    }
 
     const stackGen = stack()
       .keys(Object.keys(dataClean))
@@ -79,9 +83,8 @@ class StackedBarChart extends React.Component {
     const dataStacked = stackGen([dataClean])
     const dataEntries = entries(dataClean)
 
-
     return (
-      <div className="p2 sm-p2  bg-blue-white black border-bottom border-blue-light">
+      <div id={id} className="p2 sm-p2  bg-blue-white black border-blue-light">
         <div className="clearfix">
           <div className="right">
             <CountPercentToggle
@@ -105,7 +108,7 @@ class StackedBarChart extends React.Component {
               style={{ width: '100%', height: '100%' }}
             >
               <g transform={`translate(${margin.left}, ${margin.top})`}>
-                {dataStacked.map(d =>
+                {dataStacked.map(d => (
                   <g key={d.key} fill={colorMap(d.key)}>
                     <rect
                       x={x(null)}
@@ -113,8 +116,8 @@ class StackedBarChart extends React.Component {
                       height={y(d[0][0]) - y(d[0][1])}
                       width={x.bandwidth()}
                     />
-                  </g>,
-                )}
+                  </g>
+                ))}
                 <g className="axis" transform={`translate(0, ${height})`}>
                   <line x2={width} strokeWidth="1" />
                 </g>
@@ -144,7 +147,7 @@ class StackedBarChart extends React.Component {
 StackedBarChart.defaultProps = {
   margin: { top: 5, right: 10, bottom: 0, left: 10 },
   size: { width: 200, height: 130 },
-  colors: ['#FF5E50', '#B84941', '#F48E88'],
+  colors: ['#FF5E50', '#B84941', '#F48E88']
 }
 
 StackedBarChart.propTypes = {
@@ -154,8 +157,8 @@ StackedBarChart.propTypes = {
   until: PropTypes.number.isRequired,
   size: PropTypes.shape({
     width: PropTypes.number,
-    height: PropTypes.number,
-  }).isRequired,
+    height: PropTypes.number
+  }).isRequired
 }
 
 export default StackedBarChart
