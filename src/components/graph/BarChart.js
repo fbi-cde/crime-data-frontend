@@ -70,7 +70,6 @@ class BarChart extends React.Component {
       dataFormatted.sort((a, b) => a.value < b.value)
     }
 
-    console.log('BarChart Data:', data)
     if (
       data.title.includes('Weapon') ||
       data.title.includes('Location') ||

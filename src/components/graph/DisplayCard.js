@@ -22,7 +22,6 @@ class DisplayCard extends React.Component {
 
   render() {
     const { data, place, year, until, showMore } = this.props
-    console.log('RENDER')
     let charts = null
     switch (data.ui_type) {
       case 'basic_table':
