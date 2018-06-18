@@ -205,7 +205,7 @@ const getVAWRequests = params => {
     { type: 'offense/linkedoffense', dim: 'count' }
   ]
   return slices.map(s =>
-    fetchNibrsCounts({ ...s, pageType, place, placeType, placeId })
+    fetchVAW({ ...s, pageType, place, placeType, placeId, param })
   )
 }
 

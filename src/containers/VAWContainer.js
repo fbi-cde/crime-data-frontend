@@ -10,6 +10,7 @@ import DownloadDataBtn from '../components/downloads/DownloadDataBtn'
 import lookupUsa from '../util/usa'
 import { getPlaceInfo } from '../util/place'
 import { vawDataSetCrimes } from '../util/specializedDataSet'
+import NoData from '../components/NoData'
 
 import ucrParticipation, {
   shouldFetchNibrs as shouldShowNibrs

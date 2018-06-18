@@ -84,6 +84,7 @@ class Explorer extends React.Component {
   }
 
   handleSidebarChange = change => {
+    console.log('handleSidebarChange:', change)
     const { actions, router } = this.props
     actions.updateApp(change, router)
   }
@@ -178,9 +179,6 @@ class Explorer extends React.Component {
         <div className="site-content" id="explorer">
           <div className="container-main mx-auto px2 md-py3 lg-px3">
             <ExplorerHeaderContainer />
-            {dataSetPage && (
-              <DataSetNavigatorContainer onChange={this.handleSidebarChange} />
-            )}
             {crimePage && isAgency && crimePage && <SparklineContainer />}
             {crimePage && isAgency && <AgencyChartContainer />}
             {crimePage && !isAgency && <TrendContainer />}

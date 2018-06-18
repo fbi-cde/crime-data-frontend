@@ -18,7 +18,7 @@ const crimes = [
   }
 ]
 
-const CrimeTypeFilter = ({ ariaControls, onChange, selected }) => (
+const CrimeTypeFilter = ({ ariaControls, onChange, selected, page }) => (
   <div id="type-of-crime" className="mb4">
     <div className="mb3 fs-22 bold border-bottom border-blue-light">
       Crime Data
@@ -32,7 +32,7 @@ const CrimeTypeFilter = ({ ariaControls, onChange, selected }) => (
         <div>
           {c.options.map((o, ii) => {
             const id = o.id || slugify(o)
-            const isActive = id === slugify(selected)
+            const isActive = id === slugify(selected) && page === 'crime'
             const single = c.options.length === 1
             return (
               <label
@@ -67,7 +67,8 @@ const CrimeTypeFilter = ({ ariaControls, onChange, selected }) => (
 CrimeTypeFilter.propTypes = {
   ariaControls: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  selected: PropTypes.string
+  selected: PropTypes.string,
+  page: PropTypes.string.isRequired
 }
 
 CrimeTypeFilter.defaultProps = {

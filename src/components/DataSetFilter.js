@@ -16,7 +16,7 @@ const dataSetsCat = [
   }
 ]
 
-const DataSetFilter = ({ ariaControls, onChange, selected }) => (
+const DataSetFilter = ({ ariaControls, onChange, selected, page }) => (
   <div id="specialized-data-set" className="mb4">
     <div className="mb3 fs-22 bold border-bottom border-blue-light">
       Specialized Crime Data
@@ -29,28 +29,28 @@ const DataSetFilter = ({ ariaControls, onChange, selected }) => (
         <div>
           {c.options.map(o => {
             const id = o.id || slugify(o)
-            const isActive = id === slugify(selected)
+            const isActive = id === slugify(selected) && page === 'dataset'
             const single = c.options.length === 1
 
             return (
               <label
-                key={id}
+                key={`${o.id}-${o.dataset}`}
                 className={`block cursor-pointer hover-bg-blue-light rounded
                   ${isActive ? 'bg-blue white bold hover-blue rounded' : ''}
                   ${single ? 'bold px2' : 'px3 sm-lh-30'}`}
-                htmlFor={o.id}
+                htmlFor={`${o.id}-${o.dataset}`}
               >
                 <input
                   aria-controls={ariaControls}
                   className="hide"
                   checked={isActive}
-                  id={o.id}
+                  id={`${o.id}-${o.dataset}`}
                   name="dataset"
                   onChange={e =>
                     onChange({
-                      pageType: o.id,
+                      pageType: o.dataset,
                       page: 'dataset',
-                      param: o.param
+                      param: o.id
                     })
                   }
                   type="radio"
@@ -73,7 +73,8 @@ const DataSetFilter = ({ ariaControls, onChange, selected }) => (
 DataSetFilter.propTypes = {
   ariaControls: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  selected: PropTypes.string
+  selected: PropTypes.string,
+  page: PropTypes.string.isRequired
 }
 
 DataSetFilter.defaultProps = {

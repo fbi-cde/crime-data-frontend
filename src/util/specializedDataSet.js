@@ -10,55 +10,60 @@ const ids = Object.keys(specializedDataSets)
 const dataSets = [
   {
     id: 'violence-against-women',
-    text: 'Violence Against Women',
-    param: 'violent-crime'
+    text: 'Violence Against Women'
   }
 ]
 
 const vawDataSetCrimes = [
   {
     id: 'violent-crime',
-    text: 'Violent Crime'
+    text: 'Violent Crime',
+    dataset: 'violence-against-women'
   },
   {
     id: 'aggravated-assault',
-    text: 'Aggravated Assault'
-  },
-  {
-    id: 'burglary',
-    text: 'Burglary'
+    text: 'Aggravated Assault',
+    dataset: 'violence-against-women'
   },
   {
     id: 'homicide',
-    text: 'Homicide'
+    text: 'Homicide',
+    dataset: 'violence-against-women'
   },
   {
     id: 'rape',
-    text: 'Rape'
+    text: 'Rape',
+    dataset: 'violence-against-women'
   },
   {
     id: 'robbery',
-    text: 'Robbery'
+    text: 'Robbery',
+    dataset: 'violence-against-women'
   },
   {
     id: 'fondling',
-    text: 'Fondling'
+    text: 'Fondling',
+    dataset: 'violence-against-women'
   },
   {
     id: 'human-trafficking',
-    text: 'Human Trafficking'
+    text: 'Human Trafficking',
+    dataset: 'violence-against-women'
   },
   {
     id: 'intimidation',
-    text: 'Intimidation'
+    text: 'Intimidation',
+    dataset: 'violence-against-women'
   },
   {
     id: 'simple-assault',
-    text: 'Simple Assault'
+    text: 'Simple Assault',
+    dataset: 'violence-against-women'
   },
   {
     id: 'kidnapping',
-    text: 'Kidnapping/Abduction'
+    text: 'Kidnapping/Abduction',
+    dataset: 'violence-against-women'
   }
 ]
 

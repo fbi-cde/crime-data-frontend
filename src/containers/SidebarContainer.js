@@ -15,6 +15,7 @@ const SidebarContainer = ({
   agency,
   agencyData,
   ariaControls,
+  page,
   pageType,
   filters,
   isOpen,
@@ -55,11 +56,13 @@ const SidebarContainer = ({
         ariaControls={ariaControls}
         onChange={onChange}
         selected={pageType}
+        page={page}
       />
       <DataSetFilter
         ariaControls={ariaControls}
         onChange={onChange}
         selected={pageType}
+        page={page}
       />
     </div>
   </nav>
@@ -77,7 +80,7 @@ const formatAgencyData = (agencies, state) =>
   }))
 
 const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
-  const { pageType, place, placeType } = filters
+  const { pageType, place, placeType, page } = filters
   const isAgency = placeType === 'agency'
   const isNational = place === nationalKey
   const usState = isAgency ? oriToState(place) : place
@@ -89,6 +92,7 @@ const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   return {
     agency,
     agencyData,
+    page,
     pageType,
     filters,
     isOpen: sidebar.isOpen,
