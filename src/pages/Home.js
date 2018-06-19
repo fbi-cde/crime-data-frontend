@@ -128,7 +128,7 @@ class Home extends React.Component {
             <h1 className="mt0 mb4 pb1 fs-28 sm-fs-40 border-bottom border-blue-light">
               Improving access to crime data
             </h1>
-            <p className="mb1 md-col-9 fs-16 sm-fs-20 serif">
+            <p className="mb1 md-col-12 fs-16 sm-fs-20 serif">
               The Crime Data Explorer (CDE) represents a profound transformation
               in how data from the FBI’s{' '}
               <a href="https://ucr.fbi.gov/" className="underline">
