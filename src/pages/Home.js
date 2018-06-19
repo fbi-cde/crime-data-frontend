@@ -144,11 +144,14 @@ class Home extends React.Component {
               refresh date of content or statistics. This is especially
               important to reconcile any differences that may exist between the
               data that is available on the CDE pages and the data that resides
-              in the datasets for downloading. The data provided from{' '}
+              in the datasets for downloading.
+              <br />
+              <br />
+              The data provided from{' '}
               <a href="https://ucr.fbi.gov/" className="underline">
                 Uniform Crime Reporting (UCR) Program
               </a>{' '}
-              for 2016 Closed Master Data was made available on 6/22/2018.
+              for updated 2016 data was made available on 6/22/2018.
             </p>
           </div>
         </section>

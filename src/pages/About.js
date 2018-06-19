@@ -250,7 +250,7 @@ class About extends React.Component {
                   <a href="https://ucr.fbi.gov/" className="underline">
                     Uniform Crime Reporting (UCR) Program
                   </a>{' '}
-                  for 2016 Closed Master Data was made available on 6/22/2018.
+                  for updated 2016 data was made available on 6/22/2018.
                 </p>
               </div>
               <div className="md-col md-col-3">

@@ -29,12 +29,14 @@ const DownloadsAndDocs = () => (
             </a>, a read-only web service that returns JSON or CSV data and
             provides experienced users access to large amounts of UCR data to
             use and share. Because this data is dynamic, be aware of the time
-            stamp that reflects the refresh date of content. The data provided
-            from{' '}
+            stamp that reflects the refresh date of content.
+            <br />
+            <br />
+            The data provided from{' '}
             <a href="https://ucr.fbi.gov/" className="underline">
               Uniform Crime Reporting (UCR) Program
             </a>{' '}
-            for 2016 Closed Master Data was made available on 6/22/2018.
+            for updated 2016 data was made available on 6/22/2018.
           </p>
         </div>
         <div className="md-col md-col-3">
