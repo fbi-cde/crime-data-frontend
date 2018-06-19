@@ -4,7 +4,6 @@ import Helmet from 'react-helmet'
 
 import DownloadBulkNibrs from '../components/downloads/DownloadBulkNibrs'
 import SharingTags from '../components/SharingTags'
-import { NibrsTerm } from '../components/Terms'
 import DownloadAccordion from '../components/downloads/DownloadAccordion'
 
 const border = 'border-bottom border-blue-light'
