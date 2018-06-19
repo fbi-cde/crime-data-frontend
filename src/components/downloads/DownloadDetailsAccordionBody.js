@@ -26,7 +26,7 @@ class DownloadDetailsAccordionBody extends React.Component {
             <ul className="m0 p0 fs-14 sm-fs-16 left-bars">
               <li className="mb2">
                 <a href="https://github.com/fbi-cde/crime-data-frontend/blob/master/README.md">
-                  Read me
+                  Read me{' '}
                 </a>
                 <img
                   className="mr1 align-middle"
