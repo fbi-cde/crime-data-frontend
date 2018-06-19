@@ -17,26 +17,26 @@ const legend = [
     check: (stateProgram, nibrs, srs) => stateProgram && !srs && nibrs,
     css: 'fill-blue',
     hex: '#324D5F',
-    text: 'Incident data only',
+    text: 'Incident data only'
   },
   {
     check: (stateProgram, nibrs, srs) => stateProgram && srs && nibrs,
     css: 'fill-blue-light',
     hex: '#95AABC',
-    text: 'Incident and Summary data',
+    text: 'Incident and Summary data'
   },
   {
     check: (stateProgram, nibrs, srs) => stateProgram && srs && !nibrs,
     css: 'fill-blue-lighter',
     hex: '#DFE6ED',
-    text: 'Summary data only',
+    text: 'Summary data only'
   },
   {
     check: stateProgram => !stateProgram,
     css: 'fill-red-dark',
     hex: '#702c27',
-    text: 'No state program',
-  },
+    text: 'No state program'
+  }
 ]
 
 const stateColors = usaData.filter(k => k.slug !== nationalKey).map(k => {
@@ -48,7 +48,7 @@ const stateColors = usaData.filter(k => k.slug !== nationalKey).map(k => {
     color: matches[0].css,
     display: k.display,
     key: k.id,
-    program: matches[0].text,
+    program: matches[0].text
   }
 })
 
@@ -85,7 +85,7 @@ class About extends React.Component {
     const { region, states } = this.props
     const toggles = [
       { disabled: !mapShown, type: 'table' },
-      { disabled: mapShown, type: 'map' },
+      { disabled: mapShown, type: 'map' }
     ]
     return (
       <div>
@@ -99,9 +99,31 @@ class About extends React.Component {
             <div className="clearfix">
               <div className="md-col md-col-9 md-pr7 fs-16 sm-fs-20 serif">
                 <p className="mb2 md-m0">
-                  The Crime Data Explorer is part of the FBI’s broader effort to
-                  modernize the reporting of national crime data. It allows you
-                  to{' '}
+                  The Crime Data Explorer (CDE) is the FBI’s{' '}
+                  <a href="https://ucr.fbi.gov/" className="underline">
+                    Uniform Crime Reporting (UCR) Programs
+                  </a>{' '}
+                  dynamic solution to presenting crime data in a more immediate
+                  venue that reflects the constant change in the nation’s crime
+                  circumstance.
+                  <br />
+                  The CDE pages provide a view of estimated national and state
+                  data, reported agency-level crime statistics, and{' '}
+                  <a href="explorer/violent-crime" className="underline">
+                    graphs of specific variables from the National
+                    Incident-Based Reporting System (NIBRS)
+                  </a>. You can also{' '}
+                  <a href="/downloads-and-docs" className="underline">
+                    download bulk datasets
+                  </a>{' '}
+                  from a variety of UCR topics. In addition,{' '}
+                  <a href="/api" className="underline">
+                    Crime Data API
+                  </a>{' '}
+                  provides a way for developers to access and share large
+                  amounts of data in significant ways. The Crime Data Explorer
+                  is part of the FBI’s broader effort to modernize the reporting
+                  of national crime data. It allows you to{' '}
                   <a href="explorer/violent-crime" className="underline">
                     view trends
                   </a>,{' '}
@@ -136,12 +158,12 @@ class About extends React.Component {
                   How states participate
                 </h2>
                 <div className="fs-12 col col-12 md-col-6">
-                  {toggles.map(b =>
+                  {toggles.map(b => (
                     <button
                       aria-controls="us-ucr-participation"
-                      className={`btn col-6 md-col-4 right ${b.disabled
-                        ? 'regular'
-                        : ''}`}
+                      className={`btn col-6 md-col-4 right ${
+                        b.disabled ? 'regular' : ''
+                      }`}
                       id={`btn-toggle-${b.type}`}
                       key={b.type}
                       onClick={this.handleClick}
@@ -152,14 +174,16 @@ class About extends React.Component {
                       }}
                     >
                       View as {b.type}
-                    </button>,
-                  )}
+                    </button>
+                  ))}
                 </div>
               </div>
               <div className="mb4 clearfix" id="us-ucr-participation">
-                {mapShown
-                  ? <ParticipationMap states={states} region={region} />
-                  : <ParticipationTable states={stateColors} />}
+                {mapShown ? (
+                  <ParticipationMap states={states} region={region} />
+                ) : (
+                  <ParticipationTable states={stateColors} />
+                )}
               </div>
             </div>
           </div>
@@ -224,9 +248,9 @@ class About extends React.Component {
                 <p>
                   The data provided from{' '}
                   <a href="https://ucr.fbi.gov/" className="underline">
-                      Uniform Crime Reporting (UCR) Program
-                    </a>{' '}
-                  for 2016 data was made available on 9/25/2017.
+                    Uniform Crime Reporting (UCR) Program
+                  </a>{' '}
+                  for 2016 Closed Master Data was made available on 6/22/2018.
                 </p>
               </div>
               <div className="md-col md-col-3">
@@ -248,9 +272,7 @@ class About extends React.Component {
                     </a>
                   </li>
                   <li className="mb1">
-                    <a href="https://forms.fbi.gov/cde">
-                      Submit Feedback
-                    </a>
+                    <a href="https://forms.fbi.gov/cde">Submit Feedback</a>
                   </li>
                 </ul>
               </div>
@@ -278,11 +300,10 @@ class About extends React.Component {
 }
 
 /* eslint-disable */
-About.propTypes = {
-}
+About.propTypes = {}
 /* eslint-enable */
 
-const ParticipationMap = ({ states, region }) =>
+const ParticipationMap = ({ states, region }) => (
   <div>
     <div className="md-col md-col-9 md-pr7">
       <UsaMap
@@ -298,28 +319,26 @@ const ParticipationMap = ({ states, region }) =>
         {legend
           .map(d => ({
             ...d,
-            count: stateColors.filter(s => s.color === d.css).length,
+            count: stateColors.filter(s => s.color === d.css).length
           }))
-          .map((d, i) =>
+          .map((d, i) => (
             <div key={i} className="flex mt2 fs-14">
               <div
                 className="flex-none mt-tiny mr1 circle"
                 style={{
                   width: 16,
                   height: 16,
-                  backgroundColor: d.hex,
+                  backgroundColor: d.hex
                 }}
               />
               <div className="flex-auto">
                 <div className="bold monospace">
                   {`${d.count} State${d.count !== 1 ? 's' : ''}`}
                 </div>
-                <div>
-                  {d.text}
-                </div>
+                <div>{d.text}</div>
               </div>
-            </div>,
-          )}
+            </div>
+          ))}
       </div>
       <div className="mt6 pt2 fs-14 border-top border-blue-light">
         To see which agencies submit NIBRS data to the FBI, download
@@ -327,8 +346,8 @@ const ParticipationMap = ({ states, region }) =>
           data={[
             {
               url:
-                'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/agencies.csv',
-            },
+                'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/agencies.csv'
+            }
           ]}
           text="Agency participation data"
         />
@@ -340,8 +359,9 @@ const ParticipationMap = ({ states, region }) =>
       directly to the FBI.
     </div>
   </div>
+)
 
-const ParticipationTable = ({ states }) =>
+const ParticipationTable = ({ states }) => (
   <table className="table-striped-white">
     <thead>
       <tr className="lh-32">
@@ -350,23 +370,19 @@ const ParticipationTable = ({ states }) =>
       </tr>
     </thead>
     <tbody>
-      {states.map((s, i) =>
+      {states.map((s, i) => (
         <tr className="lh-32" key={i}>
-          <td className="pl1">
-            {s.display}
-          </td>
-          <td>
-            {s.program}
-          </td>
-        </tr>,
-      )}
+          <td className="pl1">{s.display}</td>
+          <td>{s.program}</td>
+        </tr>
+      ))}
     </tbody>
   </table>
+)
 
 const mapStateToProps = ({ region, states }) => ({
   region,
-  states,
+  states
 })
-
 
 export default connect(mapStateToProps)(About)
