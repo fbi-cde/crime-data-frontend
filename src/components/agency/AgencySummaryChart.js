@@ -144,7 +144,6 @@ class AgencySummaryChart extends React.Component {
     if (crime === 'rape') {
       const dataSet = []
       for (let i = 0; i < data.length; i++) {
-        console.log('data loop:', data[i])
         if (data[i].actual !== 0) {
           if (data[i].offense === 'rape-legacy') {
             if (data[i].data_year > lastRapeLegacyReported) {
