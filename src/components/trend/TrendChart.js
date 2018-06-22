@@ -21,7 +21,7 @@ class TrendChart extends React.Component {
     super(props)
     this.state = {
       svgParentWidth: null,
-      yearSelected: props.until,
+      yearSelected: props.until
     }
     this.getDimensions = throttle(this.getDimensions, 20)
   }
@@ -52,7 +52,9 @@ class TrendChart extends React.Component {
     const { since, until } = this.props.filters
     const { width, xPad } = this.calculateDimensions()
     const dates = range(since, until + 1).map(d => formatYear(d))
-    const x = scaleTime().domain(extent(dates)).range([xPad, width - xPad])
+    const x = scaleTime()
+      .domain(extent(dates))
+      .range([xPad, width - xPad])
 
     const x0 = x.invert(xPosition * width)
     const i = bisectLeft(dates, x0, 1)
@@ -77,10 +79,10 @@ class TrendChart extends React.Component {
               date: d.date,
               year: d.year,
               population: d[place].population,
-              ...d[place][c],
+              ...d[place][c]
             }))
           return { crime: c, place, values }
-        }),
+        })
       )
       .reduce((a, n) => a.concat(n), [])
   }
@@ -116,7 +118,7 @@ class TrendChart extends React.Component {
       onChangeYear: handleChangeYear,
       size,
       placeName,
-      filters,
+      filters
     } = this.props
 
     const { yearSelected } = this.state
@@ -127,18 +129,25 @@ class TrendChart extends React.Component {
       width,
       xPad,
       svgHeight,
-      svgWidth,
+      svgWidth
     } = this.calculateDimensions()
 
     const series = this.createSeries()
-    const dates = range(filters.since, filters.until + 1).map(d => formatYear(d))
+    const dates = range(filters.since, filters.until + 1).map(d =>
+      formatYear(d)
+    )
     const rates = series
       .map(s => s.values)
       .reduce((accum, next) => accum.concat(next), [])
       .map(s => s.rate)
 
-    const x = scaleTime().domain(extent(dates)).range([xPad, width - xPad])
-    const y = scaleLinear().domain([0, max(rates)]).range([height, 0]).nice()
+    const x = scaleTime()
+      .domain(extent(dates))
+      .range([xPad, width - xPad])
+    const y = scaleLinear()
+      .domain([0, max(rates)])
+      .range([height, 0])
+      .nice()
 
     const active = series.map(s => {
       const { values } = s
@@ -149,7 +158,7 @@ class TrendChart extends React.Component {
       return {
         crime: s.crime,
         place: s.place,
-        ...activeValue,
+        ...activeValue
       }
     })
     return (
@@ -184,8 +193,9 @@ class TrendChart extends React.Component {
               <YAxis scale={y} width={width} />
               <TrendChartLineSeries color={color} series={series} x={x} y={y} />
               {filters.until > 2013 &&
-                crime === 'rape' &&
-                <TrendChartRapeAnnotate height={height} x={x} />}
+                crime === 'rape' && (
+                  <TrendChartRapeAnnotate height={height} x={x} />
+                )}
               <TrendChartHover
                 active={active}
                 color={color}
@@ -214,16 +224,16 @@ TrendChart.propTypes = {
   initialYearSelected: PropTypes.number,
   filters: PropTypes.object.isRequired,
   placeName: PropTypes.string.isRequired,
-  crime: PropTypes.string.isRequired,
+  crime: PropTypes.string.isRequired
 }
 
 TrendChart.defaultProps = {
   size: {
     width: 735,
-    margin: { top: 16, right: 0, bottom: 24, left: 32 },
+    margin: { top: 16, right: 0, bottom: 24, left: 32 }
   },
   colors: ['#ff5e50', '#95aabc', '#52687d'],
-  onChangeYear: () => {},
+  onChangeYear: () => {}
 }
 
 export default TrendChart

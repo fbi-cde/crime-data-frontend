@@ -41,7 +41,9 @@ class AgencySummaryChart extends React.Component {
     let selected = data.find(d => d.data_year === yearSelected)
 
     if (crime === 'rape' && yearSelected < lastRapeLegacyReported) {
-      selected = data.find(d => d.data_year === yearSelected && d.offense === 'rape-legacy')
+      selected = data.find(
+        d => d.data_year === yearSelected && d.offense === 'rape-legacy'
+      )
     }
 
     if (yearSelected && selected) {
@@ -52,7 +54,7 @@ class AgencySummaryChart extends React.Component {
       active = {
         year: yearSelected,
         actual: 0,
-        cleared: 0,
+        cleared: 0
       }
     } else {
       active = data[data.length - 1]
@@ -62,7 +64,7 @@ class AgencySummaryChart extends React.Component {
     const priorYear = data.find(d => d.data_year === active.year - 1)
     return {
       active,
-      priorYear,
+      priorYear
     }
   }
 
@@ -76,7 +78,7 @@ class AgencySummaryChart extends React.Component {
 
   getNoDataYears = (data = [], since, until) => {
     const missingYears = rangeYears(since, until).filter(
-      year => !data.find(d => d.data_year === year),
+      year => !data.find(d => d.data_year === year)
     )
     const zeroReportedYears = data
       .filter(d => d.actual === 0 && d.cleared === 0)
@@ -95,14 +97,7 @@ class AgencySummaryChart extends React.Component {
   }
 
   render() {
-    const {
-      colors,
-      crime,
-      mutedColors,
-      since,
-      size,
-      until,
-    } = this.props
+    const { colors, crime, mutedColors, since, size, until } = this.props
     let data = this.props.data
     const { svgParentWidth } = this.state
 
@@ -117,12 +112,19 @@ class AgencySummaryChart extends React.Component {
     const xPadding = svgWidth < 500 ? 20 : 40
 
     const keys = ['actual', 'cleared']
-    const colorMap = scaleOrdinal().domain(keys).range(colors)
-    const mutedColorMap = scaleOrdinal().domain(keys).range(mutedColors)
+    const colorMap = scaleOrdinal()
+      .domain(keys)
+      .range(colors)
+    const mutedColorMap = scaleOrdinal()
+      .domain(keys)
+      .range(mutedColors)
     const noun = 'offenses'
     const yMax = this.getYMax(data, keys)
 
-    const y = scaleLinear().domain([0, yMax]).rangeRound([height, 0]).nice()
+    const y = scaleLinear()
+      .domain([0, yMax])
+      .rangeRound([height, 0])
+      .nice()
 
     const timeRange = rangeYears(since, until)
     const x0 = scaleBand()
@@ -137,30 +139,36 @@ class AgencySummaryChart extends React.Component {
       .rangeRound([0, x0.bandwidth()])
       .padding(0)
 
-    let lastRapeLegacyReported = 1995;
+    let lastRapeLegacyReported = 1995
     let displayRapeLine = true
     if (crime === 'rape') {
       const dataSet = []
       for (let i = 0; i < data.length; i++) {
-        if (data[i].actual !== 0 && data[i].cleared !== 0) {
+        console.log('data loop:', data[i])
+        if (data[i].actual !== 0) {
           if (data[i].offense === 'rape-legacy') {
             if (data[i].data_year > lastRapeLegacyReported) {
               lastRapeLegacyReported = data[i].data_year
             }
           }
-          dataSet.push(data[i]);
+          dataSet.push(data[i])
         }
       }
       data = dataSet
     }
-    lastRapeLegacyReported += 1;
+
+    lastRapeLegacyReported += 1
     if (lastRapeLegacyReported === 1996) {
-      displayRapeLine = false;
+      displayRapeLine = false
     }
-    const { active, priorYear: activePriorYear } = this.getActive(data, crime, until, lastRapeLegacyReported)
+    const { active, priorYear: activePriorYear } = this.getActive(
+      data,
+      crime,
+      until,
+      lastRapeLegacyReported
+    )
 
     const noDataYears = this.getNoDataYears(data, since, until)
-
 
     // no data (nd) element responsive values
     const [ndHeight, ndCircle, ndTextY, ndTextSize] =
@@ -194,39 +202,44 @@ class AgencySummaryChart extends React.Component {
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <XAxis scale={x0} height={height} />
               <YAxis scale={y} width={width} />
-              {until > 2013 && displayRapeLine &&
-                crime === 'rape' &&
-                <g transform={`translate(${x0(lastRapeLegacyReported)}, ${height})`}>
-                  <line stroke="#95aabc" strokeWidth="1" y2={-height} />
-                  <rect
-                    className="fill-blue"
-                    height="8"
-                    transform="rotate(45 4 4)"
-                    width="8"
-                    x={-4 * Math.sqrt(2)}
-                  />
-                  <text
-                    className="fill-blue fs-10 italic serif"
-                    textAnchor="end"
-                    x="-12"
-                    y={negHeight}
+              {until > 2013 &&
+                displayRapeLine &&
+                crime === 'rape' && (
+                  <g
+                    transform={`translate(${x0(
+                      lastRapeLegacyReported
+                    )}, ${height})`}
                   >
-                    Revised rape
-                  </text>
-                  <text
-                    className="fill-blue fs-10 italic serif"
-                    textAnchor="end"
-                    x="-12"
-                    y={negHeight2}
-                  >
-                    definition
-                  </text>
-                </g>
-              }
+                    <line stroke="#95aabc" strokeWidth="1" y2={-height} />
+                    <rect
+                      className="fill-blue"
+                      height="8"
+                      transform="rotate(45 4 4)"
+                      width="8"
+                      x={-4 * Math.sqrt(2)}
+                    />
+                    <text
+                      className="fill-blue fs-10 italic serif"
+                      textAnchor="end"
+                      x="-12"
+                      y={negHeight}
+                    >
+                      Revised rape
+                    </text>
+                    <text
+                      className="fill-blue fs-10 italic serif"
+                      textAnchor="end"
+                      x="-12"
+                      y={negHeight2}
+                    >
+                      definition
+                    </text>
+                  </g>
+                )}
               <g transform="translate(0, -0.5)">
-                {data.map(d =>
+                {data.map(d => (
                   <g transform={`translate(${x0(d.data_year)}, 0)`}>
-                    {keys.map(k =>
+                    {keys.map(k => (
                       <rect
                         key={`${d.data_year}-${k}`}
                         x={x1(k) + 5}
@@ -241,12 +254,11 @@ class AgencySummaryChart extends React.Component {
                         className="cursor-pointer"
                         pointerEvents="all"
                         onMouseOver={this.handleMouseOver(d.data_year)}
-                      />,
-                    )}
-                  </g>,
-
-                )}
-                {noDataYears.map(year =>
+                      />
+                    ))}
+                  </g>
+                ))}
+                {noDataYears.map(year => (
                   <g
                     transform={`translate(${x0(year) +
                       x1.bandwidth()}, ${height - ndHeight})`}
@@ -261,8 +273,8 @@ class AgencySummaryChart extends React.Component {
                     >
                       ✕
                     </text>
-                  </g>,
-                )}
+                  </g>
+                ))}
               </g>
             </g>
           </svg>
@@ -280,10 +292,10 @@ AgencySummaryChart.propTypes = {
   since: PropTypes.number.isRequired,
   size: PropTypes.shape({
     width: PropTypes.number,
-    margin: PropTypes.object,
+    margin: PropTypes.object
   }).isRequired,
   submitsNibrs: PropTypes.bool.isRequired,
-  until: PropTypes.number.isRequired,
+  until: PropTypes.number.isRequired
 }
 
 AgencySummaryChart.defaultProps = {
@@ -291,8 +303,8 @@ AgencySummaryChart.defaultProps = {
   mutedColors: ['#f4e1df', '#faefee'],
   size: {
     width: 720,
-    margin: { top: 16, right: 0, bottom: 24, left: 36 },
-  },
+    margin: { top: 16, right: 0, bottom: 24, left: 36 }
+  }
 }
 
 export default AgencySummaryChart
