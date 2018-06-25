@@ -17,29 +17,39 @@
     The Assaults on Law Enforcement Officers dataset consists of reported assaults against law enforcement officers. (The Uniform Crime Reporting [UCR] Program defines law enforcement officers as individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically to pay sworn law enforcement.) Download this dataset to see totals for officers who were killed or assaulted in the line of duty from 1995–2016.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/leoka.csv'
   files:
-    - file: leoka.csv
-      description: Information about LEOKA Data
+    - file: LEOKA_ASSAULT_TIME_WEAPON_INJURY.csv
+      description: Information about LEOKA Time of inidient, weapon, and injury Data
+    - file: LEOKA_ASSIGNMENT_ACTIVITY_1995_1998.csv
+      description: Information about LEOKA Assignment and Activity Data for 1995 to 1998
+    - file: LEOKA_ASSIGNMENT_ACTIVITY_1999_2004.csv
+      description: Information about LEOKA Assignment and Activity Data for 1999 to 2004
+    - file: LEOKA_ASSIGNMENT_ACTIVITY_2005_2010.csv
+      description: Information about LEOKA Assignment and Activity Data for 2005 to 2010
+    - file: LEOKA_ASSIGNMENT_ACTIVITY_2010_2016.csv
+      description: Information about LEOKA Assignment and Activity Data for 2010 to 2016
   data_type: LEOKA
   year_range: 1974-2016
   last_modified: January 1, 2016
-  download_type: CSV
-  file_size: 35.5 KB
+  download_type: ZIP
+  file_size: 37,216 KB
   unziped_size: 545.3M unzipped
-  sampleFile: /files/leoka_data_small.json
 - title: Police Employee Data
   description: |
     The Police Employee dataset is made up of data collected annually about law enforcement officers and civilians employed by law enforcement agencies. The dataset contains information about the number of officers and civilians employed and the rate of police employees per a location’s population.<br /><br />The Uniform Crime Reporting (UCR) Program defines law enforcement officers as individuals who ordinarily carry a firearm and a badge, have full arrest powers, and are paid from governmental funds set aside specifically for sworn law enforcement representatives.<br /><br />Please see the UCR resources provided by the FBI for <a class="underline" href="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/topic-pages/police-employee-data.pdf">for more information on police employee data</a>. Download this dataset to see how many full-time sworn and civilian law enforcement employees have served in each state from 1971–2016.
   href: 'http://s3-us-gov-west-1.amazonaws.com/cg-d3f0433b-a53e-4934-8b94-c678aa2cbaf3/pe_employee_data.csv'
   files:
-    - file: pe_employee_data.csv
-      description: Information about Police Employee Data
+    - file: pe_employee_agency_data.csv
+      description: Information about Police Agency Employee Data
+    - file: pe_employee_state_data.csv
+      description: Information about Police State Employee Data
+    - file: pe_employee_national_data.csv
+      description: Information about Police National Employee Data
   data_type: Police Data
-  year_range: 1971-2016
+  year_range: 1960-2016
   last_modified: January 1, 2016
   download_type: CSV
-  file_size: 81.4 KB
+  file_size: 25,974 KB
   unziped_size: 545.3M unzipped
-  sampleFile: /files/pe_employee_data_small.json
 - title: Hate Crime
   description: |
     The Hate Crime Statistics dataset provides annual statistics on the number of incidents, offenses, victims, and offenders in reported crimes that are motivated in whole, or in part, by an offender’s bias against the victim’s perceived race, gender, gender identity, religion, disability, sexual orientation, or ethnicity. Hate crime data is captured by indicating the element of bias present in offenses already being reported to the UCR Program.
@@ -65,13 +75,18 @@
   files:
     - file: human_trafficking.csv
       description: Information about Human Trafficking
+    - file: human_trafficking_asr_age.csv
+      description: Information about Arrest Data for Human Trafficking Offender Age
+    - file: human_trafficking_asr_ethnicity.csv
+      description: Information about Arrest Data for Human Trafficking Offender Ethnicity
+    - file: human_trafficking_asr_race.csv
+      description: Information about Arrest Data for Human Trafficking Offender Race
   data_type: Human Trafficking
   year_range: 2013-2015
   last_modified: January 1, 2016
-  download_type: CSV
-  file_size: 3.5 KB
-  unziped_size: 545.3M unzipped
-  sampleFile: /files/human_trafficking_data_small.json
+  download_type: ZIP
+  file_size: 44 KB
+  unziped_size: 44.3M unzipped
 - title: Uniform Crime Reporting Program Participation Data
   description: |
     UCR Program participation data provides Information about agencies that report data, regardless of format (summary or incident-based data), to the UCR program. These data help clarify the percentage of the population covered by reported data.

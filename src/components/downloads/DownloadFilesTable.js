@@ -47,6 +47,19 @@ class DownloadDetailsAccordionBody extends React.Component {
     } else if (sampleFile === '/files/arrests_national_drug.json') {
       data = arrestD
     }
+    let dataPreview = ''
+    if (data) {
+      dataPreview = (
+        <div>
+          <h3 className="mt-tiny mb2 fs-18 sm-fs-22"> Data Preview </h3>
+          <Scrollbars autoHeight style={{ width: 700, height: 300 }}>
+            <div>
+              <JsonTable rows={data} />
+            </div>
+          </Scrollbars>
+        </div>
+      )
+    }
 
     return (
       <div
@@ -74,12 +87,7 @@ class DownloadDetailsAccordionBody extends React.Component {
           </tbody>
         </table>
         <br />
-        <h3 className="mt-tiny mb2 fs-18 sm-fs-22"> Data Preview </h3>
-        <Scrollbars autoHeight style={{ width: 700, height: 300 }}>
-          <div>
-            <JsonTable rows={data} />
-          </div>
-        </Scrollbars>
+        {dataPreview}
         <br />
         <DownloadDataBtn
           ariaLabel={`Download ${title} as a CSV`}
