@@ -129,7 +129,7 @@ states:
     text:
 
   Michigan:
-  - url: http://www.michigan.gov/msp
+  - url: http://www.michigan.gov/crs
     text: Michigan UCR Program
   - url:
     text:
