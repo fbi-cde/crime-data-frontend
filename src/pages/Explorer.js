@@ -135,7 +135,7 @@ class Explorer extends React.Component {
       }
     }
 
-    if (agencies.loaded && isAgency && !agency) {
+    if (isAgency && !agency) {
       return <NotFound />
     }
     return (
