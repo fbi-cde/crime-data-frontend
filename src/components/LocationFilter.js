@@ -33,20 +33,21 @@ class LocationFilter extends React.Component {
           onFocus={this.handleLocationFocus}
           selected={usState}
         />
-        {showAgencySearch &&
+        {showAgencySearch && (
           <AgencySearch
             onChange={onChange}
             agency={this.getAgencyName()}
             data={agencyData}
             initialShowResults={showResults}
-          />}
+          />
+        )}
       </div>
     )
   }
 }
 
 LocationFilter.defaultProps = {
-  usState: nationalKey,
+  usState: nationalKey
 }
 
 LocationFilter.propTypes = {
@@ -54,7 +55,7 @@ LocationFilter.propTypes = {
   agencyData: PropTypes.arrayOf(PropTypes.object),
   ariaControls: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  usState: PropTypes.string.isRequired,
+  usState: PropTypes.string.isRequired
 }
 
 export default LocationFilter

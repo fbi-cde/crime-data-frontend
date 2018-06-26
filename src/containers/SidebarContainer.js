@@ -18,8 +18,8 @@ const SidebarContainer = ({
   filters,
   isOpen,
   onChange,
-  usState,
-}) =>
+  usState
+}) => (
   <nav className={`site-sidebar bg-white ${isOpen ? 'open' : ''}`}>
     <div className="p2 bg-red-bright line-height-1 md-hide lg-hide">
       <button
@@ -57,16 +57,17 @@ const SidebarContainer = ({
       />
     </div>
   </nav>
+)
 
 SidebarContainer.propTypes = {
   ariaControls: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func
 }
 
 const formatAgencyData = (agencies, state) =>
   Object.keys(agencies[state] || {}).map(id => ({
     ori: id,
-    ...agencies[state][id],
+    ...agencies[state][id]
   }))
 
 const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
@@ -74,11 +75,17 @@ const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   const isAgency = placeType === 'agency'
   const isNational = place === nationalKey
   const usState = isAgency ? oriToState(place) : place
-  let agency = isAgency && !agencies.loading && getAgency(agencies, place)
+  let agency =
+    isAgency &&
+    !agencies.loading &&
+    agencies.loaded &&
+    getAgency(agencies, place)
   if (!agency) {
     agency = {}
   }
-  const agencyData = isNational ? [] : formatAgencyData(agencies.data, usState)
+  const agencyData = isNational
+    ? []
+    : formatAgencyData(agencies.data, filters.placeId)
   return {
     agency,
     agencyData,
@@ -87,13 +94,13 @@ const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
     isOpen: sidebar.isOpen,
     usState,
     region,
-    states,
+    states
   }
 }
 const mapDispatchToProps = dispatch => ({
   actions: {
-    hide: () => dispatch(hideSidebar()),
-  },
+    hide: () => dispatch(hideSidebar())
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarContainer)
