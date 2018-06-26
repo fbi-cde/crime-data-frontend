@@ -7,22 +7,24 @@ import { fetchSummaries } from '../actions/summary'
 import { fetchLeoka } from '../actions/leoka'
 import { fetchFootnote } from '../actions/footnote'
 import { fetchUcrParticipation } from '../actions/participation'
-// import { fetchAgencies } from '../actions/agencies'
+import { fetchAgencies } from '../actions/agencies'
 import history, { createNewLocation } from '../util/history'
 import { getPlaceId, validateFilter } from '../util/location'
-// import { shouldFetchAgencies } from '../util/agencies'
 import offensesUtil from '../util/offenses'
-
-import {
-  shouldFetchNibrs,
-} from '../util/participation'
+import { shouldFetchNibrs } from '../util/participation'
 
 const fetchData = () => (dispatch, getState) => {
   const { filters, region, states } = getState()
   if (region.loaded && states.loaded) {
-    filters.placeId = getPlaceId(filters, region.region, states.states);
-    if (offensesUtil.includes(filters.pageType) && validateFilter(filters, region.regions, states.states)) {
-      // if (shouldFetchAgencies(filters) && agencies.locations !== filters.place && filters.placeType !== 'agency') dispatch(fetchAgencies(filters))
+    filters.placeId = getPlaceId(filters, region.region, states.states)
+    if (filters.placeType === 'state') {
+      dispatch(fetchAgencies(filters))
+    }
+
+    if (
+      offensesUtil.includes(filters.pageType) &&
+      validateFilter(filters, region.regions, states.states)
+    ) {
       if (filters.placeType !== 'agency') {
         dispatch(fetchUcrParticipation(filters))
         dispatch(fetchSummaries(filters, states))
@@ -35,7 +37,8 @@ const fetchData = () => (dispatch, getState) => {
       }
       if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrsCounts(filters))
     }
-    if (filters.page === 'leoka') { // Add validation of leoka type and add a shouldFetch Method
+    if (filters.page === 'leoka') {
+      // Add validation of leoka type and add a shouldFetch Method
       dispatch(fetchLeoka(filters))
     }
   }
