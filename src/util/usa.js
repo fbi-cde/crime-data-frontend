@@ -50,13 +50,18 @@ const data = [
   { id: 'vt', slug: 'vermont', placeType: 'state' },
   { id: 'va', slug: 'virginia', placeType: 'state' },
   { id: 'wa', slug: 'washington', placeType: 'state' },
-  { id: 'dc', display: 'Washington, DC', slug: 'washington-dc', placeType: 'state' },
+  {
+    id: 'dc',
+    display: 'Washington, DC',
+    slug: 'washington-dc',
+    placeType: 'state'
+  },
   { id: 'wv', slug: 'west-virginia', placeType: 'state' },
   { id: 'wi', slug: 'wisconsin', placeType: 'state' },
-  { id: 'wy', slug: 'wyoming', placeType: 'state' },
+  { id: 'wy', slug: 'wyoming', placeType: 'state' }
 ].map(d => ({
   ...d,
-  display: d.display || startCase(d.slug),
+  display: d.display || startCase(d.slug)
 }))
 
 const fromAbbr = abbr => data.find(d => d.id === abbr.toLowerCase())
@@ -73,4 +78,4 @@ const lookup = (query, type) => {
   return fromSlug(query)
 }
 
-export { lookup as default, data, nationalKey }
+export { lookup as default, data, nationalKey, fromSlug, fromAbbr }

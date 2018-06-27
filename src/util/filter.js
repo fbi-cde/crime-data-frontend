@@ -8,9 +8,9 @@ const defaults = {
   pageType: 'violent-crime',
   place: 'united-states',
   placeType: 'national',
-  placeid: 'usa',
+  placeId: 'usa',
   since: MAX_YEAR - 10,
-  until: MAX_YEAR,
+  until: MAX_YEAR
 }
 
 const validateFilter = filters => {
@@ -20,7 +20,11 @@ const validateFilter = filters => {
     newFilters.pageType = defaults.pageType
   }
 
-  if (filters.page === 'crime' && filters.pageType && !isValidCrime(filters.pageType)) {
+  if (
+    filters.page === 'crime' &&
+    filters.pageType &&
+    !isValidCrime(filters.pageType)
+  ) {
     newFilters.pageType = defaults.pageType
   }
 
@@ -31,7 +35,6 @@ const validateFilter = filters => {
   if (isValidCrime(filters.pageType) && filters.page !== 'crime') {
     newFilters.page = defaults.page
   }
-
 
   if (filters.place === 'usa') {
     newFilters.place = defaults.place
