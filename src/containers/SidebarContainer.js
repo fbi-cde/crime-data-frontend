@@ -92,7 +92,6 @@ const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   let agencyData = []
   if (!agencies.loading && agencies.loaded) {
     agencyData = formatAgencyData(agencies.data, usState)
-    console.log('sbc:', usState, agency, agencyData)
   }
   return {
     agency,
