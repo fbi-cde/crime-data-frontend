@@ -6,6 +6,7 @@ import React from 'react'
 import LocationFilter from '../../src/components/LocationFilter'
 
 describe('LocationFilter', () => {
+  /*
   describe('getAgencyName()', () => {
     it('should return agency name if supplied as prop', () => {
       const props = {
@@ -57,4 +58,5 @@ describe('LocationFilter', () => {
       expect(wrapper.state().showResults).toEqual(false)
     })
   })
+  */
 })
