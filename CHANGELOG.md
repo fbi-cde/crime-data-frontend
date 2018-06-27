@@ -6,7 +6,7 @@ All notable changes to this project be documented in this file.
 
 All notable changes to this project be documented in this file.
 
-## [3.1.0] -6/22/2018
+## [3.1.0] -6/28/2018
 
 ## Added
 
@@ -20,10 +20,12 @@ All notable changes to this project be documented in this file.
 * NIBRS Details now have a collapsible view
 * Improved Swagger UI Interface
 * Update to page context
+* Makes Agencies to be loaded on location change
 
 ## Fixed
 
 * Fix to CDE Trend Chart download files not contain proper data
+* Fix to Washington DC Agencies not loading properly
 
 ## [3.0.0] - 05-22-2018
 
