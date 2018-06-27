@@ -48,7 +48,7 @@ class PlaceThumbnail extends React.Component {
           ))
         }
       });
-    } else if (place !== 'washington-dc') {
+    } else if (place !== 'washington-dc' && placeType === 'state') {
       if (place !== 'united-states') {
         actives.push(geoStates.find(
           s => lowerCase(s.properties.name) === lowerCase(placeName),
