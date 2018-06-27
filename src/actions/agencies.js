@@ -45,7 +45,7 @@ export const receivedAgencies = agencies => ({
   agencies
 })
 
-export const fetchAgencies = ({ placeId }) => dispatch => {
+export const fetchAgencies = placeId => dispatch => {
   dispatch(fetchingAgencies())
 
   return api

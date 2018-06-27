@@ -9,7 +9,7 @@ const initialState = {
   until: MAX_YEAR,
   place: 'united-states',
   placeType: 'national',
-  placeid: 'usa',
+  placeId: 'usa'
 }
 
 export default (state = initialState, action) => {
@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
     case FILTERS_UPDATE:
       return {
         ...state,
-        ...action.filters,
+        ...action.filters
       }
     default:
       return state

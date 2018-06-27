@@ -24,7 +24,7 @@ import packageJson from '../package.json'
 import renderHtml from './html'
 import routes from './routes'
 import configureStore from './store'
-import { fetchingAgency, receivedAgency } from './actions/agencies'
+import { fetchAgencies, receivedAgency } from './actions/agencies'
 import { updateFilters } from './actions/filters'
 import { fetchUcrRegion } from './actions/region'
 import { fetchUcrState } from './actions/states'
@@ -135,13 +135,7 @@ app.get('/*', (req, res) => {
       store.dispatch(updateFilters({ ...props.router.params }))
 
       if (placeType === 'agency') {
-        store.dispatch(
-          receivedAgency({
-            ori: place,
-            agency_name: agencyNames[place]
-          })
-        )
-        store.dispatch(fetchingAgency())
+        store.dispatch(fetchAgencies(place.slice(0, 2).toUpperCase()))
       }
 
       const html = renderToString(

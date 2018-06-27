@@ -18,7 +18,9 @@ const fetchData = () => (dispatch, getState) => {
   if (region.loaded && states.loaded) {
     filters.placeId = getPlaceId(filters, region.region, states.states)
     if (filters.placeType === 'state') {
-      dispatch(fetchAgencies(filters))
+      dispatch(fetchAgencies(filters.placeId))
+    } else if (filters.placeType === 'agency') {
+      dispatch(fetchAgencies(filters.place.slice(0, 2).toUpperCase()))
     }
 
     if (

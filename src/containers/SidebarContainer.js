@@ -7,7 +7,7 @@ import LocationFilter from '../components/LocationFilter'
 import TimePeriodFilter from '../components/TimePeriodFilter'
 import { hideSidebar } from '../actions/sidebar'
 import { getAgency, oriToState } from '../util/agencies'
-import { nationalKey } from '../util/usa'
+import { nationalKey, fromSlug } from '../util/usa'
 
 const SidebarContainer = ({
   actions,
@@ -18,7 +18,8 @@ const SidebarContainer = ({
   filters,
   isOpen,
   onChange,
-  usState
+  usState,
+  locState
 }) => (
   <nav className={`site-sidebar bg-white ${isOpen ? 'open' : ''}`}>
     <div className="p2 bg-red-bright line-height-1 md-hide lg-hide">
@@ -44,6 +45,7 @@ const SidebarContainer = ({
         ariaControls={ariaControls}
         onChange={onChange}
         usState={usState}
+        locState={locState}
       />
       <TimePeriodFilter
         ariaControls={ariaControls}
@@ -74,7 +76,11 @@ const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   const { pageType, place, placeType } = filters
   const isAgency = placeType === 'agency'
   const isNational = place === nationalKey
-  const usState = isAgency ? oriToState(place) : place
+  const locState = isAgency ? oriToState(place) : place
+
+  const usState = isAgency
+    ? place.slice(0, 2).toUpperCase()
+    : fromSlug(place).id.toUpperCase()
   let agency =
     isAgency &&
     !agencies.loading &&
@@ -83,9 +89,11 @@ const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
   if (!agency) {
     agency = {}
   }
-  const agencyData = isNational
-    ? []
-    : formatAgencyData(agencies.data, filters.placeId)
+  let agencyData = []
+  if (!agencies.loading && agencies.loaded) {
+    agencyData = formatAgencyData(agencies.data, usState)
+    console.log('sbc:', usState, agency, agencyData)
+  }
   return {
     agency,
     agencyData,
@@ -94,7 +102,8 @@ const mapStateToProps = ({ agencies, filters, sidebar, region, states }) => {
     isOpen: sidebar.isOpen,
     usState,
     region,
-    states
+    states,
+    locState
   }
 }
 const mapDispatchToProps = dispatch => ({

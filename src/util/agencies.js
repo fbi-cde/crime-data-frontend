@@ -5,7 +5,7 @@ import lookupUsa from './usa'
 
 const postalMappingExceptions = {
   NB: 'NE',
-  GM: 'GU',
+  GM: 'GU'
 }
 
 export const reshapeData = data =>
@@ -26,7 +26,7 @@ export const agencyDisplay = ({ agency_name, agency_type_name }) => {
 }
 
 export const getAgency = (agencies, ori) => {
-  const usState = oriToState(ori)
+  const usState = ori.slice(0, 2).toUpperCase()
   const agency = (agencies.data[usState] || {})[ori]
 
   if (!agency) return

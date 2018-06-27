@@ -15,7 +15,7 @@ const initialState = {
 }
 
 const updateData = (agency, data) => {
-  const agencyUsState = oriToState(agency.ori)
+  const agencyUsState = agency.ori.slice(0, 2).toUpperCase()
   return {
     ...data,
     [agencyUsState]: {
@@ -42,6 +42,12 @@ export default (state = initialState, action) => {
         loaded: false
       }
     case AGENCY_FETCHING:
+      return {
+        ...state,
+        error: null,
+        loading: true,
+        loaded: true
+      }
     case AGENCIES_FETCHING:
       return {
         ...state,
