@@ -3,10 +3,8 @@ import React from 'react'
 
 class Analytics extends React.Component {
   componentDidMount() {
-    if (process.env.NODE_ENV == 'production') {
-      this.addGA()
-      this.addDAP()
-    }
+    this.addGA()
+    this.addDAP()
   }
 
   addDAP = () => {

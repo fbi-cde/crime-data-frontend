@@ -60,7 +60,10 @@ class PlaceThumbnail extends React.Component {
           )
         }
       })
-    } else if (place !== 'washington-dc' && place.slice(0, 2).toUpperCase() !== 'DC') {
+    } else if (
+      place !== 'washington-dc' &&
+      place.slice(0, 2).toUpperCase() !== 'DC'
+    ) {
       if (place !== 'united-states') {
         actives.push(
           geoStates.find(

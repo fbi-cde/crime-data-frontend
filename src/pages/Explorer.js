@@ -122,7 +122,11 @@ class Explorer extends React.Component {
       return <Loading />
     }
 
-    if (!region.loaded || !states.loaded || !agencies.loaded) {
+    if (
+      !region.loaded ||
+      !states.loaded ||
+      (!agencies.loaded && filters.place !== 'united-states')
+    ) {
       return <Loading />
     }
 
