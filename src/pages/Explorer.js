@@ -132,7 +132,11 @@ class Explorer extends React.Component {
       return <Loading />
     }
 
-    if (!region.loaded || !states.loaded) {
+    if (
+      !region.loaded ||
+      !states.loaded ||
+      (!agencies.loaded && filters.place !== 'united-states')
+    ) {
       return <Loading />
     }
 
@@ -145,7 +149,7 @@ class Explorer extends React.Component {
       }
     }
 
-    if (agencies.loaded && isAgency && !agency) {
+    if (isAgency && !agency) {
       return <NotFound />
     }
     return (
@@ -172,10 +176,12 @@ class Explorer extends React.Component {
             </button>
           </div>
         </div>
+
         <SidebarContainer
           ariaControls="explorer"
           onChange={this.handleSidebarChange}
         />
+
         <div className="site-content" id="explorer">
           <div className="container-main mx-auto px2 md-py3 lg-px3">
             <ExplorerHeaderContainer />

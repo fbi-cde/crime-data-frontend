@@ -19,9 +19,9 @@ class LocationFilter extends React.Component {
   }
 
   render() {
-    const { agencyData, ariaControls, onChange, usState } = this.props
+    const { agencyData, ariaControls, onChange, usState, locState } = this.props
     const { showResults } = this.state
-    const showAgencySearch = usState !== nationalKey && agencyData.length > 0
+    const showAgencySearch = usState !== nationalKey && agencyData
     return (
       <div id="location" className="mb4">
         <div className="mb3 fs-22 bold border-bottom border-blue-light">
@@ -31,22 +31,23 @@ class LocationFilter extends React.Component {
           ariaControls={ariaControls}
           onChange={onChange}
           onFocus={this.handleLocationFocus}
-          selected={usState}
+          selected={locState}
         />
-        {showAgencySearch &&
+        {showAgencySearch && (
           <AgencySearch
             onChange={onChange}
             agency={this.getAgencyName()}
             data={agencyData}
             initialShowResults={showResults}
-          />}
+          />
+        )}
       </div>
     )
   }
 }
 
 LocationFilter.defaultProps = {
-  usState: nationalKey,
+  usState: nationalKey
 }
 
 LocationFilter.propTypes = {
@@ -55,6 +56,7 @@ LocationFilter.propTypes = {
   ariaControls: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   usState: PropTypes.string.isRequired,
+  locState: PropTypes.string.isRequired
 }
 
 export default LocationFilter

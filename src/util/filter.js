@@ -10,8 +10,7 @@ const defaults = {
   pageType: 'violent-crime',
   place: 'united-states',
   placeType: 'national',
-  placeid: 'usa',
-  param: 'violent-crime',
+  placeId: 'usa',
   since: MAX_YEAR - 10,
   until: MAX_YEAR
 }

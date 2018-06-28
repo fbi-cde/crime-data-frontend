@@ -10,7 +10,7 @@ const initialState = {
   until: MAX_YEAR,
   place: 'united-states',
   placeType: 'national',
-  placeid: 'usa'
+  placeId: 'usa'
 }
 
 export default (state = initialState, action) => {

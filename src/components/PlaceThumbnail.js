@@ -6,15 +6,13 @@ import { feature, mesh } from 'topojson'
 import { connect } from 'react-redux'
 import lowerCase from 'lodash.lowercase'
 
-
 import { lookupStatesByRegion, lookupRegionByName } from '../util/location'
 
-const Container = ({ children }) =>
+const Container = ({ children }) => (
   <div className="center bg-white rounded">
-    <div className="aspect-ratio aspect-ratio--4x3">
-      {children}
-    </div>
+    <div className="aspect-ratio aspect-ratio--4x3">{children}</div>
   </div>
+)
 
 class PlaceThumbnail extends React.Component {
   state = { usa: null }
@@ -26,33 +24,52 @@ class PlaceThumbnail extends React.Component {
 
   render() {
     /* eslint-disable */
-    const { coordinates, place, placeType, region, states, placeName } = this.props
+    const {
+      coordinates,
+      place,
+      placeType,
+      region,
+      states,
+      placeName
+    } = this.props
     /* eslint-enable */
     const { usa } = this.state
 
     if (!usa) return <Container />
 
     const [w, h] = [400, 300]
-    const projection = geoAlbersUsa().scale(500).translate([w / 2, h / 2])
+    const projection = geoAlbersUsa()
+      .scale(500)
+      .translate([w / 2, h / 2])
     const path = geoPath().projection(projection)
     const geoStates = feature(usa, usa.objects.units).features
     const meshed = mesh(usa, usa.objects.units, (a, b) => a !== b)
     const actives = []
 
     if (placeType === 'region') {
-      const regionStates = lookupStatesByRegion(states.states, lookupRegionByName(region.regions, place).region_code)
+      const regionStates = lookupStatesByRegion(
+        states.states,
+        lookupRegionByName(region.regions, place).region_code
+      )
       Object.keys(regionStates).forEach(sr => {
         if (regionStates[sr].state_abbr !== 'DC') {
-          actives.push(geoStates.find(
-            s => s.properties.name === regionStates[sr].state_name
-          ))
+          actives.push(
+            geoStates.find(
+              s => s.properties.name === regionStates[sr].state_name
+            )
+          )
         }
-      });
-    } else if (place !== 'washington-dc') {
+      })
+    } else if (
+      place !== 'washington-dc' &&
+      place.slice(0, 2).toUpperCase() !== 'DC'
+    ) {
       if (place !== 'united-states') {
-        actives.push(geoStates.find(
-          s => lowerCase(s.properties.name) === lowerCase(placeName),
-        ))
+        actives.push(
+          geoStates.find(
+            s => lowerCase(s.properties.name) === lowerCase(placeName)
+          )
+        )
       }
     } else {
       actives.push(geoStates.find(s => s.id === 'US11'))
@@ -85,13 +102,21 @@ class PlaceThumbnail extends React.Component {
       let activeColor = '#dfe6ed'
       if (actives) {
         Object.keys(actives).forEach(active => {
-            if (geoStates[geo].properties.name === actives[active].properties.name) {
-              activeColor = '#94aabd'
-            }
-          });
-        geoHtml.push(<path key={geoStates[geo].id} d={path(geoStates[geo])} fill={activeColor} />)
+          if (
+            geoStates[geo].properties.name === actives[active].properties.name
+          ) {
+            activeColor = '#94aabd'
+          }
+        })
+        geoHtml.push(
+          <path
+            key={geoStates[geo].id}
+            d={path(geoStates[geo])}
+            fill={activeColor}
+          />
+        )
       }
-    });
+    })
 
     return (
       <Container>
@@ -114,13 +139,14 @@ class PlaceThumbnail extends React.Component {
                 strokeLinejoin="round"
               />
             </g>
-            {pin &&
+            {pin && (
               <circle
                 cx={pin[0]}
                 cy={pin[1]}
                 r={8 / scale}
                 className="fill-red-bright"
-              />}
+              />
+            )}
           </g>
         </svg>
       </Container>
@@ -129,7 +155,7 @@ class PlaceThumbnail extends React.Component {
 }
 
 PlaceThumbnail.defaultProps = {
-  coordinates: false,
+  coordinates: false
 }
 
 PlaceThumbnail.propTypes = {
@@ -138,7 +164,7 @@ PlaceThumbnail.propTypes = {
   placeType: PropTypes.string.isRequired,
   states: PropTypes.object.isRequired,
   region: PropTypes.object.isRequired,
-  placeName: PropTypes.string.isRequired,
+  placeName: PropTypes.string.isRequired
 }
 
 const mapStateToProps = ({ filters, region, states }) => {
@@ -148,7 +174,7 @@ const mapStateToProps = ({ filters, region, states }) => {
     place,
     placeType,
     region,
-    states,
+    states
   }
 }
 

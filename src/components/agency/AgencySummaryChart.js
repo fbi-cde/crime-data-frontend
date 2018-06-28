@@ -99,7 +99,6 @@ class AgencySummaryChart extends React.Component {
   render() {
     const { colors, crime, mutedColors, since, size, until } = this.props
     let data = this.props.data
-    console.log('AgencyChart Data:', data)
     const { svgParentWidth } = this.state
 
     const svgWidth = svgParentWidth || size.width
@@ -145,7 +144,7 @@ class AgencySummaryChart extends React.Component {
     if (crime === 'rape') {
       const dataSet = []
       for (let i = 0; i < data.length; i++) {
-        if (data[i].actual !== 0 && data[i].cleared !== 0) {
+        if (data[i].actual !== 0) {
           if (data[i].offense === 'rape-legacy') {
             if (data[i].data_year > lastRapeLegacyReported) {
               lastRapeLegacyReported = data[i].data_year
@@ -156,6 +155,7 @@ class AgencySummaryChart extends React.Component {
       }
       data = dataSet
     }
+
     lastRapeLegacyReported += 1
     if (lastRapeLegacyReported === 1996) {
       displayRapeLine = false

@@ -80,7 +80,7 @@ const ExplorerHeaderContainer = ({
         <a href="https://ucr.fbi.gov/" className="underline">
           Uniform Crime Reporting (UCR) Program
         </a>{' '}
-        for 2016 data was made available on 9/25/2017.
+        for updated 2016 data was made available on 6/22/2018.
       </p>
       <br />
     </div>

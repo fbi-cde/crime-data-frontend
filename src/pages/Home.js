@@ -128,26 +128,30 @@ class Home extends React.Component {
             <h1 className="mt0 mb4 pb1 fs-28 sm-fs-40 border-bottom border-blue-light">
               Improving access to crime data
             </h1>
-            <p className="mb1 md-col-9 fs-16 sm-fs-20 serif">
-              The Crime Data Explorer makes nationwide crime data accessible to
-              a wide range of users.{' '}
-              <Link to="/explorer/violent-crime" className="underline">
-                View trends
-              </Link>,{' '}
-              <Link to="/downloads-and-docs" className="underline">
-                download bulk datasets
-              </Link>, and access the{' '}
-              <a href="/api" className="underline">
-                Crime Data API
+            <p className="mb1 md-col-12 fs-16 sm-fs-20 serif">
+              The Crime Data Explorer (CDE) represents a profound transformation
+              in how data from the FBI’s{' '}
+              <a href="https://ucr.fbi.gov/" className="underline">
+                Uniform Crime Reporting (UCR) Program
               </a>{' '}
-              for reported crime at the national, state, and agency levels.
-            </p>
-            <p className="mb1 md-col-9 fs-16 sm-fs-20 serif">
+              is presented. Crime data is dynamic. Offenses occur, arrests are
+              made, and property is recovered every day. The CDE is an attempt
+              to reflect somewhat that fluidity in crime. The data presented
+              here will be updated regularly in a way that UCR publications
+              previously could not. As the data is dynamic, so is this gateway
+              to the data. The CDE’s content and features are updated and
+              expanded continually. So, look for a time stamp that reflects the
+              refresh date of content or statistics. This is especially
+              important to reconcile any differences that may exist between the
+              data that is available on the CDE pages and the data that resides
+              in the datasets for downloading.
+              <br />
+              <br />
               The data provided from{' '}
               <a href="https://ucr.fbi.gov/" className="underline">
                 Uniform Crime Reporting (UCR) Program
               </a>{' '}
-              for 2016 data was made available on 9/25/2017.
+              for updated 2016 data was made available on 6/22/2018.
             </p>
           </div>
         </section>
