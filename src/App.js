@@ -19,7 +19,8 @@ const isProd = process.env.NODE_ENV == 'production'
 const App = ({ actions, children, glossary, location, sidebarOpen }) => (
   <div className={`site ${sidebarOpen ? 'no-scroll' : ''}`}>
     <SkipContent skipTo=".site-main" />
-    <Disclaimer />
+    {!isProd && <NOEDisclaimer />}
+    {isProd && <Disclaimer />}
     <BetaBanner onFeedbackClick={actions.showFeedback} />
     <Header location={location} />
     <main id="cde-main" className="site-main">

@@ -19,11 +19,6 @@ const fetchData = () => (dispatch, getState) => {
   const { filters, region, states } = getState()
   if (region.loaded && states.loaded) {
     filters.placeId = getPlaceId(filters, region.region, states.states)
-    if (
-      filters.page === 'crime' &&
-      offensesUtil.includes(filters.pageType) &&
-      validateFilter(filters, region.regions, states.states)
-    ) {
 
     if (filters.placeType === 'state') {
       dispatch(fetchAgencies(filters.placeId))
@@ -35,7 +30,18 @@ const fetchData = () => (dispatch, getState) => {
       offensesUtil.includes(filters.pageType) &&
       validateFilter(filters, region.regions, states.states)
     ) {
-
+      if (filters.placeType !== 'agency') {
+        dispatch(fetchUcrParticipation(filters))
+        dispatch(fetchSummaries(filters, states))
+      }
+      dispatch(fetchPoliceEmployment(filters))
+      if (filters.placeType === 'agency') {
+        dispatch(fetchSummarized(filters))
+        dispatch(fetchSummaries(filters, states))
+        dispatch(fetchFootnote(filters))
+      }
+      if (shouldFetchNibrs(filters, states)) dispatch(fetchNibrsCounts(filters))
+    }
     if (
       shouldFetchNibrs(filters, states) &&
       filters.page === 'dataset' &&
