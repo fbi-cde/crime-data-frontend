@@ -9,7 +9,7 @@ This project is the front end for the Crime Data Explorer, using data from [fbi-
 API Base URL: `https://api.usa.gov/crime/fbi/sapi`
 
 Requests Format:
-`https://api.usa.gov/crime/fbi/sapi/{desired_endpiont}?api_key=<API_KEY>`
+`https://api.usa.gov/crime/fbi/sapi/{desired_endpoint}?api_key=<API_KEY>`
 
 See more information about API endpoints at [https://crime-data-explorer-master.fr.cloud.gov/api](https://crime-data-explorer.fr.cloud.gov/api)
 API Requests are required to have an API Key appended to the request to sign up for an API key please vist [https://api.data.gov/signup/](https://api.data.gov/signup/)
